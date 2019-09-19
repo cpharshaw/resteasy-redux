@@ -14,12 +14,16 @@ export class MainList extends Component {
 
     // console.log("all the props, MainList: ", this.props);
     return (
-      <div style={{
-        position: "relative",
-        height: "90vh",
-        display: this.props.displayValue
-        // height: "calc(100vh - 20px)"
-      }}>
+      <div
+        style={{
+          position: "static",
+          // top: "7vh",
+          height: "inherit",
+          width: "inherit",
+          display: this.props.displayValue
+          // height: "calc(100vh - 20px)"
+        }}
+      >
         <ul>
           <li>BBQ</li>
           <li>Tres leches</li>

@@ -18,8 +18,8 @@ export class Toggler extends Component {
         style={{
           background: "gray",
           position: "absolute",
-          bottom: "0",
-          height: "10vh",
+          bottom: "0vh",
+          height: "7vh",
           width: "100%"
         }}
       >
@@ -27,7 +27,8 @@ export class Toggler extends Component {
           onClick={this.handleClick}
           style={{
             background: "red",
-            width: "100%"
+            width: "100%",
+            height: "100%"
           }}
         >
           This toggles shit

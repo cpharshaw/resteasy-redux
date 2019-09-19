@@ -56,8 +56,10 @@ export class MainMap extends Component {
 
         <div
           style={{
-            position: "relative",
-            height: "90vh",
+            position: "static",
+            // top: "7vh",
+            height: "100%",
+            width: "inherit",
             display: this.props.displayValue
             // height: "calc(100vh - 20px)"
           }}

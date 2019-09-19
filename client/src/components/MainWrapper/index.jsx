@@ -4,6 +4,8 @@ import { getGeolocation } from '../../store/actions/geoActions';
 import MainMap from '../MainMap/';
 import MainList from '../MainList/';
 import Toggler from '../Toggler/';
+import SearchBox from '../SearchBox/';
+
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -34,11 +36,21 @@ export class MainWrapper extends Component {
 
     // console.log("MainWrapper, this.props: ", this.props)
     return (
-      <div>        
-        < MainMap display={mapListToggleValue} />
-        < MainList display={!mapListToggleValue} />
+      <div>
+        < SearchBox />
+        <div style={{
+          position: "absolute",
+          top: "7vh",
+          height: "86vh",
+          width: "100%"
+        }}>
+          < MainMap display={mapListToggleValue} />
+          < MainList display={!mapListToggleValue} />
+        </div>
         < Toggler />
+
       </div>
+
     )
   }
 
