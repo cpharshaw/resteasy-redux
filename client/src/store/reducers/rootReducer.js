@@ -1,6 +1,6 @@
 // import authReducer from './authReducer';
 // import reviewReducer from './reviewReducer';
-import geoReducer from './geoReducer';
+import geolocationReducer from './geoReducer';
 import mapListReducer from './mapListReducer';
 import { combineReducers } from 'redux';
 // import { firestoreReducer } from 'redux-firestore';
@@ -11,7 +11,7 @@ import { combineReducers } from 'redux';
 const rootReducer = combineReducers({
   // auth: authReducer,
   // review: reviewReducer,
-  geoLocationState: geoReducer,
+  geolocationState: geolocationReducer,
   mapListState: mapListReducer,
   // firestore: firestoreReducer,
   // firebase: firebaseReducer

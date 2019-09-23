@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { getGeolocation } from '../../store/actions/geoActions';
+// import { getGeolocation } from '../../store/actions/geoActions';
 import MainMap from '../MainMap/';
 import MainList from '../MainList/';
 import Toggler from '../Toggler/';
@@ -19,22 +19,25 @@ export class MainWrapper extends Component {
 
 
   componentWillMount() {
-    this.props.getGeolocation();
+    // this.props.getGeolocation();
   }
 
   render() {
 
-    const { mapListToggleValue } = this.props;
+    const { mapListToggleValue, geolocationValue } = this.props;
 
+    console.log("pizza: ", geolocationValue);
     // TODO 
     // employ toggle for map and list
 
-    console.log("all the props, MainWrapper: ", this.props);
+    // console.log("all the props, MainWrapper: ", this.props);
 
 
     // const MapListSwitcher = mapListToggleValue ? < MainList display={} /> : < MainMap display={}/>
 
-    // console.log("MainWrapper, this.props: ", this.props)
+    // console.log("MainWrapper, this.props: ", this.props) 
+
+
     return (
       <div>
         < SearchBox />
@@ -52,15 +55,15 @@ export class MainWrapper extends Component {
       </div>
 
     )
-  }
 
+  }
 }
 
 const mapStateToProps = (state) => {
-  console.log("mainwrapper state: ", state);
+  // console.log("mainwrapper state: ", state);
   return {
     mapListToggleValue: state.mapListState.mapListToggleValue,
-    geoLocationValue: state.geoLocationState.geoLocationValue
+    geolocationValue: state.geolocationState.geolocationValue
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
   }
@@ -68,7 +71,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGeolocation: () => dispatch(getGeolocation())
+    // getGeolocation: () => dispatch(getGeolocation())
   }
 }
 

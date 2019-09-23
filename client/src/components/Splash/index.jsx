@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { getGeolocation } from '../../store/actions/geoActions';
+
 // import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import './login.css';
 import './loader.css';
 import './video.css';
 import './brand.css';
+
 // import './brand.js';
 import anime from 'animejs/lib/anime.es.js';
 
 
 import video from './people.mp4';
 
-class Login extends Component {
+
+class Splash extends Component {
+
+  componentWillUnmount() {
+    this.props.getGeolocation();
+  }
+
 
   // state = {};
 
@@ -143,4 +154,15 @@ class Login extends Component {
   }
 }
 
-export default Login;
+// export default Splash;
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getGeolocation: () => dispatch(getGeolocation())
+  }
+}
+
+export default compose(
+  connect(null, mapDispatchToProps)
+)(Splash)

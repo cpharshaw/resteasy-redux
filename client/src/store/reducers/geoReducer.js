@@ -1,23 +1,23 @@
 const initState = {
-  geoLocationValue: null,
-  geoLocationStatus: null
+  geolocationValue: null,
+  geolocationStatus: null
 }
 
-const geoReducer = (state = initState, action) => {
+const geolocationReducer = (state = initState, action) => {
   switch (action.type) {
     case 'GEOLOCATION_SUCCESS':
       // console.log('geolocation success');
       return {
         ...state,
-        geoLocationValue: action.payload,
-        geoLocationStatus: 'Geolocation success'
+        geolocationValue: action.payload,
+        geolocationStatus: 'Geolocation success'
       }
     case 'GEOLOCATION_ERROR':
       // console.log('geolocation error');
       return {
         ...state,
-        geoLocationValue: action.payload,
-        geoLocationStatus: 'Geolocation error'
+        geolocationValue: action.payload,
+        geolocationStatus: 'Geolocation error'
       };
     default:
       return {
@@ -26,4 +26,4 @@ const geoReducer = (state = initState, action) => {
   }
 };
 
-export default geoReducer;
+export default geolocationReducer;

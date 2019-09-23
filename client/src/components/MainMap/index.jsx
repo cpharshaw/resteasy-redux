@@ -3,6 +3,8 @@
 
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { getGeolocation } from '../../store/actions/geoActions';
+
 import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
@@ -23,7 +25,24 @@ export class MainMap extends Component {
     }
   }
 
+  componentDidMount() {
+    // this.props.getGeolocation();
+  }
 
+  onBoundsChanged(mapProps, map) {
+    console.log("mapProps: ", mapProps);
+    console.log("map: ", map);
+
+    console.log("bounds, maybe??: ", map.getBounds());
+
+  }
+
+  onReady(mapProps, map) {
+    // console.log("mapProps: ", mapProps);
+    // console.log("map: ", map.getBounds());
+
+    // console.log("bounds, maybe??: ", mapProps.google.maps.Map);
+  }
 
   onMarkerClick(props, marker, e) {
     this.setState({
@@ -35,20 +54,20 @@ export class MainMap extends Component {
   }
 
   render() {
-    // const { reviews, auth } = this.props;
-
-    // console.log("all the props, MainMap: ", this.props);
-
 
     const google = this.props.google;
 
+    console.log("the google: ", google);
 
-
+    const myLocation = {
+      lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.96,
+      lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.14
+    }
+    
     if (!this.props.google) {
       return (
         <div className="">
           Map couldn't load ;-(
-          {/* {console.log(google)} */}
         </div>
       );
     } else {
@@ -66,26 +85,31 @@ export class MainMap extends Component {
         >
           {/* {console.log(Map)} */}
           {/* https://developers.google.com/maps/documentation/javascript/controls */}
+
+          
           <Map
             google={google}
-            initialCenter={{
-              lat: 39.962310,
-              lng: -75.144567
-            }}
-            centerAroundCurrentLocation={true}
+            onReady={this.onReady}
+            onBoundsChanged={this.onBoundsChanged}
+            onDragend={this.onBoundsChanged}
+            center={myLocation}
+            initialCenter={myLocation}
+            centerAroundCurrentLocation={false}
             // zoomControl={true}
             streetViewControl={false}
             rotateControl={true}
             fullscreenControl={false}
             styles={MyStyle}
+            zoom={16}
             zoomControl={true}
-            zoomControlOptions={{ position: google.maps.ControlPosition.LEFT_BOTTOM }}
+            // onBoundsChanged={}
+            // onZoom_changed={console}
 
           // https://github.com/fullstackreact/google-maps-react/pull/222
           >
 
             < Marker
-              // position={this.props.origLoc}
+              position={myLocation}
               onClick={this.onMarkerClick}
               icon={{
                 url: myLocationIcon
@@ -116,24 +140,24 @@ export class MainMap extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("MainMaps ownProps: ", ownProps);
+  // console.log("MainMaps ownProps: ", ownProps);
   return {
-    geolocation: state.geoLocation,
+    geolocationValue: state.geolocationState.geolocationValue,
     displayValue: ownProps.display ? "none" : ""
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     createReview: (review) => dispatch(createReview(review))
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // getGeolocation: () => dispatch(getGeolocation())
+  }
+}
 
 
 export default compose(
-  connect(mapStateToProps, null),
+  connect(mapStateToProps, mapDispatchToProps),
   // firestoreConnect([
   //   {
   //     collection: 'reviews',

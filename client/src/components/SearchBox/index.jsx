@@ -1,20 +1,43 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { submitForm } from '../../store/actions/searchBoxActions';
+
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 
 export class SearchBox extends Component {
-
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      places: null
+    }
+  }
 
   componentDidMount() {
     const google = this.props.google;
-
     const input = document.getElementById('pac-input');
+
+    var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-33.8902, 151.1759),
+      new google.maps.LatLng(-33.8474, 151.2631) 
+    );
+
     const searchBox = new google.maps.places.SearchBox(input);
-    const places = searchBox.getPlaces();
-    console.log(places);
+
+
+    searchBox.addListener(
+      'places_changed',
+      () => {
+        const places = searchBox.getPlaces();
+        this.setState({
+          places
+        });
+        console.log(this.state.places);
+      }
+    )
+
+
   }
 
 
@@ -32,7 +55,7 @@ export class SearchBox extends Component {
         <input
           id="pac-input"
           className="controls"
-          type="text"
+          type="search"
           placeholder="Search Box"
           style={{
             background: "orange",
@@ -48,7 +71,7 @@ export class SearchBox extends Component {
             height: "100%"
           }}
         />
-      </div>
+      </div >
     )
   }
 
@@ -57,7 +80,7 @@ export class SearchBox extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // geolocation: state.geoLocation,
+    geolocation: state.geoLocation,
     // displayValue: ownProps.display ? "none" : ""
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
