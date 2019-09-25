@@ -4,6 +4,7 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { getGeolocation } from '../../store/actions/geoActions';
+import { storeBounds } from '../../store/actions/boundsActions';
 
 import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -14,10 +15,10 @@ import MyStyle from './mapStyle.js';
 var myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
 
 
-export class MainMap extends Component {
+class MainMap extends Component {
   constructor(props) {
     super(props);
-    this.onMarkerClick = this.onMarkerClick.bind(this);
+    // this.onMarkerClick = this.onMarkerClick.bind(this);
     this.state = {
       showingInfoWindow: false,
       activeMarker: {},
@@ -26,44 +27,28 @@ export class MainMap extends Component {
   }
 
   componentDidMount() {
-    // this.props.getGeolocation();
+    
   }
 
-  onBoundsChanged(mapProps, map) {
-    console.log("mapProps: ", mapProps);
-    console.log("map: ", map);
-
-    console.log("bounds, maybe??: ", map.getBounds());
-
+  onIdle = (mapProps, map) => {
+    if (this.props.geolocationValue && !this.props.displayValue) {
+      console.log("onIdle - mapProps: ", mapProps);
+      console.log("onIdle - map: ", map);
+      console.log("onIdle - bounds, maybe??: ", map.getBounds());
+      this.props.storeBounds(map.getBounds());
+    }
   }
 
-  onReady(mapProps, map) {
-    // console.log("mapProps: ", mapProps);
-    // console.log("map: ", map.getBounds());
-
-    // console.log("bounds, maybe??: ", mapProps.google.maps.Map);
-  }
-
-  onMarkerClick(props, marker, e) {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
-    console.log("clicked")
-  }
 
   render() {
 
     const google = this.props.google;
 
-    console.log("the google: ", google);
-
     const myLocation = {
       lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.96,
       lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.14
     }
-    
+
     if (!this.props.google) {
       return (
         <div className="">
@@ -86,11 +71,13 @@ export class MainMap extends Component {
           {/* {console.log(Map)} */}
           {/* https://developers.google.com/maps/documentation/javascript/controls */}
 
-          
+          {console.log("map here")}
           <Map
             google={google}
-            onReady={this.onReady}
-            onBoundsChanged={this.onBoundsChanged}
+            // onReady={(mapProps, maps) => this.state.onReady(mapProps, maps)}
+            onIdle={(mapProps, maps) => this.onIdle(mapProps, maps)}
+            // onBoundsChanged={(mapProps, maps) => this.state.onBoundsChanged(mapProps, maps)}
+            // onBoundsChanged={this.onBoundsChanged}
             onDragend={this.onBoundsChanged}
             center={myLocation}
             initialCenter={myLocation}
@@ -102,9 +89,8 @@ export class MainMap extends Component {
             styles={MyStyle}
             zoom={16}
             zoomControl={true}
-            // onBoundsChanged={}
-            // onZoom_changed={console}
-
+          // onBoundsChanged={}
+          // onZoom_changed={console}
           // https://github.com/fullstackreact/google-maps-react/pull/222
           >
 
@@ -151,7 +137,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // getGeolocation: () => dispatch(getGeolocation())
+    // storeBounds: () => dispatch(storeBounds())
+    storeBounds: (bounds) => {
+      return dispatch(storeBounds(bounds));
+    }    
   }
 }
 

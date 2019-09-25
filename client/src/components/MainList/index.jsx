@@ -9,7 +9,7 @@ import { compose } from 'redux';
 // import { Redirect } from 'react-router-dom';
 
 
-export class MainList extends Component {
+class MainList extends Component {
   render() {
 
     // console.log("all the props, MainList: ", this.props);

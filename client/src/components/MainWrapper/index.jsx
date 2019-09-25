@@ -15,7 +15,7 @@ import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
 // import { Redirect } from 'react-router-dom';
 
-export class MainWrapper extends Component {
+class MainWrapper extends Component {
 
 
   componentWillMount() {
@@ -25,18 +25,6 @@ export class MainWrapper extends Component {
   render() {
 
     const { mapListToggleValue, geolocationValue } = this.props;
-
-    console.log("pizza: ", geolocationValue);
-    // TODO 
-    // employ toggle for map and list
-
-    // console.log("all the props, MainWrapper: ", this.props);
-
-
-    // const MapListSwitcher = mapListToggleValue ? < MainList display={} /> : < MainMap display={}/>
-
-    // console.log("MainWrapper, this.props: ", this.props) 
-
 
     return (
       <div>
