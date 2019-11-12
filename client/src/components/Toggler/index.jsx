@@ -18,7 +18,7 @@ export class Toggler extends Component {
         style={{
           background: "gray",
           position: "absolute",
-          bottom: "0vh",
+          bottom: "0",
           height: "7vh",
           width: "100%"
         }}

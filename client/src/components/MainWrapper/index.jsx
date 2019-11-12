@@ -19,8 +19,9 @@ class MainWrapper extends Component {
 
 
   componentWillMount() {
-    // this.props.getGeolocation();
+    // console.log("Wrapper bounds from store: ", this.props.boundsValue);
   }
+
 
   render() {
 
@@ -29,12 +30,14 @@ class MainWrapper extends Component {
     return (
       <div>
         < SearchBox />
-        <div style={{
-          position: "absolute",
-          top: "7vh",
-          height: "86vh",
-          width: "100%"
-        }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "7vh",
+            height: "86vh",
+            width: "100%"
+          }}
+        >
           < MainMap display={mapListToggleValue} />
           < MainList display={!mapListToggleValue} />
         </div>
@@ -51,7 +54,8 @@ const mapStateToProps = (state) => {
   // console.log("mainwrapper state: ", state);
   return {
     mapListToggleValue: state.mapListState.mapListToggleValue,
-    geolocationValue: state.geolocationState.geolocationValue
+    geolocationValue: state.geolocationState.geolocationValue,
+    boundsValue: state.boundsState.boundsValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
   }

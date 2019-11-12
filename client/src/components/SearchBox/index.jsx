@@ -12,37 +12,55 @@ class SearchBox extends Component {
     this.state = {
       places: null
     }
+    // console.log("SearchBox state: ", props);``
   }
 
   componentDidMount() {
-    // const google = this.props.google;
-    // const input = document.getElementById('pac-input');
-    console.log("search box here");
+    const google = this.props.google;
+    const input = document.getElementById('pac-input');
+    // console.log("search box here");
 
-    // var defaultBounds = new google.maps.LatLngBounds(
-      // new google.maps.LatLng(-33.8902, 151.1759),
-      // new google.maps.LatLng(-33.8474, 151.2631) 
-      // this.props.boundsValue
-    // );
+    const bounds = this.props.boundsValue;
 
-    // const searchBox = new google.maps.places.SearchBox(input, defaultBounds);
+    // console.log("Store (searchbox component): ", this.props.state);
 
 
-    // searchBox.addListener(
-    //   'places_changed',
-    //   () => {
-    //     const places = searchBox.getPlaces();
-    //     this.setState({
-    //       places
-    //     });
-    //     console.log(this.state.places);
-    //   }
-    // )
-    // console.log("search box rendering")
+    var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(39.960, -75.140),
+      new google.maps.LatLng(39.964, -75.075),
+
+      // new google.maps.LatLng(-33.8688, 151.2195),
+      // new google.maps.LatLng(-33.7688, 151.6195),      
+    );
+
+    const searchBox = new google.maps.places.SearchBox(input, {
+      bounds: defaultBounds
+    });
+    
+    searchBox.setBounds(defaultBounds);
+
+    searchBox.addListener(
+      'places_changed',
+      defaultBounds => searchBox.setBounds(defaultBounds)
+    )
+
+    searchBox.addListener(
+      'idle',
+      () => {
+        const places = searchBox.getPlaces();
+        this.setState({
+          places
+        });
+      }
+    )
+
+
+
   }
 
 
   render() {
+    
     return (
       <div
         style={{

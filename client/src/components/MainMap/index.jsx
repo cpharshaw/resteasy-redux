@@ -27,120 +27,80 @@ class MainMap extends Component {
   }
 
   componentDidMount() {
-    
-  }
+    const google = this.props.google;
 
-  onIdle = (mapProps, map) => {
-    if (this.props.geolocationValue && !this.props.displayValue) {
-      console.log("onIdle - mapProps: ", mapProps);
-      console.log("onIdle - map: ", map);
-      console.log("onIdle - bounds, maybe??: ", map.getBounds());
-      this.props.storeBounds(map.getBounds());
+    const myLocation = {
+      lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : -39.96,
+      lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : 75.14
     }
+
+    const mapDiv = document.getElementById('map');
+
+    const map = new google.maps.Map(mapDiv, {
+      center: myLocation,
+      zoom: 16
+    });
+
+
+    map.setOptions({ styles: MyStyle });
+
+    const { geolocationValue, displayValue } = this.props;
+
+    const test = function () {
+      if (geolocationValue && !displayValue) {
+        const bounds = map.getBounds();
+
+        console.log("anythung at all!");
+      }
+    }
+
+
+    map.addListener(
+      'tilesloaded',
+      function () {
+        test();
+      }
+    )
+
+
+
   }
 
 
   render() {
 
-    const google = this.props.google;
+    return (
+      <div
+        id="map"
+        style={{
+          position: "static",
+          height: "86vh",
+          width: "100vw",
+          display: this.props.displayValue
+        }}
+      >
+        tewt
+      </div>
 
-    const myLocation = {
-      lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.96,
-      lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.14
-    }
-
-    if (!this.props.google) {
-      return (
-        <div className="">
-          Map couldn't load ;-(
-        </div>
-      );
-    } else {
-      return (
-
-        <div
-          style={{
-            position: "static",
-            // top: "7vh",
-            height: "100%",
-            width: "inherit",
-            display: this.props.displayValue
-            // height: "calc(100vh - 20px)"
-          }}
-        >
-          {/* {console.log(Map)} */}
-          {/* https://developers.google.com/maps/documentation/javascript/controls */}
-
-          {console.log("map here")}
-          <Map
-            google={google}
-            // onReady={(mapProps, maps) => this.state.onReady(mapProps, maps)}
-            onIdle={(mapProps, maps) => this.onIdle(mapProps, maps)}
-            // onBoundsChanged={(mapProps, maps) => this.state.onBoundsChanged(mapProps, maps)}
-            // onBoundsChanged={this.onBoundsChanged}
-            onDragend={this.onBoundsChanged}
-            center={myLocation}
-            initialCenter={myLocation}
-            centerAroundCurrentLocation={false}
-            // zoomControl={true}
-            streetViewControl={false}
-            rotateControl={true}
-            fullscreenControl={false}
-            styles={MyStyle}
-            zoom={16}
-            zoomControl={true}
-          // onBoundsChanged={}
-          // onZoom_changed={console}
-          // https://github.com/fullstackreact/google-maps-react/pull/222
-          >
-
-            < Marker
-              position={myLocation}
-              onClick={this.onMarkerClick}
-              icon={{
-                url: myLocationIcon
-                // url: "https://img.icons8.com/office/30/000000/good-quality.png"
-                // anchor: new google.maps.Point(32, 32),
-                // scaledSize: new google.maps.Size(32, 32)
-              }}
-              animation={google.maps.Animation.DROP}
-              name={"Current location SO MUCH STUFF IN HERE!!!!"}
-            />
-
-
-            <InfoWindow
-              marker={this.props.activeMarker}
-              visible={this.props.showingInfoWindow}
-            >
-              <div>
-                test
-              </div>
-            </InfoWindow>
-
-          </Map>
-        </div>
-      );
-    }
+    );
   }
 }
 
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log("MainMaps ownProps: ", ownProps);
   return {
     geolocationValue: state.geolocationState.geolocationValue,
-    displayValue: ownProps.display ? "none" : ""
-    // reviews: state.firestore.ordered.reviews,
-    // auth: state.firebase.auth
+    displayValue: ownProps.display ? "none" : "",
+    boundsValue: state.boundsState.boundsValue,
+    state: state
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // storeBounds: () => dispatch(storeBounds())
     storeBounds: (bounds) => {
       return dispatch(storeBounds(bounds));
-    }    
+    }
   }
 }
 
