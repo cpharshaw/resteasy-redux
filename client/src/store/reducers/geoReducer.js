@@ -6,14 +6,16 @@ const initState = {
 const geolocationReducer = (state = initState, action) => {
   switch (action.type) {
     case 'GEOLOCATION_SUCCESS':
-      // console.log('geolocation success');
+      console.log("gelocationReducer SUCCESS: ", action.payload.latitude, action.payload.longitude);
       return {
         ...state,
         geolocationValue: action.payload,
+        geolocationLat: action.payload.latitude,
+        geolocationLng: action.payload.longitude,
         geolocationStatus: 'Geolocation success'
       }
     case 'GEOLOCATION_ERROR':
-      // console.log('geolocation error');
+      console.log("gelocationReducer ERROR: ", action.payload.latitude, action.payload.longitude);
       return {
         ...state,
         geolocationValue: action.payload,
@@ -27,3 +29,5 @@ const geolocationReducer = (state = initState, action) => {
 };
 
 export default geolocationReducer;
+
+

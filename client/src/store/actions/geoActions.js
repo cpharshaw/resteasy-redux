@@ -32,49 +32,62 @@
 export const getGeolocation = () => {
 
   return (
-    async dispatch => {
+
+    (dispatch, getState) => {
+
+      const getPosition = function (options) {
+        return new Promise(function (resolve, reject) {
+          navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        });
+      }
+
+      getPosition()
+        .then(
+          position => {
+            dispatch({
+              type: "GEOLOCATION_SUCCESS",
+              payload: position.coords
+            });
+            console.log("gathered location", position.coords)
+            console.log("getState: ", getState())
+          }
+        )
+        .catch(
+          err => {
+            dispatch({
+              type: "GEOLOCATION_ERROR",
+              payload: err
+            });
+            console.log("error gathering location", err)
+            console.log("getState: ", getState())
+          }
+        );
 
 
-      // const getPosition = function (options) {
-      //   return new Promise(function (resolve, reject) {
-      //     navigator.geolocation.getCurrentPosition(resolve, reject, options);
-      //   });
-      // }
-      // getPosition()
-      //   .then(
-      //     position => {
-      //       dispatch({
+      // const geolocation = navigator.geolocation;
+
+      // geolocation.getCurrentPosition(
+      //   position => {
+      //     dispatch(
+      //       {
       //         type: "GEOLOCATION_SUCCESS",
       //         payload: position.coords
-      //       });
-      //       console.log("gathered location")
-      //     })
-      //   .catch(
-      //     err => {
-      //       dispatch({
+      //       }
+      //     );
+      //     console.log("gathered location", position.coords)
+      //   },
+      //   err => {
+      //     dispatch(
+      //       {
       //         type: "GEOLOCATION_ERROR",
       //         payload: err
-      //       });
-      //       console.log("error gathering location")
-      //     });
+      //       }
+      //     );
+      //     console.log("error gathering location", err)
+      //   }
+      // );
 
 
-      const geolocation = navigator.geolocation;
-      geolocation.getCurrentPosition(
-        position => {
-          dispatch({
-            type: "GEOLOCATION_SUCCESS",
-            payload: position.coords
-          });
-          console.log("gathered location")
-        },
-        err => {
-          dispatch({
-            type: "GEOLOCATION_ERROR",
-            payload: err
-          });
-          console.log("error gathering location")
-        });
     }
   )
 

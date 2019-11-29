@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { BrowserRouter, Switch, Route } from 'react-router-dom';
-// import { getGeolocation } from '../../store/actions/geoActions';
+import { getGeolocation } from '../../store/actions/geoActions';
 import MainMap from '../MainMap/';
 import MainList from '../MainList/';
 import Toggler from '../Toggler/';
@@ -18,7 +18,9 @@ import { compose } from 'redux';
 class MainWrapper extends Component {
 
 
-  componentWillMount() {
+  componentDidMount() {
+    this.props.getGeolocation();
+
     // console.log("Wrapper bounds from store: ", this.props.boundsValue);
   }
 
@@ -63,14 +65,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // getGeolocation: () => dispatch(getGeolocation())
+    getGeolocation: () => dispatch(getGeolocation())
   }
 }
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
 )(MainWrapper)
-
-
-
-

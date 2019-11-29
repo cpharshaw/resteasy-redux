@@ -18,11 +18,6 @@ import video from './people.mp4';
 
 class Splash extends Component {
 
-  componentWillUnmount() {
-    this.props.getGeolocation();
-  }
-
-
   // state = {};
 
   componentDidMount() {
@@ -156,7 +151,6 @@ class Splash extends Component {
 
 // export default Splash;
 
-
 const mapDispatchToProps = (dispatch) => {
   return {
     getGeolocation: () => dispatch(getGeolocation())
@@ -164,5 +158,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-  connect(null, mapDispatchToProps)
+  connect(
+    null, 
+    mapDispatchToProps
+  )
 )(Splash)

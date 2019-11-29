@@ -18,51 +18,65 @@ var myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
 class MainMap extends Component {
   constructor(props) {
     super(props);
-    // this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {}
-    }
+    this.googleMapRef = React.createRef();
+    this.state = {};
+    this.map = null;
+    this.marker = null;
   }
 
+  // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
+
+
+  // setTimeout(
+  //   () => {
+  //     console.log("after some time, the props!: ", this.props);
+  //   },
+  //   7000
+  // );
+
+
   componentDidMount() {
-    const google = this.props.google;
 
-    const myLocation = {
-      lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : -39.96,
-      lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : 75.14
-    }
-
-    const mapDiv = document.getElementById('map');
-
-    const map = new google.maps.Map(mapDiv, {
-      center: myLocation,
-      zoom: 16
-    });
-
-
-    map.setOptions({ styles: MyStyle });
-
-    const { geolocationValue, displayValue } = this.props;
-
-    const test = function () {
-      if (geolocationValue && !displayValue) {
-        const bounds = map.getBounds();
-
-        console.log("anythung at all!");
-      }
-    }
-
-
-    map.addListener(
-      'tilesloaded',
-      function () {
-        test();
+    this.map = new this.props.google.maps.Map(
+      this.googleMapRef.current,
+      {
+        // disableDefaultUI: true,
+        zoom: 16,
+        styles: MyStyle,
+        center: {
+          lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.962620,
+          lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.144780
+        }
       }
     )
 
+    this.marker = new this.props.google.maps.Marker(
+      {
+        position: {
+          lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.962620,
+          lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.144780
+        },
+        map: this.map
+      }
+    )
 
+  }
+
+  componentDidUpdate() {
+
+    this.map.setCenter(
+      {
+        lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.962620,
+        lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.144780
+      }
+    );
+
+    this.marker.setPosition(
+      {
+        lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.962620,
+        lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.144780
+      }
+    )
 
   }
 
@@ -71,7 +85,8 @@ class MainMap extends Component {
 
     return (
       <div
-        id="map"
+        id="google-map"
+        ref={this.googleMapRef}
         style={{
           position: "static",
           height: "86vh",
@@ -79,11 +94,12 @@ class MainMap extends Component {
           display: this.props.displayValue
         }}
       >
-        tewt
+        test
       </div>
+    )
 
-    );
   }
+
 }
 
 
@@ -98,6 +114,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getGeolocation: () => {
+      return dispatch(getGeolocation())
+    },
     storeBounds: (bounds) => {
       return dispatch(storeBounds(bounds));
     }
