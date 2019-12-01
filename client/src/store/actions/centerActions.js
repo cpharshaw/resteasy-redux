@@ -1,12 +1,12 @@
 
-export const storeBounds = (bounds) => {
+export const storeCenter = (center) => {
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     dispatch({
-      type: 'BOUNDS_RECEIVED',
-      payload: bounds
+      type: 'CENTER_RECEIVED',
+      payload: center
     })
-    // console.log("bounds sent", bounds);
+    // console.log("center sent", center);
   }
 }
 

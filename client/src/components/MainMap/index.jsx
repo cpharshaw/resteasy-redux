@@ -3,8 +3,9 @@
 
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { getGeolocation } from '../../store/actions/geoActions';
+import { storeMap } from '../../store/actions/mapActions';
 import { storeBounds } from '../../store/actions/boundsActions';
+import { storeCenter } from '../../store/actions/centerActions';
 
 import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -19,9 +20,19 @@ class MainMap extends Component {
   constructor(props) {
     super(props);
     this.googleMapRef = React.createRef();
-    this.state = {};
+    this.state = {
+      bounds: null
+    };
+
     this.map = null;
+
     this.marker = null;
+
+    this.center = {
+      lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.96226267942067,
+      lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.14639198461786
+    }
+
   }
 
   // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
@@ -35,48 +46,87 @@ class MainMap extends Component {
   // );
 
 
+  mapFuncs() {
+
+    // this.map.setCenter(
+    //   this.center
+    // );
+
+    const map = this.map;
+    const bounds = this.map.getBounds();
+    const center = this.map.getCenter();
+
+    this.props.storeMap(map);
+    this.props.storeBounds(bounds);
+    this.props.storeCenter(center);
+
+  }
+
+
+
+
   componentDidMount() {
 
     this.map = new this.props.google.maps.Map(
       this.googleMapRef.current,
       {
-        // disableDefaultUI: true,
         zoom: 16,
         styles: MyStyle,
-        center: {
-          lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.962620,
-          lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.144780
-        }
+        center: this.center
+      }
+    );
+
+    this.map.addListener(
+      'tilesloaded',
+      () => {
+        this.mapFuncs();
+        console.log('map from store: ', this.props.mapValue);
+        console.log('bounds from store: ', this.props.boundsValue);
+        console.log('center from store: ', this.props.centerValue);
       }
     )
 
     this.marker = new this.props.google.maps.Marker(
       {
+        map: this.map,
         position: {
-          lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.962620,
-          lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.144780
-        },
-        map: this.map
+          lat: this.center.lat,
+          lng: this.center.lng
+        }
       }
     )
 
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
 
-    this.map.setCenter(
-      {
-        lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.962620,
-        lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.144780
-      }
-    );
+    console.log("prevProps: ", prevProps);
+    console.log("prevState: ", prevState);
+    console.log("snapshot: " , snapshot);
 
-    this.marker.setPosition(
-      {
-        lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.962620,
-        lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.144780
-      }
-    )
+    const currCenter = this.map.getCenter();
+
+    console.log('this.props: ', this.props)
+
+    if (this.props.geolocationValue && this.props.geolocationValue.latitude != currCenter.lat && this.props.geolocationValue.longitude != currCenter.lng) {
+      this.map.setCenter(
+        {
+          lat: this.props.geolocationValue.latitude,
+          lng: this.props.geolocationValue.longitude
+        }
+      );
+
+      this.marker.setPosition(
+        {
+          lat: this.props.geolocationValue.latitude,
+          lng: this.props.geolocationValue.longitude
+        }
+      );
+
+    }
+
+
+
 
   }
 
@@ -105,20 +155,25 @@ class MainMap extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    geolocationValue: state.geolocationState.geolocationValue,
     displayValue: ownProps.display ? "none" : "",
+    geolocationValue: state.geolocationState.geolocationValue,
+    mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
-    state: state
+    centerValue: state.centerState.centerValue
+    // ,state: state
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGeolocation: () => {
-      return dispatch(getGeolocation())
+    storeMap: (map) => {
+      return dispatch(storeMap(map));
     },
     storeBounds: (bounds) => {
       return dispatch(storeBounds(bounds));
+    },
+    storeCenter: (center) => {
+      return dispatch(storeCenter(center));
     }
   }
 }

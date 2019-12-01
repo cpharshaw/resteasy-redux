@@ -36,9 +36,11 @@ export const getGeolocation = () => {
     (dispatch, getState) => {
 
       const getPosition = function (options) {
-        return new Promise(function (resolve, reject) {
-          navigator.geolocation.getCurrentPosition(resolve, reject, options);
-        });
+        return new Promise(
+          function (resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
+          }
+        );
       }
 
       getPosition()
@@ -48,8 +50,8 @@ export const getGeolocation = () => {
               type: "GEOLOCATION_SUCCESS",
               payload: position.coords
             });
-            console.log("gathered location", position.coords)
-            console.log("getState: ", getState())
+            // console.log("gathered location", position.coords)
+            // console.log("getState: ", getState())
           }
         )
         .catch(
@@ -59,7 +61,7 @@ export const getGeolocation = () => {
               payload: err
             });
             console.log("error gathering location", err)
-            console.log("getState: ", getState())
+            console.log("getState after geo error: ", getState())
           }
         );
 

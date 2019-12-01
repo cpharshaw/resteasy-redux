@@ -56,7 +56,7 @@ const mapStateToProps = (state) => {
   // console.log("mainwrapper state: ", state);
   return {
     mapListToggleValue: state.mapListState.mapListToggleValue,
-    geolocationValue: state.geolocationState.geolocationValue,
+    // geolocationValue: state.geolocationState.geolocationValue,
     boundsValue: state.boundsState.boundsValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
