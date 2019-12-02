@@ -9,58 +9,95 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 class SearchBox extends Component {
   constructor(props) {
     super(props);
+    this.searchBoxRef = React.createRef();
+    this.searchBox = null;
     this.state = {
       places: null
     }
-    // console.log("SearchBox state: ", props);``
+    // console.log("SearchBox state: ", props);
   }
 
+
+
   componentDidMount() {
-    const google = this.props.google;
-    const input = document.getElementById('pac-input');
-    // console.log("search box here");
 
-    const bounds = this.props.boundsValue;
-
-    // console.log("Store (searchbox component): ", this.props.state);
-
-
-    var defaultBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(39.960, -75.140),
-      new google.maps.LatLng(39.964, -75.075),
-
-      // new google.maps.LatLng(-33.8688, 151.2195),
-      // new google.maps.LatLng(-33.7688, 151.6195),      
+    const circle = new this.props.google.maps.Circle(
+      {
+        center: {
+          lat: this.props.geolocationLat,
+          lng: this.props.geolocationLng
+        },
+        radius: 600
+      }
     );
 
-    const searchBox = new google.maps.places.SearchBox(input, {
-      bounds: defaultBounds
-    });
-    
-    searchBox.setBounds(defaultBounds);
+    // this.searchBox.setBounds(
+    //   circle.getBounds()
+    // );
 
-    searchBox.addListener(
-      'places_changed',
-      defaultBounds => searchBox.setBounds(defaultBounds)
-    )
+    const bounds = circle.getBounds();
 
-    searchBox.addListener(
-      'idle',
-      () => {
-        const places = searchBox.getPlaces();
-        this.setState({
-          places
-        });
+    const options = {
+      bounds: bounds,
+      types: ['establishment'],
+      strictBounds: true
+    };
+
+    this.searchBox = new this.props.google.maps.places.Autocomplete(
+      this.searchBoxRef.current,
+      options
+    );
+
+
+    // this.searchBox.addListener(
+    //   'places_changed',
+    //   () => {
+    //     const places = this.searchBox.getPlaces();
+    //     this.setState({
+    //       places
+    //     });
+    //   }
+    // )
+
+    // this.searchBox.addListener(
+    //   'idle',
+    //   () => {
+    //     const places = this.searchBox.getPlaces();
+    //     this.setState({
+    //       places
+    //     });
+    //   }
+    // )
+
+
+
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
+    const circle = new this.props.google.maps.Circle(
+      {
+        center: {
+          lat: this.props.centerLat,
+          lng: this.props.centerLng
+        },
+        radius: 600
       }
+    );
+
+    const bounds = circle.getBounds();
+    
+    this.searchBox.setBounds(
+      bounds
     )
 
-
-
+    console.log("new searchBox bounds from circle", bounds)
+    
   }
 
 
   render() {
-    
+
     return (
       <div
         style={{
@@ -73,6 +110,7 @@ class SearchBox extends Component {
       >
         <input
           id="pac-input"
+          ref={this.searchBoxRef}
           className="controls"
           type="search"
           placeholder="Search Box"
@@ -100,8 +138,12 @@ class SearchBox extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     geolocationValue: state.geolocationState.geolocationValue,
+    geolocationLat: state.geolocationState.geolocationLat,
+    geolocationLng: state.geolocationState.geolocationLng,
     boundsValue: state.boundsState.boundsValue,
-    state: state
+    centerLat: state.centerState.centerLat,
+    centerLng: state.centerState.centerLng,
+    // state: state
     // displayValue: ownProps.display ? "none" : ""
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth

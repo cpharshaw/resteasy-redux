@@ -27,7 +27,10 @@ class MainWrapper extends Component {
 
   render() {
 
-    const { mapListToggleValue, geolocationValue } = this.props;
+    const { 
+      mapListToggleValue, 
+      geolocationValue 
+    } = this.props;
 
     return (
       <div>

@@ -6,6 +6,6 @@ export const storeMap = (map) => {
       type: 'MAP_RECEIVED',
       payload: map
     })
-    console.log("map stored", map.getBounds());
+    // console.log("map stored", map.getBounds());
   }
 }

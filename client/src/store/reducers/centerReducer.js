@@ -1,14 +1,20 @@
+
 const initState = {
-  centerValue: null
+  center: {
+    lat: 39.952391,
+    lng: -75.163600
+  }
+  // centerValue: null
 }
 
 const centerReducer = (state = initState, action) => {
   switch (action.type) {
     case 'CENTER_RECEIVED':
-      // console.log('geolocation success');
+      console.log('center success: ', action.payload);
       return {
         ...state,
-        centerValue: action.payload
+        centerLat: action.payload.lat,
+        centerLng: action.payload.lng
       }
     default:
       return {

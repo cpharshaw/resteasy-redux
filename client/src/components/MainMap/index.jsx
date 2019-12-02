@@ -1,5 +1,6 @@
 
 // https://codesandbox.io/s/rzwrk2854
+import MarkerComp from '../Marker';
 
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
@@ -16,22 +17,18 @@ import MyStyle from './mapStyle.js';
 var myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
 
 
+
 class MainMap extends Component {
   constructor(props) {
     super(props);
     this.googleMapRef = React.createRef();
     this.state = {
-      bounds: null
+      initialUpdate: false
     };
 
     this.map = null;
 
     this.marker = null;
-
-    this.center = {
-      lat: this.props.geolocationValue ? this.props.geolocationValue.latitude : 39.96226267942067,
-      lng: this.props.geolocationValue ? this.props.geolocationValue.longitude : -75.14639198461786
-    }
 
   }
 
@@ -48,17 +45,17 @@ class MainMap extends Component {
 
   mapFuncs() {
 
-    // this.map.setCenter(
-    //   this.center
-    // );
-
-    const map = this.map;
     const bounds = this.map.getBounds();
     const center = this.map.getCenter();
+    const map = this.map;
 
-    this.props.storeMap(map);
     this.props.storeBounds(bounds);
     this.props.storeCenter(center);
+    this.props.storeMap(map);
+
+    // console.log("bounds from map update: ", this.state.initialUpdate, bounds);
+    // console.log("center from map update: ", this.state.initialUpdate,  center);
+    // console.log("map from map update: ", this.state.initialUpdate,  map);    
 
   }
 
@@ -70,63 +67,72 @@ class MainMap extends Component {
     this.map = new this.props.google.maps.Map(
       this.googleMapRef.current,
       {
-        zoom: 16,
+        zoom: 15,
         styles: MyStyle,
-        center: this.center
+        center: {
+          lat: this.props.geolocationLat,
+          lng: this.props.geolocationLng
+        }
       }
     );
-
-    this.map.addListener(
-      'tilesloaded',
-      () => {
-        this.mapFuncs();
-        console.log('map from store: ', this.props.mapValue);
-        console.log('bounds from store: ', this.props.boundsValue);
-        console.log('center from store: ', this.props.centerValue);
-      }
-    )
 
     this.marker = new this.props.google.maps.Marker(
       {
         map: this.map,
         position: {
-          lat: this.center.lat,
-          lng: this.center.lng
-        }
+          lat: this.props.geolocationLat,
+          lng: this.props.geolocationLng
+        },
+        icon: myLocationIcon
       }
-    )
+    );
+
+    this.map.addListener(
+      'idle',
+      () => {
+        this.mapFuncs();
+        console.log('idle, the props: ', this.props);
+        // console.log('bounds from store: ', this.props.boundsValue);
+        // console.log('center from store: ', this.props.centerValue);
+      }
+    );
+
+
 
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
 
-    console.log("prevProps: ", prevProps);
-    console.log("prevState: ", prevState);
-    console.log("snapshot: " , snapshot);
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
 
     const currCenter = this.map.getCenter();
 
-    console.log('this.props: ', this.props)
+    if (
+      this.props.geolocationValue &&
+      !this.state.initialUpdate &&
+      this.props.geolocationLat !== currCenter.lat &&
+      this.props.geolocationLng !== currCenter.lng
+    ) {
 
-    if (this.props.geolocationValue && this.props.geolocationValue.latitude != currCenter.lat && this.props.geolocationValue.longitude != currCenter.lng) {
       this.map.setCenter(
         {
-          lat: this.props.geolocationValue.latitude,
-          lng: this.props.geolocationValue.longitude
+          lat: this.props.geolocationLat,
+          lng: this.props.geolocationLng
         }
       );
 
       this.marker.setPosition(
         {
-          lat: this.props.geolocationValue.latitude,
-          lng: this.props.geolocationValue.longitude
+          lat: this.props.geolocationLat,
+          lng: this.props.geolocationLng
         }
       );
 
+      this.setState({
+        initialUpdate: true
+      });
+
     }
-
-
-
 
   }
 
@@ -134,17 +140,18 @@ class MainMap extends Component {
   render() {
 
     return (
-      <div
-        id="google-map"
-        ref={this.googleMapRef}
-        style={{
-          position: "static",
-          height: "86vh",
-          width: "100vw",
-          display: this.props.displayValue
-        }}
-      >
-        test
+      <div>
+        <div
+          id="google-map"
+          ref={this.googleMapRef}
+          style={{
+            position: "static",
+            height: "86vh",
+            width: "100vw",
+            display: this.props.displayValue
+          }}
+        />
+        <MarkerComp />
       </div>
     )
 
@@ -157,9 +164,11 @@ const mapStateToProps = (state, ownProps) => {
   return {
     displayValue: ownProps.display ? "none" : "",
     geolocationValue: state.geolocationState.geolocationValue,
-    mapValue: state.mapState.mapValue,
-    boundsValue: state.boundsState.boundsValue,
-    centerValue: state.centerState.centerValue
+    geolocationLat: state.geolocationState.geolocationLat,
+    geolocationLng: state.geolocationState.geolocationLng,
+    // mapValue: state.mapState.mapValue,
+    // boundsValue: state.boundsState.boundsValue,
+    // centerValue: state.centerState.centerValue
     // ,state: state
   }
 }
