@@ -21,32 +21,32 @@ class SearchBox extends Component {
 
   componentDidMount() {
 
-    const circle = new this.props.google.maps.Circle(
-      {
-        center: {
-          lat: this.props.geolocationLat,
-          lng: this.props.geolocationLng
-        },
-        radius: 600
-      }
-    );
+    // const circle = new this.props.google.maps.Circle(
+    //   {
+    //     center: {
+    //       lat: this.props.geolocationLat,
+    //       lng: this.props.geolocationLng
+    //     },
+    //     radius: 600
+    //   }
+    // );
 
     // this.searchBox.setBounds(
     //   circle.getBounds()
     // );
 
-    const bounds = circle.getBounds();
+    // const bounds = circle.getBounds();
 
-    const options = {
-      bounds: bounds,
-      types: ['establishment'],
-      strictBounds: true
-    };
+    // const options = {
+    //   bounds: bounds,
+    //   types: ['establishment'],
+    //   strictBounds: true
+    // };
 
-    this.searchBox = new this.props.google.maps.places.Autocomplete(
-      this.searchBoxRef.current,
-      options
-    );
+    // this.searchBox = new this.props.google.maps.places.Autocomplete(
+    //   this.searchBoxRef.current,
+    //   options
+    // );
 
 
     // this.searchBox.addListener(
@@ -75,23 +75,23 @@ class SearchBox extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    const circle = new this.props.google.maps.Circle(
-      {
-        center: {
-          lat: this.props.centerLat,
-          lng: this.props.centerLng
-        },
-        radius: 600
-      }
-    );
+    // const circle = new this.props.google.maps.Circle(
+    //   {
+    //     center: {
+    //       lat: this.props.centerLat,
+    //       lng: this.props.centerLng
+    //     },
+    //     radius: 600
+    //   }
+    // );
 
-    const bounds = circle.getBounds();
+    // const bounds = circle.getBounds();
     
-    this.searchBox.setBounds(
-      bounds
-    )
+    // this.searchBox.setBounds(
+    //   bounds
+    // )
 
-    console.log("new searchBox bounds from circle", bounds)
+    // console.log("new searchBox bounds from circle", bounds)
     
   }
 

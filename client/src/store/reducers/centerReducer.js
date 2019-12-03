@@ -1,10 +1,11 @@
 
 const initState = {
-  center: {
+  centerValue: {
     lat: 39.952391,
     lng: -75.163600
-  }
-  // centerValue: null
+  },
+  // centerLatValue: 39.952391,
+  // centerLngValue: -75.163600,
 }
 
 const centerReducer = (state = initState, action) => {
@@ -13,8 +14,9 @@ const centerReducer = (state = initState, action) => {
       console.log('center success: ', action.payload);
       return {
         ...state,
-        centerLat: action.payload.lat,
-        centerLng: action.payload.lng
+        centerValue: action.payload,
+        // centerLatValue: action.payload.latitude,
+        // centerLngValue: action.payload.longitude
       }
     default:
       return {

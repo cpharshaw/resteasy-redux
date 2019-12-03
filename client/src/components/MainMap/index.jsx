@@ -45,24 +45,24 @@ class MainMap extends Component {
 
   mapFuncs() {
 
-    const bounds = this.map.getBounds();
-    const center = this.map.getCenter();
     const map = this.map;
+    const bounds = this.map.getBounds();
+    // const center = this.map.getCenter();
 
-    this.props.storeBounds(bounds);
-    this.props.storeCenter(center);
     this.props.storeMap(map);
+    this.props.storeBounds(bounds);
+    // this.props.storeCenter(center);
 
     // console.log("bounds from map update: ", this.state.initialUpdate, bounds);
     // console.log("center from map update: ", this.state.initialUpdate,  center);
     // console.log("map from map update: ", this.state.initialUpdate,  map);    
-
   }
 
 
 
-
   componentDidMount() {
+
+    console.log(typeof this.props.geolocationLatValue)
 
     this.map = new this.props.google.maps.Map(
       this.googleMapRef.current,
@@ -70,32 +70,37 @@ class MainMap extends Component {
         zoom: 15,
         styles: MyStyle,
         center: {
-          lat: this.props.geolocationLat,
-          lng: this.props.geolocationLng
+          lat: parseFloat(this.props.geolocationLatValue),
+          lng: parseFloat(this.props.geolocationLngValue)
+          // lat: 40,
+          // lng: -75
         }
       }
     );
 
-    this.marker = new this.props.google.maps.Marker(
-      {
-        map: this.map,
-        position: {
-          lat: this.props.geolocationLat,
-          lng: this.props.geolocationLng
-        },
-        icon: myLocationIcon
-      }
-    );
+    // this.marker = new this.props.google.maps.Marker(
+    //   {
+    //     map: this.map,
+    //     position: {
+    //       lat: this.props.geolocationLatValue,
+    //       lng: this.props.geolocationLngValue
+    //     },
+    //     icon: myLocationIcon
+    //   }
+    // );
 
-    this.map.addListener(
-      'idle',
-      () => {
-        this.mapFuncs();
-        console.log('idle, the props: ', this.props);
+    // this.mapFuncs();
+
+
+    // this.map.addListener(
+    //   'idle',
+    //   () => {
+    //     this.mapFuncs();
+    //     console.log('idle, the props: ', this.props);
         // console.log('bounds from store: ', this.props.boundsValue);
         // console.log('center from store: ', this.props.centerValue);
-      }
-    );
+    //   }
+    // );
 
 
 
@@ -105,34 +110,37 @@ class MainMap extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    const currCenter = this.map.getCenter();
+    // const currCenter = this.map.getCenter();
+    // const currBounds = this.map.getBounds();
 
-    if (
-      this.props.geolocationValue &&
-      !this.state.initialUpdate &&
-      this.props.geolocationLat !== currCenter.lat &&
-      this.props.geolocationLng !== currCenter.lng
-    ) {
+    // if (
+    //   this.props.geolocationValue &&
+    //   this.props.geolocationLatValue !== prevProps.geolocationLatValue &&
+    //   this.props.geolocationLngValue !== prevProps.geolocationLngValue &&
+    //   !this.state.initialUpdate
+    // ) {
 
-      this.map.setCenter(
-        {
-          lat: this.props.geolocationLat,
-          lng: this.props.geolocationLng
-        }
-      );
+      // this.map.setCenter(
+      //   {
+      //     lat: this.props.geolocationLatValue,
+      //     lng: this.props.geolocationLngValue
+      //   }
+      // );
 
-      this.marker.setPosition(
-        {
-          lat: this.props.geolocationLat,
-          lng: this.props.geolocationLng
-        }
-      );
+      // this.marker.setPosition(
+      //   {
+      //     lat: this.props.geolocationLatValue,
+      //     lng: this.props.geolocationLngValue
+      //   }
+      // );
 
-      this.setState({
-        initialUpdate: true
-      });
+      // this.setState({
+      //   initialUpdate: true
+      // });
 
-    }
+      // this.mapFuncs();
+
+    // }
 
   }
 
@@ -164,8 +172,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     displayValue: ownProps.display ? "none" : "",
     geolocationValue: state.geolocationState.geolocationValue,
-    geolocationLat: state.geolocationState.geolocationLat,
-    geolocationLng: state.geolocationState.geolocationLng,
+    geolocationLatValue: parseFloat(state.geolocationState.geolocationLatValue),
+    geolocationLngValue: parseFloat(state.geolocationState.geolocationLngValue),
     // mapValue: state.mapState.mapValue,
     // boundsValue: state.boundsState.boundsValue,
     // centerValue: state.centerState.centerValue
