@@ -21,80 +21,109 @@ class SearchBox extends Component {
 
   componentDidMount() {
 
-    // const circle = new this.props.google.maps.Circle(
-    //   {
-    //     center: {
-    //       lat: this.props.geolocationLat,
-    //       lng: this.props.geolocationLng
-    //     },
-    //     radius: 600
-    //   }
-    // );
+    const circle = new this.props.google.maps.Circle(
+      {
+        center: {
+          lat: this.props.geolocationLatValue,
+          lng: this.props.geolocationLngValue
+        },
+        radius: 600
+      }
+    );
 
-    // this.searchBox.setBounds(
-    //   circle.getBounds()
-    // );
+    const bounds = circle.getBounds();
 
-    // const bounds = circle.getBounds();
+    const options = {
+      bounds: bounds,
+      types: ['establishment'],
+      strictBounds: true
+    };
 
-    // const options = {
-    //   bounds: bounds,
-    //   types: ['establishment'],
-    //   strictBounds: true
-    // };
-
-    // this.searchBox = new this.props.google.maps.places.Autocomplete(
-    //   this.searchBoxRef.current,
-    //   options
-    // );
+    this.searchBox = new this.props.google.maps.places.Autocomplete(
+      this.searchBoxRef.current,
+      options
+    );
 
 
-    // this.searchBox.addListener(
-    //   'places_changed',
-    //   () => {
-    //     const places = this.searchBox.getPlaces();
-    //     this.setState({
-    //       places
-    //     });
-    //   }
-    // )
+    this.searchBox.addListener(
+      'places_changed',
+      () => {
+        const places = this.searchBox.getPlaces();
+        this.setState({
+          places
+        });
+      }
+    )
 
-    // this.searchBox.addListener(
-    //   'idle',
-    //   () => {
-    //     const places = this.searchBox.getPlaces();
-    //     this.setState({
-    //       places
-    //     });
-    //   }
-    // )
+    this.searchBox.addListener(
+      'idle',
+      () => {
+        const places = this.searchBox.getPlaces();
+        this.setState({
+          places
+        });
+      }
+    )
 
 
 
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+// TODO  
+// add check for null prevbounds
+    if (
+      this.props.geolocationValue &&
+      this.props.geolocationLatValue !== prevProps.geolocationLatValue &&
+      this.props.geolocationLngValue !== prevProps.geolocationLngValue
+    ) {
 
-    // const circle = new this.props.google.maps.Circle(
-    //   {
-    //     center: {
-    //       lat: this.props.centerLat,
-    //       lng: this.props.centerLng
-    //     },
-    //     radius: 600
-    //   }
-    // );
+      const lat = this.props.geolocationLatValue;
+      const lng = this.props.geolocationLngValue;
 
-    // const bounds = circle.getBounds();
-    
-    // this.searchBox.setBounds(
-    //   bounds
-    // )
+      const circle = new this.props.google.maps.Circle(
+        {
+          center: {
+            lat: lat,
+            lng: lng
+          },
+          radius: 600
+        }
+      );
 
-    // console.log("new searchBox bounds from circle", bounds)
-    
+      const bounds = circle.getBounds();
+
+      this.searchBox.setBounds(
+        bounds
+      );
+
+      console.log("searchBox bounds set to circle around geolocation");
+
+    }
+
+
+    if (
+      this.props.boundsValue &&
+      JSON.stringify(this.props.boundsValue) !== JSON.stringify(prevProps.boundsValue) &&
+      this.props.geolocationLatValue !== this.props.centerLatValue &&
+      this.props.geolocationLngValue !== this.props.centerLngValue
+    ) {
+
+      console.log("searchBox - boundsValue: ", JSON.stringify(this.props.boundsValue));
+      console.log("searchBox - prevboundsValue: ", JSON.stringify(prevProps.boundsValue));
+      console.log("searchBox - geolocationLatValue: ", this.props.geolocationLatValue);
+      console.log("searchBox - centerLatValue: ", this.props.centerLatValue);
+      console.log("searchBox - geolocationLngValue: ", this.props.geolocationLngValue);
+      console.log("searchBox - centerLngValue: ", this.props.centerLngValue);
+
+
+      this.searchBox.setBounds(
+        this.props.boundsValue
+      );
+
+    }
+
   }
-
 
   render() {
 
@@ -138,11 +167,12 @@ class SearchBox extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     geolocationValue: state.geolocationState.geolocationValue,
-    geolocationLat: state.geolocationState.geolocationLat,
-    geolocationLng: state.geolocationState.geolocationLng,
+    geolocationLatValue: state.geolocationState.geolocationLatValue,
+    geolocationLngValue: state.geolocationState.geolocationLngValue,
+    mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
-    centerLat: state.centerState.centerLat,
-    centerLng: state.centerState.centerLng,
+    centerLatValue: state.centerState.centerLatValue,
+    centerLngValue: state.centerState.centerLngValue
     // state: state
     // displayValue: ownProps.display ? "none" : ""
     // reviews: state.firestore.ordered.reviews,

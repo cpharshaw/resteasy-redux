@@ -46,15 +46,19 @@ class MainMap extends Component {
   mapFuncs() {
     const map = this.map;
     const bounds = map.getBounds();
-    const center = map.getCenter();
+    const centerObj = map.getCenter();
+    const center = {
+      lat: centerObj.lat(),
+      lng: centerObj.lng()
+    }
 
     this.props.storeMap(map);
     this.props.storeBounds(bounds);
     this.props.storeCenter(center);
 
-    console.log("bounds from store: ", this.props.boundsValue);
-    console.log("center from store: ", this.props.centerValue);
-    console.log("map from store: ", this.props.mapValue);
+    // console.log("bounds from store: ", this.props.boundsValue);
+    // console.log("center from store: ", this.props.centerLatValue, this.props.centerLngValue);
+    // console.log("map from store: ", this.props.mapValue);
   }
 
 
@@ -92,11 +96,22 @@ class MainMap extends Component {
       'idle',
       () => {
         this.mapFuncs();
-        console.log('idle, the props: ', this.props);
-        console.log('bounds from store: ', this.props.boundsValue);
-        console.log('center from store: ', this.props.centerValue);
+        // console.log('idle, the props: ', this.props);
+        // console.log('bounds from store: ', this.props.boundsValue);
+        // console.log('center from store: ', this.props.centerLatValue, this.props.centerLngValue);
       }
     );
+
+    this.map.addListener(
+      'dragend',
+      () => {
+        this.mapFuncs();
+        // console.log('idle, the props: ', this.props);
+        // console.log('bounds from store: ', this.props.boundsValue);
+        // console.log('center from store: ', this.props.centerLatValue, this.props.centerLngValue);
+      }
+    );    
+
 
 
 
@@ -109,8 +124,7 @@ class MainMap extends Component {
     if (
       this.props.geolocationValue &&
       this.props.geolocationLatValue !== prevProps.geolocationLatValue &&
-      this.props.geolocationLngValue !== prevProps.geolocationLngValue &&
-      !this.state.initialUpdate
+      this.props.geolocationLngValue !== prevProps.geolocationLngValue 
     ) {
 
       const lat = this.props.geolocationLatValue;
@@ -130,9 +144,9 @@ class MainMap extends Component {
         }
       );
 
-      this.setState({
-        initialUpdate: true
-      });
+      // this.setState({
+      //   initialUpdate: true
+      // });
 
       this.mapFuncs();
 
@@ -157,6 +171,12 @@ class MainMap extends Component {
           }}
         />
         <MarkerComp />
+
+        {/* < Marker
+          position={props.origLoc}
+          icon={{ url: myLocationIcon }}
+          animation={google.maps.Animation.DROP}
+        />         */}
       </div>
     )
 
@@ -173,7 +193,8 @@ const mapStateToProps = (state, ownProps) => {
     geolocationLngValue: (state.geolocationState.geolocationLngValue),
     mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
-    centerValue: state.centerState.centerValue
+    centerLatValue: state.centerState.centerLatValue,
+    centerLngValue: state.centerState.centerLngValue,
     // ,state: state
   }
 }
