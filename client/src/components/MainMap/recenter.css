@@ -16,7 +16,31 @@
 
   border-radius: 50%;
 
-  background: #e6e6e6;
+  background: rgba(222.5, 222.5, 222.5, 0.8);
+
+  border: 0.5px dotted #44aacc;
+}
+
+.recenterButtonRing {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;  
+
+  /* top: 25%;
+  bottom: 25%; */
+  margin: 0 auto !important;
+  padding: 0 !important;
+
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  /* background: #44aacc; */
+  border: 2px solid #44aacc;
+  background: rgba(225, 225, 225, 1);
+  z-index: 1000;
 }
 
 
@@ -29,9 +53,32 @@
   padding: 0 !important;
 
   border-radius: 50%;
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   background: #44aacc;
   z-index: 1000;
 }
+
+
+
+.recenterCrosshairs1, .recenterCrosshairs2 {
+  position: absolute;
+  background: #44aacc;
+  margin: 0 auto;
+  display: flex;
+  align-self: center;
+}
+
+.recenterCrosshairs1 {
+  height: 26px;
+  width: 2px;
+}
+
+
+.recenterCrosshairs2 {
+  width: 26px;
+  height: 2px;
+}
+
+
 

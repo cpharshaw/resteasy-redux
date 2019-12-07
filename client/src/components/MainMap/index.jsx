@@ -78,9 +78,8 @@ class MainMap extends Component {
           lat: lat,
           lng: lng
         },
-        zoomControlOptions: {
-          position: this.props.google.maps.ControlPosition.RIGHT_CENTER
-        },
+        zoomControl: false,
+        mapTypeControl: false,
         fullscreenControl: false,
         streetViewControl: false
       }
@@ -190,7 +189,11 @@ class MainMap extends Component {
 
         {/* <div id="recenterContainer1" > */}
         <div className="recenterButton" >
-          <div className="recenterButtonDot" />
+          <div className="recenterCrosshairs1" />
+          <div className="recenterButtonRing">
+            <div className="recenterButtonDot" />
+          </div>
+          <div className="recenterCrosshairs2" />
         </div>
         {/* </div> */}
 

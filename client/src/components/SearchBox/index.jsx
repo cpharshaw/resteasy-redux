@@ -142,7 +142,7 @@ class SearchBox extends Component {
       >
         <input
           id="pac-input"
-          ref={ this.searchBoxRef }
+          ref={this.searchBoxRef}
           className="controls"
           type="search"
           placeholder="Search Box"
