@@ -70,10 +70,11 @@ class SearchBox extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-// TODO  
-// add check for null prevbounds
+    // TODO  
+    // add check for null prevbounds
     if (
       this.props.geolocationValue &&
+      prevProps.geolocationValue &&
       this.props.geolocationLatValue !== prevProps.geolocationLatValue &&
       this.props.geolocationLngValue !== prevProps.geolocationLngValue
     ) {
@@ -129,33 +130,37 @@ class SearchBox extends Component {
 
     return (
       <div
-        style={{
-          background: "gray",
-          position: "absolute",
-          top: "0",
-          height: "7vh",
-          width: "100%"
-        }}
+        style={
+          {
+            background: "gray",
+            position: "absolute",
+            top: "0",
+            height: "7vh",
+            width: "100%"
+          }
+        }
       >
         <input
           id="pac-input"
-          ref={this.searchBoxRef}
+          ref={ this.searchBoxRef }
           className="controls"
           type="search"
           placeholder="Search Box"
-          style={{
-            background: "orange",
-            fontFamily: "Roboto",
-            fontSize: "15px",
-            fontWeight: "300",
-            // marginLeft: "12px",
-            // padding: "0 11px 0 13px",
-            textOverflow: "ellipsis",
-            position: "absolute",
-            // bottom: "5vh",
-            width: "100%",
-            height: "100%"
-          }}
+          style={
+            {
+              background: "orange",
+              fontFamily: "Roboto",
+              fontSize: "15px",
+              fontWeight: "300",
+              // marginLeft: "12px",
+              // padding: "0 11px 0 13px",
+              textOverflow: "ellipsis",
+              position: "absolute",
+              // bottom: "5vh",
+              width: "100%",
+              height: "100%"
+            }
+          }
         />
       </div >
     )

@@ -29,8 +29,6 @@ function App() {
           <Route exact path="/splash" component={Splash} />
           
           <Route exact path="/main" component={MainWrapper} />
-          <Route exact path="/map" component={MainMap} />
-          <Route exact path="/list" component={MainList} />
 
           <Route path="/filters" component={Filters} />
 

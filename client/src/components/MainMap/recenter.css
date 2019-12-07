@@ -1,0 +1,37 @@
+
+
+.recenterButton {
+  position: absolute;
+  bottom: 24px;
+  right: 10px;
+  z-index: 999;
+
+  height: 40px;  
+  width: 40px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;  
+
+  border-radius: 50%;
+
+  background: #e6e6e6;
+}
+
+
+.recenterButtonDot {
+  position: relative;
+
+  /* top: 25%;
+  bottom: 25%; */
+  margin: 0 auto !important;
+  padding: 0 !important;
+
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  background: #44aacc;
+  z-index: 1000;
+}
+

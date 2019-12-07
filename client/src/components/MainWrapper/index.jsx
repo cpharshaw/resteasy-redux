@@ -27,21 +27,30 @@ class MainWrapper extends Component {
 
   render() {
 
-    const { 
-      mapListToggleValue, 
-      geolocationValue 
+    const {
+      mapListToggleValue,
+      geolocationValue
     } = this.props;
 
     return (
-      <div>
+      <div
+        style={
+          {
+            height: "100%",
+            width: "100%"
+          }
+        }
+      >
         < SearchBox />
         <div
-          style={{
-            position: "absolute",
-            top: "7vh",
-            height: "86vh",
-            width: "100%"
-          }}
+          style={
+            {
+              position: "absolute",
+              top: "7vh",
+              height: "86vh",
+              width: "100%"
+            }
+          }
         >
           < MainMap display={mapListToggleValue} />
           < MainList display={!mapListToggleValue} />

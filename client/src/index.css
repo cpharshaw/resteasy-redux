@@ -5,7 +5,10 @@ html {
 
 
 
-
+div {
+  padding: 0;
+  margin: 0;
+}
 
 
 body {
@@ -40,4 +43,10 @@ Link {
   /* font-family: 'Roboto Slab', serif; */
   /* font-family: 'Noto Sans', sans-serif; */
   /* font-family: 'Ubuntu', sans-serif; */
+}
+
+
+.App {
+  height: 100%;
+  width: 100%;
 }

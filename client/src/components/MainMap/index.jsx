@@ -1,7 +1,6 @@
 
 // https://codesandbox.io/s/rzwrk2854
 import MarkerComp from '../Marker';
-
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { storeMap } from '../../store/actions/mapActions';
@@ -13,6 +12,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 // import { createProject } from '../../store/actions/projectActions';
 import MyStyle from './mapStyle.js';
+import './recenter.css';
+
 // import './loading.css';
 var myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
 
@@ -76,7 +77,12 @@ class MainMap extends Component {
         center: {
           lat: lat,
           lng: lng
-        }
+        },
+        zoomControlOptions: {
+          position: this.props.google.maps.ControlPosition.RIGHT_CENTER
+        },
+        fullscreenControl: false,
+        streetViewControl: false
       }
     );
 
@@ -105,12 +111,12 @@ class MainMap extends Component {
     this.map.addListener(
       'dragend',
       () => {
-        this.mapFuncs();
+        // this.mapFuncs();
         // console.log('idle, the props: ', this.props);
         // console.log('bounds from store: ', this.props.boundsValue);
         // console.log('center from store: ', this.props.centerLatValue, this.props.centerLngValue);
       }
-    );    
+    );
 
 
 
@@ -124,7 +130,7 @@ class MainMap extends Component {
     if (
       this.props.geolocationValue &&
       this.props.geolocationLatValue !== prevProps.geolocationLatValue &&
-      this.props.geolocationLngValue !== prevProps.geolocationLngValue 
+      this.props.geolocationLngValue !== prevProps.geolocationLngValue
     ) {
 
       const lat = this.props.geolocationLatValue;
@@ -159,25 +165,37 @@ class MainMap extends Component {
   render() {
 
     return (
-      <div>
+      <div
+        id=""
+        style={
+          {
+            position: "relative",
+            height: "86vh",
+            width: "100%",
+          }
+        }
+      >
         <div
           id="google-map"
           ref={this.googleMapRef}
           style={{
-            position: "static",
-            height: "86vh",
-            width: "100vw",
+            // position: "static",
+            height: "inherit",
+            width: "inherit",
             display: this.props.displayValue
           }}
         />
-        <MarkerComp />
 
-        {/* < Marker
-          position={props.origLoc}
-          icon={{ url: myLocationIcon }}
-          animation={google.maps.Animation.DROP}
-        />         */}
-      </div>
+        < MarkerComp />
+
+        {/* <div id="recenterContainer1" > */}
+        <div className="recenterButton" >
+          <div className="recenterButtonDot" />
+        </div>
+        {/* </div> */}
+
+      </div >
+
     )
 
   }
