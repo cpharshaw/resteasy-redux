@@ -11,7 +11,7 @@ const initState = {
 const geolocationReducer = (state = initState, action) => {
   switch (action.type) {
     case 'GEOLOCATION_SUCCESS':
-      // console.log("gelocationReducer SUCCESS: ", action.payload);
+      console.log("gelocationReducer SUCCESS: ", action.payload);
       return {
         ...state,
         geolocationValue: action.payload,

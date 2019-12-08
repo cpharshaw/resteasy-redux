@@ -1,6 +1,7 @@
 
 // https://codesandbox.io/s/rzwrk2854
 import MarkerComp from '../Marker';
+import RecenterButton from '../RecenterButton';
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { storeMap } from '../../store/actions/mapActions';
@@ -125,10 +126,12 @@ class MainMap extends Component {
 
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-
+    console.log("map updated");
     if (
-      this.props.geolocationValue &&
-      this.props.geolocationLatValue !== prevProps.geolocationLatValue &&
+      this.props.geolocationValue 
+        &&
+      this.props.geolocationLatValue !== prevProps.geolocationLatValue 
+        &&
       this.props.geolocationLngValue !== prevProps.geolocationLngValue
     ) {
 
@@ -153,7 +156,16 @@ class MainMap extends Component {
       //   initialUpdate: true
       // });
 
+      this.map.panTo(
+        {
+          lat: lat,
+          lng: lng
+        }
+      )
+
       this.mapFuncs();
+
+
 
     }
 
@@ -187,15 +199,15 @@ class MainMap extends Component {
 
         < MarkerComp />
 
-        {/* <div id="recenterContainer1" > */}
-        <div className="recenterButton" >
+        {/* <div className="recenterButton" >
           <div className="recenterCrosshairs1" />
           <div className="recenterButtonRing">
             <div className="recenterButtonDot" />
           </div>
           <div className="recenterCrosshairs2" />
-        </div>
-        {/* </div> */}
+        </div> */}
+
+        <RecenterButton />
 
       </div >
 
