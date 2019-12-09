@@ -4,7 +4,7 @@ import geolocationReducer from './geoReducer';
 import mapListReducer from './mapListReducer';
 import boundsReducer from './boundsReducer';
 import centerReducer from './centerReducer';
-
+import inputReducer from './inputReducer';
 import mapReducer from './mapReducer';
 import { combineReducers } from 'redux';
 // import { firestoreReducer } from 'redux-firestore';
@@ -19,7 +19,8 @@ const rootReducer = combineReducers({
   mapListState: mapListReducer,
   boundsState: boundsReducer,
   centerState: centerReducer,
-  mapState: mapReducer
+  mapState: mapReducer,
+  inputState: inputReducer
   // firestore: firestoreReducer,
   // firebase: firebaseReducer
 })

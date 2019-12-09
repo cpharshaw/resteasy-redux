@@ -98,24 +98,27 @@ class SearchBox extends Component {
         bounds
       );
 
-      console.log("searchBox bounds set to circle around geolocation");
+      // console.log("searchBox bounds set to circle around geolocation");
 
     }
 
 
     if (
-      this.props.boundsValue &&
-      JSON.stringify(this.props.boundsValue) !== JSON.stringify(prevProps.boundsValue) &&
-      this.props.geolocationLatValue !== this.props.centerLatValue &&
+      this.props.boundsValue 
+      &&
+      JSON.stringify(this.props.boundsValue) !== JSON.stringify(prevProps.boundsValue) 
+      &&
+      this.props.geolocationLatValue !== this.props.centerLatValue 
+      &&
       this.props.geolocationLngValue !== this.props.centerLngValue
     ) {
 
-      console.log("searchBox - boundsValue: ", JSON.stringify(this.props.boundsValue));
-      console.log("searchBox - prevboundsValue: ", JSON.stringify(prevProps.boundsValue));
-      console.log("searchBox - geolocationLatValue: ", this.props.geolocationLatValue);
-      console.log("searchBox - centerLatValue: ", this.props.centerLatValue);
-      console.log("searchBox - geolocationLngValue: ", this.props.geolocationLngValue);
-      console.log("searchBox - centerLngValue: ", this.props.centerLngValue);
+      // console.log("searchBox - boundsValue: ", JSON.stringify(this.props.boundsValue));
+      // console.log("searchBox - prevboundsValue: ", JSON.stringify(prevProps.boundsValue));
+      // console.log("searchBox - geolocationLatValue: ", this.props.geolocationLatValue);
+      // console.log("searchBox - centerLatValue: ", this.props.centerLatValue);
+      // console.log("searchBox - geolocationLngValue: ", this.props.geolocationLngValue);
+      // console.log("searchBox - centerLngValue: ", this.props.centerLngValue);
 
 
       this.searchBox.setBounds(

@@ -6,6 +6,7 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { getGeolocation } from '../../store/actions/geoActions';
+import { storeInput } from '../../store/actions/inputActions';
 
 import './recenter.css';
 
@@ -23,40 +24,48 @@ class RecenterButton extends Component {
 
 
   handleClick() {
+    this.props.storeInput("system");
     this.props.getGeolocation();
     console.log('recenter clicked');
-  }    
+    this.setState({
+      color: "#44aacc"
+    })
+  }
 
 
 
   componentDidMount() {
 
     if (
-      this.props.geolocationLatValue && this.props.centerLatValue
-      &&
       (
-        this.props.geolocationLatValue === this.props.centerLatValue
-        &&
-        this.props.geolocationLngValue === this.props.centerLngValue
+        this.props.centerLatValue == this.props.geolocationLatValue 
+        ||
+        this.props.centerLngValue == this.props.geolocationLngValue
       )
     ) {
       this.setState({
         color: "#44aacc"
       });
+      console.log("DIDMOUNT - color to tiffany blue");
     }
 
     if (
-      this.props.geolocationLatValue && this.props.centerLatValue
-      &&
       (
-        this.props.geolocationLatValue !== this.props.centerLatValue
+        this.props.centerLatValue != this.props.geolocationLatValue 
         ||
-        this.props.geolocationLngValue !== this.props.centerLngValue
+        this.props.centerLngValue != this.props.geolocationLngValue
       )
     ) {
       this.setState({
         color: "grey"
       });
+      console.log("DIDMOUNT - color to grey");
+
+      console.log("centerLatValue: ", this.props.centerLatValue);
+      console.log("geolocationLatValue: ", this.props.geolocationLatValue);
+
+      console.log("centerLngValue: ", this.props.centerLngValue);
+      console.log("geolocationLngValue: ", this.props.geolocationLngValue);      
     }
 
   }
@@ -64,59 +73,29 @@ class RecenterButton extends Component {
 
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("recenter updated")
+
 
     if (
       (
-        this.props.geolocationLatValue && this.props.centerLatValue
-          &&
         (
-          this.props.geolocationLatValue !== prevProps.geolocationLatValue
-          ||
-          this.props.geolocationLngValue !== prevProps.geolocationLngValue
-          ||
           this.props.centerLatValue !== prevProps.centerLatValue
           ||
           this.props.centerLngValue !== prevProps.centerLngValue
         )
-          &&
+        &&
         (
-          this.props.geolocationLatValue === this.props.centerLatValue
-            &&
-          this.props.geolocationLngValue === this.props.centerLngValue
+          this.props.geolocationLatValue != this.props.centerLatValue
+          ||
+          this.props.geolocationLngValue != this.props.centerLngValue
         )
       )
     ) {
-      this.setState({
-        color: "#44aacc"
-      });
-      console.log("update true")
-    }
-
-    if (
-      (
-        this.props.geolocationLatValue && this.props.centerLatValue
-          &&
-        (
-          this.props.geolocationLatValue !== prevProps.geolocationLatValue
-          ||
-          this.props.geolocationLngValue !== prevProps.geolocationLngValue
-          ||
-          this.props.centerLatValue !== prevProps.centerLatValue
-          ||
-          this.props.centerLngValue !== prevProps.centerLngValue
-        )
-          &&
-        (
-          this.props.geolocationLatValue !== this.props.centerLatValue
-            ||
-          this.props.geolocationLngValue !== this.props.centerLngValue
-        )
-      )
-    ) {
+      console.log("recenter update: type 2");
       this.setState({
         color: "grey"
       });
-      console.log("update false")
+      console.log("DIDUPDATE - changed color to grey");
     }
 
   }
@@ -124,7 +103,7 @@ class RecenterButton extends Component {
 
   render() {
 
- 
+
     return (
 
       <div className="recenterButton"
@@ -189,7 +168,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGeolocation: () => dispatch(getGeolocation())
+    getGeolocation: () => {
+      return dispatch(getGeolocation());
+    },
+    storeInput: (input) => {
+      return dispatch(storeInput(input));
+    }
   }
 }
 

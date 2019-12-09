@@ -2,18 +2,20 @@
 // https://codesandbox.io/s/rzwrk2854
 import MarkerComp from '../Marker';
 import RecenterButton from '../RecenterButton';
+import { getGeolocation } from '../../store/actions/geoActions';
+
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { storeMap } from '../../store/actions/mapActions';
 import { storeBounds } from '../../store/actions/boundsActions';
 import { storeCenter } from '../../store/actions/centerActions';
+import { storeInput } from '../../store/actions/inputActions';
 
 import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 // import { createProject } from '../../store/actions/projectActions';
 import MyStyle from './mapStyle.js';
-import './recenter.css';
 
 // import './loading.css';
 var myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
@@ -66,6 +68,7 @@ class MainMap extends Component {
 
 
   componentDidMount() {
+    this.props.getGeolocation();
 
     const lat = this.props.geolocationLatValue;
     const lng = this.props.geolocationLngValue;
@@ -98,9 +101,17 @@ class MainMap extends Component {
     );
 
 
+    // this.map.addListener(
+    //   'idle',
+    //   () => {
+    //     this.mapFuncs();
+    //    }
+    // );
+
     this.map.addListener(
-      'idle',
+      'dragend',
       () => {
+        this.props.storeInput("human");
         this.mapFuncs();
         // console.log('idle, the props: ', this.props);
         // console.log('bounds from store: ', this.props.boundsValue);
@@ -108,42 +119,39 @@ class MainMap extends Component {
       }
     );
 
-    this.map.addListener(
-      'dragend',
-      () => {
-        // this.mapFuncs();
-        // console.log('idle, the props: ', this.props);
-        // console.log('bounds from store: ', this.props.boundsValue);
-        // console.log('center from store: ', this.props.centerLatValue, this.props.centerLngValue);
-      }
-    );
-
-
-
 
   }
 
 
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("map updated");
+
+    console.log("map received update");
+    const lat = this.props.geolocationLatValue;
+    const lng = this.props.geolocationLngValue;
+
     if (
-      this.props.geolocationValue 
-        &&
-      this.props.geolocationLatValue !== prevProps.geolocationLatValue 
-        &&
-      this.props.geolocationLngValue !== prevProps.geolocationLngValue
+      (this.props.geolocationLatValue != prevProps.geolocationLatValue)
+      ||
+      (this.props.geolocationLngValue != prevProps.geolocationLngValue)
     ) {
 
-      const lat = this.props.geolocationLatValue;
-      const lng = this.props.geolocationLngValue;
+      console.log("map updated - FIRST update type");
 
+
+      this.map.panTo(
+        {
+          lat: lat,
+          lng: lng
+        }
+      );     
+      
       this.map.setCenter(
         {
           lat: lat,
           lng: lng
         }
-      );
+      );      
 
       this.marker.setPosition(
         {
@@ -152,18 +160,28 @@ class MainMap extends Component {
         }
       );
 
-      // this.setState({
-      //   initialUpdate: true
-      // });
+      this.mapFuncs();
 
-      this.map.panTo(
+    }
+
+
+    if (
+      (
+        this.props.geolocationLatValue !== this.props.centerLatValue
+        ||
+        this.props.geolocationLngValue !== this.props.centerLngValue        
+      )
+      &&
+      this.props.inputValue !== "human"
+    ) {
+      console.log("map updated - second update type");
+
+      this.map.setCenter(
         {
           lat: lat,
           lng: lng
         }
-      )
-
-      this.mapFuncs();
+      );
 
 
 
@@ -228,12 +246,16 @@ const mapStateToProps = (state, ownProps) => {
     boundsValue: state.boundsState.boundsValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
+    inputValue: state.inputState.inputValue
     // ,state: state
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getGeolocation: () => {
+      return dispatch(getGeolocation())
+    },
     storeMap: (map) => {
       return dispatch(storeMap(map));
     },
@@ -242,7 +264,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     storeCenter: (center) => {
       return dispatch(storeCenter(center));
-    }
+    },
+    storeInput: (input) => {
+      return dispatch(storeInput(input));
+    }    
   }
 }
 

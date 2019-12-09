@@ -19,7 +19,6 @@ class MainWrapper extends Component {
 
 
   componentDidMount() {
-    this.props.getGeolocation();
 
     // console.log("Wrapper bounds from store: ", this.props.boundsValue);
   }
@@ -77,7 +76,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGeolocation: () => dispatch(getGeolocation())
   }
 }
 

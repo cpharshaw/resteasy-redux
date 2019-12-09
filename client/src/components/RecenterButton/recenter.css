@@ -13,7 +13,7 @@
   text-align: center;  
   border-radius: 50%;
   background: rgba(222.5, 222.5, 222.5, 0.8);
-  border: 0.75px solid;
+  border: 0.5px dotted;
   border-color: rgba(200, 200, 200, 0.75);
 }
 

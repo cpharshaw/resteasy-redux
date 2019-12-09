@@ -20,7 +20,7 @@ export const getGeolocation = () => {
               type: "GEOLOCATION_SUCCESS",
               payload: position.coords
             });
-            console.log("gathered location", position.coords)
+            // console.log("gathered location", position.coords)
             // console.log("getState: ", getState())
           }
         )
