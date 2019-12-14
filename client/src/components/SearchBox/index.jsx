@@ -27,7 +27,7 @@ class SearchBox extends Component {
           lat: this.props.geolocationLatValue,
           lng: this.props.geolocationLngValue
         },
-        radius: 600
+        radius: 500
       }
     );
 
@@ -70,62 +70,102 @@ class SearchBox extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // TODO  
-    // add check for null prevbounds
-    if (
-      this.props.geolocationValue &&
-      prevProps.geolocationValue &&
-      this.props.geolocationLatValue !== prevProps.geolocationLatValue &&
-      this.props.geolocationLngValue !== prevProps.geolocationLngValue
-    ) {
 
-      const lat = this.props.geolocationLatValue;
-      const lng = this.props.geolocationLngValue;
+    // variables
+    const numGeoUpdates = this.props.numGeolocationUpdates;
+    const prev_numGeoUpdates = prevProps.numGeolocationUpdates;
+
+    const geoLat = this.props.geolocationLatValue;
+    const geoLng = this.props.geolocationLngValue;
+    const prev_geoLat = prevProps.geolocationLatValue;
+    const prev_geoLng = prevProps.geolocationLngValue;
+
+    const ctrLat = this.props.centerLatValue;
+    const ctrLng = this.props.centerLngValue;
+    const prev_ctrLat = prevProps.centerLatValue;
+    const prev_ctrLng = prevProps.centerLngValue;
+
+    const bounds = this.props.boundsValue;
+    const prev_bounds = prevProps.boundsValue;
+
+    const inputVal = this.props.inputValue;
+    const prev_inputVal = prevProps.inputValue;
+
+    console.log("numGeoUpdates: ", numGeoUpdates);
+
+    // checks for changes
+    const geo_update =
+      geoLat !== prev_geoLat
+      ||
+      geoLng !== prev_geoLng;
+
+    const numGeo_update = numGeoUpdates !== prev_numGeoUpdates;
+
+    const ctr_update =
+      ctrLat !== prev_ctrLat
+      ||
+      ctrLng !== prev_ctrLng;
+
+    const bounds_update = JSON.stringify(bounds) !== JSON.stringify(prev_bounds);
+
+    const input_update = inputVal !== prev_inputVal;
+
+    const geo_same_ctr =
+      this.props.geolocationLatValue !== this.props.centerLatValue
+      ||
+      this.props.geolocationLngValue !== this.props.centerLngValue;
+
+// 
+// 
+
+
+
+    if (geo_update || numGeo_update) {
 
       const circle = new this.props.google.maps.Circle(
         {
           center: {
-            lat: lat,
-            lng: lng
+            lat: geoLat,
+            lng: geoLng
           },
           radius: 600
         }
       );
 
-      const bounds = circle.getBounds();
+      const circleBounds = circle.getBounds();
 
       this.searchBox.setBounds(
-        bounds
+        circleBounds
       );
 
-      // console.log("searchBox bounds set to circle around geolocation");
+      console.log("searchBox bounds set to circle around geolocation", geoLat, geoLng);
 
     }
 
 
-    if (
-      this.props.boundsValue 
-      &&
-      JSON.stringify(this.props.boundsValue) !== JSON.stringify(prevProps.boundsValue) 
-      &&
-      this.props.geolocationLatValue !== this.props.centerLatValue 
-      &&
-      this.props.geolocationLngValue !== this.props.centerLngValue
-    ) {
+    if (ctr_update) {
 
-      // console.log("searchBox - boundsValue: ", JSON.stringify(this.props.boundsValue));
-      // console.log("searchBox - prevboundsValue: ", JSON.stringify(prevProps.boundsValue));
-      // console.log("searchBox - geolocationLatValue: ", this.props.geolocationLatValue);
-      // console.log("searchBox - centerLatValue: ", this.props.centerLatValue);
-      // console.log("searchBox - geolocationLngValue: ", this.props.geolocationLngValue);
-      // console.log("searchBox - centerLngValue: ", this.props.centerLngValue);
-
-
-      this.searchBox.setBounds(
-        this.props.boundsValue
+      const circle = new this.props.google.maps.Circle(
+        {
+          center: {
+            lat: ctrLat,
+            lng: ctrLng
+          },
+          radius: 600
+        }
       );
 
-    }
+      const circleBounds = circle.getBounds();
+
+      this.searchBox.setBounds(
+        circleBounds
+      );
+
+      console.log("searchBox bounds set to circle around center", ctrLat, ctrLng);
+
+    }    
+
+
 
   }
 
@@ -174,9 +214,11 @@ class SearchBox extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    // displayValue: ownProps.display ? "none" : "",
     geolocationValue: state.geolocationState.geolocationValue,
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
+    numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
     centerLatValue: state.centerState.centerLatValue,

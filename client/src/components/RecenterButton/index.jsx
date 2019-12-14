@@ -127,13 +127,13 @@ class RecenterButton extends Component {
       this.setState({
         color: "#44aacc"
       });
-      console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
+      // console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
 
     } else if ((ctr_update || geo_update) && !geo_same_ctr) {
       this.setState({
         color: "grey"
       });
-      console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
+      // console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
     }
 
   }

@@ -36,16 +36,6 @@ class MainMap extends Component {
 
   }
 
-  // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
-
-
-  // setTimeout(
-  //   () => {
-  //     console.log("after some time, the props!: ", this.props);
-  //   },
-  //   7000
-  // );
-
 
   mapFuncs(message) {
     const map = this.map;
@@ -122,7 +112,7 @@ class MainMap extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    // variables
+// variables
     const numGeoUpdates = this.props.numGeolocationUpdates;
     const prev_numGeoUpdates = prevProps.numGeolocationUpdates;
 
@@ -142,9 +132,9 @@ class MainMap extends Component {
     const inputVal = this.props.inputValue;
     const prev_inputVal = prevProps.inputValue;
 
-    console.log("numGeoUpdates: ", numGeoUpdates);
+    // console.log("numGeoUpdates: ", numGeoUpdates);
 
-    // checks for changes
+// checks for changes
     const geo_update =
       geoLat !== prev_geoLat
       ||
@@ -161,18 +151,16 @@ class MainMap extends Component {
 
     const input_update = inputVal !== prev_inputVal;
 
-
-    // changes above; other checks below
     const geo_same_ctr =
       this.props.geolocationLatValue !== this.props.centerLatValue
       ||
-      this.props.geolocationLngValue !== this.props.centerLngValue
-      ;
+      this.props.geolocationLngValue !== this.props.centerLngValue;
 
-
+// 
+// 
     if (geo_update || numGeo_update) {
 
-      console.log("map updated - FIRST update type");
+      // console.log("map updated - FIRST update type");
 
       this.map.setCenter(
         {
@@ -244,7 +232,7 @@ const mapStateToProps = (state, ownProps) => {
     boundsValue: state.boundsState.boundsValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
-    inputValue: state.inputState.inputValue
+    // inputValue: state.inputState.inputValue
     // ,state: state
   }
 }
