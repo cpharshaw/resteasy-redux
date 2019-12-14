@@ -24,78 +24,116 @@ class RecenterButton extends Component {
 
 
   handleClick() {
-    this.props.storeInput("system");
+    // this.props.storeInput("human");
+
     this.props.getGeolocation();
+
     console.log('recenter clicked');
-    this.setState({
-      color: "#44aacc"
-    })
+
+    // this.setState({
+    //   color: "#44aacc"
+    // });
   }
 
 
 
   componentDidMount() {
 
-    if (
-      (
-        this.props.centerLatValue == this.props.geolocationLatValue 
-        ||
-        this.props.centerLngValue == this.props.geolocationLngValue
-      )
-    ) {
+    // variables
+    const geoUpdates = this.props.geolocationUpdates;
+    const geoLat = this.props.geolocationLatValue;
+    const geoLng = this.props.geolocationLngValue;
+    const ctrLat = this.props.centerLatValue;
+    const ctrLng = this.props.centerLngValue;
+    const bounds = this.props.boundsValue;
+    const inputVal = this.props.inputValue;
+
+    const ctr_matches_geo =
+      geoLat === ctrLat
+      &&
+      geoLng === ctrLng;
+
+
+    if (ctr_matches_geo) {
       this.setState({
         color: "#44aacc"
       });
-      console.log("DIDMOUNT - color to tiffany blue");
     }
 
-    if (
-      (
-        this.props.centerLatValue != this.props.geolocationLatValue 
-        ||
-        this.props.centerLngValue != this.props.geolocationLngValue
-      )
-    ) {
-      this.setState({
-        color: "grey"
-      });
-      console.log("DIDMOUNT - color to grey");
-
-      console.log("centerLatValue: ", this.props.centerLatValue);
-      console.log("geolocationLatValue: ", this.props.geolocationLatValue);
-
-      console.log("centerLngValue: ", this.props.centerLngValue);
-      console.log("geolocationLngValue: ", this.props.geolocationLngValue);      
-    }
 
   }
 
 
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("recenter updated")
+
+    // variables
+    const geoUpdates = this.props.geolocationUpdates;
+    const geoLat = this.props.geolocationLatValue;
+    const geoLng = this.props.geolocationLngValue;
+    const prev_geoLat = prevProps.geolocationLatValue;
+    const prev_geoLng = prevProps.geolocationLngValue;
+
+    const ctrLat = this.props.centerLatValue;
+    const ctrLng = this.props.centerLngValue;
+    const prev_ctrLat = prevProps.centerLatValue;
+    const prev_ctrLng = prevProps.centerLngValue;
+
+    const bounds = this.props.boundsValue;
+    const prev_bounds = prevProps.boundsValue;
+
+    const inputVal = this.props.inputValue;
+    const prev_inputVal = prevProps.inputValue;
 
 
-    if (
-      (
-        (
-          this.props.centerLatValue !== prevProps.centerLatValue
-          ||
-          this.props.centerLngValue !== prevProps.centerLngValue
-        )
-        &&
-        (
-          this.props.geolocationLatValue != this.props.centerLatValue
-          ||
-          this.props.geolocationLngValue != this.props.centerLngValue
-        )
-      )
-    ) {
-      console.log("recenter update: type 2");
+    // checks for changes
+    const geo_update =
+      geoLat !== prev_geoLat
+      ||
+      geoLng !== prev_geoLng;
+
+    const ctr_update =
+      ctrLat !== prev_ctrLat
+      ||
+      ctrLng !== prev_ctrLng;
+
+    const bounds_update = JSON.stringify(bounds) !== JSON.stringify(prev_bounds);
+
+    const input_update = inputVal !== prev_inputVal;
+
+    // output results
+    // console.log("------------------");
+    // console.log("RECENTER - geo_update: ", geo_update, geoLat, geoLng);
+    // console.log("RECENTER - ctr_update: ", ctr_update, ctrLat, ctrLng);
+    // console.log("RECENTER - bounds_update: ", bounds_update);
+    // console.log("RECENTER - inputVal_update: ", input_update, inputVal);
+    // console.log("------------");
+
+    //
+    //
+    //
+
+    // changes above; other checks below
+    const geo_same_ctr =
+      geoLat == ctrLat
+      &&
+      geoLng == ctrLng;
+    // console.log("RECENTER - geo_same_ctr: ", geo_same_ctr);
+
+    // 
+
+
+    if ((ctr_update || geo_update) && geo_same_ctr) {
+      this.setState({
+        color: "#44aacc"
+      });
+      console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
+
+    } else if ((ctr_update || geo_update) && !geo_same_ctr) {
       this.setState({
         color: "grey"
       });
-      console.log("DIDUPDATE - changed color to grey");
+      console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
     }
 
   }
@@ -103,13 +141,14 @@ class RecenterButton extends Component {
 
   render() {
 
+    const color = this.state.color;
 
     return (
 
       <div className="recenterButton"
         style={
           {
-            borderColor: this.state.color
+            borderColor: color
           }
         }
         onClick={this.handleClick}
@@ -117,21 +156,21 @@ class RecenterButton extends Component {
         <div className="recenterCrosshairs1"
           style={
             {
-              background: this.state.color
+              background: color
             }
           }
         />
         <div className="recenterButtonRing"
           style={
             {
-              borderColor: this.state.color
+              borderColor: color
             }
           }
         >
           <div className="recenterButtonDot"
             style={
               {
-                background: this.state.color
+                background: color
               }
             }
           />
@@ -139,7 +178,7 @@ class RecenterButton extends Component {
         <div className="recenterCrosshairs2"
           style={
             {
-              background: this.state.color
+              background: color
             }
           }
         />
@@ -156,12 +195,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     // displayValue: ownProps.display ? "none" : "",
     geolocationValue: state.geolocationState.geolocationValue,
-    geolocationLatValue: (state.geolocationState.geolocationLatValue),
-    geolocationLngValue: (state.geolocationState.geolocationLngValue),
-    // mapValue: state.mapState.mapValue,
-    // boundsValue: state.boundsState.boundsValue,
+    geolocationLatValue: state.geolocationState.geolocationLatValue,
+    geolocationLngValue: state.geolocationState.geolocationLngValue,
+    geolocationUpdates: state.geolocationState.geolocationUpdates,
+    mapValue: state.mapState.mapValue,
+    boundsValue: state.boundsState.boundsValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
+    inputValue: state.inputState.inputValue
     // ,state: state
   }
 }

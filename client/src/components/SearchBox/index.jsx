@@ -148,7 +148,7 @@ class SearchBox extends Component {
           ref={this.searchBoxRef}
           className="controls"
           type="search"
-          placeholder="Search Box"
+          placeholder="Search powered by Google..."
           style={
             {
               background: "orange",

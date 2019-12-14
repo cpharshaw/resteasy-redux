@@ -1,6 +1,6 @@
 
 const initState = {
-  inputValue: "system"
+  inputValue: "human"
 }
 
 const inputReducer = (state = initState, action) => {

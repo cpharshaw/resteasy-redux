@@ -27,7 +27,7 @@ class MainMap extends Component {
     super(props);
     this.googleMapRef = React.createRef();
     this.state = {
-      initialUpdate: false
+      initialUpdate: 0,
     };
 
     this.map = null;
@@ -47,22 +47,23 @@ class MainMap extends Component {
   // );
 
 
-  mapFuncs() {
+  mapFuncs(message) {
     const map = this.map;
-    const bounds = map.getBounds();
     const centerObj = map.getCenter();
     const center = {
       lat: centerObj.lat(),
       lng: centerObj.lng()
-    }
+    };
+    const bounds = map.getBounds();
 
     this.props.storeMap(map);
-    this.props.storeBounds(bounds);
     this.props.storeCenter(center);
+    this.props.storeBounds(bounds);
 
-    // console.log("bounds from store: ", this.props.boundsValue);
-    // console.log("center from store: ", this.props.centerLatValue, this.props.centerLngValue);
-    // console.log("map from store: ", this.props.mapValue);
+    console.log(message);
+    console.log("map", map);
+    console.log("center", center);
+    console.log("bounds", bounds);
   }
 
 
@@ -70,8 +71,8 @@ class MainMap extends Component {
   componentDidMount() {
     this.props.getGeolocation();
 
-    const lat = this.props.geolocationLatValue;
-    const lng = this.props.geolocationLngValue;
+    const geoLat = this.props.geolocationLatValue;
+    const geoLng = this.props.geolocationLngValue;
 
     this.map = new this.props.google.maps.Map(
       this.googleMapRef.current,
@@ -79,46 +80,41 @@ class MainMap extends Component {
         zoom: 15,
         styles: MyStyle,
         center: {
-          lat: lat,
-          lng: lng
+          lat: geoLat,
+          lng: geoLng
         },
-        zoomControl: false,
+        zoomControlOptions: {
+          position: this.props.google.maps.ControlPosition.LEFT_CENTER
+        },
         mapTypeControl: false,
         fullscreenControl: false,
         streetViewControl: false
       }
     );
 
+
     this.marker = new this.props.google.maps.Marker(
       {
         map: this.map,
         position: {
-          lat: lat,
-          lng: lng
+          lat: geoLat,
+          lng: geoLng
         },
         icon: myLocationIcon
       }
     );
 
 
-    // this.map.addListener(
-    //   'idle',
-    //   () => {
-    //     this.mapFuncs();
-    //    }
-    // );
 
-    this.map.addListener(
-      'dragend',
+
+    const idleListener = this.map.addListener(
+      'idle',
       () => {
-        this.props.storeInput("human");
-        this.mapFuncs();
-        // console.log('idle, the props: ', this.props);
-        // console.log('bounds from store: ', this.props.boundsValue);
-        // console.log('center from store: ', this.props.centerLatValue, this.props.centerLngValue);
+
+        this.mapFuncs("idleListener fired");
+
       }
     );
-
 
   }
 
@@ -126,66 +122,75 @@ class MainMap extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    console.log("map received update");
-    const lat = this.props.geolocationLatValue;
-    const lng = this.props.geolocationLngValue;
+    // variables
+    const numGeoUpdates = this.props.numGeolocationUpdates;
+    const prev_numGeoUpdates = prevProps.numGeolocationUpdates;
 
-    if (
-      (this.props.geolocationLatValue != prevProps.geolocationLatValue)
+    const geoLat = this.props.geolocationLatValue;
+    const geoLng = this.props.geolocationLngValue;
+    const prev_geoLat = prevProps.geolocationLatValue;
+    const prev_geoLng = prevProps.geolocationLngValue;
+
+    const ctrLat = this.props.centerLatValue;
+    const ctrLng = this.props.centerLngValue;
+    const prev_ctrLat = prevProps.centerLatValue;
+    const prev_ctrLng = prevProps.centerLngValue;
+
+    const bounds = this.props.boundsValue;
+    const prev_bounds = prevProps.boundsValue;
+
+    const inputVal = this.props.inputValue;
+    const prev_inputVal = prevProps.inputValue;
+
+    console.log("numGeoUpdates: ", numGeoUpdates);
+
+    // checks for changes
+    const geo_update =
+      geoLat !== prev_geoLat
       ||
-      (this.props.geolocationLngValue != prevProps.geolocationLngValue)
-    ) {
+      geoLng !== prev_geoLng;
+
+     const numGeo_update = numGeoUpdates !== prev_numGeoUpdates;
+
+    const ctr_update =
+      ctrLat !== prev_ctrLat
+      ||
+      ctrLng !== prev_ctrLng;
+
+    const bounds_update = JSON.stringify(bounds) !== JSON.stringify(prev_bounds);
+
+    const input_update = inputVal !== prev_inputVal;
+
+
+    // changes above; other checks below
+    const geo_same_ctr =
+      this.props.geolocationLatValue !== this.props.centerLatValue
+      ||
+      this.props.geolocationLngValue !== this.props.centerLngValue
+      ;
+
+
+    if (geo_update || numGeo_update) {
 
       console.log("map updated - FIRST update type");
 
-
-      this.map.panTo(
-        {
-          lat: lat,
-          lng: lng
-        }
-      );     
-      
       this.map.setCenter(
         {
-          lat: lat,
-          lng: lng
+          lat: geoLat,
+          lng: geoLng
         }
-      );      
+      );
 
       this.marker.setPosition(
         {
-          lat: lat,
-          lng: lng
-        }
-      );
-
-      this.mapFuncs();
-
-    }
-
-
-    if (
-      (
-        this.props.geolocationLatValue !== this.props.centerLatValue
-        ||
-        this.props.geolocationLngValue !== this.props.centerLngValue        
-      )
-      &&
-      this.props.inputValue !== "human"
-    ) {
-      console.log("map updated - second update type");
-
-      this.map.setCenter(
-        {
-          lat: lat,
-          lng: lng
+          lat: geoLat,
+          lng: geoLng
         }
       );
 
 
+    };
 
-    }
 
 
   }
@@ -201,6 +206,7 @@ class MainMap extends Component {
             position: "relative",
             height: "86vh",
             width: "100%",
+            display: this.props.displayValue
           }
         }
       >
@@ -211,19 +217,10 @@ class MainMap extends Component {
             // position: "static",
             height: "inherit",
             width: "inherit",
-            display: this.props.displayValue
           }}
         />
 
         < MarkerComp />
-
-        {/* <div className="recenterButton" >
-          <div className="recenterCrosshairs1" />
-          <div className="recenterButtonRing">
-            <div className="recenterButtonDot" />
-          </div>
-          <div className="recenterCrosshairs2" />
-        </div> */}
 
         <RecenterButton />
 
@@ -240,8 +237,9 @@ const mapStateToProps = (state, ownProps) => {
   return {
     displayValue: ownProps.display ? "none" : "",
     geolocationValue: state.geolocationState.geolocationValue,
-    geolocationLatValue: (state.geolocationState.geolocationLatValue),
-    geolocationLngValue: (state.geolocationState.geolocationLngValue),
+    geolocationLatValue: state.geolocationState.geolocationLatValue,
+    geolocationLngValue: state.geolocationState.geolocationLngValue,
+    numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
     centerLatValue: state.centerState.centerLatValue,
@@ -267,7 +265,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     storeInput: (input) => {
       return dispatch(storeInput(input));
-    }    
+    }
   }
 }
 
