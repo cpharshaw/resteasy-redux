@@ -16,15 +16,15 @@ class MarkerComp extends Component {
 
 
   render() {
-
     this.createMarker = () => {
       new this.props.google.maps.Marker(
         {
           map: this.props.mapValue,
           position: {
-            lat: 39.96226267942067,
-            lng: -75.14639198461786
-          }
+            lat: this.props.markerLat ? this.props.markerLat : 39.96226267942067,
+            lng: this.props.markerLng ? this.props.markerLng : -75.14639198461786
+          },
+          icon: this.props.icon ? this.props.icon : null
         }
       )
     }
@@ -44,8 +44,9 @@ const mapStateToProps = (state, ownProps) => {
   return {
     geolocationValue: state.geolocationState.geolocationValue,
     mapValue: state.mapState.mapValue,
-    centerValue: state.centerState.centerValue
-    // ,state: state
+    centerValue: state.centerState.centerValue,
+    markerLat: ownProps.lat,
+    markerLng: ownProps.lng
   }
 }
 

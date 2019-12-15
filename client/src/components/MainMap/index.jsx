@@ -20,7 +20,13 @@ import MyStyle from './mapStyle.js';
 // import './loading.css';
 var myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
 
+const greatIcon = "https://img.icons8.com/flat_round/40/000000/star--v1.png";
+const goodIcon = "https://img.icons8.com/office/40/000000/good-quality.png";
+const questionableIcon = "https://img.icons8.com/office/33/000000/error.png";
+const poorIcon = "https://img.icons8.com/office/40/000000/poor-quality.png";
+const terribleIcon = "https://img.icons8.com/officel/40/000000/evil.png";
 
+const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
 
 class MainMap extends Component {
   constructor(props) {
@@ -162,6 +168,13 @@ class MainMap extends Component {
 
       // console.log("map updated - FIRST update type");
 
+      // this.map.panTo(
+      //   {
+      //     lat: geoLat,
+      //     lng: geoLng
+      //   }
+      // );
+
       this.map.setCenter(
         {
           lat: geoLat,
@@ -185,7 +198,7 @@ class MainMap extends Component {
 
 
   render() {
-
+    console.log("icon for marker: ", questionableIcon)
     return (
       <div
         id=""
@@ -208,7 +221,13 @@ class MainMap extends Component {
           }}
         />
 
-        < MarkerComp />
+        < MarkerComp 
+          lat={40}
+          lng={-75}
+          icon={questionableIcon}
+        />
+
+
 
         <RecenterButton />
 
