@@ -36,7 +36,7 @@ class SearchBox extends Component {
     const options = {
       bounds: bounds,
       types: ['establishment'],
-      strictBounds: true
+      // strictBounds: true
     };
 
     this.searchBox = new this.props.google.maps.places.Autocomplete(

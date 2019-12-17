@@ -16,8 +16,8 @@ const geolocationReducer = (state = initState, action) => {
       return {
         ...state,
         geolocationValue: action.payload,
-        geolocationLatValue: action.payload.latitude,
-        geolocationLngValue: action.payload.longitude,
+        geolocationLatValue: Math.round(action.payload.latitude*1000000)/1000000,
+        geolocationLngValue: Math.round(action.payload.longitude*1000000)/1000000,
         geolocationAcc: action.payload.accuracy,
         geolocationStatus: action.type,
         numGeolocationUpdates: state.numGeolocationUpdates + 1

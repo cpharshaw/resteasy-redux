@@ -122,18 +122,20 @@ class RecenterButton extends Component {
 
     // 
 
+    console.log("recenter button changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
+
 
     if ((ctr_update || geo_update) && geo_same_ctr) {
       this.setState({
         color: "#44aacc"
       });
-      // console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
+      console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
 
     } else if ((ctr_update || geo_update) && !geo_same_ctr) {
       this.setState({
         color: "grey"
       });
-      // console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
+      console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
     }
 
   }

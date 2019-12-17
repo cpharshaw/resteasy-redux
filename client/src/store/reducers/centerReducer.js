@@ -11,8 +11,8 @@ const centerReducer = (state = initState, action) => {
       // console.log('center success: ', action.payload);
       return {
         ...state,
-        centerLatValue: action.payload.lat,
-        centerLngValue: action.payload.lng
+        centerLatValue: Math.round(action.payload.lat*1000000)/1000000,
+        centerLngValue: Math.round(action.payload.lng*1000000)/1000000
       }
     default:
       return {

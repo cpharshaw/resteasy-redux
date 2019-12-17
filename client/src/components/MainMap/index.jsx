@@ -59,6 +59,7 @@ class MainMap extends Component {
     console.log(message);
     console.log("map", map);
     console.log("center", center);
+    console.log("geoLoc", this.props.geolocationLatValue, this.props.geolocationLngValue)
     console.log("bounds", bounds);
   }
 
@@ -158,15 +159,18 @@ class MainMap extends Component {
     const input_update = inputVal !== prev_inputVal;
 
     const geo_same_ctr =
-      this.props.geolocationLatValue !== this.props.centerLatValue
-      ||
-      this.props.geolocationLngValue !== this.props.centerLngValue;
+      geoLat == ctrLat
+      &&
+      geoLng == ctrLng;
 
 // 
 // 
+    console.log("map changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
+
+
     if (geo_update || numGeo_update) {
 
-      // console.log("map updated - FIRST update type");
+      console.log("map updated - FIRST update type", geo_update, numGeo_update);
 
       // this.map.panTo(
       //   {

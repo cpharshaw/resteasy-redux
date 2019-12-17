@@ -10,8 +10,8 @@ export const getGeolocation = () => {
           function (resolve, reject) {
             navigator.geolocation.getCurrentPosition(resolve, reject, 
               {
-                enableHighAccuracy: true,
-                maxiumumAge: 1000
+                // enableHighAccuracy: true,
+                // maxiumumAge: 1000
               }
             );
           }
