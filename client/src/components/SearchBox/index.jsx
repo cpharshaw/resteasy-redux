@@ -4,6 +4,7 @@ import { submitForm } from '../../store/actions/searchBoxActions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { storeCircle } from '../../store/actions/circleActions';
 
 
 class SearchBox extends Component {
@@ -31,12 +32,13 @@ class SearchBox extends Component {
       }
     );
 
+
     const bounds = circle.getBounds();
 
     const options = {
       bounds: bounds,
-      types: ['establishment'],
-      // strictBounds: true
+      strictBounds: true,
+      types: ['establishment']
     };
 
     this.searchBox = new this.props.google.maps.places.Autocomplete(
@@ -65,6 +67,7 @@ class SearchBox extends Component {
       }
     )
 
+    this.props.storeCircle(circle);
 
 
   }
@@ -91,7 +94,7 @@ class SearchBox extends Component {
     const inputVal = this.props.inputValue;
     const prev_inputVal = prevProps.inputValue;
 
-    console.log("numGeoUpdates: ", numGeoUpdates);
+    // console.log("numGeoUpdates: ", numGeoUpdates);
 
     // checks for changes
     const geo_update =
@@ -131,6 +134,7 @@ class SearchBox extends Component {
           radius: 600
         }
       );
+      this.props.storeCircle(circle);
 
       const circleBounds = circle.getBounds();
 
@@ -138,7 +142,7 @@ class SearchBox extends Component {
         circleBounds
       );
 
-      console.log("searchBox bounds set to circle around geolocation", geoLat, geoLng);
+      // console.log("searchBox bounds set to circle around geolocation", geoLat, geoLng);
 
     }
 
@@ -154,6 +158,7 @@ class SearchBox extends Component {
           radius: 600
         }
       );
+      this.props.storeCircle(circle);
 
       const circleBounds = circle.getBounds();
 
@@ -161,7 +166,7 @@ class SearchBox extends Component {
         circleBounds
       );
 
-      console.log("searchBox bounds set to circle around center", ctrLat, ctrLng);
+      // console.log("searchBox bounds set to circle around center", ctrLat, ctrLng);
 
     }    
 
@@ -221,6 +226,7 @@ const mapStateToProps = (state, ownProps) => {
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
+    // circleValue: state.circleState.circleValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue
     // state: state
@@ -232,7 +238,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // createReview: (review) => dispatch(createReview(review))
+    storeCircle: (circle) => {
+      return dispatch(storeCircle(circle))
+    }
   }
 }
 

@@ -57,10 +57,10 @@ class MainMap extends Component {
     this.props.storeBounds(bounds);
 
     console.log(message);
-    console.log("map", map);
-    console.log("center", center);
-    console.log("geoLoc", this.props.geolocationLatValue, this.props.geolocationLngValue)
-    console.log("bounds", bounds);
+    // console.log("map", map);
+    // console.log("center", center);
+    // console.log("geoLoc", this.props.geolocationLatValue, this.props.geolocationLngValue)
+    // console.log("bounds", bounds);
   }
 
 
@@ -70,6 +70,9 @@ class MainMap extends Component {
 
     const geoLat = this.props.geolocationLatValue;
     const geoLng = this.props.geolocationLngValue;
+
+    // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
+    // https://developers.google.com/maps/documentation/javascript/places - nearby
 
     this.map = new this.props.google.maps.Map(
       this.googleMapRef.current,
@@ -85,7 +88,8 @@ class MainMap extends Component {
         },
         mapTypeControl: false,
         fullscreenControl: false,
-        streetViewControl: false
+        streetViewControl: false,
+        // disableDefaultUI: true
       }
     );
 
@@ -110,8 +114,33 @@ class MainMap extends Component {
 
         this.mapFuncs("idleListener fired");
 
+
+        if (this.props.numGeolocationUpdates > 0) {
+          var pyrmont = new this.props.google.maps.LatLng(
+            this.props.centerLatValue,
+            this.props.centerLngValue
+          );
+
+
+          var options = {
+            location: pyrmont,
+            type: ['point_of_interest'],
+            rankBy: this.props.google.maps.places.RankBy.DISTANCE,
+            // radius: '500',
+          };
+
+
+          const service = new this.props.google.maps.places.PlacesService(this.map);
+          service.nearbySearch(options, callback);
+
+          function callback(results, status) {
+            console.log("nearby results: ", results);
+          }
+        }
+
       }
     );
+
 
   }
 
@@ -119,7 +148,7 @@ class MainMap extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-// variables
+    // variables
     const numGeoUpdates = this.props.numGeolocationUpdates;
     const prev_numGeoUpdates = prevProps.numGeolocationUpdates;
 
@@ -141,13 +170,13 @@ class MainMap extends Component {
 
     // console.log("numGeoUpdates: ", numGeoUpdates);
 
-// checks for changes
+    // checks for changes
     const geo_update =
       geoLat !== prev_geoLat
       ||
       geoLng !== prev_geoLng;
 
-     const numGeo_update = numGeoUpdates !== prev_numGeoUpdates;
+    const numGeo_update = numGeoUpdates !== prev_numGeoUpdates;
 
     const ctr_update =
       ctrLat !== prev_ctrLat
@@ -163,14 +192,14 @@ class MainMap extends Component {
       &&
       geoLng == ctrLng;
 
-// 
-// 
-    console.log("map changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
+    // 
+    // 
+    // console.log("map changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
 
 
     if (geo_update || numGeo_update) {
 
-      console.log("map updated - FIRST update type", geo_update, numGeo_update);
+      // console.log("map updated - FIRST update type", geo_update, numGeo_update);
 
       // this.map.panTo(
       //   {
@@ -196,13 +225,13 @@ class MainMap extends Component {
 
     };
 
-
+    // console.log("places: ", this.map.getPlaces());
 
   }
 
 
   render() {
-    console.log("icon for marker: ", questionableIcon)
+    // console.log("icon for marker: ", questionableIcon)
     return (
       <div
         id=""
@@ -225,7 +254,7 @@ class MainMap extends Component {
           }}
         />
 
-        < MarkerComp 
+        < MarkerComp
           lat={40}
           lng={-75}
           icon={questionableIcon}
@@ -253,6 +282,7 @@ const mapStateToProps = (state, ownProps) => {
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
+    // circleValue: state.circleState.circleValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
     // inputValue: state.inputState.inputValue

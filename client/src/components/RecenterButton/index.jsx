@@ -26,9 +26,15 @@ class RecenterButton extends Component {
   handleClick() {
     // this.props.storeInput("human");
 
-    this.props.getGeolocation();
+    if (
+      (this.props.geolocationLatValue !== this.props.centerLatValue) 
+      || 
+      (this.props.geolocationLngValue !== this.props.centerLngValue)
+    ) {
+      this.props.getGeolocation();
+    }
 
-    console.log('recenter clicked');
+    // console.log('recenter clicked');
 
     // this.setState({
     //   color: "#44aacc"
@@ -101,13 +107,7 @@ class RecenterButton extends Component {
 
     const input_update = inputVal !== prev_inputVal;
 
-    // output results
-    // console.log("------------------");
-    // console.log("RECENTER - geo_update: ", geo_update, geoLat, geoLng);
-    // console.log("RECENTER - ctr_update: ", ctr_update, ctrLat, ctrLng);
-    // console.log("RECENTER - bounds_update: ", bounds_update);
-    // console.log("RECENTER - inputVal_update: ", input_update, inputVal);
-    // console.log("------------");
+
 
     //
     //
@@ -122,20 +122,20 @@ class RecenterButton extends Component {
 
     // 
 
-    console.log("recenter button changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
+    // console.log("recenter button changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
 
 
     if ((ctr_update || geo_update) && geo_same_ctr) {
       this.setState({
         color: "#44aacc"
       });
-      console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
+      // console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
 
     } else if ((ctr_update || geo_update) && !geo_same_ctr) {
       this.setState({
         color: "grey"
       });
-      console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
+      // console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
     }
 
   }

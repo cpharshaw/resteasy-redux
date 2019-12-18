@@ -1,12 +1,12 @@
 
-export const storeInput = (input) => {
+export const storeCircle = (circle) => {
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     dispatch({
-      type: 'INPUT_RECEIVED',
-      payload: input,
+      type: 'CIRCLE_RECEIVED',
+      payload: circle
     })
-    // console.log("input received");
+    // console.log("circle sent", bounds);
   }
 }
 
