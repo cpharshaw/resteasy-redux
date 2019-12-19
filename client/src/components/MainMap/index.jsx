@@ -3,7 +3,7 @@
 import MarkerComp from '../Marker';
 import RecenterButton from '../RecenterButton';
 import { getGeolocation } from '../../store/actions/geoActions';
-
+import { getPlacesFromFoursquare } from '../../store/actions/foursquareActions';
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { storeMap } from '../../store/actions/mapActions';
@@ -41,7 +41,7 @@ class MainMap extends Component {
     this.marker = null;
 
   }
-
+  https://stackoverflow.com/questions/20916953/get-distance-between-two-points-in-canvas
 
   mapFuncs(message) {
     const map = this.map;
@@ -67,10 +67,14 @@ class MainMap extends Component {
 
   componentDidMount() {
     this.props.getGeolocation();
-
     const geoLat = this.props.geolocationLatValue;
     const geoLng = this.props.geolocationLngValue;
 
+    const fsLL = geoLat + "," + geoLng;
+    this.props.getPlacesFromFoursquare(fsLL);
+    console.log("fs value: ", this.props.foursquareValue);
+
+    
     // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
     // https://developers.google.com/maps/documentation/javascript/places - nearby
 
@@ -128,11 +132,11 @@ class MainMap extends Component {
             rankBy: this.props.google.maps.places.RankBy.DISTANCE,
             // radius: '500',
           };
-          https://github.com/foursquare/react-foursquare
+          // https://github.com/foursquare/react-foursquare
 
 
           const service = new this.props.google.maps.places.PlacesService(this.map);
-          service.nearbySearch(options, callback);
+          // service.nearbySearch(options, callback);
 
           function callback(results, status) {
             console.log("nearby results: ", results);
@@ -189,9 +193,9 @@ class MainMap extends Component {
     const input_update = inputVal !== prev_inputVal;
 
     const geo_same_ctr =
-      geoLat == ctrLat
+      geoLat === ctrLat
       &&
-      geoLng == ctrLng;
+      geoLng === ctrLng;
 
     // 
     // 
@@ -223,7 +227,10 @@ class MainMap extends Component {
         }
       );
 
-
+      const fsLL = geoLat + "," + geoLng;
+      this.props.getPlacesFromFoursquare(fsLL);
+      console.log("fs value updated: ", this.props.foursquareValue);
+  
     };
 
     // console.log("places: ", this.map.getPlaces());
@@ -286,6 +293,7 @@ const mapStateToProps = (state, ownProps) => {
     // circleValue: state.circleState.circleValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
+    foursquareValue: state.foursquareState.foursquareValue
     // inputValue: state.inputState.inputValue
     // ,state: state
   }
@@ -296,6 +304,9 @@ const mapDispatchToProps = (dispatch) => {
     getGeolocation: () => {
       return dispatch(getGeolocation())
     },
+    getPlacesFromFoursquare: (location) => {
+      return dispatch(getPlacesFromFoursquare(location))
+    },    
     storeMap: (map) => {
       return dispatch(storeMap(map));
     },

@@ -19,7 +19,7 @@ const geolocationReducer = (state = initState, action) => {
       //   (Math.round(state.geolocationLngValue * 1000000) / 1000000) !== (Math.round(action.payload.longitude * 1000000) / 1000000)
       // ) {
 
-        console.log("geolocationReducer SUCCESS", " updates:", state.geoLocationUpdates, "lat:", action.payload.latitude, "lng:", action.payload.longitude);
+        // console.log("geolocationReducer SUCCESS", " updates:", state.geoLocationUpdates, "lat:", action.payload.latitude, "lng:", action.payload.longitude);
         return {
           ...state,
           geolocationValue: action.payload,
