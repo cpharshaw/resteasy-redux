@@ -128,6 +128,7 @@ class MainMap extends Component {
             rankBy: this.props.google.maps.places.RankBy.DISTANCE,
             // radius: '500',
           };
+          https://github.com/foursquare/react-foursquare
 
 
           const service = new this.props.google.maps.places.PlacesService(this.map);
