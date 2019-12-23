@@ -6,11 +6,20 @@ import { compose } from 'redux';
 
 export class Toggler extends Component {
 
-  handleClick = () => {
-    this.props.toggleMapList();
-    // console.log("clicked toggler button", this.props)
+  newReview = () => {
+    console.log("screen to add a review");
   };
 
+  findRestroom = () => {
+    // this.props.toggleMapList();
+    // console.log("clicked toggler button", this.props)
+
+    console.log("find a restroom");
+  };
+
+  goToAccount = () => {
+    console.log("screen displaying my account and prior reviews");
+  };
 
   render() {
     return (
@@ -24,15 +33,35 @@ export class Toggler extends Component {
         }}
       >
         <button
-          onClick={this.handleClick}
+          onClick={this.newReview}
           style={{
             background: "red",
-            width: "100%",
+            width: "33.33333%",
             height: "100%"
           }}
         >
-          This toggles shit
+          +
         </button>
+        <button
+          onClick={this.findRestroom}
+          style={{
+            background: "green",
+            width: "33.33334%",
+            height: "100%"
+          }}
+        >
+          Find restroom
+        </button>
+        <button
+          onClick={this.goToAccount}
+          style={{
+            background: "blue",
+            width: "33.33333%",
+            height: "100%"
+          }}
+        >
+          Account
+        </button>                
       </div>
     )
   }

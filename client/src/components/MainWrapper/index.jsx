@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 // import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { getGeolocation } from '../../store/actions/geoActions';
+
+import TopBar from '../TopBar/';
+import AddReview from '../AddReview/';
 import MainMap from '../MainMap/';
 import MainList from '../MainList/';
 import Toggler from '../Toggler/';
@@ -40,7 +43,8 @@ class MainWrapper extends Component {
           }
         }
       >
-        < SearchBox />
+        < TopBar />
+        {/* < SearchBox /> */}
         <div
           style={
             {
@@ -51,7 +55,8 @@ class MainWrapper extends Component {
             }
           }
         >
-          < MainMap display={mapListToggleValue} />
+          < AddReview display={mapListToggleValue} />
+          < MainMap display={!mapListToggleValue} />
           < MainList display={!mapListToggleValue} />
         </div>
         < Toggler />

@@ -119,11 +119,11 @@ class MainMap extends Component {
         console.log("fs value: ", this.props.foursquareValue);
     
         
-        if (this.props.numGeolocationUpdates > 0) {
-          var pyrmont = new this.props.google.maps.LatLng(
-            this.props.centerLatValue,
-            this.props.centerLngValue
-          );
+        // if (this.props.numGeolocationUpdates > 0) {
+        //   var pyrmont = new this.props.google.maps.LatLng(
+        //     this.props.centerLatValue,
+        //     this.props.centerLngValue
+        //   );
 
 
           // var options = {
@@ -142,7 +142,7 @@ class MainMap extends Component {
           // function callback(results, status) {
           //   console.log("nearby results: ", results);
           // }
-        }
+        // }
 
       }
     );
