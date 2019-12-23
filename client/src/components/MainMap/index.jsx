@@ -41,7 +41,7 @@ class MainMap extends Component {
     this.marker = null;
 
   }
-  https://stackoverflow.com/questions/20916953/get-distance-between-two-points-in-canvas
+  // https://stackoverflow.com/questions/20916953/get-distance-between-two-points-in-canvas
 
   mapFuncs(message) {
     const map = this.map;
@@ -70,11 +70,7 @@ class MainMap extends Component {
     const geoLat = this.props.geolocationLatValue;
     const geoLng = this.props.geolocationLngValue;
 
-    const fsLL = geoLat + "," + geoLng;
-    this.props.getPlacesFromFoursquare(fsLL);
-    console.log("fs value: ", this.props.foursquareValue);
 
-    
     // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
     // https://developers.google.com/maps/documentation/javascript/places - nearby
 
@@ -118,7 +114,11 @@ class MainMap extends Component {
 
         this.mapFuncs("idleListener fired");
 
-
+        const fsLL = geoLat + "," + geoLng;
+        this.props.getPlacesFromFoursquare(fsLL);
+        console.log("fs value: ", this.props.foursquareValue);
+    
+        
         if (this.props.numGeolocationUpdates > 0) {
           var pyrmont = new this.props.google.maps.LatLng(
             this.props.centerLatValue,
@@ -126,21 +126,22 @@ class MainMap extends Component {
           );
 
 
-          var options = {
-            location: pyrmont,
-            type: ['point_of_interest'],
-            rankBy: this.props.google.maps.places.RankBy.DISTANCE,
+          // var options = {
+          //   location: pyrmont,
+            // type: ['point_of_interest'],
+            // type: ['establishment'],
+            // rankBy: this.props.google.maps.places.RankBy.DISTANCE,
             // radius: '500',
-          };
+          // };
           // https://github.com/foursquare/react-foursquare
 
 
-          const service = new this.props.google.maps.places.PlacesService(this.map);
+          // const service = new this.props.google.maps.places.PlacesService(this.map);
           // service.nearbySearch(options, callback);
 
-          function callback(results, status) {
-            console.log("nearby results: ", results);
-          }
+          // function callback(results, status) {
+          //   console.log("nearby results: ", results);
+          // }
         }
 
       }
@@ -204,7 +205,7 @@ class MainMap extends Component {
 
     if (geo_update || numGeo_update) {
 
-      // console.log("map updated - FIRST update type", geo_update, numGeo_update);
+      console.log("map updated - FIRST update type", geo_update, numGeo_update);
 
       // this.map.panTo(
       //   {
