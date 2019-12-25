@@ -8,10 +8,10 @@ import { compose } from 'redux';
 // import { Redirect } from 'react-router-dom';
 
 
-class MainList extends Component {
+class ListSection extends Component {
   render() {
 
-    // console.log("all the props, MainList: ", this.props);
+    // console.log("all the props, ListSection: ", this.props);
     return (
       <div
         style={{
@@ -53,4 +53,4 @@ export default compose(
   //     orderBy: ['createdAt', 'desc']
   //   }
   // ])
-)(MainList);
+)(ListSection);

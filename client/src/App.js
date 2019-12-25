@@ -7,9 +7,8 @@ import MainWrapper from './components/MainWrapper/';
 import MainMap from './components/MainMap/';
 import MainList from './components/MainList/';
 import Filters from './components/Filters/';
-import UserDetails from './components/UserDetails/';
-import CreateReview from './components/CreateReview/';
-import ReviewDetails from './components/ReviewDetails/';
+
+
 import ContactUs from './components/ContactUs/';
 import About from './components/About/';
 
@@ -30,15 +29,16 @@ function App() {
           
           <Route exact path="/main" component={MainWrapper} />
 
-          <Route path="/filters" component={Filters} />
+          {/* <Route path="/filters" component={Filters} /> */}
 
-          <Route path="userDetails/:id" component={UserDetails} />
+          {/* <Route path="userDetails/:id" component={UserDetails} /> */}
           
-          <Route exact path="/create" component={CreateReview} />
-          <Route path="/review/:id" component={ReviewDetails} />          
+          {/* <Route exact path="/add" component={ReviewWrapper} />
+          <Route exact path="/create" component={ReviewWrapper} />
+          <Route path="/review/:id" component={ReviewDetails} />           */}
 
-          <Route exact path="/about" component={About} />
-          <Route path="/contact" component={ContactUs} />
+          {/* <Route exact path="/about" component={About} /> */}
+          {/* <Route path="/contact" component={ContactUs} /> */}
         </Switch>
       </div>
     </BrowserRouter>

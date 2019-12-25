@@ -12,7 +12,7 @@ export class map extends Component {
           id="map"
           style={{
             position: "static",
-            height: "86vh",
+            height: "79vh",
             width: "100vw",
             display: this.props.displayValue
           }}

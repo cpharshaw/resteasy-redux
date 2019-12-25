@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 // import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { getGeolocation } from '../../store/actions/geoActions';
 
-import TopBar from '../TopBar/';
-import AddReview from '../AddReview/';
-import MainMap from '../MainMap/';
-import MainList from '../MainList/';
-import Toggler from '../Toggler/';
-import SearchBox from '../SearchBox/';
+import TopBar from './TopBar/';
+import MainSection from './MainSection/';
+import BottomBar from './BottomBar/';
 
 
 import { connect } from 'react-redux';
@@ -44,6 +41,8 @@ class MainWrapper extends Component {
         }
       >
         < TopBar />
+        < MainSection />
+        < BottomBar />
         {/* < SearchBox /> */}
         <div
           style={
@@ -51,15 +50,15 @@ class MainWrapper extends Component {
               position: "absolute",
               top: "7vh",
               height: "86vh",
+              maxHeight: "calc(86vh - 36px)",
               width: "100%"
             }
           }
         >
-          < AddReview display={mapListToggleValue} />
-          < MainMap display={!mapListToggleValue} />
-          < MainList display={!mapListToggleValue} />
+          {/* < AddReview display={mapListToggleValue} /> */}
+          {/* < MainMap display={mapListToggleValue} />
+          < MainList display={!mapListToggleValue} /> */}
         </div>
-        < Toggler />
 
       </div>
 
@@ -67,6 +66,8 @@ class MainWrapper extends Component {
 
   }
 }
+
+
 
 const mapStateToProps = (state) => {
   // console.log("mainwrapper state: ", state);

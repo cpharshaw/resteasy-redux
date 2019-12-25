@@ -1,15 +1,18 @@
 
 // https://codesandbox.io/s/rzwrk2854
-import MarkerComp from '../Marker';
-import RecenterButton from '../RecenterButton';
-import { getGeolocation } from '../../store/actions/geoActions';
-import { getPlacesFromFoursquare } from '../../store/actions/foursquareActions';
+import MarkerComp from './Marker';
+import RecenterButton from './RecenterButton';
+
+import { getGeolocation } from '../../../../../store/actions/geoActions';
+import { getPlacesFromFoursquare } from '../../../../../store/actions/foursquareActions';
+import { storeMap } from '../../../../../store/actions/mapActions';
+import { storeBounds } from '../../../../../store/actions/boundsActions';
+import { storeCenter } from '../../../../../store/actions/centerActions';
+import { storeInput } from '../../../../../store/actions/inputActions';
+
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { storeMap } from '../../store/actions/mapActions';
-import { storeBounds } from '../../store/actions/boundsActions';
-import { storeCenter } from '../../store/actions/centerActions';
-import { storeInput } from '../../store/actions/inputActions';
+
 
 import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -28,7 +31,7 @@ const terribleIcon = "https://img.icons8.com/officel/40/000000/evil.png";
 
 const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
 
-class MainMap extends Component {
+class MapSection extends Component {
   constructor(props) {
     super(props);
     this.googleMapRef = React.createRef();
@@ -248,6 +251,7 @@ class MainMap extends Component {
           {
             position: "relative",
             height: "86vh",
+            maxHeight: "calc(86vh - 36px)",
             width: "100%",
             display: this.props.displayValue
           }
@@ -336,4 +340,4 @@ export default compose(
     apiKey: "AIzaSyBVYS3YTeyILl2Cr7ajZ0ZdKbO092cW6lw",
     version: "3.30"
   })
-)(MainMap);
+)(MapSection);

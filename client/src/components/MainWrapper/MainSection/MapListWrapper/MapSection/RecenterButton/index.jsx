@@ -5,8 +5,8 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { getGeolocation } from '../../store/actions/geoActions';
-import { storeInput } from '../../store/actions/inputActions';
+import { getGeolocation } from '../../../../../../store/actions/geoActions';
+import { storeInput } from '../../../../../../store/actions/inputActions';
 
 import './recenter.css';
 

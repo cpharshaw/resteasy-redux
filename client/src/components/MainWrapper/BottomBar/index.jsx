@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { toggleMapList } from '../../store/actions/mapListActions';
+import React, { Component } from 'react';
+import { toggleMapList } from '../../../store/actions/mapListActions';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 
-export class Toggler extends Component {
+export class BottomBar extends Component {
 
   newReview = () => {
     console.log("screen to add a review");
@@ -77,5 +77,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(null, mapDispatchToProps)
-)(Toggler)
+)(BottomBar)
 
