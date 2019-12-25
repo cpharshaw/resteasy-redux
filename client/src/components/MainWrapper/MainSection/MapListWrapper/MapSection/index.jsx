@@ -59,7 +59,7 @@ class MapSection extends Component {
     this.props.storeCenter(center);
     this.props.storeBounds(bounds);
 
-    console.log(message);
+    // console.log(message);
     // console.log("map", map);
     // console.log("center", center);
     // console.log("geoLoc", this.props.geolocationLatValue, this.props.geolocationLngValue)
@@ -208,7 +208,7 @@ class MapSection extends Component {
 
     if (geo_update || numGeo_update) {
 
-      console.log("map updated - FIRST update type", geo_update, numGeo_update);
+      // console.log("map updated - FIRST update type", geo_update, numGeo_update);
 
       // this.map.panTo(
       //   {

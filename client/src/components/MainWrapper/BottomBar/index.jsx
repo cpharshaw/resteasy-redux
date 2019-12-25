@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import { toggleMapList } from '../../../store/actions/mapListActions';
+// import { toggleMapList } from '../../../store/actions/mapListActions';
+import { selectSection } from '../../../store/actions/sectionActions';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 
 export class BottomBar extends Component {
-
-  newReview = () => {
+  
+  selectReviewSection = () => {
+    this.props.selectSection("review");
     console.log("screen to add a review");
+    console.log("section value: ", this.props.selectedSectionValue);
   };
 
-  findRestroom = () => {
-    // this.props.toggleMapList();
-    // console.log("clicked toggler button", this.props)
-
-    console.log("find a restroom");
+  selectMapListSection = () => {
+    this.props.selectSection("mapList");
+    console.log("screen to find a restroom");
+    console.log("section value: ", this.props.selectedSectionValue);
   };
 
-  goToAccount = () => {
-    console.log("screen displaying my account and prior reviews");
+  selectMyStuffSection = () => {
+    this.props.selectSection("myStuff");
+    console.log("screen to access your stuff");
+    console.log("section value: ", this.props.selectedSectionValue);
   };
+
 
   render() {
     return (
@@ -33,7 +38,7 @@ export class BottomBar extends Component {
         }}
       >
         <button
-          onClick={this.newReview}
+          onClick={this.selectReviewSection}
           style={{
             background: "red",
             width: "33.33333%",
@@ -43,7 +48,7 @@ export class BottomBar extends Component {
           +
         </button>
         <button
-          onClick={this.findRestroom}
+          onClick={this.selectMapListSection}
           style={{
             background: "green",
             width: "33.33334%",
@@ -53,7 +58,7 @@ export class BottomBar extends Component {
           Find restroom
         </button>
         <button
-          onClick={this.goToAccount}
+          onClick={this.selectMyStuffSection}
           style={{
             background: "blue",
             width: "33.33333%",
@@ -67,15 +72,24 @@ export class BottomBar extends Component {
   }
 }
 
-
+const mapStateToProps = (state) => {
+  // console.log("mainwrapper state: ", state);
+  return {
+    selectedSectionValue: state.sectionState.selectedSectionValue,
+    // geolocationValue: state.geolocationState.geolocationValue,
+    boundsValue: state.boundsState.boundsValue,
+    // reviews: state.firestore.ordered.reviews,
+    // auth: state.firebase.auth
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleMapList: () => dispatch(toggleMapList())
+    selectSection: section => dispatch(selectSection(section))
   }
 }
 
 export default compose(
-  connect(null, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps)
 )(BottomBar)
 

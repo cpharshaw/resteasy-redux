@@ -3,6 +3,7 @@
 import geolocationReducer from './geoReducer';
 import firestoreReducer from './foursquareReducer';
 import mapListReducer from './mapListReducer';
+import sectionReducer from './sectionReducer';
 import boundsReducer from './boundsReducer';
 import centerReducer from './centerReducer';
 import circleReducer from './circleReducer';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   geolocationState: geolocationReducer,
   foursquareState: firestoreReducer,
   mapListState: mapListReducer,
+  sectionState: sectionReducer,
   boundsState: boundsReducer,
   centerState: centerReducer,
   circleReducer: circleReducer,
