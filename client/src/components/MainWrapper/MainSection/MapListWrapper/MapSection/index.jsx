@@ -250,9 +250,11 @@ class MapSection extends Component {
         style={
           {
             position: "relative",
-            height: "86vh",
-            maxHeight: "calc(86vh - 36px)",
+            height: "76vh",
+            maxHeight: "",
             width: "100%",
+            padding: "0",
+            margin: "0",            
             display: this.props.displayValue
           }
         }

@@ -19,6 +19,8 @@ class ListSection extends Component {
           // top: "7vh",
           height: "inherit",
           width: "inherit",
+          padding: "0",
+          margin: "0",          
           display: this.props.displayValue
           // height: "calc(100vh - 20px)"
         }}

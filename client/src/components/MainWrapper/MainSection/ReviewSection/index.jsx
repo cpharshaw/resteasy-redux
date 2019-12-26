@@ -16,16 +16,11 @@ export class ReviewSection extends Component {
       <div
         style={
           {
-            display: reviewDisplayValue
+            display: reviewDisplayValue,
+            height: "100%"
           }
         }
       >
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
         ReviewSection
       </div>
     )

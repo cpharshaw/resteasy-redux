@@ -12,6 +12,12 @@ export class TopBar extends Component {
         id=""
         style={
           {
+            position: "absolute",
+            top: "0",
+            width: "100%",
+            // minHeight: "36px",
+            height: "42px",
+            // maxHeight: "48px",
             display: "flex",
             // flexWrap: "nowrap",
             justifyContent: "space-between",
@@ -19,11 +25,7 @@ export class TopBar extends Component {
             alignContent: "center",
             margin: "0 auto",
             background: "#44aacc",
-            position: "absolute",
-            top: "0",
-            height: "7vh",
-            minHeight: "36px",
-            width: "100%",
+
             padding: "0",
             margin: "0"
           }

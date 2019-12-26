@@ -36,29 +36,15 @@ class MainWrapper extends Component {
         style={
           {
             height: "100%",
-            width: "100%"
+            width: "100%",
+            padding: "0",
+            margin: "0"
           }
         }
       >
         < TopBar />
         < MainSection />
-        < BottomBar />
-        {/* < SearchBox /> */}
-        <div
-          style={
-            {
-              position: "absolute",
-              top: "7vh",
-              height: "86vh",
-              maxHeight: "calc(86vh - 36px)",
-              width: "100%"
-            }
-          }
-        >
-          {/* < AddReview display={mapListToggleValue} /> */}
-          {/* < MainMap display={mapListToggleValue} />
-          < MainList display={!mapListToggleValue} /> */}
-        </div>
+        < BottomBar />       
 
       </div>
 

@@ -26,9 +26,17 @@ export class MainSection extends Component {
         style={
           {
             position: "absolute",
-            top: "7vh",
+            top: "42px",
             left: "0",
-            height: "86vh"
+            width: "100%",
+
+            height: "calc(100vh - 84px)",
+            // height: "84vh",
+            // maxHeight: "calc(100vh-72px)",
+
+            padding: "0",
+            margin: "0",
+            background: "grey",
           }
         }
       >

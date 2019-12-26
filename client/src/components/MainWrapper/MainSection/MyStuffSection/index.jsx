@@ -14,16 +14,11 @@ export class MyStuffSection extends Component {
       <div
         style={
           {
-            "display":  myStuffDisplayValue 
+            display:  myStuffDisplayValue,
+            height: "100%"
           }
         }
-      >
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>      
+      >      
         MyStuffSection
       </div>
     )

@@ -1,37 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-import MapListBar from './MapListBar/';
-import MapSection from './MapSection/';
-import ListSection from './ListSection/';
-
-export class MapListWrapper extends Component {
+export class MapListBar extends Component {
   render() {
-
-    const { mapListDisplayValue } = this.props;
-
-    // console.log("mapListDisplayValue: ", mapListDisplayValue);
-
     return (
       <div
         style={
           {
-            display: mapListDisplayValue,
+            display: "flex",
+            // flexWrap: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
+            margin: "0 auto",
+            background: "orange",
+            position: "relative",
+            // top: "0",
+            height: "7vh",
+            minHeight: "32px",
+            maxHeight: "42px",
             width: "100%",
-            heigth: "100%",
             padding: "0",
             margin: "0"
           }
         }
       >
-        < MapListBar  />
-        {/* < MapSection  /> */}
-        {/* < ListSection /> */}
+        MapListBar
       </div>
     )
   }
 }
+
 
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
@@ -52,4 +53,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(MapListWrapper);
+)(MapListBar);

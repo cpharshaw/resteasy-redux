@@ -33,7 +33,9 @@ export class BottomBar extends Component {
           background: "gray",
           position: "absolute",
           bottom: "0",
-          height: "7vh",
+          // minHeight: "36px",
+          height: "42px",
+          // maxHeight: "48px",
           width: "100%"
         }}
       >
@@ -55,7 +57,7 @@ export class BottomBar extends Component {
             height: "100%"
           }}
         >
-          Find restroom
+          Search
         </button>
         <button
           onClick={this.selectMyStuffSection}
