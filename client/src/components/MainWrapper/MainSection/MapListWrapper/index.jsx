@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import MapListBar from './MapListBar/';
-import MapSection from './MapSection/';
-import ListSection from './ListSection/';
+import MapListSection from './MapListSection';
 
 export class MapListWrapper extends Component {
   render() {
@@ -19,15 +18,14 @@ export class MapListWrapper extends Component {
           {
             display: mapListDisplayValue,
             width: "100%",
-            heigth: "100%",
+            height: "calc(100vh - 84px)",
             padding: "0",
             margin: "0"
           }
         }
       >
         < MapListBar  />
-        {/* < MapSection  /> */}
-        {/* < ListSection /> */}
+        < MapListSection />
       </div>
     )
   }

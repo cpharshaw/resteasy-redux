@@ -1,33 +1,24 @@
-import React, { Component } from 'react'
-
-import { compose } from 'redux';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import MapSection from './MapSection/';
+import ListSection from './ListSection/';
 
-export class MapListBar extends Component {
+
+export class MapListSection extends Component {
   render() {
     return (
       <div
-        style={
+        style = {
           {
-            display: "flex",
-            // flexWrap: "nowrap",
-            justifyContent: "center",
-            alignItems: "center",
-            alignContent: "center",
-            margin: "0 auto",
-            background: "orange",
-            position: "relative",
-            // top: "0",
-            height: "42px",
-            // minHeight: "32px",
-            // maxHeight: "42px",
-            width: "100%",
-            padding: "0",
-            margin: "0"
+            // position: "relative",
+            // top: "84px",
+            height: "calc(100vh-84vh)"
           }
         }
       >
-        MapListBar
+        < MapSection  />
+        {/* < ListSection /> */}
       </div>
     )
   }
@@ -53,4 +44,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(MapListBar);
+)(MapListSection);

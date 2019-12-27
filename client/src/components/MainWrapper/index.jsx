@@ -44,7 +44,7 @@ class MainWrapper extends Component {
       >
         < TopBar />
         < MainSection />
-        < BottomBar />       
+        < BottomBar />
 
       </div>
 

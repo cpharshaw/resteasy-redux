@@ -3,12 +3,12 @@
 import MarkerComp from './Marker';
 import RecenterButton from './RecenterButton';
 
-import { getGeolocation } from '../../../../../store/actions/geoActions';
-import { getPlacesFromFoursquare } from '../../../../../store/actions/foursquareActions';
-import { storeMap } from '../../../../../store/actions/mapActions';
-import { storeBounds } from '../../../../../store/actions/boundsActions';
-import { storeCenter } from '../../../../../store/actions/centerActions';
-import { storeInput } from '../../../../../store/actions/inputActions';
+import { getGeolocation } from '../../../../../../store/actions/geoActions';
+import { getPlacesFromFoursquare } from '../../../../../../store/actions/foursquareActions';
+import { storeMap } from '../../../../../../store/actions/mapActions';
+import { storeBounds } from '../../../../../../store/actions/boundsActions';
+import { storeCenter } from '../../../../../../store/actions/centerActions';
+import { storeInput } from '../../../../../../store/actions/inputActions';
 
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
@@ -120,8 +120,8 @@ class MapSection extends Component {
         const fsLL = geoLat + "," + geoLng;
         this.props.getPlacesFromFoursquare(fsLL);
         console.log("fs value: ", this.props.foursquareValue);
-    
-        
+
+
         // if (this.props.numGeolocationUpdates > 0) {
         //   var pyrmont = new this.props.google.maps.LatLng(
         //     this.props.centerLatValue,
@@ -129,22 +129,22 @@ class MapSection extends Component {
         //   );
 
 
-          // var options = {
-          //   location: pyrmont,
-            // type: ['point_of_interest'],
-            // type: ['establishment'],
-            // rankBy: this.props.google.maps.places.RankBy.DISTANCE,
-            // radius: '500',
-          // };
-          // https://github.com/foursquare/react-foursquare
+        // var options = {
+        //   location: pyrmont,
+        // type: ['point_of_interest'],
+        // type: ['establishment'],
+        // rankBy: this.props.google.maps.places.RankBy.DISTANCE,
+        // radius: '500',
+        // };
+        // https://github.com/foursquare/react-foursquare
 
 
-          // const service = new this.props.google.maps.places.PlacesService(this.map);
-          // service.nearbySearch(options, callback);
+        // const service = new this.props.google.maps.places.PlacesService(this.map);
+        // service.nearbySearch(options, callback);
 
-          // function callback(results, status) {
-          //   console.log("nearby results: ", results);
-          // }
+        // function callback(results, status) {
+        //   console.log("nearby results: ", results);
+        // }
         // }
 
       }
@@ -234,7 +234,7 @@ class MapSection extends Component {
       const fsLL = geoLat + "," + geoLng;
       this.props.getPlacesFromFoursquare(fsLL);
       console.log("fs value updated: ", this.props.foursquareValue);
-  
+
     };
 
     // console.log("places: ", this.map.getPlaces());
@@ -249,25 +249,35 @@ class MapSection extends Component {
         id=""
         style={
           {
-            position: "relative",
-            height: "76vh",
-            maxHeight: "",
-            width: "100%",
+            // position: "relative",
+            // top: "42px",
+            // height: "inherit",
+            // width: "inherit",
+            display: this.props.displayValue,
             padding: "0",
-            margin: "0",            
-            display: this.props.displayValue
+            margin: "0",
           }
         }
       >
         <div
           id="google-map"
           ref={this.googleMapRef}
-          style={{
-            // position: "static",
-            height: "inherit",
-            width: "inherit",
-          }}
-        />
+          style={
+            {
+              position: "absolute",
+              top: "42px",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              padding: "0",
+              margin: "0"              
+            }
+          }
+        >
+
+        </div>
+
+
 
         < MarkerComp
           lat={40}
@@ -275,11 +285,9 @@ class MapSection extends Component {
           icon={questionableIcon}
         />
 
-
-
         <RecenterButton />
 
-      </div >
+      </div>
 
     )
 
@@ -313,7 +321,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     getPlacesFromFoursquare: (location) => {
       return dispatch(getPlacesFromFoursquare(location))
-    },    
+    },
     storeMap: (map) => {
       return dispatch(storeMap(map));
     },
