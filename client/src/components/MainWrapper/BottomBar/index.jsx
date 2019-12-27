@@ -9,20 +9,20 @@ export class BottomBar extends Component {
   
   selectReviewSection = () => {
     this.props.selectSection("review");
-    console.log("screen to add a review");
-    console.log("section value: ", this.props.selectedSectionValue);
+    // console.log("screen to add a review");
+    // console.log("section value: ", this.props.selectedSectionValue);
   };
 
   selectMapListSection = () => {
     this.props.selectSection("mapList");
-    console.log("screen to find a restroom");
-    console.log("section value: ", this.props.selectedSectionValue);
+    // console.log("screen to find a restroom");
+    // console.log("section value: ", this.props.selectedSectionValue);
   };
 
   selectMyStuffSection = () => {
     this.props.selectSection("myStuff");
-    console.log("screen to access your stuff");
-    console.log("section value: ", this.props.selectedSectionValue);
+    // console.log("screen to access your stuff");
+    // console.log("section value: ", this.props.selectedSectionValue);
   };
 
 

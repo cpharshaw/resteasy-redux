@@ -8,19 +8,18 @@ import MapListSection from './MapListSection';
 export class MapListWrapper extends Component {
   render() {
 
-    const { mapListDisplayValue } = this.props;
-
     // console.log("mapListDisplayValue: ", mapListDisplayValue);
 
     return (
       <div
         style={
           {
-            display: mapListDisplayValue,
+            display: this.props.mapListDisplayValue,
             width: "100%",
             height: "calc(100vh - 84px)",
             padding: "0",
-            margin: "0"
+            margin: "0",
+            // background: "red"
           }
         }
       >

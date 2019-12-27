@@ -118,8 +118,8 @@ class MapSection extends Component {
         this.mapFuncs("idleListener fired");
 
         const fsLL = geoLat + "," + geoLng;
-        this.props.getPlacesFromFoursquare(fsLL);
-        console.log("fs value: ", this.props.foursquareValue);
+        // this.props.getPlacesFromFoursquare(fsLL);
+        // console.log("fs value: ", this.props.foursquareValue);
 
 
         // if (this.props.numGeolocationUpdates > 0) {
@@ -232,8 +232,8 @@ class MapSection extends Component {
       );
 
       const fsLL = geoLat + "," + geoLng;
-      this.props.getPlacesFromFoursquare(fsLL);
-      console.log("fs value updated: ", this.props.foursquareValue);
+      // this.props.getPlacesFromFoursquare(fsLL);
+      // console.log("fs value updated: ", this.props.foursquareValue);
 
     };
 
@@ -244,6 +244,9 @@ class MapSection extends Component {
 
   render() {
     // console.log("icon for marker: ", questionableIcon)
+
+    const displayValue = !this.props.mapListToggleValue ? null : "none";
+
     return (
       <div
         id=""
@@ -251,11 +254,13 @@ class MapSection extends Component {
           {
             // position: "relative",
             // top: "42px",
-            // height: "inherit",
-            // width: "inherit",
-            display: this.props.displayValue,
+            // height: "100%",
+            width: "100%",
+            display: displayValue,
             padding: "0",
             margin: "0",
+            zIndex: "9",
+            background: "yellow"
           }
         }
       >
@@ -265,19 +270,15 @@ class MapSection extends Component {
           style={
             {
               position: "absolute",
-              top: "42px",
+              top: "72px",
               bottom: "0",
               left: "0",
               right: "0",
               padding: "0",
-              margin: "0"              
+              margin: "0"
             }
           }
-        >
-
-        </div>
-
-
+        />
 
         < MarkerComp
           lat={40}
@@ -308,7 +309,9 @@ const mapStateToProps = (state, ownProps) => {
     // circleValue: state.circleState.circleValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
-    foursquareValue: state.foursquareState.foursquareValue
+    foursquareValue: state.foursquareState.foursquareValue,
+    mapListToggleValue: ownProps.display
+
     // inputValue: state.inputState.inputValue
     // ,state: state
   }

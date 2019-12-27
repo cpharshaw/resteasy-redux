@@ -6,19 +6,20 @@ import ListSection from './ListSection/';
 
 
 export class MapListSection extends Component {
+
   render() {
     return (
       <div
-        style = {
+        style={
           {
             // position: "relative",
             // top: "84px",
-            height: "calc(100vh-84vh)"
+            height: "calc(100vh-156px)"
           }
-        }
+        } 
       >
-        < MapSection  />
-        {/* < ListSection /> */}
+        < ListSection display={this.props.mapListToggleValue}/>
+        < MapSection display={this.props.mapListToggleValue}/>
       </div>
     )
   }
@@ -33,7 +34,7 @@ const mapStateToProps = (state, ownProps) => {
     boundsValue: state.boundsState.boundsValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
-    mapListDisplayValue: ownProps.display
+    mapListToggleValue: state.mapListState.mapListToggleValue
   }
 }
 

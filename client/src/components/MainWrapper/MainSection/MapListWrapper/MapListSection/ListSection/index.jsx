@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 // import { statement } from '@babel/template';
 
 // import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
+
 // import { Redirect } from 'react-router-dom';
 
 
 class ListSection extends Component {
+  
   render() {
+    const displayValue = this.props.mapListToggleValue ? null : "none";
 
     // console.log("all the props, ListSection: ", this.props);
     return (
       <div
-        style={{
-          position: "static",
-          // top: "7vh",
-          height: "inherit",
-          width: "inherit",
-          padding: "0",
-          margin: "0",          
-          display: this.props.displayValue
-          // height: "calc(100vh - 20px)"
-        }}
+        style={
+          {
+            display: displayValue,
+            position: "static",
+            // top: "7vh",
+            height: "inherit",
+            width: "inherit",
+            padding: "0",
+            margin: "0",
+            // height: "calc(100vh - 20px)"
+          }
+        }
       >
         <ul>
           <li>BBQ</li>
@@ -41,7 +45,7 @@ const mapStateToProps = (state, ownProps) => {
   // console.log(state);
   return {
     geolocation: state.geoLocation,
-    displayValue: ownProps.display ? "none" : ""
+    mapListToggleValue: ownProps.display
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
   }
