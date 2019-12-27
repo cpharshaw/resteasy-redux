@@ -6,22 +6,23 @@ export class TopBar extends Component {
 
 
   render() {
+    const displayValue = this.props.selectedSectionValue === "review" ? "flex" : "none";
 
     return (
       <div
         id=""
         style={
           {
-            display: "flex",
+            display: displayValue,
             width: "100%",
-            height: "42px",
-            justifyContent: "space-between",
+            height: "100%",
+            justifyContent: "center",
             alignItems: "center",
             alignContent: "center",
             margin: "0 auto",
             padding: "0",
             border: "0",
-            background: "#44aacc"
+            background: "red"
           }
         }
       >
@@ -120,10 +121,11 @@ export class TopBar extends Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
     topBarState: state.topBarState,
+    selectedSectionValue: ownProps.display
   }
 };
 
