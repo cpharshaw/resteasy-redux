@@ -18,21 +18,16 @@ export class MapListBar extends Component {
         style={
           {
             display: "flex",
-            // flexWrap: "nowrap",
+            width: "100%",
+            height: "72px",
             justifyContent: "center",
             flexDirection: "column",
             alignItems: "center",
             alignContent: "center",
             margin: "0 auto",
-            background: "red",
-            position: "relative",
-            // top: "0",
-            height: "72px",
-            // minHeight: "32px",
-            // maxHeight: "42px",
-            width: "100%",
             padding: "0",
-            margin: "0"
+            border: "0",
+            background: "#A2D4E6",
           }
         }
       >
@@ -41,20 +36,15 @@ export class MapListBar extends Component {
           style={
             {
               display: "flex",
-              flexWrap: "nowrap",
+              width: "100%",
+              height: "42px",
               justifyContent: "center",
               alignItems: "center",
               alignContent: "center",
               margin: "0 auto",
-              // background: "orange",
-              position: "relative",
-              // top: "0",
-              height: "42px",
-              // minHeight: "32px",
-              // maxHeight: "42px",
-              width: "100%",
               padding: "0",
-              margin: "0"
+              flexWrap: "nowrap",
+              // background: "red"
             }
           }
         >
@@ -62,37 +52,31 @@ export class MapListBar extends Component {
           <div
             style={
               {
-                // background: "red",
                 display: "flex",
-                flexWrap: "nowrap",
+                width: "27.5%",
+                height: "100%",
                 justifyContent: "center",
                 alignItems: "center",
                 alignContent: "center",
                 margin: "0 auto",
-                position: "relative",
-                // top: "0",
-                height: "30px",
-                // minHeight: "32px",
-                // maxHeight: "42px",
-                width: "27.5%",
                 padding: "0",
-                margin: "0"
+                flexWrap: "nowrap"
               }
             }
           >
             <button
               style={
                 {
-                  // display: "none",
-                  background: "inherit",
-                  border: "0",
-                  height: "100%",
                   width: "100%",
+                  height: "100%",
+                  margin: "0 auto",
                   padding: "0",
-                  margin: "0",
+                  border: "0",
+                  background: "inherit",
                   color: "black"
                 }
-              }>
+              }
+            >
               <em>Filters</em>
             </button>
           </div>
@@ -100,21 +84,15 @@ export class MapListBar extends Component {
           <div
             style={
               {
-                // background: "green",
                 display: "flex",
-                flexWrap: "nowrap",
+                width: "45%",
+                height: "100%",
                 justifyContent: "center",
                 alignItems: "center",
                 alignContent: "center",
                 margin: "0 auto",
-                position: "relative",
-                // top: "0",
-                height: "100%",
-                // minHeight: "32px",
-                // maxHeight: "42px",
-                width: "45%",
                 padding: "0",
-                margin: "0"
+                flexWrap: "nowrap"
               }
             }
           >
@@ -122,9 +100,11 @@ export class MapListBar extends Component {
               style={
                 {
                   width: "100%",
-                  height: "85%",
+                  height: "75%",
                   border: "0",
-                  padding: "8px"
+                  margin: "0 auto",
+                  padding: "8px",
+                  borderRadius: "5px"
                 }
               }
             />
@@ -133,24 +113,14 @@ export class MapListBar extends Component {
           <div
             style={
               {
-                // background: "blue",
-                color: "white",
                 display: "flex",
-                flexWrap: "nowrap",
+                width: "27.5%",
+                height: "100%",
                 justifyContent: "center",
                 alignItems: "center",
                 alignContent: "center",
                 margin: "0 auto",
-
-                position: "relative",
-                // top: "0",
-                height: "100%",
-                // minHeight: "32px",
-                // maxHeight: "42px",
-                width: "27.5%",
-                padding: "0",
-                margin: "0",
-                borderRadius: "10px"
+                padding: "0"
               }
             }
           >
@@ -158,16 +128,16 @@ export class MapListBar extends Component {
               onClick={this.toggleMapList}
               style={
                 {
-                  // display: "none",
-                  background: "inherit",
-                  border: "0",
-                  height: "100%",
                   width: "100%",
+                  height: "100%",
+                  margin: "0 auto",
                   padding: "0",
-                  margin: "0",
-                  color: "black"
+                  border: "0",
+                  background: "inherit",
+                  // color: "black"
                 }
-              }>
+              }
+            >
               <em>Map/List</em>
             </button>
           </div>
@@ -176,32 +146,23 @@ export class MapListBar extends Component {
 
 
         <div
-          id = "mapListScrollbar" 
-          style = {
+          id="mapListScrollbar"
+          style={
             {
               display: "flex",
-              // flexWrap: "nowrap",
+              width: "100%",
+              height: "100%",
               justifyContent: "flex-start",
               alignItems: "center",
               alignContent: "center",
               margin: "0 auto",
-              background: "orange",
-              position: "relative",
-              // top: "0",
-              height: "100%",
-              // minHeight: "32px",
-              // maxHeight: "42px",
-              width: "100%",
               padding: "0",
-              margin: "0",
               flexWrap: "nowrap",
               overflowX: "scroll",
               msOverflowStyle: "none",
               WebkitOverflowScrolling: "touch",
-              zIndex: "10"
-              // webkitScrollbar: 
-              // whiteSpace: "nowrap",
-              // background: "teal"
+              zIndex: "10",
+              // background: "orange"
             }
           }
         >
@@ -210,110 +171,95 @@ export class MapListBar extends Component {
           <button
             style={
               {
-                // display: "none",
-                // background: "inherit",
                 height: "90%",
                 width: "fit-content",
                 marginLeft: "2.5px",
                 marginRight: "2.5px",
                 color: "black",
-                borderRadius: "10px",
-                border: "1px solid grey",
+                borderRadius: "7px",
+                // border: "0.5px solid whitesmoke",
                 fontSize: "12px",
                 flexWrap: "nowrap",
-                whiteSpace: "nowrap",
-                // overflow: "hidden",
-                // textOverflow: "ellipsis"
+                whiteSpace: "nowrap"
               }
-            }>
-            <em>Family friendly</em>
+            }
+          >
+            <em>Family-friendly</em>
           </button>
 
           <button
             style={
               {
-                // display: "none",
-                // background: "inherit",
                 height: "90%",
                 width: "fit-content",
                 marginLeft: "2.5px",
                 marginRight: "2.5px",
                 color: "black",
-                borderRadius: "10px",
-                border: "1px solid grey",
+                borderRadius: "7px",
+                // border: "0.5px solid whitesmoke",
                 fontSize: "12px",
                 flexWrap: "nowrap",
-                whiteSpace: "nowrap",
-                // overflow: "hidden",
-                // textOverflow: "ellipsis"
+                whiteSpace: "nowrap"
               }
-            }>
+            }
+          >
             <em>Free</em>
           </button>
 
           <button
             style={
               {
-                // display: "none",
-                // background: "inherit",
                 height: "90%",
                 width: "fit-content",
                 marginLeft: "2.5px",
                 marginRight: "2.5px",
                 color: "black",
-                borderRadius: "10px",
-                border: "1px solid grey",
+                borderRadius: "7px",
+                // border: "0.5px solid whitesmoke",
                 fontSize: "12px",
                 flexWrap: "nowrap",
-                whiteSpace: "nowrap",
-                // overflow: "hidden",
-                // textOverflow: "ellipsis"
+                whiteSpace: "nowrap"
               }
-            }>
+            }
+          >
             <em>Nearest bathroom, pronto!</em>
           </button>
 
           <button
             style={
               {
-                // display: "none",
-                // background: "inherit",
                 height: "90%",
                 width: "fit-content",
                 marginLeft: "2.5px",
                 marginRight: "2.5px",
                 color: "black",
-                borderRadius: "10px",
-                border: "1px solid grey",
+                borderRadius: "7px",
+                // border: "0.5px solid whitesmoke",
                 fontSize: "12px",
                 flexWrap: "nowrap",
-                whiteSpace: "nowrap",
-                // overflow: "hidden",
-                // textOverflow: "ellipsis"
+                whiteSpace: "nowrap"
               }
-            }>
+            }
+          >
             <em>Really, really clean</em>
-          </button>          
+          </button>
 
           <button
             style={
               {
-                // display: "none",
-                // background: "inherit",
                 height: "90%",
                 width: "fit-content",
                 marginLeft: "2.5px",
                 marginRight: "2.5px",
                 color: "black",
-                borderRadius: "10px",
-                border: "1px solid grey",
+                borderRadius: "7px",
+                // border: "0.5px solid whitesmoke",
                 fontSize: "12px",
                 flexWrap: "nowrap",
-                whiteSpace: "nowrap",
-                // overflow: "hidden",
-                // textOverflow: "ellipsis"
+                whiteSpace: "nowrap"
               }
-            }>
+            }
+          >
             <em>Baby changing</em>
           </button>
 

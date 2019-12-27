@@ -245,7 +245,7 @@ class MapSection extends Component {
   render() {
     // console.log("icon for marker: ", questionableIcon)
 
-    const displayValue = !this.props.mapListToggleValue ? null : "none";
+    const displayValue = this.props.mapListToggleValue ? null : "none";
 
     return (
       <div

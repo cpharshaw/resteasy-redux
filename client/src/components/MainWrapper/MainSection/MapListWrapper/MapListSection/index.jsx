@@ -18,8 +18,8 @@ export class MapListSection extends Component {
           }
         } 
       >
-        < ListSection display={this.props.mapListToggleValue}/>
-        < MapSection display={this.props.mapListToggleValue}/>
+        < ListSection display={!this.props.mapListToggleValue}/>
+        < MapSection  display={ this.props.mapListToggleValue}/>
       </div>
     )
   }
