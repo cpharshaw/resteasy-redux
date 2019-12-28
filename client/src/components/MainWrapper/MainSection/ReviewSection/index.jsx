@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import FieldWrapper from './ReviewForm/FieldWrapper';
+import FieldLabel from './ReviewForm/FieldLabel';
+import RadioInput from './ReviewForm/RadioInput';
+import RadioInputWrapper from './ReviewForm/RadioInputWrapper';
 
 
 export class ReviewSection extends Component {
@@ -14,17 +18,21 @@ export class ReviewSection extends Component {
       <div
         style={
           {
+            position: "relative",
             display: displayValue,
-            flexDirection: "column",
+            top: "10px",
             width: "100%",
-            height: "calc(100vh - 84px)",
-            justifyContent: "space-around",
+            height: "calc(100% - 20px)",
+            // height: "100%",
+            flexDirection: "column",
+            justifyContent: "flex-start",
             alignItems: "center",
             alignContent: "center",
             margin: "0 auto",
             padding: "0",
             border: "0",
-            background: "whitesmoke"
+            // background: "orange",
+            overflowY: "scroll",
           }
         }
       >
@@ -32,216 +40,225 @@ export class ReviewSection extends Component {
           id="reviewForm"
           style={
             {
+              // position: "relative",
               display: "flex",
               width: "100%",
               height: "100%",
               flexDirection: "column",
-              justifyContent: "space-around",
-              alignItems: "center",
-              alignContent: "center",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              alignContent: "flex-start",
               margin: "0 auto",
               padding: "0",
-              border: "0"
+              border: "0",
+              // background: "purple"
             }
           }
         >
+  {/* 
+    Cleanliness
+    Smell
+    Temperature (good enough or not?)
+    Perceived safety
+    Capacity
+    Privacy 
+  */}
+  
+  
+          < FieldWrapper data_id="field01">
+            < FieldLabel 
+              data_htmlFor={"field01_input_name"} data_text={"Cleanliness"} />
+            < RadioInputWrapper data_id={"field01_inputs"}>
+            {/* TODO - create a loop to create input fields using array of names */}
+              <RadioInput
+                data_id="field01_input01"
+                data_value="field01_input01_value"
+                data_name="field01_input_name"
+              />
+              <RadioInput
+                data_id="field01_input02"
+                data_value="field01_input02_value"
+                data_name="field01_input_name"
+              />
+              <RadioInput
+                data_id="field01_input03"
+                data_value="field01_input03_value"
+                data_name="field01_input_name"
+              />
+              <RadioInput
+                data_id="field01_input04"
+                data_value="field01_input04_value"
+                data_name="field01_input_name"
+              />
+              <RadioInput
+                data_id="field01_input05"
+                data_value="field01_input05_value"
+                data_name="field01_input_name"
+              />
+            </ RadioInputWrapper>
+          </FieldWrapper>
 
-          <div
-            id="field01_wrapper"
-            style={
-              {
-                display: "flex",
-                width: "100%",
-                // height: "100%",
-                flexDirection: "row",
-                justifyContent: "space-around",
-                alignItems: "center",
-                alignContent: "center",
-                margin: "0 auto",
-                padding: "0",
-                border: "0",
-                background: "grey"
-              }
-            }
-          >
-            <label
-              htmlFor="field01_label"
-              style={
-                {
-                  display: "flex",
-                  // flexGrow: "1",
-                  width: "35%",
-                  height: "100%",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  alignContent: "center",
-                  margin: "0 auto",
-                  padding: "0",
-                  border: "1px solid #44aacc",
-                  background: "red"
-                }
-              }
-            >
-              Shit
-            </label>
 
-            <div
-              id="field01_inputs"
-              style={
-                {
-                  display: "flex",
-                  // flexGrow: "3",
-                  width: "100%",
-                  height: "100%",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  alignContent: "center",
-                  margin: "0 auto",
-                  padding: "0",
-                  border: "0",
-                  background: "blue"
-                }
-              }
-            >
-              <input
-                id="field01_input01"
-                value="field01_input01_value"
-                name="field01_input_name"
-                type="radio"
-                style={
-                  {
-                    display: "flex",
-                    // flexGrow: "1",
-                    // width: "65%",
-                    height: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    alignSelf: "center",
-                    margin: "0 auto",
-                    padding: "0",
-                    border: "0",
-                    background: "green"
-                  }
-                }
-              >
-              </input>
-              <input
-                id="field01_input02"
-                type="radio"
-                value="field01_input02_value"
-                name="field01_input_name"
-                style={
-                  {
-                    display: "flex",
-                    // flexGrow: "1",
-                    // width: "65%",
-                    height: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    margin: "0 auto",
-                    padding: "0",
-                    border: "0",
-                    background: "yellow"
-                  }
-                }
-              >
-              </input>
 
-              <input
-                id="field01_input03"
-                type="radio"
-                value="field01_input03_value"
-                name="field01_input_name"
-                style={
-                  {
-                    display: "flex",
-                    // flexGrow: "1",
-                    // width: "65%",
-                    height: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    margin: "0 auto",
-                    padding: "0",
-                    border: "0",
-                    background: "yellow"
-                  }
-                }
-              >
-              </input>
+          < FieldWrapper data_id="field02">
+            < FieldLabel data_htmlFor={"field02_input_name"} data_text={"Smell"} />
+            < RadioInputWrapper data_id={"field02_inputs"}>
+              <RadioInput
+                data_id="field02_input01"
+                data_value="field02_input01_value"
+                data_name="field02_input_name"
+              />
+              <RadioInput
+                data_id="field02_input02"
+                data_value="field02_input02_value"
+                data_name="field02_input_name"
+              />
+              <RadioInput
+                data_id="field02_input03"
+                data_value="field02_input03_value"
+                data_name="field02_input_name"
+              />
+              <RadioInput
+                data_id="field02_input04"
+                data_value="field02_input04_value"
+                data_name="field02_input_name"
+              />
+              <RadioInput
+                data_id="field02_input05"
+                data_value="field02_input05_value"
+                data_name="field02_input_name"
+              />
+            </ RadioInputWrapper>
+          </FieldWrapper>
 
-              <input
-                id="field01_input04"
-                type="radio"
-                value="field01_input04_value"
-                name="field01_input_name"
-                style={
-                  {
-                    display: "flex",
-                    // flexGrow: "1",
-                    // width: "65%",
-                    height: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    margin: "0 auto",
-                    padding: "0",
-                    border: "0",
-                    background: "yellow"
-                  }
-                }
-              >
-              </input>
 
-              <input
-                id="field01_input05"
-                type="radio"
-                value="field01_input05_value"
-                name="field01_input_name"
-                style={
-                  {
-                    display: "flex",
-                    // flexGrow: "1",
-                    // width: "65%",
-                    height: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    margin: "0 auto",
-                    padding: "0",
-                    border: "0",
-                    background: "yellow"
-                  }
-                }
-              >
-              </input>
+          < FieldWrapper data_id="field03">
+            < FieldLabel data_htmlFor={"field03_input_name"} data_text={"Privacy"} />
+            < RadioInputWrapper data_id={"field03_inputs"}>
+              <RadioInput
+                data_id="field03_input01"
+                data_value="field03_input01_value"
+                data_name="field03_input_name"
+              />
+              <RadioInput
+                data_id="field03_input02"
+                data_value="field03_input02_value"
+                data_name="field03_input_name"
+              />
+              <RadioInput
+                data_id="field03_input03"
+                data_value="field03_input03_value"
+                data_name="field03_input_name"
+              />
+              <RadioInput
+                data_id="field03_input04"
+                data_value="field03_input04_value"
+                data_name="field03_input_name"
+              />
+              <RadioInput
+                data_id="field03_input05"
+                data_value="field03_input05_value"
+                data_name="field03_input_name"
+              />
+            </ RadioInputWrapper>
+          </FieldWrapper>
 
-            </div>
-          </div>
+
+          < FieldWrapper data_id="field04">
+            < FieldLabel data_htmlFor={"field04_input_name"} data_text={"Temperature"} />
+            < RadioInputWrapper data_id={"field04_inputs"}>
+              <RadioInput
+                data_id="field04_input01"
+                data_value="field04_input01_value"
+                data_name="field04_input_name"
+              />
+              <RadioInput
+                data_id="field04_input02"
+                data_value="field04_input02_value"
+                data_name="field04_input_name"
+              />
+              <RadioInput
+                data_id="field04_input03"
+                data_value="field04_input03_value"
+                data_name="field04_input_name"
+              />
+              <RadioInput
+                data_id="field04_input04"
+                data_value="field04_input04_value"
+                data_name="field04_input_name"
+              />
+              <RadioInput
+                data_id="field04_input05"
+                data_value="field04_input05_value"
+                data_name="field04_input_name"
+              />
+            </ RadioInputWrapper>
+          </FieldWrapper>
+
+
+          < FieldWrapper data_id="field05">
+            < FieldLabel data_htmlFor={"field05_input_name"} data_text={"Capacity"} />
+            < RadioInputWrapper data_id={"field05_inputs"}>
+              <RadioInput
+                data_id="field05_input01"
+                data_value="field05_input01_value"
+                data_name="field05_input_name"
+              />
+              <RadioInput
+                data_id="field05_input02"
+                data_value="field05_input02_value"
+                data_name="field05_input_name"
+              />
+              <RadioInput
+                data_id="field05_input03"
+                data_value="field05_input03_value"
+                data_name="field05_input_name"
+              />
+              <RadioInput
+                data_id="field05_input04"
+                data_value="field05_input04_value"
+                data_name="field05_input_name"
+              />
+              <RadioInput
+                data_id="field05_input05"
+                data_value="field05_input05_value"
+                data_name="field05_input_name"
+              />
+            </ RadioInputWrapper>
+          </FieldWrapper>
+
+          < FieldWrapper data_id="field06">
+            < FieldLabel data_htmlFor={"field06_input_name"} data_text={"Perceived Safety"} />
+            < RadioInputWrapper data_id={"field06_inputs"}>
+              <RadioInput
+                data_id="field06_input01"
+                data_value="field06_input01_value"
+                data_name="field06_input_name"
+              />
+              <RadioInput
+                data_id="field06_input02"
+                data_value="field06_input02_value"
+                data_name="field06_input_name"
+              />
+              <RadioInput
+                data_id="field06_input03"
+                data_value="field06_input03_value"
+                data_name="field06_input_name"
+              />
+              <RadioInput
+                data_id="field06_input04"
+                data_value="field06_input04_value"
+                data_name="field06_input_name"
+              />
+              <RadioInput
+                data_id="field06_input05"
+                data_value="field06_input05_value"
+                data_name="field06_input_name"
+              />
+            </ RadioInputWrapper>
+          </FieldWrapper>          
         </form>
 
-        {/* 
-          <div className="row flex-nowrap d-flex align-items-center">
-            <div className="col-sm-4 categoryLabel">Cleanliness:</div>
-            <div className="col-sm-8 star-rating">
-              <div className="star-rating__wrap ">
-                <input className="star-rating__input" id="clean-rating-5" type="radio" name="rating" value="5" onClick={e => this.onStarClick_Clean(e)} />
-                <label className="star-rating__ico fa fa-star-o fa-md" htmlFor="clean-rating-5" title="5 out of 5 stars"></label>
-                <input className="star-rating__input" id="clean-rating-4" type="radio" name="rating" value="4" onClick={e => this.onStarClick_Clean(e)} />
-                <label className="star-rating__ico fa fa-star-o fa-md" htmlFor="clean-rating-4" title="4 out of 5 stars"></label>
-                <input className="star-rating__input" id="clean-rating-3" type="radio" name="rating" value="3" onClick={e => this.onStarClick_Clean(e)} />
-                <label className="star-rating__ico fa fa-star-o fa-md" htmlFor="clean-rating-3" title="3 out of 5 stars"></label>
-                <input className="star-rating__input" id="clean-rating-2" type="radio" name="rating" value="2" onClick={e => this.onStarClick_Clean(e)} />
-                <label className="star-rating__ico fa fa-star-o fa-md" htmlFor="clean-rating-2" title="2 out of 5 stars"></label>
-                <input className="star-rating__input" id="clean-rating-1" type="radio" name="rating" value="1" onClick={e => this.onStarClick_Clean(e)} />
-                <label className="star-rating__ico fa fa-star-o fa-md" htmlFor="clean-rating-1" title="1 out of 5 stars"></label>
-              </div>
-            </div>
-          </div> 
-        */}
 
       </div >
     )

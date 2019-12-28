@@ -260,7 +260,7 @@ class MapSection extends Component {
             padding: "0",
             margin: "0",
             zIndex: "9",
-            background: "yellow"
+            // background: "yellow"
           }
         }
       >

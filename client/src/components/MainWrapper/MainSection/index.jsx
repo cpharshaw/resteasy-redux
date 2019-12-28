@@ -26,17 +26,18 @@ export class MainSection extends Component {
         style={
           {
             position: "absolute",
+            display: "flex",
             top: "42px",
-            left: "0",
             width: "100%",
-
             height: "calc(100vh - 84px)",
-            // height: "84vh",
-            // maxHeight: "calc(100vh-72px)",
-
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            alignContent: "flex-start",
+            margin: "0 auto",         
             padding: "0",
-            margin: "0",
-            background: "grey",
+            border: "0",
+            background: "whitesmoke",
           }
         }
       >
