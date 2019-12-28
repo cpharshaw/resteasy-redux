@@ -22,7 +22,7 @@ export class TopBar extends Component {
             margin: "0 auto",
             padding: "0",
             border: "0",
-            background: "red"
+            // background: "red"
           }
         }
       >

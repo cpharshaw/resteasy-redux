@@ -40,7 +40,7 @@ export class MainSection extends Component {
           }
         }
       >
-        < ReviewSection display={reviewDisplayValue} />
+        < ReviewSection display={selectedSectionValue} />
         < MapListWrapper display={mapListDisplayValue} />
         < MyStuffSection display={myStuffDisplayValue} />
       </div>
