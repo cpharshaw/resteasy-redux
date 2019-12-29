@@ -1,44 +1,46 @@
 import React, { Component } from 'react'
 
-export class FieldLabel extends Component {
+export class CheckInput extends Component {
 
   render() {
 
     const {
       data_htmlFor,
-      data_text,
+      data_id,
+      data_name,
+      data_value,
+      data_className,
       children
     } = this.props;
 
     return (
 
-      <label
-        htmlFor={data_htmlFor}//"field01_label"
+      <input
+        id={data_id}
+        value={data_value}
+        name={data_name}
+        type="checkbox"
         style={
           {
             display: "flex",
             // flexGrow: "1",
-            width: "50%",
+            // width: "65%",
             height: "100%",
-            justifyContent: "flex-start",
+            justifyContent: "center",
             alignItems: "center",
             alignContent: "center",
-            alignSelf: "center",
+            // alignSelf: "center",
             margin: "0 auto",
             padding: "0",
-            textAlign: "center",
-            flexWrap: "wrap",
             border: "0",
-            fontSize: "13.5px"
-            // background: "red"
+            // background: "green"
           }
         }
       >
-        {children ? children : data_text}
-      </label>
-
+      </input>
     )
   }
 }
 
-export default FieldLabel;
+export default CheckInput;
+

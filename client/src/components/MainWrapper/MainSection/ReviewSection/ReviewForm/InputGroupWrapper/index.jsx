@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class RadioInputWrapper extends Component {
+export class InputGroupWrapper extends Component {
 
   render() {
 
@@ -20,7 +20,7 @@ export class RadioInputWrapper extends Component {
           {
             display: "flex",
             flexGrow: "1",
-            width: "70%",
+            width: "50%",
             height: "100%",
             flexDirection: "row",
             justifyContent: "center",
@@ -39,4 +39,4 @@ export class RadioInputWrapper extends Component {
   }
 }
 
-export default RadioInputWrapper;
+export default InputGroupWrapper;
