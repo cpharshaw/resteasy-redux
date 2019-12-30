@@ -18,7 +18,7 @@ export class FieldLabel extends Component {
           {
             display: "flex",
             // flexGrow: "1",
-            width: "50%",
+            width: "60%",
             height: "100%",
             justifyContent: "flex-start",
             alignItems: "center",
@@ -29,7 +29,7 @@ export class FieldLabel extends Component {
             textAlign: "center",
             flexWrap: "wrap",
             border: "0",
-            fontSize: "13.5px"
+            fontSize: "12px"
             // background: "red"
           }
         }

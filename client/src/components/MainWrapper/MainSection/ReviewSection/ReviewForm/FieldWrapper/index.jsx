@@ -21,7 +21,7 @@ export class FieldWrapper extends Component {
           {
             display: "flex",
             width: "97%",
-            height: "61px",
+            height: "42px",
             flexGrow: "1",
             maxHeight: "180px",
             flexDirection: "row",

@@ -37,6 +37,51 @@ export class ReviewSection extends Component {
           }
         }
       >
+
+        < FieldWrapper data_id="field01" >
+          <button
+            id=""
+            className=""
+            type="button"
+            style={
+              {
+                display: "flex",
+                width: "50%",
+                height: "75%",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                border: "0.5px dashed lightgrey",
+                margin: "0 auto",
+                padding: "0",
+                // borderRadius: "6.5px",
+                background: "inherit"
+              }
+            }
+          >
+            <em><span
+              style={
+                {
+                  color: "grey",
+                  fontSize: "14.5px"
+                }
+              }
+            >
+              Select location...
+              </span></em>
+          </button>
+        </ FieldWrapper >
+
+
+        <hr
+          style={
+            {
+              borderTop: "1px dotted lightgrey",
+              width: "90%"
+            }
+          }
+        />
+
         <form
           id="reviewForm"
           style={
@@ -56,37 +101,50 @@ export class ReviewSection extends Component {
             }
           }
         >
-          {/* 
-    Cleanliness
-    Smell
-    Temperature (good enough or not?)
-    Perceived safety
-    Capacity
-    Privacy 
-  */}
-          < FieldWrapper data_id="field01" >
-            <button
+
+          < FieldWrapper data_id="field00" >
+            < FieldLabel data_htmlFor={"field00_input_name"}> Restroom used <sup>&nbsp;(i)</sup> </ FieldLabel >
+            <select
               id=""
               className=""
-              type="button"
+              name="restroomUsed"
+              defaultValue="Restroom type..."
               style={
                 {
                   display: "flex",
-                  width: "50%",
+                  width: "66%",
                   height: "75%",
                   justifyContent: "center",
                   alignItems: "center",
                   alignContent: "center",
-                  border: "0.5px dashed lightgrey",
+                  border: "1px dashed lightgrey",
                   margin: "0 auto",
                   padding: "0",
-                  background: "inherit"
+                  // borderRadius: "6.5px",
+                  background: "inherit",
+                  fontSize: "13.5px",
+                  fontStyle: "italic",
+                  color: "grey"
                 }
               }
             >
-              <em><span style={{color: "grey"}}>Select location...</span></em>
-            </button>
+              <option value="Restroom type..." disabled>Restroom type...</option>
+              <option value="Men's">Men's</option>
+              <option value="Women's">Women's</option>
+              <option value="Family/Gender-neutral">Family/Gender-neutral</option>
+
+            </select>
           </ FieldWrapper >
+
+
+          <hr
+            style={
+              {
+                borderTop: "1px dotted lightgrey",
+                width: "90%"
+              }
+            }
+          />
 
           < FieldWrapper data_id="field01" >
             < FieldLabel data_htmlFor={"field01_input_name"}> Cleanliness <sup>&nbsp;(i)</sup> </ FieldLabel >
@@ -123,7 +181,7 @@ export class ReviewSection extends Component {
 
 
           < FieldWrapper data_id="field02" >
-          < FieldLabel data_htmlFor={"field02_input_name"}> Smell <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < FieldLabel data_htmlFor={"field02_input_name"}> Smell <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field02_inputs"} >
               <RadioInput
                 data_id="field02_input01"
@@ -155,7 +213,7 @@ export class ReviewSection extends Component {
 
 
           < FieldWrapper data_id="field03" >
-          < FieldLabel data_htmlFor={"field03_input_name"}> Privacy <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < FieldLabel data_htmlFor={"field03_input_name"}> Privacy <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field03_inputs"} >
               <RadioInput
                 data_id="field03_input01"
@@ -187,7 +245,7 @@ export class ReviewSection extends Component {
 
 
           < FieldWrapper data_id="field04" >
-          < FieldLabel data_htmlFor={"field04_input_name"}> Comfort <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < FieldLabel data_htmlFor={"field04_input_name"}> Comfort <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field04_inputs"} >
               <RadioInput
                 data_id="field04_input01"
@@ -219,7 +277,7 @@ export class ReviewSection extends Component {
 
 
           < FieldWrapper data_id="field05" >
-          < FieldLabel data_htmlFor={"field05_input_name"}> Capacity <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < FieldLabel data_htmlFor={"field05_input_name"}> Capacity / Size <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field05_inputs"} >
               <RadioInput
                 data_id="field05_input01"
@@ -250,7 +308,7 @@ export class ReviewSection extends Component {
           </ FieldWrapper >
 
           < FieldWrapper data_id="field06" >
-          < FieldLabel data_htmlFor={"field06_input_name"}> Perceived Safety <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < FieldLabel data_htmlFor={"field06_input_name"}> Perceived Safety <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field06_inputs"} >
               <RadioInput
                 data_id="field06_input01"
@@ -281,7 +339,7 @@ export class ReviewSection extends Component {
           </ FieldWrapper >
 
           < FieldWrapper data_id="field07" >
-          < FieldLabel data_htmlFor={"field07_input_name"}> Style / Poshness <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < FieldLabel data_htmlFor={"field07_input_name"}> Style / Poshness <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field07_inputs"} >
               <RadioInput
                 data_id="field07_input01"
@@ -321,7 +379,7 @@ export class ReviewSection extends Component {
           />
 
           < FieldWrapper data_id="field08" >
-          < FieldLabel data_htmlFor={"field08_input_name"} data_text={"Handicapped Accessible"} />
+            < FieldLabel data_htmlFor={"field08_input_name"}> Handicapped accessible <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field08_inputs"} >
               <CheckInput
                 data_id="field08_input01"
@@ -332,7 +390,7 @@ export class ReviewSection extends Component {
           </ FieldWrapper >
 
           < FieldWrapper data_id="field09" >
-            < FieldLabel data_htmlFor={"field09_input_name"} data_text={"Gender Neutral Offered"} />
+            < FieldLabel data_htmlFor={"field09_input_name"}> Family/Gender-Neutral option <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field09_inputs"} >
               <CheckInput
                 data_id="field09_input01"
@@ -343,7 +401,7 @@ export class ReviewSection extends Component {
           </ FieldWrapper >
 
           < FieldWrapper data_id="field10" >
-            < FieldLabel data_htmlFor={"field10_input_name"} data_text={"Baby Changing Station"} />
+            < FieldLabel data_htmlFor={"field10_input_name"}> Baby changing station <sup>&nbsp;(i)</sup> </ FieldLabel >
             < InputGroupWrapper data_id={"field10_inputs"} >
               <CheckInput
                 data_id="field10_input01"
@@ -353,7 +411,16 @@ export class ReviewSection extends Component {
             </ InputGroupWrapper >
           </ FieldWrapper >
 
-
+          < FieldWrapper >
+            < FieldLabel data_htmlFor={"fiel11_input_name"}> Cleaning schedule visible <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < InputGroupWrapper data_id={"fiel11_inputs"} >
+              <CheckInput
+                data_id="fiel11_input11"
+                data_value="fiel11_input11_value"
+                data_name="fiel11_input_name"
+              />
+            </ InputGroupWrapper >
+          </ FieldWrapper >
 
           <hr
             style={

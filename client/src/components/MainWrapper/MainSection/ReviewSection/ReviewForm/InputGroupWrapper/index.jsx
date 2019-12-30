@@ -20,7 +20,7 @@ export class InputGroupWrapper extends Component {
           {
             display: "flex",
             flexGrow: "1",
-            width: "50%",
+            width: "40%",
             height: "100%",
             flexDirection: "row",
             justifyContent: "center",
