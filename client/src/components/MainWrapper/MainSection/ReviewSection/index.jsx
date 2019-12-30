@@ -5,6 +5,7 @@ import FieldWrapper from './ReviewForm/FieldWrapper';
 import FieldLabel from './ReviewForm/FieldLabel';
 import RadioInput from './ReviewForm/RadioInput';
 import CheckInput from './ReviewForm/CheckInput';
+import TextInput from './ReviewForm/TextInput';
 import InputGroupWrapper from './ReviewForm/InputGroupWrapper';
 
 
@@ -54,7 +55,7 @@ export class ReviewSection extends Component {
                 border: "0.5px dashed lightgrey",
                 margin: "0 auto",
                 padding: "0",
-                // borderRadius: "6.5px",
+                borderRadius: "0",
                 background: "inherit"
               }
             }
@@ -117,13 +118,16 @@ export class ReviewSection extends Component {
                   justifyContent: "center",
                   alignItems: "center",
                   alignContent: "center",
-                  border: "1px dashed lightgrey",
+                  border: "0",
+                  borderBottom: "1px dotted lightgrey",
+                  // borderTop: "1px dotted lightgrey",
                   margin: "0 auto",
                   padding: "0",
-                  // borderRadius: "6.5px",
+                  borderRadius: "0",
                   background: "inherit",
                   fontSize: "13.5px",
                   fontStyle: "italic",
+                  textAlign: "center",
                   color: "grey"
                 }
               }
@@ -412,12 +416,12 @@ export class ReviewSection extends Component {
           </ FieldWrapper >
 
           < FieldWrapper >
-            < FieldLabel data_htmlFor={"fiel11_input_name"}> Cleaning schedule visible <sup>&nbsp;(i)</sup> </ FieldLabel >
-            < InputGroupWrapper data_id={"fiel11_inputs"} >
+            < FieldLabel data_htmlFor={"field11_input_name"}> Cleaning schedule visible <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < InputGroupWrapper data_id={"field11_inputs"} >
               <CheckInput
-                data_id="fiel11_input11"
-                data_value="fiel11_input11_value"
-                data_name="fiel11_input_name"
+                data_id="field11_input01"
+                data_value="field11_input01_value"
+                data_name="field11_input_name"
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -430,6 +434,64 @@ export class ReviewSection extends Component {
               }
             }
           />
+
+          < FieldWrapper >
+            < FieldLabel data_htmlFor={"field12_input_name"}> Admission <sup>&nbsp;(i)</sup> </ FieldLabel >
+            <select
+              id=""
+              className=""
+              name="admission"
+              defaultValue="Price..."
+              style={
+                {
+                  display: "flex",
+                  width: "50%",
+                  height: "75%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  border: "0",
+                  borderBottom: "1px dotted lightgrey",
+                  // borderTop: "1px dotted lightgrey",
+                  margin: "0 auto",
+                  padding: "0",
+                  borderRadius: "0",
+                  background: "inherit",
+                  fontSize: "13.5px",
+                  fontStyle: "italic",
+                  textAlign: "center",
+                  color: "grey",
+                  // background: "red"
+                }
+              }
+            >
+              <option value="Cost..." disabled>Cost...</option>
+              <option value="Free/Public">Free/Public</option>
+              <option value="Customers Only">Customers Only</option>
+              <option value="Fee...">Fee...</option>
+
+            </select>
+          </ FieldWrapper >
+
+          < FieldWrapper >
+            < FieldLabel data_htmlFor={"field13_input_name"}> Price ($USD)<sup>&nbsp;(i)</sup> </ FieldLabel >
+            {/* < InputGroupWrapper data_id={"field13_inputs"} > */}
+              <span
+                style={
+                  {
+                    fontSize: "12px"
+                  }
+                }
+              >
+                $
+              </span>
+              <TextInput
+                data_id="field13_input01"
+                // data_value=""
+                data_name="field13_input_name"
+              />
+            {/* </ InputGroupWrapper > */}
+          </ FieldWrapper >
 
         </form>
 
