@@ -142,7 +142,7 @@ export class ReviewSection extends Component {
               data_name="locNotesInput"
               data_type="text"
               data_width="66%"
-              data_placeholder="ex: third floor restroom"
+              data_placeholder="ex: 'third floor restroom', '2nd stall'"
             />
           </ FieldWrapper >
 
@@ -245,6 +245,29 @@ export class ReviewSection extends Component {
               }
             }
           />
+
+          < FieldWrapper data_id="field08" >
+            < FieldLabel data_htmlFor={"field08_input_name"}> Out-of-Order <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < InputGroupWrapper data_id={"field08_inputs"} >
+              <CheckInput
+                data_id="field08_input01"
+                data_value="field08_input01_value"
+                data_name="field08_input_name"
+              />
+            </ InputGroupWrapper >
+          </ FieldWrapper >
+
+
+
+          <hr
+            style={
+              {
+                borderTop: "1px dotted lightgrey",
+                width: "90%"
+              }
+            }
+          />
+
 
           < FieldWrapper data_id="field01" >
             < FieldLabel data_htmlFor={"field01_input_name"}> Cleanliness <sup>&nbsp;(i)</sup> </ FieldLabel >
@@ -639,7 +662,7 @@ export class ReviewSection extends Component {
                 }
               }
             >
-              Overall Comments<sup>&nbsp;(i)</sup>
+             Comments<sup>&nbsp;(i)</sup>
             </label>
 
             <textarea
@@ -649,7 +672,7 @@ export class ReviewSection extends Component {
               // height="auto"
               border="1px solid lightgrey"
               background="red"
-              placeholder="Went in with loo expectations; peesantly surprised.  Needs more paper towels but overall decent"
+              placeholder="'Went in with loo expectations; peesantly surprised.  Needs more paper towels but overall decent'"
             />
 
           </div>
