@@ -9,17 +9,19 @@ export class FieldWrapper extends Component {
       data_id,
       data_name,
       data_value,
+      data_display,
       data_className,
       children
     } = this.props;
 
+    const display_value = data_display ? data_display : "flex";
 
     return (
       <div
         id={data_id}
         style={
           {
-            display: "flex",
+            display: display_value,
             width: "97%",
             height: "42px",
             flexGrow: "1",

@@ -10,6 +10,43 @@ import InputGroupWrapper from './ReviewForm/InputGroupWrapper';
 
 
 export class ReviewSection extends Component {
+  constructor(props) {
+    super(props);
+    this.admissionSelected.bind(this);
+    this.state = {
+      feeDisplay: "none"
+    }
+  }
+
+
+  componentDidUpdate() {
+    const fee = document.getElementById("feeInput");
+    if (fee) {
+      fee.focus();
+    }
+  }
+
+
+  admissionSelected(e) {
+
+    const cost = e.target.value
+
+    if (cost === "Fee...") {
+
+      this.setState({
+        feeDisplay: "flex"
+      });
+
+    } else {
+
+      this.setState({
+        feeDisplay: "none"
+      });
+
+    }
+
+  }
+
 
   render() {
 
@@ -18,6 +55,7 @@ export class ReviewSection extends Component {
 
     return (
       <div
+        id="reviewSection"
         style={
           {
             position: "relative",
@@ -73,16 +111,6 @@ export class ReviewSection extends Component {
           </button>
         </ FieldWrapper >
 
-
-        <hr
-          style={
-            {
-              borderTop: "1px dotted lightgrey",
-              width: "90%"
-            }
-          }
-        />
-
         <form
           id="reviewForm"
           style={
@@ -102,6 +130,32 @@ export class ReviewSection extends Component {
             }
           }
         >
+
+
+        < FieldWrapper data_display={"flex"}>
+          < FieldLabel data_htmlFor={"locNotesInput"}>
+            Location notes<sup>&nbsp;(i)</sup>
+          </ FieldLabel >
+
+          <TextInput
+            data_id="locNotesInput"
+            data_name="locNotesInput"
+            data_type="text"
+            data_width="66%"
+            data_placeholder="ex: third floor restroom"
+          />
+        </ FieldWrapper >
+
+
+        <hr
+          style={
+            {
+              borderTop: "1px dotted lightgrey",
+              width: "90%"
+            }
+          }
+        />
+
 
           < FieldWrapper data_id="field00" >
             < FieldLabel data_htmlFor={"field00_input_name"}> Restroom used <sup>&nbsp;(i)</sup> </ FieldLabel >
@@ -136,6 +190,48 @@ export class ReviewSection extends Component {
               <option value="Men's">Men's</option>
               <option value="Women's">Women's</option>
               <option value="Family/Gender-neutral">Family/Gender-neutral</option>
+
+            </select>
+          </ FieldWrapper >
+
+
+          < FieldWrapper data_id="field00" >
+            < FieldLabel data_htmlFor={"field00_input_name"}> Time of visit <sup>&nbsp;(i)</sup> </ FieldLabel >
+            <select
+              id=""
+              className=""
+              name="restroomUsed"
+              defaultValue="Time of day..."
+              style={
+                {
+                  display: "flex",
+                  width: "66%",
+                  height: "75%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  border: "0",
+                  borderBottom: "1px dotted lightgrey",
+                  // borderTop: "1px dotted lightgrey",
+                  margin: "0 auto",
+                  padding: "0",
+                  borderRadius: "0",
+                  background: "inherit",
+                  fontSize: "13.5px",
+                  fontStyle: "italic",
+                  textAlign: "center",
+                  color: "grey"
+                }
+              }
+            >
+              <option value="Time of day..." disabled>Time of day...</option>
+              <option value="Morning">(Just now)</option>
+              <option value="Morning">Morning</option>
+              <option value="Midday">Midday</option>
+              <option value="Afternoon">Late afternoon</option>
+              <option value="Evening">Evening</option>
+              <option value="Late night">Late night</option>
+              <option value="Middle of night">Middle of night</option>
 
             </select>
           </ FieldWrapper >
@@ -441,7 +537,8 @@ export class ReviewSection extends Component {
               id=""
               className=""
               name="admission"
-              defaultValue="Price..."
+              defaultValue="¿Gratis o no?"
+              onInput={e => this.admissionSelected(e)}
               style={
                 {
                   display: "flex",
@@ -461,37 +558,32 @@ export class ReviewSection extends Component {
                   fontStyle: "italic",
                   textAlign: "center",
                   color: "grey",
-                  // background: "red"
+                  // background: "red",
                 }
               }
+
             >
-              <option value="Cost..." disabled>Cost...</option>
+              <option disabled value="¿Gratis o no?" >¿Gratis o no?</option>
               <option value="Free/Public">Free/Public</option>
-              <option value="Customers Only">Customers Only</option>
+              <option value="Customers Only">Customers only</option>
               <option value="Fee...">Fee...</option>
 
             </select>
           </ FieldWrapper >
 
-          < FieldWrapper >
-            < FieldLabel data_htmlFor={"field13_input_name"}> Price ($USD)<sup>&nbsp;(i)</sup> </ FieldLabel >
-            {/* < InputGroupWrapper data_id={"field13_inputs"} > */}
-              <span
-                style={
-                  {
-                    fontSize: "12px"
-                  }
-                }
-              >
-                $
-              </span>
-              <TextInput
-                data_id="field13_input01"
-                // data_value=""
-                data_name="field13_input_name"
-              />
-            {/* </ InputGroupWrapper > */}
+
+          < FieldWrapper data_display={this.state.feeDisplay}>
+            < FieldLabel data_htmlFor={"feeInput"}>
+              Price ($USD)<sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+
+            <span style={{ fontSize: "12px" }}>$</span>
+            <TextInput
+              data_id="feeInput"
+              data_name="feeInput"
+            />
           </ FieldWrapper >
+
 
         </form>
 

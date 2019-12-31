@@ -9,7 +9,10 @@ export class TextInput extends Component {
       data_id,
       data_name,
       data_value,
+      data_type,
+      data_width,
       data_className,
+      data_placeholder,
       children
     } = this.props;
 
@@ -19,7 +22,8 @@ export class TextInput extends Component {
         id={data_id}
         value={data_value}
         name={data_name}
-        type="number"
+        type={data_type ? data_type : "number"}
+        placeholder={data_placeholder}
         // pattern="^[+-]?[0-9]{1,3}(?:[0-9]*(?:[.,][0-9]{1})?|(?:,[0-9]{3})*(?:\.[0-9]{1,2})?|(?:\.[0-9]{3})*(?:,[0-9]{1,2})?)$"
         min="0"
         max="999.99"
@@ -28,7 +32,7 @@ export class TextInput extends Component {
           {
             display: "flex",
             // flexGrow: "1",
-            width: "50%",
+            width: data_width ? data_width : "50%",
             height: "75%",
             justifyContent: "center",
             alignItems: "center",
@@ -39,9 +43,10 @@ export class TextInput extends Component {
             padding: "0",
             border: "0",
             borderBottom: "1px dotted lightgrey",
+            fontSize: "12px",
             color: "grey",
             // borderRadius: "6px",
-            background: "inherit"
+            background: "inherit",
           }
         }
       />
