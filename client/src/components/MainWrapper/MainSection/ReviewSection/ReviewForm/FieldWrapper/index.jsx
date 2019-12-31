@@ -11,6 +11,7 @@ export class FieldWrapper extends Component {
       data_value,
       data_display,
       data_className,
+      data_flexDirection,
       children
     } = this.props;
 
@@ -26,7 +27,7 @@ export class FieldWrapper extends Component {
             height: "42px",
             flexGrow: "1",
             maxHeight: "180px",
-            flexDirection: "row",
+            flexDirection: data_flexDirection ? data_flexDirection : "row",
             justifyContent: "center",
             alignItems: "center",
             alignContent: "center",

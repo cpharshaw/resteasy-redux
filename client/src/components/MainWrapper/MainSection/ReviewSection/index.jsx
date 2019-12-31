@@ -132,29 +132,29 @@ export class ReviewSection extends Component {
         >
 
 
-        < FieldWrapper data_display={"flex"}>
-          < FieldLabel data_htmlFor={"locNotesInput"}>
-            Location notes<sup>&nbsp;(i)</sup>
-          </ FieldLabel >
+          < FieldWrapper data_display={"flex"}>
+            < FieldLabel data_htmlFor={"locNotesInput"}>
+              Location notes<sup>&nbsp;(i)</sup>
+            </ FieldLabel >
 
-          <TextInput
-            data_id="locNotesInput"
-            data_name="locNotesInput"
-            data_type="text"
-            data_width="66%"
-            data_placeholder="ex: third floor restroom"
-          />
-        </ FieldWrapper >
+            <TextInput
+              data_id="locNotesInput"
+              data_name="locNotesInput"
+              data_type="text"
+              data_width="66%"
+              data_placeholder="ex: third floor restroom"
+            />
+          </ FieldWrapper >
 
 
-        <hr
-          style={
-            {
-              borderTop: "1px dotted lightgrey",
-              width: "90%"
+          <hr
+            style={
+              {
+                borderTop: "1px dotted lightgrey",
+                width: "90%"
+              }
             }
-          }
-        />
+          />
 
 
           < FieldWrapper data_id="field00" >
@@ -584,6 +584,75 @@ export class ReviewSection extends Component {
             />
           </ FieldWrapper >
 
+          <hr
+            style={
+              {
+                borderTop: "1px dotted lightgrey",
+                width: "100%"
+              }
+            }
+          />
+
+          <div
+            id="comments"
+            style={
+              {
+                display: "flex",
+                width: "97%",
+                height: "fit-contents",
+                flexGrow: "1",
+                maxHeight: "180px",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                alignContent: "center",
+                margin: "0 auto",
+                padding: "0",
+                border: "0",
+                // background: "grey"
+              }
+            }
+          >
+
+
+
+
+            <label
+              htmlFor="comments"
+              style={
+                {
+                  display: "flex",
+                  // flexGrow: "1",
+                  width: "100%",
+                  height: "42px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  alignSelf: "center",
+                  margin: "0 auto",
+                  padding: "0",
+                  textAlign: "center",
+                  flexWrap: "wrap",
+                  border: "0",
+                  fontSize: "12px"
+                  // background: "red"
+                }
+              }
+            >
+              Overall Comments<sup>&nbsp;(i)</sup>
+            </label>
+
+            <textarea
+              rows="4"
+              cols="35"
+              width="100%"
+              // height="auto"
+              border="1px solid lightgrey"
+              background="red"
+              placeholder="Went in with loo expectations; peesantly surprised.  Needs more paper towels but overall decent"
+            />
+
+          </div>
 
         </form>
 

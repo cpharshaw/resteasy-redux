@@ -11,6 +11,7 @@ export class TextInput extends Component {
       data_value,
       data_type,
       data_width,
+      data_height,
       data_className,
       data_placeholder,
       children
@@ -33,7 +34,7 @@ export class TextInput extends Component {
             display: "flex",
             // flexGrow: "1",
             width: data_width ? data_width : "50%",
-            height: "75%",
+            height: data_height ? data_height : "75%",
             justifyContent: "center",
             alignItems: "center",
             alignContent: "center",

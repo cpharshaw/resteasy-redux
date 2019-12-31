@@ -7,6 +7,7 @@ export class FieldLabel extends Component {
     const {
       data_htmlFor,
       data_text,
+      data_justifyContent,
       children
     } = this.props;
 
@@ -20,7 +21,7 @@ export class FieldLabel extends Component {
             // flexGrow: "1",
             width: "60%",
             height: "100%",
-            justifyContent: "flex-start",
+            justifyContent: data_justifyContent ? data_justifyContent : "flex-start",
             alignItems: "center",
             alignContent: "center",
             alignSelf: "center",
