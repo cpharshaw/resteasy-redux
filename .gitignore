@@ -25,7 +25,7 @@ yarn-error.log*
 client/node_modules
 client/src/google-maps-react
 client/src/react-google-maps
-
+client/.env
 server/node_modules
 server/.env
 node_modules
