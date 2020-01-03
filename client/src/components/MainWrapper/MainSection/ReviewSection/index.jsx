@@ -7,6 +7,7 @@ import RadioInput from './ReviewForm/RadioInput';
 import CheckInput from './ReviewForm/CheckInput';
 import TextInput from './ReviewForm/TextInput';
 import InputGroupWrapper from './ReviewForm/InputGroupWrapper';
+import PhotoUpload from './ReviewForm/PhotoUpload';
 
 
 export class ReviewSection extends Component {
@@ -594,7 +595,6 @@ export class ReviewSection extends Component {
             </select>
           </ FieldWrapper >
 
-
           < FieldWrapper data_display={this.state.feeDisplay}>
             < FieldLabel data_htmlFor={"feeInput"}>
               Price ($USD)<sup>&nbsp;(i)</sup>
@@ -606,6 +606,18 @@ export class ReviewSection extends Component {
               data_name="feeInput"
             />
           </ FieldWrapper >
+
+          <hr
+            style={
+              {
+                borderTop: "1px dotted lightgrey",
+                width: "100%"
+              }
+            }
+          />
+
+
+          < PhotoUpload />
 
           <hr
             style={
@@ -662,7 +674,7 @@ export class ReviewSection extends Component {
                 }
               }
             >
-             Comments<sup>&nbsp;(i)</sup>
+              Comments<sup>&nbsp;(i)</sup>
             </label>
 
             <textarea
