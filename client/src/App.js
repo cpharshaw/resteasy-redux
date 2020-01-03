@@ -4,10 +4,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Splash from './components/Splash/';
 import MainWrapper from './components/MainWrapper/';
-// import MainMap from './components/MainMap/';
+
+// // import MainMap from './components/MainMap/';
 // import MainList from './components/MainList/';
 // import Filters from './components/Filters/';
-
 
 // import ContactUs from './components/ContactUs/';
 // import About from './components/About/';

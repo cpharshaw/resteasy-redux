@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -13,6 +14,9 @@ import thunk from 'redux-thunk';
 import { getFirestore } from 'redux-firestore';
 // import { reduxFirestore } from 'redux-firestore';
 import { getFirebase } from 'react-redux-firebase';
+require('dotenv').config();
+
+
 // import { reactReduxFirebase } from 'react-redux-firebase';
 
 // import fbConfig from './config/fbConfig';

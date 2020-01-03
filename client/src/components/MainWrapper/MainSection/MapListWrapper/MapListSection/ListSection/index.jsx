@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+
+
 // import { statement } from '@babel/template';
 
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -11,8 +13,10 @@ import { compose } from 'redux';
 class ListSection extends Component {
   
   render() {
-    const displayValue = this.props.mapListToggleValue ? null : "none";
 
+    console.log(process.env.REACT_APP_CRAIGS_SECRET);
+
+    const displayValue = this.props.mapListToggleValue ? null : "none";
     // console.log("all the props, ListSection: ", this.props);
     return (
       <div
@@ -33,8 +37,10 @@ class ListSection extends Component {
           <li>BBQ</li>
           <li>Tres leches</li>
           <li>Pizza</li>
+          <li>{process.env.CRAIGS_SECRET}</li>
           <li>Pancakes</li>
           <li>Acai bowls</li>
+
         </ul>
       </div>
     )
