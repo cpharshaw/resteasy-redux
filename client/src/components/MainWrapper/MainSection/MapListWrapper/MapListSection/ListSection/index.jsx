@@ -14,7 +14,7 @@ class ListSection extends Component {
   
   render() {
 
-    console.log(process.env.REACT_APP_CRAIGS_SECRET);
+    // console.log(process.env.REACT_APP_CRAIGS_SECRET);
 
     const displayValue = this.props.mapListToggleValue ? null : "none";
     // console.log("all the props, ListSection: ", this.props);

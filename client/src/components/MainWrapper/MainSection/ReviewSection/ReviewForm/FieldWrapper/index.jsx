@@ -7,6 +7,7 @@ export class FieldWrapper extends Component {
     const {
       data_htmlFor,
       data_id,
+      data_height,
       data_name,
       data_value,
       data_display,
@@ -25,6 +26,7 @@ export class FieldWrapper extends Component {
             display: display_value,
             width: "97%",
             height: "42px",
+            height: data_height ? data_height : "42px",
             flexGrow: "1",
             maxHeight: "180px",
             flexDirection: data_flexDirection ? data_flexDirection : "row",
