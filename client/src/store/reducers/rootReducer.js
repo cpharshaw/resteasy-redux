@@ -9,6 +9,7 @@ import centerReducer from './centerReducer';
 import circleReducer from './circleReducer';
 import inputReducer from './inputReducer';
 import mapReducer from './mapReducer';
+import formReducer from './formReducer';
 import { combineReducers } from 'redux';
 // import { firestoreReducer } from 'redux-firestore';
 // import { firebaseReducer } from 'react-redux-firebase';
@@ -24,8 +25,9 @@ const rootReducer = combineReducers({
   sectionState: sectionReducer,
   boundsState: boundsReducer,
   centerState: centerReducer,
-  circleReducer: circleReducer,
+  circleState: circleReducer,
   mapState: mapReducer,
+  formState: formReducer,
   inputState: inputReducer
   // firestore: firestoreReducer,
   // firebase: firebaseReducer

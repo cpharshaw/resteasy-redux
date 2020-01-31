@@ -1,0 +1,74 @@
+
+
+.recenterButton {
+  position: absolute;
+  bottom: 72px;
+  right: 10px;
+  /* float: left;
+  margin-left: -50px;
+  margin-bottom: -300px; */
+  z-index: 999;
+  height: 38px;  
+  width: 38px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(222.5, 222.5, 222.5, 0.8);
+  border: 0.5px dotted;
+  border-color: rgba(200, 200, 200, 0.75);
+}
+
+.recenterButtonRing {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;  
+  margin: 0 auto ;
+  padding: 0 ;
+  border-radius: 50%;
+  height: 50%;
+  width:  50%;
+  background: rgba(225, 225, 225, 1);
+  z-index: 1000;
+  border: 1.75px solid;
+  border-color: grey;
+}
+
+
+.recenterButtonDot {
+  position: relative;
+  margin: 0 auto ;
+  padding: 0 ;
+  border-radius: 50%;
+  height: 7px;
+  width: 7px;
+  z-index: 1000;
+  background: grey;
+}
+
+
+
+.recenterCrosshairs1, .recenterCrosshairs2 {
+  position: absolute;
+  margin: 0 auto;
+  display: flex;
+  align-self: center;
+  background: grey;
+}
+
+.recenterCrosshairs1 {
+  height: 26px;
+  width: 1.75px;
+}
+
+
+.recenterCrosshairs2 {
+  width: 26px;
+  height: 1.75px;
+}
+
+
+

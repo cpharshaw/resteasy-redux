@@ -1,49 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 import ReviewSection from './ReviewSection/';
-import MapListWrapper from './MapListWrapper/';
+import MapListSection from './MapListSection/';
 import MyStuffSection from './MyStuffSection/';
 
 
 export class MainSection extends Component {
 
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.selectedSectionValue !== prevProps.selectedSectionValue) {
+      // console.log("new section: ", this.props.selectedSectionValue)
+    }
+  }
+
   render() {
 
     const { selectedSectionValue } = this.props;
 
-    const reviewDisplayValue = selectedSectionValue === "review" ? null : "none";
-    const mapListDisplayValue = selectedSectionValue === "mapList" ? null : "none";
-    const myStuffDisplayValue = selectedSectionValue === "myStuff" ? null : "none";
-
-    // console.log("reviewDisplayValue: ", reviewDisplayValue);
-    // console.log("mapListDisplayValue: ", mapListDisplayValue);
-    // console.log("myStuffDisplayValue: ", myStuffDisplayValue);
-
     return (
+
       <div
-        style={
-          {
-            position: "absolute",
-            display: "flex",
-            top: "42px",
-            width: "100%",
-            height: "calc(100vh - 84px)",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            alignContent: "flex-start",
-            margin: "0 auto",         
-            padding: "0",
-            border: "0",
-            background: "whitesmoke",
-          }
-        }
+        className="rs"
+        style={{
+          height: "calc(100vh - 42px)",
+          // zIndex: "12"
+        }}
       >
-        < ReviewSection display={selectedSectionValue} />
-        < MapListWrapper display={mapListDisplayValue} />
-        < MyStuffSection display={myStuffDisplayValue} />
+        < ReviewSection  display={selectedSectionValue} />
+        < MapListSection display={selectedSectionValue} />
+        < MyStuffSection display={selectedSectionValue} />
       </div>
     )
   }

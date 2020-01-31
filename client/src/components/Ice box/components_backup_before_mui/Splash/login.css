@@ -1,0 +1,188 @@
+
+/* https://tobiasahlin.com/moving-letters/ */
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 992.00000000000000000000000000000000001px) { 
+  .brand {
+    font-size: 145px;
+  }
+  .tagline {
+    font-size: 45.75px;
+  }  
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (max-width: 992px) { 
+  .brand {
+    font-size: 111.91645px;
+  }
+  .tagline {
+    font-size: 35.75px;
+  }  
+}
+
+/* Medium devics (tablets, 768px and up)*/
+@media (max-width: 768px) { 
+  .brand {
+    font-size: 86.645px;
+  }  
+  .tagline {
+    font-size: 28.25px;
+  }  
+}
+
+
+@media (max-width: 576px) { 
+  .brand {
+    font-size: 57.5px;
+  }
+  .tagline {
+    font-size: 18.25px
+  }
+}
+
+
+
+
+
+
+
+
+.login-body {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.headline-box {
+  position: absolute;
+  margin: 0 auto;
+
+  top: 21.5vh;
+  left: 0;
+  right: 0;
+  /* background: red; */
+}
+
+.headline-wrapper {
+
+  /* background: whitesmoke; */
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 11.5px;
+  border-bottom-left-radius: 11.5px;
+  /* min-width: 325px; */
+  width: fit-content;
+  /* opacity: .925; */
+  /* box-shadow: 1px 2.5px 15px whitesmoke; */
+
+}
+
+.test {
+  position: absolute;
+  /* left: 25%; */
+  /* right: 25%; */
+  top: 21.25vh;
+  /* left: 25%;
+  right: 25%; */
+  width: fit-content;
+  /* background: red; */
+  
+}
+
+
+.guys {
+  background: yellow;
+}
+
+.brand {
+
+  /* color: red; */
+  color: whitesmoke;
+  font-weight: 900;
+  /* font-size: 17.5vw; */
+  font-style: italic;
+  text-shadow: 1px 1px 22.5px #44aacc;
+  opacity: 0.925;
+  /* padding: 0;
+  margin: 0; */
+}
+
+
+
+.tagline {
+
+  color: whitesmoke;
+  /* font-size: 5.5vw; */
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 1px 1px 5.5px #44aacc;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+
+.login-logo {
+  /* object-fit: cover; */
+  width: 235px;
+  height: 235px;
+  border-radius: 6.5px;
+  opacity: .925;
+  /* box-shadow: 1px 5.5px 15px whitesmoke; */
+}
+
+
+
+
+.tos, .trouble {
+  color: #333;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.tosText {
+  font-size: 13.5px !important;
+  text-decoration: none;
+}
+
+
+.trouble {
+  color: #333 !important;
+}
+
+
+
+.logo-box {
+  position: absolute;
+  margin: 0 auto;
+
+  top: 27vh;
+  left: 0;
+  right: 0;  
+  
+  /* background: blue; */
+}
+
+
+.login-box {
+  position: absolute;
+  /* width: 100vw; */
+  top: 67vh;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  /* background: green; */
+}
+
+
+
+
+
+#google-login-image {
+  width: 200px;
+  height: 100%;
+}
+
+.button {
+  font-size: 18px;
+}

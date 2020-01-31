@@ -15,7 +15,7 @@ const geolocationReducer = (state = initState, action) => {
 
       // if (
       //   (Math.round(state.geolocationLatValue * 1000000) / 1000000) !== (Math.round(action.payload.latitude * 1000000) / 1000000)
-      //   ||
+      //     ||
       //   (Math.round(state.geolocationLngValue * 1000000) / 1000000) !== (Math.round(action.payload.longitude * 1000000) / 1000000)
       // ) {
 

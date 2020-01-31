@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 // import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { getGeolocation } from '../../store/actions/geoActions';
 
-import TopBar from './TopBar/';
+// import TopBar from './TopBar/';
 import MainSection from './MainSection/';
 import BottomBar from './BottomBar/';
 
-
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+// import styles from '../../index.module.css';
 
 // import { statement } from '@babel/template';
 
@@ -32,21 +32,24 @@ class MainWrapper extends Component {
     } = this.props;
 
     return (
-      <div
-        style={
-          {
-            height: "100%",
-            width: "100%",
-            padding: "0",
-            margin: "0"
-          }
-        }
+      // <div
+      //   fixed
+      //   background="red"
+      //   style={{
+      //     background: "green !important"
+      //   }}
+      // >
+      < div className="rs"
+        style={{
+          flexDirection: "column",
+          // zIndex: "11"
+        }}
       >
-        < TopBar />
+        {/* < TopBar /> */}
         < MainSection />
         < BottomBar />
-
-      </div>
+      </ div >
+      // </div>
 
     )
 

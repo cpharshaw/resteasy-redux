@@ -1,0 +1,101 @@
+
+.bg-white {
+	background-color: #f5f5f5;
+}
+
+.bg-lightgray {
+  background-color:#c5c5c5;
+}
+
+.bg-gray {
+  background-color: #626262;
+}
+
+.bg-darkgray {
+	background-color: #4c4c4c;
+}
+
+.bg-blackgray {
+	background-color: #151515;
+}
+
+.bg-grayblack {
+	background-color: #202020;
+}
+
+.bg-black {
+	background-color: #0a0a0a;
+}
+
+
+
+.text-white {
+	color: #f5f5f5;
+}
+
+.text-lightgray {
+  border: 1px solid #c5c5c5;
+}
+
+.text-gray {
+  border: 1px solid #737373;
+}
+
+.text-darkgray {
+	color: #4c4c4c;
+}
+
+.text-blackgray {
+	color: #151515;
+}
+
+.text-grayblack {
+	color: #202020;
+}
+
+.text-black {
+	color: #0a0a0a;
+}
+
+
+.border-white {
+  border: 1px solid #f5f5f5;
+}
+
+.border-lightgray {
+  border: 1px solid #c5c5c5;
+}
+
+.border-gray {
+  border: 1px solid #737373;
+}
+
+.border-darkgray {
+  border: 1px solid #4c4c4c;
+}
+
+.border-blackgray {
+  border: 1px solid #151515;
+}
+
+.border-grayblack {
+  border: 1px solid #202020;
+}
+
+.border-black {
+  border: 1px solid #0a0a0a;
+}
+
+
+.box-shadow {
+  box-shadow: 0 1px 3px #737373;
+}
+
+.box-shadow-inset {
+  box-shadow: 0 1px 3px #737373 inset;
+}
+
+.text-shadow {
+  text-shadow: 0 1px 3px #737373;
+}
+

@@ -1,11 +1,11 @@
 const initState = {
-  selectedSectionValue: "review"
+  selectedSectionValue: "mapList"
 }
 
 const sectionReducer = (state = initState, action) => {
   switch (action.type) {
     case 'SECTION_SELECTED':
-      // console.log("sectionreducer: ", state.selectedSectionValue)
+      // console.log("sectionreducer: ", action.payload)
       return {
         ...state,
         selectedSectionValue: action.payload

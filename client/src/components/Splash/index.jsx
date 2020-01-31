@@ -106,44 +106,44 @@ class Splash extends Component {
     return (
       // https://codesandbox.io/s/rzwrk2854
 
-      <div className="container">
+      <content id="splashPage" className="excludeFromReset container">
 
         <video autoPlay muted loop id="myVideo">
           <source src={video} type="video/mp4" />
         </video>
 
-        <div className="row d-flex justify-content-center">
-          <div id="" className="col-sm test text-center">
+        <div className="excludeFromReset row d-flex justify-content-center ">
+          <div id="" className="excludeFromReset col-sm test text-center ">
 
-            <h1 className="ml5  text-center">
-              <span className="text-wrapper">
-                <span className="brand line line1"></span>
-                <span className="brand letters letters-left">rest</span>
-                <span className="brand letters ampersand">☆</span>
-                <span className="brand letters letters-right">easy</span>
-                <span className="brand line line2"></span>
+            <h1 className="excludeFromReset ml5 text-center ">
+              <span className="excludeFromReset text-wrapper ">
+                <span className="excludeFromReset brand line line1 "></span>
+                <span className="excludeFromReset brand letters letters-left ">rest</span>
+                <span className="excludeFromReset brand letters ampersand ">☆</span>
+                <span className="excludeFromReset brand letters letters-right ">easy</span>
+                <span className="excludeFromReset brand line line2 "></span>
               </span>
             </h1>
 
-            <h1 className="ml5 text-center">
-              <span className="text-wrapper">
-                <span className="tagline letters text-center">
-                  <span className="tagline tagline1 letters">&nbsp;Your guide&nbsp;</span>
-                  <span className="tagline tagline2 letters">to all things&nbsp;</span>
-                  <span className="tagline tagline3 letters">fit to sit on&nbsp;</span>
+            <h1 className="excludeFromReset ml5 text-center ">
+              <span className="excludeFromReset text-wrapper ">
+                <span className="excludeFromReset tagline letters text-center ">
+                  <span className="excludeFromReset tagline tagline1 letters ">&nbsp;Your guide&nbsp;</span>
+                  <span className="excludeFromReset tagline tagline2 letters ">to all things&nbsp;</span>
+                  <span className="excludeFromReset tagline tagline3 letters ">fit to sit on&nbsp;</span>
                 </span>
               </span>
             </h1>
 
 
 
-            <div className="loader"></div>
+            <div className="excludeFromReset loader "></div>
           </div>
           
         </div>
 
 
-      </div>
+      </content>
 
     )
   }

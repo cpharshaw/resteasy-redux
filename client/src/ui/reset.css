@@ -1,0 +1,53 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	height: 100%;
+	width: 100%;
+}
+
+
+
+.rs {	
+	all: unset;
+	display: flex;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	/* align-self: center; */
+	/* justify-self: center; */
+	vertical-align: middle;
+	text-align: center;
+	margin: 0 auto;
+	padding: 0;
+	border: 0;
+	border-spacing: 0;
+	border-width: 0;
+	border-collapse: collapse;
+	line-height: 1;
+	list-style: none;
+	box-sizing: border-box;
+	font-size: 100%;
+	font-family: "Roboto";
+	background-color: inherit;
+	color: #202020;
+	content: '';
+	content: none;	
+}
+
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0
+}

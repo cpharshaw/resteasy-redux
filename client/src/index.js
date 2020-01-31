@@ -2,20 +2,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.css';
+// import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import './ui/reset.css';
+import './ui/base.css';
+import './ui/elements.css';
+import './ui/styles.css';
+
 
 
 import { getFirestore } from 'redux-firestore';
 // import { reduxFirestore } from 'redux-firestore';
 import { getFirebase } from 'react-redux-firebase';
 require('dotenv').config();
-
 
 // import { reactReduxFirebase } from 'react-redux-firebase';
 
@@ -44,13 +48,13 @@ const store = createStore(
 
 // store.firebaseAuthIsReady
 //   .then(() => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      document.getElementById('root')
-    )
-  // })
+ReactDOM.render(
+  <Provider store={store}>
+      <App />
+  </Provider>,
+  document.getElementById('root')
+);
+// })
 
 
 // If you want your app to work offline and load faster, you can change
