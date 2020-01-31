@@ -344,8 +344,6 @@ export default compose(
   //   }
   // ]),
   GoogleApiWrapper({
-    // apiKey: "AIzaSyBVYS3YTeyILl2Cr7ajZ0ZdKbO092cW6lw",
-    // apiKey: "AIzaSyCz9fllYDWxckPvPF1pz-KyhaDurTHFDBs",
     apiKey: process.env.REACT_APP_GM_KEY,
     version: "3.30"
   })
