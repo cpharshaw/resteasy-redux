@@ -7,7 +7,10 @@ import RadioInput from '../ReviewForm/RadioInput';
 import CheckInput from '../ReviewForm/CheckInput';
 import TextInput from '../ReviewForm/TextInput';
 import InputGroupWrapper from '../ReviewForm/InputGroupWrapper';
+import FormNavButton from '../ReviewForm/FormNavButton';
+import FormFieldGroup from '../ReviewForm/FormFieldGroup';
 import PhotoUpload from '../ReviewForm/PhotoUpload';
+import FormChunk from '../ReviewForm/FormChunk';
 import { formNext } from '../../../../../store/actions/formActions';
 import { formPrev } from '../../../../../store/actions/formActions';
 
@@ -67,143 +70,145 @@ export class ReviewSection3of4 extends Component {
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
 
     return (
-      <div
-        id="reviewSection"
+      <FormChunk
         className="rs"
-        style={{
-          // display: displayValue,
-          // height: "calc(100% - 42px)",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          overflowY: "scroll",
-        }}
+        data_padding="20px 5px 13px 5px"
       >
 
 
-        < FieldWrapper data_id="field08" >
-          < FieldLabel data_htmlFor={"field08_input_name"}> Handicapped accessible <sup>&nbsp;(i)</sup> </ FieldLabel >
-          < InputGroupWrapper data_id={"field08_inputs"} >
-            <CheckInput
-              data_id="field08_input01"
-              data_value="field08_input01_value"
-              data_name="field08_input_name"
-            />
-          </ InputGroupWrapper >
-        </ FieldWrapper >
+        <FormFieldGroup
+          data_height="calc(100% - 125px)"
+        >
 
-        < FieldWrapper data_id="field09" >
-          < FieldLabel data_htmlFor={"field09_input_name"}>  Gender neutral option <sup>&nbsp;(i)</sup> </ FieldLabel >
-          < InputGroupWrapper data_id={"field09_inputs"} >
-            <CheckInput
-              data_id="field09_input01"
-              data_value="field09_input01_value"
-              data_name="field09_input_name"
-            />
-          </ InputGroupWrapper >
-        </ FieldWrapper >
+          < FieldWrapper data_id="field08" >
+            < FieldLabel data_htmlFor={"field08_input_name"}> Handicapped accessible <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < InputGroupWrapper data_id={"field08_inputs"} >
+              <CheckInput
+                data_id="field08_input01"
+                data_value="field08_input01_value"
+                data_name="field08_input_name"
+              />
+            </ InputGroupWrapper >
+          </ FieldWrapper >
 
-        < FieldWrapper data_id="field10" >
-          < FieldLabel data_htmlFor={"field10_input_name"}> Baby changing station <sup>&nbsp;(i)</sup> </ FieldLabel >
-          < InputGroupWrapper data_id={"field10_inputs"} >
-            <CheckInput
-              data_id="field10_input01"
-              data_value="field10_input01_value"
-              data_name="field10_input_name"
-            />
-          </ InputGroupWrapper >
-        </ FieldWrapper >
+          < FieldWrapper data_id="field09" >
+            < FieldLabel data_htmlFor={"field09_input_name"}>  Gender neutral option <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < InputGroupWrapper data_id={"field09_inputs"} >
+              <CheckInput
+                data_id="field09_input01"
+                data_value="field09_input01_value"
+                data_name="field09_input_name"
+              />
+            </ InputGroupWrapper >
+          </ FieldWrapper >
 
-        < FieldWrapper >
-          < FieldLabel data_htmlFor={"field11_input_name"}> Cleaning schedule visible <sup>&nbsp;(i)</sup> </ FieldLabel >
-          < InputGroupWrapper data_id={"field11_inputs"} >
-            <CheckInput
-              data_id="field11_input01"
-              data_value="field11_input01_value"
-              data_name="field11_input_name"
-            />
-          </ InputGroupWrapper >
-        </ FieldWrapper >
+          < FieldWrapper data_id="field10" >
+            < FieldLabel data_htmlFor={"field10_input_name"}> Baby changing station <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < InputGroupWrapper data_id={"field10_inputs"} >
+              <CheckInput
+                data_id="field10_input01"
+                data_value="field10_input01_value"
+                data_name="field10_input_name"
+              />
+            </ InputGroupWrapper >
+          </ FieldWrapper >
 
-        <hr
-          style={
-            {
-              borderTop: "1px dotted lightgrey",
-              width: "100%"
-            }
-          }
-        />
+          < FieldWrapper >
+            < FieldLabel data_htmlFor={"field11_input_name"}> Cleaning schedule visible <sup>&nbsp;(i)</sup> </ FieldLabel >
+            < InputGroupWrapper data_id={"field11_inputs"} >
+              <CheckInput
+                data_id="field11_input01"
+                data_value="field11_input01_value"
+                data_name="field11_input_name"
+              />
+            </ InputGroupWrapper >
+          </ FieldWrapper >
 
-        < FieldWrapper >
-          < FieldLabel data_htmlFor={"field12_input_name"}> Admission <sup>&nbsp;(i)</sup> </ FieldLabel >
-          <select
-            id=""
-            className=""
-            name="admission"
-            defaultValue="¿Gratis o no?"
-            onInput={e => this.admissionSelected(e)}
+          <hr
             style={
               {
-                display: "flex",
-                width: "50%",
-                height: "75%",
-                justifyContent: "center",
-                alignItems: "center",
-                alignContent: "center",
-                border: "0",
-                borderBottom: "1px dotted lightgrey",
-                // borderTop: "1px dotted lightgrey",
-                margin: "0 auto",
-                padding: "0",
-                borderRadius: "0",
-                background: "inherit",
-                fontSize: "13.5px",
-                fontStyle: "italic",
-                textAlign: "center",
-                color: "grey",
-                // background: "red",
+                borderTop: "1px dotted lightgrey",
+                width: "100%"
               }
             }
-
-          >
-            <option disabled value="¿Gratis o no?" >¿Gratis o no?</option>
-            <option value="Free/Public">Free/Public</option>
-            <option value="Customers Only">Customers only</option>
-            <option value="Fee...">Fee...</option>
-
-          </select>
-        </ FieldWrapper >
-
-        < FieldWrapper data_display={this.state.feeDisplay}>
-          < FieldLabel data_htmlFor={"feeInput"}>
-            Price ($USD)<sup>&nbsp;(i)</sup>
-          </ FieldLabel >
-
-          <span style={{ fontSize: "12px" }}>$</span>
-          <TextInput
-            data_id="feeInput"
-            data_name="feeInput"
           />
-        </ FieldWrapper >
 
-        <button
-          onClick={this.nextStep}
-          className="rs button bg-primary text-white"
-        >
-          <em>
-            Next
-          </em>
-        </button>
-        <button
-          onClick={this.prevStep}
-          className="rs button bg-primary text-white"
-        >
-          <em>
-            Previous
-          </em>
-        </button>
+          < FieldWrapper >
+            < FieldLabel data_htmlFor={"field12_input_name"}> Admission <sup>&nbsp;(i)</sup> </ FieldLabel >
+            <select
+              id=""
+              className=""
+              name="admission"
+              defaultValue="¿Gratis o no?"
+              onInput={e => this.admissionSelected(e)}
+              style={
+                {
+                  display: "flex",
+                  width: "50%",
+                  height: "75%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  border: "0",
+                  borderBottom: "1px dotted lightgrey",
+                  // borderTop: "1px dotted lightgrey",
+                  margin: "0 auto",
+                  padding: "0",
+                  borderRadius: "0",
+                  background: "inherit",
+                  fontSize: "13.5px",
+                  fontStyle: "italic",
+                  textAlign: "center",
+                  color: "grey",
+                  // background: "red",
+                }
+              }
+
+            >
+              <option disabled value="¿Gratis o no?" >¿Gratis o no?</option>
+              <option value="Free/Public">Free/Public</option>
+              <option value="Customers Only">Customers only</option>
+              <option value="Fee...">Fee...</option>
+
+            </select>
+          </ FieldWrapper >
+
+          < FieldWrapper data_display={this.state.feeDisplay}>
+            < FieldLabel data_htmlFor={"feeInput"}>
+              Price ($USD)<sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+
+            <span style={{ fontSize: "12px" }}>$</span>
+            <TextInput
+              data_id="feeInput"
+              data_name="feeInput"
+            />
+          </ FieldWrapper >
+
+        </FormFieldGroup>
+
+        <div
+          className="rs"
+          style={{
+            // position: "absolute",
+            height: "50px",
+            // padding: "8px",
+            // justifyContent: "space-evenly"
+          }}>
+          <FormNavButton
+            data_text="Back"
+            data_bgcolor="bg-primary-invert-outline"
+            func_navcommand="prev"
+          />
+          <FormNavButton
+            data_text="Continue"
+            data_bgcolor="bg-primary-invert"
+            func_navcommand="next"
+          />
+        </div>
 
 
-      </div >
+      </FormChunk >
     )
   }
 }

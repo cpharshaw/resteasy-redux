@@ -8,6 +8,8 @@ import CheckInput from '../ReviewForm/CheckInput';
 import TextInput from '../ReviewForm/TextInput';
 import InputGroupWrapper from '../ReviewForm/InputGroupWrapper';
 import PhotoUpload from '../ReviewForm/PhotoUpload';
+import FormNavButton from '../ReviewForm/FormNavButton';
+import FormChunk from '../ReviewForm/FormChunk';
 import { formNext } from '../../../../../store/actions/formActions';
 import { formPrev } from '../../../../../store/actions/formActions';
 
@@ -68,19 +70,10 @@ export class ReviewSection4of4 extends Component {
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
 
     return (
-      <div
-        id="reviewSection"
+      <FormChunk
         className="rs"
-        style={{
-          // display: displayValue,
-          // height: "calc(100% - 42px)",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          overflowY: "scroll",
-        }}
+        data_padding="20px 5px 13px 5px"
       >
-
-
 
         < PhotoUpload />
 
@@ -154,24 +147,27 @@ export class ReviewSection4of4 extends Component {
 
         </div>
 
-        {/* <button
-          onClick={this.nextStep}
-          className="rs button bg-primary text-white"
-        >
-          <em>
-            Next
-          </em>
-        </button> */}
-        <button
-          onClick={this.prevStep}
-          className="rs button bg-primary text-white"
-        >
-          <em>
-            Previous
-          </em>
-        </button>
+        <div
+          className="rs"
+          style={{
+            // position: "absolute",
+            height: "50px",
+            // padding: "8px",
+            // justifyContent: "space-evenly"
+          }}>
+         <FormNavButton
+            data_text="Back"
+            data_bgcolor="bg-primary-invert-outline"
+            func_navcommand="prev"
+          />          
+          {/* <FormNavButton
+            data_text="Continue"
+            data_bgcolor="bg-primary-invert"
+            func_navcommand="next"
+          /> */}
+        </div>
 
-      </div >
+      </FormChunk >
     )
   }
 }

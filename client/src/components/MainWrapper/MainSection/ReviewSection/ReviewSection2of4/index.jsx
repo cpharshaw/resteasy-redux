@@ -8,6 +8,9 @@ import CheckInput from '../ReviewForm/CheckInput';
 import TextInput from '../ReviewForm/TextInput';
 import InputGroupWrapper from '../ReviewForm/InputGroupWrapper';
 import PhotoUpload from '../ReviewForm/PhotoUpload';
+import FormNavButton from '../ReviewForm/FormNavButton';
+import FormFieldGroup from '../ReviewForm/FormFieldGroup';
+import FormChunk from '../ReviewForm/FormChunk';
 import { formNext } from '../../../../../store/actions/formActions';
 import { formPrev } from '../../../../../store/actions/formActions';
 
@@ -69,22 +72,23 @@ export class ReviewSection2of4 extends Component {
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
 
     return (
-      <div
-        id="reviewSection"
+      <FormChunk
         className="rs"
-        style={{
-            // display: displayValue,
-            // height: "calc(100% - 42px)",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            overflowY: "scroll",
-        }}
+        data_padding="20px 5px 13px 5px"
       >
 
+        <FormFieldGroup
+          data_height="calc(100% - 125px)"
+        >
 
           < FieldWrapper data_id="field01" >
-            < FieldLabel data_htmlFor={"field01_input_name"}> Cleanliness <sup>&nbsp;(i)</sup> </ FieldLabel >
-            < InputGroupWrapper data_id={"field01_inputs"} >
+            < FieldLabel
+              data_width="42.5%"
+              data_htmlFor={"field01_input_name"}
+            >
+              Cleanliness <sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+            < InputGroupWrapper data_id={"field01_inputs"} data_width="57.5%">
               {/* TODO - create a loop to create input fields using array of names */}
               <RadioInput
                 data_id="field01_input01"
@@ -117,8 +121,13 @@ export class ReviewSection2of4 extends Component {
 
 
           < FieldWrapper data_id="field02" >
-            < FieldLabel data_htmlFor={"field02_input_name"}> Smell <sup>&nbsp;(i)</sup> </ FieldLabel >
-            < InputGroupWrapper data_id={"field02_inputs"} >
+            < FieldLabel
+              data_width="42.5%"
+              data_htmlFor={"field02_input_name"}
+            >
+              Smell <sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+            < InputGroupWrapper data_id={"field02_inputs"}  data_width="57.5%">
               <RadioInput
                 data_id="field02_input01"
                 data_value="field02_input01_value"
@@ -149,8 +158,13 @@ export class ReviewSection2of4 extends Component {
 
 
           < FieldWrapper data_id="field03" >
-            < FieldLabel data_htmlFor={"field03_input_name"}> Privacy <sup>&nbsp;(i)</sup> </ FieldLabel >
-            < InputGroupWrapper data_id={"field03_inputs"} >
+            < FieldLabel
+              data_width="42.5%"
+              data_htmlFor={"field03_input_name"}
+            >
+              Privacy <sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+            < InputGroupWrapper data_id={"field03_inputs"}  data_width="57.5%">
               <RadioInput
                 data_id="field03_input01"
                 data_value="field03_input01_value"
@@ -181,8 +195,13 @@ export class ReviewSection2of4 extends Component {
 
 
           < FieldWrapper data_id="field04" >
-            < FieldLabel data_htmlFor={"field04_input_name"}> Comfort <sup>&nbsp;(i)</sup> </ FieldLabel >
-            < InputGroupWrapper data_id={"field04_inputs"} >
+            < FieldLabel
+              data_width="42.5%"
+              data_htmlFor={"field04_input_name"}
+            >
+              Comfort <sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+            < InputGroupWrapper data_id={"field04_inputs"}  data_width="57.5%">
               <RadioInput
                 data_id="field04_input01"
                 data_value="field04_input01_value"
@@ -213,8 +232,13 @@ export class ReviewSection2of4 extends Component {
 
 
           < FieldWrapper data_id="field05" >
-            < FieldLabel data_htmlFor={"field05_input_name"}> Capacity / Size <sup>&nbsp;(i)</sup> </ FieldLabel >
-            < InputGroupWrapper data_id={"field05_inputs"} >
+            < FieldLabel
+              data_width="42.5%"
+              data_htmlFor={"field05_input_name"}
+            >
+              Capacity / Size <sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+            < InputGroupWrapper data_id={"field05_inputs"}  data_width="57.5%">
               <RadioInput
                 data_id="field05_input01"
                 data_value="field05_input01_value"
@@ -244,8 +268,13 @@ export class ReviewSection2of4 extends Component {
           </ FieldWrapper >
 
           < FieldWrapper data_id="field06" >
-            < FieldLabel data_htmlFor={"field06_input_name"}> Perceived Safety <sup>&nbsp;(i)</sup> </ FieldLabel >
-            < InputGroupWrapper data_id={"field06_inputs"} >
+            < FieldLabel
+              data_width="42.5%"
+              data_htmlFor={"field06_input_name"}
+            >
+              Perceived Safety <sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+            < InputGroupWrapper data_id={"field06_inputs"}  data_width="57.5%">
               <RadioInput
                 data_id="field06_input01"
                 data_value="field06_input01_value"
@@ -275,8 +304,13 @@ export class ReviewSection2of4 extends Component {
           </ FieldWrapper >
 
           < FieldWrapper data_id="field07" >
-            < FieldLabel data_htmlFor={"field07_input_name"}> Style / Poshness <sup>&nbsp;(i)</sup> </ FieldLabel >
-            < InputGroupWrapper data_id={"field07_inputs"} >
+            < FieldLabel
+              data_width="42.5%"
+              data_htmlFor={"field07_input_name"}
+            >
+              Style / Poshness <sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+            < InputGroupWrapper data_id={"field07_inputs"}  data_width="57.5%">
               <RadioInput
                 data_id="field07_input01"
                 data_value="field07_input01_value"
@@ -305,24 +339,29 @@ export class ReviewSection2of4 extends Component {
             </ InputGroupWrapper>
           </ FieldWrapper >
 
-        <button
-          onClick={this.nextStep}
-          className="rs button bg-primary text-white"
-        >
-          <em>
-            Next
-          </em>
-        </button>
-        <button
-          onClick={this.prevStep}
-          className="rs button bg-primary text-white"
-        >
-          <em>
-            Previous
-          </em>
-        </button>
+        </FormFieldGroup>
 
-      </div >
+        <div
+          className="rs"
+          style={{
+            // position: "absolute",
+            height: "50px",
+            // padding: "8px",
+            // justifyContent: "space-evenly"
+          }}>
+          <FormNavButton
+            data_text="Back"
+            data_bgcolor="bg-primary-invert-outline"
+            func_navcommand="prev"
+          />
+          <FormNavButton
+            data_text="Continue"
+            data_bgcolor="bg-primary-invert"
+            func_navcommand="next"
+          />
+        </div>
+
+      </FormChunk >
     )
   }
 }

@@ -20,25 +20,17 @@ export class ReviewSection0of4 extends Component {
 
 
   render() {
-    
-    
+
+
     return (
-      < div 
-        className="rs"
-        style={{
-          flexDirection: "column"
-        }}
-      >
+      < div className="rs" style={{ flexDirection: "column" }}>
         <button
           onClick={this.nextStep}
           className="rs button bg-primary text-white"
         >
-          <em>
-            Begin review
-          </em>
+          <em>Begin review</em>
         </button>
-
-      </ div >
+      </div>
     )
   }
 

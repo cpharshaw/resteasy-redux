@@ -65,15 +65,20 @@ export class ReviewSection extends Component {
     console.log(this.props.formValue);
 
     return (
-      <form className="rs">
+      <form
+        className="rs"
+        style={{
+          display: displayValue,
+        }}
+      >
         {
           this.props.formValue === 0 ? < ReviewSection0of4 /> :
             this.props.formValue === 1 ? < ReviewSection1of4 /> :
               this.props.formValue === 2 ? < ReviewSection2of4 /> :
                 this.props.formValue === 3 ? < ReviewSection3of4 /> :
-                  this.props.formValue === 4 ? < ReviewSection4of4 /> : <div />
+                  this.props.formValue === 4 ? < ReviewSection4of4 /> : <div className="rs" />
         }
-      </form>
+      </form >
     )
 
   }

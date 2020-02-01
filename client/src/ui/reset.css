@@ -29,7 +29,8 @@ html, body {
 	/* justify-self: center; */
 	vertical-align: middle;
 	text-align: center;
-	margin: 0 auto;
+	text-align-last: center;
+	margin: 0;
 	padding: 0;
 	border: 0;
 	border-spacing: 0;
@@ -44,6 +45,12 @@ html, body {
 	color: #202020;
 	content: '';
 	content: none;	
+}
+
+
+input[type="checkbox"] {
+	width: initial;
+	-webkit-appearance: "checkbox"
 }
 
 
