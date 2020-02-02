@@ -10,6 +10,7 @@ import InputGroupWrapper from '../ReviewForm/InputGroupWrapper';
 import PhotoUpload from '../ReviewForm/PhotoUpload';
 import FormNavButton from '../ReviewForm/FormNavButton';
 import FormChunk from '../ReviewForm/FormChunk';
+import HorizontalRule from '../ReviewForm/HorizontalRule';
 import { formNext } from '../../../../../store/actions/formActions';
 import { formPrev } from '../../../../../store/actions/formActions';
 
@@ -77,14 +78,7 @@ export class ReviewSection4of4 extends Component {
 
         < PhotoUpload />
 
-        <hr
-          style={
-            {
-              borderTop: "1px dotted lightgrey",
-              width: "100%"
-            }
-          }
-        />
+        <HorizontalRule />
 
         <div
           id="comments"

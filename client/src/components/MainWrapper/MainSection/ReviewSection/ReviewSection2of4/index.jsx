@@ -78,7 +78,7 @@ export class ReviewSection2of4 extends Component {
       >
 
         <FormFieldGroup
-          data_height="calc(100% - 125px)"
+          data_height="calc(100% - 75px)"
         >
 
           < FieldWrapper data_id="field01" >
@@ -88,7 +88,10 @@ export class ReviewSection2of4 extends Component {
             >
               Cleanliness <sup>&nbsp;(i)</sup>
             </ FieldLabel >
-            < InputGroupWrapper data_id={"field01_inputs"} data_width="57.5%">
+            < InputGroupWrapper
+              data_id={"field01_inputs"}
+              data_width="57.5%"
+            >
               {/* TODO - create a loop to create input fields using array of names */}
               <RadioInput
                 data_id="field01_input01"
@@ -127,7 +130,10 @@ export class ReviewSection2of4 extends Component {
             >
               Smell <sup>&nbsp;(i)</sup>
             </ FieldLabel >
-            < InputGroupWrapper data_id={"field02_inputs"}  data_width="57.5%">
+            < InputGroupWrapper
+              data_id={"field02_inputs"}
+              data_width="57.5%"
+            >
               <RadioInput
                 data_id="field02_input01"
                 data_value="field02_input01_value"
@@ -164,7 +170,10 @@ export class ReviewSection2of4 extends Component {
             >
               Privacy <sup>&nbsp;(i)</sup>
             </ FieldLabel >
-            < InputGroupWrapper data_id={"field03_inputs"}  data_width="57.5%">
+            < InputGroupWrapper
+              data_id={"field03_inputs"}
+              data_width="57.5%"
+            >
               <RadioInput
                 data_id="field03_input01"
                 data_value="field03_input01_value"
@@ -201,7 +210,10 @@ export class ReviewSection2of4 extends Component {
             >
               Comfort <sup>&nbsp;(i)</sup>
             </ FieldLabel >
-            < InputGroupWrapper data_id={"field04_inputs"}  data_width="57.5%">
+            < InputGroupWrapper
+              data_id={"field04_inputs"}
+              data_width="57.5%"
+            >
               <RadioInput
                 data_id="field04_input01"
                 data_value="field04_input01_value"
@@ -238,7 +250,10 @@ export class ReviewSection2of4 extends Component {
             >
               Capacity / Size <sup>&nbsp;(i)</sup>
             </ FieldLabel >
-            < InputGroupWrapper data_id={"field05_inputs"}  data_width="57.5%">
+            < InputGroupWrapper
+              data_id={"field05_inputs"}
+              data_width="57.5%"
+            >
               <RadioInput
                 data_id="field05_input01"
                 data_value="field05_input01_value"
@@ -274,7 +289,10 @@ export class ReviewSection2of4 extends Component {
             >
               Perceived Safety <sup>&nbsp;(i)</sup>
             </ FieldLabel >
-            < InputGroupWrapper data_id={"field06_inputs"}  data_width="57.5%">
+            < InputGroupWrapper
+              data_id={"field06_inputs"}
+              data_width="57.5%"
+            >
               <RadioInput
                 data_id="field06_input01"
                 data_value="field06_input01_value"
@@ -310,7 +328,10 @@ export class ReviewSection2of4 extends Component {
             >
               Style / Poshness <sup>&nbsp;(i)</sup>
             </ FieldLabel >
-            < InputGroupWrapper data_id={"field07_inputs"}  data_width="57.5%">
+            < InputGroupWrapper
+              data_id={"field07_inputs"}
+              data_width="57.5%"
+            >
               <RadioInput
                 data_id="field07_input01"
                 data_value="field07_input01_value"

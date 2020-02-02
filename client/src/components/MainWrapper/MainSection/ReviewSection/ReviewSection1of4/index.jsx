@@ -85,32 +85,17 @@ export class ReviewSection1of4 extends Component {
         />
 
         <FormFieldGroup
-          data_height="calc(100% - 125px)"
+          data_height="calc(100% - 150px)"
         >
 
-          < FieldWrapper >
-            < FieldLabel
-              data_htmlFor={"locNotesInput"}
-              data_width="40%"
-            >
-              Location notes<sup>&nbsp;(i)</sup>
-            </ FieldLabel >
-            <TextInput
-              data_id="locNotesInput"
-              data_name="locNotesInput"
-              data_width="60%"
-              data_justify="flex-start"
-              // data_textalign="left"
-              data_placeholder="ex: 'third floor restroom', '2nd stall'"
-            />
-          </ FieldWrapper >
+
 
           {/* <HorizontalRule /> */}
 
           < FieldWrapper>
             < FieldLabel
               data_htmlFor={"field00_input_name"}
-              data_width="40%"
+              data_width="45%"
             >
               Restroom used <sup>&nbsp;(i)</sup>
             </ FieldLabel >
@@ -118,7 +103,7 @@ export class ReviewSection1of4 extends Component {
               data_id=""
               data_name="restroomUsed"
               data_defaultvalue="Restroom type..."
-              data_width="60%"
+              data_width="55%"
             >
               <option value="Restroom type..." disabled>Restroom type...</option>
               <option value="Men's">Men's</option>
@@ -127,11 +112,28 @@ export class ReviewSection1of4 extends Component {
             </SelectBox>
           </ FieldWrapper >
 
+          < FieldWrapper >
+            < FieldLabel
+              data_htmlFor={"locNotesInput"}
+              data_width="45%"
+            >
+              Location notes<sup>&nbsp;(i)</sup>
+            </ FieldLabel >
+            <TextInput
+              data_id="locNotesInput"
+              data_name="locNotesInput"
+              data_width="55%"
+              data_justify="flex-start"
+              // data_textalign="left"
+              data_placeholder="'third floor restroom'"
+            />
+          </ FieldWrapper >
+
 
           < FieldWrapper >
             < FieldLabel
               data_htmlFor={"field00_input_name"}
-              data_width="40%"
+              data_width="45%"
             >
               Time of visit <sup>&nbsp;(i)</sup>
             </ FieldLabel >
@@ -139,7 +141,7 @@ export class ReviewSection1of4 extends Component {
               data_id=""
               data_name="restroomUsed"
               data_defaultvalue="Time of day..."
-              data_width="60%"
+              data_width="55%"
             >
               <option value="Time of day..." disabled>Time of day...</option>
               <option value="Morning">(Just now)</option>
@@ -157,13 +159,13 @@ export class ReviewSection1of4 extends Component {
           < FieldWrapper data_id="field08" >
             < FieldLabel
               // data_htmlFor={""}
-              data_width="40%"
+              data_width="45%"
             >
               Out-of-Order <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field08_inputs"}
-              data_width="60%"
+              data_width="55%"
             >
               <CheckInput
                 data_id="field08_input01"

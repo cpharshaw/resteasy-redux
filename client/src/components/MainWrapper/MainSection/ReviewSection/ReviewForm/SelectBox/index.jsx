@@ -18,6 +18,7 @@ export class SelectBox extends Component {
       data_color,
       data_fontstyle,
       data_defaultvalue,
+      func_input,
       children
     } = this.props;
 
@@ -26,7 +27,8 @@ export class SelectBox extends Component {
         id={data_id}
         className="rs"
         name={data_name ? data_name : null}
-        defaultValue={data_defaultvalue ? data_defaultvalue : "Restroom type..."}
+        defaultValue={data_defaultvalue ? data_defaultvalue : "[ENTER_A_DEFAULT_VALUE]"}
+        onInput={func_input}
         style={{
           width: data_width ? data_width : null,
           height: data_height ? data_height : null,

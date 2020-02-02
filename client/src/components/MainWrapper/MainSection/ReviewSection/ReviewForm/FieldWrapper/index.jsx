@@ -12,6 +12,8 @@ export class FieldWrapper extends Component {
       data_className,
       data_flexDirection,
       data_width,
+      data_display,
+      data_visibility,
       data_height,
       children
     } = this.props;
@@ -22,6 +24,8 @@ export class FieldWrapper extends Component {
         id={data_id}
         className="rs"
         style={{
+          // display: data_display === "none" ? data_display : null,
+          visibility: data_visibility ? data_visibility : null,
           width: data_width ? data_width : null,
           height: data_height ? data_height : null,
           // height: "42px",
