@@ -16,7 +16,7 @@ import { formPrev } from '../../../../../store/actions/formActions';
 
 
 
-export class ReviewSection2of4 extends Component {
+export class ReviewSection2 extends Component {
   constructor(props) {
     super(props);
     this.admissionSelected.bind(this);
@@ -83,14 +83,14 @@ export class ReviewSection2of4 extends Component {
 
           < FieldWrapper data_id="field01" >
             < FieldLabel
-              data_width="42.5%"
+              data_width="47.5%"
               data_htmlFor={"field01_input_name"}
             >
               Cleanliness <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field01_inputs"}
-              data_width="57.5%"
+              data_width="52.5%"
             >
               {/* TODO - create a loop to create input fields using array of names */}
               <RadioInput
@@ -125,14 +125,14 @@ export class ReviewSection2of4 extends Component {
 
           < FieldWrapper data_id="field02" >
             < FieldLabel
-              data_width="42.5%"
+              data_width="47.5%"
               data_htmlFor={"field02_input_name"}
             >
               Smell <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field02_inputs"}
-              data_width="57.5%"
+              data_width="52.5%"
             >
               <RadioInput
                 data_id="field02_input01"
@@ -165,14 +165,14 @@ export class ReviewSection2of4 extends Component {
 
           < FieldWrapper data_id="field03" >
             < FieldLabel
-              data_width="42.5%"
+              data_width="47.5%"
               data_htmlFor={"field03_input_name"}
             >
               Privacy <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field03_inputs"}
-              data_width="57.5%"
+              data_width="52.5%"
             >
               <RadioInput
                 data_id="field03_input01"
@@ -205,14 +205,14 @@ export class ReviewSection2of4 extends Component {
 
           < FieldWrapper data_id="field04" >
             < FieldLabel
-              data_width="42.5%"
+              data_width="47.5%"
               data_htmlFor={"field04_input_name"}
             >
               Comfort <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field04_inputs"}
-              data_width="57.5%"
+              data_width="52.5%"
             >
               <RadioInput
                 data_id="field04_input01"
@@ -245,14 +245,14 @@ export class ReviewSection2of4 extends Component {
 
           < FieldWrapper data_id="field05" >
             < FieldLabel
-              data_width="42.5%"
+              data_width="47.5%"
               data_htmlFor={"field05_input_name"}
             >
               Capacity / Size <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field05_inputs"}
-              data_width="57.5%"
+              data_width="52.5%"
             >
               <RadioInput
                 data_id="field05_input01"
@@ -284,14 +284,14 @@ export class ReviewSection2of4 extends Component {
 
           < FieldWrapper data_id="field06" >
             < FieldLabel
-              data_width="42.5%"
+              data_width="47.5%"
               data_htmlFor={"field06_input_name"}
             >
               Perceived Safety <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field06_inputs"}
-              data_width="57.5%"
+              data_width="52.5%"
             >
               <RadioInput
                 data_id="field06_input01"
@@ -323,14 +323,14 @@ export class ReviewSection2of4 extends Component {
 
           < FieldWrapper data_id="field07" >
             < FieldLabel
-              data_width="42.5%"
+              data_width="47.5%"
               data_htmlFor={"field07_input_name"}
             >
               Style / Poshness <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field07_inputs"}
-              data_width="57.5%"
+              data_width="52.5%"
             >
               <RadioInput
                 data_id="field07_input01"
@@ -372,12 +372,12 @@ export class ReviewSection2of4 extends Component {
           }}>
           <FormNavButton
             data_text="Back"
-            data_bgcolor="bg-primary-invert-outline"
+            data_classes="bg-primary-invert-outline"
             func_navcommand="prev"
           />
           <FormNavButton
             data_text="Continue"
-            data_bgcolor="bg-primary-invert"
+            data_classes="bg-primary-invert"
             func_navcommand="next"
           />
         </div>
@@ -410,4 +410,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(ReviewSection2of4);
+)(ReviewSection2);

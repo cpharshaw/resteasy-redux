@@ -4,9 +4,10 @@ export class HorizontalRule extends Component {
   render() {
     return (
       <hr
+        // className="rs"
         style={{
           borderTop: "1px dotted lightgrey",
-          width: "94%"
+          width: "91%"
         }}
       />
     )

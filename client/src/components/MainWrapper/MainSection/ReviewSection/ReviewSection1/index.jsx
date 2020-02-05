@@ -20,7 +20,7 @@ import { formPrev } from '../../../../../store/actions/formActions';
 
 
 
-export class ReviewSection1of4 extends Component {
+export class ReviewSection1 extends Component {
   constructor(props) {
     super(props);
     this.admissionSelected.bind(this);
@@ -79,7 +79,7 @@ export class ReviewSection1of4 extends Component {
       >
 
         <LocationSelector
-          func_selectlocation={e => { e.preventDefault(); console.log('clicked') }}
+          func_selectlocation={e => { e.preventDefault(); console.log('location selector clicked') }}
           data_width="50%"
           data_height="50px"
         />
@@ -88,22 +88,21 @@ export class ReviewSection1of4 extends Component {
           data_height="calc(100% - 150px)"
         >
 
-
-
           {/* <HorizontalRule /> */}
 
           < FieldWrapper>
             < FieldLabel
               data_htmlFor={"field00_input_name"}
-              data_width="45%"
+              data_width="47.5%"
             >
               Restroom used <sup>&nbsp;(i)</sup>
             </ FieldLabel >
+
             <SelectBox
               data_id=""
               data_name="restroomUsed"
               data_defaultvalue="Restroom type..."
-              data_width="55%"
+              data_width="52.5%"
             >
               <option value="Restroom type..." disabled>Restroom type...</option>
               <option value="Men's">Men's</option>
@@ -115,14 +114,14 @@ export class ReviewSection1of4 extends Component {
           < FieldWrapper >
             < FieldLabel
               data_htmlFor={"locNotesInput"}
-              data_width="45%"
+              data_width="47.5%"
             >
               Location notes<sup>&nbsp;(i)</sup>
             </ FieldLabel >
             <TextInput
               data_id="locNotesInput"
               data_name="locNotesInput"
-              data_width="55%"
+              data_width="52.5%"
               data_justify="flex-start"
               // data_textalign="left"
               data_placeholder="'third floor restroom'"
@@ -133,7 +132,7 @@ export class ReviewSection1of4 extends Component {
           < FieldWrapper >
             < FieldLabel
               data_htmlFor={"field00_input_name"}
-              data_width="45%"
+              data_width="47.5%"
             >
               Time of visit <sup>&nbsp;(i)</sup>
             </ FieldLabel >
@@ -141,7 +140,7 @@ export class ReviewSection1of4 extends Component {
               data_id=""
               data_name="restroomUsed"
               data_defaultvalue="Time of day..."
-              data_width="55%"
+              data_width="52.5%"
             >
               <option value="Time of day..." disabled>Time of day...</option>
               <option value="Morning">(Just now)</option>
@@ -159,13 +158,13 @@ export class ReviewSection1of4 extends Component {
           < FieldWrapper data_id="field08" >
             < FieldLabel
               // data_htmlFor={""}
-              data_width="45%"
+              data_width="47.5%"
             >
               Out-of-Order <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field08_inputs"}
-              data_width="55%"
+              data_width="52.5%"
             >
               <CheckInput
                 data_id="field08_input01"
@@ -181,18 +180,16 @@ export class ReviewSection1of4 extends Component {
         <div
           className="rs"
           style={{
-            // position: "absolute",
             height: "50px",
-            // padding: "8px",
           }}>
           <FormNavButton
             data_text="Back"
-            data_bgcolor="bg-primary-invert-outline"
+            data_classes="bg-primary-invert-outline"
             func_navcommand="prev"
           />
           <FormNavButton
             data_text="Continue"
-            data_bgcolor="bg-primary-invert"
+            data_classes="bg-primary-invert"
             func_navcommand="next"
           />
         </div>
@@ -225,4 +222,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(ReviewSection1of4);
+)(ReviewSection1);

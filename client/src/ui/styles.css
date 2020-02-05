@@ -8,6 +8,7 @@
 	border: 2px solid #0abab5;
 	background: transparent;
 	color: #f5f5f5;
+	/* border-radius: "5px"; */
 }
 
 .bg-primary-light {
@@ -43,6 +44,7 @@
 	border: 2px solid #f5454a;
 	background: transparent;
 	color: #f5454a;
+	/* border-radius: "5px"; */
 }
 
 .bg-primary-compl {

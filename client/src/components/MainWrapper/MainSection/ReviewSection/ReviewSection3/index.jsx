@@ -17,7 +17,7 @@ import { formNext } from '../../../../../store/actions/formActions';
 import { formPrev } from '../../../../../store/actions/formActions';
 
 
-export class ReviewSection3of4 extends Component {
+export class ReviewSection3 extends Component {
   constructor(props) {
     super(props);
     this.admissionSelected.bind(this);
@@ -85,13 +85,13 @@ export class ReviewSection3of4 extends Component {
           < FieldWrapper data_id="field08" >
             < FieldLabel
               data_htmlFor={"field08_input_name"}
-              data_width="60%"
+              data_width="63%"
             >
               Handicapped accessible <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field08_inputs"}
-              data_width="40%"
+              data_width="37%"
             >
               <CheckInput
                 data_id="field08_input01"
@@ -104,13 +104,13 @@ export class ReviewSection3of4 extends Component {
           < FieldWrapper data_id="field09" >
             < FieldLabel
               data_htmlFor={"field09_input_name"}
-              data_width="60%"
+              data_width="63%"
             >
               Gender neutral option <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field09_inputs"}
-              data_width="40%"
+              data_width="37%"
             >
               <CheckInput
                 data_id="field09_input01"
@@ -123,13 +123,13 @@ export class ReviewSection3of4 extends Component {
           < FieldWrapper data_id="field10" >
             < FieldLabel
               data_htmlFor={"field10_input_name"}
-              data_width="60%"
+              data_width="63%"
             >
               Baby changing station <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field10_inputs"}
-              data_width="40%"
+              data_width="37%"
             >
               <CheckInput
                 data_id="field10_input01"
@@ -142,13 +142,13 @@ export class ReviewSection3of4 extends Component {
           < FieldWrapper >
             < FieldLabel
               data_htmlFor={"field11_input_name"}
-              data_width="60%"
+              data_width="63%"
             >
               Cleaning schedule visible <sup>&nbsp;(i)</sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_id={"field11_inputs"}
-              data_width="40%"
+              data_width="37%"
             >
               <CheckInput
                 data_id="field11_input01"
@@ -164,7 +164,7 @@ export class ReviewSection3of4 extends Component {
             {/* < FieldLabel data_htmlFor={"field12_input_name"}> Admission <sup>&nbsp;(i)</sup> </ FieldLabel > */}
             < FieldLabel
               data_htmlFor={"field12_input_name"}
-              data_width="60%"
+              data_width="63%"
             >
               Admission <sup>&nbsp;(i)</sup>
             </ FieldLabel >
@@ -172,7 +172,7 @@ export class ReviewSection3of4 extends Component {
               data_id=""
               data_name="admission"
               data_defaultvalue="¿Gratis o no?"
-              data_width="40%"
+              data_width="37%"
               func_input={e => this.admissionSelected(e)}
             >
               <option disabled value="¿Gratis o no?" >¿Gratis o no?</option>
@@ -188,7 +188,7 @@ export class ReviewSection3of4 extends Component {
             data_visibility={this.state.feeDisplay}
           >
             < FieldLabel
-              data_width="60%"
+              data_width="63%"
               data_htmlFor={"feeInput"}
             >
               Price ($USD)<sup>&nbsp;(i)</sup>
@@ -196,7 +196,7 @@ export class ReviewSection3of4 extends Component {
 
             <span style={{ fontSize: "12px" }}>$</span>
             <TextInput
-              data_width="40%"
+              data_width="37%"
               data_id="feeInput"
               data_name="feeInput"
             />
@@ -212,14 +212,14 @@ export class ReviewSection3of4 extends Component {
             // padding: "8px",
             // justifyContent: "space-evenly"
           }}>
-          <FormNavButton
+           <FormNavButton
             data_text="Back"
-            data_bgcolor="bg-primary-invert-outline"
+            data_classes="bg-primary-invert-outline"
             func_navcommand="prev"
           />
           <FormNavButton
             data_text="Continue"
-            data_bgcolor="bg-primary-invert"
+            data_classes="bg-primary-invert"
             func_navcommand="next"
           />
         </div>
@@ -253,4 +253,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(ReviewSection3of4);
+)(ReviewSection3);

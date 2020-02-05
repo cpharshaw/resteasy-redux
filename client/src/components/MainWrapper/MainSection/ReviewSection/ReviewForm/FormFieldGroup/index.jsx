@@ -7,6 +7,7 @@ export class FormFieldGroup extends Component {
       data_bgcolor,
       data_width,
       data_height,
+      data_margin,
       children
     } = this.props;
 
@@ -20,6 +21,7 @@ export class FormFieldGroup extends Component {
             width: data_width ? data_width : null,
             height: data_height ? data_height : null,
             background: data_bgcolor ? data_bgcolor : null,
+            margin: data_margin ? data_margin : null,
             // padding: "1.5%",
             // margin: "1.5%"
           }}

@@ -11,11 +11,14 @@ import TextInput from './ReviewForm/TextInput';
 import InputGroupWrapper from './ReviewForm/InputGroupWrapper';
 import PhotoUpload from './ReviewForm/PhotoUpload';
 
-import ReviewSection0of4 from './ReviewSection0of4';
-import ReviewSection1of4 from './ReviewSection1of4';
-import ReviewSection2of4 from './ReviewSection2of4';
-import ReviewSection3of4 from './ReviewSection3of4';
-import ReviewSection4of4 from './ReviewSection4of4';
+import ReviewSection0 from './ReviewSection0';
+import ReviewSection1 from './ReviewSection1';
+import ReviewSection2 from './ReviewSection2';
+import ReviewSection3 from './ReviewSection3';
+import ReviewSection4 from './ReviewSection4';
+import ReviewSection5 from './ReviewSection5'; // confirm
+import ReviewSection6 from './ReviewSection6'; // success
+import ReviewSection7 from './ReviewSection7'; // failure
 // import '../../../../index.module.css';
 
 
@@ -72,11 +75,15 @@ export class ReviewSection extends Component {
         }}
       >
         {
-          this.props.formValue === 0 ? < ReviewSection0of4 /> :
-            this.props.formValue === 1 ? < ReviewSection1of4 /> :
-              this.props.formValue === 2 ? < ReviewSection2of4 /> :
-                this.props.formValue === 3 ? < ReviewSection3of4 /> :
-                  this.props.formValue === 4 ? < ReviewSection4of4 /> : <div className="rs" />
+          this.props.formValue === 0 ? < ReviewSection0 /> :
+            this.props.formValue === 1 ? < ReviewSection1 /> :
+              this.props.formValue === 2 ? < ReviewSection2 /> :
+                this.props.formValue === 3 ? < ReviewSection3 /> :
+                  this.props.formValue === 4 ? < ReviewSection4 /> :
+                    this.props.formValue === 5 ? < ReviewSection5 /> :
+                      this.props.formValue === 6 ? < ReviewSection6 /> :
+                        this.props.formValue === 7 ? < ReviewSection7 /> :
+                          <div className="rs" />
         }
       </form >
     )

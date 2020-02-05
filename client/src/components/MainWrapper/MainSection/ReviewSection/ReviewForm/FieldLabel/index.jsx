@@ -12,6 +12,7 @@ export class FieldLabel extends Component {
       data_bgcolor,
       data_fontcolor,
       data_fontsize,
+      data_flexdirection,
       data_width,
       data_height,
       children
@@ -25,12 +26,13 @@ export class FieldLabel extends Component {
         htmlFor={data_htmlFor} 
         style={{
           width: data_width ? data_width : null,
-          // height: data_height ? data_height : "80%",
+          height: data_height ? data_height : null,
           flexWrap: "wrap",
+          flexDirection: data_flexdirection ? data_flexdirection : null,
           // borderBottom: "1px dotted lightgrey",
           backgroundColor: data_bgcolor ? data_bgcolor : null,
           color: data_fontcolor ? data_fontcolor : null,
-          fontSize: data_fontsize ? data_fontsize : "11px"
+          fontSize: data_fontsize ? data_fontsize : "14.5px"
         }}
       >
         {children ? children : data_text}

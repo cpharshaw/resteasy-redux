@@ -5,7 +5,7 @@ import { formNext } from '../../../../../store/actions/formActions';
 import { formPrev } from '../../../../../store/actions/formActions';
 
 
-export class ReviewSection0of4 extends Component {
+export class ReviewSection0 extends Component {
 
   nextStep = () => {
     console.log();
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(ReviewSection0of4);
+)(ReviewSection0);

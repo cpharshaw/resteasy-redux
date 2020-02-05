@@ -24,8 +24,10 @@ export class FormNavButton extends Component {
 
     const {
       func_navcommand,
+      data_borderradius,
       data_text,
-      data_bgcolor
+      data_textcolor,
+      data_classes
     } = this.props;
 
     return (
@@ -34,12 +36,14 @@ export class FormNavButton extends Component {
           func_navcommand === "next" ? this.nextStep :
             func_navcommand === "prev" ? this.prevStep : null
         }
-        className={"rs " + data_bgcolor + ""}
+        className={"rs " + data_classes + ""}
         style={{
           width: "80px",
+          color: data_textcolor ? data_textcolor : null,
           maxHeight: "42px",
-          borderRadius: "3px",
+          // borderRadius: "3px",
           padding: "8px",
+          borderRadius: data_borderradius ? data_borderradius : "3px",
           marginLeft: "15px",
           marginRight: "15px",
           transition: "background-color 0s" /* "box-shadow 0.5s", */,

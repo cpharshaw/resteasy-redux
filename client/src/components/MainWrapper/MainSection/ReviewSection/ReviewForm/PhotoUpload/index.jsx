@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FieldWrapper from '../FieldWrapper';
 import FieldLabel from '../FieldLabel';
+import HorizontalRule from '../HorizontalRule';
 
 export class PhotoUpload extends Component {
 
@@ -8,6 +9,7 @@ export class PhotoUpload extends Component {
     super(props);
     this.state = {
       imgSrcArr: [],
+      // imgElementArr: [<div key="fuckyouineedakey" style={{ height: "202px", width: "0.01px" }}> </div>],
       imgElementArr: [],
       test: null
     }
@@ -19,6 +21,11 @@ export class PhotoUpload extends Component {
   buttonClick(e) {
     e.preventDefault();
     document.getElementById("photoUpload").click();
+  }
+
+  buttonClickCamera(e) {
+    e.preventDefault();
+    document.getElementById("cameraUpload").click();
   }
 
   deletePhoto(event) {
@@ -63,69 +70,57 @@ export class PhotoUpload extends Component {
 
           return (
             <div
+              id=""
               key={"div" + newImgKey}
+              className="rs"
               name={"photo" + newImgKey}
               style={{
-                display: "flex",
                 position: "relative",
-                width: "100px",
+                width: "120px",
                 height: "auto",
-                justifyContent: "center",
-                alignItems: "center",
-                alignContent: "center",
-                // alignSelf: "center",
-                margin: "12px 8px 8px 8px",
-                padding: "0",
-                textAlign: "center",
+                margin: "0 8px 0 8px",
                 flexWrap: "wrap",
-                border: "0",
-                // background: "green"
+                // background: "grey"
               }}
             >
               <img
+                id=""
                 key={"img" + newImgKey}
+                className="rs"
                 name={"photo" + newImgKey}
                 src={newImgSrc}
                 style={{
-                  display: "flex",
-                  maxWidth: "90px",
+                  maxWidth: "120px",
                   height: "inherit",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  alignContent: "center",
+                  maxHeight: "180px",
                   alignSelf: "center",
-                  padding: "0",
-                  textAlign: "center",
                   flexWrap: "wrap",
-                  border: "0"
+                  borderRadius: "10px"
                 }}
               />
               <button
+                id=""
                 key={"button" + newImgKey}
+                className="rs"
                 name={"photo" + newImgKey}
                 onClick={(e) => this.deletePhoto(e)}
                 style={{
-                  display: "flex",
                   position: "absolute",
                   width: "36px",
                   height: "36px",
+                  // margin: "0 0 -45px 0",
+                  // margin: "10px 10px 10px 10px",
                   top: "-8px",
                   right: "-8px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  alignContent: "center",
-                  alignSelf: "center",
-                  textAlign: "center",
-                  padding: "0",
-                  margin: "0",
+                  // alignSelf: "center",
                   background: "rgba(255,225,225,0.075)",
                   border: "5px solid rgba(255,0,0,.75)",
                   borderRadius: "50%",
-                  // zIndex: "5"
                 }}
               >
                 <span
                   key={"span" + newImgKey}
+                  className="rs"
                   name={"photo " + newImgKey}
                   // onClick={(e) => this.deletePhoto(e)}
                   pointerEvents="none"
@@ -136,7 +131,7 @@ export class PhotoUpload extends Component {
                   }}
                 >
                   x
-              </span>
+                </span>
               </button>
             </div>
           )
@@ -166,76 +161,137 @@ export class PhotoUpload extends Component {
   render() {
 
     return (
-      <FieldWrapper data_flexDirection="column" data_height="fit-content">
-        <label
-          htmlFor="comments"
-          style={
-            {
-              display: "flex",
-              // flexGrow: "1",
-              width: "100%",
-              height: "42px",
-              justifyContent: "center",
-              alignItems: "center",
-              alignContent: "center",
-              alignSelf: "center",
-              margin: "0 auto",
-              padding: "0",
-              textAlign: "center",
-              flexWrap: "wrap",
-              border: "0",
-              fontSize: "12px"
-              // background: "red"
-            }
-          }
+      <FieldWrapper
+        data_flexdirection="column"
+        data_height="fit-content"
+      >
+
+        <FieldLabel
+          data_height="42px"
+          data_fontsize="12px"
         >
           Photo Upload<sup>&nbsp;(i)</sup>
-        </label>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <input
-            id="photoUpload"
-            name="photoUpload"
-            type="file"
-            accept="image/*"
-            multiple={true}
-            onChange={e => this.onChange(e)}
-            title=" "
-            style={
-              {
-                display: "none"
-              }
-            }
-          />
-          <button
-            onClick={(e) => this.buttonClick(e)}
-            style={
-              {
-                width: "100%",
-                height: "100%",
-                margin: "0 auto",
-                padding: "0",
-                border: "0",
-                background: "inherit"
+        </FieldLabel>
 
-              }
-            }>
-            <em>Choose photo(s)</em>
-          </button>
+
+        <div
+          className="rs"
+          style={{
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            // background: "orange",
+            height: "226px",
+            margin: "0 auto"
+          }}
+        >
+
+
           <div
+            className="rs"
             style={{
-              display: "flex",
+              // background: "grey",
+              height: "64px",
+              visibility: this.state.imgElementArr.length >= 2 ? "hidden" : null,
+              // margin: "0 auto"
+            }}
+          >
+
+            <input
+              id="photoUpload"
+              name="photoUpload"
+              type="file"
+              accept="image/*"
+              multiple={true}
+              onChange={e => this.onChange(e)}
+              title=" "
+              style={{
+                display: "none"
+              }}
+            />
+
+            <input
+              id="cameraUpload"
+              name="cameraUpload"
+              type="file"
+              accept="image/*"
+              multiple={true}
+              onChange={e => this.onChange(e)}
+              title=" "
+              capture="camera"
+              style={{
+                display: "none"
+              }}
+            />
+
+            <button
+              className="rs"
+              onClick={(e) => this.buttonClick(e)}
+              style={{
+                margin: "0 auto",
+                width: "fit-content",
+                height: "fit-content"
+                // background: "blue"
+              }}
+            >
+              <img
+                className="rs"
+                src="https://img.icons8.com/material-outlined/64/000000/image-gallery.png"
+                style={{
+                  width: "auto",
+                  height: "auto"
+                }}
+              />
+            </button>
+
+            <button
+              className="rs"
+              onClick={(e) => this.buttonClickCamera(e)}
+              style={{
+                margin: "0 auto",
+                width: "fit-content",
+                height: "fit-content"
+                // background: "red"
+              }}
+            >
+              <img
+                className="rs"
+                src="https://img.icons8.com/material-outlined/64/000000/unsplash.png"
+                style={{
+                  width: "auto",
+                  height: "auto"
+                }}
+              />
+            </button>
+
+          </div>
+
+          <div
+            className="rs"
+            style={{
               flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "flex-start",
-              alignContent: "flex-start",
-              // background: "yellow",
-              margin: "0",
-              padding: "0",
-              border: "0",
-              flexWrap: 'wrap'
-              // alignSelf: "flex-start",                
+              margin: "10px 0 0 0",
+              flexWrap: 'wrap',
+              // backgroundImage: this.state.imgElementArr.length < 1 ? "linear-gradient(to bottom right, rgba(211,211,211,.75), rgba(245,245,245,.45))" : null,
+              width: this.state.imgElementArr.length < 1 ? "200px" : null,
+              border: this.state.imgElementArr.length < 1 ? "1.25px dashed grey" : null,
+              borderRadius: this.state.imgElementArr.length < 1 ? "5px" : null
             }}>
-            {this.state.imgElementArr.length > 0 ? this.state.imgElementArr : null}
+            {
+              this.state.imgElementArr.length > 0 ?
+                this.state.imgElementArr
+                :
+                <em>
+                  <span
+                    style={{
+                      color: "grey",
+                      fontWeight: "100",
+                      fontSize: "14px"
+                    }}
+                  >
+                    Submit up to two photos
+                  </span>
+                </em>
+            }
           </div>
         </div>
 
