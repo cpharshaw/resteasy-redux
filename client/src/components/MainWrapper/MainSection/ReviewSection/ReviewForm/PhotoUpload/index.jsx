@@ -170,7 +170,7 @@ export class PhotoUpload extends Component {
           data_height="42px"
           data_fontsize="12px"
         >
-          Photo Upload<sup>&nbsp;(i)</sup>
+          Photo Upload <sup><sup>&nbsp;(i)</sup></sup>
         </FieldLabel>
 
 
@@ -228,8 +228,8 @@ export class PhotoUpload extends Component {
               onClick={(e) => this.buttonClick(e)}
               style={{
                 margin: "0 auto",
-                width: "fit-content",
-                height: "fit-content"
+                // width: "fit-content",
+                height: "fit-content",
                 // background: "blue"
               }}
             >
@@ -238,7 +238,9 @@ export class PhotoUpload extends Component {
                 src="https://img.icons8.com/material-outlined/64/000000/image-gallery.png"
                 style={{
                   width: "auto",
-                  height: "auto"
+                  height: "auto",
+                  // background: "red",
+                  marginLeft: "25%"
                 }}
               />
             </button>
@@ -248,9 +250,9 @@ export class PhotoUpload extends Component {
               onClick={(e) => this.buttonClickCamera(e)}
               style={{
                 margin: "0 auto",
-                width: "fit-content",
-                height: "fit-content"
-                // background: "red"
+                // width: "fit-content",
+                height: "fit-content",
+                // background: "green"
               }}
             >
               <img
@@ -258,7 +260,9 @@ export class PhotoUpload extends Component {
                 src="https://img.icons8.com/material-outlined/64/000000/unsplash.png"
                 style={{
                   width: "auto",
-                  height: "auto"
+                  height: "auto",
+                  // background: "yellow",
+                  marginRight: "25%"
                 }}
               />
             </button>
@@ -272,7 +276,8 @@ export class PhotoUpload extends Component {
               margin: "10px 0 0 0",
               flexWrap: 'wrap',
               // backgroundImage: this.state.imgElementArr.length < 1 ? "linear-gradient(to bottom right, rgba(211,211,211,.75), rgba(245,245,245,.45))" : null,
-              width: this.state.imgElementArr.length < 1 ? "200px" : null,
+              width: this.state.imgElementArr.length < 1 ? "225px" : null,
+              height: this.state.imgElementArr.length < 1 ? "145px" : null,
               border: this.state.imgElementArr.length < 1 ? "1.25px dashed grey" : null,
               borderRadius: this.state.imgElementArr.length < 1 ? "5px" : null
             }}>

@@ -82,78 +82,74 @@ export class ReviewSection3 extends Component {
           data_height="calc(100% - 75px)"
         >
 
-          < FieldWrapper data_id="field08" >
+          < FieldWrapper >
             < FieldLabel
-              data_htmlFor={"field08_input_name"}
+              data_htmlFor="handicapped"
               data_width="63%"
             >
-              Handicapped accessible <sup>&nbsp;(i)</sup>
+              Handicapped accessible <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field08_inputs"}
               data_width="37%"
             >
               <CheckInput
-                data_id="field08_input01"
-                data_value="field08_input01_value"
-                data_name="field08_input_name"
+                data_id=""
+                data_value="yes"
+                data_name="handicapped"
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
 
-          < FieldWrapper data_id="field09" >
+          < FieldWrapper>
             < FieldLabel
-              data_htmlFor={"field09_input_name"}
+              data_htmlFor="genderNeutral"
               data_width="63%"
             >
-              Gender neutral option <sup>&nbsp;(i)</sup>
+              Gender neutral option <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field09_inputs"}
               data_width="37%"
             >
               <CheckInput
-                data_id="field09_input01"
-                data_value="field09_input01_value"
-                data_name="field09_input_name"
+                data_id=""
+                data_value="yes"
+                data_name="genderNeutral"
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
 
-          < FieldWrapper data_id="field10" >
+          < FieldWrapper>
             < FieldLabel
-              data_htmlFor={"field10_input_name"}
+              data_htmlFor="babyChange"
               data_width="63%"
             >
-              Baby changing station <sup>&nbsp;(i)</sup>
+              Baby changing station <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field10_inputs"}
               data_width="37%"
             >
               <CheckInput
-                data_id="field10_input01"
-                data_value="field10_input01_value"
-                data_name="field10_input_name"
+                data_id=""
+                data_value="yes"
+                data_name="babyChange"
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor={"field11_input_name"}
+              data_htmlFor="schedule"
               data_width="63%"
             >
-              Cleaning schedule visible <sup>&nbsp;(i)</sup>
+              Cleaning schedule visible <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field11_inputs"}
               data_width="37%"
             >
               <CheckInput
-                data_id="field11_input01"
-                data_value="field11_input01_value"
-                data_name="field11_input_name"
+                data_id=""
+                data_value="ys"
+                data_name="schedule"
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -161,12 +157,11 @@ export class ReviewSection3 extends Component {
           <HorizontalRule />
 
           < FieldWrapper >
-            {/* < FieldLabel data_htmlFor={"field12_input_name"}> Admission <sup>&nbsp;(i)</sup> </ FieldLabel > */}
             < FieldLabel
-              data_htmlFor={"field12_input_name"}
+              data_htmlFor="admission"
               data_width="63%"
             >
-              Admission <sup>&nbsp;(i)</sup>
+              Admission <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             <SelectBox
               data_id=""
@@ -175,30 +170,29 @@ export class ReviewSection3 extends Component {
               data_width="37%"
               func_input={e => this.admissionSelected(e)}
             >
-              <option disabled value="¿Gratis o no?" >¿Gratis o no?</option>
-              <option value="Free/Public">Free/Public</option>
-              <option value="Customers Only">Customers only</option>
-              <option value="Fee...">Fee...</option>
+              <option disabled value="¿Gratis o no?" >¿Gratis o no? </option>
+              <option          value="Free/Public"   >Free/Public   </option>
+              <option          value="Customers Only">Customers only</option>
+              <option          value="Fee..."        >Fee...        </option>
             </SelectBox>
 
           </ FieldWrapper >
 
           < FieldWrapper
-            // data_display={this.state.feeDisplay}
             data_visibility={this.state.feeDisplay}
           >
             < FieldLabel
               data_width="63%"
-              data_htmlFor={"feeInput"}
+              data_htmlFor="fee"
             >
-              Price ($USD)<sup>&nbsp;(i)</sup>
+              Price ($USD)<sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
 
             <span style={{ fontSize: "12px" }}>$</span>
             <TextInput
               data_width="37%"
-              data_id="feeInput"
-              data_name="feeInput"
+              data_id=""
+              data_name="fee"
             />
           </ FieldWrapper >
 

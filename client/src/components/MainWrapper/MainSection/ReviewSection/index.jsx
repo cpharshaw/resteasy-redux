@@ -26,8 +26,35 @@ export class ReviewSection extends Component {
   constructor(props) {
     super(props);
     this.admissionSelected.bind(this);
+    this.handleChange.bind(this);
     this.state = {
-      feeDisplay: "none"
+      
+      // page1
+      restroomType: null,
+      locationNotes: null,
+      timeOfVisit: null,
+      outOfOrder: null,
+
+      //page 2
+      cleanliness: null,
+      smell: null,
+      privacy: null,
+      comfort: null,
+      capacity: null,
+      safety: null,
+      style: null,
+
+      //page 3
+      handicapped: null,
+      genderNeutral: null,
+      babyChange: null,
+      schedule: null,
+      admission: null,
+      feeDisplay: "none",
+      fee: null,
+
+      //page 4
+
     }
   }
 
@@ -39,6 +66,14 @@ export class ReviewSection extends Component {
     }
   }
 
+
+  handleChange = input => e => {
+    this.setState({
+      [input]: e.target.value
+    });
+
+    console.log(this.state)
+  };
 
   admissionSelected(e) {
 
@@ -65,7 +100,7 @@ export class ReviewSection extends Component {
 
     const { selectedSectionValue } = this.props;
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
-    console.log(this.props.formValue);
+    // console.log(this.props.formValue);
 
     return (
       <form
@@ -75,14 +110,14 @@ export class ReviewSection extends Component {
         }}
       >
         {
-          this.props.formValue === 0 ? < ReviewSection0 /> :
-            this.props.formValue === 1 ? < ReviewSection1 /> :
-              this.props.formValue === 2 ? < ReviewSection2 /> :
-                this.props.formValue === 3 ? < ReviewSection3 /> :
-                  this.props.formValue === 4 ? < ReviewSection4 /> :
-                    this.props.formValue === 5 ? < ReviewSection5 /> :
-                      this.props.formValue === 6 ? < ReviewSection6 /> :
-                        this.props.formValue === 7 ? < ReviewSection7 /> :
+          this.props.formValue === 0 ? < ReviewSection0 func_handlechange={e => this.handleChange(e)} /> :
+            this.props.formValue === 1 ? < ReviewSection1 func_handlechange={e => this.handleChange(e)} /> :
+              this.props.formValue === 2 ? < ReviewSection2 func_handlechange={e => this.handleChange(e)} /> :
+                this.props.formValue === 3 ? < ReviewSection3 func_handlechange={e => this.handleChange(e)} /> :
+                  this.props.formValue === 4 ? < ReviewSection4 func_handlechange={e => this.handleChange(e)} /> :
+                    this.props.formValue === 5 ? < ReviewSection5 func_handlechange={e => this.handleChange(e)} /> :
+                      this.props.formValue === 6 ? < ReviewSection6 func_handlechange={e => this.handleChange(e)} /> :
+                        this.props.formValue === 7 ? < ReviewSection7 func_handlechange={e => this.handleChange(e)} /> :
                           <div className="rs" />
         }
       </form >

@@ -88,19 +88,19 @@ export class ReviewSection1 extends Component {
           data_height="calc(100% - 150px)"
         >
 
-          {/* <HorizontalRule /> */}
+          <HorizontalRule />
 
           < FieldWrapper>
             < FieldLabel
-              data_htmlFor={"field00_input_name"}
+              data_htmlFor="restroomType"
               data_width="47.5%"
             >
-              Restroom used <sup>&nbsp;(i)</sup>
+              Restroom used <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
 
             <SelectBox
-              data_id=""
-              data_name="restroomUsed"
+              data_id="restroomType"
+              data_name="restroomType"
               data_defaultvalue="Restroom type..."
               data_width="52.5%"
             >
@@ -113,17 +113,16 @@ export class ReviewSection1 extends Component {
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor={"locNotesInput"}
+              data_htmlFor="locationNotes"
               data_width="47.5%"
             >
-              Location notes<sup>&nbsp;(i)</sup>
+              Location notes<sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             <TextInput
-              data_id="locNotesInput"
-              data_name="locNotesInput"
+              data_id="locationNotes"
+              data_name="locationNotes"
               data_width="52.5%"
               data_justify="flex-start"
-              // data_textalign="left"
               data_placeholder="'third floor restroom'"
             />
           </ FieldWrapper >
@@ -131,14 +130,14 @@ export class ReviewSection1 extends Component {
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor={"field00_input_name"}
+              data_htmlFor="timeOfVisit"
               data_width="47.5%"
             >
-              Time of visit <sup>&nbsp;(i)</sup>
+              Time of visit <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             <SelectBox
-              data_id=""
-              data_name="restroomUsed"
+              data_id="timeOfVisit"
+              data_name="timeOfVisit"
               data_defaultvalue="Time of day..."
               data_width="52.5%"
             >
@@ -153,23 +152,25 @@ export class ReviewSection1 extends Component {
             </SelectBox>
           </ FieldWrapper >
 
-          {/* <HorizontalRule /> */}
+          <HorizontalRule />
 
-          < FieldWrapper data_id="field08" >
+          < FieldWrapper >
             < FieldLabel
-              // data_htmlFor={""}
+              data_htmlFor="outOfOrder"
               data_width="47.5%"
+              data_bgcolor="red"
             >
-              Out-of-Order <sup>&nbsp;(i)</sup>
+              Out-of-Order <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field08_inputs"}
               data_width="52.5%"
+              data_bgcolor="blue"
             >
               <CheckInput
-                data_id="field08_input01"
-                data_value="field08_input01_value"
-                data_name="field08_input_name"
+                data_id="outOfOrder"
+                data_name="outOfOrder"
+                data_value="yes"
+                data_bgcolor="orange"
               />
             </ InputGroupWrapper >
           </ FieldWrapper >

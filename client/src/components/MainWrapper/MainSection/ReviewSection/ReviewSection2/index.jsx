@@ -81,281 +81,274 @@ export class ReviewSection2 extends Component {
           data_height="calc(100% - 75px)"
         >
 
-          < FieldWrapper data_id="field01" >
+          < FieldWrapper >
             < FieldLabel
               data_width="47.5%"
-              data_htmlFor={"field01_input_name"}
+              data_htmlFor="cleanliness"
             >
-              Cleanliness <sup>&nbsp;(i)</sup>
+              Cleanliness <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field01_inputs"}
               data_width="52.5%"
             >
               {/* TODO - create a loop to create input fields using array of names */}
               <RadioInput
-                data_id="field01_input01"
-                data_value="field01_input01_value"
-                data_name="field01_input_name"
+                data_id=""
+                data_value="1"
+                data_name="cleanliness"
               />
               <RadioInput
-                data_id="field01_input02"
-                data_value="field01_input02_value"
-                data_name="field01_input_name"
+                data_id=""
+                data_value="2"
+                data_name="cleanliness"
               />
               <RadioInput
-                data_id="field01_input03"
-                data_value="field01_input03_value"
-                data_name="field01_input_name"
+                data_id=""
+                data_value="3"
+                data_name="cleanliness"
               />
               <RadioInput
-                data_id="field01_input04"
-                data_value="field01_input04_value"
-                data_name="field01_input_name"
+                data_id=""
+                data_value="4"
+                data_name="cleanliness"
               />
               <RadioInput
-                data_id="field01_input05"
-                data_value="field01_input05_value"
-                data_name="field01_input_name"
-              />
-            </ InputGroupWrapper>
-          </ FieldWrapper >
-
-
-
-          < FieldWrapper data_id="field02" >
-            < FieldLabel
-              data_width="47.5%"
-              data_htmlFor={"field02_input_name"}
-            >
-              Smell <sup>&nbsp;(i)</sup>
-            </ FieldLabel >
-            < InputGroupWrapper
-              data_id={"field02_inputs"}
-              data_width="52.5%"
-            >
-              <RadioInput
-                data_id="field02_input01"
-                data_value="field02_input01_value"
-                data_name="field02_input_name"
-              />
-              <RadioInput
-                data_id="field02_input02"
-                data_value="field02_input02_value"
-                data_name="field02_input_name"
-              />
-              <RadioInput
-                data_id="field02_input03"
-                data_value="field02_input03_value"
-                data_name="field02_input_name"
-              />
-              <RadioInput
-                data_id="field02_input04"
-                data_value="field02_input04_value"
-                data_name="field02_input_name"
-              />
-              <RadioInput
-                data_id="field02_input05"
-                data_value="field02_input05_value"
-                data_name="field02_input_name"
+                data_id=""
+                data_value="5"
+                data_name="cleanliness"
               />
             </ InputGroupWrapper>
           </ FieldWrapper >
 
 
-          < FieldWrapper data_id="field03" >
+
+          < FieldWrapper >
             < FieldLabel
               data_width="47.5%"
-              data_htmlFor={"field03_input_name"}
+              data_htmlFor="smell"
             >
-              Privacy <sup>&nbsp;(i)</sup>
+              Smell <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field03_inputs"}
               data_width="52.5%"
             >
               <RadioInput
-                data_id="field03_input01"
-                data_value="field03_input01_value"
-                data_name="field03_input_name"
+                data_id=""
+                data_value="1"
+                data_name="smell"
               />
               <RadioInput
-                data_id="field03_input02"
-                data_value="field03_input02_value"
-                data_name="field03_input_name"
+                data_id=""
+                data_value="2"
+                data_name="smell"
               />
               <RadioInput
-                data_id="field03_input03"
-                data_value="field03_input03_value"
-                data_name="field03_input_name"
+                data_id=""
+                data_value="3"
+                data_name="smell"
               />
               <RadioInput
-                data_id="field03_input04"
-                data_value="field03_input04_value"
-                data_name="field03_input_name"
+                data_id=""
+                data_value="4"
+                data_name="smell"
               />
               <RadioInput
-                data_id="field03_input05"
-                data_value="field03_input05_value"
-                data_name="field03_input_name"
+                data_id=""
+                data_value="5"
+                data_name="smell"
               />
             </ InputGroupWrapper>
           </ FieldWrapper >
 
 
-          < FieldWrapper data_id="field04" >
+          < FieldWrapper >
             < FieldLabel
               data_width="47.5%"
-              data_htmlFor={"field04_input_name"}
+              data_htmlFor="privacy"
             >
-              Comfort <sup>&nbsp;(i)</sup>
+              Privacy <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field04_inputs"}
               data_width="52.5%"
             >
               <RadioInput
-                data_id="field04_input01"
-                data_value="field04_input01_value"
-                data_name="field04_input_name"
+                data_id=""
+                data_value="1"
+                data_name="privacy"
               />
               <RadioInput
-                data_id="field04_input02"
-                data_value="field04_input02_value"
-                data_name="field04_input_name"
+                data_id=""
+                data_value="2"
+                data_name="privacy"
               />
               <RadioInput
-                data_id="field04_input03"
-                data_value="field04_input03_value"
-                data_name="field04_input_name"
+                data_id=""
+                data_value="3"
+                data_name="privacy"
               />
               <RadioInput
-                data_id="field04_input04"
-                data_value="field04_input04_value"
-                data_name="field04_input_name"
+                data_id=""
+                data_value="4"
+                data_name="privacy"
               />
               <RadioInput
-                data_id="field04_input05"
-                data_value="field04_input05_value"
-                data_name="field04_input_name"
+                data_id=""
+                data_value="5"
+                data_name="privacy"
               />
             </ InputGroupWrapper>
           </ FieldWrapper >
 
 
-          < FieldWrapper data_id="field05" >
+          < FieldWrapper >
             < FieldLabel
               data_width="47.5%"
-              data_htmlFor={"field05_input_name"}
+              data_htmlFor="comfort"
             >
-              Capacity / Size <sup>&nbsp;(i)</sup>
+              Comfort <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field05_inputs"}
               data_width="52.5%"
             >
               <RadioInput
-                data_id="field05_input01"
-                data_value="field05_input01_value"
-                data_name="field05_input_name"
+                data_id=""
+                data_value="1"
+                data_name="comfort"
               />
               <RadioInput
-                data_id="field05_input02"
-                data_value="field05_input02_value"
-                data_name="field05_input_name"
+                data_id=""
+                data_value="2"
+                data_name="comfort"
               />
               <RadioInput
-                data_id="field05_input03"
-                data_value="field05_input03_value"
-                data_name="field05_input_name"
+                data_id=""
+                data_value="3"
+                data_name="comfort"
               />
               <RadioInput
-                data_id="field05_input04"
-                data_value="field05_input04_value"
-                data_name="field05_input_name"
+                data_id=""
+                data_value="4"
+                data_name="comfort"
               />
               <RadioInput
-                data_id="field05_input05"
-                data_value="field05_input05_value"
-                data_name="field05_input_name"
+                data_id=""
+                data_value="5"
+                data_name="comfort"
               />
             </ InputGroupWrapper>
           </ FieldWrapper >
 
-          < FieldWrapper data_id="field06" >
+
+          < FieldWrapper >
             < FieldLabel
               data_width="47.5%"
-              data_htmlFor={"field06_input_name"}
+              data_htmlFor="capacity"
             >
-              Perceived Safety <sup>&nbsp;(i)</sup>
+              Capacity / Size <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field06_inputs"}
               data_width="52.5%"
             >
               <RadioInput
-                data_id="field06_input01"
-                data_value="field06_input01_value"
-                data_name="field06_input_name"
+                data_id=""
+                data_value="1"
+                data_name="capacity"
               />
               <RadioInput
-                data_id="field06_input02"
-                data_value="field06_input02_value"
-                data_name="field06_input_name"
+                data_id=""
+                data_value="2"
+                data_name="capacity"
               />
               <RadioInput
-                data_id="field06_input03"
-                data_value="field06_input03_value"
-                data_name="field06_input_name"
+                data_id=""
+                data_value="3"
+                data_name="capacity"
               />
               <RadioInput
-                data_id="field06_input04"
-                data_value="field06_input04_value"
-                data_name="field06_input_name"
+                data_id=""
+                data_value="4"
+                data_name="capacity"
               />
               <RadioInput
-                data_id="field06_input05"
-                data_value="field06_input05_value"
-                data_name="field06_input_name"
+                data_id=""
+                data_value="5"
+                data_name="capacity"
               />
             </ InputGroupWrapper>
           </ FieldWrapper >
 
-          < FieldWrapper data_id="field07" >
+          < FieldWrapper >
             < FieldLabel
               data_width="47.5%"
-              data_htmlFor={"field07_input_name"}
+              data_htmlFor="safety"
             >
-              Style / Poshness <sup>&nbsp;(i)</sup>
+              Perceived Safety <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
-              data_id={"field07_inputs"}
               data_width="52.5%"
             >
               <RadioInput
-                data_id="field07_input01"
-                data_value="field07_input01_value"
-                data_name="field07_input_name"
+                data_id=""
+                data_value="1"
+                data_name="safety"
               />
               <RadioInput
-                data_id="field07_input02"
-                data_value="field07_input02_value"
-                data_name="field07_input_name"
+                data_id=""
+                data_value="2"
+                data_name="safety"
               />
               <RadioInput
-                data_id="field07_input03"
-                data_value="field07_input03_value"
-                data_name="field07_input_name"
+                data_id=""
+                data_value="3"
+                data_name="safety"
               />
               <RadioInput
-                data_id="field07_input04"
-                data_value="field07_input04_value"
-                data_name="field07_input_name"
+                data_id=""
+                data_value="4"
+                data_name="safety"
               />
               <RadioInput
-                data_id="field07_input05"
-                data_value="field07_input05_value"
-                data_name="field07_input_name"
+                data_id=""
+                data_value="5"
+                data_name="safety"
+              />
+            </ InputGroupWrapper>
+          </ FieldWrapper >
+
+          < FieldWrapper >
+            < FieldLabel
+              data_width="47.5%"
+              data_htmlFor="style"
+            >
+              Style / Poshness <sup><sup>&nbsp;(i)</sup></sup>
+            </ FieldLabel >
+            < InputGroupWrapper
+              data_width="52.5%"
+            >
+              <RadioInput
+                data_id=""
+                data_value="1"
+                data_name="style"
+              />
+              <RadioInput
+                data_id=""
+                data_value="2"
+                data_name="style"
+              />
+              <RadioInput
+                data_id=""
+                data_value="3"
+                data_name="style"
+              />
+              <RadioInput
+                data_id=""
+                data_value="4"
+                data_name="style"
+              />
+              <RadioInput
+                data_id=""
+                data_value="5"
+                data_name="style"
               />
             </ InputGroupWrapper>
           </ FieldWrapper >

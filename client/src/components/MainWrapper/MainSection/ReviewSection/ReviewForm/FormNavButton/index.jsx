@@ -10,12 +10,12 @@ export class FormNavButton extends Component {
     e.preventDefault();
     console.log();
     this.props.formNext();
-    console.log("entry props: ", this.props.formValue)
+    // console.log("entry props: ", this.props.formValue)
   }
 
   prevStep = (e) => {
     e.preventDefault();
-    console.log();
+    // console.log();
     this.props.formPrev();
   }
 

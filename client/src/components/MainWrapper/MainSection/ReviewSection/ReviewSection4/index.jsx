@@ -124,14 +124,14 @@ export class ReviewSection4 extends Component {
             // justifyContent: "space-evenly"
           }}>
           <FormNavButton
-            data_text="Back"
-            data_classes="bg-primary-invert-outline"
-            func_navcommand="prev"
-          />
-          <FormNavButton
             data_text="Finish"
             data_classes="bg-primary-invert"
             func_navcommand="next"
+          />          
+          <FormNavButton
+            data_text="Back"
+            data_classes="bg-primary-invert-outline"
+            func_navcommand="prev"
           />
         </div>
 
