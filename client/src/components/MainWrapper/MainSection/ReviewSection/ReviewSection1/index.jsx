@@ -158,19 +158,19 @@ export class ReviewSection1 extends Component {
             < FieldLabel
               data_htmlFor="outOfOrder"
               data_width="47.5%"
-              data_bgcolor="red"
+              // data_bgcolor="red"
             >
               Out-of-Order <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
-              data_bgcolor="blue"
+              // data_bgcolor="blue"
             >
               <CheckInput
                 data_id="outOfOrder"
                 data_name="outOfOrder"
                 data_value="yes"
-                data_bgcolor="orange"
+                // data_bgcolor="orange"
               />
             </ InputGroupWrapper >
           </ FieldWrapper >

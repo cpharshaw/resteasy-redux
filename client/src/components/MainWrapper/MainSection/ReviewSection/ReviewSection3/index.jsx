@@ -93,7 +93,7 @@ export class ReviewSection3 extends Component {
               data_width="37%"
             >
               <CheckInput
-                data_id=""
+                data_id="handicapped"
                 data_value="yes"
                 data_name="handicapped"
               />
@@ -111,7 +111,7 @@ export class ReviewSection3 extends Component {
               data_width="37%"
             >
               <CheckInput
-                data_id=""
+                data_id="genderNeutral"
                 data_value="yes"
                 data_name="genderNeutral"
               />
@@ -129,7 +129,7 @@ export class ReviewSection3 extends Component {
               data_width="37%"
             >
               <CheckInput
-                data_id=""
+                data_id="babyChange"
                 data_value="yes"
                 data_name="babyChange"
               />
@@ -147,7 +147,7 @@ export class ReviewSection3 extends Component {
               data_width="37%"
             >
               <CheckInput
-                data_id=""
+                data_id="schedule"
                 data_value="ys"
                 data_name="schedule"
               />
@@ -164,7 +164,7 @@ export class ReviewSection3 extends Component {
               Admission <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             <SelectBox
-              data_id=""
+              data_id="admission"
               data_name="admission"
               data_defaultvalue="¿Gratis o no?"
               data_width="37%"

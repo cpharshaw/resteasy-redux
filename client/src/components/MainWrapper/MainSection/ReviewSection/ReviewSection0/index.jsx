@@ -10,7 +10,7 @@ export class ReviewSection0 extends Component {
   nextStep = () => {
     console.log();
     this.props.formNext();
-    console.log("entry props: ", this.props.formValue)
+    // console.log("entry props: ", this.props.formValue)
   }
 
   prevStep = () => {
@@ -23,7 +23,12 @@ export class ReviewSection0 extends Component {
 
 
     return (
-      < div className="rs" style={{ flexDirection: "column" }}>
+      < div
+        className="rs"
+        style={{
+          flexDirection: "column"
+        }}
+      >
         <button
           onClick={this.nextStep}
           className="rs button bg-primary text-white"

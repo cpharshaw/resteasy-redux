@@ -93,27 +93,22 @@ export class ReviewSection2 extends Component {
             >
               {/* TODO - create a loop to create input fields using array of names */}
               <RadioInput
-                data_id=""
                 data_value="1"
                 data_name="cleanliness"
               />
               <RadioInput
-                data_id=""
                 data_value="2"
                 data_name="cleanliness"
               />
               <RadioInput
-                data_id=""
                 data_value="3"
                 data_name="cleanliness"
               />
               <RadioInput
-                data_id=""
                 data_value="4"
                 data_name="cleanliness"
               />
               <RadioInput
-                data_id=""
                 data_value="5"
                 data_name="cleanliness"
               />
@@ -133,27 +128,22 @@ export class ReviewSection2 extends Component {
               data_width="52.5%"
             >
               <RadioInput
-                data_id=""
                 data_value="1"
                 data_name="smell"
               />
               <RadioInput
-                data_id=""
                 data_value="2"
                 data_name="smell"
               />
               <RadioInput
-                data_id=""
                 data_value="3"
                 data_name="smell"
               />
               <RadioInput
-                data_id=""
                 data_value="4"
                 data_name="smell"
               />
               <RadioInput
-                data_id=""
                 data_value="5"
                 data_name="smell"
               />
@@ -172,27 +162,22 @@ export class ReviewSection2 extends Component {
               data_width="52.5%"
             >
               <RadioInput
-                data_id=""
                 data_value="1"
                 data_name="privacy"
               />
               <RadioInput
-                data_id=""
                 data_value="2"
                 data_name="privacy"
               />
               <RadioInput
-                data_id=""
                 data_value="3"
                 data_name="privacy"
               />
               <RadioInput
-                data_id=""
                 data_value="4"
                 data_name="privacy"
               />
               <RadioInput
-                data_id=""
                 data_value="5"
                 data_name="privacy"
               />
@@ -211,27 +196,22 @@ export class ReviewSection2 extends Component {
               data_width="52.5%"
             >
               <RadioInput
-                data_id=""
                 data_value="1"
                 data_name="comfort"
               />
               <RadioInput
-                data_id=""
                 data_value="2"
                 data_name="comfort"
               />
               <RadioInput
-                data_id=""
                 data_value="3"
                 data_name="comfort"
               />
               <RadioInput
-                data_id=""
                 data_value="4"
                 data_name="comfort"
               />
               <RadioInput
-                data_id=""
                 data_value="5"
                 data_name="comfort"
               />
@@ -250,27 +230,22 @@ export class ReviewSection2 extends Component {
               data_width="52.5%"
             >
               <RadioInput
-                data_id=""
                 data_value="1"
                 data_name="capacity"
               />
               <RadioInput
-                data_id=""
                 data_value="2"
                 data_name="capacity"
               />
               <RadioInput
-                data_id=""
                 data_value="3"
                 data_name="capacity"
               />
               <RadioInput
-                data_id=""
                 data_value="4"
                 data_name="capacity"
               />
               <RadioInput
-                data_id=""
                 data_value="5"
                 data_name="capacity"
               />
@@ -288,27 +263,22 @@ export class ReviewSection2 extends Component {
               data_width="52.5%"
             >
               <RadioInput
-                data_id=""
                 data_value="1"
                 data_name="safety"
               />
               <RadioInput
-                data_id=""
                 data_value="2"
                 data_name="safety"
               />
               <RadioInput
-                data_id=""
                 data_value="3"
                 data_name="safety"
               />
               <RadioInput
-                data_id=""
                 data_value="4"
                 data_name="safety"
               />
               <RadioInput
-                data_id=""
                 data_value="5"
                 data_name="safety"
               />
@@ -326,27 +296,22 @@ export class ReviewSection2 extends Component {
               data_width="52.5%"
             >
               <RadioInput
-                data_id=""
                 data_value="1"
                 data_name="style"
               />
               <RadioInput
-                data_id=""
                 data_value="2"
                 data_name="style"
               />
               <RadioInput
-                data_id=""
                 data_value="3"
                 data_name="style"
               />
               <RadioInput
-                data_id=""
                 data_value="4"
                 data_name="style"
               />
               <RadioInput
-                data_id=""
                 data_value="5"
                 data_name="style"
               />
