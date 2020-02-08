@@ -27,7 +27,7 @@ export class MainSection extends Component {
       <div
         className="rs"
         style={{
-          height: "calc(100vh - 42px)",
+          height: "calc(100vh - 50px)",
           // zIndex: "12"
         }}
       >

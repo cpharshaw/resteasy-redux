@@ -25,15 +25,15 @@ import ReviewSection7 from './ReviewSection7'; // failure
 export class ReviewSection extends Component {
   constructor(props) {
     super(props);
-    this.admissionSelected.bind(this);
-    this.handleChange.bind(this);
+    // this.handleChange.bind(this);
     this.state = {
-      
+
       // page1
-      restroomType: null,
-      locationNotes: null,
-      timeOfVisit: null,
-      outOfOrder: null,
+      location: null,
+      restroomType: "Restroom type...",
+      locationNotes: "",
+      timeOfVisit: "Time of day...",
+      outOfOrder: false,
 
       //page 2
       cleanliness: null,
@@ -45,62 +45,58 @@ export class ReviewSection extends Component {
       style: null,
 
       //page 3
-      handicapped: null,
-      genderNeutral: null,
-      babyChange: null,
-      schedule: null,
-      admission: null,
-      feeDisplay: "none",
-      fee: null,
+      handicapped: false,
+      genderNeutral: false,
+      babyChange: false,
+      schedule: false,
+      admission: "¿Gratis o no?",
+      feeDisplay: "hidden",
+      fee: "",
 
       //page 4
+      photos: [],
 
+      //page 5
+      comments: null
     }
   }
 
 
-  componentDidUpdate() {
-    const fee = document.getElementById("feeInput");
-    if (fee) {
-      fee.focus();
-    }
-  }
+  handleChange = (e, displayVal) => {
+    const target = e.target;
+    const name = target.name;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
 
-
-  handleChange = input => e => {
     this.setState({
-      [input]: e.target.value
+      [name]: value
     });
 
-    console.log(this.state)
+    if (name === "admission") this.setState({ feeDisplay: displayVal });
+
+    if (name === "admission") console.log("test log: ", name, value, target.value, displayVal);
+    if (name !== "admission") console.log("test log: ", name, value, target.value);
   };
 
-  admissionSelected(e) {
 
-    const cost = e.target.value
 
-    if (cost === "Fee...") {
-
-      this.setState({
-        feeDisplay: "flex"
-      });
-
-    } else {
-
-      this.setState({
-        feeDisplay: "none"
-      });
-
-    }
-
-  }
 
 
   render() {
 
     const { selectedSectionValue } = this.props;
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
-    // console.log(this.props.formValue);
+
+    const { location, restroomType, locationNotes, timeOfVisit, outOfOrder } = this.state;
+    const { cleanliness, smell, privacy, comfort, capacity, safety, style } = this.state;
+    const { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee } = this.state;
+    const { photos } = this.state;
+    const { comments } = this.state;
+
+    const page1Values = { location, restroomType, locationNotes, timeOfVisit, outOfOrder };
+    const page2Values = { cleanliness, smell, privacy, comfort, capacity, safety, style };
+    const page3Values = { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee };
+    const page4Values = { photos };
+    const page5Values = { comments };
 
     return (
       <form
@@ -110,14 +106,14 @@ export class ReviewSection extends Component {
         }}
       >
         {
-          this.props.formValue === 0 ? < ReviewSection0 func_handlechange={e => this.handleChange(e)} /> :
-            this.props.formValue === 1 ? < ReviewSection1 func_handlechange={e => this.handleChange(e)} /> :
-              this.props.formValue === 2 ? < ReviewSection2 func_handlechange={e => this.handleChange(e)} /> :
-                this.props.formValue === 3 ? < ReviewSection3 func_handlechange={e => this.handleChange(e)} /> :
-                  this.props.formValue === 4 ? < ReviewSection4 func_handlechange={e => this.handleChange(e)} /> :
-                    this.props.formValue === 5 ? < ReviewSection5 func_handlechange={e => this.handleChange(e)} /> :
-                      this.props.formValue === 6 ? < ReviewSection6 func_handlechange={e => this.handleChange(e)} /> :
-                        this.props.formValue === 7 ? < ReviewSection7 func_handlechange={e => this.handleChange(e)} /> :
+          this.props.formValue === 0 ? < ReviewSection0 func_handlechange={this.handleChange} data_values={"nothing"} /> :
+            this.props.formValue === 1 ? < ReviewSection1 func_handlechange={this.handleChange} data_values={page1Values} /> :
+              this.props.formValue === 2 ? < ReviewSection2 func_handlechange={this.handleChange} data_values={page2Values} /> :
+                this.props.formValue === 3 ? < ReviewSection3 func_handlechange={this.handleChange} data_values={page3Values} /> :
+                  this.props.formValue === 4 ? < ReviewSection4 func_handlechange={this.handleChange} data_values={page4Values} /> :
+                    this.props.formValue === 5 ? < ReviewSection5 func_handlechange={this.handleChange} data_values={page5Values} /> :
+                      this.props.formValue === 6 ? < ReviewSection6 func_handlechange={this.handleChange} data_values={"test"} /> :
+                        this.props.formValue === 7 ? < ReviewSection7 func_handlechange={this.handleChange} data_values={"test"} /> :
                           <div className="rs" />
         }
       </form >

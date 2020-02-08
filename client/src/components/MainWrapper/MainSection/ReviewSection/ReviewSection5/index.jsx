@@ -16,6 +16,8 @@ import { formNext } from '../../../../../store/actions/formActions';
 import { formPrev } from '../../../../../store/actions/formActions';
 
 export class ReviewSection5 extends Component {
+
+
   render() {
     return (
 
@@ -24,26 +26,52 @@ export class ReviewSection5 extends Component {
         data_padding="20px 5px 13px 5px"
       // data_bgcolor="red"
       >
-        ReviewSection5
+         <HorizontalRule />
+
+          < FieldWrapper
+            data_id="field08"
+            data_flexdirection="column"
+            data_margin="15px 0 0 0"
+          >
+
+            < FieldLabel
+              data_htmlFor={"field08_input_name"}
+              data_height="30px"
+            >
+              Comments<sup>&nbsp;(i)</sup>
+            </FieldLabel>
+
+            <textarea
+              className="rs"
+              style={{
+                maxHeight: "110px",
+                border: "0.5px dotted lightgrey",
+                padding: "10px",
+                textAlignLast: "left",
+                textAlign: "left"
+              }}
+              placeholder="Write your comments here.."
+            />
+          </ FieldWrapper>
+
         <div
           className="rs"
           style={{
+            // position: "absolute",
             height: "50px",
-            flexDirection: "column"
+            // padding: "8px",
+            // justifyContent: "space-evenly"
           }}>
           <FormNavButton
-            data_text="Submit"
-            data_classes="bg-grey-outline text-grey"
-            // data_textcolor="#f5f5f5"
+            data_text="Finish"
+            data_classes="bg-primary-invert"
             func_navcommand="next"
-          />
+          />          
           <FormNavButton
             data_text="Back"
             data_classes="bg-primary-invert-outline"
-            // data_borderradius="15px 0 0 15px"
             func_navcommand="prev"
           />
-
         </div>
 
       </FormChunk >

@@ -7,9 +7,10 @@ export class RadioInput extends Component {
     const {
       data_htmlFor,
       data_id,
-      data_name,
       data_value,
-      func_changeHandler,
+      data_name,
+      data_checked,
+      func_handlechange,
       data_className,
       children
     } = this.props;
@@ -18,9 +19,10 @@ export class RadioInput extends Component {
 
       <input
         id={data_id}
-        className="rs"
         value={data_value}
-        onChange={func_changeHandler}
+        className="rs"
+        checked={data_checked ? data_checked : false}
+        onChange={func_handlechange}
         name={data_name}
         type="radio"
         style={{

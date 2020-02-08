@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 
 export class SelectBox extends Component {
+
+
+
   render() {
 
     const {
@@ -17,18 +20,21 @@ export class SelectBox extends Component {
       data_height,
       data_color,
       data_fontstyle,
-      data_defaultvalue,
-      func_input,
+      data_value,
+      func_handlechange,
       children
     } = this.props;
+
+    // func_handlechange();
+
 
     return (
       <select
         id={data_id}
         className="rs"
         name={data_name ? data_name : null}
-        defaultValue={data_defaultvalue ? data_defaultvalue : "[ENTER_A_DEFAULT_VALUE]"}
-        onInput={func_input}
+        defaultValue={data_value}
+        onChange={func_handlechange}
         style={{
           width: data_width ? data_width : null,
           height: data_height ? data_height : null,

@@ -80,6 +80,7 @@ export class PhotoUpload extends Component {
                 height: "auto",
                 margin: "0 8px 0 8px",
                 flexWrap: "wrap",
+                alignSelf: "flex-start",
                 // background: "grey"
               }}
             >
@@ -93,7 +94,7 @@ export class PhotoUpload extends Component {
                   maxWidth: "120px",
                   height: "inherit",
                   maxHeight: "180px",
-                  alignSelf: "center",
+                  // alignSelf: "flex-start",
                   flexWrap: "wrap",
                   borderRadius: "10px"
                 }}
@@ -275,6 +276,7 @@ export class PhotoUpload extends Component {
               flexDirection: "row",
               margin: "10px 0 0 0",
               flexWrap: 'wrap',
+              // alignContent: "flex-start",
               // backgroundImage: this.state.imgElementArr.length < 1 ? "linear-gradient(to bottom right, rgba(211,211,211,.75), rgba(245,245,245,.45))" : null,
               width: this.state.imgElementArr.length < 1 ? "225px" : null,
               height: this.state.imgElementArr.length < 1 ? "145px" : null,
@@ -283,17 +285,23 @@ export class PhotoUpload extends Component {
             }}>
             {
               this.state.imgElementArr.length > 0 ?
-                this.state.imgElementArr
+                <div
+                  id="uploadedPhotos"
+                  className="rs"
+                  style={{ alignContent: "flex-start" }}
+                >
+                  {this.state.imgElementArr}
+                </div>
                 :
                 <em>
                   <span
                     style={{
                       color: "grey",
                       fontWeight: "100",
-                      fontSize: "14px"
+                      fontSize: "14px",
                     }}
                   >
-                    Submit up to two photos
+                    Submit up to <span style={{ fontWeight: "900", color: "#4c4c4c" }}>two</span> photos
                   </span>
                 </em>
             }

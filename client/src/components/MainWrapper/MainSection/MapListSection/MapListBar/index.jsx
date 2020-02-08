@@ -85,7 +85,13 @@ export class MapListBar extends Component {
         </div>
 
 
-        <div id="mapListScrollbar" className="rs">
+        <div 
+          id="mapListScrollbar" 
+          className="rs" 
+          style={{
+            height: "30px"
+          }}
+        >
           <div className="spacer-div" >&nbsp;</div>
           <button className="rs bg-primary-xlight filter-toggle">
             <em>Family-friendly</em>

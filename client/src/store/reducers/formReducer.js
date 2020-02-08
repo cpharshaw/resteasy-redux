@@ -1,5 +1,5 @@
 const initState = {
-  formValue: 4
+  formValue: 1
 }
 
 const formReducer = (state = initState, action) => {

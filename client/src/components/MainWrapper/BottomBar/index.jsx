@@ -24,7 +24,7 @@ export class BottomBar extends Component {
       <div
         className="rs bg-primary"
         style={{
-          height: "42px",
+          height: "50px",
         }}
       >
         <button
@@ -32,13 +32,16 @@ export class BottomBar extends Component {
           onClick={e => this.selectSection(e)}
           style={{
             width: "33.33333%",
+            // background: "blue",
+            margin: "0 auto"
           }}
+          
           value="review"
         >
           <svg
             className=""
             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-            width="30" height="30"
+            width="35.7px" height="35.7px"
             viewBox="0 0 172 172"
             style={{ fill: "#f5f5f5", height: "auto", width: "auto" }}>
             <g
@@ -59,8 +62,9 @@ export class BottomBar extends Component {
           className="rs div-button"
           onClick={e => this.selectSection(e)}
           style={{
-            // background: "inherit",
+            // background: "orange",
             width: "33.33334%",
+            margin: "0 auto"
             // boxShadow: "0 1px 4px rgba(0, 0, 0, 0.6) inset"
           }}
           value="mapList"
@@ -68,9 +72,9 @@ export class BottomBar extends Component {
           <svg
             className=""
             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-            width="32" height="32"
+            width="38px" height="38px"
             viewBox="0 0 172 172"
-            style={{ fill: "#f5f5f5", height: "auto", width: "auto", color: "#f5f5f5" }}>
+            style={{ marginLeft: "7px", fill: "#f5f5f5", height: "auto", width: "auto", color: "#f5f5f5" }}>
             <g
               fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none"
               style={{ mixBlendMode: "normal" }}
@@ -88,8 +92,9 @@ export class BottomBar extends Component {
           className="rs div-button"
           onClick={e => this.selectSection(e)}
           style={{
-            // background: "inherit",
+            // background: "red",
             width: "33.33333%",
+            margin: "0 auto"
             // boxShadow: "0 1px 4px rgba(0, 0, 0, 0.6) inset"
           }}
           value="myStuff"
@@ -97,7 +102,7 @@ export class BottomBar extends Component {
           <svg
             className=""
             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-            width="32" height="32"
+            width="38px" height="38px"
             viewBox="0 0 172 172"
             style={{ fill: "#f5f5f5", height: "auto", width: "auto", borderRadius: "50%" }}>
             <g

@@ -17,7 +17,7 @@ export class TextInput extends Component {
       data_step,
       data_className,
       data_placeholder,
-      func_changeHandler,
+      func_handlechange,
       data_bgcolor,
       data_fontcolor,
       data_fontsize,
@@ -34,10 +34,11 @@ export class TextInput extends Component {
         name={data_name}
         type={data_type ? data_type : "text"}
         placeholder={data_placeholder}
-        onChange={func_changeHandler}
+        onChange={func_handlechange}
         min={data_min ? data_min : "0"}
         max={data_max ? data_max : "999.99"}
         step={data_step ? data_step : "0.05"}
+        value={data_value}
         style={{
           width: data_width ? data_width : null,
           textAlign: data_textalign ? data_textalign : null,

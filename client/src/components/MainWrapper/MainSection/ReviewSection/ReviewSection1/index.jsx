@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import FieldWrapper from '../ReviewForm/FieldWrapper';
 import FieldLabel from '../ReviewForm/FieldLabel';
 import SelectBox from '../ReviewForm/SelectBox';
-import SelectOption from '../ReviewForm/SelectBox/SelectOption';
 import RadioInput from '../ReviewForm/RadioInput';
 import CheckInput from '../ReviewForm/CheckInput';
 import TextInput from '../ReviewForm/TextInput';
@@ -21,13 +20,6 @@ import { formPrev } from '../../../../../store/actions/formActions';
 
 
 export class ReviewSection1 extends Component {
-  constructor(props) {
-    super(props);
-    this.admissionSelected.bind(this);
-    this.state = {
-      feeDisplay: "none"
-    }
-  }
 
   nextStep = () => {
     console.log();
@@ -41,36 +33,16 @@ export class ReviewSection1 extends Component {
   }
 
 
-  componentDidUpdate() {
-    const fee = document.getElementById("feeInput");
-    if (fee) {
-      fee.focus();
-    }
-  }
-
-
-  admissionSelected(e) {
-
-    const cost = e.target.value
-
-    if (cost === "Fee...") {
-
-      this.setState({
-        feeDisplay: "flex"
-      });
-
-    } else {
-
-      this.setState({
-        feeDisplay: "none"
-      });
-
-    }
-
-  }
-
-
   render() {
+
+    const {
+      func_handlechange,
+      data_values
+    } = this.props;
+
+    const { restroomType, locationNotes, timeOfVisit, outOfOrder } = data_values;
+
+    // console.log(data_values);
 
     return (
       <FormChunk
@@ -101,8 +73,9 @@ export class ReviewSection1 extends Component {
             <SelectBox
               data_id="restroomType"
               data_name="restroomType"
-              data_defaultvalue="Restroom type..."
               data_width="52.5%"
+              func_handlechange={func_handlechange}
+              data_value={restroomType}
             >
               <option value="Restroom type..." disabled>Restroom type...</option>
               <option value="Men's">Men's</option>
@@ -124,6 +97,8 @@ export class ReviewSection1 extends Component {
               data_width="52.5%"
               data_justify="flex-start"
               data_placeholder="'third floor restroom'"
+              data_value={locationNotes}
+              func_handlechange={func_handlechange}
             />
           </ FieldWrapper >
 
@@ -138,8 +113,9 @@ export class ReviewSection1 extends Component {
             <SelectBox
               data_id="timeOfVisit"
               data_name="timeOfVisit"
-              data_defaultvalue="Time of day..."
+              data_value={timeOfVisit}
               data_width="52.5%"
+              func_handlechange={func_handlechange}
             >
               <option value="Time of day..." disabled>Time of day...</option>
               <option value="Morning">(Just now)</option>
@@ -158,19 +134,20 @@ export class ReviewSection1 extends Component {
             < FieldLabel
               data_htmlFor="outOfOrder"
               data_width="47.5%"
-              // data_bgcolor="red"
+            // data_bgcolor="red"
             >
               Out-of-Order <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
-              // data_bgcolor="blue"
+            // data_bgcolor="blue"
             >
               <CheckInput
                 data_id="outOfOrder"
                 data_name="outOfOrder"
-                data_value="yes"
-                // data_bgcolor="orange"
+                data_value={outOfOrder}
+                func_handlechange={func_handlechange}
+              // data_bgcolor="orange"
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -210,6 +187,8 @@ const mapStateToProps = (state, ownProps) => {
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
     formValue: state.formState.formValue,
+    func_handlechange: ownProps.func_handlechange,
+    data_values: ownProps.data_values,
     selectedSectionValue: ownProps.display
   }
 }

@@ -25,7 +25,7 @@ export class FieldWrapper extends Component {
         id={data_id}
         className="rs"
         style={{
-          // display: data_display === "none" ? data_display : null,
+          // display: data_visibility === "none" ? data_display : null,
           visibility: data_visibility ? data_visibility : null,
           width: data_width ? data_width : null,
           flexDirection: data_flexdirection ? data_flexdirection : null,

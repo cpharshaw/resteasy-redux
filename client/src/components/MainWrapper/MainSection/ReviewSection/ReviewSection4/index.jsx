@@ -19,7 +19,6 @@ import { formPrev } from '../../../../../store/actions/formActions';
 export class ReviewSection4 extends Component {
   constructor(props) {
     super(props);
-    this.admissionSelected.bind(this);
     this.state = {
       feeDisplay: "none"
     }
@@ -36,34 +35,6 @@ export class ReviewSection4 extends Component {
     this.props.formPrev();
   }
 
-
-  componentDidUpdate() {
-    const fee = document.getElementById("feeInput");
-    if (fee) {
-      fee.focus();
-    }
-  }
-
-
-  admissionSelected(e) {
-
-    const cost = e.target.value
-
-    if (cost === "Fee...") {
-
-      this.setState({
-        feeDisplay: "flex"
-      });
-
-    } else {
-
-      this.setState({
-        feeDisplay: "none"
-      });
-
-    }
-
-  }
 
 
   render() {
@@ -85,53 +56,23 @@ export class ReviewSection4 extends Component {
 
           <br />
 
-          {/* <HorizontalRule /> */}
-
-          {/* < FieldWrapper
-            data_id="field08"
-            data_flexdirection="column"
-            data_margin="15px 0 0 0"
-          >
-
-            < FieldLabel
-              data_htmlFor={"field08_input_name"}
-              data_height="30px"
-            >
-              Comments<sup>&nbsp;(i)</sup>
-            </FieldLabel>
-
-            <textarea
-              className="rs"
-              style={{
-                maxHeight: "110px",
-                border: "0.5px dotted lightgrey",
-                padding: "10px",
-                textAlignLast: "left",
-                textAlign: "left"
-              }}
-              placeholder="Write your comments here.."
-            />
-          </ FieldWrapper> */}
-
+         
         </FormFieldGroup>
 
         <div
           className="rs"
           style={{
-            // position: "absolute",
             height: "50px",
-            // padding: "8px",
-            // justifyContent: "space-evenly"
           }}>
-          <FormNavButton
-            data_text="Finish"
-            data_classes="bg-primary-invert"
-            func_navcommand="next"
-          />          
           <FormNavButton
             data_text="Back"
             data_classes="bg-primary-invert-outline"
             func_navcommand="prev"
+          />
+          <FormNavButton
+            data_text="Continue"
+            data_classes="bg-primary-invert"
+            func_navcommand="next"
           />
         </div>
 

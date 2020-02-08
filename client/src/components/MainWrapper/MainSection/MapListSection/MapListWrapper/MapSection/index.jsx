@@ -258,7 +258,7 @@ class MapSection extends Component {
             // boxShadow:  "0 -1px 7.5px rgba(0, 0, 0, .6)",
             // textShadow: "0 1px 4px rgba(0, 0, 0, .6)",
             // zIndex: "999",
-            height: "calc(100vh - 115px)",
+            height: "calc(100vh - 122px)",
             background: "red",
             zIndex:"9"
           }

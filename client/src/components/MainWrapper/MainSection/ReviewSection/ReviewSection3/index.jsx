@@ -21,15 +21,11 @@ export class ReviewSection3 extends Component {
   constructor(props) {
     super(props);
     this.admissionSelected.bind(this);
-    this.state = {
-      feeDisplay: "hidden"
-    }
   }
 
   nextStep = () => {
     console.log();
     this.props.formNext();
-    console.log("entry props: ", this.props.formValue)
   }
 
   prevStep = () => {
@@ -45,22 +41,15 @@ export class ReviewSection3 extends Component {
   }
 
 
+
   admissionSelected(e) {
 
-    const cost = e.target.value
+    const cost = e.target.value;
 
     if (cost === "Fee...") {
-
-      this.setState({
-        feeDisplay: "visible"
-      });
-
+      this.props.func_handlechange(e, "visible");
     } else {
-
-      this.setState({
-        feeDisplay: "hidden"
-      });
-
+      this.props.func_handlechange(e, "hidden");
     }
 
   }
@@ -69,7 +58,14 @@ export class ReviewSection3 extends Component {
   render() {
 
     const { selectedSectionValue } = this.props;
-    const displayValue = selectedSectionValue === "review" ? "flex" : "none";
+    const displayValue = selectedSectionValue === "review" ? "flex" : "`none`";
+
+    const {
+      func_handlechange,
+      data_values
+    } = this.props;
+
+    const { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee } = data_values;
 
     return (
       <FormChunk
@@ -94,8 +90,9 @@ export class ReviewSection3 extends Component {
             >
               <CheckInput
                 data_id="handicapped"
-                data_value="yes"
                 data_name="handicapped"
+                data_value={handicapped}
+                func_handlechange={func_handlechange}
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -112,8 +109,9 @@ export class ReviewSection3 extends Component {
             >
               <CheckInput
                 data_id="genderNeutral"
-                data_value="yes"
                 data_name="genderNeutral"
+                data_value={genderNeutral}
+                func_handlechange={func_handlechange}
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -130,8 +128,9 @@ export class ReviewSection3 extends Component {
             >
               <CheckInput
                 data_id="babyChange"
-                data_value="yes"
                 data_name="babyChange"
+                data_value={babyChange}
+                func_handlechange={func_handlechange}            
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -148,8 +147,9 @@ export class ReviewSection3 extends Component {
             >
               <CheckInput
                 data_id="schedule"
-                data_value="ys"
                 data_name="schedule"
+                data_value={schedule}
+                func_handlechange={func_handlechange}     
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -166,9 +166,10 @@ export class ReviewSection3 extends Component {
             <SelectBox
               data_id="admission"
               data_name="admission"
-              data_defaultvalue="¿Gratis o no?"
+              // data_defaultvalue="¿Gratis o no?"
               data_width="37%"
-              func_input={e => this.admissionSelected(e)}
+              func_handlechange={e => this.admissionSelected(e)}
+              data_value={admission}
             >
               <option disabled value="¿Gratis o no?" >¿Gratis o no? </option>
               <option          value="Free/Public"   >Free/Public   </option>
@@ -179,8 +180,9 @@ export class ReviewSection3 extends Component {
           </ FieldWrapper >
 
           < FieldWrapper
-            data_visibility={this.state.feeDisplay}
+            data_visibility={feeDisplay}
           >
+          {/* {console.log(feeDisplay)} */}
             < FieldLabel
               data_width="63%"
               data_htmlFor="fee"
@@ -189,10 +191,13 @@ export class ReviewSection3 extends Component {
             </ FieldLabel >
 
             <span style={{ fontSize: "12px" }}>$</span>
+
             <TextInput
               data_width="37%"
-              data_id=""
+              data_id="fee"
               data_name="fee"
+              data_value={fee}
+              func_handlechange={func_handlechange}
             />
           </ FieldWrapper >
 
@@ -234,6 +239,7 @@ const mapStateToProps = (state, ownProps) => {
     formValue: state.formState.formValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
+    data_values: ownProps.data_values,
     selectedSectionValue: ownProps.display
   }
 }
