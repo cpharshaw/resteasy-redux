@@ -26,7 +26,7 @@ export class ReviewSection5 extends Component {
         data_padding="20px 5px 13px 5px"
       // data_bgcolor="red"
       >
-         <HorizontalRule />
+         {/* <HorizontalRule /> */}
 
           < FieldWrapper
             data_id="field08"

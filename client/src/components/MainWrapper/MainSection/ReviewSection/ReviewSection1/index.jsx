@@ -118,7 +118,7 @@ export class ReviewSection1 extends Component {
               func_handlechange={func_handlechange}
             >
               <option value="Time of day..." disabled>Time of day...</option>
-              <option value="Morning">(Just now)</option>
+              <option value="Just Now">(Just now)</option>
               <option value="Morning">Morning</option>
               <option value="Midday">Midday</option>
               <option value="Afternoon">Late afternoon</option>

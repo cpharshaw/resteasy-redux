@@ -54,7 +54,7 @@ export class ReviewSection extends Component {
       fee: "",
 
       //page 4
-      photos: [],
+      imgElementArr: [],
 
       //page 5
       comments: null
@@ -62,20 +62,40 @@ export class ReviewSection extends Component {
   }
 
 
-  handleChange = (e, displayVal) => {
-    const target = e.target;
-    const name = target.name;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+  handleChange = (e, otherData) => {
 
-    this.setState({
-      [name]: value
-    });
+    if (e) {
+      const target = e.target;
+      const name = target.name;
+      const files = target.files;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
 
-    if (name === "admission") this.setState({ feeDisplay: displayVal });
+      this.setState({
+        [name]: value
+      });
 
-    if (name === "admission") console.log("test log: ", name, value, target.value, displayVal);
-    if (name !== "admission") console.log("test log: ", name, value, target.value);
+      if (name === "admission") this.setState({ feeDisplay: otherData });
+      if (name === "admission") console.log("test log: ", name, value, target.value, otherData);
+      if (name !== "admission") console.log("test log: ", name, value, target.value);
+    } else if (otherData) {
+
+      if (otherData[0] === "delete") {
+        this.setState({
+          imgElementArr: otherData[1]
+        });
+      }
+
+      if (otherData[0] === "add") {
+        this.setState({
+          imgElementArr: [...this.state.imgElementArr, ...otherData[1]]
+        });
+      }
+
+    }
+
+
   };
+
 
 
 
@@ -89,13 +109,13 @@ export class ReviewSection extends Component {
     const { location, restroomType, locationNotes, timeOfVisit, outOfOrder } = this.state;
     const { cleanliness, smell, privacy, comfort, capacity, safety, style } = this.state;
     const { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee } = this.state;
-    const { photos } = this.state;
+    const { imgElementArr } = this.state;
     const { comments } = this.state;
 
     const page1Values = { location, restroomType, locationNotes, timeOfVisit, outOfOrder };
     const page2Values = { cleanliness, smell, privacy, comfort, capacity, safety, style };
     const page3Values = { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee };
-    const page4Values = { photos };
+    const page4Values = { imgElementArr };
     const page5Values = { comments };
 
     return (

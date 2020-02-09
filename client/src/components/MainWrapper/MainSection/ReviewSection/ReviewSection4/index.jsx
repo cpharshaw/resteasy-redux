@@ -17,12 +17,6 @@ import { formPrev } from '../../../../../store/actions/formActions';
 
 
 export class ReviewSection4 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      feeDisplay: "none"
-    }
-  }
 
   nextStep = () => {
     console.log();
@@ -42,6 +36,7 @@ export class ReviewSection4 extends Component {
     const { selectedSectionValue } = this.props;
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
 
+
     return (
       <FormChunk
         className="rs"
@@ -52,11 +47,14 @@ export class ReviewSection4 extends Component {
           data_height="calc(100% - 75px)"
         >
 
-          < PhotoUpload />
+          < PhotoUpload 
+            func_handlechange={this.props.func_handlechange} 
+            data_values={this.props.data_values}
+          />
 
           <br />
 
-         
+
         </FormFieldGroup>
 
         <div
@@ -93,6 +91,8 @@ const mapStateToProps = (state, ownProps) => {
     formValue: state.formState.formValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
+    data_values: ownProps.data_values,
+    func_handlechange: ownProps.func_handlechange,
     selectedSectionValue: ownProps.display
   }
 }

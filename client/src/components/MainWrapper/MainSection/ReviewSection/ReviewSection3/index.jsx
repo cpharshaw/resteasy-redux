@@ -240,6 +240,7 @@ const mapStateToProps = (state, ownProps) => {
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
     data_values: ownProps.data_values,
+    func_handlechange: ownProps.func_handlechange,
     selectedSectionValue: ownProps.display
   }
 }

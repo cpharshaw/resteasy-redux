@@ -2,20 +2,10 @@ import React, { Component } from 'react'
 import FieldWrapper from '../FieldWrapper';
 import FieldLabel from '../FieldLabel';
 import HorizontalRule from '../HorizontalRule';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 export class PhotoUpload extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      imgSrcArr: [],
-      // imgElementArr: [<div key="fuckyouineedakey" style={{ height: "202px", width: "0.01px" }}> </div>],
-      imgElementArr: [],
-      test: null
-    }
-    // this.deletePhoto = this.deletePhoto.bind(this);
-
-  };
 
 
   buttonClick(e) {
@@ -28,25 +18,26 @@ export class PhotoUpload extends Component {
     document.getElementById("cameraUpload").click();
   }
 
-  deletePhoto(event) {
-    event.preventDefault();
-    const photoToDelete = event.currentTarget.name;
+  deletePhoto(e) {
+    const { imgElementArr } = this.props.data_values;
+    e.preventDefault();
+    const photoToDelete = e.currentTarget.name;
 
-    const newImgElementArr = this.state.imgElementArr.filter((photo, i, arr) => {
+    const newImgElementArr = imgElementArr.filter((photo, i, arr) => {
       const photoToCheck = photo.props.name;
       return photoToCheck !== photoToDelete;
-    })
+    });
 
     console.log("returned", newImgElementArr);
 
-    this.setState({
-      imgElementArr: newImgElementArr
-    })
+    this.props.func_handlechange(null, ["delete", newImgElementArr]);
+
   }
 
 
-  onChange(event) {
-    const files = event.target.files;
+  onChange(e) {
+    const files = e.target.files;
+
     const keys = Object.keys(files);
     const tempImgSrcArr = [];
     const tempImgElementArr = [];
@@ -141,10 +132,7 @@ export class PhotoUpload extends Component {
         tempImgElementArr.push(newImgElement());
 
         if (tempImgElementArr.length === keys.length) {
-          this.setState({
-            imgElementArr: [...this.state.imgElementArr, ...tempImgElementArr]
-          });
-          console.log("done!", this.state.imgElementArr);
+          this.props.func_handlechange(null, ["add", tempImgElementArr]);
         }
 
       };
@@ -160,6 +148,14 @@ export class PhotoUpload extends Component {
 
 
   render() {
+
+    const {
+      func_handlechange,
+      data_values
+    } = this.props;
+
+    const { imgElementArr } = data_values;
+
 
     return (
       <FieldWrapper
@@ -192,7 +188,7 @@ export class PhotoUpload extends Component {
             style={{
               // background: "grey",
               height: "64px",
-              visibility: this.state.imgElementArr.length >= 2 ? "hidden" : null,
+              visibility: imgElementArr.length >= 2 ? "hidden" : null,
               // margin: "0 auto"
             }}
           >
@@ -278,19 +274,19 @@ export class PhotoUpload extends Component {
               flexWrap: 'wrap',
               // alignContent: "flex-start",
               // backgroundImage: this.state.imgElementArr.length < 1 ? "linear-gradient(to bottom right, rgba(211,211,211,.75), rgba(245,245,245,.45))" : null,
-              width: this.state.imgElementArr.length < 1 ? "225px" : null,
-              height: this.state.imgElementArr.length < 1 ? "145px" : null,
-              border: this.state.imgElementArr.length < 1 ? "1.25px dashed grey" : null,
-              borderRadius: this.state.imgElementArr.length < 1 ? "5px" : null
+              width: imgElementArr.length < 1 ? "225px" : null,
+              height: imgElementArr.length < 1 ? "145px" : null,
+              border: imgElementArr.length < 1 ? "1.25px dashed grey" : null,
+              borderRadius: imgElementArr.length < 1 ? "5px" : null
             }}>
             {
-              this.state.imgElementArr.length > 0 ?
+              imgElementArr.length > 0 ?
                 <div
                   id="uploadedPhotos"
                   className="rs"
                   style={{ alignContent: "flex-start" }}
                 >
-                  {this.state.imgElementArr}
+                  {imgElementArr}
                 </div>
                 :
                 <em>
@@ -313,4 +309,25 @@ export class PhotoUpload extends Component {
   }
 }
 
-export default PhotoUpload;
+// export default PhotoUpload;
+
+
+const mapStateToProps = (state, ownProps) => {
+  // console.log("mainwrapper state: ", state);
+  return {
+    selectedSectionValue: state.mapListState.selectedSectionValue,
+    // geolocationValue: state.geolocationState.geolocationValue,
+    boundsValue: state.boundsState.boundsValue,
+    formValue: state.formState.formValue,
+    // reviews: state.firestore.ordered.reviews,
+    // auth: state.firebase.auth
+    data_values: ownProps.data_values,
+    func_handlechange: ownProps.func_handlechange,
+    selectedSectionValue: ownProps.display
+  }
+}
+
+
+export default compose(
+  connect(mapStateToProps, null)
+)(PhotoUpload);
