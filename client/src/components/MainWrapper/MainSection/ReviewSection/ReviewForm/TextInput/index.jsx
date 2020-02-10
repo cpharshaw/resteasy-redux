@@ -8,7 +8,6 @@ export class TextInput extends Component {
       data_htmlFor,
       data_id,
       data_name,
-      data_value,
       data_type,
       data_width,
       data_height,
@@ -17,11 +16,12 @@ export class TextInput extends Component {
       data_step,
       data_className,
       data_placeholder,
-      func_handlechange,
       data_bgcolor,
       data_fontcolor,
       data_fontsize,
       data_textalign,
+      data_value,
+      func_handlechange,      
       children
     } = this.props;
 
@@ -34,7 +34,7 @@ export class TextInput extends Component {
         name={data_name}
         type={data_type ? data_type : "text"}
         placeholder={data_placeholder}
-        onChange={func_handlechange}
+        onChange={e => func_handlechange(e)}
         min={data_min ? data_min : "0"}
         max={data_max ? data_max : "999.99"}
         step={data_step ? data_step : "0.05"}
@@ -46,7 +46,8 @@ export class TextInput extends Component {
           // borderBottom: "1px dotted lightgrey",
           backgroundColor: data_bgcolor ? data_bgcolor : null,
           color: data_fontcolor ? data_fontcolor : "grey",
-          fontSize: data_fontsize ? data_fontsize : "12px"
+          fontSize: data_fontsize ? data_fontsize : "14.5px",
+          fontStyle: "italic"
         }}
       />
     )

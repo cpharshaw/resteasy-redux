@@ -13,8 +13,17 @@ import FormFieldGroup from '../ReviewForm/FormFieldGroup';
 import HorizontalRule from '../ReviewForm/HorizontalRule';
 import PhotoUpload from '../ReviewForm/PhotoUpload';
 import FormChunk from '../ReviewForm/FormChunk';
-import { formNext } from '../../../../../store/actions/formActions';
-import { formPrev } from '../../../../../store/actions/formActions';
+import {
+  formNext,
+  formPrev,
+  locationChosen,
+  radioSelected,
+  checkboxClicked,
+  dropdownSelected,
+  textEntered,
+  feeChosen,
+  fileChosen
+} from '../../../../../store/actions/formActions';
 
 
 export class ReviewSection3 extends Component {
@@ -34,7 +43,7 @@ export class ReviewSection3 extends Component {
   }
 
   componentDidUpdate() {
-    const fee = document.getElementById("feeInput");
+    const fee = document.getElementById("formFeeValue");
     if (fee) {
       fee.focus();
     }
@@ -44,12 +53,18 @@ export class ReviewSection3 extends Component {
 
   admissionSelected(e) {
 
+    
+
+    this.props.dropdownSelected(e);
+
     const cost = e.target.value;
 
+    console.log("admission selected", cost)
+
     if (cost === "Fee...") {
-      this.props.func_handlechange(e, "visible");
+      this.props.feeChosen("visible");
     } else {
-      this.props.func_handlechange(e, "hidden");
+      this.props.feeChosen("hidden");
     }
 
   }
@@ -61,11 +76,26 @@ export class ReviewSection3 extends Component {
     const displayValue = selectedSectionValue === "review" ? "flex" : "`none`";
 
     const {
-      func_handlechange,
+      // func_handlechange,
       data_values
     } = this.props;
 
-    const { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee } = data_values;
+    const {
+      formHandicappedValue,
+      formGenderNeutralValue,
+      formBabyChangeValue,
+      formScheduleValue,
+      formAdmissionValue,
+      formFeeDisplayValue,
+      formFeeValue,
+      feeChosen,
+
+      dropdownSelected,
+      checkboxClicked,
+      textEntered,
+    } = this.props;
+
+    // const { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee } = data_values;
 
     return (
       <FormChunk
@@ -80,7 +110,7 @@ export class ReviewSection3 extends Component {
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor="handicapped"
+              data_htmlFor="formHandicappedValue"
               data_width="63%"
             >
               Handicapped accessible <sup><sup>&nbsp;(i)</sup></sup>
@@ -89,17 +119,17 @@ export class ReviewSection3 extends Component {
               data_width="37%"
             >
               <CheckInput
-                data_id="handicapped"
-                data_name="handicapped"
-                data_value={handicapped}
-                func_handlechange={func_handlechange}
+                data_id="formHandicappedValue"
+                data_name="formHandicappedValue"
+                data_value={formHandicappedValue}
+                func_handlechange={checkboxClicked}
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
 
           < FieldWrapper>
             < FieldLabel
-              data_htmlFor="genderNeutral"
+              data_htmlFor="formGenderNeutralValue"
               data_width="63%"
             >
               Gender neutral option <sup><sup>&nbsp;(i)</sup></sup>
@@ -108,17 +138,17 @@ export class ReviewSection3 extends Component {
               data_width="37%"
             >
               <CheckInput
-                data_id="genderNeutral"
-                data_name="genderNeutral"
-                data_value={genderNeutral}
-                func_handlechange={func_handlechange}
+                data_id="formGenderNeutralValue"
+                data_name="formGenderNeutralValue"
+                data_value={formGenderNeutralValue}
+                func_handlechange={checkboxClicked}
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
 
           < FieldWrapper>
             < FieldLabel
-              data_htmlFor="babyChange"
+              data_htmlFor="formBabyChangeValue"
               data_width="63%"
             >
               Baby changing station <sup><sup>&nbsp;(i)</sup></sup>
@@ -127,17 +157,17 @@ export class ReviewSection3 extends Component {
               data_width="37%"
             >
               <CheckInput
-                data_id="babyChange"
-                data_name="babyChange"
-                data_value={babyChange}
-                func_handlechange={func_handlechange}            
+                data_id="formBabyChangeValue"
+                data_name="formBabyChangeValue"
+                data_value={formBabyChangeValue}
+                func_handlechange={checkboxClicked}            
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor="schedule"
+              data_htmlFor="formScheduleValue"
               data_width="63%"
             >
               Cleaning schedule visible <sup><sup>&nbsp;(i)</sup></sup>
@@ -146,10 +176,10 @@ export class ReviewSection3 extends Component {
               data_width="37%"
             >
               <CheckInput
-                data_id="schedule"
-                data_name="schedule"
-                data_value={schedule}
-                func_handlechange={func_handlechange}     
+                data_id="formScheduleValue"
+                data_name="formScheduleValue"
+                data_value={formScheduleValue}
+                func_handlechange={checkboxClicked}     
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -158,18 +188,18 @@ export class ReviewSection3 extends Component {
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor="admission"
+              data_htmlFor="formAdmissionValue"
               data_width="63%"
             >
               Admission <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             <SelectBox
-              data_id="admission"
-              data_name="admission"
+              data_id="formAdmissionValue"
+              data_name="formAdmissionValue"
               // data_defaultvalue="¿Gratis o no?"
               data_width="37%"
               func_handlechange={e => this.admissionSelected(e)}
-              data_value={admission}
+              data_value={formAdmissionValue}
             >
               <option disabled value="¿Gratis o no?" >¿Gratis o no? </option>
               <option          value="Free/Public"   >Free/Public   </option>
@@ -180,12 +210,12 @@ export class ReviewSection3 extends Component {
           </ FieldWrapper >
 
           < FieldWrapper
-            data_visibility={feeDisplay}
+            data_visibility={formFeeDisplayValue}
           >
           {/* {console.log(feeDisplay)} */}
             < FieldLabel
               data_width="63%"
-              data_htmlFor="fee"
+              data_htmlFor="formFeeValue"
             >
               Price ($USD)<sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
@@ -194,10 +224,10 @@ export class ReviewSection3 extends Component {
 
             <TextInput
               data_width="37%"
-              data_id="fee"
-              data_name="fee"
-              data_value={fee}
-              func_handlechange={func_handlechange}
+              data_id="formFeeValue"
+              data_name="formFeeValue"
+              data_value={formFeeValue}
+              func_handlechange={textEntered}
             />
           </ FieldWrapper >
 
@@ -239,8 +269,14 @@ const mapStateToProps = (state, ownProps) => {
     formValue: state.formState.formValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
-    data_values: ownProps.data_values,
-    func_handlechange: ownProps.func_handlechange,
+    formHandicappedValue: state.formState.formHandicappedValue,
+    formGenderNeutralValue: state.formState.formGenderNeutralValue,
+    formBabyChangeValue: state.formState.formBabyChangeValue,
+    formScheduleValue: state.formState.formScheduleValue,
+    formAdmissionValue: state.formState.formAdmissionValue,
+    formFeeDisplayValue: state.formState.formFeeDisplayValue,
+    formFeeValue: state.formState.formFeeValue,
+
     selectedSectionValue: ownProps.display
   }
 }
@@ -249,6 +285,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     formNext: () => dispatch(formNext()),
     formPrev: () => dispatch(formPrev()),
+
+    checkboxClicked: (data) => dispatch(checkboxClicked(data)),
+    dropdownSelected: (data) => dispatch(dropdownSelected(data)),
+    textEntered: (data) => dispatch(textEntered(data)),
+    feeChosen: (data) => dispatch(feeChosen(data))
   }
 }
 

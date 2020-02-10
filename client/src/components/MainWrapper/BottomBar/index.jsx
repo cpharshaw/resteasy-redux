@@ -74,7 +74,7 @@ export class BottomBar extends Component {
             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
             width="38px" height="38px"
             viewBox="0 0 172 172"
-            style={{ marginLeft: "7px", fill: "#f5f5f5", height: "auto", width: "auto", color: "#f5f5f5" }}>
+            style={{ marginLeft: "5px", fill: "#f5f5f5", height: "auto", width: "auto", color: "#f5f5f5" }}>
             <g
               fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none"
               style={{ mixBlendMode: "normal" }}

@@ -36,10 +36,15 @@ export class PhotoUpload extends Component {
 
 
   onChange(e) {
-    const files = e.target.files;
+
+    this.props.func_handlechange(e);
+
+    const files = this.props.data_values.photos;
+
+    // const files = e.target.files;
 
     const keys = Object.keys(files);
-    const tempImgSrcArr = [];
+    // const tempImgSrcArr = [];
     const tempImgElementArr = [];
 
     keys.forEach((key, i) => {
@@ -293,8 +298,8 @@ export class PhotoUpload extends Component {
                   <span
                     style={{
                       color: "grey",
-                      fontWeight: "100",
-                      fontSize: "14px",
+                      fontWeight: "200",
+                      fontSize: "19px",
                     }}
                   >
                     Submit up to <span style={{ fontWeight: "900", color: "#4c4c4c" }}>two</span> photos

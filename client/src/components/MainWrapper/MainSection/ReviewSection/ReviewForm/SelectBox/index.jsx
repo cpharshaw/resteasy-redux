@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 
 export class SelectBox extends Component {
 
-
-
   render() {
 
     const {
@@ -34,14 +32,14 @@ export class SelectBox extends Component {
         className="rs"
         name={data_name ? data_name : null}
         defaultValue={data_value}
-        onChange={func_handlechange}
+        onChange={e => func_handlechange(e)}
         style={{
           width: data_width ? data_width : null,
           height: data_height ? data_height : null,
           // width: "66%",
           // height: "75%",
           // borderBottom: "1px dotted lightgrey",
-          fontSize: data_fontsize ? data_fontsize : "13.5px",
+          fontSize: data_fontsize ? data_fontsize : "14.5px",
           fontStyle: data_fontstyle ? data_fontstyle : "italic",
           color: data_color ? data_color : "grey"
         }}

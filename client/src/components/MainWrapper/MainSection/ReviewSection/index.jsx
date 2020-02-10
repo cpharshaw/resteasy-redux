@@ -64,34 +64,32 @@ export class ReviewSection extends Component {
 
   handleChange = (e, otherData) => {
 
-    if (e) {
-      const target = e.target;
-      const name = target.name;
-      const files = target.files;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
+    const target = e.target;
+    const name = target.name;
 
+    const files = target.files;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({
+      [name]: value
+    });
+
+    if (name === "admission") this.setState({ feeDisplay: otherData });
+    // if (name === "admission") console.log("test log: ", name, value, target.value, otherData);
+    // if (name !== "admission") console.log("test log: ", name, value, target.value);
+
+    if (otherData && otherData[0] === "delete") {
       this.setState({
-        [name]: value
+        imgElementArr: otherData[1]
       });
-
-      if (name === "admission") this.setState({ feeDisplay: otherData });
-      if (name === "admission") console.log("test log: ", name, value, target.value, otherData);
-      if (name !== "admission") console.log("test log: ", name, value, target.value);
-    } else if (otherData) {
-
-      if (otherData[0] === "delete") {
-        this.setState({
-          imgElementArr: otherData[1]
-        });
-      }
-
-      if (otherData[0] === "add") {
-        this.setState({
-          imgElementArr: [...this.state.imgElementArr, ...otherData[1]]
-        });
-      }
-
     }
+
+    if (otherData && otherData[0] === "add") {
+      this.setState({
+        imgElementArr: [...this.state.imgElementArr, ...otherData[1]]
+      });
+    }
+
 
 
   };
@@ -117,7 +115,7 @@ export class ReviewSection extends Component {
     const page3Values = { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee };
     const page4Values = { imgElementArr };
     const page5Values = { comments };
-
+    const formStepValue = this.props.formStepValue;
     return (
       <form
         className="rs"
@@ -126,14 +124,15 @@ export class ReviewSection extends Component {
         }}
       >
         {
-          this.props.formValue === 0 ? < ReviewSection0 func_handlechange={this.handleChange} data_values={"nothing"} /> :
-            this.props.formValue === 1 ? < ReviewSection1 func_handlechange={this.handleChange} data_values={page1Values} /> :
-              this.props.formValue === 2 ? < ReviewSection2 func_handlechange={this.handleChange} data_values={page2Values} /> :
-                this.props.formValue === 3 ? < ReviewSection3 func_handlechange={this.handleChange} data_values={page3Values} /> :
-                  this.props.formValue === 4 ? < ReviewSection4 func_handlechange={this.handleChange} data_values={page4Values} /> :
-                    this.props.formValue === 5 ? < ReviewSection5 func_handlechange={this.handleChange} data_values={page5Values} /> :
-                      this.props.formValue === 6 ? < ReviewSection6 func_handlechange={this.handleChange} data_values={"test"} /> :
-                        this.props.formValue === 7 ? < ReviewSection7 func_handlechange={this.handleChange} data_values={"test"} /> :
+
+          formStepValue === 0 ? < ReviewSection0 func_handlechange={this.handleChange} data_values={"nothing"} /> :
+            formStepValue === 1 ? < ReviewSection1 func_handlechange={this.handleChange} data_values={page1Values} /> :
+              formStepValue === 2 ? < ReviewSection2 func_handlechange={this.handleChange} data_values={page2Values} /> :
+                formStepValue === 3 ? < ReviewSection3 func_handlechange={this.handleChange} data_values={page3Values} /> :
+                  formStepValue === 4 ? < ReviewSection4 func_handlechange={this.handleChange} data_values={page4Values} /> :
+                    formStepValue === 5 ? < ReviewSection5 func_handlechange={this.handleChange} data_values={page5Values} /> :
+                      formStepValue === 6 ? < ReviewSection6 func_handlechange={this.handleChange} data_values={"test"} /> :
+                        formStepValue === 7 ? < ReviewSection7 func_handlechange={this.handleChange} data_values={"test"} /> :
                           <div className="rs" />
         }
       </form >
@@ -149,7 +148,7 @@ const mapStateToProps = (state, ownProps) => {
     selectedSectionValue: state.mapListState.selectedSectionValue,
     // geolocationValue: state.geolocationState.geolocationValue,
     boundsValue: state.boundsState.boundsValue,
-    formValue: state.formState.formValue,
+    formStepValue: state.formState.formStepValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
     selectedSectionValue: ownProps.display

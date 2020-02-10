@@ -22,7 +22,7 @@ export class RadioInput extends Component {
         value={data_value}
         className="rs"
         checked={data_checked ? data_checked : false}
-        onChange={func_handlechange}
+        onChange={e => func_handlechange(e)}
         name={data_name}
         type="radio"
         style={{

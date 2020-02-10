@@ -14,8 +14,16 @@ import HorizontalRule from '../ReviewForm/HorizontalRule';
 import FormFieldGroup from '../ReviewForm/FormFieldGroup';
 import FormChunk from '../ReviewForm/FormChunk';
 import FormNavButton from '../ReviewForm/FormNavButton'
-import { formNext } from '../../../../../store/actions/formActions';
-import { formPrev } from '../../../../../store/actions/formActions';
+import {
+  formNext,
+  formPrev,
+  locationChosen,
+  radioSelected,
+  checkboxClicked,
+  dropdownSelected,
+  textEntered,
+  fileChosen
+} from '../../../../../store/actions/formActions';
 
 
 
@@ -36,15 +44,26 @@ export class ReviewSection1 extends Component {
   render() {
 
     const {
-      func_handlechange,
+      // func_handlechange,
       data_values
     } = this.props;
 
-    const { restroomType, locationNotes, timeOfVisit, outOfOrder } = data_values;
+    const {
+      formLocationValue,
+      formRestroomTypeValue,
+      formLocationNotesValue,
+      formTimeOfVisitValue,
+      formOutOfOrderValue,
 
-    // console.log(data_values);
+      dropdownSelected,
+      textEntered,
+      checkboxClicked,
+      radioSelected,
+      fileChosen
+    } = this.props;
 
     return (
+
       <FormChunk
         className="rs"
         data_padding="20px 5px 13px 5px"
@@ -64,18 +83,18 @@ export class ReviewSection1 extends Component {
 
           < FieldWrapper>
             < FieldLabel
-              data_htmlFor="restroomType"
+              data_htmlFor="formRestroomTypeValue"
               data_width="47.5%"
             >
               Restroom used <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
 
             <SelectBox
-              data_id="restroomType"
-              data_name="restroomType"
+              data_id="formRestroomTypeValue"
+              data_name="formRestroomTypeValue"
               data_width="52.5%"
-              func_handlechange={func_handlechange}
-              data_value={restroomType}
+              func_handlechange={dropdownSelected}
+              data_value={formRestroomTypeValue}
             >
               <option value="Restroom type..." disabled>Restroom type...</option>
               <option value="Men's">Men's</option>
@@ -92,13 +111,13 @@ export class ReviewSection1 extends Component {
               Location notes<sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
             <TextInput
-              data_id="locationNotes"
-              data_name="locationNotes"
+              data_id="formLocationNotesValue"
+              data_name="formLocationNotesValue"
               data_width="52.5%"
               data_justify="flex-start"
-              data_placeholder="'third floor restroom'"
-              data_value={locationNotes}
-              func_handlechange={func_handlechange}
+              data_placeholder="ex: 'third floor'"
+              func_handlechange={textEntered}
+              data_value={formLocationNotesValue}
             />
           </ FieldWrapper >
 
@@ -110,12 +129,13 @@ export class ReviewSection1 extends Component {
             >
               Time of visit <sup><sup>&nbsp;(i)</sup></sup>
             </ FieldLabel >
+            
             <SelectBox
-              data_id="timeOfVisit"
-              data_name="timeOfVisit"
-              data_value={timeOfVisit}
+              data_id="formTimeOfVisitValue"
+              data_name="formTimeOfVisitValue"
               data_width="52.5%"
-              func_handlechange={func_handlechange}
+              func_handlechange={dropdownSelected}
+              data_value={formTimeOfVisitValue}
             >
               <option value="Time of day..." disabled>Time of day...</option>
               <option value="Just Now">(Just now)</option>
@@ -143,10 +163,10 @@ export class ReviewSection1 extends Component {
             // data_bgcolor="blue"
             >
               <CheckInput
-                data_id="outOfOrder"
-                data_name="outOfOrder"
-                data_value={outOfOrder}
-                func_handlechange={func_handlechange}
+                data_id="formOutOfOrderValue"
+                data_name="formOutOfOrderValue"
+                data_value={formOutOfOrderValue}
+                func_handlechange={checkboxClicked}
               // data_bgcolor="orange"
               />
             </ InputGroupWrapper >
@@ -186,9 +206,14 @@ const mapStateToProps = (state, ownProps) => {
     boundsValue: state.boundsState.boundsValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
-    formValue: state.formState.formValue,
-    func_handlechange: ownProps.func_handlechange,
-    data_values: ownProps.data_values,
+    formStepValue: state.formState.formStepValue,
+
+    formLocationValue: state.formState.formLocationValue,
+    formRestroomTypeValue: state.formState.formRestroomTypeValue,
+    formLocationNotesValue: state.formState.formLocationNotesValue,
+    formTimeOfVisitValue: state.formState.formTimeOfVisitValue,
+    formOutOfOrderValue: state.formState.formOutOfOrderValue,
+
     selectedSectionValue: ownProps.display
   }
 }
@@ -197,6 +222,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     formNext: () => dispatch(formNext()),
     formPrev: () => dispatch(formPrev()),
+
+    locationChosen: (data) => dispatch(locationChosen(data)),
+    radioSelected: (data) => dispatch(radioSelected(data)),
+    checkboxClicked: (data) => dispatch(checkboxClicked(data)),
+    dropdownSelected: (data) => dispatch(dropdownSelected(data)),
+    textEntered: (data) => dispatch(textEntered(data)),
+    fileChosen: (data) => dispatch(fileChosen(data)),
   }
 }
 
