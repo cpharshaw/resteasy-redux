@@ -94,8 +94,6 @@ export class ReviewSection2 extends Component {
     } = this.props;
 
 
-    const { cleanliness, smell, privacy, comfort, capacity, safety, style } = data_values;
-
     return (
       <FormChunk
         className="rs"
