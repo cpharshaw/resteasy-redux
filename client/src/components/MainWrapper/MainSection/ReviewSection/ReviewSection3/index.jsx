@@ -22,7 +22,7 @@ import {
   dropdownSelected,
   textEntered,
   feeChosen,
-  fileChosen
+  
 } from '../../../../../store/actions/formActions';
 
 
@@ -52,8 +52,6 @@ export class ReviewSection3 extends Component {
 
 
   admissionSelected(e) {
-
-    
 
     this.props.dropdownSelected(e);
 

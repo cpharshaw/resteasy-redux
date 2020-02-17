@@ -1,5 +1,5 @@
 const initState = {
-  formStepValue: 1,
+  formStepValue: 4,
 
   // page1
   formLocationValue: null,
@@ -27,7 +27,7 @@ const initState = {
   formFeeValue: "",
 
   //page 4
-  formImgElementArrValue: [],
+  photosArrValue: [],
 
   //page 5
   formCommentsValue: null
@@ -99,15 +99,16 @@ const formReducer = (state = initState, action) => {
       };
 
 
-    case "FILE_CHOSEN":
-      // console.log("sectionreducer: ", action.payload)
+    case 'PHOTO_SELECTED':
       return {
         ...state,
-        [action.payload.name]: action.payload.value
-      };
-
-
-
+        photosArrValue: [...state.photosArrValue, action.payload]
+      }
+    case 'PHOTO_DELETED':
+      return {
+        ...state,
+        photosArrValue: action.payload
+      }
 
     default:
       return state;

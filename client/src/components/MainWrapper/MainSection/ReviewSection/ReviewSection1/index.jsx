@@ -22,7 +22,6 @@ import {
   checkboxClicked,
   dropdownSelected,
   textEntered,
-  fileChosen
 } from '../../../../../store/actions/formActions';
 
 
@@ -59,7 +58,7 @@ export class ReviewSection1 extends Component {
       textEntered,
       checkboxClicked,
       radioSelected,
-      fileChosen
+      
     } = this.props;
 
     return (
@@ -228,7 +227,6 @@ const mapDispatchToProps = (dispatch) => {
     checkboxClicked: (data) => dispatch(checkboxClicked(data)),
     dropdownSelected: (data) => dispatch(dropdownSelected(data)),
     textEntered: (data) => dispatch(textEntered(data)),
-    fileChosen: (data) => dispatch(fileChosen(data)),
   }
 }
 

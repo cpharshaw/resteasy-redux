@@ -118,18 +118,28 @@ export const textEntered = (input) => {
   }
 }
 
-export const fileChosen = (input) => {
 
-  const target = input.target;
-  const name = target.name;
-  const value = target.value;
-  const files = target.files;
 
+export const photoInput = (photoObj) => {
+
+  // console.log("photoInput executed: ", photoObj);
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     dispatch({
-      type: 'FILE_CHOSEN',
-      payload: { name, value }
+      type: 'PHOTO_SELECTED',
+      payload: photoObj
+    })
+  }
+}
+
+
+export const deletePhoto = (photoArr) => {
+  // console.log("deletePhoto executed: ", photoArr);
+  return (dispatch, getState) => {
+    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
+    dispatch({
+      type: 'PHOTO_DELETED',
+      payload: photoArr
     })
   }
 }
