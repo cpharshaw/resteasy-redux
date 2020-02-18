@@ -17,6 +17,17 @@ export const formPrev = () => {
   }
 }
 
+export const resetForm = () => {
+  return (dispatch, getState) => {
+    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
+    dispatch({
+      type: 'FORM_RESET'
+    })
+  }
+}
+
+
+
 export const locationChosen = (input) => {
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
@@ -45,7 +56,7 @@ export const radioSelected = (input) => {
 }
 
 export const checkboxClicked = (input) => {
-  console.log("clicked check", input.target);
+  // console.log("clicked check", input.target);
 
   const target = input.target;
   const name = target.name;
@@ -107,7 +118,7 @@ export const textEntered = (input) => {
   const name = target.name;
   const value = target.value;
 
-  console.log(name, value)
+  // console.log(name, value)
 
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch

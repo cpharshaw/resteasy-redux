@@ -124,17 +124,29 @@ export class ReviewSection extends Component {
         }}
       >
         {
-
-          formStepValue === 0 ? < ReviewSection0 func_handlechange={this.handleChange} data_values={"nothing"} /> :
-            formStepValue === 1 ? < ReviewSection1 func_handlechange={this.handleChange} data_values={page1Values} /> :
-              formStepValue === 2 ? < ReviewSection2 func_handlechange={this.handleChange} data_values={page2Values} /> :
-                formStepValue === 3 ? < ReviewSection3 func_handlechange={this.handleChange} data_values={page3Values} /> :
-                  formStepValue === 4 ? < ReviewSection4 func_handlechange={this.handleChange} data_values={page4Values} /> :
-                    formStepValue === 5 ? < ReviewSection5 func_handlechange={this.handleChange} data_values={page5Values} /> :
-                      formStepValue === 6 ? < ReviewSection6 func_handlechange={this.handleChange} data_values={"test"} /> :
-                        formStepValue === 7 ? < ReviewSection7 func_handlechange={this.handleChange} data_values={"test"} /> :
+          formStepValue === 0 ? < ReviewSection0 /> :
+            formStepValue === 1 ? < ReviewSection1 /> :
+              formStepValue === 2 ? < ReviewSection2 /> :
+                formStepValue === 3 ? < ReviewSection3 /> :
+                  formStepValue === 4 ? < ReviewSection4 /> :
+                    formStepValue === 5 ? < ReviewSection5 /> :
+                      formStepValue === 6 ? (
+                        <React.Fragment>
+                          < ReviewSection5 />
+                          < ReviewSection6 />
+                        </React.Fragment>
+                      ) :
+                      formStepValue === 7 ? (
+                        <React.Fragment>
+                          < ReviewSection5 />
+                          < ReviewSection6 />
+                        </React.Fragment>
+                      ) :
+                        // formStepValue === 7 ? < ReviewSection7 /> :
                           <div className="rs" />
         }
+
+        {/* TODO - CREATE CONDITIONALS FOR MODALS.  WILL USE ABSOLUTE POSITION TO OVERLAY THE CURRENT PAGE */}
       </form >
     )
 

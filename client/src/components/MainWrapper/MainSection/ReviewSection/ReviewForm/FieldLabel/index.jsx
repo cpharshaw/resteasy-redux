@@ -8,7 +8,6 @@ export class FieldLabel extends Component {
       data_htmlFor,
       data_id,
       data_text,
-      data_justifyContent,
       data_bgcolor,
       data_fontcolor,
       data_fontsize,

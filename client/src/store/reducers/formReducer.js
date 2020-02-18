@@ -1,5 +1,5 @@
 const initState = {
-  formStepValue: 4,
+  formStepValue: 0,
 
   // page1
   formLocationValue: null,
@@ -30,7 +30,7 @@ const initState = {
   photosArrValue: [],
 
   //page 5
-  formCommentsValue: null
+  formCommentsValue: ""
 }
 
 const formReducer = (state = initState, action) => {
@@ -47,6 +47,11 @@ const formReducer = (state = initState, action) => {
         ...state,
         formStepValue: state.formStepValue - 1
       };
+
+
+    case "FORM_RESET":
+      // console.log("sectionreducer: ", action.payload)
+      return {...initState};
 
 
 

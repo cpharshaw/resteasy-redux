@@ -19,7 +19,7 @@ import {
   checkboxClicked,
   dropdownSelected,
   textEntered,
-  
+
 } from '../../../../../store/actions/formActions';
 
 
@@ -90,7 +90,7 @@ export class ReviewSection2 extends Component {
       textEntered,
       checkboxClicked,
       radioSelected,
-    
+
     } = this.props;
 
 
@@ -419,21 +419,42 @@ export class ReviewSection2 extends Component {
         <div
           className="rs"
           style={{
-            // position: "absolute",
             height: "50px",
-            // padding: "8px",
-            // justifyContent: "space-evenly"
-          }}>
-          <FormNavButton
-            data_text="Back"
-            data_classes="bg-primary-invert-outline"
-            func_navcommand="prev"
+          }}
+        >
+          <div
+            className="rs"
+            style={{
+              width: "12.5%",
+            }}
           />
-          <FormNavButton
-            data_text="Continue"
-            data_classes="bg-primary-invert"
-            func_navcommand="next"
-          />
+          <div
+            className="rs"
+            style={{
+              width: "75%",
+            }}
+          >
+            <FormNavButton
+              data_text="Back"
+              data_classes="bg-primary-invert-outline"
+              func_navcommand="prev"
+            />
+            <FormNavButton
+              data_text="Continue"
+              data_classes="bg-primary-invert"
+              func_navcommand="next"
+            />
+          </div>
+
+          <button
+            className="rs reset"
+            style={{
+              width: "12.5%",
+              fontSize: "14px"
+            }}
+          >
+            <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />
+          </button>
         </div>
 
       </FormChunk >

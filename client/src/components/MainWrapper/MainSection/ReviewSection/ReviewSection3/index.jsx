@@ -22,7 +22,7 @@ import {
   dropdownSelected,
   textEntered,
   feeChosen,
-  
+
 } from '../../../../../store/actions/formActions';
 
 
@@ -158,7 +158,7 @@ export class ReviewSection3 extends Component {
                 data_id="formBabyChangeValue"
                 data_name="formBabyChangeValue"
                 data_value={formBabyChangeValue}
-                func_handlechange={checkboxClicked}            
+                func_handlechange={checkboxClicked}
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -177,7 +177,7 @@ export class ReviewSection3 extends Component {
                 data_id="formScheduleValue"
                 data_name="formScheduleValue"
                 data_value={formScheduleValue}
-                func_handlechange={checkboxClicked}     
+                func_handlechange={checkboxClicked}
               />
             </ InputGroupWrapper >
           </ FieldWrapper >
@@ -200,9 +200,9 @@ export class ReviewSection3 extends Component {
               data_value={formAdmissionValue}
             >
               <option disabled value="¿Gratis o no?" >¿Gratis o no? </option>
-              <option          value="Free/Public"   >Free/Public   </option>
-              <option          value="Customers Only">Customers only</option>
-              <option          value="Fee..."        >Fee...        </option>
+              <option value="Free/Public"   >Free/Public   </option>
+              <option value="Customers Only">Customers only</option>
+              <option value="Fee..."        >Fee...        </option>
             </SelectBox>
 
           </ FieldWrapper >
@@ -210,7 +210,7 @@ export class ReviewSection3 extends Component {
           < FieldWrapper
             data_visibility={formFeeDisplayValue}
           >
-          {/* {console.log(feeDisplay)} */}
+            {/* {console.log(feeDisplay)} */}
             < FieldLabel
               data_width="63%"
               data_htmlFor="formFeeValue"
@@ -234,21 +234,42 @@ export class ReviewSection3 extends Component {
         <div
           className="rs"
           style={{
-            // position: "absolute",
             height: "50px",
-            // padding: "8px",
-            // justifyContent: "space-evenly"
-          }}>
-           <FormNavButton
-            data_text="Back"
-            data_classes="bg-primary-invert-outline"
-            func_navcommand="prev"
+          }}
+        >
+          <div
+            className="rs"
+            style={{
+              width: "12.5%",
+            }}
           />
-          <FormNavButton
-            data_text="Continue"
-            data_classes="bg-primary-invert"
-            func_navcommand="next"
-          />
+          <div
+            className="rs"
+            style={{
+              width: "75%",
+            }}
+          >
+            <FormNavButton
+              data_text="Back"
+              data_classes="bg-primary-invert-outline"
+              func_navcommand="prev"
+            />
+            <FormNavButton
+              data_text="Continue"
+              data_classes="bg-primary-invert"
+              func_navcommand="next"
+            />
+          </div>
+
+          <button
+            className="rs reset"
+            style={{
+              width: "12.5%",
+              fontSize: "14px"
+            }}
+          >
+            <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />
+          </button>
         </div>
 
 

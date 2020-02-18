@@ -11,6 +11,13 @@
 	/* border-radius: "5px"; */
 }
 
+.bg-grey-outline {
+	border: 2px solid #626262;
+	background: transparent;
+	color: #626262;
+	/* border-radius: "5px"; */
+}
+
 .bg-primary-light {
 	background-color: #0ce9e2;
 }

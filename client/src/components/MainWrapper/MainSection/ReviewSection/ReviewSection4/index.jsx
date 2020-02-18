@@ -25,7 +25,8 @@ import {
 export class ReviewSection4 extends Component {
 
   state = {
-    photoArr: []
+    photoArr: [],
+    updated: true
   }
 
   nextStep = () => {
@@ -73,10 +74,14 @@ export class ReviewSection4 extends Component {
         this.props.photoInput(photoData);
       }
 
-
     }
 
+    this.setState({
+      updated: false
+    })
+
   }
+
 
   deletePhoto(e) {
     e.preventDefault();
@@ -89,7 +94,110 @@ export class ReviewSection4 extends Component {
     });
 
     this.props.deletePhoto(newPhotosArr);
+
+    this.setState({
+      updated: false
+    })
   }
+
+
+  loadImgPreviews() {
+
+    const tempArr = [];
+
+    this.props.photosArrValue.forEach((photo, i) => {
+      const newImgSrc = photo.src;
+      const imgMetadata = photo.metadata;
+
+      const leftPadWithZeros = (number, length) => {
+        let str = number + '';
+        while (str.length < length) {
+          str = str + '0';
+        }
+
+        return str;
+      }
+
+      const random = Math.random();
+      const paddedRandom = leftPadWithZeros(random, 25);
+      const name = paddedRandom + "--" + imgMetadata.name + imgMetadata.lastModified + imgMetadata.size + imgMetadata.type;
+
+      const newImgElement = () => {
+
+        return (
+          <div
+            id=""
+            className="rs"
+            key={"div" + i}
+            style={{
+              position: "relative",
+              width: "120px",
+              height: "auto",
+              margin: "0 8px 0 8px",
+              flexWrap: "wrap",
+              alignSelf: "flex-start",
+              // background: "grey"
+            }}
+          >
+            <img
+              id=""
+              className="rs"
+              key={"img" + i}
+              src={newImgSrc}
+              style={{
+                maxWidth: "120px",
+                height: "inherit",
+                maxHeight: "180px",
+                flexWrap: "wrap",
+                borderRadius: "10px"
+              }}
+            />
+            <button
+              id=""
+              key={"button" + i}
+              className="rs"
+              name={name}
+              onClick={(e) => this.deletePhoto(e)}
+              style={{
+                position: "absolute",
+                width: "36px",
+                height: "36px",
+                top: "-8px",
+                right: "-8px",
+                background: "rgba(255,225,225,0.075)",
+                border: "5px solid rgba(255,0,0,.75)",
+                borderRadius: "50%",
+              }}
+            >
+              <span
+                key={"span" + i}
+                className="rs"
+                name={"span test"}
+                pointerEvents="none"
+                style={{
+                  color: "red",
+                  fontWeight: "bolder",
+                  fontSize: "16px"
+                }}
+              >
+                x
+            </span>
+            </button>
+          </div>
+        )
+      }
+
+      tempArr.push(newImgElement());
+
+    });
+
+    this.setState({
+      photoArr: tempArr,
+      updated: true
+    });
+
+  }
+
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
@@ -97,6 +205,8 @@ export class ReviewSection4 extends Component {
     const currPhotos = this.props.photosArrValue;
 
     if (
+      (prevPhotos.length === 0 && currPhotos.length === 0 && this.state.updated === false)
+      ||
       prevPhotos.length === 0 && currPhotos.length === 1
       ||
       prevPhotos.length === 1 && currPhotos.length === 0
@@ -105,104 +215,16 @@ export class ReviewSection4 extends Component {
       ||
       prevPhotos.length === 2 && currPhotos.length === 1
     ) {
-
-      const tempArr = [];
-
-      this.props.photosArrValue.forEach((photo, i) => {
-        const newImgSrc = photo.src;
-        const imgMetadata = photo.metadata;
-
-        const leftPadWithZeros = (number, length) => {
-          let str = number + '';
-          while (str.length < length) {
-            str = str + '0';
-          }
-
-          return str;
-        }
-
-        const random = Math.random();
-        const paddedRandom = leftPadWithZeros(random, 25);
-        const name = paddedRandom + "--" + imgMetadata.name + imgMetadata.lastModified + imgMetadata.size + imgMetadata.type;
-
-        const newImgElement = () => {
-
-          return (
-            <div
-              id=""
-              className="rs"
-              key={"div" + i}
-              style={{
-                position: "relative",
-                width: "120px",
-                height: "auto",
-                margin: "0 8px 0 8px",
-                flexWrap: "wrap",
-                alignSelf: "flex-start",
-                // background: "grey"
-              }}
-            >
-              <img
-                id=""
-                className="rs"
-                key={"img" + i}
-                src={newImgSrc}
-                style={{
-                  maxWidth: "120px",
-                  height: "inherit",
-                  maxHeight: "180px",
-                  flexWrap: "wrap",
-                  borderRadius: "10px"
-                }}
-              />
-              <button
-                id=""
-                key={"button" + i}
-                className="rs"
-                name={name}
-                onClick={(e) => this.deletePhoto(e)}
-                style={{
-                  position: "absolute",
-                  width: "36px",
-                  height: "36px",
-                  top: "-8px",
-                  right: "-8px",
-                  background: "rgba(255,225,225,0.075)",
-                  border: "5px solid rgba(255,0,0,.75)",
-                  borderRadius: "50%",
-                }}
-              >
-                <span
-                  key={"span" + i}
-                  className="rs"
-                  name={"span test"}
-                  pointerEvents="none"
-                  style={{
-                    color: "red",
-                    fontWeight: "bolder",
-                    fontSize: "16px"
-                  }}
-                >
-                  x
-              </span>
-              </button>
-            </div>
-          )
-        }
-
-        tempArr.push(newImgElement());
-
-      });
-
-      this.setState({
-        photoArr: tempArr
-      })
+      this.loadImgPreviews();
     }
+
   }
 
+  componentDidMount() {
 
+    this.loadImgPreviews();
 
-
+  }
 
 
   render() {
@@ -230,7 +252,7 @@ export class ReviewSection4 extends Component {
 
             <FieldLabel
               data_height="42px"
-              data_fontsize="12px"
+            // data_fontsize="12px"
             >
               Photo Upload <sup><sup>&nbsp;(i)</sup></sup>
             </FieldLabel>
@@ -356,7 +378,7 @@ export class ReviewSection4 extends Component {
                           fontSize: "19px",
                         }}
                       >
-                        Submit up to <span style={{ fontWeight: "900", color: "#4c4c4c" }}>two</span> photos
+                        Submit <span style={{ fontWeight: "900", color: "#4c4c4c" }}> up to </span>two photos
                       </span>
                     </em>
                     :
@@ -376,20 +398,42 @@ export class ReviewSection4 extends Component {
           className="rs"
           style={{
             height: "50px",
-          }}>
-          <FormNavButton
-            data_text="Back"
-            data_classes="bg-primary-invert-outline"
-            func_navcommand="prev"
+          }}
+        >
+          <div
+            className="rs"
+            style={{
+              width: "12.5%",
+            }}
           />
-          <FormNavButton
-            data_text="Continue"
-            data_classes="bg-primary-invert"
-            func_navcommand="next"
-          />
+          <div
+            className="rs"
+            style={{
+              width: "75%",
+            }}
+          >
+            <FormNavButton
+              data_text="Back"
+              data_classes="bg-primary-invert-outline"
+              func_navcommand="prev"
+            />
+            <FormNavButton
+              data_text="Continue"
+              data_classes="bg-primary-invert"
+              func_navcommand="next"
+            />
+          </div>
+
+          <button
+            className="rs reset"
+            style={{
+              width: "12.5%",
+              fontSize: "14px"
+            }}
+          >
+            <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />
+          </button>
         </div>
-
-
 
       </FormChunk >
     )
