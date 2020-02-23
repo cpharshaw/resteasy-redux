@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import FormNavButton from '../ReviewForm/FormNavButton';
 // import { selectSection } from '../../../../../store/actions/sectionActions';
 
-export class ReviewSection6 extends Component {
+export class ReviewConfirm extends Component {
 
   render() {
     return (
@@ -132,4 +132,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(ReviewSection6);
+)(ReviewConfirm);

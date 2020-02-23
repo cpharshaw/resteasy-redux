@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import FieldWrapper from '../ReviewForm/FieldWrapper';
-import FieldLabel from '../ReviewForm/FieldLabel';
-import RadioInput from '../ReviewForm/RadioInput';
-import CheckInput from '../ReviewForm/CheckInput';
-import TextInput from '../ReviewForm/TextInput';
-import InputGroupWrapper from '../ReviewForm/InputGroupWrapper';
-import PhotoUpload from '../ReviewForm/PhotoUpload';
-import FormNavButton from '../ReviewForm/FormNavButton';
-import FormFieldGroup from '../ReviewForm/FormFieldGroup';
-import FormChunk from '../ReviewForm/FormChunk';
+import FieldWrapper from '../../ReviewFormElements/FieldWrapper';
+import FieldLabel from '../../ReviewFormElements/FieldLabel';
+import RadioInput from '../../ReviewFormElements/RadioInput';
+import InputGroupWrapper from '../../ReviewFormElements/InputGroupWrapper';
+import FormFieldGroup from '../../ReviewFormElements/FormFieldGroup';
+import FormChunk from '../../ReviewFormElements/FormChunk';
 import {
   formNext,
   formPrev,
@@ -20,20 +16,17 @@ import {
   dropdownSelected,
   textEntered,
 
-} from '../../../../../store/actions/formActions';
-
+} from '../../../../../../store/actions/formActions';
+import ReviewMainNav from '../../ReviewNav/ReviewMainNav';
 
 export class ReviewSection2 extends Component {
 
 
   nextStep = () => {
-    console.log();
     this.props.formNext();
-    console.log("entry props: ", this.props.formValue)
   }
 
   prevStep = () => {
-    console.log();
     this.props.formPrev();
   }
 
@@ -69,14 +62,6 @@ export class ReviewSection2 extends Component {
 
   render() {
 
-    const { selectedSectionValue } = this.props;
-    const displayValue = selectedSectionValue === "review" ? "flex" : "none";
-
-    const {
-      // func_handlechange,
-      data_values
-    } = this.props;
-
     const {
       formCleanlinessValue,
       formSmellValue,
@@ -86,9 +71,6 @@ export class ReviewSection2 extends Component {
       formSafetyValue,
       formStyleValue,
 
-      dropdownSelected,
-      textEntered,
-      checkboxClicked,
       radioSelected,
 
     } = this.props;
@@ -415,47 +397,8 @@ export class ReviewSection2 extends Component {
           </ FieldWrapper >
 
         </FormFieldGroup>
-
-        <div
-          className="rs"
-          style={{
-            height: "50px",
-          }}
-        >
-          <div
-            className="rs"
-            style={{
-              width: "12.5%",
-            }}
-          />
-          <div
-            className="rs"
-            style={{
-              width: "75%",
-            }}
-          >
-            <FormNavButton
-              data_text="Back"
-              data_classes="bg-primary-invert-outline"
-              func_navcommand="prev"
-            />
-            <FormNavButton
-              data_text="Continue"
-              data_classes="bg-primary-invert"
-              func_navcommand="next"
-            />
-          </div>
-
-          <button
-            className="rs reset"
-            style={{
-              width: "12.5%",
-              fontSize: "14px"
-            }}
-          >
-            <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />
-          </button>
-        </div>
+        
+        < ReviewMainNav /> 
 
       </FormChunk >
     )

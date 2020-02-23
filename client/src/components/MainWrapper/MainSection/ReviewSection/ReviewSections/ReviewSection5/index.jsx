@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import FieldWrapper from '../ReviewForm/FieldWrapper';
-import FieldLabel from '../ReviewForm/FieldLabel';
-import FormNavButton from '../ReviewForm/FormNavButton';
-import FormChunk from '../ReviewForm/FormChunk';
-import FormFieldGroup from '../ReviewForm/FormFieldGroup';
+import FieldWrapper from '../../ReviewFormElements/FieldWrapper';
+import FieldLabel from '../../ReviewFormElements/FieldLabel';
+import FormNavButton from '../../ReviewFormElements/FormNavButton';
+import FormChunk from '../../ReviewFormElements/FormChunk';
+import FormFieldGroup from '../../ReviewFormElements/FormFieldGroup';
 import {
   textEntered
-} from '../../../../../store/actions/formActions';
+} from '../../../../../../store/actions/formActions';
+
+import ReviewMainNav from '../../ReviewNav/ReviewMainNav';
 
 export class ReviewSection5 extends Component {
 
@@ -58,46 +60,8 @@ export class ReviewSection5 extends Component {
             />
           </ FieldWrapper>
         </FormFieldGroup>
-        <div
-          className="rs"
-          style={{
-            height: "50px",
-          }}
-        >
-          <div
-            className="rs"
-            style={{
-              width: "12.5%",
-            }}
-          />
-          <div
-            className="rs"
-            style={{
-              width: "75%",
-            }}
-          >
-            <FormNavButton
-              data_text="Back"
-              data_classes="bg-primary-invert-outline"
-              func_navcommand="prev"
-            />
-            <FormNavButton
-              data_text="Continue"
-              data_classes="bg-primary-invert"
-              func_navcommand="next"
-            />
-          </div>
-
-          <button
-            className="rs reset"
-            style={{
-              width: "12.5%",
-              fontSize: "14px"
-            }}
-          >
-            <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />
-          </button>
-        </div>
+        
+        <ReviewMainNav />
 
       </FormChunk >
     )

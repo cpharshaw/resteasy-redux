@@ -1,24 +1,19 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import FieldWrapper from '../ReviewForm/FieldWrapper';
-import FieldLabel from '../ReviewForm/FieldLabel';
-import RadioInput from '../ReviewForm/RadioInput';
-import CheckInput from '../ReviewForm/CheckInput';
-import TextInput from '../ReviewForm/TextInput';
-import InputGroupWrapper from '../ReviewForm/InputGroupWrapper';
-import PhotoUpload from '../ReviewForm/PhotoUpload';
-import FormNavButton from '../ReviewForm/FormNavButton';
-import FormChunk from '../ReviewForm/FormChunk';
-import HorizontalRule from '../ReviewForm/HorizontalRule';
-import FormFieldGroup from '../ReviewForm/FormFieldGroup';
+import FieldWrapper from '../../ReviewFormElements/FieldWrapper';
+import FieldLabel from '../../ReviewFormElements/FieldLabel';
+
+import FormChunk from '../../ReviewFormElements/FormChunk';
+import FormFieldGroup from '../../ReviewFormElements/FormFieldGroup';
 import {
   formNext,
   formPrev,
   photoInput,
   deletePhoto
-} from '../../../../../store/actions/formActions';
+} from '../../../../../../store/actions/formActions';
+
+import ReviewMainNav from '../../ReviewNav/ReviewMainNav';
 
 
 
@@ -207,13 +202,13 @@ export class ReviewSection4 extends Component {
     if (
       (prevPhotos.length === 0 && currPhotos.length === 0 && this.state.updated === false)
       ||
-      prevPhotos.length === 0 && currPhotos.length === 1
+      (prevPhotos.length === 0 && currPhotos.length === 1)
       ||
-      prevPhotos.length === 1 && currPhotos.length === 0
+      (prevPhotos.length === 1 && currPhotos.length === 0)
       ||
-      prevPhotos.length === 1 && currPhotos.length === 2
+      (prevPhotos.length === 1 && currPhotos.length === 2)
       ||
-      prevPhotos.length === 2 && currPhotos.length === 1
+      (prevPhotos.length === 2 && currPhotos.length === 1)
     ) {
       this.loadImgPreviews();
     }
@@ -394,46 +389,7 @@ export class ReviewSection4 extends Component {
 
         </FormFieldGroup>
 
-        <div
-          className="rs"
-          style={{
-            height: "50px",
-          }}
-        >
-          <div
-            className="rs"
-            style={{
-              width: "12.5%",
-            }}
-          />
-          <div
-            className="rs"
-            style={{
-              width: "75%",
-            }}
-          >
-            <FormNavButton
-              data_text="Back"
-              data_classes="bg-primary-invert-outline"
-              func_navcommand="prev"
-            />
-            <FormNavButton
-              data_text="Continue"
-              data_classes="bg-primary-invert"
-              func_navcommand="next"
-            />
-          </div>
-
-          <button
-            className="rs reset"
-            style={{
-              width: "12.5%",
-              fontSize: "14px"
-            }}
-          >
-            <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />
-          </button>
-        </div>
+        < ReviewMainNav />
 
       </FormChunk >
     )

@@ -11,7 +11,7 @@ import { storeCenter } from '../../../../../../store/actions/centerActions';
 import { storeInput } from '../../../../../../store/actions/inputActions';
 
 import React, { Component } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { GoogleApiWrapper } from "google-maps-react";
 
 
 import { compose } from 'redux';
@@ -23,13 +23,13 @@ import MyStyle from './mapStyle.js';
 // import './loading.css';
 var myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
 
-const greatIcon = "https://img.icons8.com/flat_round/40/000000/star--v1.png";
-const goodIcon = "https://img.icons8.com/office/40/000000/good-quality.png";
+// const greatIcon = "https://img.icons8.com/flat_round/40/000000/star--v1.png";
+// const goodIcon = "https://img.icons8.com/office/40/000000/good-quality.png";
 const questionableIcon = "https://img.icons8.com/office/33/000000/error.png";
-const poorIcon = "https://img.icons8.com/office/40/000000/poor-quality.png";
-const terribleIcon = "https://img.icons8.com/officel/40/000000/evil.png";
+// const poorIcon = "https://img.icons8.com/office/40/000000/poor-quality.png";
+// const terribleIcon = "https://img.icons8.com/officel/40/000000/evil.png";
 
-const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
+// const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
 
 class MapSection extends Component {
   constructor(props) {

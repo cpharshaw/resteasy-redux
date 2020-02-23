@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { formNext } from '../../../../../store/actions/formActions';
-import { formPrev } from '../../../../../store/actions/formActions';
+import { formNext } from '../../../../../../store/actions/formActions';
 
 
 export class ReviewSection0 extends Component {
@@ -10,17 +9,9 @@ export class ReviewSection0 extends Component {
   nextStep = () => {
     console.log();
     this.props.formNext();
-    // console.log("entry props: ", this.props.formValue)
   }
-
-  prevStep = () => {
-    console.log();
-    this.props.formPrev();
-  }
-
 
   render() {
-
 
     return (
       < div
@@ -60,7 +51,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     formNext: () => dispatch(formNext()),
-    formPrev: () => dispatch(formPrev()),
   }
 }
 

@@ -1,29 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import FieldWrapper from '../ReviewForm/FieldWrapper';
-import FieldLabel from '../ReviewForm/FieldLabel';
-import RadioInput from '../ReviewForm/RadioInput';
-import CheckInput from '../ReviewForm/CheckInput';
-import TextInput from '../ReviewForm/TextInput';
-import SelectBox from '../ReviewForm/SelectBox';
-import InputGroupWrapper from '../ReviewForm/InputGroupWrapper';
-import FormNavButton from '../ReviewForm/FormNavButton';
-import FormFieldGroup from '../ReviewForm/FormFieldGroup';
-import HorizontalRule from '../ReviewForm/HorizontalRule';
-import PhotoUpload from '../ReviewForm/PhotoUpload';
-import FormChunk from '../ReviewForm/FormChunk';
+import FieldWrapper from '../../ReviewFormElements/FieldWrapper';
+import FieldLabel from '../../ReviewFormElements/FieldLabel';
+import CheckInput from '../../ReviewFormElements/CheckInput';
+import TextInput from '../../ReviewFormElements/TextInput';
+import SelectBox from '../../ReviewFormElements/SelectBox';
+import InputGroupWrapper from '../../ReviewFormElements/InputGroupWrapper';
+import FormFieldGroup from '../../ReviewFormElements/FormFieldGroup';
+import HorizontalRule from '../../ReviewFormElements/HorizontalRule';
+import FormChunk from '../../ReviewFormElements/FormChunk';
 import {
   formNext,
   formPrev,
-  locationChosen,
-  radioSelected,
+
   checkboxClicked,
   dropdownSelected,
   textEntered,
   feeChosen,
 
-} from '../../../../../store/actions/formActions';
+} from '../../../../../../store/actions/formActions';
+
+import ReviewMainNav from '../../ReviewNav/ReviewMainNav';
 
 
 export class ReviewSection3 extends Component {
@@ -231,46 +229,7 @@ export class ReviewSection3 extends Component {
 
         </FormFieldGroup>
 
-        <div
-          className="rs"
-          style={{
-            height: "50px",
-          }}
-        >
-          <div
-            className="rs"
-            style={{
-              width: "12.5%",
-            }}
-          />
-          <div
-            className="rs"
-            style={{
-              width: "75%",
-            }}
-          >
-            <FormNavButton
-              data_text="Back"
-              data_classes="bg-primary-invert-outline"
-              func_navcommand="prev"
-            />
-            <FormNavButton
-              data_text="Continue"
-              data_classes="bg-primary-invert"
-              func_navcommand="next"
-            />
-          </div>
-
-          <button
-            className="rs reset"
-            style={{
-              width: "12.5%",
-              fontSize: "14px"
-            }}
-          >
-            <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />
-          </button>
-        </div>
+        < ReviewMainNav />
 
 
       </FormChunk >
