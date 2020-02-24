@@ -30,7 +30,7 @@ const initState = {
   photosArrValue: [],
 
   //page 5
-  formCommentsValue: ""
+  formCommentsValue: "",
 }
 
 const formReducer = (state = initState, action) => {
@@ -51,8 +51,7 @@ const formReducer = (state = initState, action) => {
 
     case "FORM_RESET":
       // console.log("sectionreducer: ", action.payload)
-      return {...initState};
-
+      return { ...initState };
 
 
     case "LOCATION_CHOSEN":
@@ -109,11 +108,15 @@ const formReducer = (state = initState, action) => {
         ...state,
         photosArrValue: [...state.photosArrValue, action.payload]
       }
+
     case 'PHOTO_DELETED':
       return {
         ...state,
         photosArrValue: action.payload
       }
+
+
+
 
     default:
       return state;

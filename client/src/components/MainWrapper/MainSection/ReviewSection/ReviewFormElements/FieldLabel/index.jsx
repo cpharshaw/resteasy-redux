@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { modalToggled } from '../../../../../../store/actions/modalActions';
 
 export class FieldLabel extends Component {
+
+  labelClicked(e) {
+    e.preventDefault();
+    console.log("label clicked", this.props.data_htmlFor.replace("Value", "Modal"));
+    // console.log("store value", this.props.modalState);
+    const modalName = this.props.data_htmlFor.replace("Value", "Modal");
+
+    this.props.modalToggled(modalName);
+  }
 
   render() {
 
@@ -22,23 +34,47 @@ export class FieldLabel extends Component {
       <label
         id={data_id}
         className="rs"
-        htmlFor={data_htmlFor} 
+        htmlFor={data_htmlFor}
         style={{
           width: data_width ? data_width : null,
           height: data_height ? data_height : null,
-          flexWrap: "wrap",
+          // flexWrap: "wrap",
           flexDirection: data_flexdirection ? data_flexdirection : null,
-          // borderBottom: "1px dotted lightgrey",
           backgroundColor: data_bgcolor ? data_bgcolor : null,
-          color: data_fontcolor ? data_fontcolor : null,
-          fontSize: data_fontsize ? data_fontsize : "14.5px"
+          // color: data_fontcolor ? data_fontcolor : null,
+          // fontSize: data_fontsize ? data_fontsize : "14.5px"
         }}
       >
-        {children ? children : data_text}
+        <span
+          className="rs"
+          onClick={e => this.labelClicked(e)}
+          style={{
+            color: data_fontcolor ? data_fontcolor : null,
+            fontSize: data_fontsize ? data_fontsize : "14.5px",
+            flexWrap: "wrap",
+          }}
+        >
+          {children ? children : data_text} <sup><sup><sup>&nbsp;(i)</sup></sup></sup>
+        </span>
       </label>
 
     )
   }
 }
 
-export default FieldLabel;
+const mapStateToProps = (state, ownProps) => {
+  // console.log("mainwrapper state: ", state);
+  return {
+    modalState: state.modalState
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal))
+  }
+}
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps)
+)(FieldLabel);

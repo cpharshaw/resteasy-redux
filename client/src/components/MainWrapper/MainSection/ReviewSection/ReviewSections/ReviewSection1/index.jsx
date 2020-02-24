@@ -75,7 +75,7 @@ export class ReviewSection1 extends Component {
               data_htmlFor="formRestroomTypeValue"
               data_width="47.5%"
             >
-              Restroom used <sup><sup>&nbsp;(i)</sup></sup>
+              Restroom used
             </ FieldLabel >
 
             <SelectBox
@@ -94,10 +94,10 @@ export class ReviewSection1 extends Component {
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor="locationNotes"
+              data_htmlFor="formLocationNotesValue"
               data_width="47.5%"
             >
-              Location notes<sup><sup>&nbsp;(i)</sup></sup>
+              Location notes
             </ FieldLabel >
             <TextInput
               data_id="formLocationNotesValue"
@@ -113,10 +113,10 @@ export class ReviewSection1 extends Component {
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor="timeOfVisit"
+              data_htmlFor="formTimeOfVisitValue"
               data_width="47.5%"
             >
-              Time of visit <sup><sup>&nbsp;(i)</sup></sup>
+              Time of visit 
             </ FieldLabel >
 
             <SelectBox
@@ -141,11 +141,11 @@ export class ReviewSection1 extends Component {
 
           < FieldWrapper >
             < FieldLabel
-              data_htmlFor="outOfOrder"
+              data_htmlFor="formOutOfOrderValue"
               data_width="47.5%"
             // data_bgcolor="red"
             >
-              Out-of-Order <sup><sup>&nbsp;(i)</sup></sup>
+              Out-of-Order 
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"

@@ -1,8 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import FormNavButton from '../../ReviewFormElements/FormNavButton';
+import { resetForm }    from '../../../../../../store/actions/formActions';
+import { modalToggled } from '../../../../../../store/actions/modalActions';
 
 export class ReviewMainNav extends Component {
+
+  resetClicked(e) {
+    e.preventDefault();
+
+    console.log("reset clicked");
+    this.props.modalToggled("formResetModal");
+    // this.props.resetForm();
+  }
+
   render() {
+
     return (
 
       <div
@@ -37,6 +51,7 @@ export class ReviewMainNav extends Component {
 
         <button
           className="rs reset"
+          onClick={e => this.resetClicked(e)}
           style={{
             width: "12.5%",
             fontSize: "14px"
@@ -49,4 +64,18 @@ export class ReviewMainNav extends Component {
   }
 }
 
-export default ReviewMainNav;
+// export default ReviewMainNav;
+
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
+    resetForm: () => dispatch(resetForm()),
+  }
+}
+
+export default compose(
+  connect(null, mapDispatchToProps)
+)(ReviewMainNav);
+

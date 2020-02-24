@@ -9,9 +9,8 @@ import ReviewSection3 from './ReviewSections/ReviewSection3';
 import ReviewSection4 from './ReviewSections/ReviewSection4';
 import ReviewSection5 from './ReviewSections/ReviewSection5';
 
-import ReviewModalContainer from '../ReviewSection/ReviewModalContainer';
-import ReviewModalSmall from '../ReviewSection/ReviewModalContainer/ReviewModalSmall';
-import ReviewModalLarge from '../ReviewSection/ReviewModalContainer/ReviewModalLarge';
+import ReviewModal from '../ReviewSection/ReviewModal';
+import FormNavButton from './ReviewFormElements/FormNavButton';
 
 // import ReviewConfirm from './ReviewSections/ReviewSection6'; 
 
@@ -56,30 +55,43 @@ export class ReviewSection extends Component {
     const {
       selectedSectionValue,
       formStepValue,
-      currentModal
     } = this.props;
 
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
 
-    // const formStepValue = this.props.formStepValue;
+    const {
+      formRestroomTypeModal,
+      formLocationNotesModal,
+      formTimeOfVisitModal,
+      formOutOfOrderModal,
+
+      formCleanlinessModal,
+      formSmellModal,
+      formPrivacyModal,
+      formComfortModal,
+      formCapacityModal,
+      formSafetyModal,
+      formStyleModal,
+
+      //page 3
+      formHandicappedModal,
+      formGenderNeutralModal,
+      formBabyChangeModal,
+      formScheduleModal,
+      formAdmissionModal,
+      formFeeDisplayModal,
+      formFeeModal,
+
+      //page 4
+      formPhotoUploadModal,
+
+      //page 5
+      formCommentsModal,
 
 
-    const CurrentModal = props => {
-      switch (props.currentModal) {
-        case 'EXPORT_DATA':
-          return (
-            // <ExportDataModal {...props}/>
-            null
-          );
-        case 'SOCIAL_SIGN_IN':
-          return (
-            // <SignInModal {...props}/>
-            null
-          );
-        default:
-          return null;
-      }
-    }
+      // other
+      formResetModal
+    } = this.props.modalState;
 
     return (
       <form
@@ -94,40 +106,267 @@ export class ReviewSection extends Component {
               formStepValue === 2 ? < ReviewSection2 /> :
                 formStepValue === 3 ? < ReviewSection3 /> :
                   formStepValue === 4 ? < ReviewSection4 /> :
-                    formStepValue === 5 ? < ReviewSection5 /> :
-                      formStepValue === 6 || formStepValue === 7 ? (
-                        <React.Fragment>
-                          < ReviewSection5 />
-                          {/* < ReviewConfirm /> */}
-                        </React.Fragment>
-                      ) :
-                        // formStepValue === 7 ? < ReviewSection7 /> :
-                        <div id="test" className="rs" />
+                    formStepValue === 5 || formStepValue === 6 || formStepValue === 7 ? (
+                      < ReviewSection5 />
+                    ) :
+                      <div id="test" className="rs" />
         }
-
-        {/* TODO - CREATE CONDITIONALS FOR MODALS.  WILL USE ABSOLUTE POSITION TO OVERLAY THE CURRENT PAGE */}
         {/* https://codeburst.io/modals-in-react-f6c3ff9f4701 */}
         {
-          formStepValue === 6 || formStepValue === 7 ? (
+          formStepValue === 6 ? (
+            < ReviewModal data_size="sm">
+              <div className="rs" style={{ flexDirection: "column" }}>
+                <h1 className="rs">
+                  Ok to submit review?
+                  </h1>
+                <div
+                  className="rs"
+                  style={{
+                    height: "50px",
+                    marginBottom: "20px"
+                  }}>
+                  <FormNavButton
+                    data_text="Back"
+                    data_classes="bg-primary-invert"
+                    func_navcommand="prev"
+                  />
+                  <FormNavButton
+                    data_text="Submit"
+                    data_classes="bg-grey-outline"
+                    func_navcommand="next"
+                  />
+                </div>
+              </div>
+            </ReviewModal >
+          )
+            :
+            formStepValue === 7 ? (
+              < ReviewModal data_size="sm">
+                <div className="rs" style={{ flexDirection: "column" }}>
+                  <h1 className="rs">
+                    Thank you for your review.
+                    </h1>
+                  <div
+                    className="rs"
+                    style={{
+                      height: "50px",
+                      marginBottom: "20px"
+                    }}>
 
-            < ReviewModalContainer >
-              {/* <CurrentModal /> */}
-              <ReviewModal data_size="sm">
-                test
-              </ReviewModal>
-            </ReviewModalContainer >
-          ) : null
-          // < ReviewModalContainer >
+                    <FormNavButton
+                      data_text="Close"
+                      data_classes="bg-grey-outline"
+                      data_width="fit-content"
+                      func_navcommand="finish"
+                    />
+                  </div>
+                </div>
+              </ReviewModal >
+            ) : null
 
-          // </ ReviewModalContainer >
-
-          // formStepValue === 6 || formStepValue === 7 ? (
-          // < ReviewConfirm />
-          // <div />
-          // ) :
-          // <div id="test2" className="rs" />
         }
 
+
+        {
+          formRestroomTypeModal ? (
+            < ReviewModal data_name="formRestroomTypeModal">
+              formRestroomTypeModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formLocationNotesModal ? (
+            < ReviewModal data_name="formLocationNotesModal">
+              formLocationNotesModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formTimeOfVisitModal ? (
+            < ReviewModal data_name="formTimeOfVisitModal">
+              formTimeOfVisitModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formOutOfOrderModal ? (
+            < ReviewModal data_name="formOutOfOrderModal">
+              formOutOfOrderModal
+            </ ReviewModal >
+          ) : null
+        }
+
+
+        {
+          formCleanlinessModal ? (
+            < ReviewModal data_name="formCleanlinessModal">
+              formCleanlinessModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formSmellModal ? (
+            < ReviewModal data_name="formSmellModal">
+              formSmellModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formPrivacyModal ? (
+            < ReviewModal data_name="formPrivacyModal">
+              formPrivacyModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formComfortModal ? (
+            < ReviewModal data_name="formComfortModal">
+              formComfortModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formCapacityModal ? (
+            < ReviewModal data_name="formCapacityModal">
+              formCapacityModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formSafetyModal ? (
+            < ReviewModal data_name="formSafetyModal">
+              formSafetyModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formStyleModal ? (
+            < ReviewModal data_name="formStyleModal">
+              formStyleModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formHandicappedModal ? (
+            < ReviewModal data_name="formHandicappedModal">
+              formHandicappedModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formGenderNeutralModal ? (
+            < ReviewModal data_name="formGenderNeutralModal">
+              formGenderNeutralModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formGenderNeutralModal ? (
+            < ReviewModal data_name="formGenderNeutralModal">
+              formGenderNeutralModal
+            </ ReviewModal >
+          ) : null
+        }
+
+
+        {
+          formBabyChangeModal ? (
+            < ReviewModal data_name="formBabyChangeModal">
+              formBabyChangeModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formScheduleModal ? (
+            < ReviewModal data_name="formScheduleModal">
+              formScheduleModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formAdmissionModal ? (
+            < ReviewModal data_name="formAdmissionModal">
+              formAdmissionModal
+            </ ReviewModal >
+          ) : null
+        }
+
+        {
+          formFeeDisplayModal ? (
+            < ReviewModal data_name="formFeeDisplayModal">
+              formFeeDisplayModal
+            </ ReviewModal >
+          ) : null
+        }
+
+
+        {
+          formFeeModal ? (
+            < ReviewModal data_name="formFeeModal">
+              formFeeModal
+            </ ReviewModal >
+          ) : null
+        }
+        {
+          formPhotoUploadModal ? (
+            < ReviewModal data_name="formPhotoUploadModal">
+              formPhotoUploadModal
+            </ ReviewModal >
+          ) : null
+        }
+
+
+        {
+          formCommentsModal ? (
+            < ReviewModal data_name="formCommentsModal">
+              formCommentsModal
+            </ ReviewModal >
+          ) : null
+        }
+
+
+        {
+          formResetModal ? (
+            < ReviewModal data_size="sm" data_name="formResetModal">
+              <div className="rs" style={{ flexDirection: "column" }}>
+                <h1 className="rs">
+                  Reset review form and start over?
+                </h1>
+                <div
+                  className="rs"
+                  style={{
+                    height: "50px",
+                    marginBottom: "20px"
+                  }}>
+                  <FormNavButton
+                    data_text="Cancel"
+                    data_classes="bg-primary-invert"
+                    func_navcommand="cancel"
+                  />
+                  <FormNavButton
+                    data_text="Reset"
+                    data_classes="bg-grey-outline"
+                    func_navcommand="reset"
+                  />
+                </div>
+              </div>
+            </ ReviewModal >
+          ) : null
+        }
 
       </form >
     )
@@ -143,6 +382,7 @@ const mapStateToProps = (state, ownProps) => {
     // geolocationValue: state.geolocationState.geolocationValue,
     boundsValue: state.boundsState.boundsValue,
     formStepValue: state.formState.formStepValue,
+    modalState: state.modalState,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
     selectedSectionValue: ownProps.display
@@ -151,6 +391,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+
   }
 }
 

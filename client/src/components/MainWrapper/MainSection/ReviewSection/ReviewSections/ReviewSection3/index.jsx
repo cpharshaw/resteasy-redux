@@ -109,7 +109,7 @@ export class ReviewSection3 extends Component {
               data_htmlFor="formHandicappedValue"
               data_width="63%"
             >
-              Handicapped accessible <sup><sup>&nbsp;(i)</sup></sup>
+              Handicapped accessible 
             </ FieldLabel >
             < InputGroupWrapper
               data_width="37%"
@@ -128,7 +128,7 @@ export class ReviewSection3 extends Component {
               data_htmlFor="formGenderNeutralValue"
               data_width="63%"
             >
-              Gender neutral option <sup><sup>&nbsp;(i)</sup></sup>
+              Gender neutral option 
             </ FieldLabel >
             < InputGroupWrapper
               data_width="37%"
@@ -147,7 +147,7 @@ export class ReviewSection3 extends Component {
               data_htmlFor="formBabyChangeValue"
               data_width="63%"
             >
-              Baby changing station <sup><sup>&nbsp;(i)</sup></sup>
+              Baby changing station 
             </ FieldLabel >
             < InputGroupWrapper
               data_width="37%"
@@ -166,7 +166,7 @@ export class ReviewSection3 extends Component {
               data_htmlFor="formScheduleValue"
               data_width="63%"
             >
-              Cleaning schedule visible <sup><sup>&nbsp;(i)</sup></sup>
+              Cleaning schedule visible 
             </ FieldLabel >
             < InputGroupWrapper
               data_width="37%"
@@ -187,7 +187,7 @@ export class ReviewSection3 extends Component {
               data_htmlFor="formAdmissionValue"
               data_width="63%"
             >
-              Admission <sup><sup>&nbsp;(i)</sup></sup>
+              Admission 
             </ FieldLabel >
             <SelectBox
               data_id="formAdmissionValue"
@@ -213,7 +213,7 @@ export class ReviewSection3 extends Component {
               data_width="63%"
               data_htmlFor="formFeeValue"
             >
-              Price ($USD)<sup><sup>&nbsp;(i)</sup></sup>
+              Price ($USD)
             </ FieldLabel >
 
             <span style={{ fontSize: "12px" }}>$</span>

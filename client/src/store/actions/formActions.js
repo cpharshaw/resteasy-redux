@@ -154,3 +154,7 @@ export const deletePhoto = (photoArr) => {
     })
   }
 }
+
+
+
+

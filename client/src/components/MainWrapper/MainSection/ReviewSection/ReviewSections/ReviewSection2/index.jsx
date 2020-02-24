@@ -91,7 +91,7 @@ export class ReviewSection2 extends Component {
               data_width="47.5%"
               data_htmlFor="formCleanlinessValue"
             >
-              Cleanliness <sup><sup>&nbsp;(i)</sup></sup>
+              Cleanliness
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
@@ -137,7 +137,7 @@ export class ReviewSection2 extends Component {
               data_width="47.5%"
               data_htmlFor="formSmellValue"
             >
-              Smell <sup><sup>&nbsp;(i)</sup></sup>
+              Smell
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
@@ -181,7 +181,7 @@ export class ReviewSection2 extends Component {
               data_width="47.5%"
               data_htmlFor="formPrivacyValue"
             >
-              Privacy <sup><sup>&nbsp;(i)</sup></sup>
+              Privacy
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
@@ -228,7 +228,7 @@ export class ReviewSection2 extends Component {
               data_width="47.5%"
               data_htmlFor="formComfortValue"
             >
-              Comfort <sup><sup>&nbsp;(i)</sup></sup>
+              Comfort
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
@@ -272,7 +272,7 @@ export class ReviewSection2 extends Component {
               data_width="47.5%"
               data_htmlFor="formCapacityValue"
             >
-              Capacity / Size <sup><sup>&nbsp;(i)</sup></sup>
+              Capacity / Size
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
@@ -315,7 +315,7 @@ export class ReviewSection2 extends Component {
               data_width="47.5%"
               data_htmlFor="formSafetyValue"
             >
-              Perceived Safety <sup><sup>&nbsp;(i)</sup></sup>
+              Perceived Safety
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
@@ -358,7 +358,7 @@ export class ReviewSection2 extends Component {
               data_width="47.5%"
               data_htmlFor="formStyleValue"
             >
-              Style / Poshness <sup><sup>&nbsp;(i)</sup></sup>
+              Style / Poshness
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"

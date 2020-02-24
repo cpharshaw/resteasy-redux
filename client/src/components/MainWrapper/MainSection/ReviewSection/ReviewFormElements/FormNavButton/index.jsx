@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { formNext,formPrev,resetForm } from '../../../../../../store/actions/formActions';
+import { formNext, formPrev, resetForm } from '../../../../../../store/actions/formActions';
 import { selectSection } from '../../../../../../store/actions/sectionActions';
+import { modalToggled }  from '../../../../../../store/actions/modalActions';
 
 export class FormNavButton extends Component {
 
@@ -27,6 +28,19 @@ export class FormNavButton extends Component {
     this.props.selectSection("mapList");
   };
 
+  
+  modalCancel = () => {
+    this.props.modalToggled("formResetModal");
+  };
+
+
+  resetForm = (e) => {
+    e.preventDefault();
+
+    this.props.resetForm();
+    this.props.modalToggled("formResetModal");
+  }
+
 
   render() {
 
@@ -45,8 +59,10 @@ export class FormNavButton extends Component {
       <button
         onClick={
           func_navcommand === "next" ? this.nextStep :
-            func_navcommand === "prev" ? this.prevStep : 
-              func_navcommand === "finish" ? this.finshedForm : null
+            func_navcommand === "prev" ? this.prevStep :
+              func_navcommand === "cancel" ? this.modalCancel :
+                func_navcommand === "reset" ? this.resetForm :
+                  func_navcommand === "finish" ? this.finshedForm : null
         }
         className={"rs " + data_classes + ""}
         style={{
@@ -75,6 +91,7 @@ const mapDispatchToProps = (dispatch) => {
     formPrev: () => dispatch(formPrev()),
     resetForm: () => dispatch(resetForm()),
     selectSection: (section) => dispatch(selectSection(section)),
+    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
   }
 }
 

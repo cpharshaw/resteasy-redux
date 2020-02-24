@@ -9,6 +9,7 @@ import centerReducer from './centerReducer';
 import circleReducer from './circleReducer';
 import inputReducer from './inputReducer';
 import mapReducer from './mapReducer';
+import modalReducer from './modalReducer';
 import formReducer from './formReducer';
 import { combineReducers } from 'redux';
 // import { firestoreReducer } from 'redux-firestore';
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   boundsState: boundsReducer,
   centerState: centerReducer,
   circleState: circleReducer,
+  modalState: modalReducer,
   mapState: mapReducer,
   formState: formReducer,
   inputState: inputReducer

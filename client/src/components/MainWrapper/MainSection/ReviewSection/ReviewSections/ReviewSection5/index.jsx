@@ -38,19 +38,22 @@ export class ReviewSection5 extends Component {
           >
 
             < FieldLabel
-              data_htmlFor={"field08_input_name"}
+              data_htmlFor="formCommentsValue"
               data_height="30px"
             >
-              Overall Comments<sup>&nbsp;(i)</sup>
+              Overall Comments
             </FieldLabel>
 
             <textarea
               className="rs"
               name="formCommentsValue"
               style={{
-                maxHeight: "110px",
-                border: "0.5px dotted lightgrey",
+                width: "92.5%",
+                maxHeight: "220px",
+                border: "2px dotted lightgrey",
                 padding: "10px",
+                // marginLeft: "30px",
+                // marginRight: "30px",
                 textAlignLast: "left",
                 textAlign: "left"
               }}

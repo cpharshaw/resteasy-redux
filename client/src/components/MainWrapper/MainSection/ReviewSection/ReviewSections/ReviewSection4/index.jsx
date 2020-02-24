@@ -35,12 +35,12 @@ export class ReviewSection4 extends Component {
 
   buttonClick(e) {
     e.preventDefault();
-    document.getElementById("photoUpload").click();
+    document.getElementById("formPhotoUploadValue1").click();
   }
 
   buttonClickCamera(e) {
     e.preventDefault();
-    document.getElementById("cameraUpload").click();
+    document.getElementById("formPhotoUploadValue2").click();
   }
 
   selectPhoto = (e) => {
@@ -247,9 +247,10 @@ export class ReviewSection4 extends Component {
 
             <FieldLabel
               data_height="42px"
+              data_htmlFor="formPhotoUploadValue"
             // data_fontsize="12px"
             >
-              Photo Upload <sup><sup>&nbsp;(i)</sup></sup>
+              Photo Upload 
             </FieldLabel>
 
 
@@ -274,9 +275,9 @@ export class ReviewSection4 extends Component {
               >
 
                 <input
-                  id="photoUpload"
+                  id="formPhotoUploadValue1"
                   // className="rs"
-                  name="photoUpload"
+                  name="formPhotoUploadValue"
                   type="file"
                   accept="image/*"
                   multiple={false}
@@ -311,9 +312,9 @@ export class ReviewSection4 extends Component {
                 </button>
 
                 <input
-                  id="cameraUpload"
+                  id="formPhotoUploadValue2"
                   // className="rs"
-                  name="cameraUpload"
+                  name="formPhotoUploadValue"
                   type="file"
                   accept="image/*"
                   multiple={false}
