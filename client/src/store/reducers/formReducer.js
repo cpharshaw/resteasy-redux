@@ -2,7 +2,7 @@ const initState = {
   formStepValue: 0,
 
   // page1
-  formLocationValue: null,
+  formLocationValue: "My house!",
   formRestroomTypeValue: "Restroom type...",
   formLocationNotesValue: "",
   formTimeOfVisitValue: "Time of day...",

@@ -251,7 +251,7 @@ class MapSection extends Component {
     return (
       <div
         id=""
-        className="rs"
+        className="rs animated fadeIn faster"
         style={
           {
             display: displayValue,
@@ -259,7 +259,7 @@ class MapSection extends Component {
             // textShadow: "0 1px 4px rgba(0, 0, 0, .6)",
             // zIndex: "999",
             height: "calc(100vh - 122px)",
-            background: "red",
+            // background: "red",
             zIndex:"9"
           }
         }

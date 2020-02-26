@@ -18,7 +18,7 @@ html, body {
 
 
 .rs {	
-	all: unset;
+	/* all: unset; */
 	display: flex;
 	/* flex-grow: 1; */
 	height: 100%;

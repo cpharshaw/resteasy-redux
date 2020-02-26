@@ -29,7 +29,7 @@ export class ReviewSection5 extends Component {
       // data_bgcolor="red"
       >
         <FormFieldGroup
-          data_height="calc(100% - 75px)"
+          data_height="calc(100% - 25px)"
         >
           < FieldWrapper
             data_id="field08"
@@ -64,7 +64,7 @@ export class ReviewSection5 extends Component {
           </ FieldWrapper>
         </FormFieldGroup>
         
-        <ReviewMainNav />
+        {/* <ReviewMainNav /> */}
 
       </FormChunk >
     )

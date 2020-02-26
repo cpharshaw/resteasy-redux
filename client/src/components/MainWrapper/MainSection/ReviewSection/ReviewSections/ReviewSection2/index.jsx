@@ -78,12 +78,11 @@ export class ReviewSection2 extends Component {
 
     return (
       <FormChunk
-        className="rs"
         data_padding="20px 5px 13px 5px"
       >
 
         <FormFieldGroup
-          data_height="calc(100% - 75px)"
+          data_height="calc(100% - 25px)"
         >
 
           < FieldWrapper >
@@ -398,7 +397,7 @@ export class ReviewSection2 extends Component {
 
         </FormFieldGroup>
         
-        < ReviewMainNav /> 
+        {/* < ReviewMainNav />  */}
 
       </FormChunk >
     )

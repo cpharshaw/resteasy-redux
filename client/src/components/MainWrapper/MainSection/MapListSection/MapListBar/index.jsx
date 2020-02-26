@@ -21,7 +21,7 @@ export class MapListBar extends Component {
     return (
       <div
         id="mapListBar"
-        className="rs"
+        className="rs bg-primary "
         style={{
           flexDirection: "column",
           height: "72px",
@@ -79,7 +79,7 @@ export class MapListBar extends Component {
             }}
             onClick={this.toggleMapList}
           >
-            <em>Map/List</em>
+            <em>Map / List</em>
           </button>
 
         </div>

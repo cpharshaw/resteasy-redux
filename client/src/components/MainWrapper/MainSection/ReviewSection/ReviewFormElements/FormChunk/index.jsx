@@ -14,12 +14,13 @@ export class FormChunk extends Component {
     } = this.props;
 
     return (
-      <div className="rs"
+      <div 
+        className="rs animated fadeIn faster"
         style={{
           flexDirection: "column",
-          alignContent: "space-between",
-          justifyContent: "space-between",
-          // alignItems: "stretch",
+          alignContent: "space-around",
+          justifyContent: "space-around",
+          // alignItems: "space-around",
           height: data_height ? data_height : null,
           width: data_width ? data_width : null,
           margin: data_margin ? data_margin: null,

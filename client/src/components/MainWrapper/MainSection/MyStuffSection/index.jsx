@@ -18,7 +18,8 @@ export class MyStuffSection extends Component {
     return (
       <div
         id="myStuffSection"
-        className="rs section"
+        // className="rs section"
+        className="rs section animated fadeIn faster"
         style={
           {
             display: displayValue,

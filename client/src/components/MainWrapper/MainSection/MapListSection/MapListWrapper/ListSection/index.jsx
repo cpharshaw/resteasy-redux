@@ -20,7 +20,7 @@ class ListSection extends Component {
     // console.log("all the props, ListSection: ", this.props);
     return (
       <div
-        className="rs"
+        className="rs animated fadeIn faster"
         style={{
           display: displayValue,
           background: "#f5f5f5",

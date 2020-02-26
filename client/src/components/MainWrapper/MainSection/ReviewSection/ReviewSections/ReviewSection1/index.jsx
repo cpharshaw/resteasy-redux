@@ -40,6 +40,7 @@ export class ReviewSection1 extends Component {
   render() {
 
     const {
+      formLocationValue,
       formRestroomTypeValue,
       formLocationNotesValue,
       formTimeOfVisitValue,
@@ -54,18 +55,21 @@ export class ReviewSection1 extends Component {
     return (
 
       <FormChunk
-        className="rs"
         data_padding="20px 5px 13px 5px"
       >
 
-        <LocationSelector
-          func_selectlocation={e => { e.preventDefault(); console.log('location selector clicked') }}
-          data_width="50%"
-          data_height="50px"
-        />
+        {
+          !formLocationValue ? <div> {formLocationValue} </div> : (
+            <LocationSelector
+              data_width="50%"
+              data_height="50px"
+            />
+          )
+        }
+
 
         <FormFieldGroup
-          data_height="calc(100% - 150px)"
+          data_height="calc(100% - 100px)"
         >
 
           <HorizontalRule />
@@ -116,7 +120,7 @@ export class ReviewSection1 extends Component {
               data_htmlFor="formTimeOfVisitValue"
               data_width="47.5%"
             >
-              Time of visit 
+              Time of visit
             </ FieldLabel >
 
             <SelectBox
@@ -145,7 +149,7 @@ export class ReviewSection1 extends Component {
               data_width="47.5%"
             // data_bgcolor="red"
             >
-              Out-of-Order 
+              Out-of-Order
             </ FieldLabel >
             < InputGroupWrapper
               data_width="52.5%"
@@ -163,7 +167,7 @@ export class ReviewSection1 extends Component {
 
         </FormFieldGroup>
 
-        < ReviewMainNav />
+        {/* < ReviewMainNav /> */}
 
       </FormChunk >
     )

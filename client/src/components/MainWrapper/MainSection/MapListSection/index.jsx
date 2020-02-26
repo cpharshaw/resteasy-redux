@@ -20,7 +20,7 @@ export class MapListSection extends Component {
     return (
       <div
         id="maplistSection"
-        className="rs bg-primary"
+        className="rs animated fadeIn faster"
         style={{
           display: displayValue,
           flexDirection: "column",

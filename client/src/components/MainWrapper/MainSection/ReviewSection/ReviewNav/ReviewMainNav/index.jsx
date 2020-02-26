@@ -23,6 +23,7 @@ export class ReviewMainNav extends Component {
         className="rs"
         style={{
           height: "50px",
+          marginBottom: "20px"
         }}
       >
         <div

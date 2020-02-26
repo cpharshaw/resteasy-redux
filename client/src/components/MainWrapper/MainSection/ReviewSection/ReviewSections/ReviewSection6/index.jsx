@@ -23,7 +23,7 @@ export class ReviewConfirm extends Component {
           bottom: "50px",
           left: 0,
           width: "100vw",
-          height: "calc(100% - 50px)",
+          height: "calc(100%)",
           zIndex: "1000",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

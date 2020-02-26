@@ -49,7 +49,7 @@ export class ReviewModal extends Component {
 
       <div
         id=""
-        className="rs"
+        className="rs animated fadeIn faster"
         name={data_name ? data_name : null}
         style={{
           position: "absolute",
@@ -73,7 +73,7 @@ export class ReviewModal extends Component {
       >
         <div
           id=""
-          className="rs"
+          className="rs animated zoomIn faster"
           style={style}
         >
           <div

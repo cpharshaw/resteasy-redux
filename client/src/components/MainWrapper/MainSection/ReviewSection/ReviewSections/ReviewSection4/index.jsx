@@ -122,7 +122,7 @@ export class ReviewSection4 extends Component {
         return (
           <div
             id=""
-            className="rs"
+            className="rs animated pulse fast"
             key={"div" + i}
             style={{
               position: "relative",
@@ -237,7 +237,7 @@ export class ReviewSection4 extends Component {
       >
 
         <FormFieldGroup
-          data_height="calc(100% - 75px)"
+          data_height="calc(100% - 25px)"
         >
 
           <FieldWrapper
@@ -390,7 +390,7 @@ export class ReviewSection4 extends Component {
 
         </FormFieldGroup>
 
-        < ReviewMainNav />
+        {/* < ReviewMainNav /> */}
 
       </FormChunk >
     )

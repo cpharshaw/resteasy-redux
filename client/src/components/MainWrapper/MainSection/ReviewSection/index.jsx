@@ -11,6 +11,7 @@ import ReviewSection5 from './ReviewSections/ReviewSection5';
 
 import ReviewModal from '../ReviewSection/ReviewModal';
 import FormNavButton from './ReviewFormElements/FormNavButton';
+import ReviewMainNav from './ReviewNav/ReviewMainNav';
 
 // import ReviewConfirm from './ReviewSections/ReviewSection6'; 
 
@@ -60,6 +61,8 @@ export class ReviewSection extends Component {
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
 
     const {
+      formLocationModal,
+
       formRestroomTypeModal,
       formLocationNotesModal,
       formTimeOfVisitModal,
@@ -95,9 +98,13 @@ export class ReviewSection extends Component {
 
     return (
       <form
-        className="rs"
+        // className="rs"
+        className="rs animated fadeIn faster"
         style={{
           display: displayValue,
+          flexDirection: "column",
+          alignContent: "space-between",
+          justifyContent: "space-between",
         }}
       >
         {
@@ -111,6 +118,7 @@ export class ReviewSection extends Component {
                     ) :
                       <div id="test" className="rs" />
         }
+        {formStepValue > 0 ? < ReviewMainNav /> : null}
         {/* https://codeburst.io/modals-in-react-f6c3ff9f4701 */}
         {
           formStepValue === 6 ? (
@@ -166,6 +174,13 @@ export class ReviewSection extends Component {
 
         }
 
+        {
+          formLocationModal ? (
+            < ReviewModal data_name="formLocationModal">
+              formLocationModal
+            </ ReviewModal >
+          ) : null
+        }
 
         {
           formRestroomTypeModal ? (

@@ -10,12 +10,12 @@ export class MapListSection extends Component {
   render() {
     return (
       <div
-      className="rs"
+      className="rs animated fadeIn faster"
         style={
           {
             // height: "calc(100% - 114px)",
             overflowY: "scroll",
-            background: "green",
+            // background: "green",
           }
         }
       >

@@ -147,7 +147,7 @@ class RecenterButton extends Component {
 
     return (
 
-      <div className="recenterButton"
+       <div className="recenterButton animated slideInRight faster"
         style={
           {
             borderColor: color
