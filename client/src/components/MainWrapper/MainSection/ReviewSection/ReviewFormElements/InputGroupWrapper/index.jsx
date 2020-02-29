@@ -27,7 +27,7 @@ export class InputGroupWrapper extends Component {
           // background: "grey",
           justifyContent: "space-evenly",
           margin: "0",
-          backgroundColor: data_bgcolor ? data_bgcolor : null,
+          // backgroundColor: data_bgcolor ? data_bgcolor : null,
         }}
       >
         {children}

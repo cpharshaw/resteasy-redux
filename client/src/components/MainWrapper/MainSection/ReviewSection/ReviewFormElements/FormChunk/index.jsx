@@ -17,6 +17,7 @@ export class FormChunk extends Component {
       <div 
         className="rs animated fadeIn faster"
         style={{
+          // all: "unset",
           flexDirection: "column",
           alignContent: "space-around",
           justifyContent: "space-around",
@@ -25,7 +26,7 @@ export class FormChunk extends Component {
           width: data_width ? data_width : null,
           margin: data_margin ? data_margin: null,
           padding: data_padding ? data_padding: "25px 5px 15px 5px",
-          backgroundColor: data_bgcolor
+          // backgroundColor: data_bgcolor
         }}
       >
         {children}

@@ -18,16 +18,12 @@ html, body {
 
 
 .rs {	
-	/* all: unset; */
 	display: flex;
-	/* flex-grow: 1; */
 	height: 100%;
 	width: 100%;
 	justify-content: center;
 	align-items: center;
 	align-content: center;
-	/* align-self: center; */
-	/* justify-self: center; */
 	vertical-align: middle;
 	text-align: center;
 	text-align-last: center;
@@ -42,12 +38,10 @@ html, body {
 	box-sizing: border-box;
 	font-size: 100%;
 	font-family: "Roboto";
-	background-color: inherit;
+	background-color: #f5f5f5;
+	background: #f5f5f5;
 	color: #202020;
-	content: '';
-	content: none;	
 }
-
 
 input[type="checkbox"] {
 	width: initial;
@@ -59,3 +53,5 @@ input[type="checkbox"] {
   width: 0;
   height: 0
 }
+
+

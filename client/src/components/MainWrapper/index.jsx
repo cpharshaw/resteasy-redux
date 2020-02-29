@@ -39,7 +39,8 @@ class MainWrapper extends Component {
       //     background: "green !important"
       //   }}
       // >
-      < div className="rs"
+      < div
+        className="rs"
         style={{
           flexDirection: "column",
           // zIndex: "11"

@@ -21,25 +21,27 @@ export class MapListBar extends Component {
     return (
       <div
         id="mapListBar"
-        className="rs bg-primary "
+        className=" bg-primary rs"
         style={{
           flexDirection: "column",
           height: "72px",
+          background: "#0abab5"
           // zIndex: "15"
         }}
       >
 
         <div
           id="mapListTogglers"
-          className="rs"
+          className="rs bg-primary"
           style={{
             height: "42px",
             flexWrap: "nowrap",
+            // background: "#0abab5"
           }}
         >
 
           <button
-            className="rs div-button text-white"
+            className="rs div-button text-white bg-primary"
             style={{
               width: "50%",
               background: "inherit"
@@ -72,7 +74,7 @@ export class MapListBar extends Component {
           </button>
 
           <button
-            className="rs div-button text-white"
+            className="rs div-button text-white bg-primary"
             style={{
               width: "50%",
               background: "inherit"
@@ -87,7 +89,7 @@ export class MapListBar extends Component {
 
         <div 
           id="mapListScrollbar" 
-          className="rs" 
+          className="rs bg-primary" 
           style={{
             height: "30px"
           }}

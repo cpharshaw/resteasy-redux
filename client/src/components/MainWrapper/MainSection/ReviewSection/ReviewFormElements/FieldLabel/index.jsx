@@ -40,7 +40,8 @@ export class FieldLabel extends Component {
           height: data_height ? data_height : null,
           // flexWrap: "wrap",
           flexDirection: data_flexdirection ? data_flexdirection : null,
-          backgroundColor: data_bgcolor ? data_bgcolor : null,
+          // backgroundColor: data_bgcolor ? data_bgcolor : null,
+          // background: "white",
           // color: data_fontcolor ? data_fontcolor : null,
           // fontSize: data_fontsize ? data_fontsize : "14.5px"
         }}
@@ -49,7 +50,7 @@ export class FieldLabel extends Component {
           className="rs"
           onClick={e => this.labelClicked(e)}
           style={{
-            color: data_fontcolor ? data_fontcolor : null,
+            // color: data_fontcolor ? data_fontcolor : null,
             fontSize: data_fontsize ? data_fontsize : "14.5px",
             flexWrap: "wrap",
           }}

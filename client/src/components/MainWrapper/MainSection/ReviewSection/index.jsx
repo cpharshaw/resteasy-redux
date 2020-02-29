@@ -101,6 +101,7 @@ export class ReviewSection extends Component {
         // className="rs"
         className="rs animated fadeIn faster"
         style={{
+          // all: "unset",
           display: displayValue,
           flexDirection: "column",
           alignContent: "space-between",
@@ -116,10 +117,12 @@ export class ReviewSection extends Component {
                     formStepValue === 5 || formStepValue === 6 || formStepValue === 7 ? (
                       < ReviewSection5 />
                     ) :
-                      <div id="test" className="rs" />
+                      <div id="test" className="rs" >test</div>
         }
+
         {formStepValue > 0 ? < ReviewMainNav /> : null}
         {/* https://codeburst.io/modals-in-react-f6c3ff9f4701 */}
+
         {
           formStepValue === 6 ? (
             < ReviewModal data_size="sm">

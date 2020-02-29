@@ -232,7 +232,6 @@ export class ReviewSection4 extends Component {
 
     return (
       <FormChunk
-        className="rs"
         data_padding="20px 5px 13px 5px"
       >
 

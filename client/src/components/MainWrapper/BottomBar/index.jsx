@@ -25,6 +25,7 @@ export class BottomBar extends Component {
         className="rs bg-primary"
         style={{
           height: "50px",
+          background: "#0abab5"
         }}
       >
         <button
@@ -32,7 +33,7 @@ export class BottomBar extends Component {
           onClick={e => this.selectSection(e)}
           style={{
             width: "33.33333%",
-            // background: "blue",
+            background: "inherit",
             margin: "0 auto"
           }}
           
@@ -64,7 +65,8 @@ export class BottomBar extends Component {
           style={{
             // background: "orange",
             width: "33.33334%",
-            margin: "0 auto"
+            margin: "0 auto",
+            background: "inherit",
             // boxShadow: "0 1px 4px rgba(0, 0, 0, 0.6) inset"
           }}
           value="mapList"
@@ -94,6 +96,7 @@ export class BottomBar extends Component {
           style={{
             // background: "red",
             width: "33.33333%",
+            background: "inherit",
             margin: "0 auto"
             // boxShadow: "0 1px 4px rgba(0, 0, 0, 0.6) inset"
           }}

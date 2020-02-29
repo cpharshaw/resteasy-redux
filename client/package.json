@@ -13,6 +13,7 @@
     "google-maps-react": "^2.0.2",
     "moment": "^2.24.0",
     "react": "^16.8.6",
+    "react-backdrop-filter": "^2.1.0",
     "react-dom": "^16.8.6",
     "react-redux": "^5.1.1",
     "react-redux-firebase": "^2.2.6",

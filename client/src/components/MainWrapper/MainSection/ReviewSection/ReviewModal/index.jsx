@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { formPrev }       from '../../../../../store/actions/formActions';
+import { formPrev } from '../../../../../store/actions/formActions';
 import { modalToggled } from '../../../../../store/actions/modalActions';
+import BackdropFilter from "react-backdrop-filter";
 
 export class ReviewModal extends Component {
 
   closeModal(e) {
     e.preventDefault();
-    
+
     if (this.props.formStepValue === 6) {
       this.props.formPrev();
     }
@@ -32,7 +33,8 @@ export class ReviewModal extends Component {
       overflowY: "auto",
       flexDirection: "column",
       justifyContent: "flex-start",
-      alignContent: "flex-start"
+      alignContent: "flex-start",
+      // background: "transparent"
     }
 
     if (data_size === "sm") {
@@ -53,27 +55,24 @@ export class ReviewModal extends Component {
         name={data_name ? data_name : null}
         style={{
           position: "absolute",
+          backdropFilter: "blur(7px)",
+          WebkitBackdropFilter: "blur(7px)",
           background: 'rgba(197,197,197,0.6)',
-          // background: 'blue',
-          backdropFilter: "blur(6px)",
+          // backgroundPosition: "center",
+          // backgroundRepeat: "no-repeat",
+          // backgroundSize: "cover",
           top: 0,
           right: 0,
-          // bottom: "50px",
           left: 0,
           width: "100vw",
           height: "calc(100% - 50px)",
-          // height: "100vh",
           zIndex: "1000",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          // justifyContent: "flex-start",
-          // flexDirection: "column"
         }}
       >
+      
         <div
           id=""
-          className="rs animated zoomIn faster"
+          className="rs animated zoomIn fast"
           style={style}
         >
           <div
@@ -81,7 +80,7 @@ export class ReviewModal extends Component {
             style={{
               height: "35px",
               justifyContent: "flex-end",
-              background: "transparent",
+              // background: "transparent",
               paddingRight: "8px"
             }}
           >
@@ -92,6 +91,8 @@ export class ReviewModal extends Component {
             }
           </div>
           {children}
+
+
         </div>
       </div>
     )
