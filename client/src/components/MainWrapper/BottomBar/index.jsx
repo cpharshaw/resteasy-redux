@@ -121,6 +121,7 @@ export class BottomBar extends Component {
             </g>
           </svg>
         </button>
+        
       </div>
     )
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import FormNavButton from '../../ReviewFormElements/FormNavButton';
-import { resetForm }    from '../../../../../../store/actions/formActions';
+import { resetForm } from '../../../../../../store/actions/formActions';
 import { modalToggled } from '../../../../../../store/actions/modalActions';
 
 export class ReviewMainNav extends Component {
@@ -20,7 +20,7 @@ export class ReviewMainNav extends Component {
     return (
 
       <div
-        className="rs"
+        className="rs animated fadeIn faster"
         style={{
           height: "50px",
           marginBottom: "20px"

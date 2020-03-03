@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { formPrev } from '../../../../../store/actions/formActions';
-import { modalToggled } from '../../../../../store/actions/modalActions';
-import BackdropFilter from "react-backdrop-filter";
+import { modalToggled, modalClosed} from '../../../../../store/actions/modalActions';
+import ModalBlurBackground from '../ModalBlurBackground';
 
 export class ReviewModal extends Component {
 
@@ -14,7 +14,7 @@ export class ReviewModal extends Component {
       this.props.formPrev();
     }
 
-    // this.props.modalToggled(this.props.data_name)
+    this.props.modalClosed()
 
   }
 
@@ -41,35 +41,21 @@ export class ReviewModal extends Component {
       style.width = "82.5%"
       style.minHeight = "225px"
       style.height = "fit-content"
-    } else {
+    } else if (data_size === "loc") {
+      style.width = "85%"
+      style.height = "22.5%"
+    }
+    else {
       style.width = "92.5%"
       style.height = "92.5%"
     }
 
 
+
     return (
 
-      <div
-        id=""
-        className="rs animated fadeIn faster"
-        name={data_name ? data_name : null}
-        style={{
-          position: "absolute",
-          backdropFilter: "blur(7px)",
-          WebkitBackdropFilter: "blur(7px)",
-          background: 'rgba(197,197,197,0.6)',
-          // backgroundPosition: "center",
-          // backgroundRepeat: "no-repeat",
-          // backgroundSize: "cover",
-          top: 0,
-          right: 0,
-          left: 0,
-          width: "100vw",
-          height: "calc(100% - 50px)",
-          zIndex: "1000",
-        }}
-      >
-      
+      <ModalBlurBackground>
+
         <div
           id=""
           className="rs animated zoomIn fast"
@@ -85,16 +71,21 @@ export class ReviewModal extends Component {
             }}
           >
             {
-              this.props.formStepValue === 7 ? null : (
-                <span onClick={e => this.closeModal(e)} style={{ color: "grey", fontSize: "24px" }}> &times; </span>
-              )
+              <span
+                onClick={e => this.closeModal(e)}
+                style={{ color: "grey", fontSize: "24px" }}
+              >
+                &times;
+        </span>
             }
           </div>
           {children}
 
-
         </div>
-      </div>
+
+      </ModalBlurBackground>
+
+
     )
   }
 }
@@ -110,7 +101,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     formPrev: () => dispatch(formPrev()),
-    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal))
+    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
+    modalClosed: () => dispatch(modalClosed())
   }
 }
 

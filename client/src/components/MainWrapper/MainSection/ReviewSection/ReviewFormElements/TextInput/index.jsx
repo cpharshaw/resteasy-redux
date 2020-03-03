@@ -38,7 +38,6 @@ export class TextInput extends Component {
         min={data_min ? data_min : "0"}
         max={data_max ? data_max : "999.99"}
         step={data_step ? data_step : "0.05"}
-        value={data_value}
         style={{
           width: data_width ? data_width : null,
           textAlign: data_textalign ? data_textalign : null,

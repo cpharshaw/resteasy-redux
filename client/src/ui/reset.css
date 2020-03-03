@@ -15,7 +15,10 @@ html, body {
 	width: 100%;
 }
 
-
+button {
+	all: unset;
+	border: 0
+}
 
 .rs {	
 	display: flex;
@@ -35,6 +38,7 @@ html, body {
 	border-collapse: collapse;
 	line-height: 1;
 	list-style: none;
+	text-decoration: none;
 	box-sizing: border-box;
 	font-size: 100%;
 	font-family: "Roboto";
@@ -47,6 +51,8 @@ input[type="checkbox"] {
 	width: initial;
 	-webkit-appearance: "checkbox"
 }
+
+
 
 
 ::-webkit-scrollbar {

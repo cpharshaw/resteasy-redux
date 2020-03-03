@@ -36,7 +36,9 @@ const initState = {
 
   // other
 
-  formResetModal: false
+  formResetModal: false,
+
+  settingsModal: false
 
 }
 
@@ -50,6 +52,13 @@ const modalReducer = (state = initState, action) => {
       return {
         ...state,
         [modalName]: !state[modalName]
+      };
+
+    case "MODAL_CLOSED":
+      // console.log("modalReducer: ", action.payload)
+
+      return {
+        ...initState
       };
 
     default:

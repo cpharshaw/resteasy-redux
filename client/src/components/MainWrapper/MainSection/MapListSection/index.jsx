@@ -4,14 +4,17 @@ import { compose } from 'redux';
 
 import MapListBar from './MapListBar/';
 import MapListWrapper from './MapListWrapper';
+import ModalContainer from '../Modals';
+import LocationModal from '../Modals/LocationModal';
 
 export class MapListSection extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const { selectedSectionValue } = this.props;
+
+    const {
+      settingsModal
+    } = this.props.modalState;
 
     const displayValue = selectedSectionValue === "mapList" ? "flex" : "none";
 
@@ -27,8 +30,17 @@ export class MapListSection extends Component {
           // zIndex: "13"
         }}
       >
-        < MapListBar  />
+        < MapListBar />
         < MapListWrapper />
+
+        {
+          settingsModal ? (
+            // < ModalContainer data_size="loc" >
+              <LocationModal />
+            // </ModalContainer>
+          ) : null
+        }
+        
       </div>
     )
   }
@@ -42,7 +54,8 @@ const mapStateToProps = (state, ownProps) => {
     boundsValue: state.boundsState.boundsValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
-    selectedSectionValue: ownProps.display
+    selectedSectionValue: ownProps.display,
+    modalState: state.modalState,
   }
 }
 

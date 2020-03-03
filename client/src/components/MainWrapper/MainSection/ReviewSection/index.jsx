@@ -9,7 +9,8 @@ import ReviewSection3 from './ReviewSections/ReviewSection3';
 import ReviewSection4 from './ReviewSections/ReviewSection4';
 import ReviewSection5 from './ReviewSections/ReviewSection5';
 
-import ReviewModal from '../ReviewSection/ReviewModal';
+import ReviewModal from '../Modals/ReviewModal';
+// import ReviewModal from '../../Modals/ReviewModal';
 import FormNavButton from './ReviewFormElements/FormNavButton';
 import ReviewMainNav from './ReviewNav/ReviewMainNav';
 
@@ -125,7 +126,8 @@ export class ReviewSection extends Component {
 
         {
           formStepValue === 6 ? (
-            < ReviewModal data_size="sm">
+
+            <ReviewModal data_size="sm">
               <div className="rs" style={{ flexDirection: "column" }}>
                 <h1 className="rs">
                   Ok to submit review?
@@ -148,11 +150,11 @@ export class ReviewSection extends Component {
                   />
                 </div>
               </div>
-            </ReviewModal >
+            </ReviewModal>
           )
             :
             formStepValue === 7 ? (
-              < ReviewModal data_size="sm">
+              <ReviewModal data_size="sm">
                 <div className="rs" style={{ flexDirection: "column" }}>
                   <h1 className="rs">
                     Thank you for your review.
@@ -172,194 +174,194 @@ export class ReviewSection extends Component {
                     />
                   </div>
                 </div>
-              </ReviewModal >
+              </ReviewModal>
             ) : null
 
         }
 
         {
           formLocationModal ? (
-            < ReviewModal data_name="formLocationModal">
+            <ReviewModal data_name="formLocationModal">
               formLocationModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formRestroomTypeModal ? (
-            < ReviewModal data_name="formRestroomTypeModal">
+            <ReviewModal data_name="formRestroomTypeModal">
               formRestroomTypeModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formLocationNotesModal ? (
-            < ReviewModal data_name="formLocationNotesModal">
+            <ReviewModal data_name="formLocationNotesModal">
               formLocationNotesModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formTimeOfVisitModal ? (
-            < ReviewModal data_name="formTimeOfVisitModal">
+            <ReviewModal data_name="formTimeOfVisitModal">
               formTimeOfVisitModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formOutOfOrderModal ? (
-            < ReviewModal data_name="formOutOfOrderModal">
+            <ReviewModal data_name="formOutOfOrderModal">
               formOutOfOrderModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
 
         {
           formCleanlinessModal ? (
-            < ReviewModal data_name="formCleanlinessModal">
+            <ReviewModal data_name="formCleanlinessModal">
               formCleanlinessModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formSmellModal ? (
-            < ReviewModal data_name="formSmellModal">
+            <ReviewModal data_name="formSmellModal">
               formSmellModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formPrivacyModal ? (
-            < ReviewModal data_name="formPrivacyModal">
+            <ReviewModal data_name="formPrivacyModal">
               formPrivacyModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formComfortModal ? (
-            < ReviewModal data_name="formComfortModal">
+            <ReviewModal data_name="formComfortModal">
               formComfortModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formCapacityModal ? (
-            < ReviewModal data_name="formCapacityModal">
+            <ReviewModal data_name="formCapacityModal">
               formCapacityModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formSafetyModal ? (
-            < ReviewModal data_name="formSafetyModal">
+            <ReviewModal data_name="formSafetyModal">
               formSafetyModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formStyleModal ? (
-            < ReviewModal data_name="formStyleModal">
+            <ReviewModal data_name="formStyleModal">
               formStyleModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formHandicappedModal ? (
-            < ReviewModal data_name="formHandicappedModal">
+            <ReviewModal data_name="formHandicappedModal">
               formHandicappedModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formGenderNeutralModal ? (
-            < ReviewModal data_name="formGenderNeutralModal">
+            <ReviewModal data_name="formGenderNeutralModal">
               formGenderNeutralModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formGenderNeutralModal ? (
-            < ReviewModal data_name="formGenderNeutralModal">
+            <ReviewModal data_name="formGenderNeutralModal">
               formGenderNeutralModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
 
         {
           formBabyChangeModal ? (
-            < ReviewModal data_name="formBabyChangeModal">
+            <ReviewModal data_name="formBabyChangeModal">
               formBabyChangeModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formScheduleModal ? (
-            < ReviewModal data_name="formScheduleModal">
+            <ReviewModal data_name="formScheduleModal">
               formScheduleModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formAdmissionModal ? (
-            < ReviewModal data_name="formAdmissionModal">
+            <ReviewModal data_name="formAdmissionModal">
               formAdmissionModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
         {
           formFeeDisplayModal ? (
-            < ReviewModal data_name="formFeeDisplayModal">
+            <ReviewModal data_name="formFeeDisplayModal">
               formFeeDisplayModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
 
         {
           formFeeModal ? (
-            < ReviewModal data_name="formFeeModal">
+            <ReviewModal data_name="formFeeModal">
               formFeeModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
         {
           formPhotoUploadModal ? (
-            < ReviewModal data_name="formPhotoUploadModal">
+            <ReviewModal data_name="formPhotoUploadModal">
               formPhotoUploadModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
 
         {
           formCommentsModal ? (
-            < ReviewModal data_name="formCommentsModal">
+            <ReviewModal data_name="formCommentsModal">
               formCommentsModal
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 
 
         {
           formResetModal ? (
-            < ReviewModal data_size="sm" data_name="formResetModal">
+            <ReviewModal data_size="sm">
               <div className="rs" style={{ flexDirection: "column" }}>
                 <h1 className="rs">
                   Reset review form and start over?
@@ -382,7 +384,7 @@ export class ReviewSection extends Component {
                   />
                 </div>
               </div>
-            </ ReviewModal >
+            </ReviewModal>
           ) : null
         }
 

@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { formPrev } from '../../../../../store/actions/formActions';
-import { modalToggled } from '../../../../../store/actions/modalActions';
-import BackdropFilter from "react-backdrop-filter";
+import { modalClosed } from '../../../../../store/actions/modalActions';
 
-export class ReviewModal extends Component {
 
-  closeModal(e) {
+export class ModalBlurBackground extends Component {
+
+  closeModal = (e) => {
     e.preventDefault();
 
     if (this.props.formStepValue === 6) {
       this.props.formPrev();
     }
 
-    // this.props.modalToggled(this.props.data_name)
+    this.props.modalClosed()
 
   }
 
@@ -23,7 +22,8 @@ export class ReviewModal extends Component {
     const {
       children,
       data_size,
-      data_name
+      data_name,
+      modalClosed
     } = this.props;
 
     const style = {
@@ -41,11 +41,14 @@ export class ReviewModal extends Component {
       style.width = "82.5%"
       style.minHeight = "225px"
       style.height = "fit-content"
-    } else {
+    } else if (data_size === "loc") {
+      style.width = "85%"
+      style.height = "22.5%"
+    }
+    else {
       style.width = "92.5%"
       style.height = "92.5%"
     }
-
 
     return (
 
@@ -58,9 +61,7 @@ export class ReviewModal extends Component {
           backdropFilter: "blur(7px)",
           WebkitBackdropFilter: "blur(7px)",
           background: 'rgba(197,197,197,0.6)',
-          // backgroundPosition: "center",
-          // backgroundRepeat: "no-repeat",
-          // backgroundSize: "cover",
+
           top: 0,
           right: 0,
           left: 0,
@@ -69,31 +70,7 @@ export class ReviewModal extends Component {
           zIndex: "1000",
         }}
       >
-      
-        <div
-          id=""
-          className="rs animated zoomIn fast"
-          style={style}
-        >
-          <div
-            className="rs"
-            style={{
-              height: "35px",
-              justifyContent: "flex-end",
-              // background: "transparent",
-              paddingRight: "8px"
-            }}
-          >
-            {
-              this.props.formStepValue === 7 ? null : (
-                <span onClick={e => this.closeModal(e)} style={{ color: "grey", fontSize: "24px" }}> &times; </span>
-              )
-            }
-          </div>
-          {children}
-
-
-        </div>
+        {children}
       </div>
     )
   }
@@ -103,17 +80,16 @@ export class ReviewModal extends Component {
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
-    formStepValue: state.formState.formStepValue,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    formPrev: () => dispatch(formPrev()),
-    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal))
+    // formPrev: () => dispatch(formPrev()),
+    modalClosed: () => dispatch(modalClosed())
   }
 }
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(ReviewModal);
+)(ModalBlurBackground);
