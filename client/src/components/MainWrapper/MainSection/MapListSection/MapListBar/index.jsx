@@ -129,14 +129,8 @@ export class MapListBar extends Component {
               {
                 this.state.settingsToggled ?
 
-                  // <img
-                  //   className="animated flipInX faster"
-                  //   style={{ color: "white", background: "white" }}
-                  //   src="https://img.icons8.com/material-outlined/30/000000/multiply--v1.png"
-                  // />
-
                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                    className="animated tada slow"
+                    className="animated heartBeat slow"
                     width="30" height="30"
                     viewBox="0 0 172 172"
                     style={{ fill: "#f5f5f5" }}>
