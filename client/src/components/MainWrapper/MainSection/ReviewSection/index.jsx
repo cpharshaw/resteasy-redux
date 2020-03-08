@@ -182,7 +182,30 @@ export class ReviewSection extends Component {
         {
           formLocationModal ? (
             <ReviewModal data_name="formLocationModal">
-              formLocationModal
+
+              {
+                this.props.foursquareValue.map((place, i) => {
+                  const name = place.name ? place.name : null;
+                  const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : null) : null;
+                  const address = place.location.address + ", " + place.location.city + ", " + place.location.state + " " + place.location.postalCode;
+                  return (
+                    <div
+                      id=""
+                      key={i + "fs"}
+                      className="rs"
+                      style={{
+                        flexDirection: "column"
+                      }}
+                    >
+                      <h2>{name}</h2>
+                      <h4>Category - {category}</h4>
+                      <h4>{address}</h4>
+                    </div>
+                  )
+                })
+
+              }
+
             </ReviewModal>
           ) : null
         }
@@ -405,7 +428,8 @@ const mapStateToProps = (state, ownProps) => {
     modalState: state.modalState,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
-    selectedSectionValue: ownProps.display
+    selectedSectionValue: ownProps.display,
+    foursquareValue: state.foursquareState.foursquareValue
   }
 }
 

@@ -6,8 +6,8 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { getGeolocation } from '../../../../../../../store/actions/geoActions';
-import { storeInput } from '../../../../../../../store/actions/inputActions';
-
+import { storeInput }              from '../../../../../../../store/actions/inputActions';
+import { getPlacesFromFoursquare } from '../../../../../../../store/actions/foursquareActions';
 import './recenter.css';
 
 
@@ -129,6 +129,7 @@ class RecenterButton extends Component {
       this.setState({
         color: "#1898dd"
       });
+      // console.log('recenter', this.props.foursquareValue);
       // console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
 
     } else if ((ctr_update || geo_update) && !geo_same_ctr) {
@@ -204,8 +205,8 @@ const mapStateToProps = (state, ownProps) => {
     boundsValue: state.boundsState.boundsValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
-    inputValue: state.inputState.inputValue
-    // ,state: state
+    inputValue: state.inputState.inputValue,
+    foursquareValue: state.foursquareState.foursquareValue,
   }
 }
 
@@ -216,7 +217,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     storeInput: (input) => {
       return dispatch(storeInput(input));
-    }
+    },
+    getPlacesFromFoursquare: (location) => {
+      return dispatch(getPlacesFromFoursquare(location))
+    },
   }
 }
 

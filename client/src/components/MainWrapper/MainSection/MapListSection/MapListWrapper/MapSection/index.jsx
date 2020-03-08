@@ -118,6 +118,8 @@ class MapSection extends Component {
 
         this.mapFuncs("idleListener fired");
 
+        // console.log('map idle fired')
+
         const fsLL = geoLat + "," + geoLng;
         // this.props.getPlacesFromFoursquare(fsLL);
         // console.log("fs value: ", this.props.foursquareValue);
@@ -193,6 +195,8 @@ class MapSection extends Component {
       ||
       ctrLng !== prev_ctrLng;
 
+      // console.log(ctr_update);
+
     const bounds_update = JSON.stringify(bounds) !== JSON.stringify(prev_bounds);
 
     const input_update = inputVal !== prev_inputVal;
@@ -201,6 +205,19 @@ class MapSection extends Component {
       geoLat === ctrLat
       &&
       geoLng === ctrLng;
+
+
+    if (ctr_update) {
+      this.map.setCenter(
+        {
+          lat: ctrLat,
+          lng: ctrLng
+        }
+      );
+      const fsLL = ctrLat + "," + ctrLng;
+      this.props.getPlacesFromFoursquare(fsLL);
+      // console.log("fs value updated: ", this.props.foursquareValue);
+    }
 
     // 
     // 

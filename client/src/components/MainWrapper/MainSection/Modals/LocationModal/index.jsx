@@ -5,6 +5,8 @@ import { formPrev } from '../../../../../store/actions/formActions';
 import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { storeCircle } from '../../../../../store/actions/circleActions';
+import { storeCenter }             from '../../../../../store/actions/centerActions';
+import { getPlacesFromFoursquare } from '../../../../../store/actions/foursquareActions';
 // import ModalBlurBackground from '../ModalBlurBackground';
 
 export class LocationModal extends Component {
@@ -12,6 +14,7 @@ export class LocationModal extends Component {
     super(props);
     this.searchBoxRef = React.createRef();
     this.searchBox = null;
+    this.searchBoxTest = null;
     this.state = {
       place: null,
       value: ""
@@ -31,7 +34,7 @@ export class LocationModal extends Component {
       place: null,
       value: ""
     });
-    console.log("cleared input pressed", this.state);
+    // console.log("cleared input pressed", this.state);
   }
 
   componentDidMount() {
@@ -64,13 +67,30 @@ export class LocationModal extends Component {
     this.searchBox.addListener(
       'place_changed',
       () => {
-        console.log(this.searchBox)
+        // console.log(this.searchBox)
         const place = this.searchBox.getPlace();
         this.setState({
           place,
           value: place.name
         });
-        console.log("place: ", place)
+        // console.log("place: ", place)
+
+        const ctrLat = place.geometry.location.lat();
+        const ctrLng = place.geometry.location.lng();
+
+        const center = {
+          lat: ctrLat,
+          lng: ctrLng
+        };
+
+        const fsLL = ctrLat + "," + ctrLng;
+        this.props.getPlacesFromFoursquare(fsLL);
+
+        // setTimeout(() => console.log("fs value updated: ", this.props.foursquareValue), 2000)
+        // console.log("fs value updated: ", this.props.foursquareValue);
+
+        this.props.storeCenter(center);
+
       }
     );
 
@@ -81,11 +101,11 @@ export class LocationModal extends Component {
         this.setState({
           place
         });
-        console.log("place: ", this.state.place)
+        // console.log("place: ", this.state.place)
       }
     );
 
-    this.props.storeCircle(circle);
+    // this.props.storeCircle(circle);
 
   }
 
@@ -309,7 +329,8 @@ const mapStateToProps = (state, ownProps) => {
     mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
     centerLatValue: state.centerState.centerLatValue,
-    centerLngValue: state.centerState.centerLngValue
+    centerLngValue: state.centerState.centerLngValue,
+    foursquareValue: state.foursquareState.foursquareValue,
   }
 }
 
@@ -318,7 +339,13 @@ const mapDispatchToProps = (dispatch) => {
     formPrev: () => dispatch(formPrev()),
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     modalClosed: () => dispatch(modalClosed()),
-    storeCircle: (circle) => dispatch(storeCircle(circle))
+    storeCircle: (circle) => dispatch(storeCircle(circle)),
+    storeCenter: (center) => {
+      return dispatch(storeCenter(center));
+    },
+    getPlacesFromFoursquare: (location) => {
+      return dispatch(getPlacesFromFoursquare(location))
+    },
   }
 }
 
