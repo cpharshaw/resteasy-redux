@@ -1,8 +1,8 @@
 
 const initState = {
   geolocationValue: null,
-  geolocationLatValue: 39.952391,
-  geolocationLngValue: -75.163600,
+  geolocationLatValue: 39.962292,
+  geolocationLngValue: -75.144768,
   geolocationAcc: 600,
   geolocationStatus: null,
   numGeolocationUpdates: 0
@@ -23,8 +23,10 @@ const geolocationReducer = (state = initState, action) => {
         return {
           ...state,
           geolocationValue: action.payload,
+          // geolocationLatValue: Math.round(initState.geolocationLatValue * 1000000) / 1000000,
+          // geolocationLngValue: Math.round(initState.geolocationLngValue * 1000000) / 1000000,
           geolocationLatValue: Math.round(action.payload.latitude * 1000000) / 1000000,
-          geolocationLngValue: Math.round(action.payload.longitude * 1000000) / 1000000,
+          geolocationLngValue: Math.round(action.payload.longitude * 1000000) / 1000000,          
           geolocationAcc: action.payload.accuracy,
           geolocationStatus: action.type,
           numGeolocationUpdates: state.numGeolocationUpdates + 1
@@ -35,8 +37,10 @@ const geolocationReducer = (state = initState, action) => {
       return {
         ...state,
         geolocationValue: action.payload,
-        geolocationLatValue: action.payload.latitude,
-        geolocationLngValue: action.payload.longitude,
+        // geolocationLatValue: action.payload.latitude,
+        // geolocationLngValue: action.payload.longitude,
+        geolocationLatValue: initState.geolocationLatValue,
+        geolocationLngValue: initState.geolocationLngValue,
         geolocationAcc: action.payload.accuracy,
         geolocationStatus: action.type,
         numGeolocationUpdates: state.numGeolocationUpdates

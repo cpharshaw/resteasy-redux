@@ -5,7 +5,7 @@ import { formPrev } from '../../../../../store/actions/formActions';
 import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { storeCircle } from '../../../../../store/actions/circleActions';
-import { storeCenter }             from '../../../../../store/actions/centerActions';
+import { storeCenter } from '../../../../../store/actions/centerActions';
 import { getPlacesFromFoursquare } from '../../../../../store/actions/foursquareActions';
 // import ModalBlurBackground from '../ModalBlurBackground';
 
@@ -48,7 +48,6 @@ export class LocationModal extends Component {
         radius: 56000
       }
     );
-
 
     const bounds = circle.getBounds();
 
@@ -225,7 +224,7 @@ export class LocationModal extends Component {
   }
 
   render() {
-
+console.log(this.props.google)
     const {
       children,
       data_size,
@@ -256,20 +255,12 @@ export class LocationModal extends Component {
 
 
     return (
-
-      <div
-        id=""
-        className="rs animated flipInX faster"
-        style={style}
-      >
-
+      <React.Fragment>
         <input
           id="pac-input"
           className="rs"
           type="search"
           ref={this.searchBoxRef}
-          // value={this.state.value}
-          // onChange={e => this.handleChange(e)}
           placeholder="Recenter around location..."
           style={{
             all: "unset",
@@ -281,28 +272,7 @@ export class LocationModal extends Component {
             background: "#f5f5f5",
             textOverflow: "ellipsis",
           }}
-        />
-        {/* {
-          this.state.value !== "" ?
-            <span
-              id=""
-              className="rs"
-              onClick={this.clearInput}
-              style={{
-                position: "absolute",
-                width: "10px",
-                height: "42px",
-                right: "47.5px",
-                color: "darkgrey",
-                background: "transparent",
-                backgroundColor: "transparent",
-                fontSize: "25px"
-              }}
-            >
-              &times;
-            </span> 
-            : null
-        } */}
+        /> 
         <div
           className="rs"
           style={{
@@ -312,8 +282,7 @@ export class LocationModal extends Component {
         >
           <img src="https://img.icons8.com/material-outlined/20/000000/location-update.png" />
         </div>
-      </div >
-
+      </React.Fragment>
     )
   }
 }
@@ -362,7 +331,3 @@ export default compose(
     version: "3.30"
   })
 )(LocationModal);
-
-// export default compose(
-//   connect(mapStateToProps, mapDispatchToProps)
-// )(LocationModal);

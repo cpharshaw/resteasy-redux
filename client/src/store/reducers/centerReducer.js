@@ -1,7 +1,7 @@
 
 const initState = {
-  centerLatValue: 39.952391,
-  centerLngValue: -75.163600
+  centerLatValue: 39.962292,
+  centerLngValue: -75.144768
 }
 
 const centerReducer = (state = initState, action) => {
@@ -13,6 +13,9 @@ const centerReducer = (state = initState, action) => {
         ...state,
         centerLatValue: Math.round(action.payload.lat*1000000)/1000000,
         centerLngValue: Math.round(action.payload.lng*1000000)/1000000
+
+        // centerLatValue: Math.round(initState.centerLatValue*1000000)/1000000,
+        // centerLngValue: Math.round(initState.centerLngValue*1000000)/1000000        
       }
     default:
       return {

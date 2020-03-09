@@ -33,17 +33,23 @@
 
 #mapListScrollbar {
   justify-content: flex-start;
-  height: 72px;
-  /* width: 100%; */
+  height: 72px; 
   flex-wrap: nowrap;
   white-space: nowrap;
   overflow: auto;
   overflow-x: scroll;
-  /* overflow-y: scroll; */
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
+  /* width: 100%; */
+  /* overflow-y: scroll; */
   /* background: red; */
 }
+
+#mapListScrollbar::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important
+}
+
 
 .filter-toggle {
   height: 82%;

@@ -20,6 +20,9 @@ export class MapListSection extends Component {
 
     // console.log("mapListDisplayValue: ", mapListDisplayValue);
 
+    const Test = () => {
+      return <React.Fragment><input type='text' placeholder='text' /></React.Fragment>
+    }
     return (
       <div
         id="maplistSection"
@@ -36,11 +39,36 @@ export class MapListSection extends Component {
         {
           settingsModal ? (
             // < ModalContainer data_size="loc" >
+            <div
+              id=""
+              className="animated flipInX faster"
+              style={{
+                position: 'absolute',
+                top: "72px",
+                left: "0",
+                right: "0",
+                // width: "85%",
+                height: "50px",
+                flexDirection: "row",
+                boxShadow: "0 1px 3px #a8a8a8",
+                // borderRadius: "5px",
+                // background: "#f5f5f5",
+                paddingTop: "3px",
+                paddingBottom: "3px",
+                paddingLeft: "9px",
+                paddingRight: "9px",
+                // borderRight: "1px solid #f5f5f5",
+                // overflowY: "auto",
+                // justifyContent: "flex-start",
+                // alignContent: "flex-start",
+                background: "#0abab5"
+              }}
+            >
               <LocationModal />
-            // </ModalContainer>
+              {/* <Test/> */}
+            </div>
           ) : null
         }
-        
       </div>
     )
   }
@@ -65,5 +93,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, null)
 )(MapListSection);

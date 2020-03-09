@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { formPrev } from '../../../../../store/actions/formActions';
-import { modalToggled, modalClosed} from '../../../../../store/actions/modalActions';
+import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
 import ModalBlurBackground from '../ModalBlurBackground';
 
 export class ReviewModal extends Component {
@@ -46,8 +46,8 @@ export class ReviewModal extends Component {
       style.height = "22.5%"
     }
     else {
-      style.width = "92.5%"
-      style.height = "92.5%"
+      style.width = "95%"
+      style.height = "95%"
     }
 
 
@@ -58,27 +58,33 @@ export class ReviewModal extends Component {
 
         <div
           id=""
-          className="rs animated zoomIn fast"
+          className="rs animated zoomIn fast modal"
           style={style}
         >
           <div
             className="rs"
             style={{
+              position: "fixed",
+              width: "inherit",
+              background: "transparent",
+              // top: "0",
+              // right: "0",
+              // left: "0",
               height: "35px",
               justifyContent: "flex-end",
               // background: "transparent",
               paddingRight: "8px"
             }}
           >
-            {
-              <span
-                onClick={e => this.closeModal(e)}
-                style={{ color: "grey", fontSize: "24px" }}
-              >
-                &times;
-        </span>
-            }
+            <span
+              onClick={e => this.closeModal(e)}
+              className="animated fadeIn slower delay-1s"
+              style={{ color: "grey", fontSize: "24px" }}
+            >
+              &times;
+            </span>
           </div>
+
           {children}
 
         </div>

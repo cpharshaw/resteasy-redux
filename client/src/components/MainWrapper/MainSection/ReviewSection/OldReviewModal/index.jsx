@@ -5,7 +5,7 @@ import { formPrev } from '../../../../../store/actions/formActions';
 import { modalToggled } from '../../../../../store/actions/modalActions';
 import BackdropFilter from "react-backdrop-filter";
 
-export class ReviewModal extends Component {
+export class OldReviewModal extends Component {
 
   closeModal(e) {
     e.preventDefault();
@@ -42,8 +42,8 @@ export class ReviewModal extends Component {
       style.minHeight = "225px"
       style.height = "fit-content"
     } else {
-      style.width = "92.5%"
-      style.height = "92.5%"
+      style.width = "95%"
+      style.height = "5%"
     }
 
 
@@ -116,4 +116,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
-)(ReviewModal);
+)(OldReviewModal);

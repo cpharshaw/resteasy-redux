@@ -61,8 +61,8 @@ export class ReviewSection1 extends Component {
         {
           !formLocationValue ? <div> {formLocationValue} </div> : (
             <LocationSelector
-              data_width="50%"
-              data_height="50px"
+              data_width="75%"
+              data_height="75px"
             />
           )
         }

@@ -21,8 +21,8 @@ class MarkerComp extends Component {
         {
           map: this.props.mapValue,
           position: {
-            lat: this.props.markerLat ? this.props.markerLat : 39.96226267942067,
-            lng: this.props.markerLng ? this.props.markerLng : -75.14639198461786
+            lat: this.props.markerLat ? this.props.markerLat : 39.962292,
+            lng: this.props.markerLng ? this.props.markerLng : -75.144768
           },
           icon: this.props.icon ? this.props.icon : null
         }

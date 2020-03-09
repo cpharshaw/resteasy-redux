@@ -23,7 +23,7 @@ export const getPlacesFromFoursquare = (location) => {
 
               // near: "39.952170,-75.166150", 
               near: location,
-              limit: 13,
+              limit: 30,
               intent: "checkin",
               v: "20191130",
             },
@@ -36,7 +36,7 @@ export const getPlacesFromFoursquare = (location) => {
 
                 // console.log(res);
 
-                return res.response.venues.map(venue => {
+                const fsWIthDistance = res.response.venues.map(venue => {
                   const venueLat = venue.location.labeledLatLngs[0].lat;
                   const venueLng = venue.location.labeledLatLngs[0].lng;
                   const venueDistance = getDistance(
@@ -45,6 +45,12 @@ export const getPlacesFromFoursquare = (location) => {
                   );
                   venue.distance = venueDistance;
                   return venue;
+                });
+
+                // return fsWIthDistance;
+
+                return fsWIthDistance.filter(venue => {
+                  return venue.location.address && venue.location.city && venue.location.state && venue.location.postalCode
                 });
               }
             ],

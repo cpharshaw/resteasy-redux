@@ -12,6 +12,7 @@ import ReviewSection5 from './ReviewSections/ReviewSection5';
 import ReviewModal from '../Modals/ReviewModal';
 // import ReviewModal from '../../Modals/ReviewModal';
 import FormNavButton from './ReviewFormElements/FormNavButton';
+import HorizontalRule from './ReviewFormElements/HorizontalRule';
 import ReviewMainNav from './ReviewNav/ReviewMainNav';
 
 // import ReviewConfirm from './ReviewSections/ReviewSection6'; 
@@ -53,6 +54,7 @@ export class ReviewSection extends Component {
 
 
   render() {
+
 
     const {
       selectedSectionValue,
@@ -186,8 +188,9 @@ export class ReviewSection extends Component {
               {
                 this.props.foursquareValue.map((place, i) => {
                   const name = place.name ? place.name : null;
-                  const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : null) : null;
-                  const address = place.location.address + ", " + place.location.city + ", " + place.location.state + " " + place.location.postalCode;
+                  const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : "null";
+                  const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
+                  const distance = place.distance + " ft";
                   return (
                     <div
                       id=""
@@ -197,9 +200,14 @@ export class ReviewSection extends Component {
                         flexDirection: "column"
                       }}
                     >
-                      <h2>{name}</h2>
-                      <h4>Category - {category}</h4>
-                      <h4>{address}</h4>
+
+                      <br />
+                      <br />
+                      {name} ({distance})<br />
+                      {address} <br />
+                      {category} <br/>
+                      <br />
+                      <HorizontalRule />
                     </div>
                   )
                 })
