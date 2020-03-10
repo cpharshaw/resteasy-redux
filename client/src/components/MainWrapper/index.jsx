@@ -8,6 +8,8 @@ import BottomBar from './BottomBar/';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { GoogleApiWrapper } from "google-maps-react";
+import { storeGoogleAPI } from '../../store/actions/googleAPIActions';
 // import styles from '../../index.module.css';
 
 // import { statement } from '@babel/template';
@@ -17,9 +19,8 @@ import { compose } from 'redux';
 
 class MainWrapper extends Component {
 
-
   componentDidMount() {
-
+    this.props.storeGoogleAPI(this.props.google.maps);
     // console.log("Wrapper bounds from store: ", this.props.boundsValue);
   }
 
@@ -30,7 +31,7 @@ class MainWrapper extends Component {
       mapListToggleValue,
       geolocationValue
     } = this.props;
-
+    // console.log("GOOGLE PROPS: ", this.props.googleAPIValue)
     return (
       // <div
       //   fixed
@@ -50,6 +51,7 @@ class MainWrapper extends Component {
         < MainSection />
         < BottomBar />
       </ div >
+      
       // </div>
 
     )
@@ -58,23 +60,33 @@ class MainWrapper extends Component {
 }
 
 
+// export default MainWrapper;
+
 
 const mapStateToProps = (state) => {
-  // console.log("mainwrapper state: ", state);
   return {
     mapListToggleValue: state.mapListState.mapListToggleValue,
-    // geolocationValue: state.geolocationState.geolocationValue,
     boundsValue: state.boundsState.boundsValue,
-    // reviews: state.firestore.ordered.reviews,
-    // auth: state.firebase.auth
+    googleAPIValue: state.googleAPIState.googleAPIValue,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    storeGoogleAPI: api => dispatch(storeGoogleAPI(api))
   }
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
-)(MainWrapper)
+  connect(mapStateToProps, mapDispatchToProps),
+  // firestoreConnect([
+  //   {
+  //     collection: 'reviews',
+  //     orderBy: ['createdAt', 'desc']
+  //   }
+  // ]),
+  GoogleApiWrapper({
+    apiKey: process.env.REACT_APP_GM_KEY,
+    version: "3.30"
+  })
+)(MainWrapper);

@@ -71,89 +71,9 @@ class MapSection extends Component {
   componentDidMount() {
 
     this.props.getGeolocation();
-    const geoLat = this.props.geolocationLatValue;
-    const geoLng = this.props.geolocationLngValue;
-    // console.log("lat, lng: ", geoLat, geoLng)
 
     // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
     // https://developers.google.com/maps/documentation/javascript/places - nearby
-
-    this.map = new this.props.google.maps.Map(
-      this.googleMapRef.current,
-      {
-        zoom: 15,
-        styles: MyStyle,
-        center: {
-          lat: geoLat,
-          lng: geoLng
-        },
-        zoomControlOptions: {
-          position: this.props.google.maps.ControlPosition.LEFT_CENTER
-        },
-        mapTypeControl: false,
-        fullscreenControl: false,
-        streetViewControl: false,
-        // disableDefaultUI: true
-      }
-    );
-
-
-    this.marker = new this.props.google.maps.Marker(
-      {
-        map: this.map,
-        position: {
-          lat: geoLat,
-          lng: geoLng
-        },
-        icon: myLocationIcon
-      }
-    );
-
-
-
-
-    const idleListener = this.map.addListener(
-      'idle',
-      () => {
-
-        this.mapFuncs("idleListener fired");
-
-        // console.log('map idle fired')
-
-        const fsLL = geoLat + "," + geoLng;
-        // this.props.getPlacesFromFoursquare(fsLL);
-        // console.log("fs value: ", this.props.foursquareValue);
-
-
-        // if (this.props.numGeolocationUpdates > 0) {
-        //   var pyrmont = new this.props.google.maps.LatLng(
-        //     this.props.centerLatValue,
-        //     this.props.centerLngValue
-        //   );
-
-
-        // var options = {
-        //   location: pyrmont,
-        // type: ['point_of_interest'],
-        // type: ['establishment'],
-        // rankBy: this.props.google.maps.places.RankBy.DISTANCE,
-        // radius: '500',
-        // };
-        // https://github.com/foursquare/react-foursquare
-
-
-        // const service = new this.props.google.maps.places.PlacesService(this.map);
-        // service.nearbySearch(options, callback);
-
-        // function callback(results, status) {
-        //   console.log("nearby results: ", results);
-        // }
-        // }
-
-      }
-    );
-
-
   }
 
 
@@ -183,31 +103,120 @@ class MapSection extends Component {
     // console.log("numGeoUpdates: ", numGeoUpdates);
 
     // checks for changes
-    const geo_update =
+    
+    const googleAPIUpdate = prevProps.googleAPIValue === null && this.props.googleAPIValue !== null;
+
+    // console.log("prevProps.googleAPIValue: ", prevProps.googleAPIValue)
+    // console.log("this.props.googleAPIValue: ", this.props.googleAPIValue)
+    // console.log("googleAPIUpdate: ", googleAPIUpdate)
+
+    const geo_update = this.props.googleAPIValue && (
       geoLat !== prev_geoLat
       ||
-      geoLng !== prev_geoLng;
+      geoLng !== prev_geoLng
+    );
 
-    const numGeo_update = numGeoUpdates !== prev_numGeoUpdates;
+    const numGeo_update = (numGeoUpdates !== prev_numGeoUpdates) && this.props.googleAPIValue;
 
-    const ctr_update =
+    const ctr_update = this.props.googleAPIValue && (
       ctrLat !== prev_ctrLat
       ||
-      ctrLng !== prev_ctrLng;
+      ctrLng !== prev_ctrLng
+    );
 
-      // console.log(ctr_update);
+    // console.log(ctr_update);
 
-    const bounds_update = JSON.stringify(bounds) !== JSON.stringify(prev_bounds);
+    const bounds_update = (JSON.stringify(bounds) !== JSON.stringify(prev_bounds)) && this.props.googleAPIValue;
 
-    const input_update = inputVal !== prev_inputVal;
+    const input_update = (inputVal !== prev_inputVal) && this.props.googleAPIValue;
 
-    const geo_same_ctr =
+    const geo_same_ctr = this.props.googleAPIValue && (
       geoLat === ctrLat
       &&
-      geoLng === ctrLng;
+      geoLng === ctrLng
+    );
 
 
-    if (ctr_update) {
+    if (googleAPIUpdate) {
+
+      this.map = new this.props.googleAPIValue.Map(
+        this.googleMapRef.current,
+        {
+          zoom: 15,
+          styles: MyStyle,
+          center: {
+            lat: geoLat,
+            lng: geoLng
+          },
+          zoomControlOptions: {
+            position: this.props.googleAPIValue.ControlPosition.LEFT_CENTER
+          },
+          mapTypeControl: false,
+          fullscreenControl: false,
+          streetViewControl: false,
+          // disableDefaultUI: true
+        }
+      );
+
+
+      this.marker = new this.props.googleAPIValue.Marker(
+        {
+          map: this.map,
+          position: {
+            lat: geoLat,
+            lng: geoLng
+          },
+          icon: myLocationIcon
+        }
+      );
+
+
+
+      const idleListener = this.map.addListener(
+        'idle',
+        () => {
+
+          this.mapFuncs("idleListener fired");
+
+          // console.log('map idle fired')
+
+          const fsLL = geoLat + "," + geoLng;
+          // this.props.getPlacesFromFoursquare(fsLL);
+          // console.log("fs value: ", this.props.foursquareValue);
+
+
+          // if (this.props.numGeolocationUpdates > 0) {
+          //   var pyrmont = new this.props.google.maps.LatLng(
+          //     this.props.centerLatValue,
+          //     this.props.centerLngValue
+          //   );
+
+
+          // var options = {
+          //   location: pyrmont,
+          // type: ['point_of_interest'],
+          // type: ['establishment'],
+          // rankBy: this.props.google.maps.places.RankBy.DISTANCE,
+          // radius: '500',
+          // };
+          // https://github.com/foursquare/react-foursquare
+
+
+          // const service = new this.props.google.maps.places.PlacesService(this.map);
+          // service.nearbySearch(options, callback);
+
+          // function callback(results, status) {
+          //   console.log("nearby results: ", results);
+          // }
+          // }
+
+        }
+      );
+
+    }
+
+
+    if (this.map && ctr_update) {
       this.map.setCenter(
         {
           lat: ctrLat,
@@ -224,7 +233,7 @@ class MapSection extends Component {
     // console.log("map changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
 
 
-    if (geo_update || numGeo_update) {
+    if (this.map && this.marker && (geo_update || numGeo_update)) {
 
       // console.log("map updated - FIRST update type", geo_update, numGeo_update);
 
@@ -277,7 +286,7 @@ class MapSection extends Component {
             // zIndex: "999",
             height: "calc(100vh - 122px)",
             // background: "red",
-            zIndex:"9"
+            zIndex: "9"
           }
         }
       >
@@ -321,8 +330,8 @@ const mapStateToProps = (state, ownProps) => {
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
     foursquareValue: state.foursquareState.foursquareValue,
-    mapListToggleValue: ownProps.display
-
+    mapListToggleValue: ownProps.display,
+    googleAPIValue: state.googleAPIState.googleAPIValue
     // inputValue: state.inputState.inputValue
     // ,state: state
   }
@@ -360,8 +369,8 @@ export default compose(
   //     orderBy: ['createdAt', 'desc']
   //   }
   // ]),
-  GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GM_KEY,
-    version: "3.30"
-  })
+  // GoogleApiWrapper({
+  //   apiKey: process.env.REACT_APP_GM_KEY,
+  //   version: "3.30"
+  // })
 )(MapSection);

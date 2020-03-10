@@ -20,9 +20,7 @@ export class MapListSection extends Component {
 
     // console.log("mapListDisplayValue: ", mapListDisplayValue);
 
-    const Test = () => {
-      return <React.Fragment><input type='text' placeholder='text' /></React.Fragment>
-    }
+    
     return (
       <div
         id="maplistSection"
@@ -41,7 +39,7 @@ export class MapListSection extends Component {
             // < ModalContainer data_size="loc" >
             <div
               id=""
-              className="animated flipInX faster"
+              className="rs animated flipInX faster"
               style={{
                 position: 'absolute',
                 top: "72px",
@@ -65,7 +63,6 @@ export class MapListSection extends Component {
               }}
             >
               <LocationModal />
-              {/* <Test/> */}
             </div>
           ) : null
         }

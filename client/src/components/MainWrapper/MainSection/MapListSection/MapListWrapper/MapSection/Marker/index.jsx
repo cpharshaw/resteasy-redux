@@ -12,26 +12,39 @@ class MarkerComp extends Component {
   constructor(props) {
     super(props);
     this.marker = null;
+    this.createMarker = null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
+    const googleAPIUpdate = prevProps.googleAPIValue === null && this.props.googleAPIValue !== null;
+
+    if (googleAPIUpdate) {
+
+      this.createMarker = () => {
+        new this.props.googleAPIValue.Marker(
+          {
+            map: this.props.mapValue,
+            position: {
+              lat: this.props.markerLat ? this.props.markerLat : 39.962292,
+              lng: this.props.markerLng ? this.props.markerLng : -75.144768
+            },
+            icon: this.props.icon ? this.props.icon : null
+          }
+        )
+        // {console.log('create marker log')}
+      }
+    }
   }
 
 
+
   render() {
-    this.createMarker = () => {
-      new this.props.google.maps.Marker(
-        {
-          map: this.props.mapValue,
-          position: {
-            lat: this.props.markerLat ? this.props.markerLat : 39.962292,
-            lng: this.props.markerLng ? this.props.markerLng : -75.144768
-          },
-          icon: this.props.icon ? this.props.icon : null
-        }
-      )
-    }
+
 
     return (
       <div className="">
-        {this.createMarker()}
+        {this.createMarker ? this.createMarker() : null}
       </div>
     )
 
@@ -46,7 +59,8 @@ const mapStateToProps = (state, ownProps) => {
     mapValue: state.mapState.mapValue,
     centerValue: state.centerState.centerValue,
     markerLat: ownProps.lat,
-    markerLng: ownProps.lng
+    markerLng: ownProps.lng,
+    googleAPIValue: state.googleAPIState.googleAPIValue
   }
 }
 
@@ -61,8 +75,4 @@ export default compose(
   //     orderBy: ['createdAt', 'desc']
   //   }
   // ]),
-  GoogleApiWrapper({
-    apiKey: "AIzaSyBVYS3YTeyILl2Cr7ajZ0ZdKbO092cW6lw",
-    version: "3.30"
-  })
 )(MarkerComp);

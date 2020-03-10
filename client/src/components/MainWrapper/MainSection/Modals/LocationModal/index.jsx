@@ -39,7 +39,7 @@ export class LocationModal extends Component {
 
   componentDidMount() {
 
-    const circle = new this.props.google.maps.Circle(
+    const circle = new this.props.googleAPIValue.Circle(
       {
         center: {
           lat: this.props.geolocationLatValue,
@@ -57,7 +57,7 @@ export class LocationModal extends Component {
       // types: ['establishment']
     };
 
-    this.searchBox = new this.props.google.maps.places.Autocomplete(
+    this.searchBox = new this.props.googleAPIValue.places.Autocomplete(
       this.searchBoxRef.current,
       options
     );
@@ -162,7 +162,7 @@ export class LocationModal extends Component {
 
     if (geo_update || numGeo_update) {
 
-      const circle = new this.props.google.maps.Circle(
+      const circle = new this.props.googleAPIValue.Circle(
         {
           center: {
             lat: geoLat,
@@ -187,7 +187,7 @@ export class LocationModal extends Component {
 
     if (ctr_update) {
 
-      const circle = new this.props.google.maps.Circle(
+      const circle = new this.props.googleAPIValue.Circle(
         {
           center: {
             lat: ctrLat,
@@ -224,7 +224,6 @@ export class LocationModal extends Component {
   }
 
   render() {
-console.log(this.props.google)
     const {
       children,
       data_size,
@@ -300,6 +299,7 @@ const mapStateToProps = (state, ownProps) => {
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
     foursquareValue: state.foursquareState.foursquareValue,
+    googleAPIValue: state.googleAPIState.googleAPIValue,
   }
 }
 
@@ -326,8 +326,4 @@ export default compose(
   //     orderBy: ['createdAt', 'desc']
   //   }
   // ]),
-  GoogleApiWrapper({
-    apiKey: "AIzaSyBVYS3YTeyILl2Cr7ajZ0ZdKbO092cW6lw",
-    version: "3.30"
-  })
 )(LocationModal);

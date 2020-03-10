@@ -9,6 +9,7 @@ import centerReducer from './centerReducer';
 import circleReducer from './circleReducer';
 import inputReducer from './inputReducer';
 import mapReducer from './mapReducer';
+import googleAPIReducer from './googleAPIReducer';
 import modalReducer from './modalReducer';
 import formReducer from './formReducer';
 import { combineReducers } from 'redux';
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   circleState: circleReducer,
   modalState: modalReducer,
   mapState: mapReducer,
+  googleAPIState: googleAPIReducer,
   formState: formReducer,
   inputState: inputReducer
   // firestore: firestoreReducer,
