@@ -10,6 +10,7 @@ import ReviewSection4 from './ReviewSections/ReviewSection4';
 import ReviewSection5 from './ReviewSections/ReviewSection5';
 
 import ReviewModal from '../Modals/ReviewModal';
+import LocationModal from '../Modals/LocationModal';
 // import ReviewModal from '../../Modals/ReviewModal';
 import FormNavButton from './ReviewFormElements/FormNavButton';
 import HorizontalRule from './ReviewFormElements/HorizontalRule';
@@ -99,6 +100,30 @@ export class ReviewSection extends Component {
       formResetModal
     } = this.props.modalState;
 
+
+    const foursquarePlaces = this.props.foursquareValue !== null ?
+      this.props.foursquareValue.map((place, i) => {
+        const name = place.name ? place.name : null;
+        const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
+        const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
+        const distance = place.distance + " ft";
+        return (
+          <div
+            id=""
+            key={i + "fs"}
+            className="rs"
+            style={{
+              flexDirection: "column"
+            }}
+          >
+            {name} ({distance})<br />
+            {address} <br />
+            {category} <br />
+            <HorizontalRule />
+          </div>
+        )
+      }) : null;
+
     return (
       <form
         // className="rs"
@@ -185,35 +210,23 @@ export class ReviewSection extends Component {
           formLocationModal ? (
             <ReviewModal data_name="formLocationModal">
 
-              {
-                this.props.foursquareValue.map((place, i) => {
-                  const name = place.name ? place.name : null;
-                  const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : "null";
-                  const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
-                  const distance = place.distance + " ft";
-                  return (
-                    <div
-                      id=""
-                      key={i + "fs"}
-                      className="rs"
-                      style={{
-                        flexDirection: "column"
-                      }}
-                    >
+              <LocationModal
+                data_width="85%"
+                data_height="44px"
+                data_border="0.5px solid darkgrey"
+              />
 
-                      <br />
-                      <br />
-                      {name} ({distance})<br />
-                      {address} <br />
-                      {category} <br/>
-                      <br />
-                      <HorizontalRule />
-                    </div>
-                  )
-                })
-
-              }
-
+              <div
+                className="rs"
+                style={{
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  overflowY: "auto",
+                  margin: "12.5px 0 0 0 "
+                }}
+              >
+                {foursquarePlaces}
+              </div>
             </ReviewModal>
           ) : null
         }
@@ -402,7 +415,8 @@ export class ReviewSection extends Component {
                   style={{
                     height: "50px",
                     marginBottom: "20px"
-                  }}>
+                  }}
+                >
                   <FormNavButton
                     data_text="Cancel"
                     data_classes="bg-primary-invert"

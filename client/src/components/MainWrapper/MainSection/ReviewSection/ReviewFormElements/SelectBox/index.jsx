@@ -41,6 +41,7 @@ export class SelectBox extends Component {
           // borderBottom: "1px dotted lightgrey",
           fontSize: data_fontsize ? data_fontsize : "14.5px",
           fontStyle: data_fontstyle ? data_fontstyle : "italic",
+          background: "inherit",
           color: data_color ? data_color : "grey"
         }}
       >

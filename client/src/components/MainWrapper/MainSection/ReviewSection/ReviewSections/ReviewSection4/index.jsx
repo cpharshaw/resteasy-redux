@@ -172,7 +172,9 @@ export class ReviewSection4 extends Component {
                 style={{
                   color: "red",
                   fontWeight: "bolder",
-                  fontSize: "16px"
+                  fontSize: "16px",
+                  background: "transparent",
+                  backgroundColor: "transparent",
                 }}
               >
                 x

@@ -61,7 +61,6 @@ export class ModalBlurBackground extends Component {
           backdropFilter: "blur(7px)",
           WebkitBackdropFilter: "blur(7px)",
           background: 'rgba(197,197,197,0.6)',
-
           top: 0,
           right: 0,
           left: 0,

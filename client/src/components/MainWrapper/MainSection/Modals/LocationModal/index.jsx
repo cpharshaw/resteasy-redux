@@ -227,34 +227,21 @@ export class LocationModal extends Component {
     const {
       children,
       data_size,
-      data_name
+      data_name,
+      data_width,
+      data_height,
+      data_margin,
+      data_position,
+      data_top,
+      data_bottom,
+      data_left,
+      data_right,
+      data_border
     } = this.props;
 
-    const style = {
-      position: 'absolute',
-      top: "72px",
-      left: "0",
-      right: "0",
-      // width: "85%",
-      height: "50px",
-      flexDirection: "row",
-      boxShadow: "0 1px 3px #a8a8a8",
-      // borderRadius: "5px",
-      // background: "#f5f5f5",
-      paddingTop: "3px",
-      paddingBottom: "3px",
-      paddingLeft: "9px",
-      paddingRight: "9px",
-      // borderRight: "1px solid #f5f5f5",
-      // overflowY: "auto",
-      // justifyContent: "flex-start",
-      // alignContent: "flex-start",
-      background: "#0abab5"
-    }
-
-
+    // console.log(data_position)
     return (
-      <React.Fragment>
+
         <input
           id="pac-input"
           className="rs"
@@ -262,26 +249,25 @@ export class LocationModal extends Component {
           ref={this.searchBoxRef}
           placeholder="Recenter around location..."
           style={{
-            all: "unset",
-            height: "30px",
-            width: "90%",
+            // all: "unset",
+            position: data_position ? data_position : null,
+            top: data_top ? data_top : null ,
+            bottom: data_bottom ? data_bottom : null,
+            left: data_left ? data_left : null,
+            right: data_right ? data_right : null,
+            height: data_height ? data_height : "44px !important",
+            width: data_width ? data_width : null,
+            margin: data_margin ? data_margin : null,
             fontStyle: "italic",
-            padding: "7px",
+            padding: "7px !important",
             fontSize: "12.5px",
             background: "#f5f5f5",
+            border: data_border ? data_border : null,
             textOverflow: "ellipsis",
+            zIndex: "1100 !important"
           }}
         /> 
-        <div
-          className="rs"
-          style={{
-            width: "10%",
-            background: "#f5f5f5",
-          }}
-        >
-          <img src="https://img.icons8.com/material-outlined/20/000000/location-update.png" />
-        </div>
-      </React.Fragment>
+  
     )
   }
 }

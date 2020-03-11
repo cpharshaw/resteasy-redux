@@ -110,21 +110,25 @@ export class PhotoUpload extends Component {
                   top: "-8px",
                   right: "-8px",
                   // alignSelf: "center",
-                  background: "rgba(255,225,225,0.075)",
+                  // background: "rgba(255,225,225,0.075)",
+                  backgroundColor: "clear",
+                  background: "clear",
                   border: "5px solid rgba(255,0,0,.75)",
                   borderRadius: "50%",
                 }}
               >
                 <span
                   key={"span" + newImgKey}
-                  className="rs"
+                  className=""
                   name={"photo " + newImgKey}
                   // onClick={(e) => this.deletePhoto(e)}
                   pointerEvents="none"
                   style={{
                     color: "red",
                     fontWeight: "bolder",
-                    fontSize: "16px"
+                    fontSize: "16px",
+                    background: "transparent",
+                    backgroundColor: "transparent"
                   }}
                 >
                   x

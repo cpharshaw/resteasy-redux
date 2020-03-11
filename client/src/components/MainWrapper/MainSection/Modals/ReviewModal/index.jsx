@@ -30,17 +30,16 @@ export class ReviewModal extends Component {
       boxShadow: "0 1px 3px #a8a8a8",
       borderRadius: "5px",
       background: "#f5f5f5",
-      overflowY: "auto",
       flexDirection: "column",
-      justifyContent: "flex-start",
+      // justifyContent: "flex-start",
       alignContent: "flex-start",
-      // background: "transparent"
     }
 
     if (data_size === "sm") {
       style.width = "82.5%"
-      style.minHeight = "225px"
-      style.height = "fit-content"
+      // style.minHeight = "225px"
+      // style.maxHeight = "450px"
+      style.height = "225px"
     } else if (data_size === "loc") {
       style.width = "85%"
       style.height = "22.5%"
@@ -62,31 +61,36 @@ export class ReviewModal extends Component {
           style={style}
         >
           <div
-            className="rs"
+            onClick={e => this.closeModal(e)}
+            className="rs animated fadeIn "
             style={{
-              position: "fixed",
-              width: "inherit",
-              background: "transparent",
-              // top: "0",
-              // right: "0",
-              // left: "0",
+              fontSize: "24px",
+              pointerEvents: "all",
+              paddingRight: "8px",
               height: "35px",
+              background: "transparent",
+              color: "grey",
               justifyContent: "flex-end",
-              // background: "transparent",
-              paddingRight: "8px"
+              pointerEvents: "none",
             }}
           >
-            <span
-              onClick={e => this.closeModal(e)}
-              className="animated fadeIn slower delay-1s"
-              style={{ color: "grey", fontSize: "24px" }}
-            >
-              &times;
-            </span>
+            <span style={{ pointerEvents: "all" }}>&times;</span>
           </div>
-
-          {children}
-
+          <div
+            className="rs"
+            style={{
+              // width: "inherit",
+              // background: "red",
+              // background: "#f5f5f5",
+              overflowY: "auto",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignContent: "flex-start",
+              margin: "-10px 0 0 0"
+            }}
+          >
+            {children}
+          </div>
         </div>
 
       </ModalBlurBackground>
