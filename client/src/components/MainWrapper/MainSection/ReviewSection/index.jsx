@@ -133,7 +133,8 @@ export class ReviewSection extends Component {
             key={i + "fs"}
             className="rs"
             style={{
-              flexDirection: "column"
+              flexDirection: "column",
+              // height: "calc(100% - 50px)"
             }}
             data_placedata={JSON.stringify(place)}
             onClick={e => this.placeSelected(e)}
@@ -164,7 +165,10 @@ export class ReviewSection extends Component {
           alignContent: "space-between",
           justifyContent: "space-between",
           // height: "100%",
-          // background: "red"
+          background: "red",
+          height: "calc(100% - 50px)",
+          position: "fixed",
+          bottom: "50px"
         }}
       >
         {
@@ -172,11 +176,11 @@ export class ReviewSection extends Component {
             <div
               className="rs"
               style={{
-                height: "calc(100%)",
+                // height: "calc(100%)",
                 flexDirection: "column",
-                alignContent: "space-between",
-                justifyContent: "space-between",
-                // background: "blue"           
+                // alignContent: "space-between",
+                // justifyContent: "space-between",
+                // background: "blue"    
               }}
             >
               {

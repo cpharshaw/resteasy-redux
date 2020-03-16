@@ -15,6 +15,8 @@ video {
   min-height: 100%;
   width: auto;
   height: auto;
+  right: 0;
+  bottom: 0; 
   -ms-transform: translateX(-50%) translateY(-50%);
   -moz-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);
@@ -23,16 +25,8 @@ video {
   /* filter: blur(1.5px); */
 }
 
-
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0; 
-  /* min-width: 100%; 
-  min-height: 100%; */
-}
-
-/* header .container {
+/* 
+header .container {
   position: relative;
   z-index: 2;
 }

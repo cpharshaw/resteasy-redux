@@ -27,6 +27,8 @@ export class MapListSection extends Component {
         className="rs animated fadeIn faster"
         style={{
           display: displayValue,
+          // position: "inherit",
+          // height: "inherit",
           flexDirection: "column",
           // zIndex: "13"
         }}
@@ -42,7 +44,7 @@ export class MapListSection extends Component {
               className="rs animated flipInX faster"
               style={{
                 position: 'absolute',
-                top: "72px",
+                top: "calc(0vh)",
                 left: "0",
                 right: "0",
                 // width: "85%",

@@ -62,6 +62,7 @@ export class ReviewSection1 extends Component {
 
     } = this.props;
     console.log("formLocationValue: ", formLocationValue)
+    
     return (
 
       <FormChunk
@@ -97,10 +98,13 @@ export class ReviewSection1 extends Component {
 
 
         <FormFieldGroup
-          data_height="calc(100% - 100px)"
+          // data_height="calc(100% - 100px)"
         >
 
+          <br />
+
           <HorizontalRule />
+          
 
           < FieldWrapper>
             < FieldLabel

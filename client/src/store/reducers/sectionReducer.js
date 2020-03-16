@@ -1,4 +1,5 @@
 const initState = {
+  // selectedSectionValue: "mapList"
   selectedSectionValue: "review"
 }
 

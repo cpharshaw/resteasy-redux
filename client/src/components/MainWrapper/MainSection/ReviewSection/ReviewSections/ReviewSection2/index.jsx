@@ -82,7 +82,7 @@ export class ReviewSection2 extends Component {
       >
 
         <FormFieldGroup
-          data_height="calc(100% - 25px)"
+          // data_height="calc(100% - 25px)"
         >
 
           < FieldWrapper >

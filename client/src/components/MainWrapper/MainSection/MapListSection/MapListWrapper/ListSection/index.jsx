@@ -24,6 +24,9 @@ class ListSection extends Component {
         className="rs animated fadeIn faster"
         style={{
           display: displayValue,
+          // position: "fixed",
+          // bottom: "50px",
+          // height: "calc(100% - 122px)",
           // background: "red",
         }}
       >

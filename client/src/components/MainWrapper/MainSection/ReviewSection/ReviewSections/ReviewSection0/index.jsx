@@ -17,7 +17,10 @@ export class ReviewSection0 extends Component {
       < div
         className="rs"
         style={{
-          flexDirection: "column"
+          flexDirection: "column",
+          // background: "yellow"
+          // position: "fixed",
+          // bottom: "50px"
         }}
       >
         <button

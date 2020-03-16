@@ -42,6 +42,8 @@ export class MapListBar extends Component {
         className="bg-primary rs"
         style={{
           flexDirection: "column",
+          position: "fixed",
+          top: "0",
           height: "72px",
           background: "#0abab5"
           // zIndex: "15"

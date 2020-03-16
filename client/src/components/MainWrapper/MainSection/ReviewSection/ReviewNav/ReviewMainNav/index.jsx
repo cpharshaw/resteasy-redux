@@ -31,12 +31,14 @@ export class ReviewMainNav extends Component {
           className="rs"
           style={{
             width: "12.5%",
+            // background: "green"
           }}
         />
         <div
           className="rs"
           style={{
             width: "75%",
+            // background: "green"
           }}
         >
           <FormNavButton
@@ -56,7 +58,8 @@ export class ReviewMainNav extends Component {
           onClick={e => this.resetClicked(e)}
           style={{
             width: "12.5%",
-            fontSize: "14px"
+            fontSize: "14px",
+            // background: "green"
           }}
         >
           <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />

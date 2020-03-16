@@ -8,6 +8,7 @@ import ListSection from './ListSection/';
 export class MapListSection extends Component {
 
   render() {
+    
     return (
       <div
         id="mapListSection"
@@ -16,6 +17,10 @@ export class MapListSection extends Component {
           // height: "calc(100% - 114px)",
           // overflowY: "scroll",
           // background: "#f5f5f5",
+          position: "fixed",
+          bottom: "50px",
+          height: "calc(100% - 122px)",
+          // background: "red",        
         }}
       >
         < ListSection data_display={!this.props.mapListToggleValue} />
