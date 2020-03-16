@@ -21,7 +21,7 @@ class MainWrapper extends Component {
 
   componentDidMount() {
     this.props.storeGoogleAPI(this.props.google.maps);
-    // console.log("Wrapper bounds from store: ", this.props.boundsValue);
+ 
   }
 
 
@@ -41,10 +41,12 @@ class MainWrapper extends Component {
       //   }}
       // >
       < div
+        id="mainSection"
         className="rs"
         style={{
           flexDirection: "column",
           // zIndex: "11"
+          height: "100vh"
         }}
       >
         {/* < TopBar /> */}

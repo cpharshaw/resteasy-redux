@@ -10,17 +10,17 @@ export class MapListSection extends Component {
   render() {
     return (
       <div
-      className="rs animated fadeIn faster"
-        style={
-          {
-            // height: "calc(100% - 114px)",
-            overflowY: "scroll",
-            // background: "green",
-          }
-        }
+        id="mapListSection"
+        className="rs animated fadeIn faster"
+        style={{
+          // height: "calc(100% - 114px)",
+          // overflowY: "scroll",
+          // background: "#f5f5f5",
+        }}
       >
-        < ListSection display={!this.props.mapListToggleValue} />
-        < MapSection  display={ this.props.mapListToggleValue} />
+        < ListSection data_display={!this.props.mapListToggleValue} />
+        < MapSection data_display={this.props.mapListToggleValue} />
+        {/* {console.log("mapListToggleValue: ", this.props.mapListToggleValue)} */}
       </div>
     )
   }

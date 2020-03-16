@@ -80,6 +80,8 @@ class MapSection extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
+    // console.log("map component update")
+
     // variables
     const numGeoUpdates = this.props.numGeolocationUpdates;
     const prev_numGeoUpdates = prevProps.numGeolocationUpdates;
@@ -103,7 +105,7 @@ class MapSection extends Component {
     // console.log("numGeoUpdates: ", numGeoUpdates);
 
     // checks for changes
-    
+
     const googleAPIUpdate = prevProps.googleAPIValue === null && this.props.googleAPIValue !== null;
 
     // console.log("prevProps.googleAPIValue: ", prevProps.googleAPIValue)
@@ -138,6 +140,8 @@ class MapSection extends Component {
 
 
     if (googleAPIUpdate) {
+
+      // console.log("googleAPIUpdate", googleAPIUpdate)
 
       this.map = new this.props.googleAPIValue.Map(
         this.googleMapRef.current,
@@ -224,7 +228,7 @@ class MapSection extends Component {
         }
       );
       const fsLL = ctrLat + "," + ctrLng;
-      this.props.getPlacesFromFoursquare(fsLL);
+      // this.props.getPlacesFromFoursquare(fsLL);
       // console.log("fs value updated: ", this.props.foursquareValue);
     }
 
@@ -272,35 +276,32 @@ class MapSection extends Component {
   render() {
     // console.log("icon for marker: ", questionableIcon)
 
-    const displayValue = this.props.mapListToggleValue ? null : "none";
+    const displayValue = this.props.data_display ? null : "none";
+    // console.log("data_display: ", displayValue)
 
     return (
       <div
-        id=""
+      id="mapSection"
         className="rs animated fadeIn faster"
-        style={
-          {
-            display: displayValue,
-            // boxShadow:  "0 -1px 7.5px rgba(0, 0, 0, .6)",
-            // textShadow: "0 1px 4px rgba(0, 0, 0, .6)",
-            // zIndex: "999",
-            height: "calc(100vh - 122px)",
-            // background: "red",
-            zIndex: "9"
-          }
-        }
+        style={{
+          display: displayValue,
+          // boxShadow:  "0 -1px 7.5px rgba(0, 0, 0, .6)",
+          // textShadow: "0 1px 4px rgba(0, 0, 0, .6)",
+          // zIndex: "999",
+          height: "calc(100vh - 122px)",
+          // background: "red",
+          // zIndex: "9"
+        }}
       >
         <div
           id="google-map"
-          className="rs"
+          className=""
           ref={this.googleMapRef}
-          style={
-            {
-              // height: "calc(100vh - 156px)",
-              height: "inherit",
-              width: "100vw"
-            }
-          }
+          style={{
+            // height: "calc(100vh - 156px)",
+            height: "inherit",
+            width: "100vw"
+          }}
         />
         < MarkerComp
           lat={40}

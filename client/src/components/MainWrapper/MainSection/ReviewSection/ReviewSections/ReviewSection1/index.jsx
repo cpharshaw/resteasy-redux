@@ -11,6 +11,8 @@ import LocationSelector from '../../ReviewFormElements/LocationSelector';
 import HorizontalRule from '../../ReviewFormElements/HorizontalRule';
 import FormFieldGroup from '../../ReviewFormElements/FormFieldGroup';
 import FormChunk from '../../ReviewFormElements/FormChunk';
+import { modalClosed } from '../../../../../../store/actions/modalActions';
+import { modalToggled } from '../../../../../../store/actions/modalActions';
 // import FormNavButton from '../ReviewForm/FormNavButton'
 
 import ReviewMainNav from '../../ReviewNav/ReviewMainNav';
@@ -37,6 +39,14 @@ export class ReviewSection1 extends Component {
     this.props.formPrev();
   }
 
+
+  placeClicked = (e) => {
+    e.preventDefault();
+
+    this.props.modalToggled("formLocationModal");
+  }
+
+
   render() {
 
     const {
@@ -51,7 +61,7 @@ export class ReviewSection1 extends Component {
       checkboxClicked,
 
     } = this.props;
-
+    console.log("formLocationValue: ", formLocationValue)
     return (
 
       <FormChunk
@@ -59,12 +69,30 @@ export class ReviewSection1 extends Component {
       >
 
         {
-          !formLocationValue ? <div> {formLocationValue} </div> : (
-            <LocationSelector
-              data_width="75%"
-              data_height="75px"
-            />
-          )
+          formLocationValue.name ? (
+            <div
+              id=""
+              className="rs"
+              style={{
+                flexDirection: "column",
+                minWidth: "75%",
+                width: "fit-content",
+                minHeight: "90px",
+                height: "fit-content"
+              }}
+            // data_placedata={JSON.stringify(place)}
+              onClick={e => this.placeClicked(e)}
+            >
+              <span>{formLocationValue.name} </span>
+              <span>{formLocationValue.address} </span>
+              <span>{formLocationValue.category} </span>
+            </div>
+          ) : (
+              <LocationSelector
+                data_width="75%"
+                data_height="90px"
+              />
+            )
         }
 
 
@@ -199,12 +227,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     formNext: () => dispatch(formNext()),
     formPrev: () => dispatch(formPrev()),
-
+    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     locationChosen: (data) => dispatch(locationChosen(data)),
     radioSelected: (data) => dispatch(radioSelected(data)),
     checkboxClicked: (data) => dispatch(checkboxClicked(data)),
     dropdownSelected: (data) => dispatch(dropdownSelected(data)),
     textEntered: (data) => dispatch(textEntered(data)),
+    modalClosed: () => dispatch(modalClosed())
   }
 }
 

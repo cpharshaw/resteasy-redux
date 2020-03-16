@@ -149,41 +149,31 @@ class RecenterButton extends Component {
     return (
 
        <div className="recenterButton animated slideInRight faster"
-        style={
-          {
-            borderColor: color
-          }
-        }
+        style={{
+          borderColor: color
+        }}
         onClick={this.handleClick}
       >
         <div className="recenterCrosshairs1"
-          style={
-            {
-              background: color
-            }
-          }
+          style={{
+            background: color
+          }}
         />
         <div className="recenterButtonRing"
-          style={
-            {
-              borderColor: color
-            }
-          }
+          style={{
+            borderColor: color
+          }}
         >
           <div className="recenterButtonDot"
-            style={
-              {
-                background: color
-              }
-            }
+            style={{
+              background: color
+            }}
           />
         </div>
         <div className="recenterCrosshairs2"
-          style={
-            {
-              background: color
-            }
-          }
+          style={{
+            background: color
+          }}
         />
       </div>
 

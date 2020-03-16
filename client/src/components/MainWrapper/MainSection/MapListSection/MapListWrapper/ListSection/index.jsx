@@ -16,14 +16,15 @@ class ListSection extends Component {
 
     // console.log(process.env);
 
-    const displayValue = this.props.mapListToggleValue ? null : "none";
+    const displayValue = this.props.data_display ? null : "none";
     // console.log("all the props, ListSection: ", this.props);
     return (
       <div
+        id="listSection"
         className="rs animated fadeIn faster"
         style={{
           display: displayValue,
-          background: "#f5f5f5",
+          // background: "red",
         }}
       >
         <ul className=""

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { modalToggled } from '../../../../../../store/actions/modalActions';
+import { modalToggled }            from '../../../../../../store/actions/modalActions';
+import { getPlacesFromFoursquare } from '../../../../../../store/actions/foursquareActions';
 
 export class LocationSelector extends Component {
 
@@ -10,7 +11,15 @@ export class LocationSelector extends Component {
     console.log("location button clicked")
 
     this.props.modalToggled("formLocationModal");
+
+    //update list
+    const ctrLat = this.props.centerLatValue;
+    const ctrLng = this.props.centerLngValue;
+    const fsLL = ctrLat + "," + ctrLng;
+    this.props.getPlacesFromFoursquare(fsLL);
+    console.log("update fs in review")
   }
+
 
   render() {
 
@@ -31,7 +40,7 @@ export class LocationSelector extends Component {
           borderRadius: "5px"
         }}
       >
-        <em><span style={{color: "grey", fontSize: "14.5px"}}>Select location...</span></em>
+        <em><span style={{ color: "grey", fontSize: "14.5px" }}>Select location...</span></em>
       </button>
     )
   }
@@ -41,13 +50,16 @@ export class LocationSelector extends Component {
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
-    modalState: state.modalState
+    modalState: state.modalState,
+    centerLatValue: state.centerState.centerLatValue,
+    centerLngValue: state.centerState.centerLngValue,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal))
+    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
+    getPlacesFromFoursquare: location => dispatch(getPlacesFromFoursquare(location))
   }
 }
 

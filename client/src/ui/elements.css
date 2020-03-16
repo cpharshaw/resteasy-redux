@@ -45,10 +45,12 @@
   /* background: red; */
 }
 
-#mapListScrollbar::-webkit-scrollbar {
+/* #mapListScrollbar::-webkit-scrollbar,
+#mapSection::-webkit-scrollbar,
+#mapListSection::-webkit-scrollbar {
   width: 0 !important;
   height: 0 !important
-}
+} */
 
 
 .filter-toggle {

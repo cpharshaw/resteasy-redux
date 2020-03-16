@@ -29,6 +29,7 @@ export const resetForm = () => {
 
 
 export const locationChosen = (input) => {
+  console.log("location chosen, action: ", input)
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     dispatch({

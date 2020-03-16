@@ -22,11 +22,11 @@ export class FormChunk extends Component {
           alignContent: "space-around",
           justifyContent: "space-around",
           // alignItems: "space-around",
-          height: data_height ? data_height : null,
+          // height: data_height ? data_height : null,
           width: data_width ? data_width : null,
           margin: data_margin ? data_margin: null,
           padding: data_padding ? data_padding: "25px 5px 15px 5px",
-          // backgroundColor: data_bgcolor
+          // backgroundColor: "grey"
         }}
       >
         {children}

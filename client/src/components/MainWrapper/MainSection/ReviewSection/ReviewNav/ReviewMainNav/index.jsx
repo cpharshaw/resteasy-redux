@@ -22,8 +22,9 @@ export class ReviewMainNav extends Component {
       <div
         className="rs animated fadeIn faster"
         style={{
-          height: "50px",
-          marginBottom: "20px"
+          height: "70px",
+          // background: "green"
+          // marginBottom: "20px"
         }}
       >
         <div

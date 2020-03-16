@@ -15,6 +15,7 @@ export class BottomBar extends Component {
     // const newValue = event.currentTarget.getAttribute('value');
     // console.log("bottom bar selected section: ", newValue);
     this.props.selectSection(newValue);
+
   };
 
   render() {
@@ -36,7 +37,6 @@ export class BottomBar extends Component {
             background: "inherit",
             margin: "0 auto"
           }}
-          
           value="review"
         >
           <svg

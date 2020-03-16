@@ -2,7 +2,7 @@ const initState = {
   formStepValue: 0,
 
   // page1
-  formLocationValue: "My house!",
+  formLocationValue: {},
   formRestroomTypeValue: "Restroom type...",
   formLocationNotesValue: "",
   formTimeOfVisitValue: "Time of day...",
@@ -55,10 +55,10 @@ const formReducer = (state = initState, action) => {
 
 
     case "LOCATION_CHOSEN":
-      // console.log("sectionreducer: ", action.payload)
+      console.log("location chosen, reducer: ", action.payload)
       return {
         ...state,
-        location: action.payload
+        formLocationValue: action.payload
       };
 
     case "DROPDOWN_SELECTED":
