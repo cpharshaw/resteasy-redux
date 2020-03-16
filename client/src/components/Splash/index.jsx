@@ -118,31 +118,36 @@ class Splash extends Component {
       // https://codesandbox.io/s/rzwrk2854
 
       <div
-        id=""
-        className=""
+        id="splashContainer"
+        className="rs"
         style={{
-          position: "fixed",
-          bottom: "0",
-          top: "0",
-          left: "0",
-          right: "0",
-          // height: "calc(100vh - 50px)",
-          overflow: "hidden",
-          
-          // height: "100%",
-          // width: "100%",
-          background: "yellow"
+          // position: "fixed",
+          // bottom: "0",
+          // top: "0",
+          // left: "0",
+          // right: "0",
+          // height: "100vh",
+          // width: "100vw",
+          // overflow: "hidden",
+          background: "black"
         }}
       >
-          test
-        {/* <video autoPlay muted loop id="myVideo">
-          <source src={video} type="video/mp4" />
-        </video> */}
 
-        {/* <div className=""> */}
-          {/* <div id="" className=""> */}
-            his test
-            {/* <h1 className="ml5">
+        <video 
+          id="myVideo"
+          style={{
+          }}
+          autoPlay 
+          muted 
+          loop 
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+
+
+        <div className="">
+          <div id="" className="">
+            <h1 className="ml5">
               <span className="text-wrapper ">
                 <span className="brand line line1 "></span>
                 <span className="brand letters letters-left ">rest</span>
@@ -150,9 +155,9 @@ class Splash extends Component {
                 <span className="brand letters letters-right ">easy</span>
                 <span className="brand line line2 "></span>
               </span>
-            </h1> */}
+            </h1>
 
-            {/* <h1 className="ml5">
+            <h1 className="ml5">
               <span className="text-wrapper ">
                 <span className="tagline letters">
                   <span className="tagline tagline1 letters ">&nbsp;Your guide&nbsp;</span>
@@ -160,15 +165,15 @@ class Splash extends Component {
                   <span className="tagline tagline3 letters ">fit to sit on&nbsp;</span>
                 </span>
               </span>
-            </h1> */}
+            </h1>
 
 
 
-            {/* <div className="loader"/> */}
+            <div className="loader"></div>
 
-          {/* </div> */}
+          </div>
 
-        {/* </div> */}
+        </div>
 
 
       </div>
