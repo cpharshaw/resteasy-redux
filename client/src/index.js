@@ -44,13 +44,55 @@ const store = createStore(
   )
 );
 
+
+/* minified */
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function () {
+    var context = this;
+    var args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    }, wait);
+    if (immediate && !timeout) func.apply(context, args);
+  };
+}
+
+var myEfficientFn = debounce(() => {
+  let vh = window.innerHeight;
+
+  // this.setState({
+  //   windowHeight: [...this.state.windowHeight, vh]
+  // })
+
+  document.documentElement.style.setProperty('--vh', `${vh / 100}px`);
+  // console.log("window height: ", this.state.windowHeight)
+  // console.log("MAX - window height: ", this.state.max_windowHeight())
+  // console.log("MIN - window height: ", this.state.min_windowHeight())
+
+  // console.log("address bar height: ", this.state.max_windowHeight() - this.state.min_windowHeight());
+}, 750);
+
+var loadedFn = () => {
+  myEfficientFn();
+  // window.scrollTo(0, 1);
+
+  console.log('loaded')
+}
+
+window.addEventListener('resize', loadedFn);
+window.addEventListener('load', myEfficientFn);
+
+
 // ReactDOM.render(< App />, document.getElementById('root'));
 
 // store.firebaseAuthIsReady
 //   .then(() => {
 ReactDOM.render(
   <Provider store={store}>
-      <App />
+    <App />
   </Provider>,
   document.getElementById('root')
 );

@@ -18,9 +18,20 @@ import video from './people.mp4';
 
 class Splash extends Component {
 
-  // state = {};
+  state = {
+    windowHeight: [],
+    max_windowHeight: function () {
+      return Math.max(...this.windowHeight);
+    },
+    min_windowHeight: function () {
+      return Math.min(...this.windowHeight);
+    }
+  }
+
 
   componentDidMount() {
+
+
 
     anime.timeline({
       loop: 10
@@ -106,16 +117,32 @@ class Splash extends Component {
     return (
       // https://codesandbox.io/s/rzwrk2854
 
-      <content id="splashPage" className="excludeFromReset container" style={{ height: "100vh" }}>
-
-        <video autoPlay muted loop id="myVideo">
+      <div
+        id=""
+        className=""
+        style={{
+          position: "fixed",
+          bottom: "0",
+          top: "0",
+          left: "0",
+          right: "0",
+          // height: "calc(100vh - 50px)",
+          overflow: "hidden",
+          
+          // height: "100%",
+          // width: "100%",
+          background: "yellow"
+        }}
+      >
+          test
+        {/* <video autoPlay muted loop id="myVideo">
           <source src={video} type="video/mp4" />
-        </video>
+        </video> */}
 
-        <div className="row d-flex justify-content-center">
-          <div id="" className="col-sm test text-center ">
-
-            <h1 className="ml5 text-center ">
+        {/* <div className=""> */}
+          {/* <div id="" className=""> */}
+            his test
+            {/* <h1 className="ml5">
               <span className="text-wrapper ">
                 <span className="brand line line1 "></span>
                 <span className="brand letters letters-left ">rest</span>
@@ -123,27 +150,28 @@ class Splash extends Component {
                 <span className="brand letters letters-right ">easy</span>
                 <span className="brand line line2 "></span>
               </span>
-            </h1>
+            </h1> */}
 
-            <h1 className="ml5 text-center ">
+            {/* <h1 className="ml5">
               <span className="text-wrapper ">
-                <span className="tagline letters text-center ">
+                <span className="tagline letters">
                   <span className="tagline tagline1 letters ">&nbsp;Your guide&nbsp;</span>
                   <span className="tagline tagline2 letters ">to all things&nbsp;</span>
                   <span className="tagline tagline3 letters ">fit to sit on&nbsp;</span>
                 </span>
               </span>
-            </h1>
+            </h1> */}
 
 
 
-            <div className="loader "></div>
-          </div>
+            {/* <div className="loader"/> */}
 
-        </div>
+          {/* </div> */}
+
+        {/* </div> */}
 
 
-      </content>
+      </div>
 
     )
   }
