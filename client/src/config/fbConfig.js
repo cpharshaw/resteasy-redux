@@ -9,7 +9,7 @@ const config = {
   authDomain: "resteasy-redux.firebaseapp.com",
   databaseURL: "https://resteasy-redux.firebaseio.com",
   projectId: "resteasy-redux",
-  storageBucket: "",
+  storageBucket: "resteasy-redux.appspot.com",
   messagingSenderId: "394459746566",
   appId: "1:394459746566:web:964db52ca7965a30"
 };

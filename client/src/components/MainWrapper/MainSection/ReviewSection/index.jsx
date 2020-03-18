@@ -17,7 +17,7 @@ import HorizontalRule from './ReviewFormElements/HorizontalRule';
 import ReviewMainNav from './ReviewNav/ReviewMainNav';
 
 import { locationChosen } from '../../../../store/actions/formActions';
-import { modalClosed }    from '../../../../store/actions/modalActions';
+import { modalClosed } from '../../../../store/actions/modalActions';
 
 // import ReviewConfirm from './ReviewSections/ReviewSection6'; 
 
@@ -36,7 +36,7 @@ export class ReviewSection extends Component {
       distance,
       address
     }
-    console.log("place selected: ", placeObj)
+    // console.log("place selected: ", placeObj)
     this.props.locationChosen(placeObj);
     this.props.modalClosed();
   }
@@ -76,6 +76,8 @@ export class ReviewSection extends Component {
 
   render() {
 
+
+    // console.log('all props from review section: ', this.props)
 
     const {
       selectedSectionValue,
@@ -120,8 +122,9 @@ export class ReviewSection extends Component {
       formResetModal
     } = this.props.modalState;
 
+    // console.log(this.props)
 
-    const foursquarePlaces = this.props.foursquareValue !== null ?
+    const foursquarePlaces = this.props.foursquareValue !== null && this.props.foursquareValue !== undefined ?
       this.props.foursquareValue.map((place, i) => {
         const name = place.name ? place.name : null;
         const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
@@ -134,7 +137,6 @@ export class ReviewSection extends Component {
             className="rs"
             style={{
               flexDirection: "column",
-              // height: "calc(100% - 50px)"
             }}
             data_placedata={JSON.stringify(place)}
             onClick={e => this.placeSelected(e)}
@@ -500,7 +502,7 @@ const mapStateToProps = (state, ownProps) => {
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
     // reviews: state.firestore.ordered.reviews,
-    // auth: state.firebase.auth
+    auth: state.firebase.auth,
     selectedSectionValue: ownProps.display,
     foursquareValue: state.foursquareState.foursquareValue
   }

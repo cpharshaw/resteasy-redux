@@ -52,11 +52,11 @@ class MainWrapper extends Component {
       })
 
       document.documentElement.style.setProperty('--vh', `${this.state.windowHeight/100}px`);
-      console.log("window height: ", this.state.windowHeight)
-      console.log("MAX - window height: ", this.state.max_windowHeight())
-      console.log("MIN - window height: ", this.state.min_windowHeight())
+      // console.log("window height: ", this.state.windowHeight)
+      // console.log("MAX - window height: ", this.state.max_windowHeight())
+      // console.log("MIN - window height: ", this.state.min_windowHeight())
 
-      console.log("address bar height: ", this.state.max_windowHeight() - this.state.min_windowHeight());
+      // console.log("address bar height: ", this.state.max_windowHeight() - this.state.min_windowHeight());
     }, 750);
 
     var loadedFn = () => {
@@ -66,8 +66,8 @@ class MainWrapper extends Component {
       console.log('loaded')
     }
 
-    window.addEventListener('resize', loadedFn);
-    window.addEventListener('load', myEfficientFn);
+    // window.addEventListener('resize', loadedFn);
+    // window.addEventListener('load', myEfficientFn);
 
   }
 

@@ -4,21 +4,60 @@ export const signIn = (credentials) => {
 
     const firebase = getFirebase();
 
-    firebase.auth().signInWithEmailAndPassword(
-      credentials.email,
-      credentials.password
-    )
-      .then(() => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider)
+      .then(result => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const token = result.credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+
+        console.log('log in success, user: ', user)
+
+        const loginObj = {
+          token,
+          user,
+          errorCode: null,
+          errorMessage: null,
+          email: null,
+          credential: null
+        }
+
+
         dispatch({
-          type: 'LOGIN_SUCCESS'
-        })
+          type: 'LOGIN_SUCCESS',
+          payload: loginObj
+        })        
+        // ...
       })
-      .catch((err) => {
+      .catch(error => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        const credential = error.credential;
+
+        const loginObj = {
+          token: null,
+          user: null,
+          errorCode,
+          errorMessage,
+          email,
+          credential
+        }
+
         dispatch({
           type: 'LOGIN_ERROR',
-          error: err
+          payload: loginObj
         })
-      })
+        // ...
+      });
+
+
+
   }
 
 }
@@ -45,37 +84,4 @@ export const signOut = () => {
       })
   }
 
-}
-
-export const signUp = (newUser) => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
-
-    const firebase = getFirebase();
-    const firestore = getFirestore();
-
-    firebase.auth().createUserWithEmailAndPassword(
-      newUser.email,
-      newUser.password
-    )
-      .then(resp => {
-        return firestore.collection('users').doc(resp.user.uid).set({
-          // email: newUser.email,
-          firstName: newUser.firstName,
-          lastName: newUser.lastName,
-          initials: newUser.firstName[0] + newUser.lastName[0]
-        })
-      })
-        .then(() => {
-          dispatch({
-            type: 'SIGNUP_SUCCESS'
-          })
-        })
-        .catch((err) => {
-          dispatch({
-            type: 'SIGNUP_ERROR',
-            err
-          })
-        })
-
-  }
 }

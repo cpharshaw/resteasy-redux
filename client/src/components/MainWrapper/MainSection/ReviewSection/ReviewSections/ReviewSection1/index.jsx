@@ -61,7 +61,7 @@ export class ReviewSection1 extends Component {
       checkboxClicked,
 
     } = this.props;
-    console.log("formLocationValue: ", formLocationValue)
+    // console.log("formLocationValue: ", formLocationValue)
     
     return (
 

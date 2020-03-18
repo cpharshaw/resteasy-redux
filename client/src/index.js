@@ -1,46 +1,42 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 // import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
 import './ui/reset.css';
 import './ui/base.css';
 import './ui/elements.css';
 import './ui/styles.css';
+import thunk from 'redux-thunk';
 
+import { reduxFirestore, getFirestore } from 'redux-firestore';
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+import 'firebase/auth';
 
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import fbConfig from './config/fbConfig';
 
-import { getFirestore } from 'redux-firestore';
-// import { reduxFirestore } from 'redux-firestore';
-import { getFirebase } from 'react-redux-firebase';
 require('dotenv').config();
 
-// import { reactReduxFirebase } from 'react-redux-firebase';
-
-// import fbConfig from './config/fbConfig';
-// import './components/Splash/brand.js';
 
 const store = createStore(
   rootReducer,
   compose(
-    // applyMiddleware(thunk)
-    applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase }))
-
-    // reduxFirestore(fbConfig),
-    // reactReduxFirebase(
-    //   fbConfig,
-    //   {
-    //     attachAuthIsReady: true,
-    //     useFirestoreForProfile: true,
-    //     userProfile: 'users'
-    //   }
-    // )
+    applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
+    reduxFirestore(fbConfig),
+    reactReduxFirebase(
+      fbConfig, 
+      { 
+        attachAuthIsReady: true,
+        useFirestoreForProfile: true,
+        userProfile: 'users'
+      }
+    )
   )
 );
 
@@ -63,16 +59,8 @@ function debounce(func, wait, immediate) {
 var myEfficientFn = debounce(() => {
   let vh = window.innerHeight;
 
-  // this.setState({
-  //   windowHeight: [...this.state.windowHeight, vh]
-  // })
-
   document.documentElement.style.setProperty('--vh', `${vh / 100}px`);
-  // console.log("window height: ", this.state.windowHeight)
-  // console.log("MAX - window height: ", this.state.max_windowHeight())
-  // console.log("MIN - window height: ", this.state.min_windowHeight())
 
-  // console.log("address bar height: ", this.state.max_windowHeight() - this.state.min_windowHeight());
 }, 750);
 
 var loadedFn = () => {
@@ -82,21 +70,26 @@ var loadedFn = () => {
   console.log('loaded')
 }
 
-window.addEventListener('resize', loadedFn);
-window.addEventListener('load', myEfficientFn);
+// window.addEventListener('resize', loadedFn);
+// window.addEventListener('load', myEfficientFn);
+
+
+// https://stackoverflow.com/questions/32963400/android-keyboard-shrinking-the-viewport-and-elements-using-unit-vh-in-css
+
 
 
 // ReactDOM.render(< App />, document.getElementById('root'));
 
-// store.firebaseAuthIsReady
-//   .then(() => {
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
-// })
+store.firebaseAuthIsReady
+  .then(() => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('root')
+    )
+  })
+
 
 
 // If you want your app to work offline and load faster, you can change

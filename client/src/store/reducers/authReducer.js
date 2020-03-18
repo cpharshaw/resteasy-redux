@@ -1,5 +1,6 @@
 
 const initState = {
+  loginCredentialValue: null,
   authError: null
 }
 
@@ -15,15 +16,29 @@ const authReducer = (state = initState, action) => {
       }
 
     case 'LOGIN_SUCCESS':
-      console.log('login success')
+      console.log('login success', action.payload)
+
+      const userObj = action.payload.user;
+      const usid = userObj.usid;
+      const displayName = userObj.displayName;
+      const photoURL = userObj.photoURL;
+      const email = userObj.email;
+
+      const loginCredentialValue = {
+        usid,
+        displayName,
+        photoURL,
+        email
+      }
+
       return {
         ...state,
-        authError: 'Login failed'
+        loginCredentialValue
       }
 
     case 'SIGNOUT_SUCCESS':
       console.log('logout success')
-      return state;
+      return initState;
 
     case 'SIGNUP_SUCCESS':
       console.log('signup success')

@@ -1,39 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import Splash from './components/Splash/';
 import MainWrapper from './components/MainWrapper/';
-import Test from './test.jsx';
-
-// import theme from './ui/theme';
-
-// import './components/Splash/brand.js';
 
 
-function App() {
+class App extends Component {
 
-  // window.addEventListener('resize', myEfficientFn);
-  // window.addEventListener('load', loadedFn);
+  render() {
 
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={Splash} />
+            <Route exact path="/splash" component={Splash} />
 
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Splash} />
-          <Route exact path="/splash" component={Splash} />
+            <Route exact path="/main" component={MainWrapper} />
 
-          <Route exact path="/main" component={MainWrapper} />
+            {/* <Route exact path="/main" component={Test} /> */}
 
-          {/* <Route exact path="/main" component={Test} /> */}
-
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
+  
 }
-
 
 export default App;
 
+// export default withFirebaseAuth({
+//   providers,
+//   firebaseAppAuth
+// })(App);

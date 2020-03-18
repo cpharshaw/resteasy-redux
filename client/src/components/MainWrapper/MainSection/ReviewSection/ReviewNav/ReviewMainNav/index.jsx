@@ -10,7 +10,7 @@ export class ReviewMainNav extends Component {
   resetClicked(e) {
     e.preventDefault();
 
-    console.log("reset clicked");
+    // console.log("reset clicked");
     this.props.modalToggled("formResetModal");
     // this.props.resetForm();
   }

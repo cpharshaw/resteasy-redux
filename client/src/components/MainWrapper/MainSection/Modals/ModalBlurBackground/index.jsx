@@ -65,7 +65,7 @@ export class ModalBlurBackground extends Component {
           // right: 0,
           // left: 0,
           // bottom: 0,
-          width: "100vw",
+          // width: "100vw",
           // height: "100%",
           zIndex: "1000",
         }}

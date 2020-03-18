@@ -27,6 +27,7 @@ export class MainSection extends Component {
       <div
         className="rs"
         style={{
+          // position: "fixed",
           position: "fixed",
           bottom: "50px",
           height: "calc(100vh - 50px)"

@@ -15,13 +15,6 @@ html, body {
 	width: 100%;
 }
 
-.App {
-	/* height: 100vh;
-	width: 100vw; */
-	/* background: orange; */
-	/* z-index: "-5" */
-}
-
 
 button {
 	all: unset;
@@ -75,14 +68,6 @@ input[type=search]::-webkit-search-cancel-button {
 
 input[type=search] {
 	-webkit-appearance: none;
-}
-
-body {
-	/* Fallback for browsers that do not support Custom Properties */
-	height: 100vh; 
-	
-	/*calc height*/
-  height: calc(var(--vh, 1vh) * 100);
 }
 
 

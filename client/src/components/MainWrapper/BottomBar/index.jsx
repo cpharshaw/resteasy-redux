@@ -25,6 +25,7 @@ export class BottomBar extends Component {
       <div
         className="rs bg-primary"
         style={{
+          // position: "absolute",
           position: "fixed",
           bottom: "0",
           height: "50px",

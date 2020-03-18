@@ -65,7 +65,7 @@ export const getPlacesFromFoursquare = (location) => {
             })
 
             // console.log("before sort", newData);
-            console.log("after sort", newData);
+            // console.log("after sort", newData);
 
             dispatch({
               type: "FOURSQUARE_SUCCESS",
