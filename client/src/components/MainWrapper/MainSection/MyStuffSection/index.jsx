@@ -18,15 +18,18 @@ export class MyStuffSection extends Component {
 
 
   render() {
+
     const { selectedSectionValue } = this.props;
 
     const displayValue = selectedSectionValue === "myStuff" ? "flex" : "none";
 
+    let token = null;
     let displayName = null;
     let photoURL = null;
     let email = null;
 
     if (this.props.loginCredentialValue) {
+      token = this.props.loginCredentialValue.token;
       displayName = this.props.loginCredentialValue.displayName;
       photoURL = this.props.loginCredentialValue.photoURL;
       email = this.props.loginCredentialValue.email;
@@ -37,20 +40,12 @@ export class MyStuffSection extends Component {
 
     return (
       <div
-        id="myStuffSection"
-        // className="rs section"
-        className="rs section animated fadeIn faster"
-        style={
-          {
-            display: displayValue,
-            flexDirection: "column"
-            // overflowY: "scroll",
-            // overflowX: "scroll",
-            // background: "#f5f5f5",
-            // boxShadow:  "0 -3.5px 3.5px 0 rgba(0, 0, 0, .6)",
-            // zIndex: "900"
-          }
-        }
+        id=""
+        className="rs animated fadeIn faster"
+        style={{
+          display: displayValue,
+          flexDirection: "column"
+        }}
       >
 
         {

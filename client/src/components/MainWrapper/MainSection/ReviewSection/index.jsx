@@ -167,10 +167,10 @@ export class ReviewSection extends Component {
           alignContent: "space-between",
           justifyContent: "space-between",
           // height: "100%",
-          background: "red",
-          height: "calc(100% - 50px)",
+          // background: "red",
+          height: "calc(100% - 55px)",
           position: "fixed",
-          bottom: "50px"
+          bottom: "55px"
         }}
       >
         {

@@ -44,7 +44,7 @@ export class MapListSection extends Component {
               className="rs animated flipInX faster"
               style={{
                 position: "fixed",
-                top: "72px",
+                top: "80px",
                 left: "0",
                 right: "0",
                 // width: "85%",

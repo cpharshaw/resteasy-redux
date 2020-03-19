@@ -19,7 +19,7 @@ export class MapListSection extends Component {
           // background: "#f5f5f5",
           position: "fixed",
           bottom: "50px",
-          height: "calc(100% - 122px)",
+          height: "calc(100% - 130px)",
           // background: "red",        
         }}
       >

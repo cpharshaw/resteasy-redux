@@ -92,8 +92,9 @@ class MainWrapper extends Component {
         className="rs"
         style={{
           flexDirection: "column",
-          // zIndex: "11"
-          // height: "100vh"
+          position: "fixed",
+          height: "100vh",
+          width: "100vw"
         }}
       >
         {/* < TopBar /> */}

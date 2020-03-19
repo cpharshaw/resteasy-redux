@@ -7,34 +7,23 @@ const initState = {
 const authReducer = (state = initState, action) => {
   switch (action.type) {
 
+    case 'LOGIN_SUCCESS':
+      // console.log('login success', action.payload)
+
+      return {
+        ...state,
+        loginCredentialValue: action.payload
+      }
 
     case 'LOGIN_ERROR':
       console.log('login error')
+      
       return {
         ...state,
+        loginCredentialValue: action.payload,
         authError: 'Login failed'
       }
 
-    case 'LOGIN_SUCCESS':
-      console.log('login success', action.payload)
-
-      const userObj = action.payload.user;
-      const usid = userObj.usid;
-      const displayName = userObj.displayName;
-      const photoURL = userObj.photoURL;
-      const email = userObj.email;
-
-      const loginCredentialValue = {
-        usid,
-        displayName,
-        photoURL,
-        email
-      }
-
-      return {
-        ...state,
-        loginCredentialValue
-      }
 
     case 'SIGNOUT_SUCCESS':
       console.log('logout success')

@@ -25,10 +25,9 @@ export class BottomBar extends Component {
       <div
         className="rs bg-primary"
         style={{
-          // position: "absolute",
           position: "fixed",
           bottom: "0",
-          height: "50px",
+          height: "55px",
           background: "#0abab5"
         }}
       >
@@ -66,11 +65,9 @@ export class BottomBar extends Component {
           className="rs div-button"
           onClick={e => this.selectSection(e)}
           style={{
-            // background: "orange",
             width: "33.33334%",
             margin: "0 auto",
             background: "inherit",
-            // boxShadow: "0 1px 4px rgba(0, 0, 0, 0.6) inset"
           }}
           value="mapList"
         >
@@ -97,11 +94,9 @@ export class BottomBar extends Component {
           className="rs div-button"
           onClick={e => this.selectSection(e)}
           style={{
-            // background: "red",
             width: "33.33333%",
             background: "inherit",
             margin: "0 auto"
-            // boxShadow: "0 1px 4px rgba(0, 0, 0, 0.6) inset"
           }}
           value="myStuff"
         >

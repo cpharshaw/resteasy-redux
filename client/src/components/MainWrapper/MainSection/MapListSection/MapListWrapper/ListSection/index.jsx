@@ -20,7 +20,7 @@ class ListSection extends Component {
     // console.log("all the props, ListSection: ", this.props);
     return (
       <div
-        id="listSection"
+        id="mapList_listSection"
         className="rs animated fadeIn faster"
         style={{
           display: displayValue,
@@ -30,7 +30,8 @@ class ListSection extends Component {
           // background: "red",
         }}
       >
-        <ul className=""
+        <ul 
+          className="rs"
           style={{
             flexDirection: "column",
           }}

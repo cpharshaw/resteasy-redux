@@ -8,41 +8,55 @@ export const signIn = (credentials) => {
 
     firebase.auth().signInWithPopup(provider)
       .then(result => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const token = result.credential.accessToken;
-        // The signed-in user info.
         const user = result.user;
-
-        console.log('log in success, user: ', user)
+        
+        const token = result.credential.accessToken;
+        const uid = user.uid;
+        const displayName = user.displayName;
+        const email = user.email;
+        const photoURL = user.photoURL;
+        const errorCode = null;
+        const errorMessage = null;
+        // const email = null;
+        const credential = null;        
+        
+        // console.log('log in success, user: ', user)
 
         const loginObj = {
           token,
-          user,
-          errorCode: null,
-          errorMessage: null,
-          email: null,
-          credential: null
+          uid,
+          displayName,
+          email,
+          photoURL,
+          errorCode,
+          errorMessage,
+          email,
+          credential
         }
-
-
         dispatch({
           type: 'LOGIN_SUCCESS',
           payload: loginObj
         })        
-        // ...
       })
       .catch(error => {
-        // Handle Errors here.
+
+        const token = null;
+        const uid = null;
+        const displayName = null;
+        // const email = null;
+        const photoURL = null;
+        
         const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
         const email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
         const credential = error.credential;
 
         const loginObj = {
-          token: null,
-          user: null,
+          token,
+          uid,
+          displayName,
+          email,
+          photoURL,
           errorCode,
           errorMessage,
           email,
@@ -53,7 +67,6 @@ export const signIn = (credentials) => {
           type: 'LOGIN_ERROR',
           payload: loginObj
         })
-        // ...
       });
 
 

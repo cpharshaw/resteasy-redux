@@ -44,7 +44,7 @@ export class MapListBar extends Component {
           flexDirection: "column",
           position: "fixed",
           top: "0",
-          height: "72px",
+          height: "80px",
           background: "#0abab5"
           // zIndex: "15"
         }}
@@ -54,7 +54,7 @@ export class MapListBar extends Component {
           id="mapListTogglers"
           className="rs bg-primary"
           style={{
-            height: "42px",
+            height: "46px",
             flexWrap: "nowrap",
             justifyContent: "space-between"
             // background: "#0abab5"
@@ -77,7 +77,7 @@ export class MapListBar extends Component {
             // id="mapListTogglers"
             className="rs bg-primary"
             style={{
-              height: "42px",
+              height: "46px",
               width: "40%",
               flexWrap: "nowrap",
               justifyContent: "space-around"
@@ -133,7 +133,7 @@ export class MapListBar extends Component {
 
                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                     className="animated heartBeat slow"
-                    width="30" height="30"
+                    width="34" height="34"
                     viewBox="0 0 172 172"
                     style={{ fill: "#f5f5f5" }}>
                     <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
@@ -154,7 +154,7 @@ export class MapListBar extends Component {
 
 
                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                    width="30" height="30"
+                    width="34" height="34"
                     viewBox="0 0 172 172"
                     style={{ fill: "#f5f5f5" }}>
                     <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
@@ -179,7 +179,7 @@ export class MapListBar extends Component {
           id="mapListScrollbar"
           className="rs bg-primary"
           style={{
-            height: "30px"
+            height: "34px"
           }}
         >
           <div className="spacer-div" >&nbsp;</div>
