@@ -24,7 +24,7 @@ export class MapListSection extends Component {
         }}
       >
         < ListSection data_display={!this.props.mapListToggleValue} />
-        < MapSection data_display={this.props.mapListToggleValue} />
+        {/* < MapSection data_display={this.props.mapListToggleValue} /> */}
         {/* {console.log("mapListToggleValue: ", this.props.mapListToggleValue)} */}
       </div>
     )

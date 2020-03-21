@@ -4,8 +4,6 @@ const endpoint = "https://api.foursquare.com/v2/venues/search";
 
 export const getPlacesFromFoursquare = (location) => {
 
-  // console.log(location);
-
   return (dispatch, getState) => {
 
     return (
@@ -16,12 +14,7 @@ export const getPlacesFromFoursquare = (location) => {
             params: {
               client_id: "0LGB42K434S53KGEGHWWSIMGGAYY5KOYXBJ14SK2W1O0FNTF",
               client_secret: "FRCGLR2MJHZ2I2AMFL5PECJOERPOPCNHU3L3EYQGVYX1YU1H",
-              // query: "piz",
               radius: 500,
-              //near: "39.962292,-75.144768", 
-              //home
-
-              // near: "39.952170,-75.166150", 
               near: location,
               limit: 30,
               intent: "checkin",
@@ -33,9 +26,6 @@ export const getPlacesFromFoursquare = (location) => {
                 const state = getState();
                 const currLat = state.centerState.centerLatValue;
                 const currLng = state.centerState.centerLngValue;
-
-                // console.log(res);
-
                 const fsWIthDistance = res.response.venues.map(venue => {
                   const venueLat = venue.location.labeledLatLngs[0].lat;
                   const venueLng = venue.location.labeledLatLngs[0].lng;
@@ -46,9 +36,6 @@ export const getPlacesFromFoursquare = (location) => {
                   venue.distance = venueDistance;
                   return venue;
                 });
-
-                // return fsWIthDistance;
-
                 return fsWIthDistance.filter(venue => {
                   return venue.location.address && venue.location.city && venue.location.state && venue.location.postalCode
                 });
@@ -64,15 +51,10 @@ export const getPlacesFromFoursquare = (location) => {
               return a.distance - b.distance;
             })
 
-            // console.log("before sort", newData);
-            // console.log("after sort", newData);
-
             dispatch({
               type: "FOURSQUARE_SUCCESS",
               payload: newData
-              // payload: res.data.response.venues
             });
-            // console.log("gathered places: ", response)
           }
         )
         .catch(

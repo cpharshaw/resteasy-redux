@@ -1,0 +1,11 @@
+
+.logo {
+  font-family: 'Alegreya Sans', sans-serif;
+  color: whitesmoke;
+  /* height: 8vh; */
+  background: #0abab5;
+  box-shadow: 0 -1px 15.5px whitesmoke;
+  z-index: 100;
+  padding: 0 !important;
+  margin: 0 !important;
+}

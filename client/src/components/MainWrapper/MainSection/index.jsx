@@ -32,8 +32,8 @@ export class MainSection extends Component {
           height: "calc(100% - 55px)"
         }}
       >
-        < ReviewSection  display={selectedSectionValue} />
-        < MapListSection display={selectedSectionValue} />
+        {/* < ReviewSection  display={selectedSectionValue} />
+        < MapListSection display={selectedSectionValue} /> */}
         < MyStuffSection display={selectedSectionValue} />
       </div>
     )

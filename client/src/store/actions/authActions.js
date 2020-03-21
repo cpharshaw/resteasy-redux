@@ -20,7 +20,7 @@ export const signIn = (credentials) => {
         // const email = null;
         const credential = null;        
         
-        // console.log('log in success, user: ', user)
+        console.log('log in success, user: ', photoURL)
 
         const loginObj = {
           token,
@@ -39,6 +39,8 @@ export const signIn = (credentials) => {
         })        
       })
       .catch(error => {
+
+        console.log('log in error, user: ', errorCode, errorMessage)
 
         const token = null;
         const uid = null;

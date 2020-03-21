@@ -6,7 +6,7 @@ const initState = {
 const foursquareReducer = (state = initState, action) => {
   switch (action.type) {
     case 'FOURSQUARE_SUCCESS':
-      // console.log("foursquareReducer SUCCESS", action.payload);
+      console.log("foursquareReducer SUCCESS", action.payload);
       return {
         ...state,
         // foursquareValue: []

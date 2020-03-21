@@ -28,7 +28,8 @@ export class BottomBar extends Component {
           position: "fixed",
           bottom: "0",
           height: "55px",
-          background: "#0abab5"
+          background: "#0abab5",
+          flexDirection: "row"
         }}
       >
         <button
