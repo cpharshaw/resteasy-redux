@@ -9,15 +9,36 @@ export class FormNavButton extends Component {
 
   nextStep = (e) => {
     e.preventDefault();
-    console.log();
-    this.props.formNext();
-    // console.log("entry props: ", this.props.formValue)
+
+    let outOfOrderInd;
+
+    if (
+      this.props.formStepValue === 1
+        &&
+      this.props.formOutOfOrderValue
+    ) {
+      outOfOrderInd = "outOfOrder";
+    }
+
+    this.props.formNext(outOfOrderInd);
+
   }
 
   prevStep = (e) => {
     e.preventDefault();
-    // console.log();
-    this.props.formPrev();
+
+    let outOfOrderInd;
+
+    if (
+      this.props.formStepValue === 5
+        &&
+      this.props.formOutOfOrderValue
+    ) {
+      outOfOrderInd = "outOfOrder";
+    }
+
+    this.props.formPrev(outOfOrderInd);
+
   }
 
   finshedForm = () => {
@@ -85,10 +106,21 @@ export class FormNavButton extends Component {
 }
 
 
+
+const mapStateToProps = (state, ownProps) => {
+  // console.log("mainwrapper state: ", state);
+  return {
+    formOutOfOrderValue: state.formState.formOutOfOrderValue,
+    formStepValue: state.formState.formStepValue,
+  }
+}
+
+
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    formNext: () => dispatch(formNext()),
-    formPrev: () => dispatch(formPrev()),
+    formNext: (outOfOrderInd) => dispatch(formNext(outOfOrderInd)),
+    formPrev: (outOfOrderInd) => dispatch(formPrev(outOfOrderInd)),
     resetForm: () => dispatch(resetForm()),
     selectSection: (section) => dispatch(selectSection(section)),
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
@@ -96,7 +128,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-  connect(null, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps)
 )(FormNavButton);
 
 

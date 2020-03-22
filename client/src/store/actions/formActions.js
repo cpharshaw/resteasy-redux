@@ -1,18 +1,20 @@
 
-export const formNext = () => {
+export const formNext = (outOfOrderInd) => {
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     dispatch({
-      type: 'FORM_NEXT'
+      type: 'FORM_NEXT',
+      payload: outOfOrderInd
     })
   }
 }
 
-export const formPrev = () => {
+export const formPrev = (outOfOrderInd) => {
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     dispatch({
-      type: 'FORM_PREV'
+      type: 'FORM_PREV',
+      payload: outOfOrderInd
     })
   }
 }

@@ -34,25 +34,30 @@ const initState = {
 }
 
 const formReducer = (state = initState, action) => {
+
+  const newFormStep = action.payload;
+
   switch (action.type) {
+
     case "FORM_NEXT":
-      // console.log("sectionreducer: ", action.payload)
+
       return {
         ...state,
-        formStepValue: state.formStepValue + 1
-      };
-    case "FORM_PREV":
-      // console.log("sectionreducer: ", action.payload)
-      return {
-        ...state,
-        formStepValue: state.formStepValue - 1
+        formStepValue: newFormStep === "outOfOrder" ? 5 : state.formStepValue + 1
       };
 
+    case "FORM_PREV":
+
+      return {
+        ...state,
+        formStepValue: newFormStep === "outOfOrder" ? 1 : state.formStepValue - 1
+      };
 
     case "FORM_RESET":
-      // console.log("sectionreducer: ", action.payload)
-      return { ...initState };
 
+      return {
+        ...initState
+      };
 
     case "LOCATION_CHOSEN":
       console.log("location chosen, reducer: ", action.payload)
@@ -75,14 +80,12 @@ const formReducer = (state = initState, action) => {
         [action.payload.name]: action.payload.value
       };
 
-
     case "TEXT_ENTERED":
       // console.log("sectionreducer: ", action.payload)
       return {
         ...state,
         [action.payload.name]: action.payload.value
       };
-
 
     case "RADIO_SELECTED":
       // console.log("sectionreducer: ", action.payload)
@@ -91,17 +94,12 @@ const formReducer = (state = initState, action) => {
         [action.payload.name]: action.payload.value
       };
 
-
-
-
-
     case "CHECKBOX_CLICKED":
       // console.log("sectionreducer: ", action.payload)
       return {
         ...state,
         [action.payload.name]: !state[action.payload.name]
       };
-
 
     case 'PHOTO_SELECTED':
       return {
@@ -114,8 +112,6 @@ const formReducer = (state = initState, action) => {
         ...state,
         photosArrValue: action.payload
       }
-
-
 
 
     default:

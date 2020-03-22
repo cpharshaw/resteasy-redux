@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { signIn, signOut } from '../../../../store/actions/authActions';
+import HorizontalRule from '../ReviewSection/ReviewFormElements/HorizontalRule';
 
 export class MyStuffSection extends Component {
 
@@ -38,96 +39,40 @@ export class MyStuffSection extends Component {
 
 
     const SignedOutComponent = () => {
-      return (
-        <div
-          className="rs"
-          style={{
-            flexDirection: "column",
-            height: "fit-content",
-            // background: "red",
-            justifyContent: "space-around",
-            // padding: "15px 0 15px 0"
-          }}
-        >
+
+      if (!displayName) {
+        return null
+      } else {
+
+        return (
           <div
             className="rs"
             style={{
-              height: "fit-content",
               flexDirection: "column",
-              justifyContent: "space-around",
-              justifySelf: "flex-start",
-              // background: "blue"
-            }}
-          >
-            <span>You are currently not signed in.</span>
-            <span>If you lose this device or get a new one, your history will be lost.  To prevent this, please: </span>
-          </div>
-          <button
-            id=""
-            className="rs"
-            onClick={this.signInclicked}
-            style={{
-              width: "fit-content",
               height: "fit-content",
-              padding: "9px 16px 9px 16px",
-              border: "1px solid #0abab5",
-              color: "#0abab5"
-            }}
-          >
-            <span><em>Sign in</em></span>
-          </button>
-        </div>
-      )
-    }
-
-
-    const SignedInComponent = () => {
-      return (
-        <div
-          className="rs"
-          style={{
-            flexDirection: "column",
-            // height: "125px",
-            background: "lightgrey",
-            justifyContent: "space-around",
-            // padding: "15px 0 15px 0"
-          }}
-        >
-          <div
-            className="rs"
-            style={{
-              height: "fit-content",
-              flexDirection: "row",
+              // background: "red",
               justifyContent: "space-around",
-              justifySelf: "flex-start"
+              // padding: "15px 0 15px 0"
             }}
           >
-            <img
-              className="rs"
-              style={{
-                width: photoURL ? "auto" : "70px",
-                height: "70px",
-                margin: photoURL ? "5px" : "5px",
-                background: "black"
-              }}
-              src={photoURL ? photoURL : null}
-            />
             <div
               className="rs"
               style={{
+                height: "fit-content",
                 flexDirection: "column",
-                width: "fit-content"
+                justifyContent: "space-around",
+                justifySelf: "flex-start",
+                // background: "blue"
               }}
             >
-              <span>{displayName ? displayName : "John Doe"}</span>
-              <span>{email ? email : "test@aol.com"}</span>
+              <span>You are currently not signed in.</span>
+              {/* <span>To access your data  create new reviews, please sign in.</span> */}
             </div>
-
-
+            <br />
             <button
               id=""
               className="rs"
-              onClick={this.signOutclicked}
+              onClick={this.signInclicked}
               style={{
                 width: "fit-content",
                 height: "fit-content",
@@ -136,188 +81,182 @@ export class MyStuffSection extends Component {
                 color: "#0abab5"
               }}
             >
-              <h6>Sign out</h6>
+              <span><em>Sign in</em></span>
             </button>
-
           </div>
+        )
+      }
 
-          {/* <br />
+    }
+    const SignedInComponent = () => {
 
+      if (displayName) {
+        return null
+      } else {
+
+        return (
           <div
-            id=""
             className="rs"
             style={{
-              height: "130px",
-              flexDirection: "row",
-              alignContent: "space-evenly",
-              background: "red"
+              flexDirection: "column",
+              // height: "125px",
+              // background: "lightgrey",
+              justifyContent: "flex-start",
+              // padding: "15px 0 15px 0"
             }}
           >
             <div
               className="rs"
               style={{
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                margin: "5px 8px 5px 8px"
-              }}
-            >
-              <div
-                id=""
-                className="rs"
-                style={{
-                  background: "red",
-                  borderRadius: "5px",
-                  height: "10%"
-                }}
-                data-value=".10"
-              />
-              <span style={{ color: "grey" }}>10%</span>
-              <span style={{ color: "lightgrey" }}>Poor</span>
-            </div>
-
-
-            <div
-              className="rs"
-              style={{
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                margin: "5px 8px 5px 8px"
-              }}
-            >
-              <div
-                id=""
-                className="rs"
-                style={{
-                  background: "orange",
-                  borderRadius: "5px",
-                  height: "10%"
-                }}
-                data-value=".10"
-              />
-              <span style={{ color: "grey" }}>10%</span>
-              <span style={{ color: "lightgrey" }}>Bad</span>
-            </div>
-
-            <div
-              className="rs"
-              style={{
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                margin: "5px 8px 5px 8px"
-              }}
-            >
-              <div
-                id=""
-                className="rs"
-                style={{
-                  background: "yellow",
-                  borderRadius: "5px",
-                  height: "30%"
-                }}
-                data-value=".30"
-              />
-              <span style={{ color: "grey" }}>30%</span>
-              <span style={{ color: "lightgrey" }}>Ok</span>
-            </div>
-
-            <div
-              className="rs"
-              style={{
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                margin: "5px 8px 5px 8px"
-              }}
-            >
-              <div
-                id=""
-                className="rs"
-                style={{
-                  background: "#7FFF00",
-                  borderRadius: "5px",
-                  height: "40%"
-                }}
-                data-value=".40"
-              />
-              <span style={{ color: "grey" }}>40%</span>
-              <span style={{ color: "lightgrey" }}>Good</span>
-            </div>
-
-
-
-            <div
-              className="rs"
-              style={{
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                margin: "5px 8px 5px 8px"
-              }}
-            >
-              <div
-                id=""
-                className="rs"
-                style={{
-                  background: "green",
-                  borderRadius: "5px",
-                  height: "10%"
-                }}
-                data-value=".10"
-              />
-              <span style={{ color: "grey" }}>10%</span>
-              <span style={{ color: "lightgrey" }}>Great</span>
-            </div>
-
-
-
-            <div
-              id=""
-              className="rs"
-              style={{
-                height: "75px",
+                height: "fit-content",
                 flexDirection: "row",
-                alignContent: "space-evenly",
+                justifyContent: "space-between",
+                justifySelf: "flex-start",
+                padding: "0 7.5px 0 7.5px"
               }}
             >
-              <div className="rs" style={{ flexDirection: "column" }}>
-                <span>10</span>
-                <span>RE reviews</span>
+              <img
+                className="rs"
+                style={{
+                  width: photoURL ? "auto" : "70px",
+                  height: "70px",
+                  // margin: photoURL ? "5px" : "5px",
+                  background: "black"
+                }}
+                src={photoURL ? photoURL : null}
+              />
+              <div
+                className="rs"
+                style={{
+                  flexDirection: "column",
+                  width: "fit-content"
+                }}
+              >
+                <span>{displayName ? displayName : "John Doe"}</span>
+                <span>{email ? email : "test@aol.com"}</span>
               </div>
-              <div className="rs" style={{ flexDirection: "column" }}>
-                <span>1</span>
-                <span>this week</span>
-              </div>
-              <div className="rs" style={{ flexDirection: "column" }}>
-                <span>1</span>
-                <span>week streak</span>
-              </div>
+
+
+              <button
+                id=""
+                className="rs"
+                onClick={this.signOutclicked}
+                style={{
+                  width: "fit-content",
+                  height: "fit-content",
+                  padding: "9px 16px 9px 16px",
+                  border: "1px solid #0abab5",
+                  color: "#0abab5"
+                }}
+              >
+                <span><em>Sign out</em></span>
+              </button>
+
             </div>
 
-
+            <br />
+            <br />
             <div
               id=""
               className="rs"
               style={{
                 flexDirection: "column",
-                minHeight: "fit-content",
-                height: "200px"
+                height: "fit-content",
+                // height: "200px"
               }}
             >
-              <span>RE Review History</span>
+              <span><em>Review History</em></span>
+
               <br />
-              <span> ..... </span>
+
+              <div
+                className="rs"
+                style={{
+                  flexDirection: "row",
+                  height: "65px",
+                  padding: "0 5px 0 5px"
+                }}
+              >
+                <div
+                  className="rs"
+                  style={{
+                    flexDirection: "column",
+                    width: "25%",
+                    // justifyContent: "flex-end",
+                    background: "yellow"
+                  }}
+                >
+                  {/* <span>&times;</span> */}
+                  <span style={{ color: "grey" }}>OK</span>
+                </div>
+
+                <div
+                  className="rs"
+                  style={{
+                    flexDirection: "column",
+                    width: "75%",
+                    alignItems: "flex-start",
+                    paddingLeft: "8px"
+                    // justifyContent: "flex-end",
+                    // background: "orange"
+                  }}
+                >
+                  <span><b>IKEA</b> - 10100 Baltimore Ave</span>
+                  <span>8.2 - Furniture / Home Store</span>
+                  <span style={{ color: "grey" }}>Thu 3/19/20 at 8:45pm</span>
+                </div>
+
+              </div>
+              <HorizontalRule />
             </div>
-          </div> */}
 
 
 
-        </div >
-      )
+            <div
+              className="rs"
+              style={{
+                flexDirection: "row",
+                height: "65px",
+                padding: "0 5px 0 5px"
+              }}
+            >
+              <div
+                className="rs"
+                style={{
+                  flexDirection: "column",
+                  width: "25%",
+                  // justifyContent: "flex-end",
+                  background: "#DFFF00"
+                }}
+              >
+                {/* <span>&times;</span> */}
+                <span style={{ color: "grey" }}>Good</span>
+              </div>
+
+              <div
+                className="rs"
+                style={{
+                  flexDirection: "column",
+                  width: "75%",
+                  alignItems: "flex-start",
+                  paddingLeft: "8px"
+                  // background: "orange"
+                }}
+              >
+                <span><b>Rite Aid</b> - 400 Spring Garden Street</span>
+                <span>6.4 - Pharmacy</span>
+                <span style={{ color: "grey" }}>Thu 2/4/20 at 9:58pm</span>
+              </div>
+
+            </div>
+            <HorizontalRule />
+
+          </div >
+        )
+      }
     }
 
-    const DisplayedComponent = () => {
-      return (
-        displayName ? <SignedInComponent /> : < SignedOutComponent />
-      )
-    }
+
 
     return (
       <div
@@ -326,11 +265,53 @@ export class MyStuffSection extends Component {
         style={{
           display: displayValue,
           flexDirection: "column",
-          justifyContent: "space-between"
+          // justifyContent: "flex-start",
+          // padding: "15px 0 0 0"
+          // background: "lightgrey"
         }}
       >
-        <span style={{ fontSize: "20px", color: "#0abab5" }}>r☆e</span>
-        <DisplayedComponent />
+        <div
+          className="rs"
+          style={{
+            height: "10%",
+            flexDirection: "column",
+            // justifyContent: "space-evenly",
+            // padding: "15px 0 0 0",
+            background: "#E8E8E8",
+            // borderBottomLeftRadius: "7.5px",
+            // borderBottomRightRadius: "7.5px",
+            borderBottom: "1px solid #D3D3D3"
+          }}
+        >
+          <span
+            className="rs"
+            style={{
+              height: "fit-content",
+              fontSize: "30px",
+              color: "whitesmoke",
+              textShadow: "1px 1px 5.5px #0abab5",
+              fontFamily: "Roboto",
+              fontStyle: "italic",
+              background: "inherit"
+            }}
+          >
+            rest☆easy
+        </span>
+        </div>
+        <div
+          className="rs"
+          style={{
+            height: "90%",
+            margin: "15px 0 0 0",
+            flexDirection: "flex-start"
+          }}
+        >
+          <SignedInComponent />
+          <SignedOutComponent />
+        </div>
+
+
+
       </div >
     )
   }
