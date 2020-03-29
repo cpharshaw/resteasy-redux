@@ -42,8 +42,9 @@ export class MyStuffSection extends Component {
 
       return (
         <React.Fragment>
-          <div className="row">
-            <div className="col" style={{ justifyContent: "space-evenly" }}>
+          <div className="row h-100">
+            <div className="col jc-se">
+
               <span>You are currently not signed in.</span>
 
               <button
@@ -71,78 +72,82 @@ export class MyStuffSection extends Component {
     const SignedInComponent = () => {
 
       return (
-        <React.Fragment>
-          <div id="mySignedInStuff" className="row">
-            <div className="col">
 
-              <div className="row" style={{ padding: "0=25 25px 0 25px", background: "inherit" }}>
+        <div className="row h-100">
+          <div className="col jc-fs">
 
-                <img
-                  className="rs"
-                  style={{
-                    width: photoURL ? "auto" : "85px",
-                    height: "85px",
-                    background: photoURL ? null : "black",
-                    // margin: "10px 0 5px 0",
-                  }}
-                  src={photoURL ? photoURL : null}
-                />
+            <div id="mySignedInStuff" className="row">
+              <div className="col">
 
-                <div
-                  className="col"
-                  style={{
-                    margin: "5px 0 5px 0",
-                    background: "inherit",
-                    // alignItems: "flex-start"
-                  }}
-                >
-                  <span>{displayName ? displayName : "Craig Harshaw"}</span>
-                  <span>{email ? email : "cpharshaw@gmail.com"}</span>
+                <div className="row" style={{ padding: "0 25px 0 25px", background: "inherit" }}>
+
+                  <img
+                    className="rs"
+                    style={{
+                      width: photoURL ? "auto" : "85px",
+                      height: "85px",
+                      background: photoURL ? null : "black",
+                      // margin: "10fpx 0 5px 0",
+                    }}
+                    src={photoURL ? photoURL : null}
+                  />
+
+                  <div
+                    className="col"
+                    style={{
+                      margin: "5px 0 5px 0",
+                      background: "inherit",
+                      // alignItems: "flex-start"
+                    }}
+                  >
+                    <span>{displayName ? displayName : "Craig Harshaw"}</span>
+                    <span>{email ? email : "cpharshaw@gmail.com"}</span>
+                  </div>
+
+                </div>
+
+                <div className="row">
+
+                  <button
+                    id=""
+                    className="rs"
+                    onClick={this.signOutclicked}
+                    style={{
+                      padding: "9px 16px 9px 16px",
+                      border: "1px solid #0abab5",
+                      color: "#0abab5",
+                      margin: "5px 0 5px 0",
+                      background: "inherit"
+                    }}
+                  >
+                    <span><em>Sign out</em></span>
+                  </button>
                 </div>
 
               </div>
+            </div>
 
-              <div className="row">
+            <br />
 
-                <button
-                  id=""
-                  className="rs"
-                  onClick={this.signOutclicked}
-                  style={{
-                    padding: "9px 16px 9px 16px",
-                    border: "1px solid #0abab5",
-                    color: "#0abab5",
-                    margin: "5px 0 5px 0",
-                    background: "inherit"
-                  }}
-                >
-                  <span><em>Sign out</em></span>
-                </button>
+            <div
+              id=""
+              className="row"
+              style={{
+                height: "fit-content",
+                // background: "red"
+              }}
+            >
+              <div className="col" style={{ borderBottom: "2px solid #0abab5", padding: "0 0 6px 0" }}>
+                <span>Review History</span>
               </div>
 
-            </div>
-          </div>
-
-          <br />
-
-          <div
-            id=""
-            className="row"
-            style={{
-              height: "fit-content",
-            }}
-          >
-            <div className="col" style={{ borderBottom: "2px solid #0abab5", padding: "0 0 6px 0" }}>
-              <span>Review History</span>
+              <div className="col" style={{ borderBottom: "1px solid darkgrey", padding: "0 0 6px 0" }}>
+                <span style={{ color: "darkgrey" }}>Favorites</span>
+              </div>
             </div>
 
-            <div className="col" style={{ borderBottom: "1px solid darkgrey", padding: "0 0 6px 0" }}>
-              <span style={{ color: "darkgrey" }}>Favorites</span>
-            </div>
-          </div>
-
-          <div className="row" >
-            {/* <div
+            <div className="row" >
+              {/* <div
               id="myStuffHistoryScroller"
               className="col"
               style={{
@@ -308,54 +313,55 @@ export class MyStuffSection extends Component {
 
 
             </div> */}
+            </div >
+
           </div >
-
-        </React.Fragment >
-      )
-    }
-
-
-
-    const VisibleComponent = () => {
-      return (
-        <React.Fragment>
-          {displayName ? <SignedInComponent /> : <SignedOutComponent />}
-        </React.Fragment>
+        </div >
       )
     }
 
 
 
     return (
-      <React.Fragment>
 
-        <div className="row"
-          style={{ display: displayValue, background: "black", height: "100%" }}
+      <div className="container-fluid" style={{ display: displayValue }}>
+
+        <div className="row h-100"
+          style={{
+            // background: "black" 
+          }}
         >
-          <div className="col"
+          <div className="col jc-fs"
             style={{
               // background: "red",
-              justifyContent: "flex-start"
             }}
           >
 
 
             <div className="row"
-              style={{ background: "orange", height: "55px" }}
+              style={{
+                background: "#E8E8E8",
+                borderBottomLeftRadius: "5px",
+                borderBottomRightRadius: "5px",
+                height: "55px",
+                borderBottom: "1px solid #DCDCDC",
+                borderStyle: "inset"
+              }}
             >
-              <div className="col"
-                // style={{ background: "transparent" }}
-              >
+              <div className="col">
                 <span
                   className=""
                   style={{
                     fontSize: "30px",
                     color: "whitesmoke",
                     textShadow: "0px 0px 5.5px #0abab5",
-                    fontFamily: "Roboto",
-                    fontStyle: "italic",
+                    // fontFamily: "Roboto",
+                    // fontStyle: "italic",
                     margin: "12.5px 0 12.5px 0",
-                    // background: "transparent"
+                    height: "100%",
+                    transformOrigin: "0.5 0",
+                    fontWeight: "600",
+                    fontStyle: "italic"
                   }}
                 >
                   rest☆easy
@@ -364,18 +370,20 @@ export class MyStuffSection extends Component {
             </div>
 
             <div className="row"
-              // style={{ background: "yellow" }}
+              style={{
+                height: "calc(100% - 55px)",
+                // background: "yellow"
+              }}
             >
-              <div className="col"
-                // style={{ background: "transparent" }}
-              >
-                <VisibleComponent />
+              <div className="col" style={{padding: "10px 0 10px 0"}}>
+                {displayName ? <SignedInComponent /> : <SignedOutComponent />}
               </div>
             </div>
 
           </div>
         </div>
-      </React.Fragment >
+
+      </div>
     )
   }
 }

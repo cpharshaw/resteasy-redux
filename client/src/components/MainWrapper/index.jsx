@@ -106,6 +106,8 @@ class MainWrapper extends Component {
             position: "fixed",
             bottom: "0",
             height: "55px",
+            borderTop: "1px solid #DCDCDC",
+            borderStyle: "inset"
           }}
         >
           <div id="testBottomBar" className="col bg-primary">
