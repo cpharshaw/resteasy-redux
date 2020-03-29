@@ -85,11 +85,7 @@ class MainWrapper extends Component {
     } = this.props;
 
     return (
-      <div id="MainWrapper" className="container-fluid"
-        style={{
-          height: "100%",
-        }}
-      >
+      <div id="MainWrapper" className="container-fluid animated fadeIn">
 
         <div
           className="row"
@@ -112,7 +108,7 @@ class MainWrapper extends Component {
             height: "55px",
           }}
         >
-          <div className="col bg-primary">
+          <div id="testBottomBar" className="col bg-primary">
             < BottomBar />
           </div>
         </div >

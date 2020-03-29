@@ -28,21 +28,16 @@ export class BottomBar extends Component {
     // TODO -- make icon sizes react to click; grow/shrink, etc
     return (
 
-      <div className="row h-100 bg-primary">
+      <div className="row bg-primary h-100">
 
         <div className="col bg-primary">
           <button
-            className="rs div-button bg-primary h-100 w-100"
+            className="div-button bg-primary"
             onClick={e => this.selectSection(e)}
-            style={{
-              // background: "#0abab5"
-              // height: "100%",
-              // width: "100%"
-            }}
             value="review"
           >
             <svg
-              className=""
+              // className="w-100 h-100"
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
               style={{ fill: "#f5f5f5", height: "35.7px", width: "35.7px" }}>
@@ -63,16 +58,12 @@ export class BottomBar extends Component {
 
         <div className="col bg-primary">
           <button
-            className="rs div-button bg-primary h-100 w-100"
+            className="div-button bg-primary"
             onClick={e => this.selectSection(e)}
-            style={{
-              height: "100%",
-              width: "100%"
-            }}
             value="mapList"
           >
             <svg
-              className=""
+              // className="w-100 h-100"
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
               style={{ marginLeft: "5px", fill: "#f5f5f5", height: "38px", width: "38px", color: "#f5f5f5" }}>
@@ -92,16 +83,12 @@ export class BottomBar extends Component {
 
         <div className="col bg-primary">
           <button
-            className="rs div-button bg-primary h-100 w-100"
+            className="div-button bg-primary"
             onClick={e => this.selectSection(e)}
-            style={{
-              height: "100%",
-              width: "100%"
-            }}
             value="myStuff"
           >
             <svg
-              className=""
+              // className="w-100 h-100"
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
               style={{ fill: "#f5f5f5", height: "38px", width: "38px", borderRadius: "50%" }}>

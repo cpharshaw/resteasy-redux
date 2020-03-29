@@ -7,13 +7,6 @@
 	vertical-align: baseline;
 	text-align: center;
   text-align-last: center;
-  background-color: red;
-  /* margin: 0;
-	padding: 0;
-	border: 0;
-	border-spacing: 0;
-	border-width: 0; */
-	/* line-height: 1; */
 }
 
 .container, .container-fluid {
@@ -43,6 +36,7 @@
   flex-basis: 0;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  height: 100%;
   max-width: 100%;
   justify-content: space-evenly;
   align-items: stretch;

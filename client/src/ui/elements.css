@@ -14,10 +14,12 @@
 }
 
 .button:active {
-  background-color: #1ca8a4 !important;
+  background-color: #1ca8a4;
 }
 
 .div-button {
+  height: 100%;
+  width: 100%;
   border-radius: 3px;
   transition: 
     background-color 0s, 
@@ -25,7 +27,8 @@
 }
 
 .div-button:active {
-  background-color: #1ca8a4 !important;
+  /* background-color: red; */
+  background-color: #1ca8a4;
 }
 
 
