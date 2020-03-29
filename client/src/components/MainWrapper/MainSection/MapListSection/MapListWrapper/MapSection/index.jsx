@@ -285,6 +285,7 @@ class MapSection extends Component {
         className="rs animated fadeIn faster"
         style={{
           display: displayValue,
+          height: "100%"
         }}
       >
         <div
@@ -292,6 +293,7 @@ class MapSection extends Component {
           className="rs"
           ref={this.googleMapRef}
           style={{
+            height: "inherit"
           }}
         />
         < MarkerComp

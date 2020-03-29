@@ -19,6 +19,7 @@ export class ReviewSection5 extends Component {
     const {
       textEntered,
       formCommentsValue,
+      formOutOfOrderValue
     } = this.props;
 
     return (
@@ -57,7 +58,7 @@ export class ReviewSection5 extends Component {
                 textAlignLast: "left",
                 textAlign: "left"
               }}
-              placeholder="Write your comments here.."
+              placeholder={formOutOfOrderValue ? "This restroom was out of order..." : "Write your comments here.."}
               onChange={e => textEntered(e)}
               value={formCommentsValue}
             />
@@ -78,6 +79,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     formStepValue: state.formState.formStepValue,
     formCommentsValue: state.formState.formCommentsValue,
+    formOutOfOrderValue: state.formState.formOutOfOrderValue,
   }
 }
 

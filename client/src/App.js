@@ -10,21 +10,15 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="App">
-          <Switch>
-            <Route exact path="/" component={Splash} />
-            <Route exact path="/splash" component={Splash} />
-
-            <Route exact path="/main" component={MainWrapper} />
-
-            {/* <Route exact path="/main" component={Test} /> */}
-
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path="/" component={Splash} />
+          <Route exact path="/splash" component={Splash} />
+          <Route exact path="/main" component={MainWrapper} />
+        </Switch>
       </BrowserRouter>
     );
   }
-  
+
 }
 
 export default App;

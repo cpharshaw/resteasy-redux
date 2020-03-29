@@ -65,7 +65,7 @@ export class ReviewModal extends Component {
             className="rs animated fadeIn "
             style={{
               fontSize: "24px",
-              pointerEvents: "all",
+              // pointerEvents: "all",
               paddingRight: "8px",
               height: "35px",
               background: "transparent",

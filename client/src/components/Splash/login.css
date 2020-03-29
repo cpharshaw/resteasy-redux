@@ -6,6 +6,9 @@
   .brand {
     font-size: 145px;
   }
+  .ampersand {
+    font-size: 148px;
+  }
   .tagline {
     font-size: 45.75px;
   }  
@@ -15,6 +18,9 @@
 @media (max-width: 992px) { 
   .brand {
     font-size: 111.91645px;
+  }
+  .ampersand {
+    font-size: 114.91645px;
   }
   .tagline {
     font-size: 35.75px;
@@ -26,6 +32,9 @@
   .brand {
     font-size: 86.645px;
   }  
+  .ampersand {
+    font-size: 89.645px;
+  }  
   .tagline {
     font-size: 28.25px;
   }  
@@ -33,8 +42,11 @@
 
 
 @media (max-width: 576px) { 
-  .brand {
+  .brand{
     font-size: 57.5px;
+  }
+  .ampersand {
+    font-size: 60.5px;
   }
   .tagline {
     font-size: 18.25px

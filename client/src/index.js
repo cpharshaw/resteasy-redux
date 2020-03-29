@@ -6,10 +6,14 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
+
 import './ui/reset.css';
 import './ui/base.css';
 import './ui/elements.css';
 import './ui/styles.css';
+import './ui/bootstrapGrid.css';
+
+// import './ui/test.css';
 import thunk from 'redux-thunk';
 
 import { reduxFirestore, getFirestore } from 'redux-firestore';

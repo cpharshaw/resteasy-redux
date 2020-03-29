@@ -10,7 +10,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { GoogleApiWrapper } from "google-maps-react";
 import { storeGoogleAPI } from '../../store/actions/googleAPIActions';
-// import styles from '../../index.module.css';
+
+// import bootstrapGrid from './bootstrapGrid.module.css';
+// import reset from './reset.module.css';
+// import styles from './styles.module.css';
+// import elements from './elements.module.css';
+
 
 // import { statement } from '@babel/template';
 
@@ -51,7 +56,7 @@ class MainWrapper extends Component {
         windowHeight: [...this.state.windowHeight, vh]
       })
 
-      document.documentElement.style.setProperty('--vh', `${this.state.windowHeight/100}px`);
+      document.documentElement.style.setProperty('--vh', `${this.state.windowHeight / 100}px`);
       // console.log("window height: ", this.state.windowHeight)
       // console.log("MAX - window height: ", this.state.max_windowHeight())
       // console.log("MIN - window height: ", this.state.min_windowHeight())
@@ -78,32 +83,41 @@ class MainWrapper extends Component {
       mapListToggleValue,
       geolocationValue
     } = this.props;
-    // console.log("GOOGLE PROPS: ", this.props.googleAPIValue)
+
     return (
-      // <div
-      //   fixed
-      //   background="red"
-      //   style={{
-      //     background: "green !important"
-      //   }}
-      // >
-      < div
-        id="mainSection"
-        className="rs"
+      <div id="MainWrapper" className="container-fluid"
         style={{
-          flexDirection: "column",
-          position: "fixed",
-          height: "100vh",
-          width: "100vw"
+          height: "100%",
         }}
       >
-        {/* < TopBar /> */}
-        < MainSection />
-        < BottomBar />
-      </ div >
 
-      // </div>
+        <div
+          className="row"
+          style={{
+            position: "fixed",
+            top: "0",
+            height: "calc(100% - 55px)",
+          }}
+        >
+          <div className="col">
+            < MainSection />
+          </div>
+        </div>
 
+        <div
+          className="row bg-primary"
+          style={{
+            position: "fixed",
+            bottom: "0",
+            height: "55px",
+          }}
+        >
+          <div className="col bg-primary">
+            < BottomBar />
+          </div>
+        </div >
+
+      </div>
     )
 
   }

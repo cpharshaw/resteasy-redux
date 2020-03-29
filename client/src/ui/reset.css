@@ -3,72 +3,245 @@
    License: none (public domain)
 */
 
+html {
+	height: 100%;
+	width: 100%;
+}
 
-html, body {
+html, body, div:not(.skip), span:not(.skip), applet:not(.skip), object:not(.skip), iframe:not(.skip),
+h1:not(.skip), h2:not(.skip), h3:not(.skip), h4:not(.skip), h5:not(.skip), h6:not(.skip), p:not(.skip), blockquote:not(.skip), pre:not(.skip),
+a:not(.skip), abbr:not(.skip), acronym:not(.skip), address:not(.skip), big:not(.skip), cite:not(.skip), code:not(.skip),
+del:not(.skip), dfn:not(.skip), em:not(.skip), img:not(.skip), ins:not(.skip), kbd:not(.skip), q:not(.skip), s:not(.skip), samp:not(.skip),
+small:not(.skip), strike:not(.skip), strong:not(.skip), sub:not(.skip), sup:not(.skip), tt:not(.skip), var:not(.skip),
+b:not(.skip), u:not(.skip), i:not(.skip), center:not(.skip),
+dl:not(.skip), dt:not(.skip), dd:not(.skip), ol:not(.skip), ul:not(.skip), li:not(.skip),
+fieldset:not(.skip), form:not(.skip), label:not(.skip), legend:not(.skip),
+table:not(.skip), caption:not(.skip), tbody, tfoot:not(.skip), thead:not(.skip), tr:not(.skip), th:not(.skip), td:not(.skip),
+article:not(.skip), aside:not(.skip), canvas:not(.skip), details:not(.skip), embed:not(.skip), 
+figure:not(.skip), figcaption:not(.skip), footer:not(.skip), header:not(.skip), hgroup:not(.skip), 
+menu:not(.skip), nav:not(.skip), output:not(.skip), ruby:not(.skip), section:not(.skip), summary:not(.skip),
+time:not(.skip), mark:not(.skip), audio:not(.skip), /*video*/ 
+{
+	/* all: unset; */
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	height: 100%;
-	width: 100%;
 }
 
-
-button {
-	all: unset;
-	border: 0
+/* HTML5 display-role reset for older browsers */
+article:not(.skip), aside:not(.skip), details:not(.skip), figcaption:not(.skip), figure:not(.skip), 
+footer:not(.skip), header:not(.skip), hgroup:not(.skip), menu:not(.skip), nav:not(.skip), section:not(.skip) 
+{
+	display: block;
 }
 
-.rs {	
-	display: flex;
-	height: 100%;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	vertical-align: middle;
-	text-align: center;
-	text-align-last: center;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	border-spacing: 0;
-	border-width: 0;
-	border-collapse: collapse;
+body {
 	line-height: 1;
-	list-style: none;
-	text-decoration: none;
-	box-sizing: border-box;
-	font-size: 100%;
-	font-family: "Roboto";
-	background-color: #f5f5f5;
-	background: #f5f5f5;
-	color: #202020;
-	/* font-family: 'Alegreya Sans', sans-serif; */
 }
+
+ol:not(.skip), ul:not(.skip) {
+	list-style: none;
+}
+
+blockquote:not(.skip), q:not(.skip) {
+	quotes: none;
+}
+
+blockquote:before:not(.skip), 
+blockquote:after:not(.skip),
+q:before:not(.skip), 
+q:after:not(.skip) {
+	content: '';
+	content: none;
+}
+
+table:not(.skip) {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+
+
+
+/* ***** Reboot ***** */
+
+a,
+area,
+button,
+[role="button"],
+input:not([type=range]),
+label,
+select,
+summary,
+textarea,
+:not(.skip) {
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+html {
+  /* font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); */
+}
+
+
+
+body {
+	/* font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5; */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	color: #212529;
+	background-color: #f5f5f5;
+}
+
+
 
 input[type="checkbox"] {
 	width: initial;
 	-webkit-appearance: "checkbox"
 }
 
-
-
-
-:not(#fsReviewScroller)::-webkit-scrollbar {
-  width: 0;
-  height: 0
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
 }
 
 
-input[type=search]::-webkit-search-cancel-button {
-	-webkit-appearance: searchfield-cancel-button;
+[tabindex="-1"]:focus {
+  outline: 0 !important;
+}
+
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+/* ***** Custom ***** */
+:root {
+	color: #212529;
+	background-color: #f5f5f5;
+	/* background: #f5f5f5; */
+}
+
+
+
+div, article:not(.skip), aside:not(.skip), details:not(.skip), figcaption:not(.skip), figure:not(.skip), 
+footer:not(.skip), header:not(.skip), hgroup:not(.skip), menu:not(.skip), nav:not(.skip), section:not(.skip), {
+	display: flex;
+	display: -ms-flexbox;
+}
+
+
+
+/* button:not(.skip), input:not(.skip), textarea:not(.skip), label:not(.skip), select:not(.skip) {
+  display: -ms-flexbox;
+	display: flex;
+} */
+
+:not(html):not(head):not(link):not(style):not(meta):not(title):not(noscript):not(iframe):not(svg):not(g):not(path):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(p):not(em):not(b):not(u):not(span):not(video):not(source):not(.skip) {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	/* justify-self: center;
+	align-self: center; */
+	list-style: none;
+	border-style: none;
+	text-decoration: none;
+	text-decoration: none;
+	-webkit-text-decoration: none;
+	text-decoration-skip-ink: none;
+	-webkit-text-decoration-skip-ink: none;
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+	user-select: none;
+	text-transform: none;
+	text-shadow: none;
+	padding: 0;
+	border: 0;
+	border-style: none;
+	margin: 0;
+	border-spacing: 0;
+	border-width: 0;;
+	outline: 0;
+	vertical-align: baseline;
+	text-align: center;
+	text-align-last: center;
+	writing-mode: horizontal-tb; 
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+		/* custom */
+		color: #212529;
+		background-color: #f5f5f5;
+}
+
+
+:not(#fsReviewScroller)::-webkit-scrollbar:not(#myStuffHistoryScroller)::-webkit-scrollbar {
+  width: 0;
+  height: 0
 }
 
 input[type=search] {
 	-webkit-appearance: none;
 }
 
+input[type=search]::-webkit-search-cancel-button {
+	-webkit-appearance: searchfield-cancel-button;
+}
 
+
+button,
+button:active,
+buttom:focus {
+	all: unset;
+	display: flex;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	/* background-color: inherit; */
+}
+
+
+#root > div, #root {
+	height: 100%;
+	width: 100%;
+}
+
+
+body {
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+}

@@ -163,14 +163,12 @@ export class ReviewSection extends Component {
         style={{
           // all: "unset",
           display: displayValue,
+          position: "fixed",
+          bottom: "55px",
+          height: "calc(100% - 55px)",
           flexDirection: "column",
           alignContent: "space-between",
           justifyContent: "space-between",
-          // height: "100%",
-          // background: "red",
-          height: "calc(100% - 55px)",
-          position: "fixed",
-          bottom: "55px"
         }}
       >
         {
@@ -271,7 +269,7 @@ export class ReviewSection extends Component {
                         flexDirection: "column",
                         justifyContent: "flex-start",
                         overflowY: "auto",
-                        margin: "12.5px 0 0 0 "
+                        margin: "12.5px 0 0 0",
                       }}
                     >
                       {foursquarePlaces}

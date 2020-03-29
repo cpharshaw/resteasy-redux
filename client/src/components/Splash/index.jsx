@@ -7,6 +7,7 @@ import { getGeolocation } from "../../store/actions/geoActions";
 import "./login.css";
 import "./loader.css";
 import "./brand.css";
+import "./reset.module.css";
 
 // import "./brand.js";
 import anime from "animejs/lib/anime.es.js";
@@ -47,7 +48,7 @@ class Splash extends Component {
         translateY: function (e, i, l) {
           var offset = -0.625 + 0.625 * 2 * i;
           return offset + "em";
-        },        
+        },
         easing: "easeOutExpo",
         duration: 700
       })
@@ -102,26 +103,26 @@ class Splash extends Component {
         duration: 5000,
         easing: "easeInOutExpo"
       }, '-=3000')
-      // .add({
-      //   targets: ".ml5",
-      //   opacity: 0,
-      //   duration: 1000,
-      //   easing: "easeOutExpo",
-      //   delay: 1000
-      // })
+    // .add({
+    //   targets: ".ml5",
+    //   opacity: 0,
+    //   duration: 1000,
+    //   easing: "easeOutExpo",
+    //   delay: 1000
+    // })
   }
   render() {
 
     setTimeout(() => {
-      this.props.history.push("/main")
-    }, 7250)
+      // this.props.history.push("/main")
+    }, 7750)
 
     return (
       // https://codesandbox.io/s/rzwrk2854
 
       <div
         id="splashContainer"
-        className="rs animated fadeIn faster"
+        className="animated fadeIn faster skip"
         style={{
           position: "fixed",
           background: "lightgrey",
@@ -144,7 +145,7 @@ class Splash extends Component {
 
         <video
           id="myVideo"
-          className="animated fadeIn"
+          className="animated fadeIn skip"
           style={{
             position: "fixed",
             top: "50%",
@@ -164,37 +165,44 @@ class Splash extends Component {
           loop
         >
           <source
+            className=" skip"
             src={video}
             type="video/mp4"
           />
         </video>
 
 
-        <div className="">
-          <div id="" className="">
-            <h1 className="ml5">
-              <span className="text-wrapper ">
-                <span className="brand line line1 "></span>
-                <span className="brand letters letters-left">rest</span>
-                <span className="brand letters ampersand" style={{fontSize: "60px", margin: "0 12.5px 0 5px"}}>☆</span>
-                <span className="brand letters letters-right" >easy</span>
-                <span className="brand line line2 "></span>
+        <div className="skip"
+          style={{
+            position: "absolute",
+            top: "25%",
+            right: "0",
+            left: "0",
+          }}
+        >
+
+          <div className="skip">
+            <h1 className="ml5 skip">
+              <span className="text-wrapper skip">
+                <span className="brand line line1 skip"></span>
+                <span className="brand letters letters-left skip">rest</span>
+                <span className="brand letters ampersand skip" style={{ margin: "0 12.5px 0 5px" }}>☆</span>
+                <span className="brand letters letters-right skip" >easy</span>
+                <span className="brand line line2 skip"></span>
               </span>
             </h1>
 
-            <h1 className="ml5">
-              <span className="text-wrapper ">
-                <span className="tagline ">
-                  <span className="tagline tagline1  ">&nbsp;Your guide&nbsp;</span>
-                  <span className="tagline tagline2  ">to all things&nbsp;</span>
-                  <span className="tagline tagline3  ">fit to sit on&nbsp;</span>
+            <h1 className="ml5 skip">
+              <span className="text-wrapper skip">
+                <span className="tagline skip">
+                  <span className="tagline tagline1 skip">&nbsp;Your guide&nbsp;</span>
+                  <span className="tagline tagline2 skip">to all things&nbsp;</span>
+                  <span className="tagline tagline3 skip">fit to sit on&nbsp;</span>
                 </span>
               </span>
             </h1>
 
-
-
-            <div className="loader" />
+            <div className="loader skip" />
 
           </div>
 
