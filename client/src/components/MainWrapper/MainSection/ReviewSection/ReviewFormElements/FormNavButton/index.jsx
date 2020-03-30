@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { formNext, formPrev, resetForm } from '../../../../../../store/actions/formActions';
 import { selectSection } from '../../../../../../store/actions/sectionActions';
-import { modalToggled }  from '../../../../../../store/actions/modalActions';
+import { modalToggled } from '../../../../../../store/actions/modalActions';
 
 export class FormNavButton extends Component {
 
@@ -14,7 +14,7 @@ export class FormNavButton extends Component {
 
     if (
       this.props.formStepValue === 1
-        &&
+      &&
       this.props.formOutOfOrderValue
     ) {
       outOfOrderInd = "outOfOrder";
@@ -31,7 +31,7 @@ export class FormNavButton extends Component {
 
     if (
       this.props.formStepValue === 5
-        &&
+      &&
       this.props.formOutOfOrderValue
     ) {
       outOfOrderInd = "outOfOrder";
@@ -49,7 +49,7 @@ export class FormNavButton extends Component {
     this.props.selectSection("mapList");
   };
 
-  
+
   modalCancel = () => {
     this.props.modalToggled("formResetModal");
   };
@@ -87,11 +87,11 @@ export class FormNavButton extends Component {
         }
         className={"rs " + data_classes + ""}
         style={{
-          width: data_width ? data_width : "80px",
+          width: data_width ? data_width : "110px",
           color: data_textcolor ? data_textcolor : null,
-          maxHeight: "42px",
+          // maxHeight: "42px",
           // borderRadius: "3px",
-          padding: "8px",
+          padding: "7px",
           flexGrow: data_flexgrow ? data_flexgrow : null,
           borderRadius: data_borderradius ? data_borderradius : "3px",
           margin: data_margin ? data_margin : "0 15px 0 15px",
@@ -99,7 +99,7 @@ export class FormNavButton extends Component {
           transition: "background-color 0s" /* "box-shadow 0.5s", */,
         }}
       >
-        <em>{data_text}</em>
+        {data_text}
       </button>
     )
   }

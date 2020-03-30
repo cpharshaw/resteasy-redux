@@ -14,22 +14,126 @@ export class ReviewSection0 extends Component {
   render() {
 
     return (
-      < div
-        className="rs"
-        style={{
-          flexDirection: "column",
-          // background: "yellow"
-          // position: "fixed",
-          // bottom: "50px"
-        }}
-      >
-        <button
-          onClick={this.nextStep}
-          className="rs button bg-primary text-white"
-        >
-          <em>Begin review</em>
-        </button>
-      </div>
+      <div className="row-100">
+        <div className="col">
+
+          <div
+            style={{
+              position: "relative",
+              width: "80%",
+              height: "fit-content",
+              padding: "10px 12.5px 10px 12.5px",
+              // opacity: "0.5",
+              // background: "#f5f5f5",
+              borderRadius: "3px",
+              // flexDirection: "column",
+              // color: "black",
+              // backdropFilter: "blur(10px)",
+              // WebkitBackdropFilter: "blur(10px)"
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: "0",
+                bottom: "0",
+                right: "0",
+                left: "0",
+                opacity: "0.825",
+                // filter: "blur(1px)",
+                backgroundColor: "#f5f5f5",
+                zIndex: "-1",
+                borderRadius: "12.5px",
+                boxShadow: "0 -1px 12.5px #A0E0DE",
+              }}
+            />
+            <div
+              style={{
+                positon: "absolute",
+                top: "0",
+                bottom: "0",
+                right: "0",
+                left: "0",
+                height: "100%",
+                width: "100%",
+                background: "transparent",
+                zIndex: "1",
+
+                flexDirection: 'column'
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "30px",
+                  color: "whitesmoke",
+                  textShadow: "0px 0px 5.5px #212529",
+                  // fontFamily: "Roboto",
+                  // fontStyle: "italic",
+                  // margin: "12.5px 0 12.5px 0",
+                  // height: "100%",
+                  // transformOrigin: "0.5 0",
+                  fontWeight: "700",
+                  fontStyle: "italic"
+                }}
+              >
+                rest☆easy
+              </p>
+              <p style={{ fontSize: "16px" }}>Welcome to <em>rest☆easy</em>, the best bathroom review app in the Mid-Atlantic region of the United States!!</p>
+              <p style={{ color: "#212529", fontSize: "6px"}}>---------------------------------------------------------------------------------</p>
+              {/* <hr /> */}
+              <p style={{ fontSize: "18px", color: "black" }}>If you'd like to create a review, please press 'Begin review'.</p>
+              {/* <div
+                style={{
+                  background: "#212529",
+                  width: "40%",
+                  height: "fit-content",
+                  padding: "0 17.5px 0 17.5px",
+                }}
+              > */}
+
+              {/* </div> */}
+              {/* <p>Good luck, idiot.</p> */}
+            </div>
+            {/* <p> */}
+            {/* 
+          https://unsplash.com/photos/I72dFJRFT3k
+          https://unsplash.com/photos/PMKd1Qg7jJ0
+          https://unsplash.com/photos/rb767e573nE
+          https://unsplash.com/photos/XatMS2NXIpo
+          https://unsplash.com/photos/xXc7zUKIhRw
+          https://unsplash.com/photos/qeIuFR5vPm8
+          https://unsplash.com/photos/d6LzDABxP6I
+          https://unsplash.com/photos/y14YOjamViI
+          https://unsplash.com/photos/FuQBKSIc2yM
+
+          https://unsplash.com/photos/SKoLSGLucN4
+
+          https://unsplash.com/photos/egqR_zUd4NI
+          https://unsplash.com/photos/yCzY0pnrhWo
+          https://unsplash.com/photos/FtUzIprTVtI
+          https://unsplash.com/photos/Mk_cIYHdC0w
+          https://unsplash.com/photos/PMKd1Qg7jJ0
+          https://unsplash.com/photos/nN1NUSsYreQ
+          https://pixabay.com/photos/toilet-grunge-bathroom-damaged-990206/
+          https://pixabay.com/photos/water-closet-toilet-wc-lavatory-1333454/
+          https://unsplash.com/photos/VijgJ4fIe8A
+          https://unsplash.com/photos/FRmsFpV4Fao
+          https://unsplash.com/photos/dSbfzDB2DiU
+          https://unsplash.com/photos/C4pTlSHaBsk
+          https://unsplash.com/photos/BiDGqzEoT3c
+          https://unsplash.com/photos/qmJVhLF9RLs
+          https://unsplash.com/photos/EF-QrtA8nkQ
+          https://unsplash.com/photos/TMlDhxsT3wE
+          https://unsplash.com/photos/1PBAMt4mF80
+          https://unsplash.com/photos/q7NBKl58K_U
+          https://unsplash.com/photos/MgnI7cUwkq8
+          https://unsplash.com/photos/VCVI5QUvFAY 
+           */}
+            {/* </p> */}
+
+          </div>
+        </div>
+      </div >
     )
   }
 

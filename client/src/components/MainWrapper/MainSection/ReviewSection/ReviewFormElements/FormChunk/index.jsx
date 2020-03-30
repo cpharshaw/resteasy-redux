@@ -14,22 +14,20 @@ export class FormChunk extends Component {
     } = this.props;
 
     return (
-      <div 
-        className="rs animated fadeIn faster"
+      <div
+        className="row-100 animated fadeIn faster"
         style={{
-          // all: "unset",
-          flexDirection: "column",
-          alignContent: "space-around",
-          justifyContent: "space-around",
           // alignItems: "space-around",
-          height: data_height ? data_height : "calc(100% - 70px)",
-          width: data_width ? data_width : null,
-          margin: data_margin ? data_margin: null,
-          padding: data_padding ? data_padding: "25px 5px 15px 5px",
-          // backgroundColor: "grey"
+          // height: data_height ? data_height : "calc(100% - 70px)",
+          // width: data_width ? data_width : null,
+          // margin: data_margin ? data_margin : null,
+          // padding: data_padding ? data_padding : "25px 5px 15px 5px",
+          background: "#f5f5f5"
         }}
       >
-        {children}
+        <div className="col jc-sa ac-sa">
+          {children}
+        </div>
       </div>
     )
   }
