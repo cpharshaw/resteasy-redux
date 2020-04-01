@@ -15,17 +15,27 @@ export class ReviewSection0 extends Component {
 
     return (
       <div className="row-100">
-        <div className="col">
-
+        <div className="col jc-c">
+          <p
+            className="animated flipInX fadeIn"
+            style={{
+              fontSize: "30px",
+              color: "whitesmoke",
+              textShadow: "0px 0px 5.5px #212529",
+              fontWeight: "700",
+              fontStyle: "italic"
+            }}
+          >rest☆easy
+          </p>
           <div
             style={{
               position: "relative",
-              width: "80%",
+              width: "85%",
               height: "fit-content",
               padding: "10px 12.5px 10px 12.5px",
               // opacity: "0.5",
               // background: "#f5f5f5",
-              borderRadius: "3px",
+              borderRadius: "12px",
               // flexDirection: "column",
               // color: "black",
               // backdropFilter: "blur(10px)",
@@ -43,8 +53,8 @@ export class ReviewSection0 extends Component {
                 // filter: "blur(1px)",
                 backgroundColor: "#f5f5f5",
                 zIndex: "-1",
-                borderRadius: "12.5px",
-                boxShadow: "0 -1px 12.5px #A0E0DE",
+                borderRadius: "12px",
+                // boxShadow: "0 -1px 12.5px #A0E0DE",
               }}
             />
             <div
@@ -62,26 +72,25 @@ export class ReviewSection0 extends Component {
                 flexDirection: 'column'
               }}
             >
-              <p
+              {/* <p
                 style={{
                   fontSize: "30px",
                   color: "whitesmoke",
                   textShadow: "0px 0px 5.5px #212529",
-                  // fontFamily: "Roboto",
-                  // fontStyle: "italic",
-                  // margin: "12.5px 0 12.5px 0",
-                  // height: "100%",
-                  // transformOrigin: "0.5 0",
                   fontWeight: "700",
                   fontStyle: "italic"
                 }}
               >
                 rest☆easy
-              </p>
-              <p style={{ fontSize: "16px" }}>Welcome to <em>rest☆easy</em>, the best bathroom review app in the Mid-Atlantic region of the United States!!</p>
-              <p style={{ color: "#212529", fontSize: "6px"}}>---------------------------------------------------------------------------------</p>
+              </p> */}
+              <p style={{ fontSize: "19px" }}><u><em><b>Create Review</b></em></u></p>
+              <p style={{ fontSize: "17.75px" }}>Welcome to <span className="animated flipInX fadeIn"><em>rest☆easy</em></span> </p>
+              <span style={{ fontSize: "15px" }}>The world's <em>best</em> bathroom review app</span>
+              <br />
+              <p style={{ color: "#212529", fontSize: "6px" }}>---------------------------------------------------------------------------------</p>
               {/* <hr /> */}
-              <p style={{ fontSize: "18px", color: "black" }}>If you'd like to create a review, please press 'Begin review'.</p>
+              <p style={{ fontSize: "16.5px", color: "black" }}>To submit a review, press 'Begin review'.</p>
+              {/* <p style={{ fontSize: "16.5px", color: "black" }}>Go for it, idiot.  Let the world know what you have to say.</p> */}
               {/* <div
                 style={{
                   background: "#212529",

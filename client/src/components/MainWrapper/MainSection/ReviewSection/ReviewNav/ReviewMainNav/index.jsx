@@ -43,7 +43,7 @@ export class ReviewMainNav extends Component {
         <div className="col" style={{ background: "transparent" }}>
           <FormNavButton
             data_text={formStepValue === 0 ? "Begin review" : "Continue"}
-            data_classes="bg-primary"
+            data_classes="button-bg-primary"
             data_width={formStepValue === 0 ? "110px" : "80px"}
             func_navcommand="next"
           />
@@ -59,7 +59,23 @@ export class ReviewMainNav extends Component {
                   fontSize: "14px",
                 }}
               >
-                <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" />
+                {/* <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" /> */}
+
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                  width="24" height="24"
+                  viewBox="0 0 172 172"
+                  style={{ fill: "#f5f5f5" }}
+                >
+                  <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
+                    <path d="M0,172v-172h172v172z" fill="#f5f5f5" />
+                    <g fill="#000">
+                      <path d="M157.66667,14.33333l-21.08008,21.08008c-15.71512,-15.75037 -38.64141,-24.279 -63.3942,-19.96029c-28.88167,5.04533 -52.24612,28.08191 -57.58529,56.91341c-8.43517,45.47967 26.41824,85.30013 70.3929,85.30013c36.79367,0 67.21258,-27.88483 71.21875,-63.63216c0.48017,-4.27133 -2.86667,-8.03451 -7.16667,-8.03451c-3.58333,0 -6.66769,2.63901 -7.05469,6.20084c-3.10317,28.7025 -27.4779,51.13249 -56.9974,51.13249c-35.4105,0 -63.42388,-32.25818 -56.18555,-68.93718c4.35733,-22.07333 22.0263,-39.91889 44.0638,-44.46972c20.51251,-4.23376 39.5845,2.64623 52.56022,15.63509l-18.93848,18.93848h50.16667z" />
+                    </g>
+                  </g>
+                </svg>
+
+
+
               </button>
             ) : null
           }

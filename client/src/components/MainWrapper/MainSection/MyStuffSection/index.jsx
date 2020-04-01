@@ -7,6 +7,10 @@ import HorizontalRule from '../ReviewSection/ReviewFormElements/HorizontalRule';
 
 export class MyStuffSection extends Component {
 
+  state = {
+    myStuffCategory: "My Reviews"
+  }
+
   signInclicked = e => {
     this.props.signIn();
     console.log("sign in clicked")
@@ -15,6 +19,24 @@ export class MyStuffSection extends Component {
   signOutclicked = e => {
     this.props.signOut();
     console.log("sign out clicked")
+  }
+
+  myStuffCategoryClicked = e => {
+    e.preventDefault();
+
+    console.log(e.currentTarget.innerText)
+
+    const value = e.currentTarget.innerText;
+
+    // alert("this.state.myStuffCategory: " + this.state.myStuffCategory)
+    // alert("Value: " + value)
+
+
+    this.setState({
+      myStuffCategory: value
+    })
+
+    // alert("new this.state.myStuffCategory: " + this.state.myStuffCategory)
   }
 
 
@@ -79,21 +101,23 @@ export class MyStuffSection extends Component {
             <div id="mySignedInStuff" className="row">
               <div className="col">
 
-                <div className="row" style={{ padding: "0 25px 0 25px", background: "inherit" }}>
+                <div className="row jc-fs ac-fs" style={{ padding: "0 25px 0 25px", background: "inherit" }}>
 
-                  <img
-                    className="rs"
-                    style={{
-                      width: photoURL ? "auto" : "85px",
-                      height: "85px",
-                      background: photoURL ? null : "black",
-                      // margin: "10fpx 0 5px 0",
-                    }}
-                    src={photoURL ? photoURL : null}
-                  />
+                  <div className="col-3 jc-fs">
+                    <img
+                      className=""
+                      style={{
+                        width: photoURL ? "auto" : "85px",
+                        height: "85px",
+                        background: photoURL ? null : "black",
+                        // margin: "10fpx 0 5px 0",
+                      }}
+                      src={photoURL ? photoURL : null}
+                    />
+                  </div>
 
                   <div
-                    className="col"
+                    className="col-9"
                     style={{
                       margin: "5px 0 5px 0",
                       background: "inherit",
@@ -137,12 +161,68 @@ export class MyStuffSection extends Component {
                 // background: "red"
               }}
             >
-              <div className="col" style={{ borderBottom: "2px solid #0abab5", padding: "0 0 6px 0" }}>
-                <span>Review History</span>
+              <div
+                className="col"
+                style={{
+                  borderBottom: this.state.myStuffCategory === "My Reviews" ? "2px solid #0abab5" : "1px solid darkgrey",
+                  padding: "0 0 6px 0",
+                }}
+                onClick={e => this.myStuffCategoryClicked(e)}
+              >
+                <span
+                  style={{
+                    color: this.state.myStuffCategory === "My Reviews" ? "" : "darkgrey",
+                    fontSize: "85%"
+                  }}
+                >My Reviews</span>
               </div>
 
-              <div className="col" style={{ borderBottom: "1px solid darkgrey", padding: "0 0 6px 0" }}>
-                <span style={{ color: "darkgrey" }}>Favorites</span>
+              <div
+                className="col"
+                style={{
+                  borderBottom: this.state.myStuffCategory === "Favorites" ? "2px solid #0abab5" : "1px solid darkgrey",
+                  padding: "0 0 6px 0"
+                }}
+                onClick={e => this.myStuffCategoryClicked(e)}
+              >
+                <span
+                  style={{
+                    color: this.state.myStuffCategory === "Favorites" ? "" : "darkgrey",
+                    fontSize: "85%"
+                  }}
+                >Favorites</span>
+              </div>
+
+              <div
+                className="col"
+                style={{
+                  borderBottom: this.state.myStuffCategory === "Notifications" ? "2px solid #0abab5" : "1px solid darkgrey",
+                  padding: "0 0 6px 0"
+                }}
+                onClick={e => this.myStuffCategoryClicked(e)}
+              >
+                <span
+                  style={{
+                    color: this.state.myStuffCategory === "Notifications" ? "" : "darkgrey",
+                    fontSize: "85%"
+                  }}
+                >Notifications</span>
+              </div>
+
+              <div
+                className="col"
+                style={{
+                  borderBottom: this.state.myStuffCategory === "Settings" ? "2px solid #0abab5" : "1px solid darkgrey",
+                  padding: "0 0 6px 0"
+                }}
+                onClick={e => this.myStuffCategoryClicked(e)}
+              >
+                <span
+                  style={{
+                    color: this.state.myStuffCategory === "Settings" ? "" : "darkgrey",
+                    fontSize: "85%"
+                  }}
+                >Settings</span>
               </div>
             </div>
 
@@ -341,11 +421,11 @@ export class MyStuffSection extends Component {
             <div className="row"
               style={{
                 background: "#E8E8E8",
-                borderBottomLeftRadius: "5px",
-                borderBottomRightRadius: "5px",
+                // borderBottomLeftRadius: "5px",
+                // borderBottomRightRadius: "5px",
                 height: "55px",
-                borderBottom: "1px solid #DCDCDC",
-                borderStyle: "inset"
+                // borderBottom: "1px solid #DCDCDC",
+                // borderStyle: "inset"
               }}
             >
               <div className="col">
@@ -375,8 +455,8 @@ export class MyStuffSection extends Component {
                 // background: "yellow"
               }}
             >
-              <div className="col" style={{padding: "10px 0 10px 0"}}>
-                {displayName ? <SignedInComponent /> : <SignedOutComponent />}
+              <div className="col" style={{ padding: "10px 0 10px 0" }}>
+                {!displayName ? <SignedInComponent /> : <SignedOutComponent />}
               </div>
             </div>
 

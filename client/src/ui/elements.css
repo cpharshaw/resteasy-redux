@@ -7,14 +7,14 @@
 	/* border-radius: 3px; */
   padding: 10px;
   transition: 
-    background-color 0s, 
+    background-color 0s  !important; 
     /* box-shadow 0.5s, */
   ;
 
 }
 
 .button:active {
-  background-color: #1ca8a4;
+  /* background-color: #1ca8a4 !important; */
 }
 
 .div-button {
@@ -27,8 +27,7 @@
 }
 
 .div-button:active {
-  /* background-color: red; */
-  background-color: #1ca8a4;
+  /* background-color: #1ca8a4 !important; */
 }
 
 
@@ -73,3 +72,15 @@
 .spacer-div {
   width: 2.5px;
 }
+
+
+/* https://www.steckinsights.com/shorten-length-border-bottom-pure-css/
+#outOfOrder:after {
+  position: absolute;
+  content: ""; 
+  display: block; 
+  margin: -12.5% auto; 
+  width: 91%; 
+  padding-top: 0; 
+  border-top: 1px dotted lightgrey; 
+} */

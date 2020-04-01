@@ -101,12 +101,12 @@ class MainWrapper extends Component {
         </div>
 
         <div
-          className="row bg-primary"
+          className="row"
           style={{
             position: "fixed",
             bottom: "0",
             height: "55px",
-            borderTop: "1px solid #DCDCDC",
+            // borderTop: "1px solid #DCDCDC",
             borderStyle: "inset"
           }}
         >

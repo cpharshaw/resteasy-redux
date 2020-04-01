@@ -146,7 +146,6 @@ textarea {
 :root {
 	color: #212529;
 	background-color: #f5f5f5;
-	/* background: #f5f5f5; */
 }
 
 
@@ -164,7 +163,8 @@ footer:not(.skip), header:not(.skip), hgroup:not(.skip), menu:not(.skip), nav:no
 	display: flex;
 } */
 
-:not(html):not(head):not(link):not(style):not(meta):not(title):not(noscript):not(iframe):not(svg):not(g):not(path):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(p):not(em):not(b):not(u):not(span):not(video):not(source):not(.skip) {
+:not(span):not(sup):not(sub):not(hr):not(br):not(html):not(head):not(link):not(style):not(meta):not(title):not(noscript):not(iframe):not(svg):not(g):not(path):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(p):not(em):not(b):not(u):not(video):not(source):not(.skip) {
+	/* all: unset; */
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -194,7 +194,6 @@ footer:not(.skip), header:not(.skip), hgroup:not(.skip), menu:not(.skip), nav:no
 	vertical-align: baseline;
 	text-align: center;
 	text-align-last: center;
-	writing-mode: horizontal-tb; 
 	-webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -233,7 +232,7 @@ buttom:focus {
 }
 
 
-#root > div, #root {
+#root, #root > div {
 	height: 100%;
 	width: 100%;
 }

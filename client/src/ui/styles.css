@@ -1,23 +1,27 @@
 
 
 .bg-primary {
+	background-color: #0abab5 !important;
+	color: #f5f5f5 !important;
+}
+
+.button-bg-primary {
 	border: 2px solid #0abab5 !important;
 	background-color: #0abab5 !important;
 	color: #f5f5f5 !important;
 }
 
+
 .bg-primary-outline {
 	border: 2px solid #0abab5 !important;
 	background: transparent !important;
 	color: #0abab5 !important;
-	/* border-radius: "5px"; */
 }
 
 .bg-grey-outline {
 	border: 2px solid #626262;
 	background: transparent;
 	color: #626262;
-	/* border-radius: "5px"; */
 }
 
 .bg-primary-light {
@@ -66,9 +70,49 @@
 }
 
 
+.bg-red {
+	background-color: red;
+}
 
+.bg-green {
+	background-color: green;
+}
 
+.bg-blue {
+	background-color: blue;
+}
 
+.bg-orange {
+	background-color: orange;
+}
+
+.bg-yellow {
+	background-color: yellow;
+}
+
+.bg-brown {
+	background-color: brown;
+}
+
+.bg-grey {
+	background-color: grey;
+}
+
+.bg-teal {
+	background-color: teal;
+}
+
+.bg-black {
+	background-color: black;
+}
+
+.bg-purple {
+	background-color: purple;
+}
+
+.bg-indigo {
+	background-color: indigo;
+}
 
 
 

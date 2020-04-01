@@ -33,12 +33,15 @@ export class FieldLabel extends Component {
 
       <label
         id={data_id}
-        className="rs"
+        className="jc-fs ac-c ai-c"
         htmlFor={data_htmlFor}
         style={{
-          width: data_width ? data_width : null,
-          height: data_height ? data_height : null,
+          width: data_width ? data_width : "100%",
+          height: data_height ? data_height : "100%",
+          paddingLeft: "10%",
+          // flexGrow: data_width ? null : 1,
           // flexWrap: "wrap",
+          // justifyContent: "flex-start !important",
           flexDirection: data_flexdirection ? data_flexdirection : null,
           // backgroundColor: data_bgcolor ? data_bgcolor : null,
           // background: "white",
@@ -55,7 +58,7 @@ export class FieldLabel extends Component {
             flexWrap: "wrap",
           }}
         >
-          {children ? children : data_text} <sup><sup><sup>&nbsp;(i)</sup></sup></sup>
+          {children ? children : data_text} <sup>&nbsp;(i)</sup>
         </span>
       </label>
 

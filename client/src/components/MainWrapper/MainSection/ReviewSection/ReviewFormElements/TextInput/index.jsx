@@ -39,12 +39,16 @@ export class TextInput extends Component {
         max={data_max ? data_max : "999.99"}
         step={data_step ? data_step : "0.05"}
         style={{
-          width: data_width ? data_width : null,
+          width: data_width ? data_width : "95%",
+          // flexGrow: null ? data_width : 1,
+          height: data_height ? data_height : "100%",
           textAlign: data_textalign ? data_textalign : null,
           // height: data_height ? data_height : "80%",
           // borderBottom: "1px dotted lightgrey",
-          backgroundColor: data_bgcolor ? data_bgcolor : null,
+          backgroundColor: data_bgcolor ? data_bgcolor : "inherit",
           color: data_fontcolor ? data_fontcolor : "grey",
+          borderBottom: "0.5px solid lightgrey",
+          // borderRadius: "5px",
           fontSize: data_fontsize ? data_fontsize : "14.5px",
           fontStyle: "italic"
         }}

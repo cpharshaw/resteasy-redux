@@ -8,7 +8,7 @@ export class HorizontalRule extends Component {
         style={{
           borderTop: "1px dotted lightgrey",
           width: "91%",
-          margin: "8.5px 0 8.5px 0",
+          margin: "8px 4px 8px 4px",
           // padding: "0"
         }}
       />

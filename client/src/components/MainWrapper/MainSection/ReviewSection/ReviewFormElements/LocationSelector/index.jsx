@@ -36,8 +36,9 @@ export class LocationSelector extends Component {
         style={{
           width: data_width ? data_width : null,
           height: data_height ? data_height : null,
-          border: "1.25px dashed grey",
-          borderRadius: "5px"
+          border: "1.5px dashed lightgrey",
+          borderRadius: "5px",
+          backgroundColor: "rgb(230,230,230)"
         }}
       >
         <em><span style={{ color: "grey", fontSize: "14.5px" }}>Select location...</span></em>

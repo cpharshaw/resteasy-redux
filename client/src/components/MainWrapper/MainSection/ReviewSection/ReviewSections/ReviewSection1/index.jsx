@@ -62,146 +62,142 @@ export class ReviewSection1 extends Component {
 
     } = this.props;
     // console.log("formLocationValue: ", formLocationValue)
-    
+
     return (
 
-      <FormChunk
-        data_padding="20px 5px 13px 5px"
+      <div id="revewSection" className="container-fluid jc-se"
+        style={{
+          padding: "15px 5px 5px 5px",
+        }}
       >
 
-        {
-          formLocationValue.name ? (
-            <div
-              id=""
-              className="rs"
-              style={{
-                flexDirection: "column",
-                minWidth: "75%",
-                width: "fit-content",
-                minHeight: "90px",
-                height: "fit-content"
-              }}
-            // data_placedata={JSON.stringify(place)}
-              onClick={e => this.placeClicked(e)}
-            >
-              <span>{formLocationValue.name} </span>
-              <span>{formLocationValue.address} </span>
-              <span>{formLocationValue.category} </span>
+        <div className="row-15">
+          <div className="col">
+
+            {
+              formLocationValue.name ? (
+                <div
+                  id=""
+                  className="rs"
+                  style={{
+                    flexDirection: "column",
+                    minWidth: "75%",
+                    width: "fit-content",
+                    maxWidth: "100%",
+                    minHeight: "90px",
+                    height: "fit-content"
+                  }}
+                  // data_placedata={JSON.stringify(place)}
+                  onClick={e => this.placeClicked(e)}
+                >
+                  <span>{formLocationValue.name} </span>
+                  <span>{formLocationValue.address} </span>
+                  <span>{formLocationValue.category} </span>
+                </div>
+              ) : (
+                  <LocationSelector
+                    data_width="75%"
+                    data_height="90px"
+                  />
+                )
+            }
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <HorizontalRule />
+          </div>
+        </div>
+
+        <div className="row-75">
+          <div className="col jc-se">
+
+            <div className="row-15">
+              <div className="col-5">
+                < FieldLabel data_htmlFor="formRestroomTypeValue">Restroom used</ FieldLabel >
+              </div>
+              <div className="col-7">
+                <SelectBox
+                  data_id="formRestroomTypeValue"
+                  data_name="formRestroomTypeValue"
+                  func_handlechange={dropdownSelected}
+                  data_value={formRestroomTypeValue}
+                >
+                  <option value="Restroom type..." disabled>Restroom type...</option>
+                  <option value="Men's">Men's</option>
+                  <option value="Women's">Women's</option>
+                  <option value="Family/Gender-neutral">Family/Gender-neutral</option>
+                </SelectBox>
+              </div>
             </div>
-          ) : (
-              <LocationSelector
-                data_width="75%"
-                data_height="90px"
-              />
-            )
-        }
+
+            <div className="row-15">
+              <div className="col-5">
+                < FieldLabel data_htmlFor="formLocationNotesValue">Location notes</ FieldLabel >
+              </div>
+              <div className="col-7">
+                <TextInput
+                  data_id="formLocationNotesValue"
+                  data_name="formLocationNotesValue"
+                  data_justify="flex-start"
+                  data_placeholder="ex: 'third floor'"
+                  func_handlechange={textEntered}
+                  data_value={formLocationNotesValue}
+                />
+              </div>
+            </div>
 
 
-        <FormFieldGroup
-          // data_height="calc(100% - 100px)"
-        >
+            <div className="row-15">
+              <div className="col-5">
+                < FieldLabel data_htmlFor="formTimeOfVisitValue">Time of visit</ FieldLabel >
+              </div>
+              <div className="col-7">
+                <SelectBox
+                  data_id="formTimeOfVisitValue"
+                  data_name="formTimeOfVisitValue"
+                  // data_width="52.5%"
+                  func_handlechange={dropdownSelected}
+                  data_value={formTimeOfVisitValue}
+                >
+                  <option value="Time of day..." disabled>Time of day...</option>
+                  <option value="Just Now">(Just now)</option>
+                  <option value="Morning">Morning</option>
+                  <option value="Midday">Midday</option>
+                  <option value="Afternoon">Late afternoon</option>
+                  <option value="Evening">Evening</option>
+                  <option value="Late night">Late night</option>
+                  <option value="Middle of night">Middle of night</option>
+                </SelectBox>
+              </div>
+            </div>
 
-          <br />
+            <div className="row-15" >
+              <div className="col">
+                <HorizontalRule />
+              </div>
+            </div>
 
-          <HorizontalRule />
-          
+            <div id="outOfOrder" className="row-15">
+              <div className="col-5">
+                < FieldLabel data_htmlFor="formOutOfOrderValue">Out-of-Order</ FieldLabel >
+              </div>
 
-          < FieldWrapper>
-            < FieldLabel
-              data_htmlFor="formRestroomTypeValue"
-              data_width="47.5%"
-            >
-              Restroom used
-            </ FieldLabel >
+              <div className="col-7">
+                <CheckInput
+                  data_id="formOutOfOrderValue"
+                  data_name="formOutOfOrderValue"
+                  data_value={formOutOfOrderValue}
+                  func_handlechange={checkboxClicked}
+                />
+              </div>
+            </div>
 
-            <SelectBox
-              data_id="formRestroomTypeValue"
-              data_name="formRestroomTypeValue"
-              data_width="52.5%"
-              func_handlechange={dropdownSelected}
-              data_value={formRestroomTypeValue}
-            >
-              <option value="Restroom type..." disabled>Restroom type...</option>
-              <option value="Men's">Men's</option>
-              <option value="Women's">Women's</option>
-              <option value="Family/Gender-neutral">Family/Gender-neutral</option>
-            </SelectBox>
-          </ FieldWrapper >
+          </div >
+        </div >
 
-          < FieldWrapper >
-            < FieldLabel
-              data_htmlFor="formLocationNotesValue"
-              data_width="47.5%"
-            >
-              Location notes
-            </ FieldLabel >
-            <TextInput
-              data_id="formLocationNotesValue"
-              data_name="formLocationNotesValue"
-              data_width="52.5%"
-              data_justify="flex-start"
-              data_placeholder="ex: 'third floor'"
-              func_handlechange={textEntered}
-              data_value={formLocationNotesValue}
-            />
-          </ FieldWrapper >
-
-
-          < FieldWrapper >
-            < FieldLabel
-              data_htmlFor="formTimeOfVisitValue"
-              data_width="47.5%"
-            >
-              Time of visit
-            </ FieldLabel >
-
-            <SelectBox
-              data_id="formTimeOfVisitValue"
-              data_name="formTimeOfVisitValue"
-              data_width="52.5%"
-              func_handlechange={dropdownSelected}
-              data_value={formTimeOfVisitValue}
-            >
-              <option value="Time of day..." disabled>Time of day...</option>
-              <option value="Just Now">(Just now)</option>
-              <option value="Morning">Morning</option>
-              <option value="Midday">Midday</option>
-              <option value="Afternoon">Late afternoon</option>
-              <option value="Evening">Evening</option>
-              <option value="Late night">Late night</option>
-              <option value="Middle of night">Middle of night</option>
-            </SelectBox>
-          </ FieldWrapper >
-
-          <HorizontalRule />
-
-          < FieldWrapper >
-            < FieldLabel
-              data_htmlFor="formOutOfOrderValue"
-              data_width="47.5%"
-            // data_bgcolor="red"
-            >
-              Out-of-Order
-            </ FieldLabel >
-            < InputGroupWrapper
-              data_width="52.5%"
-            // data_bgcolor="blue"
-            >
-              <CheckInput
-                data_id="formOutOfOrderValue"
-                data_name="formOutOfOrderValue"
-                data_value={formOutOfOrderValue}
-                func_handlechange={checkboxClicked}
-              // data_bgcolor="orange"
-              />
-            </ InputGroupWrapper >
-          </ FieldWrapper >
-
-        </FormFieldGroup>
-
-        {/* < ReviewMainNav /> */}
-
-      </FormChunk >
+      </div >
     )
   }
 }

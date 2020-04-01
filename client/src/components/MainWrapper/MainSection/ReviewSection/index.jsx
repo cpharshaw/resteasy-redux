@@ -181,6 +181,7 @@ export class ReviewSection extends Component {
               }}
             >
               <div className="col">
+                {/* {formStepValue === 0 || formStepValue === 1 ? < ReviewSection1 /> : null} */}
                 {formStepValue === 0 ? < ReviewSection0 /> : null}
                 {formStepValue === 1 ? < ReviewSection1 /> : null}
                 {formStepValue === 2 ? < ReviewSection2 /> : null}
@@ -193,7 +194,7 @@ export class ReviewSection extends Component {
             <div className="row"
               style={{
                 height: "70px",
-                // background: "whitesmoke"
+                background: "transparent"
               }}
             >
               <div className="col">

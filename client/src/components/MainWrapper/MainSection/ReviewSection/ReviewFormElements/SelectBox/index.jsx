@@ -34,15 +34,16 @@ export class SelectBox extends Component {
         defaultValue={data_value}
         onChange={e => func_handlechange(e)}
         style={{
-          width: data_width ? data_width : null,
-          height: data_height ? data_height : null,
+          width: data_width ? data_width : "95%",
+          height: data_height ? data_height : "100%",
           // width: "66%",
           // height: "75%",
           // borderBottom: "1px dotted lightgrey",
           fontSize: data_fontsize ? data_fontsize : "14.5px",
           fontStyle: data_fontstyle ? data_fontstyle : "italic",
           background: "inherit",
-          color: data_color ? data_color : "grey"
+          color: data_color ? data_color : "grey",
+          textOverflow: "ellipsis"
         }}
       >
         {children}
