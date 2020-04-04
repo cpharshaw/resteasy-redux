@@ -1,21 +1,21 @@
 
 
 .bg-primary {
-	background-color: #0abab5 !important;
-	color: #f5f5f5 !important;
+	background-color: #0abab5 ;
+	color: #f5f5f5 ;
 }
 
 .button-bg-primary {
-	border: 2px solid #0abab5 !important;
-	background-color: #0abab5 !important;
-	color: #f5f5f5 !important;
+	border: 2px solid #0abab5 ;
+	background-color: #0abab5 ;
+	color: #f5f5f5 ;
 }
 
 
 .bg-primary-outline {
-	border: 2px solid #0abab5 !important;
-	background: transparent !important;
-	color: #0abab5 !important;
+	border: 2px solid #0abab5 ;
+	background-color: transparent ;
+	color: #0abab5 ;
 }
 
 .bg-grey-outline {
@@ -49,15 +49,15 @@
 }
 
 .bg-primary-invert {
-	border: 2px solid #f5454a !important;
+	border: 2px solid #f5454a ;
 	background-color: #f5454a;
 	color: #f5f5f5;
 }
 
 .bg-primary-invert-outline {
-	border: 2px solid #f5454a !important;
-	background: transparent !important;
-	color: #f5454a !important;
+	border: 2px solid #f5454a ;
+	background: transparent ;
+	color: #f5454a ;
 	/* border-radius: "5px"; */
 }
 

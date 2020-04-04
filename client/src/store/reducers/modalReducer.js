@@ -1,5 +1,5 @@
 const initState = {
-
+  currentModal: "",
   // modals
   //page1
   formLocationModal: false,
@@ -51,6 +51,7 @@ const modalReducer = (state = initState, action) => {
 
       return {
         ...state,
+        currentModal: modalName,
         [modalName]: !state[modalName]
       };
 
