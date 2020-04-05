@@ -23,14 +23,24 @@ export class MainSection extends Component {
 
     return (
 
-      <React.Fragment>
+      <div className="row-100" style={{ background: "transparent" }}>
+        <div className="col" style={{ background: "#f5f5f5" }}>
 
-        < ReviewSection display={selectedSectionValue} />
-        < MapListSection display={selectedSectionValue} />
-        < MyStuffSection display={selectedSectionValue} />
+          < ReviewSection display={selectedSectionValue} />
+          {/* < MapListSection display={selectedSectionValue} /> */}
+          < MyStuffSection display={selectedSectionValue} />
 
-        {currentModal !== "" ? < ModalContainer /> : null}
-      </React.Fragment>
+          {
+            
+            //take away the exclamation point
+            
+            
+            
+            
+            currentModal !== "" ? < ModalContainer /> : null}
+
+        </div>
+      </div>
 
     )
   }

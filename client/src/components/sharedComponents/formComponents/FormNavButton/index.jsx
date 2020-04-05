@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { formNext, formPrev, resetForm } from '../../../../store/actions/formActions';
 import { selectSection } from '../../../../store/actions/sectionActions';
-import { modalToggled } from '../../../../store/actions/modalActions';
+import { modalToggled, modalClosed } from '../../../../store/actions/modalActions';
 
 export class FormNavButton extends Component {
 
   nextStep = (e) => {
     e.preventDefault();
+
+    console.log("button clicked")
 
     let outOfOrderInd;
 
@@ -28,6 +30,8 @@ export class FormNavButton extends Component {
     e.preventDefault();
 
     let outOfOrderInd;
+
+    console.log("button clicked")
 
     if (
       this.props.formStepValue === 5
@@ -51,15 +55,16 @@ export class FormNavButton extends Component {
 
 
   modalCancel = () => {
-    this.props.modalToggled("formResetModal");
+    console.log("cancel clicked")
+    this.props.modalClosed();
   };
 
 
-  resetForm = (e) => {
+  resetForm = e => {
     e.preventDefault();
-
+    console.log("reset clicked")
     this.props.resetForm();
-    this.props.modalToggled("formResetModal");
+    this.props.modalClosed();
   }
 
 
@@ -125,6 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     resetForm: () => dispatch(resetForm()),
     selectSection: (section) => dispatch(selectSection(section)),
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
+    modalClosed: () => dispatch(modalClosed()),
   }
 }
 

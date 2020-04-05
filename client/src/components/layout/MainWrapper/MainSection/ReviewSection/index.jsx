@@ -118,7 +118,7 @@ export class ReviewSection extends Component {
     {/* https://codeburst.io/modals-in-react-f6c3ff9f4701 */ }
     return (
 
-      <div id="FormSections" className="container-fluid animated fadeIn faster"
+      <div id="FormSections" className="container-fluid animated fadeIn fast"
         style={{
           display: displayValue,
           backgroundImage: formStepValue === 0 ? "url('https://images.unsplash.com/photo-1584475784921-d9dbfd9d17ca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')" : null,
@@ -128,10 +128,10 @@ export class ReviewSection extends Component {
         }}
       >
 
-        <div className="row-100 animated fadeIn faster jc-sb ac-sb"
+        <div className="row-100 jc-sb ac-sb"
           style={{
-            backdropFilter: "blur(3.75px) grayscale(0.8) sepia(0.1) contrast(0.8)",
-            WebkitBackdropFilter: "blur(3.75px) grayscale(0.8) sepia(0.1) contrast(0.8)"
+            // backdropFilter: "blur(3.75px) grayscale(0.8) sepia(0.1) contrast(0.8)",
+            // WebkitBackdropFilter: "blur(3.75px) grayscale(0.8) sepia(0.1) contrast(0.8)"
           }}
         >
           <div className="col">
@@ -139,23 +139,24 @@ export class ReviewSection extends Component {
             <div className="row"
               style={{
                 height: "calc(100% - 70px)",
+                padding: "8px 2px 2px 2px"
               }}
             >
               <div className="col">
                 {/* {formStepValue === 0 || formStepValue === 1 ? < FormSection1 /> : null} */}
                 {formStepValue === 0 ? < FormSection0 /> : null}
                 {formStepValue === 1 ? < FormSection1 /> : null}
-                {/* {formStepValue === 2 ? < FormSection2 /> : null}
-                {formStepValue === 3 ? < FormSection3 /> : null}
-                {formStepValue === 4 ? < FormSection4 /> : null}
-                {formStepValue === 5 || formStepValue === 6 || formStepValue === 7 ? < FormSection5 /> : null} */}
+                {formStepValue === 2 ? < FormSection2 /> : null}
+                {/* {formStepValue === 3 ? < FormSection3 /> : null} */}
+                {/* {formStepValue === 4 ? < FormSection4 /> : null} */}
+                {/* {formStepValue === 5 || formStepValue === 6 || formStepValue === 7 ? < FormSection5 /> : null} */}
               </div>
             </div>
 
             <div className="row"
               style={{
                 height: "70px",
-                background: "transparent"
+                // background: "transparent"
               }}
             >
 

@@ -60,7 +60,8 @@ export class FormSection1 extends Component {
 
       <div id="reviewSection1" className="container-fluid jc-se animated fadeIn fast"
         style={{
-          padding: "15px 5px 5px 5px",
+          padding: "8px 2px 2px 2px"
+          // background: "transparent"
         }}
       >
 

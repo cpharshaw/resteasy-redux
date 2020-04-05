@@ -21,7 +21,11 @@
 .row-100, .row-95, .row-90, .row-85, .row-80,
 .row-75, .row-70, .row-65, .row-60, .row-55,
 .row-50, .row-45, .row-40, .row-35, .row-30,
-.row-25, .row-20, .row-15, .row-10, .row-5 {
+.row-25, .row-20, .row-15, .row-10, .row-5,
+.row-1, .row-2, .row-3, .row-4, .row-6, .row-7, .row-8, .row-9
+.row-99, .row-98, .row-97, .row-96, .row-94, .row-93, .row-92, .row-91
+.row-125, .row-875
+{
   width: 100%;
   flex-direction: row;
   /* justify-content: center;
@@ -911,6 +915,9 @@
 }
 
 
+
+
+
 .h-20 {
   height: 20% !important;
 }
@@ -960,6 +967,10 @@
   justify-content: flex-start !important;
 }
 
+.jc-fe {
+  justify-content: flex-end !important;
+}
+
 .jc-c {
   justify-content: center !important;
 }
@@ -986,6 +997,11 @@
   align-content: flex-start !important;
 }
 
+.ac-fe {
+  align-content: flex-end !important;
+}
+
+
 .ac-c {
   align-content: center !important;
 }
@@ -999,6 +1015,10 @@
 
 .ai-fs {
   align-items: flex-start !important;
+}
+
+.ai-fe {
+  align-items: flex-end !important;
 }
 
 .ai-c {
@@ -1026,12 +1046,48 @@
   height: 100%;
 }
 
+.row-1 {
+  height: 1%;
+}
+
+.row-2 {
+  height: 2%;
+}
+
+.row-3 {
+  height: 3%;
+}
+
+.row-4 {
+  height: 4%;
+}
+
 .row-5 {
   height: 5%;
 }
 
+.row-6 {
+  height: 6%;
+}
+
+.row-7 {
+  height: 7%;
+}
+
+.row-8 {
+  height: 8%;
+}
+
+.row-9 {
+  height: 9%;
+}
+
 .row-10 {
   height: 10%;
+}
+
+.row-125 {
+  height: 12.5%;
 }
 
 .row-15 {
@@ -1094,12 +1150,49 @@
   height: 85%;
 }
 
+.row-875 {
+  height: 87.5%;
+}
+
+
 .row-90 {
   height: 90%;
 }
 
+.row-91 {
+  height: 91%;
+}
+
+.row-92 {
+  height: 92%;
+}
+
+.row-93 {
+  height: 93%;
+}
+
+.row-94 {
+  height: 94%;
+}
+
 .row-95 {
   height: 95%;
+}
+
+.row-96 {
+  height: 96%;
+}
+
+.row-97 {
+  height: 97%;
+}
+
+.row-98 {
+  height: 98%;
+}
+
+.row-99 {
+  height: 99%;
 }
 
 .row-33 {

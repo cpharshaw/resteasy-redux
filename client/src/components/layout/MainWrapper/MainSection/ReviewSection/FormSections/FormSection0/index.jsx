@@ -24,7 +24,7 @@ export class FormSection0 extends Component {
         <div className="row">
           <div className="col jc-c">
             <p
-              className="animated fadeIn slower"
+              className="animated fadeIn"
               style={{
                 fontSize: "30px",
                 color: "whitesmoke",
@@ -45,8 +45,6 @@ export class FormSection0 extends Component {
                 borderRadius: "12px",
                 // flexDirection: "column",
                 // color: "black",
-                // backdropFilter: "blur(10px)",
-                // WebkitBackdropFilter: "blur(10px)"
               }}
             >
               <div

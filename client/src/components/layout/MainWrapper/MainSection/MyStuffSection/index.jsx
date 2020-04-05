@@ -394,7 +394,7 @@ export class MyStuffSection extends Component {
 
     return (
 
-      <div className="container-fluid" style={{ display: displayValue }}>
+      <div className="container-fluid animated fadeIn fast" style={{ display: displayValue }}>
 
         <div className="row h-100"
           style={{

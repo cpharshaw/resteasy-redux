@@ -14,7 +14,6 @@ export class BottomBar extends Component {
     // const newValue = event.currentTarget.getAttribute('value');
     // console.log("bottom bar selected section: ", newValue);
     this.props.selectSection(newValue);
-
   };
 
   render() {
@@ -34,18 +33,13 @@ export class BottomBar extends Component {
             className="div-button bg-primary"
             onClick={e => this.selectSection(e)}
             value="review"
-            style={{
-            }}
           >
             <svg
-              // className="w-100 h-100"
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
               style={{
                 height: "35.7px",
                 width: "35.7px",
-                // border: "1px solid white",
-                // borderTopStyle: "inset",
                 borderRadius: "50%",
               }}
             >
@@ -69,7 +63,6 @@ export class BottomBar extends Component {
             value="mapList"
           >
             <svg
-              // className="w-100 h-100"
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
               style={{ marginLeft: "5px", height: "38px", width: "38px" }}
@@ -94,7 +87,6 @@ export class BottomBar extends Component {
             value="myStuff"
           >
             <svg
-              // className="w-100 h-100"
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
               style={{ height: "38px", width: "38px", borderRadius: "50%" }}

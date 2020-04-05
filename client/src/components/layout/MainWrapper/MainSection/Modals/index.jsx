@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
+import FormNavButton from '../../../../sharedComponents/formComponents/FormNavButton';
 
+import ModalFormReset from './ModalFormReset';
 
 export class ModalContainer extends Component {
 
@@ -55,7 +57,8 @@ export class ModalContainer extends Component {
 
     return (
 
-      <div
+      <section
+        id="modalContainer"
         className="animated fadeIn faster container-fluid"
         style={{
           position: "absolute",
@@ -63,59 +66,103 @@ export class ModalContainer extends Component {
           // bottom: "0",
           left: "0",
           // right: "0",
-          backgroundColor: "rgba(197,197,197,0.6)",
-          WebkitFilter: "blur(6px)",
-          backdropFilter: "blur(6px)",
+          backgroundColor: "rgba(197,197,197,0.55)",
+          WebkitBackdropFilter: "blur(8px)",
+          backdropFilter: "blur(8px)",
           zIndex: "1000",
-          pointerEvents: "none"
+          // pointerEvents: "none"
         }}
       >
-        <div className="row">
-          <div className="col ac-fe" onClick={e => this.closeModal(e)}
-            style={{
-              fontSize: "24px",
-              paddingRight: "8px",
-              // height: "35px",
-              // background: "red",
-              color: "grey",
-              pointerEvents: "none",
-              zIndex: "1001",
-            }}
-          >
-            <span style={{ pointerEvents: "all" }}>&times;</span>
-          </div>
-        </div>
-
-
-        <div className="row">
-          <div className="col"
-            style={{
-              overflowY: "auto",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignContent: "flex-start",
-              margin: "-10px 0 0 0",
-              background: "orange"
-            }}
-          >
-            {children}
-          </div>
-        </div>
+        <div className="row-50">
+          <div className="col jc-se">
 
 
 
 
-        {/* 
-        {currentModal === "formResetModal" ? <ModalFormReset /> : null}
-        {currentModal === "formLocationModal" ? <ModalFormLocationSelector /> : null}
-        {currentModal === "formConfirmSubmitModal" ? <ModalFormConfirmSubmit /> : null}
-        {currentModal === "formThankYouModal" ? <ModalFormThankYou /> : null}
-        {currentModal === "formLabelInfoModal" ? <ModalFormLabelInfo /> : null}
-      */}
 
 
 
-        {/* {
+            <div className="row-50">
+              <div className="col-10 jc-fs"
+                style={{
+                  background: "#f5f5f5",
+                  borderRadius: "5px",
+                  // paddingBottom: "23px",
+                  boxShadow: "0 1px 3px #a8a8a8",
+                }}
+              >
+
+                <div className="row">
+                  <div className="col ai-fe" onClick={e => this.closeModal(e)}
+                    style={{
+                      pointerEvents: "all",
+                      zIndex: "1000",
+                      padding: "2px 9px 0 0"
+                    }}
+                  >
+                    <span className="animated fadeIn slow"
+                      style={{
+                        pointerEvents: "all",
+                        fontSize: "30px",
+                        color: "grey",
+                        fontWeight: "500",
+                        zIndex: '1000'
+                      }}
+                    >
+                      &times;
+                    </span>
+                  </div>
+                </div>
+
+                <div className="row-100" style={{ pointerEvents: "all" }}>
+                  <div className="col jc-se">
+
+                    <div className="row">
+                      <div className="col">
+                        <p className="">Reset review form and start over?</p>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col">
+                        <FormNavButton
+                          data_text="Cancel"
+                          data_classes="bg-grey-outline"
+                          func_navcommand="cancel"
+                        />
+                      </div>
+                      <div className="col">
+                        <FormNavButton
+                          data_text="Reset"
+                          data_classes="bg-grey-outline"
+                          func_navcommand="reset"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+
+
+
+
+            {/* {children} */}
+
+
+            {/* {currentModal === "formResetModal" ? <ModalFormReset /> : null} */}
+
+            {/*
+            {currentModal === "formLocationModal" ? <ModalFormLocationSelector /> : null}
+            {currentModal === "formConfirmSubmitModal" ? <ModalFormConfirmSubmit /> : null}
+            {currentModal === "formThankYouModal" ? <ModalFormThankYou /> : null}
+            {currentModal === "formLabelInfoModal" ? <ModalFormLabelInfo /> : null}
+            */}
+
+            {/* {
           formStepValue === 6 ? (
 
             <ReviewModal data_size="sm">
@@ -369,38 +416,11 @@ export class ModalContainer extends Component {
           ) : null
         }
 
+*/}
+          </div>
+        </div>
 
-        {
-          formResetModal ? (
-            <ReviewModal data_size="sm">
-              <div className="" style={{ flexDirection: "column" }}>
-                <span className="">
-                  Reset review form and start over?
-                      </span>
-                <div
-                  className=""
-                  style={{
-                    height: "50px",
-                    marginBottom: "20px"
-                  }}
-                >
-                  <FormNavButton
-                    data_text="Cancel"
-                    data_classes="bg-primary-invert"
-                    func_navcommand="cancel"
-                  />
-                  <FormNavButton
-                    data_text="Reset"
-                    data_classes="bg-grey-outline"
-                    func_navcommand="reset"
-                  />
-                </div>
-              </div>
-            </ReviewModal>
-          ) : null
-        } */}
-
-      </div>
+      </section >
     )
   }
 }

@@ -115,7 +115,7 @@ class Splash extends Component {
 
     setTimeout(() => {
       this.props.history.push("/main")
-    }, 7750)
+    }, 7500)
 
     return (
       // https://codesandbox.io/s/rzwrk2854
