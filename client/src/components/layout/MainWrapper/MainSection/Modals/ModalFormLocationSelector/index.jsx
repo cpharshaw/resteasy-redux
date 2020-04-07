@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { formPrev } from '../../../../../store/actions/formActions';
-import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { storeCircle } from '../../../../../store/actions/circleActions';
-import { storeCenter } from '../../../../../store/actions/centerActions';
-import { getPlacesFromFoursquare } from '../../../../../store/actions/foursquareActions';
+import { formPrev } from '../../../../../../store/actions/formActions';
+import { modalToggled, modalClosed } from '../../../../../../store/actions/modalActions';
+// import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { storeCircle } from '../../../../../../store/actions/circleActions';
+import { storeCenter } from '../../../../../../store/actions/centerActions';
+import { getPlacesFromFoursquare } from '../../../../../../store/actions/foursquareActions';
 // import ModalBlurBackground from '../ModalBlurBackground';
 
 export class LocationModal extends Component {
@@ -72,7 +72,7 @@ export class LocationModal extends Component {
           place,
           value: place.name
         });
-        // console.log("place: ", place)
+        console.log("place: ", place)
 
         const ctrLat = place.geometry.location.lat();
         const ctrLng = place.geometry.location.lng();
@@ -89,6 +89,8 @@ export class LocationModal extends Component {
         // console.log("fs value updated: ", this.props.foursquareValue);
 
         this.props.storeCenter(center);
+
+        if (this.props.selectedSectionValue === "mapList")  this.props.modalClosed();
 
       }
     );
@@ -259,7 +261,8 @@ export class LocationModal extends Component {
             width: data_width ? data_width : null,
             margin: data_margin ? data_margin : null,
             fontStyle: "italic",
-            padding: "7px !important",
+            borderRadius: "5px",
+            padding: "10px !important",
             fontSize: "12.5px",
             background: "#f5f5f5",
             border: data_border ? data_border : null,
@@ -286,6 +289,7 @@ const mapStateToProps = (state, ownProps) => {
     centerLngValue: state.centerState.centerLngValue,
     foursquareValue: state.foursquareState.foursquareValue,
     googleAPIValue: state.googleAPIState.googleAPIValue,
+    selectedSectionValue: state.sectionState.selectedSectionValue,
   }
 }
 

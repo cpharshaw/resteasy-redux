@@ -57,12 +57,7 @@ export class ReviewMainNav extends Component {
               < button
                 className="reset"
                 onClick={e => this.resetClicked(e)}
-                style={{
-                  fontSize: "14px",
-                }}
               >
-                {/* <img src="https://img.icons8.com/material-rounded/24/000000/recurring-appointment.png" /> */}
-
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                   width="24" height="24"
                   viewBox="0 0 172 172"
@@ -75,9 +70,6 @@ export class ReviewMainNav extends Component {
                     </g>
                   </g>
                 </svg>
-
-
-
               </button>
             ) : null
           }

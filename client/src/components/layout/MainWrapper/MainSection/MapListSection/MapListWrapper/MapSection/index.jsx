@@ -59,6 +59,8 @@ class MapSection extends Component {
     this.props.storeCenter(center);
     this.props.storeBounds(bounds);
 
+    // console.log("the map: ", map);
+
     // console.log(message);
     // console.log("map", map);
     // console.log("center", center);
@@ -280,29 +282,34 @@ class MapSection extends Component {
     // console.log("data_display: ", displayValue)
 
     return (
-      <div
-        id="mapList_mapSection"
-        className="rs animated fadeIn faster"
-        style={{
-          display: displayValue,
-          height: "100%"
-        }}
-      >
-        <div
-          id="google-map"
-          className="rs"
-          ref={this.googleMapRef}
-          style={{
-            height: "inherit"
-          }}
-        />
-        < MarkerComp
-          lat={40}
-          lng={-75}
-          icon={questionableIcon}
-        />
+      <div className="container-fluid animated fadeIn fast" style={{ display: displayValue }}>
+        <div className="row">
 
-        <RecenterButton />
+          <div id="mapSection" className="col"
+            style={{
+              position: "absolute",
+              // top: "0",
+              left: "0",
+              right: "0",
+              // bottom: "0"
+            }}
+          >
+            <div id="google-map" className="row" ref={this.googleMapRef}
+              style={{
+                height: "inherit"
+              }}
+            />
+            {/* < MarkerComp
+                lat={40}
+                lng={-75}
+                icon={questionableIcon}
+              /> */}
+
+            <RecenterButton />
+          </div>
+
+
+        </div>
       </div>
     )
   }

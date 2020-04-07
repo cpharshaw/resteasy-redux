@@ -108,7 +108,7 @@ export class FormSection1 extends Component {
           <div className="col jc-se">
 
             <div className="row-15">
-              <div className="col-5">
+              <div className="col-5 jc-se">
                 < FieldLabel data_htmlFor="formRestroomTypeValue">Restroom used</ FieldLabel >
               </div>
               <div className="col-7">

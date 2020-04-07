@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { toggleMapList } from '../../../store/actions/mapListActions';
 import { selectSection } from '../../../../store/actions/sectionActions';
+import { modalClosed } from '../../../../store/actions/modalActions';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -13,6 +14,7 @@ export class BottomBar extends Component {
     const newValue = e.currentTarget.value;
     // const newValue = event.currentTarget.getAttribute('value');
     // console.log("bottom bar selected section: ", newValue);
+    this.props.modalClosed()
     this.props.selectSection(newValue);
   };
 
@@ -26,13 +28,17 @@ export class BottomBar extends Component {
 
     return (
 
-      <div className="row h-100 bg-primary">
+      <div className="row bg-primary">
 
         <div className="col bg-primary">
           <button
-            className="div-button bg-primary"
+            className="bg-primary"
             onClick={e => this.selectSection(e)}
             value="review"
+            style={{
+              height: "100%",
+              width: "100%",
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -58,9 +64,13 @@ export class BottomBar extends Component {
 
         <div className="col bg-primary">
           <button
-            className="div-button bg-primary"
+            className="bg-primary"
             onClick={e => this.selectSection(e)}
             value="mapList"
+            style={{
+              height: "100%",
+              width: "100%",
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -82,9 +92,13 @@ export class BottomBar extends Component {
 
         <div className="col bg-primary">
           <button
-            className="div-button bg-primary"
+            className="bg-primary"
             onClick={e => this.selectSection(e)}
             value="myStuff"
+            style={{
+              height: "100%",
+              width: "100%",
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -119,7 +133,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectSection: section => dispatch(selectSection(section))
+    selectSection: section => dispatch(selectSection(section)),
+    modalClosed: () => dispatch(modalClosed()),
   }
 }
 

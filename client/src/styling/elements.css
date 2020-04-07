@@ -56,7 +56,7 @@
 
 
 .filter-toggle {
-  height: 82%;
+  height: 75%;
   width: fit-content;
   padding: 1px 5px 1px 5px;
   margin-left: 3px;
@@ -67,6 +67,7 @@
   font-size: 12px;
   flex-wrap: nowrap;
   white-space: nowrap;
+  color: grey;
 }
 
 .spacer-div {

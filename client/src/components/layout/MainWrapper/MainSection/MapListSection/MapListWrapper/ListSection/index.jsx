@@ -19,30 +19,33 @@ class ListSection extends Component {
     const displayValue = this.props.data_display ? null : "none";
     // console.log("all the props, ListSection: ", this.props);
     return (
-      <div
-        id="mapList_listSection"
-        className="rs animated fadeIn faster"
-        style={{
-          display: displayValue,
-          // position: "fixed",
-          // bottom: "50px",
-          // height: "calc(100% - 122px)",
-          // background: "red",
-        }}
-      >
-        <ul 
-          className="rs"
-          style={{
-            flexDirection: "column",
-          }}
-        >
-          <li className="" >BBQ</li>
-          <li className="" >Tres leches</li>
-          <li className="" >Pizza</li>
-          <li className="" >{process.env.REACT_APP_CRAIGS_SECRET}</li>
-          <li className="" >Pancakes</li>
-          <li className="" >Acai bowls</li>
-        </ul>
+      // <div
+      // id="listSection"
+      //   className="rs animated fadeIn faster"
+      //   style={{
+      //     display: displayValue,
+      //   }}
+      // >
+      <div id="listSection" className="container-fluid animated fadeIn fast" style={{ display: displayValue }}>
+        <div className="row-100">
+          <div className="col">
+
+            <ul
+              className="rs"
+              style={{
+                flexDirection: "column",
+              }}
+            >
+              <li className="" >BBQ</li>
+              <li className="" >Tres leches</li>
+              <li className="" >Pizza</li>
+              <li className="" >{process.env.REACT_APP_CRAIGS_SECRET}</li>
+              <li className="" >Pancakes</li>
+              <li className="" >Acai bowls</li>
+            </ul>
+            
+          </div>
+        </div>
       </div>
     )
   }

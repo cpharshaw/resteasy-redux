@@ -33,7 +33,7 @@ export class FieldLabel extends Component {
 
       <label
         id={data_id}
-        className=""
+        className="row jc-fs"
         htmlFor={data_htmlFor}
         style={{
           width: data_width ? data_width : "100%",

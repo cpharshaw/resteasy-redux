@@ -7,6 +7,13 @@ import { compose } from 'redux';
 import { GoogleApiWrapper } from "google-maps-react";
 import { storeGoogleAPI } from '../../../store/actions/googleAPIActions';
 
+import '../../../styling/reset/customReset.css';
+
+// import '../../../styling/base.css';
+// import '../../../styling/elements.css';
+// import '../../../styling/styles.css';
+// import '../../../styling/bootstrapGrid.css';
+
 class MainWrapper extends Component {
 
   state = {
@@ -20,7 +27,7 @@ class MainWrapper extends Component {
   }
 
   componentDidMount() {
-    // this.props.storeGoogleAPI(this.props.google.maps);
+    this.props.storeGoogleAPI(this.props.google.maps);
   }
 
 
@@ -40,6 +47,8 @@ class MainWrapper extends Component {
           style={{
             position: "fixed",
             top: "0",
+            left: "0",
+            right: "0",
             height: "calc(100% - 55px)",
           }}
         >
@@ -54,6 +63,8 @@ class MainWrapper extends Component {
           style={{
             position: "fixed",
             bottom: "0",
+            left: "0",
+            right: "0",
             height: "55px",
           }}
         >
@@ -95,8 +106,8 @@ export default compose(
   //   }
   // ]),
 
-  // GoogleApiWrapper({
-  //   apiKey: process.env.REACT_APP_GM_KEY,
-  //   version: "3.30"
-  // })
+  GoogleApiWrapper({
+    apiKey: process.env.REACT_APP_GM_KEY,
+    version: "3.30"
+  })
 )(MainWrapper);

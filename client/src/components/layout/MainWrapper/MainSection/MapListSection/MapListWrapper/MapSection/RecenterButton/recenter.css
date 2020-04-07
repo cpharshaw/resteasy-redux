@@ -1,73 +1,73 @@
 
 
 .recenterButton {
-  position: absolute;
-  bottom: 62px;
-  right: 10px;
-  /* float: left;
-  margin-left: -50px;
-  margin-bottom: -300px; */
-  z-index: 999;
-  height: 38px;  
-  width: 38px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  border-radius: 50%;
+  position: absolute !important;
+  bottom: 48px !important;
+  right: 16px !important;
+  /* float: left !important;
+  margin-left: -50px !important;
+  margin-bottom: -300px !important; */
+  z-index: 999 !important;
+  height: 38px !important;  
+  width: 38px !important;
+  display: flex !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  text-align: center !important;
+  border-radius: 50% !important;
   background: rgba(222.5, 222.5, 222.5, 0.8);
-  border: 0.5px dotted;
+  border: 0.25px dotted;
   border-color: rgba(200, 200, 200, 0.75);
 }
 
 .recenterButtonRing {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;  
-  margin: 0 auto ;
-  padding: 0 ;
-  border-radius: 50%;
-  height: 50%;
-  width:  50%;
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  text-align: center !important;  
+  margin: 0 auto  !important;
+  padding: 0  !important;
+  border-radius: 50% !important;
+  height: 50% !important;
+  width:  50% !important;
   background: rgba(225, 225, 225, 1);
-  z-index: 1000;
-  border: 1.75px solid;
-  border-color: grey;
+  z-index: 1000 !important;
+  border: 0.25px solid;
+  /* border-color: grey; */
 }
 
 
 .recenterButtonDot {
-  position: relative;
-  margin: 0 auto ;
-  padding: 0 ;
-  border-radius: 50%;
-  height: 7px;
-  width: 7px;
-  z-index: 1000;
-  background: grey;
+  position: relative !important;
+  margin: 0 auto  !important;
+  padding: 0  !important;
+  border-radius: 50% !important;
+  height: 7px !important;
+  width: 7px !important;
+  z-index: 1000 !important;
+  /* background: grey; */
 }
 
 
 
 .recenterCrosshairs1, .recenterCrosshairs2 {
-  position: absolute;
-  margin: 0 auto;
-  display: flex;
-  align-self: center;
-  background: grey;
+  position: absolute !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-self: center !important;
+  /* background: grey; */
 }
 
 .recenterCrosshairs1 {
-  height: 26px;
-  width: 1.75px;
+  height: 26px !important;
+  width: 1.25px !important;
 }
 
 
 .recenterCrosshairs2 {
-  width: 26px;
-  height: 1.75px;
+  width: 26px !important;
+  height: 1.25px !important;
 }
 
 

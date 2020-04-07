@@ -1,14 +1,16 @@
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
 
 html {
-	height: 100%;
-	width: 100%;
+	/* height: 100%;
+	width: 100%; */
 }
 
-html, body, div:not(.skip), span:not(.skip), applet:not(.skip), object:not(.skip), iframe:not(.skip),
+/*html, body, */
+div:not(.skip)div:not([class*="pac-"]), span:not(.skip)span:not([class*="pac-"]), applet:not(.skip), object:not(.skip), iframe:not(.skip),
 h1:not(.skip), h2:not(.skip), h3:not(.skip), h4:not(.skip), h5:not(.skip), h6:not(.skip), p:not(.skip), blockquote:not(.skip), pre:not(.skip),
 a:not(.skip), abbr:not(.skip), acronym:not(.skip), address:not(.skip), big:not(.skip), cite:not(.skip), code:not(.skip),
 del:not(.skip), dfn:not(.skip), em:not(.skip), img:not(.skip), ins:not(.skip), kbd:not(.skip), q:not(.skip), s:not(.skip), samp:not(.skip),
@@ -20,8 +22,7 @@ table:not(.skip), caption:not(.skip), tbody, tfoot:not(.skip), thead:not(.skip),
 article:not(.skip), aside:not(.skip), canvas:not(.skip), details:not(.skip), embed:not(.skip), 
 figure:not(.skip), figcaption:not(.skip), footer:not(.skip), header:not(.skip), hgroup:not(.skip), 
 menu:not(.skip), nav:not(.skip), output:not(.skip), ruby:not(.skip), section:not(.skip), summary:not(.skip),
-time:not(.skip), mark:not(.skip), audio:not(.skip), /*video*/ 
-{
+time:not(.skip), mark:not(.skip), audio:not(.skip), video:not(.skip) {
 	/* all: unset; */
 	margin: 0;
 	padding: 0;
@@ -31,15 +32,16 @@ time:not(.skip), mark:not(.skip), audio:not(.skip), /*video*/
 	vertical-align: baseline;
 }
 
+
+
 /* HTML5 display-role reset for older browsers */
 article:not(.skip), aside:not(.skip), details:not(.skip), figcaption:not(.skip), figure:not(.skip), 
-footer:not(.skip), header:not(.skip), hgroup:not(.skip), menu:not(.skip), nav:not(.skip), section:not(.skip) 
-{
+footer:not(.skip), header:not(.skip), hgroup:not(.skip), menu:not(.skip), nav:not(.skip), section:not(.skip) {
 	display: block;
 }
 
 body {
-	line-height: 1;
+	/* line-height: 1; */
 }
 
 ol:not(.skip), ul:not(.skip) {
@@ -68,84 +70,18 @@ table:not(.skip) {
 
 
 
-/* ***** Reboot ***** */
-
-a,
-area,
-button,
-[role="button"],
-input:not([type=range]),
-label,
-select,
-summary,
-textarea,
-:not(.skip) {
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-}
-
-
-*:not(html),
-*:not(html)::before,
-*:not(html)::after {
-  box-sizing: border-box;
-}
-
-
-html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-
-
-body {
-	/* font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5; */
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	/* color: #212529; */
-	/* background-color: #f5f5f5; */
-}
-
-
-
-input[type="checkbox"] {
-	width: initial;
-	-webkit-appearance: "checkbox"
-}
-
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}
-
-
-[tabindex="-1"]:focus {
-  outline: 0 !important;
-}
-
-
-input,
-button,
-select,
-optgroup,
-textarea {
-  margin: 0;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
 
 /* ***** Custom ***** */
 :root {
 	color: #212529;
 	background: #f5f5f5;
+	-webkit-overflow-scrolling: "touch";
+	scroll-behavior: smooth;
+	touch-action: none;
+	-ms-touch-action: none;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 
@@ -163,8 +99,21 @@ footer:not(.skip), header:not(.skip), hgroup:not(.skip), menu:not(.skip), nav:no
 	display: flex;
 } */
 
-:not(span):not(sup):not(sub):not(hr):not(br):not(html):not(head):not(link):not(style):not(meta):not(title):not(noscript):not(iframe):not(svg):not(g):not(path):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(p):not(em):not(b):not(u):not(video):not(source):not(.skip):not(time):not(.blur) {
-	/* all: unset; */
+/* :not([class*="pac-"]):not(span):not(sup):not(sub):not(hr):not(br):not(html):not(head):not(link):not(style):not(meta):not(title):not(noscript):not(iframe):not(svg):not(g):not(path):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(p):not(em):not(b):not(u):not(video):not(source):not(.skip):not(time):not(.blur) { */
+
+div:not(.skip)div:not([class*="pac-"]), span:not(.skip)span:not([class*="pac-"]), applet:not(.skip), object:not(.skip), iframe:not(.skip),
+h1:not(.skip), h2:not(.skip), h3:not(.skip), h4:not(.skip), h5:not(.skip), h6:not(.skip), p:not(.skip), blockquote:not(.skip), pre:not(.skip),
+a:not(.skip), abbr:not(.skip), acronym:not(.skip), address:not(.skip), big:not(.skip), cite:not(.skip), code:not(.skip),
+del:not(.skip), dfn:not(.skip), em:not(.skip), img:not(.skip), ins:not(.skip), kbd:not(.skip), q:not(.skip), s:not(.skip), samp:not(.skip),
+small:not(.skip), strike:not(.skip), strong:not(.skip), sub:not(.skip), sup:not(.skip), tt:not(.skip), var:not(.skip),
+b:not(.skip), u:not(.skip), i:not(.skip), center:not(.skip),
+dl:not(.skip), dt:not(.skip), dd:not(.skip), ol:not(.skip), ul:not(.skip), li:not(.skip),
+fieldset:not(.skip), form:not(.skip), label:not(.skip), legend:not(.skip),
+table:not(.skip), caption:not(.skip), tbody, tfoot:not(.skip), thead:not(.skip), tr:not(.skip), th:not(.skip), td:not(.skip),
+article:not(.skip), aside:not(.skip), canvas:not(.skip), details:not(.skip), embed:not(.skip), 
+figure:not(.skip), figcaption:not(.skip), footer:not(.skip), header:not(.skip), hgroup:not(.skip), 
+menu:not(.skip), nav:not(.skip), output:not(.skip), ruby:not(.skip), section:not(.skip), summary:not(.skip),
+time:not(.skip), mark:not(.skip), audio:not(.skip) /*video*/ {	
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -194,14 +143,25 @@ footer:not(.skip), header:not(.skip), hgroup:not(.skip), menu:not(.skip), nav:no
 	vertical-align: baseline;
 	text-align: center;
 	text-align-last: center;
+	-moz-text-align-last: center;
 	-webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+	user-select: none;
 		/* custom */
 		/* color: #212529;
 		background-color: #f5f5f5; */
 }
+
+
+
+
+*[class*="pac-"] {
+	all: revert;
+	text-align-last: left;
+	-moz-text-align-last: left;
+}
+
 
 
 :not(#fsReviewScroller)::-webkit-scrollbar:not(#myStuffHistoryScroller)::-webkit-scrollbar {
@@ -213,8 +173,16 @@ input[type=search] {
 	-webkit-appearance: none;
 }
 
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
 input[type=search]::-webkit-search-cancel-button {
 	-webkit-appearance: searchfield-cancel-button;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 16px;
+	background: inherit;
 }
 
 
@@ -232,12 +200,6 @@ buttom:focus {
 }
 
 
-#root, #root > div {
-	height: 100%;
-	width: 100%;
-}
-
-
 body {
 	position: fixed;
 	height: 100vh;
@@ -245,3 +207,9 @@ body {
 	color: #212529;
 	background: #f5f5f5;
 }
+
+#root, #root > div {
+	height: 100%;
+	width: 100%;
+}
+

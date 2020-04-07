@@ -139,7 +139,6 @@ export class ReviewSection extends Component {
             <div className="row"
               style={{
                 height: "calc(100% - 70px)",
-                padding: "8px 2px 2px 2px"
               }}
             >
               <div className="col">
@@ -147,9 +146,9 @@ export class ReviewSection extends Component {
                 {formStepValue === 0 ? < FormSection0 /> : null}
                 {formStepValue === 1 ? < FormSection1 /> : null}
                 {formStepValue === 2 ? < FormSection2 /> : null}
-                {/* {formStepValue === 3 ? < FormSection3 /> : null} */}
-                {/* {formStepValue === 4 ? < FormSection4 /> : null} */}
-                {/* {formStepValue === 5 || formStepValue === 6 || formStepValue === 7 ? < FormSection5 /> : null} */}
+                {formStepValue === 3 ? < FormSection3 /> : null}
+                {formStepValue === 4 ? < FormSection4 /> : null}
+                {formStepValue === 5 || formStepValue === 6 || formStepValue === 7 ? < FormSection5 /> : null}
               </div>
             </div>
 

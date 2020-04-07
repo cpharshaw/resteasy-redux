@@ -1,16 +1,16 @@
 .loader {
-  margin: 75px auto;
-  font-size: 100%;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  position: relative;
-  text-indent: -9999em;
-  -webkit-animation: load5 .75s infinite ease;
-  animation: load5 .75s infinite ease;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
+  margin: 75px auto !important;
+  font-size: 100% !important;
+  width: 1em !important;
+  height: 1em !important;
+  border-radius: 50% !important;
+  position: relative !important;
+  text-indent: -9999em !important;
+  -webkit-animation: load5 .75s infinite ease !important;
+  animation: load5 .75s infinite ease !important;
+  -webkit-transform: translateZ(0) !important;
+  -ms-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
 
 }
 @-webkit-keyframes load5 {

@@ -1,0 +1,190 @@
+/* styling reset */
+
+:root {
+	--font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+
+button /*button:focus, button:active, button:visited, button:hover, button:focus-within*/ {
+  all: initial;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+* {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* :root, html, body,
+div:not([class*="pac-"]), footer, header, main, section, nav, article, summary, figcaption, figure, details, aside, hgroup, 
+p, h1, h2, h3, h4, h5, h6, span:not([class*="pac-"]), b, u, em, i, center, strong,
+img, a, table,
+form, fieldset, label, input, select, textarea, option, datalist, output, legend, 
+button,
+dl, dt, dd, ol, ul, li,
+blockquote, blockquote:before, blockquote:after, q, q:before, q:after */
+
+html, body {
+  margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+#root, #root *:not([class*="pac-"]) {
+  /* all: initial; */
+  margin: 0 auto;
+	padding: 0;
+  
+  font-size: 100%;
+  font-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; 
+  -ms-text-size-adjust: 100%;
+  text-indent: 0;
+  font: inherit;
+  text-decoration: none;
+  -webkit-text-decoration: none;
+  text-decoration-style: none;
+  -moz-text-decoration-style: none;
+	text-decoration-skip-ink: none;
+  -webkit-text-decoration-skip-ink: none;
+  
+  -webkit-tap-highlight-color: transparent;
+
+  vertical-align: baseline;
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
+  -ms-text-align-last: center;
+
+  border: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+  box-shadow: none;
+  outline: none;
+
+	quotes: none;
+  list-style: none;
+
+  user-select: none;
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  
+	text-transform: none;
+  text-shadow: none;
+
+  content: ''; 
+  content: none; 
+  
+}
+
+span {
+  margin: 0 !important;
+}
+
+[tabindex="-1"]:focus {
+  outline: 0 !important;
+}
+
+
+input[type=search] {
+	-webkit-appearance: none;
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0
+}
+
+
+/* adding styles back */
+
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1; /* 1.5 */
+  color: #212529;
+  background-color: #f5f5f5;
+}
+
+
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+   font: inherit; /* 2 */
+}
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  /* outline-offset: -2px; //..2..// */
+}
+
+
+b, strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+input[type=search]::-webkit-search-cancel-button {
+	-webkit-appearance: searchfield-cancel-button;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 17px;
+	background: inherit;
+}
+
+div:not([class*="pac-"])div:not(.row)div:not([class*="row-"])div:not(.col)div:not([class*="col-"])div:not(.container)div:not(.container-fluid),
+footer, header, main, section, nav, article, aside, summary, figcaption, figure, details, hgroup, 
+form, fieldset, label, input, select, textarea, option, datalist, output, legend {
+  /* display: -ms-flexbox;
+  display: flex; */
+  /* justify-content: center;
+  align-items: center;
+  align-content: center; */
+}
+
+head, link, meta, script, style, title {
+  display: none;
+}

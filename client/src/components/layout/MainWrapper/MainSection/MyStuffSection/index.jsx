@@ -428,7 +428,6 @@ export class MyStuffSection extends Component {
                     // fontFamily: "Roboto",
                     // fontStyle: "italic",
                     margin: "12.5px 0 12.5px 0",
-                    height: "100%",
                     transformOrigin: "0.5 0",
                     fontWeight: "600",
                     fontStyle: "italic"

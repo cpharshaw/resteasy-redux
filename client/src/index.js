@@ -7,7 +7,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
 
-import './styling/reset.css';
+// import './styling/meyerreset.css';
+// import './styling/reboot.css';
+// import './styling/reset/customReset.css';
+
 import './styling/base.css';
 import './styling/elements.css';
 import './styling/styles.css';
@@ -26,6 +29,8 @@ import 'firebase/auth';
 import fbConfig from './config/fbConfig';
 
 require('dotenv').config();
+
+document.addEventListener("touchstart", function(){}, true)
 
 
 const store = createStore(

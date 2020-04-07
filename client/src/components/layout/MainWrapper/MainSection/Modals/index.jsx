@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
 import FormNavButton from '../../../../sharedComponents/formComponents/FormNavButton';
-
+import HorizontalRule from '../../../../sharedComponents/general/HorizontalRule';
 import ModalFormReset from './ModalFormReset';
-
+import LocationModal from './ModalFormLocationSelector';
 export class ModalContainer extends Component {
 
   closeModal(e) {
@@ -55,114 +55,223 @@ export class ModalContainer extends Component {
     }
 
 
+
+    const foursquarePlaces = this.props.foursquareValue !== null && this.props.foursquareValue !== undefined ?
+      this.props.foursquareValue.map((place, i) => {
+        const name = place.name ? place.name : null;
+        const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
+        const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
+        const distance = place.distance + " ft";
+
+        return (
+          <div className="row" key={i + "fs"}
+            style={{
+              background: i % 2 === 0 ? "red" : "blue",
+              margin: "8px 0 4px 0"
+            }}
+          >
+            <div
+              className="col"
+              data_placedata={JSON.stringify(place)}
+              onClick={e => this.placeSelected(e)}
+              data_placename={name}
+              data_placeaddress={address}
+              data_placecategory={category}
+              data_placedistance={distance}
+              style={{
+                background: i % 2 === 0 ? "darkgrey" : "lightgrey",
+              }}
+            >
+              <span><b>{name}</b> ({distance}) </span>
+              <span>{address} </span>
+              <span>{category} </span>
+
+            </div>
+          </div>
+          // {i !== (this.props.foursquareValue.length - 1) ? <HorizontalRule /> : null}
+
+        )
+      }) : null;
+
+
+
     return (
+      <React.Fragment>
+        {
+          currentModal !== "settingsModal" ? (
+            <section
+              id="modalContainer"
+              className="animated fadeIn faster container-fluid"
+              style={{
+                position: "absolute",
+                top: "0",
+                left: "0",
+                backgroundColor: "rgba(197,197,197,0.55)",
+                WebkitBackdropFilter: "blur(8px)",
+                backdropFilter: "blur(8px)",
+                zIndex: "1000",
+              }}
+            >
 
-      <section
-        id="modalContainer"
-        className="animated fadeIn faster container-fluid"
-        style={{
-          position: "absolute",
-          top: "0",
-          // bottom: "0",
-          left: "0",
-          // right: "0",
-          backgroundColor: "rgba(197,197,197,0.55)",
-          WebkitBackdropFilter: "blur(8px)",
-          backdropFilter: "blur(8px)",
-          zIndex: "1000",
-          // pointerEvents: "none"
-        }}
-      >
-        <div className="row-50">
-          <div className="col jc-se">
+              {
+                currentModal !== "formLocationModal" && currentModal !== "" ? (
+
+                  <div className="row-50">
+                    <div className="col jc-se">
+
+                      <div className="row-50 animated fadeIn">
+                        <div className="col-10 jc-fs"
+                          style={{
+                            background: "#f5f5f5",
+                            borderRadius: "5px",
+                            // paddingBottom: "23px",
+                            boxShadow: "0 1px 3px #a8a8a8",
+                          }}
+                        >
+
+                          <div className="row">
+                            <div className="col jc-fe ai-fe ac-fe" onClick={e => this.closeModal(e)}
+                              style={{
+                                pointerEvents: "all",
+                                zIndex: "1000",
+                                padding: "5px 12px 0 0"
+                              }}
+                            >
+                              <span className="animated fadeIn slower"
+                                style={{
+                                  pointerEvents: "all",
+                                  fontSize: "30px",
+                                  color: "grey",
+                                  fontWeight: "500",
+                                  zIndex: '1000'
+                                }}
+                              >
+                                &times;
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="row-100" style={{ pointerEvents: "all" }}>
+                            <div className="col jc-se">
+
+                              <div className="row">
+                                <div className="col">
+                                  {currentModal === "formResetModal" ? <p>Reset review form and start over?</p> : null}
+                                  {currentModal === "formConfirm" ? <p>Ok to submit review?</p> : null}
+                                  {currentModal === "formComplete" ? <p>Thank you for your review.</p> : null}
+                                </div>
+                              </div>
+                              <div className="row">
+                                <div className="col">
+                                  <FormNavButton
+                                    data_text={currentModal === "formResetModal" ? "Cancel" : null}
+                                    data_classes="bg-grey-outline"
+                                    func_navcommand="cancel"
+                                  />
+                                </div>
+                                <div className="col">
+                                  <FormNavButton
+                                    data_text={currentModal === "formResetModal" ? "Reset" : null}
+                                    data_classes="bg-grey-outline"
+                                    func_navcommand={currentModal === "formResetModal" ? "reset" : null}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                ) : null
+              }
 
 
+              {
+                currentModal === "formLocationModal" ? (
 
-
-
-            <div className="row-50">
-              <div className="col-10 jc-fs"
-                style={{
-                  background: "#f5f5f5",
-                  borderRadius: "5px",
-                  // paddingBottom: "23px",
-                  boxShadow: "0 1px 3px #a8a8a8",
-                }}
-              >
-
-                <div className="row">
-                  <div className="col ai-fe" onClick={e => this.closeModal(e)}
-                    style={{
-                      pointerEvents: "all",
-                      zIndex: "1000",
-                      padding: "2px 9px 0 0"
-                    }}
-                  >
-                    <span className="animated fadeIn slow"
+                  <div className="row-95 animated fadeIn">
+                    <div className="col-11 jc-fs"
                       style={{
-                        pointerEvents: "all",
-                        fontSize: "30px",
-                        color: "grey",
-                        fontWeight: "500",
-                        zIndex: '1000'
+                        background: "#f5f5f5",
+                        borderRadius: "5px",
+                        boxShadow: "0 1px 3px #a8a8a8",
                       }}
                     >
-                      &times;
-                    </span>
-                  </div>
-                </div>
 
-                <div className="row-100" style={{ pointerEvents: "all" }}>
-                  <div className="col jc-se">
-
-                    <div className="row">
-                      <div className="col">
-                        <p className="">Reset review form and start over?</p>
+                      <div className="row" style={{ height: "35px" }}>
+                        <div className="col jc-fe ai-fe ac-fe" onClick={e => this.closeModal(e)}
+                          style={{
+                            pointerEvents: "all",
+                            zIndex: "1000",
+                            padding: "5px 12px 0 0",
+                          }}
+                        >
+                          <span className="animated fadeIn slower "
+                            style={{
+                              pointerEvents: "all",
+                              fontSize: "30px",
+                              color: "grey",
+                              fontWeight: "500",
+                              zIndex: '1000'
+                            }}
+                          >
+                            &times;
+                          </span>
+                        </div>
                       </div>
+
+                      <div className="row" style={{ height: "45px" }}>
+                        <div className="col">
+                          <LocationModal
+                            data_width="85%"
+                            data_height="45px"
+                            data_border="0.5px solid #0abab5"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="row"
+                        style={{
+                          height: "calc(100% - 80px)",
+                          padding: "8px 3px 8px 3px",
+                        }}
+                      >
+                        <div
+                          id="fsReviewScroller"
+                          className="col jc-fs"
+                          style={{
+                            whiteSpace: "nowrap",
+                            overflow: "scroll",
+                            WebkitOverflowScrolling: "touch",
+                          }}
+                        >
+                          {foursquarePlaces}
+                        </div>
+                      </div>
+
                     </div>
-                    <div className="row">
-                      <div className="col">
-                        <FormNavButton
-                          data_text="Cancel"
-                          data_classes="bg-grey-outline"
-                          func_navcommand="cancel"
-                        />
-                      </div>
-                      <div className="col">
-                        <FormNavButton
-                          data_text="Reset"
-                          data_classes="bg-grey-outline"
-                          func_navcommand="reset"
-                        />
-                      </div>
-                    </div>
                   </div>
-                </div>
+                ) : null
+              }
 
 
-              </div>
-            </div>
+              {/* {children} */}
 
 
+              {/* {currentModal === "formResetModal" ? <ModalFormReset /> : null} */}
 
-
-
-
-            {/* {children} */}
-
-
-            {/* {currentModal === "formResetModal" ? <ModalFormReset /> : null} */}
-
-            {/*
+              {/*
             {currentModal === "formLocationModal" ? <ModalFormLocationSelector /> : null}
             {currentModal === "formConfirmSubmitModal" ? <ModalFormConfirmSubmit /> : null}
             {currentModal === "formThankYouModal" ? <ModalFormThankYou /> : null}
             {currentModal === "formLabelInfoModal" ? <ModalFormLabelInfo /> : null}
             */}
 
-            {/* {
+              {/* {
           formStepValue === 6 ? (
 
             <ReviewModal data_size="sm">
@@ -223,204 +332,19 @@ export class ModalContainer extends Component {
 
             <ReviewModal data_name="formLocationModal">
 
-              <LocationModal
-                data_width="85%"
-                data_height="44px"
-                data_border="0.5px solid #0abab5"
-              />
-
-              <div
-                id="fsReviewScroller"
-                className=""
-                style={{
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                  overflowY: "auto",
-                  margin: "12.5px 0 0 0",
-                }}
-              >
-                {foursquarePlaces}
-              </div>
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formRestroomTypeModal ? (
-            <ReviewModal data_name="formRestroomTypeModal">
-              formRestroomTypeModal
-                </ReviewModal>
-          ) : null
-        }
-
-        {
-          formLocationNotesModal ? (
-            <ReviewModal data_name="formLocationNotesModal">
-              formLocationNotesModal
-                  </ReviewModal>
-          ) : null
-        }
-
-        {
-          formTimeOfVisitModal ? (
-            <ReviewModal data_name="formTimeOfVisitModal">
-              formTimeOfVisitModal
-                  </ReviewModal>
-          ) : null
-        }
-
-        {
-          formOutOfOrderModal ? (
-            <ReviewModal data_name="formOutOfOrderModal">
-              formOutOfOrderModal
-                  </ReviewModal>
-          ) : null
-        }
-
-
-        {
-          formCleanlinessModal ? (
-            <ReviewModal data_name="formCleanlinessModal">
-              formCleanlinessModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formSmellModal ? (
-            <ReviewModal data_name="formSmellModal">
-              formSmellModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formPrivacyModal ? (
-            <ReviewModal data_name="formPrivacyModal">
-              formPrivacyModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formComfortModal ? (
-            <ReviewModal data_name="formComfortModal">
-              formComfortModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formCapacityModal ? (
-            <ReviewModal data_name="formCapacityModal">
-              formCapacityModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formSafetyModal ? (
-            <ReviewModal data_name="formSafetyModal">
-              formSafetyModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formStyleModal ? (
-            <ReviewModal data_name="formStyleModal">
-              formStyleModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formHandicappedModal ? (
-            <ReviewModal data_name="formHandicappedModal">
-              formHandicappedModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formGenderNeutralModal ? (
-            <ReviewModal data_name="formGenderNeutralModal">
-              formGenderNeutralModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formGenderNeutralModal ? (
-            <ReviewModal data_name="formGenderNeutralModal">
-              formGenderNeutralModal
-            </ReviewModal>
-          ) : null
-        }
-
-
-        {
-          formBabyChangeModal ? (
-            <ReviewModal data_name="formBabyChangeModal">
-              formBabyChangeModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formScheduleModal ? (
-            <ReviewModal data_name="formScheduleModal">
-              formScheduleModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formAdmissionModal ? (
-            <ReviewModal data_name="formAdmissionModal">
-              formAdmissionModal
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formFeeDisplayModal ? (
-            <ReviewModal data_name="formFeeDisplayModal">
-              formFeeDisplayModal
-            </ReviewModal>
-          ) : null
-        }
-
-
-        {
-          formFeeModal ? (
-            <ReviewModal data_name="formFeeModal">
-              formFeeModal
-            </ReviewModal>
-          ) : null
-        }
-        {
-          formPhotoUploadModal ? (
-            <ReviewModal data_name="formPhotoUploadModal">
-              formPhotoUploadModal
-            </ReviewModal>
-          ) : null
-        }
-
-
-        {
-          formCommentsModal ? (
-            <ReviewModal data_name="formCommentsModal">
-              formCommentsModal
+            
             </ReviewModal>
           ) : null
         }
 
 */}
-          </div>
-        </div>
 
-      </section >
+
+            </section >
+
+          ) : null
+        }
+      </React.Fragment >
     )
   }
 }
@@ -440,7 +364,7 @@ const mapStateToProps = (state, ownProps) => {
     // reviews: state.firestore.ordered.reviews,
     auth: state.firebase.auth,
     selectedSectionValue: ownProps.display,
-    foursquareValue: state.foursquareState.foursquareValue
+    foursquareValue: state.foursquareState.foursquareValue,
   }
 }
 

@@ -8,25 +8,21 @@ import ListSection from './ListSection/';
 export class MapListSection extends Component {
 
   render() {
-    
+
     return (
-      <div
-        id="mapListSection"
-        className="rs animated fadeIn faster"
-        style={{
-          // height: "calc(100% - 114px)",
-          // overflowY: "scroll",
-          // background: "#f5f5f5",
-          position: "fixed",
-          bottom: "50px",
-          height: "calc(100% - 130px)",
-          // background: "red",        
-        }}
-      >
+      // <div
+      //   id="mapListSection"
+      //   className="rs animated fadeIn faster"
+      //   style={{
+      //     position: "fixed",
+      //     bottom: "50px",
+      //     height: "calc(100% - 130px)",
+      //   }}
+      // >
+      <React.Fragment>
         < ListSection data_display={!this.props.mapListToggleValue} />
-        {/* < MapSection data_display={this.props.mapListToggleValue} /> */}
-        {/* {console.log("mapListToggleValue: ", this.props.mapListToggleValue)} */}
-      </div>
+        < MapSection data_display={this.props.mapListToggleValue} />
+      </React.Fragment>
     )
   }
 }

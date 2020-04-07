@@ -7,7 +7,9 @@ import { getPlacesFromFoursquare } from '../../../../store/actions/foursquareAct
 export class LocationSelector extends Component {
 
   buttonClicked(e) {
+
     e.preventDefault();
+
     console.log("location button clicked")
 
     this.props.modalToggled("formLocationModal");
@@ -18,6 +20,7 @@ export class LocationSelector extends Component {
     const fsLL = ctrLat + "," + ctrLng;
     this.props.getPlacesFromFoursquare(fsLL);
     console.log("update fs in review")
+
   }
 
 

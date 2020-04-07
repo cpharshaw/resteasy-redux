@@ -16,7 +16,7 @@ export const getPlacesFromFoursquare = (location) => {
               client_secret: "FRCGLR2MJHZ2I2AMFL5PECJOERPOPCNHU3L3EYQGVYX1YU1H",
               radius: 500,
               near: location,
-              limit: 30,
+              limit: 80,
               intent: "checkin",
               v: "20191130",
             },

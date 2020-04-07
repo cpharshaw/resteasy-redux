@@ -61,6 +61,7 @@ class RecenterButton extends Component {
 
 
     if (ctr_matches_geo) {
+      console.log("center matches geoLoc");
       this.setState({
         color: "#1898dd"
       });
@@ -130,13 +131,13 @@ class RecenterButton extends Component {
         color: "#1898dd"
       });
       // console.log('recenter', this.props.foursquareValue);
-      // console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
+      console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
 
     } else if ((ctr_update || geo_update) && !geo_same_ctr) {
       this.setState({
         color: "grey"
       });
-      // console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
+      console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
     }
 
   }
@@ -148,7 +149,7 @@ class RecenterButton extends Component {
 
     return (
 
-       <div className="recenterButton animated slideInRight faster"
+       <div className="recenterButton animated fadeInRight faster"
         style={{
           borderColor: color
         }}
