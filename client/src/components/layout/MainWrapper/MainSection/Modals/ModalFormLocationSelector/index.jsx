@@ -238,15 +238,16 @@ export class LocationModal extends Component {
       data_bottom,
       data_left,
       data_right,
-      data_border
+      data_border,
+      data_classname
     } = this.props;
 
-    // console.log(data_position)
+    console.log(data_classname)
     return (
 
         <input
           id="pac-input"
-          className="rs"
+          className={data_classname ? data_classname : null}
           type="search"
           ref={this.searchBoxRef}
           placeholder="Recenter around location..."
@@ -257,8 +258,9 @@ export class LocationModal extends Component {
             bottom: data_bottom ? data_bottom : null,
             left: data_left ? data_left : null,
             right: data_right ? data_right : null,
-            height: data_height ? data_height : "44px !important",
-            width: data_width ? data_width : null,
+            // height: data_height ? data_height : "50%",
+            // height: data_height ? data_height : "44px !important",
+            // width: data_width ? data_width : null,
             margin: data_margin ? data_margin : null,
             fontStyle: "italic",
             borderRadius: "5px",

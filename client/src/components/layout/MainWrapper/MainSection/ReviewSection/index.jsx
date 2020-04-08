@@ -83,37 +83,6 @@ export class ReviewSection extends Component {
     const displayValue = selectedSectionValue === "review" ? "flex" : "none";
 
 
-    // console.log(this.props)
-
-    const foursquarePlaces = this.props.foursquareValue !== null && this.props.foursquareValue !== undefined ?
-      this.props.foursquareValue.map((place, i) => {
-        const name = place.name ? place.name : null;
-        const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
-        const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
-        const distance = place.distance + " ft";
-        return (
-          <div
-            id=""
-            key={i + "fs"}
-            className=""
-            style={{
-              flexDirection: "column",
-            }}
-            data_placedata={JSON.stringify(place)}
-            onClick={e => this.placeSelected(e)}
-            data_placename={name}
-            data_placeaddress={address}
-            data_placecategory={category}
-            data_placedistance={distance}
-          >
-            <span><b>{name}</b> ({distance}) </span>
-            <span>{address} </span>
-            <span>{category} </span>
-            <HorizontalRule />
-          </div>
-        )
-      }) : null;
-
     // backgroundImage: "url('https://images.unsplash.com/photo-1569122243657-3c1c51340f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80')",
     {/* https://codeburst.io/modals-in-react-f6c3ff9f4701 */ }
     return (
@@ -128,7 +97,7 @@ export class ReviewSection extends Component {
         }}
       >
 
-        <div className="row-100 jc-sb ac-sb"
+        <div className="row jc-sb ac-sb"
           style={{
             // backdropFilter: "blur(3.75px) grayscale(0.8) sepia(0.1) contrast(0.8)",
             // WebkitBackdropFilter: "blur(3.75px) grayscale(0.8) sepia(0.1) contrast(0.8)"
@@ -136,9 +105,9 @@ export class ReviewSection extends Component {
         >
           <div className="col">
 
-            <div className="row"
+            <div className="row bg-red"
               style={{
-                height: "calc(100% - 70px)",
+                // maxHeight: "calc(100% - 70px)",
               }}
             >
               <div className="col">
@@ -152,10 +121,9 @@ export class ReviewSection extends Component {
               </div>
             </div>
 
-            <div className="row"
+            <div className="row bg-orange"
               style={{
-                height: "70px",
-                // background: "transparent"
+                maxHeight: "70px",
               }}
             >
 

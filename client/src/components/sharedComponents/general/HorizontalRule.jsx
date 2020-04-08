@@ -4,7 +4,7 @@ export const HorizontalRule = () => (
   <hr
     style={{
       borderTop: "1px dotted lightgrey",
-      width: "91%",
+      width: "70%",
       margin: "8px 4px 8px 4px",
     }}
   />

@@ -291,12 +291,13 @@ class MapSection extends Component {
               // top: "0",
               left: "0",
               right: "0",
-              // bottom: "0"
+              // bottom: "55px",
+              height: "100%"
             }}
           >
             <div id="google-map" className="row" ref={this.googleMapRef}
               style={{
-                height: "inherit"
+                height: "100%"
               }}
             />
             {/* < MarkerComp

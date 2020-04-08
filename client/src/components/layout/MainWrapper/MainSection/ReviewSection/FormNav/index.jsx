@@ -25,7 +25,7 @@ export class ReviewMainNav extends Component {
 
     return (
 
-      <div className="row-100">
+      <div className="row">
 
         <div className="col" />
         {

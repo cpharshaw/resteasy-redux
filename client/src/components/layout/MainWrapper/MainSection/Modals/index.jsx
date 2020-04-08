@@ -6,7 +6,18 @@ import FormNavButton from '../../../../sharedComponents/formComponents/FormNavBu
 import HorizontalRule from '../../../../sharedComponents/general/HorizontalRule';
 import ModalFormReset from './ModalFormReset';
 import LocationModal from './ModalFormLocationSelector';
+
 export class ModalContainer extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      foursquarePlaces: null
+    }
+    
+  }
+
+
 
   closeModal(e) {
     e.preventDefault();
@@ -19,55 +30,27 @@ export class ModalContainer extends Component {
 
   }
 
-  render() {
+  componentDidMount() {
+    const scrollWindow = document.getElementById("fsReviewScroller")
 
-    const {
-      selectedSectionValue,
-      formStepValue,
-      currentModal,
-      data_size,
-      children
-    } = this.props;
+  };
 
-    const style = {
-      boxShadow: "0 1px 3px #a8a8a8",
-      borderRadius: "5px",
-      background: "#f5f5f5",
-      flexDirection: "column",
-      // justifyContent: "flex-start",
-      alignContent: "flex-start",
-      // backdropFilter: "blur(7px)",
-      // WebkitBackdropFilter: "blur(7px)",
-    }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const prevFSVal = prevProps.foursquareValue;
+    const currFSVal = this.props.foursquareValue;
+    const fsCheck = prevFSVal !== currFSVal && currFSVal;
 
-    if (data_size === "sm") {
-      style.width = "82.5%"
-      // style.minHeight = "225px"
-      // style.maxHeight = "450px"
-      style.height = "225px"
-    } else if (data_size === "loc") {
-      style.width = "85%"
-      style.height = "22.5%"
-    }
-    else {
-      style.width = "95%"
-      style.height = "95%"
-    }
-
-
-
-    const foursquarePlaces = this.props.foursquareValue !== null && this.props.foursquareValue !== undefined ?
-      this.props.foursquareValue.map((place, i) => {
+    if (fsCheck) {
+      const tempFS = currFSVal.map((place, i) => {
         const name = place.name ? place.name : null;
         const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
         const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
         const distance = place.distance + " ft";
 
         return (
+          // <React.Fragment>
           <div className="row" key={i + "fs"}
             style={{
-              background: i % 2 === 0 ? "red" : "blue",
-              margin: "8px 0 4px 0"
             }}
           >
             <div
@@ -79,19 +62,43 @@ export class ModalContainer extends Component {
               data_placecategory={category}
               data_placedistance={distance}
               style={{
-                background: i % 2 === 0 ? "darkgrey" : "lightgrey",
+                flexWrap: "nowrap",
+                whiteSpace: "nowrap",
+                // background: i % 2 === 0 ? "darkgrey" : "lightgrey",
               }}
             >
-              <span><b>{name}</b> ({distance}) </span>
-              <span>{address} </span>
-              <span>{category} </span>
+              <span className=""><b>{name}</b> ({distance}) </span>
+              <span className="">{address} </span>
+              <span className="">{category} </span>
+              {i !== (currFSVal.length - 1) ? <HorizontalRule /> : null}
 
             </div>
           </div>
-          // {i !== (this.props.foursquareValue.length - 1) ? <HorizontalRule /> : null}
-
+          // </React.Fragment> 
         )
-      }) : null;
+      })
+
+      this.setState({
+        foursquarePlaces: tempFS
+      })
+    }
+
+  }
+
+
+
+  render() {
+
+    const {
+      selectedSectionValue,
+      formStepValue,
+      currentModal,
+      data_size,
+      children
+    } = this.props;
+
+
+
 
 
 
@@ -99,13 +106,16 @@ export class ModalContainer extends Component {
       <React.Fragment>
         {
           currentModal !== "settingsModal" ? (
+
             <section
               id="modalContainer"
-              className="animated fadeIn faster container-fluid"
+              className="animated fadeIn faster col"
               style={{
                 position: "absolute",
                 top: "0",
                 left: "0",
+                right: "0",
+                bottom: "0",
                 backgroundColor: "rgba(197,197,197,0.55)",
                 WebkitBackdropFilter: "blur(8px)",
                 backdropFilter: "blur(8px)",
@@ -116,10 +126,10 @@ export class ModalContainer extends Component {
               {
                 currentModal !== "formLocationModal" && currentModal !== "" ? (
 
-                  <div className="row-50">
+                  <div className="row animated fadeIn">
                     <div className="col jc-se">
 
-                      <div className="row-50 animated fadeIn">
+                      <div className="row">
                         <div className="col-10 jc-fs"
                           style={{
                             background: "#f5f5f5",
@@ -129,20 +139,26 @@ export class ModalContainer extends Component {
                           }}
                         >
 
-                          <div className="row">
-                            <div className="col jc-fe ai-fe ac-fe" onClick={e => this.closeModal(e)}
+                          <div className="row animated fadeIn slow bg-orange"
+                            style={{
+                              // maxHeight: "40px"
+                            }}
+                          >
+                            <div className="col jc-fe ai-fe ac-fe bg-red" onClick={e => this.closeModal(e)}
                               style={{
                                 pointerEvents: "all",
                                 zIndex: "1000",
                                 padding: "5px 12px 0 0"
                               }}
                             >
-                              <span className="animated fadeIn slower"
+                              <span className="mr-4 bg-blue"
                                 style={{
                                   pointerEvents: "all",
-                                  fontSize: "30px",
+
+                                  fontSize: "1.25em",
+                                  // lineHeight: "0",
                                   color: "grey",
-                                  fontWeight: "500",
+                                  // fontWeight: "500",
                                   zIndex: '1000'
                                 }}
                               >
@@ -151,7 +167,7 @@ export class ModalContainer extends Component {
                             </div>
                           </div>
 
-                          <div className="row-100" style={{ pointerEvents: "all" }}>
+                          <div className="row" style={{ pointerEvents: "all" }}>
                             <div className="col jc-se">
 
                               <div className="row">
@@ -193,29 +209,38 @@ export class ModalContainer extends Component {
               {
                 currentModal === "formLocationModal" ? (
 
-                  <div className="row-95 animated fadeIn">
-                    <div className="col-11 jc-fs"
+                  <div className="row animated fadeIn ac-fs" style={{ overflow: "hidden" }}>
+
+                    <div className="col jc-fs ac-fs ai-fs"
                       style={{
                         background: "#f5f5f5",
                         borderRadius: "5px",
                         boxShadow: "0 1px 3px #a8a8a8",
+                        overflow: "hidden"
                       }}
                     >
 
-                      <div className="row" style={{ height: "35px" }}>
-                        <div className="col jc-fe ai-fe ac-fe" onClick={e => this.closeModal(e)}
+                      <div className="row-f-1 animated fadeIn slow ac-fs bg-orange"
+                        style={{
+                          // maxHeight: "40px"
+                        }}
+                      >
+
+                        <div className="col jc-c ai-fe ac-c bg-red" onClick={e => this.closeModal(e)}
                           style={{
                             pointerEvents: "all",
                             zIndex: "1000",
-                            padding: "5px 12px 0 0",
+                            // padding: "5px 12px 0 0",
                           }}
                         >
-                          <span className="animated fadeIn slower "
+                          <span className="mr-2 bg-blue"
                             style={{
                               pointerEvents: "all",
-                              fontSize: "30px",
+                              // height: "100%",
+                              fontSize: "1.25em",
+                              // lineHeight: "0",
                               color: "grey",
-                              fontWeight: "500",
+                              // fontWeight: "500",
                               zIndex: '1000'
                             }}
                           >
@@ -224,32 +249,44 @@ export class ModalContainer extends Component {
                         </div>
                       </div>
 
-                      <div className="row" style={{ height: "45px" }}>
+                      <div className="row-f-1">
                         <div className="col">
                           <LocationModal
-                            data_width="85%"
-                            data_height="45px"
+                            // data_width="85%"
+                            // data_height="45px"
                             data_border="0.5px solid #0abab5"
+                            data_classname="mx-2"
                           />
                         </div>
                       </div>
 
-                      <div className="row"
+                      <div className="row-f-11 ai-fs"
                         style={{
-                          height: "calc(100% - 80px)",
                           padding: "8px 3px 8px 3px",
+                          // minHeight: "100%",
+                          height: this.state.foursquareValue !== null ? "100%" : "100px",
+                          overflowY: "scroll",
+                          msOverflowY: "scroll",
+                          WebkitOverflowScrolling: "touch",
+                          overflowX: "hidden",
+                          msOverflowX: "hidden",
                         }}
                       >
                         <div
                           id="fsReviewScroller"
                           className="col jc-fs"
                           style={{
+                            height: this.state.foursquareValue !== null ? "fit-content !important" : "10000px",
+                            bottom: "0",
                             whiteSpace: "nowrap",
-                            overflow: "scroll",
-                            WebkitOverflowScrolling: "touch",
+                            overflowX: "hidden",
+                            msOverflowX: "hidden",
+                            overflowY: "hidden",
+                            msOverflowY: "hidden",
                           }}
                         >
-                          {foursquarePlaces}
+                          {/* https://stackoverflow.com/questions/35469227/overflow-y-not-working-in-safari-inside-a-modal */}
+                          {this.state.foursquareValue !== null ? this.state.foursquarePlaces : null}
                         </div>
                       </div>
 
@@ -259,85 +296,6 @@ export class ModalContainer extends Component {
               }
 
 
-              {/* {children} */}
-
-
-              {/* {currentModal === "formResetModal" ? <ModalFormReset /> : null} */}
-
-              {/*
-            {currentModal === "formLocationModal" ? <ModalFormLocationSelector /> : null}
-            {currentModal === "formConfirmSubmitModal" ? <ModalFormConfirmSubmit /> : null}
-            {currentModal === "formThankYouModal" ? <ModalFormThankYou /> : null}
-            {currentModal === "formLabelInfoModal" ? <ModalFormLabelInfo /> : null}
-            */}
-
-              {/* {
-          formStepValue === 6 ? (
-
-            <ReviewModal data_size="sm">
-              <div className="" style={{ flexDirection: "column" }}>
-                <span className="">
-                  Ok to submit review?
-                </span>
-                <div
-                  className=""
-                  style={{
-                    height: "50px",
-                    marginBottom: "20px"
-                  }}
-                >
-                  <FormNavButton
-                    data_text="Back"
-                    data_classes="bg-primary-invert"
-                    func_navcommand="prev"
-                  />
-                  <FormNavButton
-                    data_text="Submit"
-                    data_classes="bg-grey-outline"
-                    func_navcommand="next"
-                  />
-                </div>
-              </div>
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formStepValue === 7 ? (
-            <ReviewModal data_size="sm">
-              <div className="" style={{ flexDirection: "column" }}>
-                <span className="">
-                  Thank you for your review.
-                </span>
-                <div
-                  className=""
-                  style={{
-                    height: "50px",
-                    marginBottom: "20px"
-                  }}>
-                  <FormNavButton
-                    data_text="Close"
-                    data_classes="bg-grey-outline"
-                    data_width="fit-content"
-                    func_navcommand="finish"
-                  />
-                </div>
-              </div>
-            </ReviewModal>
-          ) : null
-        }
-
-        {
-          formLocationModal ? (
-
-            <ReviewModal data_name="formLocationModal">
-
-            
-            </ReviewModal>
-          ) : null
-        }
-
-*/}
 
 
             </section >
@@ -346,6 +304,7 @@ export class ModalContainer extends Component {
         }
       </React.Fragment >
     )
+
   }
 }
 
@@ -379,43 +338,3 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps)
 )(ModalContainer);
 
-
-
-
-
-
-// const {
-//   formLocationModal,
-
-//   formRestroomTypeModal,
-//   formLocationNotesModal,
-//   formTimeOfVisitModal,
-//   formOutOfOrderModal,
-
-//   formCleanlinessModal,
-//   formSmellModal,
-//   formPrivacyModal,
-//   formComfortModal,
-//   formCapacityModal,
-//   formSafetyModal,
-//   formStyleModal,
-
-//   //page 3
-//   formHandicappedModal,
-//   formGenderNeutralModal,
-//   formBabyChangeModal,
-//   formScheduleModal,
-//   formAdmissionModal,
-//   formFeeDisplayModal,
-//   formFeeModal,
-
-//   //page 4
-//   formPhotoUploadModal,
-
-//   //page 5
-//   formCommentsModal,
-
-
-//   // other
-//   formResetModal
-// } = this.props.modalState;

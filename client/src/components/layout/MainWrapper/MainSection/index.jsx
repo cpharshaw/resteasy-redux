@@ -23,7 +23,7 @@ export class MainSection extends Component {
 
     return (
 
-      <div className="row-100" style={{ background: "transparent" }}>
+      <div className="row" style={{ background: "transparent" }}>
         <div className="col" style={{ background: "#f5f5f5" }}>
 
           < ReviewSection display={selectedSectionValue} />

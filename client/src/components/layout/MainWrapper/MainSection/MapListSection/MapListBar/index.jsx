@@ -64,12 +64,12 @@ export class MapListBar extends Component {
           }}
         >
 
-          <div className="col">
+          <div className="col-8">
             <button
               className="text-white bg-primary"
               style={{
-                width: "60%",
-                background: "inherit"
+                // width: "60%",
+                // background: "inherit"
               }}
               onClick={this.toggleMapList}
             >
@@ -77,28 +77,23 @@ export class MapListBar extends Component {
             </button>
           </div>
 
-          <div className="col bg-orange">
-            <div className="row">
-              <div className="col bg-blue">
+          <div className="col-4">
+            <div className="row ">
+              <div className="col">
                 <button
-                  className="text-white bg-primary-invert ac-fe"
+                  className="text-white"
                   style={{
-                    all: "initial",
-                    height: "100%",
-                    width: "100%",
-                    // justifyContent: "flex-start !important",
-                    // alignContent: "flex-start !important",
-                    // alignItems: "flex-end !important",
+                    // width: "fit-content !important",
+                    // margin: "0 !important"
                   }}
                   onClick={this.toggleFilters}
                 >
-
                   <svg
                     xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                     width="30" height="30"
                     viewBox="0 0 172 172"
                     style={{ fill: "#f5f5f5", }}
-                    className="bg-green"
+                    className=""
                   >
                     <g transform="">
                       <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none"

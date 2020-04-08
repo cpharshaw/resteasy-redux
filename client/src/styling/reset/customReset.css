@@ -41,9 +41,13 @@ html, body {
 	vertical-align: baseline;
 }
 
-#root, #root *:not([class*="pac-"]) {
+body {
+  line-height: 1;
+}
+
+#root, #root *:not([class*="pac-"]):not(.skip):not(.loader):not(hr):not(br):not(svg):not(path):not(g):not([class^="gm"]) {
   /* all: initial; */
-  margin: 0 auto;
+  margin: 0;
 	padding: 0;
   
   font-size: 100%;
@@ -51,13 +55,16 @@ html, body {
   -webkit-text-size-adjust: 100%; 
   -ms-text-size-adjust: 100%;
   text-indent: 0;
-  font: inherit;
+  font-family: inherit;
+  /* line-height: 1; */
   text-decoration: none;
   -webkit-text-decoration: none;
   text-decoration-style: none;
   -moz-text-decoration-style: none;
 	text-decoration-skip-ink: none;
   -webkit-text-decoration-skip-ink: none;
+  text-transform: none;
+  text-shadow: none;
   
   -webkit-tap-highlight-color: transparent;
 
@@ -76,21 +83,15 @@ html, body {
 	quotes: none;
   list-style: none;
 
-  user-select: none;
-	-webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  
-	text-transform: none;
-  text-shadow: none;
-
   content: ''; 
   content: none; 
   
 }
 
-span {
-  margin: 0 !important;
+span:not(.skip):not(.loader):not([class*="pac-"]) {
+  /* margin: 0;
+  padding: 0;
+  line-height: 50%; */
 }
 
 [tabindex="-1"]:focus {
@@ -114,16 +115,20 @@ button::-moz-focus-inner,
   padding: 0;
 }
 
-
+/* :not(.fsReviewScroller) */
 
 ::-webkit-scrollbar {
-  width: 0;
-  height: 0
+  /* display: none; */
+  /* width: 0;
+  height: 0; */
 }
 
 
 /* adding styles back */
-
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
 
 html {
   font-family: sans-serif;
@@ -138,6 +143,12 @@ body {
   background-color: #f5f5f5;
 }
 
+input {
+  /* user-select: initial;
+	-webkit-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial; */
+}
 
 
 ::-webkit-file-upload-button {
@@ -160,11 +171,20 @@ em {
 }
 
 
+
 button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
+}
+
+button {
+  display: flex;
+  /* flex: 1 auto; */
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 input[type=search]::-webkit-search-cancel-button {
@@ -174,6 +194,8 @@ input[type=search]::-webkit-search-cancel-button {
 	font-size: 17px;
 	background: inherit;
 }
+
+ 
 
 div:not([class*="pac-"])div:not(.row)div:not([class*="row-"])div:not(.col)div:not([class*="col-"])div:not(.container)div:not(.container-fluid),
 footer, header, main, section, nav, article, aside, summary, figcaption, figure, details, hgroup, 
@@ -187,4 +209,15 @@ form, fieldset, label, input, select, textarea, option, datalist, output, legend
 
 head, link, meta, script, style, title {
   display: none;
+}
+
+button:not([class^="gm"]):not(#locationSelectorButton) {
+  display: -webkit-flex;
+  display: flex;
+  /* width: fit-content !important; */
+  margin: 0 !important;
+  vertical-align: middle;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }

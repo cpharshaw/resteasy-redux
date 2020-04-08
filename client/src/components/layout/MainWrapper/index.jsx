@@ -39,13 +39,20 @@ class MainWrapper extends Component {
     } = this.props;
 
     return (
-      <div id="mainWrapper" className="container-fluid ">
+      <div id="mainWrapper" className="container-fluid "
+        style={{
+          position: "fixed",
+          bottom: "0",
+          left: "0",
+          right: "0"
+        }}
+      >
 
         <main
           id="mainSection"
           className="row animated fadeIn fast"
           style={{
-            position: "fixed",
+            position: "absolute",
             top: "0",
             left: "0",
             right: "0",
@@ -61,7 +68,7 @@ class MainWrapper extends Component {
           id="footer"
           className="row animated fadeIn faster"
           style={{
-            position: "fixed",
+            position: "absolute",
             bottom: "0",
             left: "0",
             right: "0",
