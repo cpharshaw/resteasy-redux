@@ -118,9 +118,9 @@ button::-moz-focus-inner,
 /* :not(.fsReviewScroller) */
 
 ::-webkit-scrollbar {
-  /* display: none; */
-  /* width: 0;
-  height: 0; */
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 

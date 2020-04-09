@@ -47,9 +47,9 @@ export class MapListSection extends Component {
           settingsModal ? (
             <div
               id=""
-              className="animated flipInX fast bg-primary"
+              className="animated fadeIn faster bg-primary"
               style={{
-                zIndex: "9999",
+                zIndex: "99999999999999999999999",
                 position: "fixed",
                 top: "80px",
                 left: "0",
@@ -57,11 +57,6 @@ export class MapListSection extends Component {
                 height: "50px",
                 width: "100%",
                 flexDirection: "row",
-                // boxShadow: "0 1px 3px #a8a8a8",
-                // padding: "3p 9px 3px 9px",
-                // backdropFilter: "blue(6px)",
-                // WebkitBackdropFilter: "blue(6px)",
-                // background: "transparent"
               }}
             >
               <LocationModal

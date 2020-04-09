@@ -9,13 +9,6 @@ import LocationModal from './ModalFormLocationSelector';
 
 export class ModalContainer extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      foursquarePlaces: null
-    }
-    
-  }
 
 
 
@@ -30,58 +23,51 @@ export class ModalContainer extends Component {
 
   }
 
-  componentDidMount() {
-    const scrollWindow = document.getElementById("fsReviewScroller")
-
-  };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const prevFSVal = prevProps.foursquareValue;
-    const currFSVal = this.props.foursquareValue;
-    const fsCheck = prevFSVal !== currFSVal && currFSVal;
+    // const prevFSVal = prevProps.foursquareValue;
+    // const currFSVal = this.props.foursquareValue;
+    // const fsCheck = prevFSVal !== currFSVal && currFSVal;
 
-    if (fsCheck) {
-      const tempFS = currFSVal.map((place, i) => {
-        const name = place.name ? place.name : null;
-        const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
-        const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
-        const distance = place.distance + " ft";
+    // if (fsCheck) {
 
-        return (
-          // <React.Fragment>
-          <div className="row" key={i + "fs"}
-            style={{
-            }}
-          >
-            <div
-              className="col"
-              data_placedata={JSON.stringify(place)}
-              onClick={e => this.placeSelected(e)}
-              data_placename={name}
-              data_placeaddress={address}
-              data_placecategory={category}
-              data_placedistance={distance}
-              style={{
-                flexWrap: "nowrap",
-                whiteSpace: "nowrap",
-                // background: i % 2 === 0 ? "darkgrey" : "lightgrey",
-              }}
-            >
-              <span className=""><b>{name}</b> ({distance}) </span>
-              <span className="">{address} </span>
-              <span className="">{category} </span>
-              {i !== (currFSVal.length - 1) ? <HorizontalRule /> : null}
+    //   const tempFS = currFSVal.map((place, i) => {
+    //     const name = place.name ? place.name : null;
+    //     const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
+    //     const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
+    //     const distance = place.distance + " ft";
 
-            </div>
-          </div>
-          // </React.Fragment> 
-        )
-      })
+    //     return (
+    //       <div className="row" key={i + "fs"}
+    //         style={{
+    //         }}
+    //       >
+    //         <div
+    //           className="col"
+    //           data_placedata={JSON.stringify(place)}
+    //           onClick={e => this.placeSelected(e)}
+    //           data_placename={name}
+    //           data_placeaddress={address}
+    //           data_placecategory={category}
+    //           data_placedistance={distance}
+    //           style={{
+    //             flexWrap: "nowrap",
+    //             whiteSpace: "nowrap",
+    //             // background: i % 2 === 0 ? "darkgrey" : "lightgrey",
+    //           }}
+    //         >
+    //           <span className=""><b>{name}</b> ({distance}) </span>
+    //           <span className="">{address} </span>
+    //           <span className="">{category} </span>
+    //           {i !== (currFSVal.length - 1) ? <HorizontalRule /> : null}
 
-      this.setState({
-        foursquarePlaces: tempFS
-      })
-    }
+    //         </div>
+    //       </div>
+    //     )
+    //   })
+
+
+    // }
 
   }
 
@@ -94,13 +80,46 @@ export class ModalContainer extends Component {
       formStepValue,
       currentModal,
       data_size,
-      children
+      children,
+      foursquareValue
     } = this.props;
 
+    console.log("typeof: ", typeof foursquareValue)
 
 
 
+    const foursquarePlaces = !foursquareValue ? null : (
+      foursquareValue.map((place, i) => {
+        const name = place.name ? place.name : null;
+        const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
+        const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
+        const distance = place.distance + " ft";
 
+        return (
+          <div className="row" key={i + "fs"}>
+            <div
+              className="col jc-se ai-c"
+              data_placedata={JSON.stringify(place)}
+              onClick={e => this.placeSelected(e)}
+              data_placename={name}
+              data_placeaddress={address}
+              data_placecategory={category}
+              data_placedistance={distance}
+              style={{
+                flexWrap: "nowrap",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span className=""><b>{name}</b> ({distance}) </span>
+              <span className="">{address} </span>
+              <span className="">{category} </span>
+              {i !== (foursquareValue.length - 1) ? <HorizontalRule /> : null}
+
+            </div>
+          </div>
+        )
+      })
+    )
 
     return (
       <React.Fragment>
@@ -126,7 +145,7 @@ export class ModalContainer extends Component {
               {
                 currentModal !== "formLocationModal" && currentModal !== "" ? (
 
-                  <div className="row animated fadeIn">
+                  <div className="row animated fadeIn ">
                     <div className="col jc-se">
 
                       <div className="row">
@@ -139,26 +158,23 @@ export class ModalContainer extends Component {
                           }}
                         >
 
-                          <div className="row animated fadeIn slow bg-orange"
+                          <div className="row animated fadeIn slow "
                             style={{
                               // maxHeight: "40px"
                             }}
                           >
-                            <div className="col jc-fe ai-fe ac-fe bg-red" onClick={e => this.closeModal(e)}
+                            <div className="col jc-fe ai-fe ac-fe " onClick={e => this.closeModal(e)}
                               style={{
                                 pointerEvents: "all",
                                 zIndex: "1000",
-                                padding: "5px 12px 0 0"
+                                // padding: "5px 12px 0 0"
                               }}
                             >
-                              <span className="mr-4 bg-blue"
+                              <span className="mr-3"
                                 style={{
                                   pointerEvents: "all",
-
                                   fontSize: "1.25em",
-                                  // lineHeight: "0",
                                   color: "grey",
-                                  // fontWeight: "500",
                                   zIndex: '1000'
                                 }}
                               >
@@ -209,38 +225,34 @@ export class ModalContainer extends Component {
               {
                 currentModal === "formLocationModal" ? (
 
-                  <div className="row animated fadeIn ac-fs" style={{ overflow: "hidden" }}>
+                  <div className="row m-3 animated fadeIn ac-fs" style={{ overflow: "hidden" }}>
 
-                    <div className="col jc-fs ac-fs ai-fs"
+
+                    <div className="col jc-fs ac-fs ai-s"
                       style={{
                         background: "#f5f5f5",
                         borderRadius: "5px",
                         boxShadow: "0 1px 3px #a8a8a8",
-                        overflow: "hidden"
                       }}
                     >
 
-                      <div className="row-f-1 animated fadeIn slow ac-fs bg-orange"
+                      <div className="row-f-1 animated fadeIn slow ac-fe"
                         style={{
-                          // maxHeight: "40px"
+                          minHeight: "35px"
                         }}
                       >
-
-                        <div className="col jc-c ai-fe ac-c bg-red" onClick={e => this.closeModal(e)}
+                        <div className="col ai-fe"
                           style={{
                             pointerEvents: "all",
                             zIndex: "1000",
-                            // padding: "5px 12px 0 0",
                           }}
                         >
-                          <span className="mr-2 bg-blue"
+                          <span className="mx-2" onClick={e => this.closeModal(e)}
                             style={{
                               pointerEvents: "all",
-                              // height: "100%",
-                              fontSize: "1.25em",
-                              // lineHeight: "0",
+                              fontSize: "1.5em",
+                              fontWeight: "bold",
                               color: "grey",
-                              // fontWeight: "500",
                               zIndex: '1000'
                             }}
                           >
@@ -249,25 +261,26 @@ export class ModalContainer extends Component {
                         </div>
                       </div>
 
-                      <div className="row-f-1">
-                        <div className="col">
+                      <div className="row-f-1"
+                        style={{
+                          minHeight: "40px"
+                        }}
+                      >
+                        <div className="col mx-3">
                           <LocationModal
                             // data_width="85%"
                             // data_height="45px"
                             data_border="0.5px solid #0abab5"
-                            data_classname="mx-2"
+                            // data_classname="mx-4"
                           />
                         </div>
                       </div>
 
-                      <div className="row-f-11 ai-fs"
+                      <div className="row-f-1 ai-fs my-2"
                         style={{
-                          padding: "8px 3px 8px 3px",
-                          // minHeight: "100%",
-                          height: this.state.foursquareValue !== null ? "100%" : "100px",
+                          WebkitOverflowScrolling: "touch",
                           overflowY: "scroll",
                           msOverflowY: "scroll",
-                          WebkitOverflowScrolling: "touch",
                           overflowX: "hidden",
                           msOverflowX: "hidden",
                         }}
@@ -276,17 +289,13 @@ export class ModalContainer extends Component {
                           id="fsReviewScroller"
                           className="col jc-fs"
                           style={{
-                            height: this.state.foursquareValue !== null ? "fit-content !important" : "10000px",
-                            bottom: "0",
-                            whiteSpace: "nowrap",
                             overflowX: "hidden",
                             msOverflowX: "hidden",
                             overflowY: "hidden",
                             msOverflowY: "hidden",
                           }}
                         >
-                          {/* https://stackoverflow.com/questions/35469227/overflow-y-not-working-in-safari-inside-a-modal */}
-                          {this.state.foursquareValue !== null ? this.state.foursquarePlaces : null}
+                          {this.props.foursquareValue !== null ? foursquarePlaces : null}
                         </div>
                       </div>
 

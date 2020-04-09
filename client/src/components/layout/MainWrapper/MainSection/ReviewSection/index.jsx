@@ -105,7 +105,7 @@ export class ReviewSection extends Component {
         >
           <div className="col">
 
-            <div className="row bg-red"
+            <div className="row"
               style={{
                 // maxHeight: "calc(100% - 70px)",
               }}
@@ -121,7 +121,7 @@ export class ReviewSection extends Component {
               </div>
             </div>
 
-            <div className="row bg-orange"
+            <div className="row"
               style={{
                 maxHeight: "70px",
               }}
