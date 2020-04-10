@@ -193,10 +193,20 @@
 
 } */
 
-.col > input {
-  flex: 1 auto;
-  max-width: 100%;
+
+
+/* .col > span, .col > p, .col > b, .col > em, .col > h1, .col > h2, .col > h3, .col > h4, .col > h5, .col > h6, .col > a,
+.col > img, .col > svg,
+.col > input, .col > label, .col > select, .col > textarea, .col > hr 
+.col > button,  */
+:not(label) > .col > *:not(.row):not([class^="row-"]):not(.container-fluid):not(.container),
+button > *,
+.col > .row[style*="max-width"] {
+  justify-self: center;
+  align-self: center;
+  vertical-align: middle;
 }
+
 
 
 .col-auto {

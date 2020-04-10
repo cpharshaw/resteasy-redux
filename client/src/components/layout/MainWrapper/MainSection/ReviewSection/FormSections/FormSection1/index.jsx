@@ -58,56 +58,49 @@ export class FormSection1 extends Component {
 
     return (
 
-      <div id="reviewSection1" className="container-fluid jc-se animated fadeIn fast"
+      <div id="reviewSection1" className="container-fluid animated fadeIn fast jc-se"
         style={{
-          padding: "8px 2px 2px 2px"
-          // background: "transparent"
+          padding: "18px 9px 18px 9px"
         }}
       >
-
-        <div className="row-15">
+        {/* <br/> */}
+        <div className="row">
           <div className="col">
 
             {
               formLocationValue.name ? (
-                <div
-                  id=""
-                  className="rs"
+
+                //  <span>{formLocationValue.name} </span>
+                // <span>{formLocationValue.address} </span>
+                // <span>{formLocationValue.category} </span> 
+                <div className="row "
                   style={{
-                    flexDirection: "column",
-                    minWidth: "75%",
-                    width: "fit-content",
-                    maxWidth: "100%",
-                    minHeight: "90px",
-                    height: "fit-content"
+                    maxHeight: "90px",
+                    maxWidth: "75%",
                   }}
-                  // data_placedata={JSON.stringify(place)}
-                  onClick={e => this.placeClicked(e)}
                 >
-                  <span>{formLocationValue.name} </span>
-                  <span>{formLocationValue.address} </span>
-                  <span>{formLocationValue.category} </span>
+                  <div className="col ">
+                    <span className=""> Del Rossi's Cheesesteaks and Pizza </span>
+                    <span> 200 N 4th St, Philadelphia, PA (600ft) </span>
+                    <span> Sandwiches </span>
+                  </div>
                 </div>
-              ) : (
-                  <LocationSelector
-                    data_width="75%"
-                    data_height="90px"
-                  />
-                )
+              ) :
+                <LocationSelector
+                  data_width="75%"
+                  data_height="90px"
+                />
             }
-          </div>
-        </div>
 
-        <div className="row">
-          <div className="col">
-            <HorizontalRule />
-          </div>
-        </div>
+            {/* </div>
+        </div> */}
+            <br />
+            <HorizontalRule data_width="90%" />
+            <br />
+            {/* <div className="row bg-yellow">
+          <div className="col jc-se"> */}
 
-        <div className="row-75">
-          <div className="col jc-se">
-
-            <div className="row-15">
+            <div className="row ">
               <div className="col-5 jc-se">
                 < FieldLabel data_htmlFor="formRestroomTypeValue">Restroom used</ FieldLabel >
               </div>
@@ -126,7 +119,7 @@ export class FormSection1 extends Component {
               </div>
             </div>
 
-            <div className="row-15">
+            <div className="row">
               <div className="col-5">
                 < FieldLabel data_htmlFor="formLocationNotesValue">Location notes</ FieldLabel >
               </div>
@@ -143,7 +136,7 @@ export class FormSection1 extends Component {
             </div>
 
 
-            <div className="row-15">
+            <div className="row ">
               <div className="col-5">
                 < FieldLabel data_htmlFor="formTimeOfVisitValue">Time of visit</ FieldLabel >
               </div>
@@ -167,13 +160,11 @@ export class FormSection1 extends Component {
               </div>
             </div>
 
-            <div className="row-15" >
-              <div className="col">
-                <HorizontalRule />
-              </div>
-            </div>
 
-            <div id="outOfOrder" className="row-15">
+            <HorizontalRule data_width="90%" />
+
+
+            <div id="outOfOrder" className="row">
               <div className="col-5">
                 < FieldLabel data_htmlFor="formOutOfOrderValue">Out-of-Order</ FieldLabel >
               </div>
@@ -190,7 +181,7 @@ export class FormSection1 extends Component {
 
           </div >
         </div >
-
+        {/* <br/> */}
       </div >
     )
   }

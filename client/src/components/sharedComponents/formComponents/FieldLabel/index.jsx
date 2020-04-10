@@ -33,11 +33,11 @@ export class FieldLabel extends Component {
 
       <label
         id={data_id}
-        className="row jc-fs"
+        className="row"
         htmlFor={data_htmlFor}
         style={{
-          width: data_width ? data_width : "100%",
-          height: data_height ? data_height : "100%",
+          // width: data_width ? data_width : "null",
+          // height: data_height ? data_height : "100%",
           paddingLeft: "10%",
           // flexGrow: data_width ? null : 1,
           // flexWrap: "wrap",
@@ -49,17 +49,19 @@ export class FieldLabel extends Component {
           // fontSize: data_fontsize ? data_fontsize : "14.5px"
         }}
       >
-        <span
-          className=""
-          onClick={e => this.labelClicked(e)}
-          style={{
-            // color: data_fontcolor ? data_fontcolor : null,
-            fontSize: data_fontsize ? data_fontsize : "14.5px",
-            flexWrap: "wrap",
-          }}
-        >
-          {children ? children : data_text} <sup>&nbsp;(i)</sup>
-        </span>
+        <div className="col ai-fs">
+          <span
+            className=""
+            onClick={e => this.labelClicked(e)}
+            style={{
+              // color: data_fontcolor ? data_fontcolor : null,
+              fontSize: data_fontsize ? data_fontsize : "14.5px",
+              flexWrap: "wrap",
+            }}
+          >
+            {children ? children : data_text} <sup>&nbsp;(i)</sup>
+          </span>
+        </div>
       </label>
 
     )
@@ -75,7 +77,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal))
+    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal))
   }
 }
 

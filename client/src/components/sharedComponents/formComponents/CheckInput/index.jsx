@@ -18,12 +18,15 @@ export class CheckInput extends Component {
 
       <input
         id={data_id}
-        className="rs"
+        className=""
         checked={data_value}
         name={data_name}
         onChange={e => func_handlechange(e)}
         type="checkbox"
+        
         style={{
+          width: "100%",
+          // height: "100%", lol
           WebkitAppearance: "checkbox",
         }}
       />
