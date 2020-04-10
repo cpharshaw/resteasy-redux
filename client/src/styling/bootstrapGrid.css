@@ -32,13 +32,13 @@
 }
 
 
-.row, [class^="row-"] {
+.row {
   -ms-flex-direction: row !important;
   flex-direction: row !important;
 
-  flex: 1 auto;
-  
-  max-width: 100%;
+  width: 100%;
+
+  flex-grow: 1;
 
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
@@ -52,6 +52,29 @@
   -webkit-align-content: stretch;
   align-content: stretch;
 }
+
+
+[class^="row-"] {
+  -ms-flex-direction: row !important;
+  flex-direction: row !important;
+
+  /* flex: 1 auto; */
+  
+  width: 100%;
+
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -ms-flex-align: stretch;
+  -ms-align-items: stretch;
+  align-items: stretch;
+
+  -webkit-align-content: stretch;
+  align-content: stretch;
+}
+
 
 
 
@@ -147,6 +170,9 @@
   -ms-flex-direction: column !important;
   flex-direction: column !important;
 
+  flex: 1 auto;
+  max-width: 100%;
+
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
   
@@ -168,16 +194,9 @@
 
 .col > input {
   flex: 1 auto;
-}
-
-
-.col {
-  -ms-flex-preferred-size: 0;
-  flex-basis: 0;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
   max-width: 100%;
 }
+
 
 .col-auto {
   -ms-flex: 0 0 auto;

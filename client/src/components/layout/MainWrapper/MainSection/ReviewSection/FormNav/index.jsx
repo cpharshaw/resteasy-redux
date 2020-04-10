@@ -25,35 +25,38 @@ export class ReviewMainNav extends Component {
 
     return (
 
-      <div className="row">
+      <div className="row ">
 
-        <div className="col" />
+        <div className="col-2">
+          {/* spacer */}
+        </div>
+
         {
           formStepValue > 0 ? (
-            <div className="col" >
+            <div className="col-4 ai-c" >
               <FormNavButton
-                // data_text=""
-                data_width="80px"
-                data_classes="bg-primary-outline"
+                data_text="Back"
+                data_width="100px"
+                data_classes="button-bg-primary"
                 func_navcommand="prev"
-              >Back
-              </FormNavButton>
+              />
             </div>
           ) : null
         }
 
-        <div className="col">
+        <div className="col-4 ai-c">
           <FormNavButton
             data_text={formStepValue === 0 ? "Begin review" : "Continue"}
+            data_width="100px"
             data_classes="button-bg-primary"
-            data_width={formStepValue === 0 ? "110px" : "80px"}
             func_navcommand="next"
           />
         </div>
 
-        <div className="col">
+        <div className="col-2">
           {
             formStepValue > 0 ? (
+              // null
               < button
                 className="reset"
                 onClick={e => this.resetClicked(e)}

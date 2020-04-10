@@ -31,40 +31,7 @@ export class ModalContainer extends Component {
 
     // if (fsCheck) {
 
-    //   const tempFS = currFSVal.map((place, i) => {
-    //     const name = place.name ? place.name : null;
-    //     const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
-    //     const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
-    //     const distance = place.distance + " ft";
-
-    //     return (
-    //       <div className="row" key={i + "fs"}
-    //         style={{
-    //         }}
-    //       >
-    //         <div
-    //           className="col"
-    //           data_placedata={JSON.stringify(place)}
-    //           onClick={e => this.placeSelected(e)}
-    //           data_placename={name}
-    //           data_placeaddress={address}
-    //           data_placecategory={category}
-    //           data_placedistance={distance}
-    //           style={{
-    //             flexWrap: "nowrap",
-    //             whiteSpace: "nowrap",
-    //             // background: i % 2 === 0 ? "darkgrey" : "lightgrey",
-    //           }}
-    //         >
-    //           <span className=""><b>{name}</b> ({distance}) </span>
-    //           <span className="">{address} </span>
-    //           <span className="">{category} </span>
-    //           {i !== (currFSVal.length - 1) ? <HorizontalRule /> : null}
-
-    //         </div>
-    //       </div>
-    //     )
-    //   })
+   
 
 
     // }
@@ -106,8 +73,8 @@ export class ModalContainer extends Component {
               data_placecategory={category}
               data_placedistance={distance}
               style={{
-                flexWrap: "nowrap",
-                whiteSpace: "nowrap",
+                flexWrap: "wrap",
+                whiteSpace: "wrap",
               }}
             >
               <span className=""><b>{name}</b> ({distance}) </span>
@@ -128,7 +95,7 @@ export class ModalContainer extends Component {
 
             <section
               id="modalContainer"
-              className="animated fadeIn faster col"
+              className="animated fadeIn faster col ai-c"
               style={{
                 position: "absolute",
                 top: "0",
@@ -173,7 +140,8 @@ export class ModalContainer extends Component {
                               <span className="mr-3"
                                 style={{
                                   pointerEvents: "all",
-                                  fontSize: "1.25em",
+                                  fontSize: "2em",
+                                  fontWeight: "bold",
                                   color: "grey",
                                   zIndex: '1000'
                                 }}
@@ -225,10 +193,15 @@ export class ModalContainer extends Component {
               {
                 currentModal === "formLocationModal" ? (
 
-                  <div className="row m-3 animated fadeIn ac-fs" style={{ overflow: "hidden" }}>
+                  <div className="row animated fadeIn ac-fs"
+                    style={{
+                      maxHeight: "87.5%",
+                      maxWidth: "92.5%",
+                    }}
+                  >
 
 
-                    <div className="col jc-fs ac-fs ai-s"
+                    <div className="col jc-se ac-fs ai-s"
                       style={{
                         background: "#f5f5f5",
                         borderRadius: "5px",
@@ -236,87 +209,87 @@ export class ModalContainer extends Component {
                       }}
                     >
 
-                      <div className="row-f-1 animated fadeIn slow ac-fe"
-                        style={{
-                          minHeight: "35px"
-                        }}
-                      >
-                        <div className="col ai-fe"
-                          style={{
-                            pointerEvents: "all",
-                            zIndex: "1000",
-                          }}
-                        >
-                          <span className="mx-2" onClick={e => this.closeModal(e)}
-                            style={{
-                              pointerEvents: "all",
-                              fontSize: "1.5em",
-                              fontWeight: "bold",
-                              color: "grey",
-                              zIndex: '1000'
-                            }}
-                          >
-                            &times;
-                          </span>
-                        </div>
-                      </div>
+                      {
+                        this.props.foursquareValue === null ? <div className="fsLoader" /> : (
+                          <React.Fragment>
+                            <div className="row animated fadeIn slow ac-fe"
+                              style={{
+                                height: "35px"
+                              }}
+                            >
+                              <div className="col ai-fe"
+                                style={{
+                                  pointerEvents: "all",
+                                  zIndex: "1000",
+                                }}
+                              >
+                                <span className="mx-2" onClick={e => this.closeModal(e)}
+                                  style={{
+                                    pointerEvents: "all",
+                                    fontSize: "2em",
+                                    fontWeight: "bold",
+                                    color: "grey",
+                                    zIndex: '1000'
+                                  }}
+                                >
+                                  &times;
+                              </span>
+                              </div>
+                            </div>
 
-                      <div className="row-f-1"
-                        style={{
-                          minHeight: "40px"
-                        }}
-                      >
-                        <div className="col mx-3">
-                          <LocationModal
-                            // data_width="85%"
-                            // data_height="45px"
-                            data_border="0.5px solid #0abab5"
-                            // data_classname="mx-4"
-                          />
-                        </div>
-                      </div>
+                            <div className="row"
+                              style={{
+                                height: "45px"
+                              }}
+                            >
+                              <div className="col mx-3">
+                                <LocationModal
+                                  data_border="0.5px solid #0abab5"
+                                />
+                              </div>
+                            </div>
 
-                      <div className="row-f-1 ai-fs my-2"
-                        style={{
-                          WebkitOverflowScrolling: "touch",
-                          overflowY: "scroll",
-                          msOverflowY: "scroll",
-                          overflowX: "hidden",
-                          msOverflowX: "hidden",
-                        }}
-                      >
-                        <div
-                          id="fsReviewScroller"
-                          className="col jc-fs"
-                          style={{
-                            overflowX: "hidden",
-                            msOverflowX: "hidden",
-                            overflowY: "hidden",
-                            msOverflowY: "hidden",
-                          }}
-                        >
-                          {this.props.foursquareValue !== null ? foursquarePlaces : null}
-                        </div>
-                      </div>
-
+                            <div className="row ai-fs my-2"
+                              style={{
+                                height: "calc(100% - (35px + 45px))",
+                                WebkitOverflowScrolling: "touch",
+                                overflowY: "scroll",
+                                msOverflowY: "scroll",
+                                overflowX: "hidden",
+                                msOverflowX: "hidden",
+                              }}
+                            >
+                              <div
+                                id="fsReviewScroller"
+                                className="col jc-fs pt-1"
+                                style={{
+                                  overflowX: "hidden",
+                                  msOverflowX: "hidden",
+                                  overflowY: "hidden",
+                                  msOverflowY: "hidden",
+                                }}
+                              >
+                                {foursquarePlaces}
+                              </div>
+                            </div>
+                          </React.Fragment>
+                        )
+                      }
                     </div>
                   </div>
+
                 ) : null
               }
 
-
-
-
             </section >
-
           ) : null
         }
       </React.Fragment >
+
     )
-
   }
-}
 
+}
 
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);

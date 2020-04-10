@@ -180,11 +180,11 @@ button,
 }
 
 button {
-  display: flex;
-  /* flex: 1 auto; */
+  /* display: flex;
+  flex: 1 auto;
   justify-content: center;
   align-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 input[type=search]::-webkit-search-cancel-button {
@@ -215,7 +215,7 @@ button:not([class^="gm"]):not(#locationSelectorButton) {
   display: -webkit-flex;
   display: flex;
   /* width: fit-content !important; */
-  margin: 0 !important;
+  /* margin: 0 auto !important; */
   vertical-align: middle;
   justify-content: center;
   align-content: center;

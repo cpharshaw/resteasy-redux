@@ -52,10 +52,7 @@ class MainWrapper extends Component {
           id="mainSection"
           className="row animated fadeIn fast"
           style={{
-            position: "absolute",
-            top: "0",
-            left: "0",
-            right: "0",
+            position: "relative",
             height: "calc(100% - 55px)",
           }}
         >
@@ -68,10 +65,7 @@ class MainWrapper extends Component {
           id="footer"
           className="row animated fadeIn faster"
           style={{
-            position: "absolute",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            position: "relative",
             height: "55px",
           }}
         >

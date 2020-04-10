@@ -91,16 +91,17 @@ export class FormNavButton extends Component {
                 func_navcommand === "reset" ? this.resetForm :
                   func_navcommand === "finish" ? this.finshedForm : null
         }
-        className={"rs " + data_classes + ""}
+        className={"" + data_classes + ""}
         style={{
-          width: data_width ? data_width : "110px",
+          width: data_width ? data_width : "10%",
+          // height: data_height ? data_height : "fit-content",
           color: data_textcolor ? data_textcolor : null,
           // maxHeight: "42px",
           // borderRadius: "3px",
-          padding: "7px",
-          flexGrow: data_flexgrow ? data_flexgrow : null,
+          padding: "5px 0 5px 0",
+          // flexGrow: data_flexgrow ? data_flexgrow : null,
           borderRadius: data_borderradius ? data_borderradius : "3px",
-          margin: data_margin ? data_margin : "0 15px 0 15px",
+          // margin: data_margin ? data_margin : "0 15px 0 15px",
           // marginRight: "15px",
           transition: "background-color 0s" /* "box-shadow 0.5s", */,
         }}
