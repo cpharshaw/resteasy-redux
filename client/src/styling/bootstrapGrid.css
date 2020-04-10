@@ -199,12 +199,17 @@
 .col > img, .col > svg,
 .col > input, .col > label, .col > select, .col > textarea, .col > hr 
 .col > button,  */
-:not(label) > .col > *:not(.row):not([class^="row-"]):not(.container-fluid):not(.container),
+:not(label) > .col > *:not(.row):not([class^="row-"]):not(.container-fluid):not(.container):not(.skip),
 button > *,
-.col > .row[style*="max-width"] {
+.col > .row[style*="max-width"],
+.row > *:not(.col):not([class^="col-"]):not(.container-fluid):not(.container) {
   justify-self: center;
   align-self: center;
   vertical-align: middle;
+}
+
+.col > input.skip {
+  flex: 1 auto
 }
 
 

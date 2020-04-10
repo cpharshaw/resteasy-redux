@@ -38,7 +38,7 @@ export class FieldLabel extends Component {
         style={{
           // width: data_width ? data_width : "null",
           // height: data_height ? data_height : "100%",
-          paddingLeft: "10%",
+          paddingLeft: "10px",
           // flexGrow: data_width ? null : 1,
           // flexWrap: "wrap",
           // justifyContent: "flex-start !important",

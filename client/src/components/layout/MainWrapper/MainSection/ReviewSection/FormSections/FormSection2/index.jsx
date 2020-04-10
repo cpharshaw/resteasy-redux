@@ -72,299 +72,334 @@ export class FormSection2 extends Component {
 
 
     return (
-      <>
+      <div id="reviewSection2" className="row animated fadeIn fast jc-se ">
+        <div className="col">
+
+          <div className="row">
+            <div className="col-7">
+              < FieldLabel
+                data_text="Cleanliness"
+                data_htmlFor="formCleanlinessValue"
+              />
+            </div>
+            <div className="col-5">
+              <div className="row">
+                {/* TODO - create a loop to create input fields using array of names */}
+                <RadioInput
+                  data_value="1"
+                  data_name="formCleanlinessValue"
+                  data_checked={formCleanlinessValue === "1" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="2"
+                  data_name="formCleanlinessValue"
+                  data_checked={formCleanlinessValue === "2" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="3"
+                  data_name="formCleanlinessValue"
+                  data_checked={formCleanlinessValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="4"
+                  data_name="formCleanlinessValue"
+                  data_checked={formCleanlinessValue === "4" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="5"
+                  data_name="formCleanlinessValue"
+                  data_checked={formCleanlinessValue === "5" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+              </div>
+            </div>
+
+          </div>
+
+          <div className="row">
+          <div className="col-7">
+              < FieldLabel
+                data_text="Smell"
+                data_htmlFor="formSmellValue"
+              />
+            </div>
+            <div className="col-5">
+              <div className="row">
+                <RadioInput
+                  data_value="1"
+                  data_name="formSmellValue"
+                  data_checked={formSmellValue === "1" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="2"
+                  data_name="formSmellValue"
+                  data_checked={formSmellValue === "2" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="3"
+                  data_name="formSmellValue"
+                  data_checked={formSmellValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="4"
+                  data_name="formSmellValue"
+                  data_checked={formSmellValue === "4" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="5"
+                  data_name="formSmellValue"
+                  data_checked={formSmellValue === "5" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+              </div>
+            </div>
+
+          </div>
 
 
-          < FieldWrapper >
-            < FieldLabel
-              data_width="47.5%"
-              data_htmlFor="formCleanlinessValue"
-            >
-              Cleanliness
-            </ FieldLabel >
+          <div className="row">
+          <div className="col-7">
+              <FieldLabel
+                data_text="Privacy"
+                data_htmlFor="formPrivacyValue"
+              />
+            </div>
+            <div className="col-5">
+              <div className="row">
 
-              {/* TODO - create a loop to create input fields using array of names */}
-              <RadioInput
-                data_value="1"
-                data_name="formCleanlinessValue"
-                data_checked={formCleanlinessValue === "1" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="2"
-                data_name="formCleanlinessValue"
-                data_checked={formCleanlinessValue === "2" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="3"
-                data_name="formCleanlinessValue"
-                data_checked={formCleanlinessValue === "3" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="4"
-                data_name="formCleanlinessValue"
-                data_checked={formCleanlinessValue === "4" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="5"
-                data_name="formCleanlinessValue"
-                data_checked={formCleanlinessValue === "5" ? true : false}
-                func_handlechange={radioSelected}
-              />
-          </ FieldWrapper >
+                <RadioInput
+                  data_value="1"
+                  data_name="formPrivacyValue"
+                  data_checked={formPrivacyValue === "1" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="2"
+                  data_name="formPrivacyValue"
+                  data_checked={formPrivacyValue === "2" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
 
+                  data_value="3"
+                  data_name="formPrivacyValue"
+                  data_checked={formPrivacyValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
 
+                  data_value="4"
+                  data_name="formPrivacyValue"
+                  data_checked={formPrivacyValue === "4" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
 
-          < FieldWrapper >
-            < FieldLabel
-              data_width="47.5%"
-              data_htmlFor="formSmellValue"
-            >
-              Smell
-            </ FieldLabel >
+                  data_value="5"
+                  data_name="formPrivacyValue"
+                  data_checked={formPrivacyValue === "5" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+              </div>
+            </div>
 
-              <RadioInput
-                data_value="1"
-                data_name="formSmellValue"
-                data_checked={formSmellValue === "1" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="2"
-                data_name="formSmellValue"
-                data_checked={formSmellValue === "2" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="3"
-                data_name="formSmellValue"
-                data_checked={formSmellValue === "3" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="4"
-                data_name="formSmellValue"
-                data_checked={formSmellValue === "4" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="5"
-                data_name="formSmellValue"
-                data_checked={formSmellValue === "5" ? true : false}
-                func_handlechange={radioSelected}
-              />
-          </ FieldWrapper >
+          </div>
 
+          <div className="row">
+          <div className="col-7">
 
-          < FieldWrapper >
-            < FieldLabel
-              data_width="47.5%"
-              data_htmlFor="formPrivacyValue"
-            >
-              Privacy
-            </ FieldLabel >
+              < FieldLabel
+                data_text="Comfort"
+                data_htmlFor="formComfortValue"
+              />
 
-              <RadioInput
-                data_value="1"
-                data_name="formPrivacyValue"
-                data_checked={formPrivacyValue === "1" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="2"
-                data_name="formPrivacyValue"
-                data_checked={formPrivacyValue === "2" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
+            </div>
+            <div className="col-5">
+              <div className="row">
 
-                data_value="3"
-                data_name="formPrivacyValue"
-                data_checked={formPrivacyValue === "3" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
+                <RadioInput
+                  data_value="1"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "1" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="2"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "2" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="3"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="4"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="5"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "5" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+              </div>
+            </div>
 
-                data_value="4"
-                data_name="formPrivacyValue"
-                data_checked={formPrivacyValue === "4" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-
-                data_value="5"
-                data_name="formPrivacyValue"
-                data_checked={formPrivacyValue === "5" ? true : false}
-                func_handlechange={radioSelected}
-              />
-          </ FieldWrapper >
+          </div>
 
 
-          < FieldWrapper >
-            < FieldLabel
-              data_width="47.5%"
-              data_htmlFor="formComfortValue"
-            >
-              Comfort
-            </ FieldLabel >
+          <div className="row">
+          <div className="col-7">
+              < FieldLabel
+                data_text="Capacity / Size"
+                data_htmlFor="formCapacityValue"
+              />
+            </div>
+            <div className="col-5">
+              <div className="row">
+                <RadioInput
+                  data_value="1"
+                  data_name="formCapacityValue"
+                  data_checked={formCapacityValue === "1" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="2"
+                  data_name="formCapacityValue"
+                  data_checked={formCapacityValue === "2" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="3"
+                  data_name="formCapacityValue"
+                  data_checked={formCapacityValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="4"
+                  data_name="formCapacityValue"
+                  data_checked={formCapacityValue === "4" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="5"
+                  data_name="formCapacityValue"
+                  data_checked={formCapacityValue === "5" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+              </div>
+            </div>
 
-              <RadioInput
-                data_value="1"
-                data_name="formComfortValue"
-                data_checked={formComfortValue === "1" ? true : false}
-                func_handlechange={radioSelected}
+          </div>
+
+          <div className="row">
+          <div className="col-7">
+              < FieldLabel
+                data_text="Perceived Safety"
+                data_htmlFor="formSafetyValue"
               />
-              <RadioInput
-                data_value="2"
-                data_name="formComfortValue"
-                data_checked={formComfortValue === "2" ? true : false}
-                func_handlechange={radioSelected}
+
+            </div>
+            <div className="col-5">
+              <div className="row">
+
+                <RadioInput
+                  data_value="1"
+                  data_name="formSafetyValue"
+                  data_checked={formSafetyValue === "1" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="2"
+                  data_name="formSafetyValue"
+                  data_checked={formSafetyValue === "2" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="3"
+                  data_name="formSafetyValue"
+                  data_checked={formSafetyValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="4"
+                  data_name="formSafetyValue"
+                  data_checked={formSafetyValue === "4" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="5"
+                  data_name="formSafetyValue"
+                  data_checked={formSafetyValue === "5" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+              </div>
+            </div>
+
+          </div>
+
+          <div className="row">
+          <div className="col-7">
+              < FieldLabel
+                data_text="Style / Poshness"
+                data_htmlFor="formStyleValue"
               />
-              <RadioInput
-                data_value="3"
-                data_name="formComfortValue"
-                data_checked={formComfortValue === "3" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="4"
-                data_name="formComfortValue"
-                data_checked={formComfortValue === "3" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="5"
-                data_name="formComfortValue"
-                data_checked={formComfortValue === "5" ? true : false}
-                func_handlechange={radioSelected}
-              />
-          </ FieldWrapper >
+
+            </div>
+            <div className="col-5">
+              <div className="row">
+                <RadioInput
+                  data_value="1"
+                  data_name="formStyleValue"
+                  data_checked={formStyleValue === "1" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="2"
+                  data_name="formStyleValue"
+                  data_checked={formStyleValue === "2" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="3"
+                  data_name="formStyleValue"
+                  data_checked={formStyleValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="4"
+                  data_name="formStyleValue"
+                  data_checked={formStyleValue === "4" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="5"
+                  data_name="formStyleValue"
+                  data_checked={formStyleValue === "5" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+
+              </div>
+            </div>
+
+          </div>
 
 
-          < FieldWrapper >
-            < FieldLabel
-              data_width="47.5%"
-              data_htmlFor="formCapacityValue"
-            >
-              Capacity / Size
-            </ FieldLabel >
-
-              <RadioInput
-                data_value="1"
-                data_name="formCapacityValue"
-                data_checked={formCapacityValue === "1" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="2"
-                data_name="formCapacityValue"
-                data_checked={formCapacityValue === "2" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="3"
-                data_name="formCapacityValue"
-                data_checked={formCapacityValue === "3" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="4"
-                data_name="formCapacityValue"
-                data_checked={formCapacityValue === "4" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="5"
-                data_name="formCapacityValue"
-                data_checked={formCapacityValue === "5" ? true : false}
-                func_handlechange={radioSelected}
-              />
-          </ FieldWrapper >
-
-          < FieldWrapper >
-            < FieldLabel
-              data_width="47.5%"
-              data_htmlFor="formSafetyValue"
-            >
-              Perceived Safety
-            </ FieldLabel >
-
-              <RadioInput
-                data_value="1"
-                data_name="formSafetyValue"
-                data_checked={formSafetyValue === "1" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="2"
-                data_name="formSafetyValue"
-                data_checked={formSafetyValue === "2" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="3"
-                data_name="formSafetyValue"
-                data_checked={formSafetyValue === "3" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="4"
-                data_name="formSafetyValue"
-                data_checked={formSafetyValue === "4" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="5"
-                data_name="formSafetyValue"
-                data_checked={formSafetyValue === "5" ? true : false}
-                func_handlechange={radioSelected}
-              />
-          </ FieldWrapper >
-
-          < FieldWrapper >
-            < FieldLabel
-              data_width="47.5%"
-              data_htmlFor="formStyleValue"
-            >
-              Style / Poshness
-            </ FieldLabel >
-
-              <RadioInput
-                data_value="1"
-                data_name="formStyleValue"
-                data_checked={formStyleValue === "1" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="2"
-                data_name="formStyleValue"
-                data_checked={formStyleValue === "2" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="3"
-                data_name="formStyleValue"
-                data_checked={formStyleValue === "3" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="4"
-                data_name="formStyleValue"
-                data_checked={formStyleValue === "4" ? true : false}
-                func_handlechange={radioSelected}
-              />
-              <RadioInput
-                data_value="5"
-                data_name="formStyleValue"
-                data_checked={formStyleValue === "5" ? true : false}
-                func_handlechange={radioSelected}
-              />
-          </ FieldWrapper >
-
-     </>
+        </div>
+      </div>
     )
   }
 }

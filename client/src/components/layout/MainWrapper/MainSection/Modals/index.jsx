@@ -31,7 +31,7 @@ export class ModalContainer extends Component {
 
     // if (fsCheck) {
 
-   
+
 
 
     // }
@@ -91,7 +91,7 @@ export class ModalContainer extends Component {
     return (
       <React.Fragment>
         {
-          currentModal !== "settingsModal" ? (
+          currentModal === "settingsModal" ? null : (
 
             <section
               id="modalContainer"
@@ -109,186 +109,141 @@ export class ModalContainer extends Component {
               }}
             >
 
-              {
-                currentModal !== "formLocationModal" && currentModal !== "" ? (
-
-                  <div className="row animated fadeIn ">
-                    <div className="col jc-se">
-
-                      <div className="row">
-                        <div className="col-10 jc-fs"
-                          style={{
-                            background: "#f5f5f5",
-                            borderRadius: "5px",
-                            // paddingBottom: "23px",
-                            boxShadow: "0 1px 3px #a8a8a8",
-                          }}
-                        >
-
-                          <div className="row animated fadeIn slow "
-                            style={{
-                              // maxHeight: "40px"
-                            }}
-                          >
-                            <div className="col jc-fe ai-fe ac-fe " onClick={e => this.closeModal(e)}
-                              style={{
-                                pointerEvents: "all",
-                                zIndex: "1000",
-                                // padding: "5px 12px 0 0"
-                              }}
-                            >
-                              <span className="mr-3"
-                                style={{
-                                  pointerEvents: "all",
-                                  fontSize: "2em",
-                                  fontWeight: "bold",
-                                  color: "grey",
-                                  zIndex: '1000'
-                                }}
-                              >
-                                &times;
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="row" style={{ pointerEvents: "all" }}>
-                            <div className="col jc-se">
-
-                              <div className="row">
-                                <div className="col">
-                                  {currentModal === "formResetModal" ? <p>Reset review form and start over?</p> : null}
-                                  {currentModal === "formConfirm" ? <p>Ok to submit review?</p> : null}
-                                  {currentModal === "formComplete" ? <p>Thank you for your review.</p> : null}
-                                </div>
-                              </div>
-                              <div className="row">
-                                <div className="col">
-                                  <FormNavButton
-                                    data_text={currentModal === "formResetModal" ? "Cancel" : null}
-                                    data_classes="bg-grey-outline"
-                                    func_navcommand="cancel"
-                                  />
-                                </div>
-                                <div className="col">
-                                  <FormNavButton
-                                    data_text={currentModal === "formResetModal" ? "Reset" : null}
-                                    data_classes="bg-grey-outline"
-                                    func_navcommand={currentModal === "formResetModal" ? "reset" : null}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+              <div className="row animated fadeIn ac-fs"
+                style={{
+                  maxHeight: currentModal === "formLocationModal" ? "87.5%" : currentModal !== "settingsModal" ? "27.5%" : "50%",
+                  maxWidth:  currentModal === "formLocationModal" ? "92.5%" : currentModal !== "settingsModal" ? "70%" : "50%",
+                }}
+              >
 
 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="col jc-se ac-fs ai-s"
+                  style={{
+                    background: "#f5f5f5",
+                    borderRadius: "5px",
+                    boxShadow: "0 1px 3px #a8a8a8",
+                  }}
+                >
 
-                ) : null
-              }
-
-
-              {
-                currentModal === "formLocationModal" ? (
-
-                  <div className="row animated fadeIn ac-fs"
+                  <div className="row animated fadeIn slow ac-fe"
                     style={{
-                      maxHeight: "87.5%",
-                      maxWidth: "92.5%",
+                      minHeight: "40px",
+                      maxHeight: "40px",
                     }}
                   >
 
-
-                    <div className="col jc-se ac-fs ai-s"
+                    <div className="col ai-fe"
                       style={{
-                        background: "#f5f5f5",
-                        borderRadius: "5px",
-                        boxShadow: "0 1px 3px #a8a8a8",
+                        pointerEvents: "all",
+                        zIndex: "1000",
                       }}
                     >
-
-                      {
-                        this.props.foursquareValue === null ? <div className="fsLoader" /> : (
-                          <React.Fragment>
-                            <div className="row animated fadeIn slow ac-fe"
-                              style={{
-                                height: "35px"
-                              }}
-                            >
-                              <div className="col ai-fe"
-                                style={{
-                                  pointerEvents: "all",
-                                  zIndex: "1000",
-                                }}
-                              >
-                                <span className="mx-2" onClick={e => this.closeModal(e)}
-                                  style={{
-                                    pointerEvents: "all",
-                                    fontSize: "2em",
-                                    fontWeight: "bold",
-                                    color: "grey",
-                                    zIndex: '1000'
-                                  }}
-                                >
-                                  &times;
-                              </span>
-                              </div>
-                            </div>
-
-                            <div className="row"
-                              style={{
-                                height: "45px"
-                              }}
-                            >
-                              <div className="col mx-3">
-                                <LocationModal
-                                  data_border="0.5px solid #0abab5"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="row ai-fs my-2"
-                              style={{
-                                height: "calc(100% - (35px + 45px))",
-                                WebkitOverflowScrolling: "touch",
-                                overflowY: "scroll",
-                                msOverflowY: "scroll",
-                                overflowX: "hidden",
-                                msOverflowX: "hidden",
-                              }}
-                            >
-                              <div
-                                id="fsReviewScroller"
-                                className="col jc-fs pt-1"
-                                style={{
-                                  overflowX: "hidden",
-                                  msOverflowX: "hidden",
-                                  overflowY: "hidden",
-                                  msOverflowY: "hidden",
-                                }}
-                              >
-                                {foursquarePlaces}
-                              </div>
-                            </div>
-                          </React.Fragment>
-                        )
-                      }
+                      <span className="mx-2 skip" onClick={e => this.closeModal(e)}
+                        style={{
+                          pointerEvents: "all",
+                          fontSize: "2.5em",
+                          fontWeight: "bold",
+                          color: "grey",
+                          zIndex: '1000',
+                          marginTop: ""
+                        }}
+                      >&times;
+                      </span>
                     </div>
                   </div>
 
-                ) : null
-              }
+                  {
+                    currentModal === "formLocationModal" ? (
 
-            </section >
-          ) : null
+                      this.props.foursquareValue === null ? <div className="fsLoader" /> : (
+                        <React.Fragment>
+                          
+                          <div className="row mt-1"
+                            style={{
+                              minHeight: "45px",
+                              maxHeight: "45px"
+                            }}
+                          >
+                            <div className="col mx-3 ">
+                              <LocationModal
+                                data_border="0.5px solid #0abab5"
+                                data_classname="skip"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="row ai-fs my-2"
+                            style={{
+                              height: "calc(100% - (35px + 45px))",
+                              WebkitOverflowScrolling: "touch",
+                              overflowY: "scroll",
+                              msOverflowY: "scroll",
+                              overflowX: "hidden",
+                              msOverflowX: "hidden",
+                            }}
+                          >
+                            <div
+                              id="fsReviewScroller"
+                              className="col jc-fs pt-1"
+                              style={{
+                                overflowX: "hidden",
+                                msOverflowX: "hidden",
+                                overflowY: "hidden",
+                                msOverflowY: "hidden",
+                              }}
+                            >
+                              {foursquarePlaces}
+                            </div>
+                          </div>
+                        </React.Fragment>
+                      )
+
+                    ) : null
+                  }
+
+                  {
+                    currentModal !== "formLocationModal" && currentModal !== "" ? (
+
+                      <div className="row" style={{ pointerEvents: "all" }}>
+                        <div className="col jc-se">
+
+                          <div className="row">
+                            <div className="col">
+                              {currentModal === "formResetModal" ? <p>Reset review form and start over?</p> : null}
+                              {currentModal === "formConfirm" ? <p>Ok to submit review?</p> : null}
+                              {currentModal === "formComplete" ? <p>Thank you for your review.</p> : null}
+                            </div>
+                          </div>
+
+                          <div className="row">
+                            <div className="col">
+                              <FormNavButton
+                                data_text={currentModal === "formResetModal" ? "Cancel" : null}
+                                data_classes="bg-grey-outline"
+                                func_navcommand="cancel"
+                              />
+                            </div>
+                            <div className="col">
+                              <FormNavButton
+                                data_text={currentModal === "formResetModal" ? "Reset" : null}
+                                data_classes="bg-grey-outline"
+                                func_navcommand={currentModal === "formResetModal" ? "reset" : null}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    ) : null
+                  }
+                </div>
+              </div>
+            </section>
+          )
         }
-      </React.Fragment >
-
+      </React.Fragment>
     )
   }
-
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -320,3 +275,89 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps)
 )(ModalContainer);
 
+
+
+
+
+
+
+
+// {
+//   currentModal !== "formLocationModal" && currentModal !== "" ? (
+//     <div className="row animated fadeIn ac-fs"
+//       style={{
+//         maxHeight: "37.5%",
+//         maxWidth: "72.5%",
+//       }}
+//     >
+
+
+//       <div className="col jc-se ac-fs ai-s"
+//         style={{
+//           background: "#f5f5f5",
+//           borderRadius: "5px",
+//           boxShadow: "0 1px 3px #a8a8a8",
+//         }}
+//       >
+
+//         <React.Fragment>
+//           <div className="row animated fadeIn slow ac-fe"
+//             style={{
+//               minHeight: "35px"
+//             }}
+//           >
+//             <div className="col ai-fe"
+//               style={{
+//                 pointerEvents: "all",
+//                 zIndex: "1000",
+//               }}
+//             >
+//               <span className="mx-2 skip" onClick={e => this.closeModal(e)}
+//                 style={{
+//                   pointerEvents: "all",
+//                   fontSize: "2.5em",
+//                   fontWeight: "bold",
+//                   color: "grey",
+//                   zIndex: '1000',
+//                   marginTop: ""
+//                 }}
+//               >
+//                 &times;
+//           </span>
+//             </div>
+//           </div>
+
+
+//           <div className="row" style={{ pointerEvents: "all" }}>
+//             <div className="col jc-se">
+
+//               <div className="row">
+//                 <div className="col">
+//                   {currentModal === "formResetModal" ? <p>Reset review form and start over?</p> : null}
+//                   {currentModal === "formConfirm" ? <p>Ok to submit review?</p> : null}
+//                   {currentModal === "formComplete" ? <p>Thank you for your review.</p> : null}
+//                 </div>
+//               </div>
+//               <div className="row">
+//                 <div className="col">
+//                   <FormNavButton
+//                     data_text={currentModal === "formResetModal" ? "Cancel" : null}
+//                     data_classes="bg-grey-outline"
+//                     func_navcommand="cancel"
+//                   />
+//                 </div>
+//                 <div className="col">
+//                   <FormNavButton
+//                     data_text={currentModal === "formResetModal" ? "Reset" : null}
+//                     data_classes="bg-grey-outline"
+//                     func_navcommand={currentModal === "formResetModal" ? "reset" : null}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </React.Fragment>
+//       </div>
+//     </div>
+//   ) : null
+// }

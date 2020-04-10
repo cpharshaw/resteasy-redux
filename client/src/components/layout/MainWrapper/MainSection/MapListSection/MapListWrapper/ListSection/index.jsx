@@ -27,15 +27,10 @@ class ListSection extends Component {
       //   }}
       // >
       <div id="listSection" className="container-fluid animated fadeIn fast" style={{ display: displayValue }}>
-        <div className="row-100">
+        <div className="row">
           <div className="col">
 
-            <ul
-              className="rs"
-              style={{
-                flexDirection: "column",
-              }}
-            >
+            <ul>
               <li className="" >BBQ</li>
               <li className="" >Tres leches</li>
               <li className="" >Pizza</li>
@@ -43,7 +38,7 @@ class ListSection extends Component {
               <li className="" >Pancakes</li>
               <li className="" >Acai bowls</li>
             </ul>
-            
+
           </div>
         </div>
       </div>

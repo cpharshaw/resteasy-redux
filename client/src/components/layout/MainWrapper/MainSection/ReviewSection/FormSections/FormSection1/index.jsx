@@ -58,11 +58,9 @@ export class FormSection1 extends Component {
 
     return (
 
-      <div id="reviewSection1" className="container-fluid animated fadeIn fast jc-se"
-        style={{
-          padding: "18px 9px 18px 9px"
-        }}
-      >
+      <div id="reviewSection1" className="row animated fadeIn fast jc-se">
+        <div className="col">
+
         {/* <br/> */}
         <div className="row">
           <div className="col">
@@ -80,9 +78,9 @@ export class FormSection1 extends Component {
                   }}
                 >
                   <div className="col ">
-                    <span className=""> Del Rossi's Cheesesteaks and Pizza </span>
-                    <span> 200 N 4th St, Philadelphia, PA (600ft) </span>
-                    <span> Sandwiches </span>
+                    <em><span className=""> Del Rossi's Cheesesteaks and Pizza </span></em>
+                    <em><span> 200 N 4th St, Philadelphia, PA (600ft) </span></em>
+                    <em><span> Sandwiches </span></em>
                   </div>
                 </div>
               ) :
@@ -92,13 +90,11 @@ export class FormSection1 extends Component {
                 />
             }
 
-            {/* </div>
-        </div> */}
+
+            <br />
             <br />
             <HorizontalRule data_width="90%" />
-            <br />
-            {/* <div className="row bg-yellow">
-          <div className="col jc-se"> */}
+            {/* <br /> */}
 
             <div className="row ">
               <div className="col-5 jc-se">
@@ -182,6 +178,7 @@ export class FormSection1 extends Component {
           </div >
         </div >
         {/* <br/> */}
+      </div >
       </div >
     )
   }

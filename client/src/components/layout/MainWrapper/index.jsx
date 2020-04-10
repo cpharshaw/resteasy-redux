@@ -27,7 +27,7 @@ class MainWrapper extends Component {
   }
 
   componentDidMount() {
-    // this.props.storeGoogleAPI(this.props.google.maps);
+    this.props.storeGoogleAPI(this.props.google.maps);
   }
 
 
@@ -53,7 +53,7 @@ class MainWrapper extends Component {
           className="row animated fadeIn fast"
           style={{
             position: "relative",
-            height: "calc(100% - 55px)",
+            height: "calc(100% - 62.5px)",
           }}
         >
           <div className="col">
@@ -66,7 +66,7 @@ class MainWrapper extends Component {
           className="row animated fadeIn faster"
           style={{
             position: "relative",
-            height: "55px",
+            height: "62.5px",
           }}
         >
           <nav id="bottomBar" className="col bg-primary">
@@ -107,8 +107,8 @@ export default compose(
   //   }
   // ]),
 
-  // GoogleApiWrapper({
-  //   apiKey: process.env.REACT_APP_GM_KEY,
-  //   version: "3.30"
-  // })
+  GoogleApiWrapper({
+    apiKey: process.env.REACT_APP_GM_KEY,
+    version: "3.30"
+  })
 )(MainWrapper);

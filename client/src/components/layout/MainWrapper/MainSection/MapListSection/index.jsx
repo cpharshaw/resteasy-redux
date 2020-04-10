@@ -71,10 +71,10 @@ export class MapListSection extends Component {
         <div className="row"
           style={{
             position: "fixed",
-            bottom: "55px",
+            bottom: "62.5px",
             left: "0",
             right: "0",
-            height: "calc(100% - 135px)",
+            height: "calc(100% - 142.5px)",
           }}
         >
           <div className="col">

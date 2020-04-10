@@ -82,7 +82,7 @@ export class FormSection0 extends Component {
                 {/* <br /> */}
                 <span style={{ fontSize: "16px" }}>To create a review, press 'Begin review'.</span>
 
-                {/* <span style={{ fontSize: "16px" }}>Go for it, idiot.  Let the world know what you have to say about bathrooms.</span> */}
+                <span style={{ fontSize: "16px" }}>Go for it, idiot.  Let the world know what you have to say about bathrooms.</span>
               </div>
             </div>
 

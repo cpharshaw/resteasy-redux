@@ -90,16 +90,19 @@ export class FormSection3 extends Component {
     // const { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee } = data_values;
 
     return (
-      <>
+      <div id="reviewSection2" className="row animated fadeIn fast jc-se ">
+        <div className="col">
 
 
-          < FieldWrapper >
-            < FieldLabel
-              data_htmlFor="formHandicappedValue"
-              data_width="63%"
-            >
-              Handicapped accessible 
-            </ FieldLabel >
+          <div className="row">
+            <div className="col-8">
+              < FieldLabel
+                data_htmlFor="formHandicappedValue"
+                data_text="Handicapped accessible"
+              />
+
+            </div>
+            <div className="col-4">
 
               <CheckInput
                 data_id="formHandicappedValue"
@@ -108,15 +111,20 @@ export class FormSection3 extends Component {
                 func_handlechange={checkboxClicked}
               />
 
-          </ FieldWrapper >
+            </div>
+          </div>
 
-          < FieldWrapper>
-            < FieldLabel
-              data_htmlFor="formGenderNeutralValue"
-              data_width="63%"
-            >
-              Gender neutral option 
-            </ FieldLabel >
+
+
+          <div className="row">
+            <div className="col-8">
+              < FieldLabel
+                data_htmlFor="formGenderNeutralValue"
+                data_text="Gender neutral option"
+              />
+            </div>
+            <div className="col-4">
+
 
               <CheckInput
                 data_id="formGenderNeutralValue"
@@ -124,92 +132,114 @@ export class FormSection3 extends Component {
                 data_value={formGenderNeutralValue}
                 func_handlechange={checkboxClicked}
               />
-            
-          </ FieldWrapper >
 
-          < FieldWrapper>
-            < FieldLabel
-              data_htmlFor="formBabyChangeValue"
-              data_width="63%"
-            >
-              Baby changing station 
-            </ FieldLabel >
-            
+            </div>
+          </div>
+
+
+          <div className="row">
+            <div className="col-8">
+              < FieldLabel
+                data_htmlFor="formBabyChangeValue"
+                data_text="Baby changing station"
+              />
+
+            </div>
+            <div className="col-4">
+
               <CheckInput
                 data_id="formBabyChangeValue"
                 data_name="formBabyChangeValue"
                 data_value={formBabyChangeValue}
                 func_handlechange={checkboxClicked}
               />
-            
-          </ FieldWrapper >
 
-          < FieldWrapper >
-            < FieldLabel
-              data_htmlFor="formScheduleValue"
-              data_width="63%"
-            >
-              Cleaning schedule visible 
-            </ FieldLabel >
-            
+            </div>
+          </div>
+
+
+          <div className="row">
+            <div className="col-8">
+              < FieldLabel
+                data_htmlFor="formScheduleValue"
+                data_text="Cleaning schedule visible"
+              />
+
+            </div>
+            <div className="col-4">
+
               <CheckInput
                 data_id="formScheduleValue"
                 data_name="formScheduleValue"
                 data_value={formScheduleValue}
                 func_handlechange={checkboxClicked}
               />
-            
-          </ FieldWrapper >
+
+            </div>
+          </div>
+
 
           <HorizontalRule />
 
-          < FieldWrapper >
-            < FieldLabel
-              data_htmlFor="formAdmissionValue"
-              data_width="63%"
-            >
-              Admission 
-            </ FieldLabel >
-            <SelectBox
-              data_id="formAdmissionValue"
-              data_name="formAdmissionValue"
-              // data_defaultvalue="¿Gratis o no?"
-              data_width="37%"
-              func_handlechange={e => this.admissionSelected(e)}
-              data_value={formAdmissionValue}
-            >
-              <option disabled value="¿Gratis o no?" >¿Gratis o no? </option>
-              <option value="Free/Public"   >Free/Public   </option>
-              <option value="Customers Only">Customers only</option>
-              <option value="Fee..."        >Fee...        </option>
-            </SelectBox>
+          <div className="row">
+            <div className="col-6">
+              < FieldLabel
+                data_htmlFor="formAdmissionValue"
+                data_text="Admission"
+              />
+            </div>
+            <div className="col-6">
+              <SelectBox
+                data_id="formAdmissionValue"
+                data_name="formAdmissionValue"
+                // data_defaultvalue="¿Gratis o no?"
+                // data_width="37%"
+                func_handlechange={e => this.admissionSelected(e)}
+                data_value={formAdmissionValue}
+              >
+                <option disabled value="¿Gratis o no?" >¿Gratis o no? </option>
+                <option value="Free/Public"   >Free/Public   </option>
+                <option value="Customers Only">Customers only</option>
+                <option value="Fee..."        >Fee...        </option>
+              </SelectBox>
 
-          </ FieldWrapper >
+            </div>
+          </div>
 
-          < FieldWrapper
-            data_visibility={formFeeDisplayValue}
+          {console.log("formFeeDisplayValue: ", formFeeDisplayValue)}
+
+          <div className="row"
+            style={{
+              visibility: formFeeDisplayValue
+            }}
           >
-            {/* {console.log(feeDisplay)} */}
-            < FieldLabel
-              data_width="63%"
-              data_htmlFor="formFeeValue"
-            >
-              Price ($USD)
-            </ FieldLabel >
+            <div className="col-6">
+              < FieldLabel
+                data_text="Price ($USD)"
+                data_htmlFor="formFeeValue"
+              />
+            </div>
 
-            <span style={{ fontSize: "12px" }}>$</span>
+            <div className="col-6">
 
-            <TextInput
-              data_width="37%"
-              data_id="formFeeValue"
-              data_name="formFeeValue"
-              data_value={formFeeValue}
-              func_handlechange={textEntered}
-            />
-          </ FieldWrapper >
+              <div className="row">
+
+                <span style={{ fontSize: "12px" }}>$</span>
+                <TextInput
+                  // data_width="37%"
+                  data_id="formFeeValue"
+                  data_name="formFeeValue"
+                  data_value={formFeeValue}
+                  func_handlechange={textEntered}
+                />
+              </div>
+            </div>
+          </div >
 
 
-      </>
+
+        </div >
+      </div >
     )
   }
 }

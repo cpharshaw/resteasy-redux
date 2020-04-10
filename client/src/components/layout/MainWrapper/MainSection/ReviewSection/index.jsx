@@ -105,12 +105,12 @@ export class ReviewSection extends Component {
         >
           <div className="col">
 
-            <div className="row"
-              style={{
-                // maxHeight: "calc(100% - 70px)",
-              }}
-            >
-              <div className="col">
+            <div className="row">
+              <div className="col"
+                style={{
+                  padding: formStepValue !== 0 ? "18px 9px 18px 9px" : null
+                }}
+              >
                 {/* {formStepValue === 0 || formStepValue === 1 ? < FormSection1 /> : null} */}
                 {formStepValue === 0 ? < FormSection0 /> : null}
                 {formStepValue === 1 ? < FormSection1 /> : null}
@@ -123,14 +123,12 @@ export class ReviewSection extends Component {
 
             <div className="row"
               style={{
-                maxHeight: "70px",
+                maxHeight: "85px",
               }}
             >
-
               <div className="col">
                 < FormNav />
               </div>
-
             </div>
 
 
