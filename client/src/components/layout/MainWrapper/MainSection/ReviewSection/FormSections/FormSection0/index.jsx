@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { formNext } from '../../../../../../../store/actions/formActions';
-
+import HorizontalRule from '../../../../../../sharedComponents/general/HorizontalRule';
 
 export class FormSection0 extends Component {
 
@@ -15,140 +15,81 @@ export class FormSection0 extends Component {
 
     return (
 
-      <div id="revewSection" className="container-fluid jc-se animated fadeIn fast"
+      <div id="revewSection" className="container-fluid  ai-c jc-c"
         style={{
-          padding: "15px 5px 5px 5px",
+          WebkitBackdropFilter: "blur(8px)", backdropFilter: "blur(8px)"
         }}
       >
 
-        <div className="row">
-          <div className="col jc-c">
-            <p
-              className="animated fadeIn"
-              style={{
-                fontSize: "30px",
-                color: "whitesmoke",
-                textShadow: "0px 0px 5.5px #212529",
-                fontWeight: "700",
-                fontStyle: "italic"
-              }}
-            >rest☆easy
-          </p>
-            <div
-              style={{
-                position: "relative",
-                width: "85%",
-                height: "fit-content",
-                padding: "10px 12.5px 10px 12.5px",
-                // opacity: "0.5",
-                // background: "#f5f5f5",
-                borderRadius: "12px",
-                // flexDirection: "column",
-                // color: "black",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  bottom: "0",
-                  right: "0",
-                  left: "0",
-                  opacity: "0.825",
-                  // filter: "blur(1px)",
-                  backgroundColor: "#f5f5f5",
-                  zIndex: "-1",
-                  borderRadius: "12px",
-                  // boxShadow: "0 -1px 12.5px #A0E0DE",
-                }}
-              />
-              <div
-                style={{
-                  positon: "absolute",
-                  top: "0",
-                  bottom: "0",
-                  right: "0",
-                  left: "0",
-                  height: "100%",
-                  width: "100%",
-                  background: "transparent",
-                  zIndex: "1",
+        <div className="row p-3 animated fadeIn"
+          style={{
+            borderRadius: "10px",
+            maxHeight: "45%",
+            maxWidth: "85%",
+            backgroundColor: "rgba(255, 255, 255, 0.35)",
+            boxShadow: "0 0 5px #f5f5f5"
+          }}
+        >
+          <div className="col ai-sa">
 
-                  flexDirection: 'column'
-                }}
-              >
-                {/* <p
-                style={{
-                  fontSize: "30px",
-                  color: "whitesmoke",
-                  textShadow: "0px 0px 5.5px #212529",
-                  fontWeight: "700",
-                  fontStyle: "italic"
-                }}
-              >
-                rest☆easy
-              </p> */}
-                <p style={{ fontSize: "19px" }}><u><em><b>Create Review</b></em></u></p>
-                <p style={{ fontSize: "17.75px" }}>Welcome to <span className="animated fadeIn slower"><em>rest☆easy</em></span> </p>
-                <span style={{ fontSize: "15px" }}>The world's <em>best</em> bathroom review app</span>
-                <br />
-                <p style={{ color: "#212529", fontSize: "6px" }}>---------------------------------------------------------------------------------</p>
-                {/* <hr /> */}
-                <p style={{ fontSize: "16.5px", color: "black" }}>To submit a review, press 'Begin review'.</p>
-                {/* <p style={{ fontSize: "16.5px", color: "black" }}>Go for it, idiot.  Let the world know what you have to say.</p> */}
-                {/* <div
-                style={{
-                  background: "#212529",
-                  width: "40%",
-                  height: "fit-content",
-                  padding: "0 17.5px 0 17.5px",
-                }}
-              > */}
-
-                {/* </div> */}
-                {/* <p>Good luck, idiot.</p> */}
+            <div className="row animated fadeIn fast">
+              <div className="col jc-se ai-c">
+                {/* <br /> */}
+                <span
+                  className=""
+                  style={{
+                    fontSize: "35px",
+                    color: "whitesmoke",
+                    textShadow: "0px 0px 5.5px #0abab5",
+                    fontWeight: "700",
+                    fontStyle: "italic",
+                  }}
+                >rest☆easy
+                {/* 212529 */}
+                </span>
+                {/* <br /> */}
+                {/* <span className="" style={{ fontSize: "17px" }}>Welcome to <span className="animated fadeIn slower">rest☆easy</span> </span> */}
+                <span className=""
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "700",
+                    fontStyle: "italic",
+                    color: "whitesmoke",
+                    textShadow: "0px 0px 4.5px #0abab5",
+                  }}
+                >The world's best bathroom review app
+                </span>
+                {/* <br /> */}
+                {/* <hr/> */}
+                <HorizontalRule data_width="90%" />
               </div>
-              {/* <p> */}
-              {/* 
-          https://unsplash.com/photos/I72dFJRFT3k
-          https://unsplash.com/photos/PMKd1Qg7jJ0
-          https://unsplash.com/photos/rb767e573nE
-          https://unsplash.com/photos/XatMS2NXIpo
-          https://unsplash.com/photos/xXc7zUKIhRw
-          https://unsplash.com/photos/qeIuFR5vPm8
-          https://unsplash.com/photos/d6LzDABxP6I
-          https://unsplash.com/photos/y14YOjamViI
-          https://unsplash.com/photos/FuQBKSIc2yM
-
-          https://unsplash.com/photos/SKoLSGLucN4
-
-          https://unsplash.com/photos/egqR_zUd4NI
-          https://unsplash.com/photos/yCzY0pnrhWo
-          https://unsplash.com/photos/FtUzIprTVtI
-          https://unsplash.com/photos/Mk_cIYHdC0w
-          https://unsplash.com/photos/PMKd1Qg7jJ0
-          https://unsplash.com/photos/nN1NUSsYreQ
-          https://pixabay.com/photos/toilet-grunge-bathroom-damaged-990206/
-          https://pixabay.com/photos/water-closet-toilet-wc-lavatory-1333454/
-          https://unsplash.com/photos/VijgJ4fIe8A
-          https://unsplash.com/photos/FRmsFpV4Fao
-          https://unsplash.com/photos/dSbfzDB2DiU
-          https://unsplash.com/photos/C4pTlSHaBsk
-          https://unsplash.com/photos/BiDGqzEoT3c
-          https://unsplash.com/photos/qmJVhLF9RLs
-          https://unsplash.com/photos/EF-QrtA8nkQ
-          https://unsplash.com/photos/TMlDhxsT3wE
-          https://unsplash.com/photos/1PBAMt4mF80
-          https://unsplash.com/photos/q7NBKl58K_U
-          https://unsplash.com/photos/MgnI7cUwkq8
-          https://unsplash.com/photos/VCVI5QUvFAY 
-           */}
-              {/* </p> */}
-
             </div>
-          </div>
-        </div >
 
+
+
+            {/* <div className="row animated fadeIn slower">
+              <div className="col jc-sa ai-c">
+
+                <span className="" style={{ fontSize: "17px" }}>Welcome to <span className="animated fadeIn slower">rest☆easy</span> </span>
+                <span className="" style={{ fontSize: "16px" }}>The world's best bathroom review app</span>
+              </div>
+            </div>
+            <HorizontalRule /> */}
+            <div className="row animated fadeIn fast ">
+              <div className="col jc-sa ai-c">
+                {/* <HorizontalRule /> */}
+                <span style={{ fontSize: "17px", fontWeight: "bold" }}>Create a Review</span>
+                {/* <br /> */}
+                <span style={{ fontSize: "16px" }}>To create a review, press 'Begin review'.</span>
+
+                {/* <span style={{ fontSize: "16px" }}>Go for it, idiot.  Let the world know what you have to say about bathrooms.</span> */}
+              </div>
+            </div>
+
+
+
+          </div >
+        </div >
       </div >
     )
   }
@@ -180,3 +121,36 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
 )(FormSection0);
+
+    // https://unsplash.com/photos/I72dFJRFT3k
+    // https://unsplash.com/photos/PMKd1Qg7jJ0
+    // https://unsplash.com/photos/rb767e573nE
+    // https://unsplash.com/photos/XatMS2NXIpo
+    // https://unsplash.com/photos/xXc7zUKIhRw
+    // https://unsplash.com/photos/qeIuFR5vPm8
+    // https://unsplash.com/photos/d6LzDABxP6I
+    // https://unsplash.com/photos/y14YOjamViI
+    // https://unsplash.com/photos/FuQBKSIc2yM
+
+    // https://unsplash.com/photos/SKoLSGLucN4
+
+    // https://unsplash.com/photos/egqR_zUd4NI
+    // https://unsplash.com/photos/yCzY0pnrhWo
+    // https://unsplash.com/photos/FtUzIprTVtI
+    // https://unsplash.com/photos/Mk_cIYHdC0w
+    // https://unsplash.com/photos/PMKd1Qg7jJ0
+    // https://unsplash.com/photos/nN1NUSsYreQ
+    // https://pixabay.com/photos/toilet-grunge-bathroom-damaged-990206/
+    // https://pixabay.com/photos/water-closet-toilet-wc-lavatory-1333454/
+    // https://unsplash.com/photos/VijgJ4fIe8A
+    // https://unsplash.com/photos/FRmsFpV4Fao
+    // https://unsplash.com/photos/dSbfzDB2DiU
+    // https://unsplash.com/photos/C4pTlSHaBsk
+    // https://unsplash.com/photos/BiDGqzEoT3c
+    // https://unsplash.com/photos/qmJVhLF9RLs
+    // https://unsplash.com/photos/EF-QrtA8nkQ
+    // https://unsplash.com/photos/TMlDhxsT3wE
+    // https://unsplash.com/photos/1PBAMt4mF80
+    // https://unsplash.com/photos/q7NBKl58K_U
+    // https://unsplash.com/photos/MgnI7cUwkq8
+// https://unsplash.com/photos/VCVI5QUvFAY 

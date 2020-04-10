@@ -25,15 +25,15 @@ export class ReviewMainNav extends Component {
 
     return (
 
-      <div className="row ">
+      <div className="row">
 
-        <div className="col-2">
+        <div className="col-2 jc-fs pt-2">
           {/* spacer */}
         </div>
 
         {
           formStepValue > 0 ? (
-            <div className="col-4 ai-c" >
+            <div className="col-4 ai-c jc-fs pt-2" >
               <FormNavButton
                 data_text="Back"
                 data_width="100px"
@@ -44,7 +44,7 @@ export class ReviewMainNav extends Component {
           ) : null
         }
 
-        <div className="col-4 ai-c">
+        <div className="col-4 ai-c jc-fs pt-2">
           <FormNavButton
             data_text={formStepValue === 0 ? "Begin review" : "Continue"}
             data_width="100px"
@@ -53,7 +53,7 @@ export class ReviewMainNav extends Component {
           />
         </div>
 
-        <div className="col-2">
+        <div className="col-2 jc-fs pt-3">
           {
             formStepValue > 0 ? (
               // null

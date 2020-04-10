@@ -27,7 +27,7 @@ class MainWrapper extends Component {
   }
 
   componentDidMount() {
-    this.props.storeGoogleAPI(this.props.google.maps);
+    // this.props.storeGoogleAPI(this.props.google.maps);
   }
 
 
@@ -107,8 +107,8 @@ export default compose(
   //   }
   // ]),
 
-  GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GM_KEY,
-    version: "3.30"
-  })
+  // GoogleApiWrapper({
+  //   apiKey: process.env.REACT_APP_GM_KEY,
+  //   version: "3.30"
+  // })
 )(MainWrapper);

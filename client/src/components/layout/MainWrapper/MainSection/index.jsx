@@ -27,8 +27,8 @@ export class MainSection extends Component {
         <div className="col" style={{ background: "#f5f5f5" }}>
 
           < ReviewSection display={selectedSectionValue} />
-          < MapListSection display={selectedSectionValue} />
-          < MyStuffSection display={selectedSectionValue} />
+          {/* < MapListSection display={selectedSectionValue} />
+          < MyStuffSection display={selectedSectionValue} /> */}
 
           {
             

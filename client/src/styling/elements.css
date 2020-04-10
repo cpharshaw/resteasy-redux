@@ -1,3 +1,11 @@
+
+.splashBlur {
+  /* animation-duration: 3s; */
+  animation-delay: .75s;
+  /* animation-iteration-count: infinite; */
+}
+
+
 .button {
   width: fit-content;
   height: fit-content;

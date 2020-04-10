@@ -34,6 +34,7 @@ class Splash extends Component {
     // https://tobiasahlin.com/moving-letters/
     let ml = { timelines: {} };
 
+
     ml.timelines["ml5"] = anime.timeline({ loop: false })
       .add({
         targets: '.ml5 .line',
@@ -122,10 +123,10 @@ class Splash extends Component {
 
       <div
         id="splashContainer"
-        className="animated fadeIn faster skip"
+        className="splashContainer animated fadeIn faster skip"
         style={{
           position: "fixed",
-          background: "lightgrey",
+
           top: "50%",
           right: "0",
           bottom: "0",
@@ -138,16 +139,34 @@ class Splash extends Component {
           MozTransform: "translateX(-50%) translateY(-50%)",
           WebkitTransform: "translateX(-50%) translateY(-50%)",
           transform: "translateX(-50%) translateY(-50%)",
+
+
+
           /* z-index: -100; */
           /* filter: blur(1.5px); */
         }}
       >
+        <div
+          className="splashBlur animated fadeIn slow"
+          style={{
+            position: "absolute",
+            top: "0",
+            right: "0",
+            bottom: "0",
+            left: "0",
+            height: "100%",
+            width: "100%",
+            backgroundColor: "rgba(255, 255, 255, .2)",
+            backdropFilter: "blur(4.5px)",
+          }}
+        />
 
         <video
           id="myVideo"
           className="animated fadeIn skip"
           style={{
             position: "fixed",
+
             top: "50%",
             left: "50%",
             minWidth: "100%",

@@ -1,5 +1,5 @@
 const initState = {
-  formStepValue: 1,
+  formStepValue: 0,
 
   // page1
   formLocationValue: {},
