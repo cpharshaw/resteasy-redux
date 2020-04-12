@@ -37,6 +37,7 @@ class MapSection extends Component {
     this.googleMapRef = React.createRef();
     this.state = {
       initialUpdate: 0,
+      geo_same_ctr: true
     };
 
     this.map = null;
@@ -68,7 +69,10 @@ class MapSection extends Component {
     // console.log("bounds", bounds);
   }
 
-
+  resetCenter = e => {
+    alert('reset center clicked');
+    console.log('reset center clicked')
+  }
 
   componentDidMount() {
 
@@ -140,6 +144,7 @@ class MapSection extends Component {
       geoLng === ctrLng
     );
 
+    if (this.map && this.props.googleAPIValue && ctr_update && !geo_same_ctr) this.setState({ geo_same_ctr: false });
 
     if (googleAPIUpdate) {
 
@@ -271,6 +276,10 @@ class MapSection extends Component {
       // this.props.getPlacesFromFoursquare(fsLL);
       // console.log("fs value updated: ", this.props.foursquareValue);
 
+      this.setState({
+        geo_same_ctr: true
+      })
+
     };
 
     // console.log("places: ", this.map.getPlaces());
@@ -314,6 +323,30 @@ class MapSection extends Component {
 
 
         </div>
+
+
+        {
+          this.state.geo_same_ctr ? null : (
+            <div className="col animated fadeIn slow px-3 py-2" onClick={this.resetCenter}
+              style={{
+                position: "absolute",
+                left: "25%",
+                right: "25%",
+                margin: "0 auto",
+                bottom: "60px",
+                height: "fit-content",
+                width: "fit-content",
+                borderRadius: "7.5px",
+                backgroundColor: "rgba(245,245,245,0.5)",
+                backdropFilter: "blur(5px)",
+                WebkitBackdropFilter: "blur(5px)",
+                boxShadow: "0 0 12px #a2ddd9"
+              }}
+            >
+              <span><em>Redo search in this area</em></span>
+            </div>
+          )
+        }
       </div>
     )
   }

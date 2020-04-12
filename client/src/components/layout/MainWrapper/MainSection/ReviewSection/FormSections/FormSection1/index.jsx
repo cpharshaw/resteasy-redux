@@ -165,10 +165,11 @@ export class FormSection1 extends Component {
                   >
                     <option value="Time of day..." disabled>Time of day...</option>
                     <option value="Just Now">(Just now)</option>
-                    <option value="Morning">Morning</option>
-                    <option value="Midday">Midday</option>
-                    <option value="Afternoon">Late afternoon</option>
-                    <option value="Evening">Evening</option>
+                    <option value="Morning">Dawn</option>
+                    <option value="Morning">Morning / Breafast</option>
+                    <option value="Midday">Late morning - Noon / Lunch</option>
+                    <option value="Afternoon">Mid afternoon</option>
+                    <option value="Evening">Evening / Dinnertime</option>
                     <option value="Late night">Late night</option>
                     <option value="Middle of night">Middle of night</option>
                   </SelectBox>
