@@ -76,13 +76,13 @@ export class FormSection2 extends Component {
         <div className="col">
 
           <div className="row">
-            <div className="col-7">
+            <div className="col-6">
               < FieldLabel
                 data_text="Cleanliness"
                 data_htmlFor="formCleanlinessValue"
               />
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <div className="row">
                 {/* TODO - create a loop to create input fields using array of names */}
                 <RadioInput
@@ -121,13 +121,13 @@ export class FormSection2 extends Component {
           </div>
 
           <div className="row">
-          <div className="col-7">
+          <div className="col-6">
               < FieldLabel
                 data_text="Smell"
                 data_htmlFor="formSmellValue"
               />
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <div className="row">
                 <RadioInput
                   data_value="1"
@@ -166,13 +166,13 @@ export class FormSection2 extends Component {
 
 
           <div className="row">
-          <div className="col-7">
+          <div className="col-6">
               <FieldLabel
                 data_text="Privacy"
                 data_htmlFor="formPrivacyValue"
               />
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <div className="row">
 
                 <RadioInput
@@ -214,7 +214,7 @@ export class FormSection2 extends Component {
           </div>
 
           <div className="row">
-          <div className="col-7">
+          <div className="col-6">
 
               < FieldLabel
                 data_text="Comfort"
@@ -222,7 +222,7 @@ export class FormSection2 extends Component {
               />
 
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <div className="row">
 
                 <RadioInput
@@ -262,13 +262,13 @@ export class FormSection2 extends Component {
 
 
           <div className="row">
-          <div className="col-7">
+          <div className="col-6">
               < FieldLabel
                 data_text="Capacity / Size"
                 data_htmlFor="formCapacityValue"
               />
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <div className="row">
                 <RadioInput
                   data_value="1"
@@ -306,14 +306,14 @@ export class FormSection2 extends Component {
           </div>
 
           <div className="row">
-          <div className="col-7">
+          <div className="col-6">
               < FieldLabel
                 data_text="Perceived Safety"
                 data_htmlFor="formSafetyValue"
               />
 
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <div className="row">
 
                 <RadioInput
@@ -352,14 +352,14 @@ export class FormSection2 extends Component {
           </div>
 
           <div className="row">
-          <div className="col-7">
+          <div className="col-6">
               < FieldLabel
                 data_text="Style / Poshness"
                 data_htmlFor="formStyleValue"
               />
 
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <div className="row">
                 <RadioInput
                   data_value="1"

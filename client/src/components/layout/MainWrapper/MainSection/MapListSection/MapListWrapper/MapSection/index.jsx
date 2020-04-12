@@ -155,7 +155,10 @@ class MapSection extends Component {
             lng: geoLng
           },
           zoomControlOptions: {
-            position: this.props.googleAPIValue.ControlPosition.LEFT_CENTER
+            // position: this.props.googleAPIValue.ControlPosition.LEFT_CENTER
+            position: this.props.googleAPIValue.ControlPosition.LEFT_BOTTOM
+            // position: this.props.googleAPIValue.ControlPosition.RIGHT_CENTER
+            // position: this.props.googleAPIValue.ControlPosition.RIGHT_BOTTOM
           },
           mapTypeControl: false,
           fullscreenControl: false,

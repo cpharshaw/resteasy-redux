@@ -30,11 +30,11 @@ export class MapListSection extends Component {
 
         <div className="row"
           style={{
-            position: "fixed",
+            position: "absolute",
             top: "0",
             left: "0",
             right: "0",
-            height: "80px",
+            height: "95px",
           }}
         >
           <div className="col">
@@ -47,21 +47,20 @@ export class MapListSection extends Component {
           settingsModal ? (
             <div
               id=""
-              className="animated fadeIn faster bg-primary"
+              className="col animated fadeIn faster bg-primary px-2 py-1"
               style={{
                 zIndex: "99999999999999999999999",
-                position: "fixed",
-                top: "80px",
+                position: "absolute",
+                top: "92.5px",
                 left: "0",
                 right: "0",
                 height: "50px",
                 width: "100%",
-                flexDirection: "row",
               }}
             >
               <LocationModal
-                data_width="95%"
-                data_height="92%"
+                // data_width="95%"
+                // data_height="92%"
                 // data_border="3px solid #0abab5"
               />
             </div>
@@ -70,11 +69,11 @@ export class MapListSection extends Component {
 
         <div className="row"
           style={{
-            position: "fixed",
-            bottom: "62.5px",
+            position: "absolute",
+            bottom: "0",
             left: "0",
             right: "0",
-            height: "calc(100% - 142.5px)",
+            height: "calc(100% - 92.5px)",
           }}
         >
           <div className="col">

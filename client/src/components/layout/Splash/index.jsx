@@ -157,6 +157,7 @@ class Splash extends Component {
             height: "100%",
             width: "100%",
             backgroundColor: "rgba(255, 255, 255, .2)",
+            WebkitBackdropFilter: "blur(4.5px)",
             backdropFilter: "blur(4.5px)",
           }}
         />

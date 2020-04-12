@@ -12,16 +12,30 @@
 }
 
 
-.bg-primary-outline {
-	border: 2px solid #0abab5 ;
+
+.button-primary-outline {
+	border: 2px solid #0abab5 !important;
 	background-color: transparent ;
-	color: #0abab5 ;
+	color: #0abab5;
+} 
+
+.button-form-nav {
+	/* border: 2px solid #0abab5 !important; */
+	background-color: #0abab5 ;
+	color: #f5f5f5;
+	font-style: italic !important;
+	/* text-shadow: 0 0 2px lightgrey !important; */
 }
 
-.bg-grey-outline {
-	border: 2px solid #626262;
+.button-form-modal {
 	background: transparent;
-	color: #626262;
+	font-style: italic !important;
+}
+
+.button-grey-outline {
+	/* border: 2px solid #626262;
+	background: transparent;
+	color: #626262; */
 }
 
 .bg-primary-light {

@@ -95,9 +95,9 @@ export class MyStuffSection extends Component {
 
                   <div className="col-3 jc-fs">
                     <img
-                      className=""
+                      className="skip"
                       style={{
-                        width: photoURL ? "auto" : "85px",
+                        width: photoURL ? "91px" : "91px",
                         height: "85px",
                         background: photoURL ? null : "black",
                         // margin: "10fpx 0 5px 0",

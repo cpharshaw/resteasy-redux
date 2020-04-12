@@ -18,7 +18,8 @@ export class MainSection extends Component {
 
     const {
       selectedSectionValue,
-      currentModal
+      currentModal,
+      formStepValue
     } = this.props;
 
     return (
@@ -30,15 +31,8 @@ export class MainSection extends Component {
           < MapListSection display={selectedSectionValue} />
           < MyStuffSection display={selectedSectionValue} />
 
-          {
-            
-            //take away the exclamation point
-            
-            
-            
-            
-            currentModal !== "" ? < ModalContainer /> : null}
-
+          {currentModal !== "" || formStepValue === 6 || formStepValue === 7 ? < ModalContainer /> : null}
+          
         </div>
       </div>
 
@@ -53,6 +47,7 @@ const mapStateToProps = (state, ownProps) => {
     boundsValue: state.boundsState.boundsValue,
     data_height: ownProps.data_height,
     currentModal: state.modalState.currentModal,
+    formStepValue: state.formState.formStepValue,
   }
 }
 

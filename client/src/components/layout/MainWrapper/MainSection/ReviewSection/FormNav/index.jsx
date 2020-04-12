@@ -21,7 +21,7 @@ export class ReviewMainNav extends Component {
     const {
       formStepValue
     } = this.props;
-    console.log(formStepValue)
+    // console.log(formStepValue)
 
     return (
 
@@ -37,7 +37,7 @@ export class ReviewMainNav extends Component {
               <FormNavButton
                 data_text="Back"
                 data_width="100px"
-                data_classes="button-bg-primary"
+                data_classes="button-form-nav"
                 func_navcommand="prev"
               />
             </div>
@@ -48,7 +48,7 @@ export class ReviewMainNav extends Component {
           <FormNavButton
             data_text={formStepValue === 0 ? "Begin review" : "Continue"}
             data_width="100px"
-            data_classes="button-bg-primary"
+            data_classes="button-form-nav"
             func_navcommand="next"
           />
         </div>

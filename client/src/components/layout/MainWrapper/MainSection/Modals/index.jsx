@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
+import { formPrev, resetForm } from '../../../../../store/actions/formActions';
+import { selectSection } from '../../../../../store/actions/sectionActions';
+import { locationChosen } from '../../../../../store/actions/formActions';
 import FormNavButton from '../../../../sharedComponents/formComponents/FormNavButton';
 import HorizontalRule from '../../../../sharedComponents/general/HorizontalRule';
 import ModalFormReset from './ModalFormReset';
@@ -19,8 +22,30 @@ export class ModalContainer extends Component {
       this.props.formPrev();
     }
 
+    if (this.props.formStepValue === 7) {
+      this.props.resetForm();
+      this.props.selectSection("mapList");
+    }
+
     this.props.modalClosed()
 
+  }
+
+  placeSelected = e => {
+    const name = e.currentTarget.getAttribute('data_placename');
+    const category = e.currentTarget.getAttribute('data_placecategory');
+    const distance = e.currentTarget.getAttribute('data_placedistance');
+    const address = e.currentTarget.getAttribute('data_placeaddress');
+
+    const placeObj = {
+      name,
+      category,
+      distance,
+      address
+    }
+    // console.log("place selected: ", placeObj)
+    this.props.locationChosen(placeObj);
+    this.props.modalClosed();
   }
 
 
@@ -106,18 +131,19 @@ export class ModalContainer extends Component {
                 WebkitBackdropFilter: "blur(8px)",
                 backdropFilter: "blur(8px)",
                 zIndex: "1000",
+                color: "inherit"
               }}
             >
 
               <div className="row animated fadeIn ac-fs"
                 style={{
                   maxHeight: currentModal === "formLocationModal" ? "87.5%" : currentModal !== "settingsModal" ? "27.5%" : "50%",
-                  maxWidth:  currentModal === "formLocationModal" ? "92.5%" : currentModal !== "settingsModal" ? "70%" : "50%",
+                  maxWidth: currentModal === "formLocationModal" ? "92.5%" : currentModal !== "settingsModal" ? "70%" : "50%",
                 }}
               >
 
 
-                <div className="col jc-se ac-fs ai-s"
+                <div className="col jc-fs ac-fs ai-s"
                   style={{
                     background: "#f5f5f5",
                     borderRadius: "5px",
@@ -142,12 +168,13 @@ export class ModalContainer extends Component {
                         style={{
                           pointerEvents: "all",
                           fontSize: "2.5em",
-                          fontWeight: "bold",
+                          fontWeight: "500",
                           color: "grey",
                           zIndex: '1000',
                           marginTop: ""
                         }}
-                      >&times;
+                      >
+                        {formStepValue !== 7 ? "×" : null}
                       </span>
                     </div>
                   </div>
@@ -157,7 +184,7 @@ export class ModalContainer extends Component {
 
                       this.props.foursquareValue === null ? <div className="fsLoader" /> : (
                         <React.Fragment>
-                          
+
                           <div className="row mt-1"
                             style={{
                               minHeight: "45px",
@@ -201,8 +228,10 @@ export class ModalContainer extends Component {
                     ) : null
                   }
 
+                  {console.log("currentModal: ", currentModal)}
+                  {console.log("formStepValue: ", formStepValue)}
                   {
-                    currentModal !== "formLocationModal" && currentModal !== "" ? (
+                    currentModal !== "formLocationModal" && (currentModal !== "" || formStepValue > 5) ? (
 
                       <div className="row" style={{ pointerEvents: "all" }}>
                         <div className="col jc-se">
@@ -210,26 +239,35 @@ export class ModalContainer extends Component {
                           <div className="row">
                             <div className="col">
                               {currentModal === "formResetModal" ? <p>Reset review form and start over?</p> : null}
-                              {currentModal === "formConfirm" ? <p>Ok to submit review?</p> : null}
-                              {currentModal === "formComplete" ? <p>Thank you for your review.</p> : null}
+                              {formStepValue === 6 ? <p>Ok to submit review?</p> : null}
+                              {formStepValue === 7 ? <p>Thank you for your review.  You've done your part to help save the world.  Go home now and feel good about yourself.</p> : null}
                             </div>
                           </div>
 
+
                           <div className="row">
+                            {
+                              formStepValue !== 7 ? (
+                                <div className="col">
+                                  <FormNavButton
+                                    data_text={currentModal === "formResetModal" ? "Cancel" : formStepValue === 6 ? "Cancel" : null}
+                                    data_classes="button-form-modal"
+                                    data_width="100px"
+                                    func_navcommand={currentModal === "formResetModal" ? "cancel" : formStepValue === 6 ? "prev" : null}
+                                  />
+                                </div>
+
+                              ) : null
+                            }
                             <div className="col">
                               <FormNavButton
-                                data_text={currentModal === "formResetModal" ? "Cancel" : null}
-                                data_classes="bg-grey-outline"
-                                func_navcommand="cancel"
+                                data_text={currentModal === "formResetModal" ? "Reset" : formStepValue === 6 ? "Submit" : formStepValue === 7 ? "Close" : null}
+                                data_classes="button-form-modal"
+                                data_width="100px"
+                                func_navcommand={currentModal === "formResetModal" ? "reset" : formStepValue === 6 ? "next" : formStepValue === 7 ? "finish" : null}
                               />
                             </div>
-                            <div className="col">
-                              <FormNavButton
-                                data_text={currentModal === "formResetModal" ? "Reset" : null}
-                                data_classes="bg-grey-outline"
-                                func_navcommand={currentModal === "formResetModal" ? "reset" : null}
-                              />
-                            </div>
+
                           </div>
 
                         </div>
@@ -267,6 +305,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // locationChosen: location => dispatch(locationChosen(location)),
+    modalClosed: () => dispatch(modalClosed()),
+    formPrev: () => dispatch(formPrev()),
+    resetForm: () => dispatch(resetForm()),
+    selectSection: (section) => dispatch(selectSection(section)),
+    locationChosen: location => dispatch(locationChosen(location)),
     modalClosed: () => dispatch(modalClosed())
   }
 }
@@ -274,90 +317,3 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
   connect(mapStateToProps, mapDispatchToProps)
 )(ModalContainer);
-
-
-
-
-
-
-
-
-// {
-//   currentModal !== "formLocationModal" && currentModal !== "" ? (
-//     <div className="row animated fadeIn ac-fs"
-//       style={{
-//         maxHeight: "37.5%",
-//         maxWidth: "72.5%",
-//       }}
-//     >
-
-
-//       <div className="col jc-se ac-fs ai-s"
-//         style={{
-//           background: "#f5f5f5",
-//           borderRadius: "5px",
-//           boxShadow: "0 1px 3px #a8a8a8",
-//         }}
-//       >
-
-//         <React.Fragment>
-//           <div className="row animated fadeIn slow ac-fe"
-//             style={{
-//               minHeight: "35px"
-//             }}
-//           >
-//             <div className="col ai-fe"
-//               style={{
-//                 pointerEvents: "all",
-//                 zIndex: "1000",
-//               }}
-//             >
-//               <span className="mx-2 skip" onClick={e => this.closeModal(e)}
-//                 style={{
-//                   pointerEvents: "all",
-//                   fontSize: "2.5em",
-//                   fontWeight: "bold",
-//                   color: "grey",
-//                   zIndex: '1000',
-//                   marginTop: ""
-//                 }}
-//               >
-//                 &times;
-//           </span>
-//             </div>
-//           </div>
-
-
-//           <div className="row" style={{ pointerEvents: "all" }}>
-//             <div className="col jc-se">
-
-//               <div className="row">
-//                 <div className="col">
-//                   {currentModal === "formResetModal" ? <p>Reset review form and start over?</p> : null}
-//                   {currentModal === "formConfirm" ? <p>Ok to submit review?</p> : null}
-//                   {currentModal === "formComplete" ? <p>Thank you for your review.</p> : null}
-//                 </div>
-//               </div>
-//               <div className="row">
-//                 <div className="col">
-//                   <FormNavButton
-//                     data_text={currentModal === "formResetModal" ? "Cancel" : null}
-//                     data_classes="bg-grey-outline"
-//                     func_navcommand="cancel"
-//                   />
-//                 </div>
-//                 <div className="col">
-//                   <FormNavButton
-//                     data_text={currentModal === "formResetModal" ? "Reset" : null}
-//                     data_classes="bg-grey-outline"
-//                     func_navcommand={currentModal === "formResetModal" ? "reset" : null}
-//                   />
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </React.Fragment>
-//       </div>
-//     </div>
-//   ) : null
-// }

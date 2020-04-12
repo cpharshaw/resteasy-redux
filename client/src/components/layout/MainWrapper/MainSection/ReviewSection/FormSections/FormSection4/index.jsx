@@ -119,13 +119,13 @@ export class FormSection4 extends Component {
         return (
           <div
             id=""
-            className="rs animated pulse fast"
+            className=" animated pulse fast"
             key={"div" + i}
             style={{
               position: "relative",
-              width: "120px",
+              width: "130px",
               height: "auto",
-              margin: "0 8px 0 8px",
+              margin: "4px 8px 4px 8px",
               flexWrap: "wrap",
               alignSelf: "flex-start",
               // background: "grey"
@@ -133,13 +133,13 @@ export class FormSection4 extends Component {
           >
             <img
               id=""
-              className="rs"
+              className=""
               key={"img" + i}
               src={newImgSrc}
               style={{
-                maxWidth: "120px",
+                maxWidth: "130px",
                 height: "inherit",
-                maxHeight: "180px",
+                maxHeight: "195px",
                 flexWrap: "wrap",
                 borderRadius: "10px"
               }}
@@ -147,7 +147,7 @@ export class FormSection4 extends Component {
             <button
               id=""
               key={"button" + i}
-              className="rs"
+              className=""
               name={name}
               onClick={(e) => this.deletePhoto(e)}
               style={{
@@ -163,7 +163,7 @@ export class FormSection4 extends Component {
             >
               <span
                 key={"span" + i}
-                className="rs"
+                className=""
                 name={"span test"}
                 pointerEvents="none"
                 style={{
@@ -230,87 +230,76 @@ export class FormSection4 extends Component {
 
 
     return (
-      <>
-          <FieldWrapper
-            data_flexdirection="column"
-            data_height="fit-content"
+      <div id="reviewSection4" className="row animated fadeIn fast">
+        <div className="col jc-c">
+
+          <div className="row"
+            style={{
+              maxHeight: "fit-content",
+              maxWidth: "fit-content"
+            }}
+          >
+            <div className="col" >
+              <FieldLabel
+                data_padding="0"
+                data_text="Photo Upload"
+                data_htmlFor="formPhotoUploadValue"
+              />
+            </div>
+          </div>
+
+          <div className="row mt-3"
+            style={{
+              maxHeight: "fit-content",
+            }}
           >
 
-            <FieldLabel
-              data_height="42px"
-              data_htmlFor="formPhotoUploadValue"
-            // data_fontsize="12px"
-            >
-              Photo Upload 
-            </FieldLabel>
+            <div className="col ai-c">
 
-
-            <div
-              className="rs"
-              style={{
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                // background: "orange",
-                height: "226px",
-                margin: "0 auto"
-              }}
-            >
-
-              <div
-                className="rs"
+              <div className="row jc-c"
                 style={{
-                  // background: "grey",
-                  height: "64px",
+                  // visibility: "hidden",
+                  maxHeight: "fit-content",
                   visibility: photosArrValue.length >= 2 ? "hidden" : null,
                 }}
               >
 
                 <input
                   id="formPhotoUploadValue1"
-                  // className="rs"
-                  name="formPhotoUploadValue"
+                  className=""
+                  name="formPhotoUploadValue skip"
                   type="file"
                   accept="image/*"
                   multiple={false}
                   onInput={this.selectPhoto}
-                  // title=" "
-                  // ccapture=""
                   style={{
                     display: "none"
                   }}
                 />
 
                 <button
-                  className="rs"
+                  className="mx-5"
                   onClick={this.buttonClick}
                   style={{
-                    margin: "0 auto",
-                    // width: "fit-content",
-                    height: "fit-content",
-                    // background: "blue"
+                    visibility: "inherit"
                   }}
                 >
                   <img
-                    className="rs"
+                    className=""
                     src="https://img.icons8.com/material-outlined/64/000000/image-gallery.png"
                     style={{
-                      width: "auto",
-                      height: "auto",
-                      // background: "red",
-                      marginLeft: "25%"
                     }}
                   />
                 </button>
 
                 <input
                   id="formPhotoUploadValue2"
-                  // className="rs"
+                  className=""
                   name="formPhotoUploadValue"
                   type="file"
                   accept="image/*"
                   multiple={false}
                   onInput={this.selectPhoto}
-                  // title=" "
                   capture="camera"
                   style={{
                     display: "none"
@@ -318,47 +307,40 @@ export class FormSection4 extends Component {
                 />
 
                 <button
-                  className="rs"
+                  className="mx-5"
                   onClick={this.buttonClickCamera}
                   style={{
-                    margin: "0 auto",
-                    // width: "fit-content",
-                    height: "fit-content",
-                    // background: "green"
+                    visibility: "inherit"
                   }}
                 >
                   <img
-                    className="rs"
+                    className=""
                     src="https://img.icons8.com/material-outlined/64/000000/unsplash.png"
                     style={{
-                      width: "auto",
-                      height: "auto",
-                      // background: "yellow",
-                      marginRight: "25%"
+
                     }}
                   />
                 </button>
 
               </div>
 
-              <div
-                className="rs"
-                id="photoDisplay"
+              <div id="photoDisplay" className="row mt-3"
                 style={{
-                  flexDirection: "row",
-                  margin: "10px 0 0 0",
-                  flexWrap: 'wrap',
-                  // alignContent: "flex-start",
-                  // backgroundImage: photosArrValue.length < 1 ? "linear-gradient(to bottom right, rgba(211,211,211,.75), rgba(245,245,245,.45))" : null,
-                  width: photosArrValue.length < 1 ? "225px" : null,
-                  height: photosArrValue.length < 1 ? "145px" : null,
+                  // margin: "20px 0 0 0",
+                  flexWrap: "wrap",
+                  minWidth: "250px",
+                  width: photosArrValue.length < 1 ? "87.5%" : "97.5%",
+                  maxWidth: photosArrValue.length < 1 ? "400px" : "100%",
+                  height: photosArrValue.length < 1 ? "250px" : "250px",
                   border: photosArrValue.length < 1 ? "1.25px dashed grey" : null,
                   borderRadius: photosArrValue.length < 1 ? "5px" : null
-                }}>
+                }}
+              >
                 {
                   photosArrValue.length === 0 ?
                     <em>
                       <span
+                        onClick={this.buttonClick}
                         style={{
                           color: "grey",
                           fontWeight: "200",
@@ -371,15 +353,19 @@ export class FormSection4 extends Component {
                     :
                     this.state.photoArr
                 }
+                {console.log("# of photos: ", this.state.photoArr.length)}
               </div>
             </div>
 
-          </FieldWrapper>
-
-          <br />
+          </div>
 
 
-      </ >
+
+          {/* <br /> */}
+
+
+        </div >
+      </div >
     )
   }
 }

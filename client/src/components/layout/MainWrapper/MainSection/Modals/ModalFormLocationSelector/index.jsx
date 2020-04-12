@@ -266,7 +266,7 @@ export class LocationModal extends Component {
             borderRadius: "5px",
             padding: "10px !important",
             fontSize: "12.5px",
-            background: "#f5f5f5",
+            // background: "#f5f5f5",
             border: data_border ? data_border : null,
             textOverflow: "ellipsis",
             zIndex: "1100 !important"

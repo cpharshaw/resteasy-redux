@@ -24,9 +24,9 @@ export class FormSection0 extends Component {
         <div className="row p-3 animated fadeIn"
           style={{
             borderRadius: "10px",
-            maxHeight: "45%",
-            maxWidth: "85%",
-            backgroundColor: "rgba(255, 255, 255, 0.35)",
+            maxHeight: "50%",
+            maxWidth: "87.5%",
+            backgroundColor: "rgba(255, 255, 255, 0.45)",
             boxShadow: "0 0 5px #f5f5f5"
           }}
         >

@@ -35,7 +35,7 @@ export class LocationSelector extends Component {
       <button
         id="locationSelectorButton"
         className=""
-        onClick={e => this.buttonClicked(e)}
+        // onClick={e => this.buttonClicked(e)}
         style={{
           width: data_width ? data_width : null,
           height: data_height ? data_height : null,

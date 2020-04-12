@@ -23,9 +23,9 @@ export class CheckInput extends Component {
         name={data_name}
         onChange={e => func_handlechange(e)}
         type="checkbox"
-        
         style={{
-          width: "100%",
+          margin: "0 auto",
+          // width: "100%",
           // height: "100%", lol
           WebkitAppearance: "checkbox",
         }}

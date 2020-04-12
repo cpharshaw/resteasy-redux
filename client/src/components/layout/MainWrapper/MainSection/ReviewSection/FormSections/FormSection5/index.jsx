@@ -19,41 +19,55 @@ export class FormSection5 extends Component {
     } = this.props;
 
     return (
-      <>
+      <div id="reviewSection4" className="row animated fadeIn fast"
 
-        < FieldWrapper
-          data_id="field08"
-          data_flexdirection="column"
-          data_margin="15px 0 0 0"
-        >
+      >
+        <div className="col jc-c">
 
-          < FieldLabel
-            data_htmlFor="formCommentsValue"
-            data_height="30px"
-          >
-            Overall Comments
-            </FieldLabel>
-
-          <textarea
-            className="rs"
-            name="formCommentsValue"
+          <div className="row ai-c"
             style={{
-              width: "92.5%",
-              maxHeight: "220px",
-              border: "2px dotted lightgrey",
-              padding: "10px",
-              // marginLeft: "30px",
-              // marginRight: "30px",
-              textAlignLast: "left",
-              textAlign: "left"
+              maxHeight: "20%",
+              maxWidth: "fit-content"
             }}
-            placeholder={formOutOfOrderValue ? "This restroom was out of order..." : "Write your comments here.."}
-            onChange={e => textEntered(e)}
-            value={formCommentsValue}
-          />
-        </ FieldWrapper>
-        
-      </ >
+          >
+            <div className="col">
+              < FieldLabel
+                data_htmlFor="formCommentsValue"
+                // data_height="30px"
+                data_padding="0"
+                data_text="Overall Comments"
+              />
+            </div>
+          </div>
+
+          <div className="row"
+            style={{
+              maxHeight: "45%",
+            }}
+          >
+            <div className="col">
+              <textarea
+                className=""
+                name="formCommentsValue"
+                style={{
+                  width: "92.5%",
+                  height: "90%",
+                  border: "2px dotted lightgrey",
+                  padding: "10px",
+                  // marginLeft: "30px",
+                  // marginRight: "30px",
+                  textAlignLast: "left",
+                  textAlign: "left"
+                }}
+                placeholder={formOutOfOrderValue ? "This restroom was out of order..." : "You obviously know what you're talking about, so please, elaborate a little why dontchya..."}
+                onChange={e => textEntered(e)}
+                value={formCommentsValue}
+              />
+            </div>
+          </div>
+
+        </div >
+      </div >
     )
   }
 }

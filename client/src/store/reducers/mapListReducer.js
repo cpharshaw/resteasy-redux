@@ -1,5 +1,5 @@
 const initState = {
-  mapListToggleValue: false
+  mapListToggleValue: true
 }
 
 const mapListReducer = (state = initState, action) => {

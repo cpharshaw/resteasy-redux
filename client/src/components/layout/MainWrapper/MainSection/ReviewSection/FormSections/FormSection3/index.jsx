@@ -90,7 +90,7 @@ export class FormSection3 extends Component {
     // const { handicapped, genderNeutral, babyChange, schedule, admission, feeDisplay, fee } = data_values;
 
     return (
-      <div id="reviewSection2" className="row animated fadeIn fast jc-se ">
+      <div id="reviewSection3" className="row animated fadeIn fast jc-se ">
         <div className="col">
 
 

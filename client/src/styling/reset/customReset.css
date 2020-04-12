@@ -8,6 +8,7 @@
 
 button /*button:focus, button:active, button:visited, button:hover, button:focus-within*/ {
   all: initial;
+  color: inherit;
 }
 
 
@@ -17,6 +18,7 @@ button /*button:focus, button:active, button:visited, button:hover, button:focus
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
+
 
 * {
   -webkit-overflow-scrolling: touch;
@@ -40,6 +42,8 @@ html, body {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+
 
 body {
   line-height: 1;

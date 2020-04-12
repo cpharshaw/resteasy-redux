@@ -26,6 +26,7 @@ export class FieldLabel extends Component {
       data_flexdirection,
       data_width,
       data_height,
+      data_padding,
       children
     } = this.props;
 
@@ -36,9 +37,14 @@ export class FieldLabel extends Component {
         className="row"
         htmlFor={data_htmlFor}
         style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          alignContent: "center",
           // width: data_width ? data_width : "null",
           // height: data_height ? data_height : "100%",
-          paddingLeft: "10px",
+          margin: "0 auto",
+          padding: data_padding ? data_padding : "0 0 0 10px",
           // flexGrow: data_width ? null : 1,
           // flexWrap: "wrap",
           // justifyContent: "flex-start !important",

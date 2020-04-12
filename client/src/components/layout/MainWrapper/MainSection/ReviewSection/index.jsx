@@ -108,6 +108,7 @@ export class ReviewSection extends Component {
             <div className="row">
               <div className="col"
                 style={{
+                  // padding: formStepValue !== 0 ? "4% 2% 4% 2%" : null
                   padding: formStepValue !== 0 ? "18px 9px 18px 9px" : null
                 }}
               >

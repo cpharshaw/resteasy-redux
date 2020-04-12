@@ -44,9 +44,9 @@ export class BottomBar extends Component {
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
               style={{
-                height: "35.7px",
-                width: "35.7px",
-                borderRadius: "50%",
+                height: "39px",
+                width: "39px",
+                // borderRadius: "50%",
               }}
             >
               <g
@@ -75,7 +75,11 @@ export class BottomBar extends Component {
             <svg
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
-              style={{ marginLeft: "5px", height: "38px", width: "38px" }}
+              style={{ 
+                marginLeft: "2px", 
+                height: "40px", 
+                width: "40px" 
+              }}
             >
               <g
                 fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none"
@@ -103,7 +107,11 @@ export class BottomBar extends Component {
             <svg
               xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 172 172"
-              style={{ height: "38px", width: "38px", borderRadius: "50%" }}
+              style={{ 
+                height: "40px", 
+                width: "40px", 
+                // borderRadius: "50%" 
+              }}
             >
               <g
                 fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none"

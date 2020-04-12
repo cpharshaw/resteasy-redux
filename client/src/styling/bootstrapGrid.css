@@ -208,8 +208,16 @@ button > *,
   vertical-align: middle;
 }
 
-.col > input.skip {
-  flex: 1 auto
+.col[style^="width"] > input {
+  /* flex: 1 auto; */
+  /* width: 100% !important;
+  height: 100% !important; */
+  color: red !important
+}
+
+.col > input {
+  flex: 1 auto;
+  width: 100%
 }
 
 
@@ -371,6 +379,10 @@ button > *,
 
 .ai-sb {
   align-items: space-between !important;
+}
+
+.ai-b {
+  align-items: baseline !important;
 }
 
 .ai-sa {
