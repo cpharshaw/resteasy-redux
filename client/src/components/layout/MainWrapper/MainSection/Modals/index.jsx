@@ -76,12 +76,16 @@ export class ModalContainer extends Component {
       foursquareValue
     } = this.props;
 
-    console.log("typeof: ", typeof foursquareValue)
+    // console.log("typeof: ", typeof foursquareValue)
 
 
 
     const foursquarePlaces = !foursquareValue ? null : (
+
       foursquareValue.map((place, i) => {
+        
+        // console.log("fsPlace - " + i + " - ", place);
+
         const name = place.name ? place.name : null;
         const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
         const address = place.location.address + ", " + place.location.city + ", " + place.location.state;

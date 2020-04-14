@@ -11,6 +11,8 @@ import { storeCenter } from '../../../../../../../store/actions/centerActions';
 import { storeInput } from '../../../../../../../store/actions/inputActions';
 
 import React, { Component } from "react";
+import ReactDOM from 'react-dom';
+
 import { GoogleApiWrapper } from "google-maps-react";
 
 
@@ -37,10 +39,13 @@ class MapSection extends Component {
     this.googleMapRef = React.createRef();
     this.state = {
       initialUpdate: 0,
-      geo_same_ctr: true
+      geo_same_ctr: true,
+      fsMarkers: null
     };
 
     this.map = null;
+
+    this.renderJunk = this.renderJunk.bind(this);
 
     this.marker = null;
 
@@ -69,6 +74,7 @@ class MapSection extends Component {
     // console.log("bounds", bounds);
   }
 
+
   resetCenter = e => {
     alert('reset center clicked');
     console.log('reset center clicked')
@@ -89,6 +95,9 @@ class MapSection extends Component {
     // console.log("map component update")
 
     // variables
+    const foursquareValue = this.props.foursquareValue;
+    const prev_foursquareValue = prevProps.foursquareValue;
+
     const numGeoUpdates = this.props.numGeolocationUpdates;
     const prev_numGeoUpdates = prevProps.numGeolocationUpdates;
 
@@ -108,6 +117,9 @@ class MapSection extends Component {
     const inputVal = this.props.inputValue;
     const prev_inputVal = prevProps.inputValue;
 
+
+    const map = this.props.mapValue;
+
     // console.log("numGeoUpdates: ", numGeoUpdates);
 
     // checks for changes
@@ -117,6 +129,19 @@ class MapSection extends Component {
     // console.log("prevProps.googleAPIValue: ", prevProps.googleAPIValue)
     // console.log("this.props.googleAPIValue: ", this.props.googleAPIValue)
     // console.log("googleAPIUpdate: ", googleAPIUpdate)
+
+    // console.log("prev_fs JSON: ", JSON.stringify(prev_foursquareValue));
+    // console.log("fs JSON: ", JSON.stringify(foursquareValue));
+
+    const fsPlacesUpdate = foursquareValue && (JSON.stringify(foursquareValue) !== JSON.stringify(prev_foursquareValue));
+
+    if (fsPlacesUpdate) {
+      // https://frontarm.com/james-k-nelson/pdf-cheatsheets/
+      this.renderJunk(map);
+    }
+
+
+    // console.log("fs update: ", fsPlacesUpdate)
 
     const geo_update = this.props.googleAPIValue && (
       geoLat !== prev_geoLat
@@ -146,9 +171,13 @@ class MapSection extends Component {
 
     if (this.map && this.props.googleAPIValue && ctr_update && !geo_same_ctr) this.setState({ geo_same_ctr: false });
 
-    if (googleAPIUpdate) {
 
-      // console.log("googleAPIUpdate", googleAPIUpdate)
+ 
+
+    if (JSON.stringify(this.state.fsMarkers) !== JSON.stringify(prevState.fsMarkers)) console.log('state update')
+
+
+    if (googleAPIUpdate) {
 
       this.map = new this.props.googleAPIValue.Map(
         this.googleMapRef.current,
@@ -183,6 +212,9 @@ class MapSection extends Component {
           icon: myLocationIcon
         }
       );
+
+      // https://medium.com/@13milliseconds/interact-with-google-maps-markers-in-the-dom-8772452ebeef
+      // https://www.sitepoint.com/animated-google-map-markers-css-javascript/
 
 
 
@@ -286,14 +318,94 @@ class MapSection extends Component {
 
   }
 
+  renderShit() {
+    const Ab1 = () => <div style={{ position: "absolute", top: "25%", left: "5px", color: "red" }}>test1</div>
+    const Ab2 = () => <div style={{ position: "absolute", top: "30%", left: "15px", color: "green" }}>test2</div>
+    const Ab3 = () => <div style={{ position: "absolute", top: "35%", left: "25px", color: "yellow" }}>test3</div>
+    const Ab4 = () => <div style={{ position: "absolute", top: "40%", left: "35px", color: "orange" }}>test4</div>
+    const Ab5 = () => <div style={{ position: "absolute", top: "45%", left: "45px", color: "purple" }}>test5</div>
+
+    const arr = [Ab1, Ab2, Ab3, Ab4, Ab5]
+
+    return arr.map((El, i) => {
+      const key = i + "test"
+      return <El key={key} />
+    })
+  }
+
+
+  renderJunk(map) {
+
+    console.log("renderJunk!!!")
+
+
+    const mapParam = map;
+
+    const fs = this.props.foursquareValue.map((place, i) => {
+
+
+      const markerCreator = (mapArg) => {
+        
+        // console.log("Made it to the marker creator within map");
+
+        return new this.props.googleAPIValue.Marker(
+          {
+            map: mapArg,
+            position: {
+              lat: !place.location.lat ? 39.962292 : place.location.lat,
+              lng: !place.location.lng ? -75.144768 : place.location.lng
+            },
+            icon: questionableIcon,
+            animation: this.props.googleAPIValue.Animation.DROP,
+            // optimized: false
+          }
+        )
+
+      }
+
+      const MarkerComp = (creatorArg) => {
+
+        // console.log("The Markercomp")
+        
+        return (
+          <>
+            {() => creatorArg}
+          </>
+        )
+      }
+
+      // const created = ;
+
+      return MarkerComp(markerCreator(mapParam));
+
+    })
+
+
+    // return console.log(fs);
+
+    return fs.map((MarkerDiv, i) => {
+      // console.log("fs map 1st")
+      return MarkerDiv
+    })
+
+  }
+
+
+
+
 
   render() {
     // console.log("icon for marker: ", questionableIcon)
 
     const displayValue = this.props.data_display ? null : "none";
+
+    const map = this.map;
     // console.log("data_display: ", displayValue)
 
+    
+
     return (
+
       <div className="container-fluid animated fadeIn fast" style={{ display: displayValue }}>
         <div className="row">
 
@@ -307,18 +419,46 @@ class MapSection extends Component {
               height: "100%"
             }}
           >
+
             <div id="google-map" className="row" ref={this.googleMapRef}
               style={{
                 height: "100%"
               }}
             />
-            {/* < MarkerComp
-                lat={40}
-                lng={-75}
-                icon={questionableIcon}
-              /> */}
+
+            {
+              // !this.props.foursquareValue ? null : console.log("renderJunk= ", this.renderJunk(map)[0])
+            }
+            {
+              // console.log(Array.isArray(markerArr))
+            }
+
+            {/* {!this.props.foursquareValue ? null : console.log(this.renderMarkers())} */}
+
+            {
+              <MarkerComp
+                key="OKMark"
+                data_lat={40}
+                data_lng={-75}
+                data_icon="https://img.icons8.com/office/33/000000/error.png"
+              />
+            }
+
+            {
+              !this.props.foursquareValue ? null :
+                console.log(
+                  <MarkerComp
+                    key="OKMark"
+                    data_lat={40}
+                    data_lng={-75}
+                    data_icon="https://img.icons8.com/office/33/000000/error.png"
+                  />
+                )
+            }
 
             <RecenterButton />
+
+
           </div>
 
 
@@ -364,6 +504,7 @@ const mapStateToProps = (state, ownProps) => {
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
     boundsValue: state.boundsState.boundsValue,
+    foursquareValue: state.foursquareState.foursquareValue,
     // circleValue: state.circleState.circleValue,
     centerLatValue: state.centerState.centerLatValue,
     centerLngValue: state.centerState.centerLngValue,
@@ -412,3 +553,4 @@ export default compose(
   //   version: "3.30"
   // })
 )(MapSection);
+

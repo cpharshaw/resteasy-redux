@@ -242,7 +242,7 @@ export class LocationModal extends Component {
       data_classname
     } = this.props;
 
-    console.log(data_classname)
+    // console.log(data_classname)
     return (
 
         <input

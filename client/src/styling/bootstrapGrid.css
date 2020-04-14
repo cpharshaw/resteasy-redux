@@ -59,9 +59,9 @@
   -ms-flex-direction: row !important;
   flex-direction: row !important;
 
-  /* flex: 1 auto; */
-  
   width: 100%;
+
+  flex-grow: 1;
 
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
@@ -74,6 +74,20 @@
 
   -webkit-align-content: stretch;
   align-content: stretch;
+}
+
+.col.fc > .row {
+  max-height: fit-content;
+}
+
+.col.sc > .row {
+  max-height: 100%;
+  flex-grow: 1;
+}
+
+.col.fc > .row.js-fg {
+  max-height: 100%;
+  flex-grow: 1;
 }
 
 
@@ -192,6 +206,13 @@
 [class^="col-"] > *:not(.row):not(.container-fluid):not(section):not(main):not(footer):not(header):not(button) {
 
 } */
+
+
+[class~="col"] > [class~="row"] {
+  /* background: red !important */
+  /* display: none; */
+  /* max-height: fit-content !important; */
+}
 
 
 

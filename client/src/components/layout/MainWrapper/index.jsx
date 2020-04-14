@@ -115,6 +115,6 @@ export default compose(
 
   GoogleApiWrapper({
     apiKey: process.env.REACT_APP_GM_KEY,
-    version: "3.30"
+    version: "weekly"
   })
 )(MainWrapper);

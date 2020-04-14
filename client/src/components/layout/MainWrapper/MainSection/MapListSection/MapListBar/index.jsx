@@ -157,8 +157,8 @@ export class MapListBar extends Component {
                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                         width="34" height="34"
                         viewBox="0 0 226 226"
-                        style={{ fill: "#f5f5f5;" }}>
-                        <g fill="none" fill-rule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
+                        style={{ fill: "#f5f5f5" }}>
+                        <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
                           <path d="M0,226v-226h226v226z" fill="#0abab5" />
                           <g fill="#f5f5f5">
                             <path d="M37.66667,18.83333v47.08333h47.08333l-14.71354,-14.71354c12.18702,-8.49491 26.93616,-13.53646 42.96354,-13.53646c41.7221,0 75.33333,33.61123 75.33333,75.33333h18.83333c0,-51.89839 -42.26827,-94.16667 -94.16667,-94.16667c-21.15721,0 -40.75876,7.01238 -56.5,18.83333zM113,65.91667c-20.80142,0 -37.66667,16.86525 -37.66667,37.66667c0,28.25 37.66667,65.91667 37.66667,65.91667c0,0 37.66667,-37.66667 37.66667,-65.91667c0,-20.80142 -16.86525,-37.66667 -37.66667,-37.66667zM113,84.75c10.38658,0 18.83333,8.44675 18.83333,18.83333c0,9.64267 -8.90861,24.58545 -18.81494,37.33561c-9.84042,-12.7125 -18.85172,-27.7777 -18.85172,-37.33561c0,-10.38658 8.44675,-18.83333 18.83333,-18.83333zM18.83333,113c0,51.8984 42.26827,94.16667 94.16667,94.16667c21.15722,0 40.75876,-7.01238 56.5,-18.83333l18.83333,18.83333v-47.08333h-47.08333l14.71354,14.71354c-12.18701,8.49491 -26.93616,13.53646 -42.96354,13.53646c-41.72211,0 -75.33333,-33.61123 -75.33333,-75.33333z" />

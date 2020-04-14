@@ -17,6 +17,14 @@ class MarkerComp extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
+    const {
+      data_lat,
+      data_lng,
+      data_icon
+    } = this.props;
+
+    // console.log("key test", data_lat, data_lng, data_icon)
+
     const googleAPIUpdate = prevProps.googleAPIValue === null && this.props.googleAPIValue !== null;
 
     if (googleAPIUpdate) {
@@ -26,24 +34,27 @@ class MarkerComp extends Component {
           {
             map: this.props.mapValue,
             position: {
-              lat: this.props.markerLat ? this.props.markerLat : 39.962292,
-              lng: this.props.markerLng ? this.props.markerLng : -75.144768
+              lat: data_lat ? data_lat : 39.962292,
+              lng: data_lng ? data_lng : -75.144768
             },
-            icon: this.props.icon ? this.props.icon : null
+            icon: data_icon ? data_icon : null,
+            animation: this.props.googleAPIValue.Animation.DROP,
+            // optimized:false
           }
         )
-        // {console.log('create marker log')}
       }
+
+
     }
+
   }
 
 
 
   render() {
 
-
     return (
-      <div className="">
+      <div>
         {this.createMarker ? this.createMarker() : null}
       </div>
     )
@@ -52,27 +63,20 @@ class MarkerComp extends Component {
 
 }
 
-
 const mapStateToProps = (state, ownProps) => {
   return {
     geolocationValue: state.geolocationState.geolocationValue,
     mapValue: state.mapState.mapValue,
     centerValue: state.centerState.centerValue,
-    markerLat: ownProps.lat,
-    markerLng: ownProps.lng,
+    // markerLat: ownProps.data_lat,
+    // markerLng: ownProps.data_lng,
+    // key: ownProps.data_key,
     googleAPIValue: state.googleAPIState.googleAPIValue
   }
 }
 
-
-
+// export default MarkerComp;
 
 export default compose(
   connect(mapStateToProps, null),
-  // firestoreConnect([
-  //   {
-  //     collection: 'reviews',
-  //     orderBy: ['createdAt', 'desc']
-  //   }
-  // ]),
 )(MarkerComp);

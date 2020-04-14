@@ -16,7 +16,7 @@ export const getPlacesFromFoursquare = (location) => {
               client_secret: "FRCGLR2MJHZ2I2AMFL5PECJOERPOPCNHU3L3EYQGVYX1YU1H",
               radius: 500,
               near: location,
-              limit: 80,
+              limit: 35,
               intent: "checkin",
               v: "20191130",
             },
@@ -27,17 +27,18 @@ export const getPlacesFromFoursquare = (location) => {
                 const currLat = state.centerState.centerLatValue;
                 const currLng = state.centerState.centerLngValue;
                 const fsWIthDistance = res.response.venues.map(venue => {
-                  const venueLat = venue.location.labeledLatLngs[0].lat;
-                  const venueLng = venue.location.labeledLatLngs[0].lng;
-                  const venueDistance = getDistance(
+                  const venueLat = venue.location.labeledLatLngs ? venue.location.labeledLatLngs[0].lat : null;
+                  const venueLng = venue.location.labeledLatLngs ? venue.location.labeledLatLngs[0].lng : null;
+                  const venueDistance = !venue.location.labeledLatLngs ? null : getDistance(
                     { latitude: currLat, longitude: currLng },
                     { latitude: venueLat, longitude: venueLng }
                   );
-                  venue.distance = venueDistance;
+                  venue.distance = venue.location.labeledLatLngs ? venueDistance : null;
                   return venue;
                 });
                 return fsWIthDistance.filter(venue => {
-                  return venue.location.address && venue.location.city && venue.location.state && venue.location.postalCode
+                  // console.log("ACTION: ", venue)
+                  return venue && venue.location && venue.location.address && venue.location.city && venue.location.state && venue.location.postalCode && venue.location.lat && venue.location.lng
                 });
               }
             ],

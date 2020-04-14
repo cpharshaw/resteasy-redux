@@ -25,7 +25,7 @@ export class MyStuffSection extends Component {
 
     // console.log(e.currentTarget.innerText)
 
-    const value = e.currentTarget.innerText;
+    const value = e.target.innerText;
 
     this.setState({
       myStuffCategory: value
@@ -56,14 +56,14 @@ export class MyStuffSection extends Component {
     const SignedOutComponent = () => {
 
       return (
-        <div className="row h-100">
+        <div className="row">
           <div className="col jc-se">
 
             <span>You are currently not signed in.</span>
 
             <button
               id=""
-              className="rs"
+              className=""
               onClick={this.signInclicked}
               style={{
                 padding: "9px 16px 9px 16px",
@@ -85,14 +85,13 @@ export class MyStuffSection extends Component {
 
       return (
 
-        <div className="row h-100">
-          <div className="col jc-fs">
+        <div className="row">
+          <div className="col fc jc-fs">
 
-            <div id="mySignedInStuff" className="row">
+            <div id="mySignedInStuff" className="row p-2">
               <div className="col">
 
-                <div className="row jc-fs ac-fs" style={{ padding: "0 25px 0 25px", background: "inherit" }}>
-
+                <div className="row jc-fs ac-fs">
                   <div className="col-3 jc-fs">
                     <img
                       className="skip"
@@ -100,124 +99,155 @@ export class MyStuffSection extends Component {
                         width: photoURL ? "91px" : "91px",
                         height: "85px",
                         background: photoURL ? null : "black",
-                        // margin: "10fpx 0 5px 0",
                       }}
                       src={photoURL ? photoURL : null}
                     />
                   </div>
-
-                  <div
-                    className="col-9"
-                    style={{
-                      margin: "5px 0 5px 0",
-                      background: "inherit",
-                      // alignItems: "flex-start"
-                    }}
-                  >
+                  <div className="col-9">
                     <span>{displayName ? displayName : "Craig Harshaw"}</span>
                     <span>{email ? email : "cpharshaw@gmail.com"}</span>
                   </div>
-
                 </div>
 
-                <div className="row">
-
+                {/* <div className="row mt-2 bg-yellow">
                   <button
                     id=""
-                    className="rs"
+                    className=" py-2 px-3"
                     onClick={this.signOutclicked}
                     style={{
-                      padding: "9px 16px 9px 16px",
                       border: "1px solid #0abab5",
                       color: "#0abab5",
-                      margin: "5px 0 5px 0",
                       background: "inherit"
                     }}
                   >
                     <span><em>Sign out</em></span>
                   </button>
-                </div>
+                </div> */}
+
 
               </div>
             </div>
 
-            <br />
+            <div id="" className="row pt-3 pb-2 px-1">
 
-            <div
-              id=""
-              className="row"
-              style={{
-                height: "fit-content",
-                // background: "red"
-              }}
-            >
-              <div
-                className="col"
+              <div className="col-3 pb-1"
                 style={{
                   borderBottom: this.state.myStuffCategory === "My Reviews" ? "2px solid #0abab5" : "1px solid darkgrey",
-                  padding: "0 0 6px 0",
                 }}
-                onClick={e => this.myStuffCategoryClicked(e)}
               >
-                <span
+                <span onClick={e => this.myStuffCategoryClicked(e)}
                   style={{
                     color: this.state.myStuffCategory === "My Reviews" ? "" : "darkgrey",
-                    fontSize: "85%"
+                    fontSize: "85%",
+                    height: "100%",
+                    width: "100%"
                   }}
-                >My Reviews</span>
+                >My Reviews
+                </span>
               </div>
 
               <div
-                className="col"
+                className="col-3 pb-1"
                 style={{
                   borderBottom: this.state.myStuffCategory === "Favorites" ? "2px solid #0abab5" : "1px solid darkgrey",
-                  padding: "0 0 6px 0"
                 }}
-                onClick={e => this.myStuffCategoryClicked(e)}
+
               >
-                <span
+                <span onClick={e => this.myStuffCategoryClicked(e)}
                   style={{
                     color: this.state.myStuffCategory === "Favorites" ? "" : "darkgrey",
-                    fontSize: "85%"
+                    fontSize: "85%",
+                    height: "100%",
+                    width: "100%"
                   }}
                 >Favorites</span>
               </div>
 
               <div
-                className="col"
+                className="col-3 pb-1"
                 style={{
                   borderBottom: this.state.myStuffCategory === "Notifications" ? "2px solid #0abab5" : "1px solid darkgrey",
-                  padding: "0 0 6px 0"
                 }}
-                onClick={e => this.myStuffCategoryClicked(e)}
               >
-                <span
+                <span onClick={e => this.myStuffCategoryClicked(e)}
                   style={{
                     color: this.state.myStuffCategory === "Notifications" ? "" : "darkgrey",
-                    fontSize: "85%"
+                    fontSize: "85%",
+                    height: "100%",
+                    width: "100%"
                   }}
                 >Notifications</span>
               </div>
 
               <div
-                className="col"
+                className="col-3 pb-1"
                 style={{
                   borderBottom: this.state.myStuffCategory === "Settings" ? "2px solid #0abab5" : "1px solid darkgrey",
-                  padding: "0 0 6px 0"
                 }}
-                onClick={e => this.myStuffCategoryClicked(e)}
               >
-                <span
+                <span onClick={e => this.myStuffCategoryClicked(e)}
                   style={{
                     color: this.state.myStuffCategory === "Settings" ? "" : "darkgrey",
-                    fontSize: "85%"
+                    fontSize: "85%",
+                    height: "100%",
+                    width: "100%"
                   }}
                 >Settings</span>
               </div>
             </div>
 
-            <div className="row" >
-              {/* <div
+            <div className="row js-fg jc-c ai-c">
+
+              {
+                this.state.myStuffCategory !== "My Reviews" ? null : (
+                  <span>You have reviewed 0 bathrooms.</span>
+                )
+              }
+
+              {
+                this.state.myStuffCategory !== "Favorites" ? null : (
+                  <span>You have 0 favorites.</span>
+                )
+              }
+
+              {
+                this.state.myStuffCategory !== "Notifications" ? null : (
+                  <span><em>Coming soon...</em></span>
+                )
+              }
+
+              {
+                this.state.myStuffCategory !== "Settings" ? null : (
+
+                  <ul>
+                    <li>My country</li>
+                    <li>Units of Measure</li>
+                    <li>Dark Mode (Coming soon...)</li>
+                    <li>Send feedback to developer</li>
+                    <li>
+                      <div className="row">
+                        <button
+                          id=""
+                          className=" py-2 px-3"
+                          onClick={this.signOutclicked}
+                          style={{
+                            // border: "1px solid #0abab5",
+                            color: "#0abab5",
+                            background: "inherit"
+                          }}
+                        >
+                          <span><em>Log out</em></span>
+                        </button>
+                      </div>
+                    </li>                    
+                  </ul>
+
+                )
+              }
+
+            </div >
+
+            {/* <div
               id="myStuffHistoryScroller"
               className="col"
               style={{
@@ -383,7 +413,7 @@ export class MyStuffSection extends Component {
 
 
             </div> */}
-            </div >
+
 
           </div >
         </div >
@@ -394,62 +424,40 @@ export class MyStuffSection extends Component {
 
     return (
 
-      <div className="container-fluid animated fadeIn fast" style={{ display: displayValue }}>
+      <div className="row animated fadeIn fast" style={{ display: displayValue }}>
+        <div className="col fc">
 
-        <div className="row h-100"
-          style={{
-            // background: "black" 
-          }}
-        >
-          <div className="col jc-fs"
+          <div className="row"
             style={{
-              // background: "red",
+              background: "#E8E8E8",
+              // height: "55px",
             }}
           >
-
-
-            <div className="row"
-              style={{
-                background: "#E8E8E8",
-                // borderBottomLeftRadius: "5px",
-                // borderBottomRightRadius: "5px",
-                height: "55px",
-                // borderBottom: "1px solid #DCDCDC",
-                // borderStyle: "inset"
-              }}
-            >
-              <div className="col">
-                <span
-                  className=""
-                  style={{
-                    fontSize: "30px",
-                    color: "whitesmoke",
-                    textShadow: "0px 0px 5.5px #0abab5",
-                    // fontFamily: "Roboto",
-                    // fontStyle: "italic",
-                    margin: "12.5px 0 12.5px 0",
-                    transformOrigin: "0.5 0",
-                    fontWeight: "600",
-                    fontStyle: "italic"
-                  }}
-                >
-                  rest☆easy
+            <div className="col my-2">
+              <span
+                className="my-1"
+                style={{
+                  fontSize: "30px",
+                  color: "whitesmoke",
+                  textShadow: "0px 0px 5.5px #0abab5",
+                  // fontFamily: "Roboto",
+                  // fontStyle: "italic",
+                  // margin: "12.5px 0 12.5px 0",
+                  transformOrigin: "0.5 0",
+                  fontWeight: "600",
+                  fontStyle: "italic"
+                }}
+              >rest☆easy
                 </span>
-              </div>
             </div>
-
-            <div className="row"
-              style={{
-                height: "calc(100% - 55px)",
-                // background: "yellow"
-              }}
-            >
-              <div className="col" style={{ padding: "10px 0 10px 0" }}>
-                {displayName ? <SignedInComponent /> : <SignedOutComponent />}
-              </div>
-            </div>
-
           </div>
+
+          <div className="row js-fg">
+            <div className="col">
+              {displayName ? <SignedInComponent /> : <SignedOutComponent />}
+            </div>
+          </div>
+
         </div>
 
       </div>

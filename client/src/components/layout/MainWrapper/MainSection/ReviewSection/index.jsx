@@ -87,7 +87,7 @@ export class ReviewSection extends Component {
     {/* https://codeburst.io/modals-in-react-f6c3ff9f4701 */ }
     return (
 
-      <div id="FormSections" className="container-fluid animated fadeIn fast"
+      <div id="FormSections" className="container-fluid animated fadeIn fast "
         style={{
           display: displayValue,
           backgroundImage: formStepValue === 0 ? "url('https://images.unsplash.com/photo-1584475784921-d9dbfd9d17ca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')" : null,
