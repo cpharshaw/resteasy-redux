@@ -172,7 +172,7 @@ class MapSection extends Component {
     if (this.map && this.props.googleAPIValue && ctr_update && !geo_same_ctr) this.setState({ geo_same_ctr: false });
 
 
- 
+
 
     if (JSON.stringify(this.state.fsMarkers) !== JSON.stringify(prevState.fsMarkers)) console.log('state update')
 
@@ -182,7 +182,7 @@ class MapSection extends Component {
       this.map = new this.props.googleAPIValue.Map(
         this.googleMapRef.current,
         {
-          zoom: 15,
+          zoom: 17,
           styles: MyStyle,
           center: {
             lat: geoLat,
@@ -318,35 +318,14 @@ class MapSection extends Component {
 
   }
 
-  renderShit() {
-    const Ab1 = () => <div style={{ position: "absolute", top: "25%", left: "5px", color: "red" }}>test1</div>
-    const Ab2 = () => <div style={{ position: "absolute", top: "30%", left: "15px", color: "green" }}>test2</div>
-    const Ab3 = () => <div style={{ position: "absolute", top: "35%", left: "25px", color: "yellow" }}>test3</div>
-    const Ab4 = () => <div style={{ position: "absolute", top: "40%", left: "35px", color: "orange" }}>test4</div>
-    const Ab5 = () => <div style={{ position: "absolute", top: "45%", left: "45px", color: "purple" }}>test5</div>
-
-    const arr = [Ab1, Ab2, Ab3, Ab4, Ab5]
-
-    return arr.map((El, i) => {
-      const key = i + "test"
-      return <El key={key} />
-    })
-  }
-
 
   renderJunk(map) {
-
-    console.log("renderJunk!!!")
-
-
+    // <div style={{animation-name: _gm5393}} />
     const mapParam = map;
 
     const fs = this.props.foursquareValue.map((place, i) => {
 
-
       const markerCreator = (mapArg) => {
-        
-        // console.log("Made it to the marker creator within map");
 
         return new this.props.googleAPIValue.Marker(
           {
@@ -357,52 +336,28 @@ class MapSection extends Component {
             },
             icon: questionableIcon,
             animation: this.props.googleAPIValue.Animation.DROP,
-            // optimized: false
+            optimized: false
           }
         )
 
       }
 
-      const MarkerComp = (creatorArg) => {
-
-        // console.log("The Markercomp")
-        
-        return (
-          <>
-            {() => creatorArg}
-          </>
-        )
-      }
-
-      // const created = ;
-
-      return MarkerComp(markerCreator(mapParam));
-
+      return markerCreator(mapParam);
     })
 
-
-    // return console.log(fs);
+    // https://developers.google.com/maps/documentation/javascript/infowindows
 
     return fs.map((MarkerDiv, i) => {
-      // console.log("fs map 1st")
-      return MarkerDiv
+      return <section className="test">{MarkerDiv}</section>
     })
 
   }
 
 
 
-
-
   render() {
-    // console.log("icon for marker: ", questionableIcon)
 
     const displayValue = this.props.data_display ? null : "none";
-
-    const map = this.map;
-    // console.log("data_display: ", displayValue)
-
-    
 
     return (
 
@@ -425,15 +380,6 @@ class MapSection extends Component {
                 height: "100%"
               }}
             />
-
-            {
-              // !this.props.foursquareValue ? null : console.log("renderJunk= ", this.renderJunk(map)[0])
-            }
-            {
-              // console.log(Array.isArray(markerArr))
-            }
-
-            {/* {!this.props.foursquareValue ? null : console.log(this.renderMarkers())} */}
 
             {
               <MarkerComp

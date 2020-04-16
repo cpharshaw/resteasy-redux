@@ -40,8 +40,6 @@ export const signIn = (credentials) => {
       })
       .catch(error => {
 
-        console.log('log in error, user: ', errorCode, errorMessage)
-
         const token = null;
         const uid = null;
         const displayName = null;
@@ -52,6 +50,11 @@ export const signIn = (credentials) => {
         const errorMessage = error.message;
         const email = error.email;
         const credential = error.credential;
+
+        console.log("error code: ", errorCode)
+        console.log("error message: ", errorMessage)
+        console.log("error email: ", email)
+        console.log("error credential: ", credential)
 
         const loginObj = {
           token,
