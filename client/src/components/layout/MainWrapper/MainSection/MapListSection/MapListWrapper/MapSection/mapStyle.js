@@ -11,37 +11,26 @@ const MyStyle = [
       }
     ]
   },  
-
-  {
-    "featureType": "administrative",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
   {
     "featureType": "poi",
-    "elementType": "labels.icon",
+    // "elementType": "labels.icon",
     "stylers": [
       {
-        // "visibility": "simplified",
-        "color": "#929292"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        // "visibility": "simplified",
-        "color": "#929292",
-        "weight": 1.5
+        "visibility": "off",
+        // "color": "#929292"
       }
     ]
   },  
+
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  }, 
   {
     "featureType": "road",
     "elementType": "labels.icon",

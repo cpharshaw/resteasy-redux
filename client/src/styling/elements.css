@@ -93,3 +93,44 @@
   padding-top: 0; 
   border-top: 1px dotted lightgrey; 
 } */
+
+
+/* div[style^="display: table-cell"] > div,  */
+div[style^="display: table-cell"] {
+  visibility: hidden;
+  /* font-size: 1px !important; */
+  /* width: fit-content !important; */
+  height: 35px !important;
+  width: 35px !important;  
+  min-height: 35px !important;
+  min-width: 35px !important;
+  max-height: 35px !important;
+  max-width: 35px !important;
+  text-overflow: clip !important;
+  overflow: hidden !important;
+  color: red !important;
+}
+
+
+
+div.gm-style-iw-c,
+div.gm-style-iw-c *,
+div.gm-style-iw-c > *,
+/* div.gm-style-iw-t::after,
+div.gm-style-iw-t *::after,
+div.gm-style-iw-t > *::after  */
+{
+  /* visibility: hidden !important; */
+  position: fixed !important;
+  bottom: 70px !important;
+}
+
+
+#markerLayer > div:not([style^="animation"]):not(div:first-child) {
+  visibility: hidden !important;
+  position: fixed !important;
+  bottom: 70px !important;
+  left: 0px !important;
+  right: 0px !important;
+  width: 100% !important
+}

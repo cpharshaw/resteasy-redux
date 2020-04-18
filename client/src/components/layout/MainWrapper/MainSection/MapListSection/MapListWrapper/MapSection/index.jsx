@@ -45,6 +45,8 @@ class MapSection extends Component {
 
     this.map = null;
 
+    this.layer = null
+
     this.renderJunk = this.renderJunk.bind(this);
 
     this.marker = null;
@@ -119,6 +121,11 @@ class MapSection extends Component {
 
 
     const map = this.props.mapValue;
+    const prev_map = prevProps.mapValue;
+
+    const mapUpdate = map !== prev_map
+
+
 
     // console.log("numGeoUpdates: ", numGeoUpdates);
 
@@ -177,6 +184,7 @@ class MapSection extends Component {
     if (JSON.stringify(this.state.fsMarkers) !== JSON.stringify(prevState.fsMarkers)) console.log('state update')
 
 
+
     if (googleAPIUpdate) {
 
       this.map = new this.props.googleAPIValue.Map(
@@ -201,6 +209,14 @@ class MapSection extends Component {
         }
       );
 
+      // this.myoverlay = new this.props.googleAPIValue.OverlayView();
+
+      // this.myoverlay.draw = function () {
+      //   this.getPanes().markerLayer.id = 'markerLayer';
+      // };
+      // this.myoverlay.setMap(this.map);
+
+
 
       this.marker = new this.props.googleAPIValue.Marker(
         {
@@ -209,7 +225,8 @@ class MapSection extends Component {
             lat: geoLat,
             lng: geoLng
           },
-          icon: myLocationIcon
+          icon: myLocationIcon,
+          animation: this.props.googleAPIValue.Animation.DROP,
         }
       );
 
@@ -327,18 +344,42 @@ class MapSection extends Component {
 
       const markerCreator = (mapArg) => {
 
-        return new this.props.googleAPIValue.Marker(
+        const infowindow = new this.props.googleAPIValue.InfoWindow({
+          content: JSON.stringify(place.name),
+          // content: "",
+          // maxWidth: "0",
+          // pixelOffset: 0
+        });
+
+        const marker = new this.props.googleAPIValue.Marker(
           {
             map: mapArg,
             position: {
               lat: !place.location.lat ? 39.962292 : place.location.lat,
               lng: !place.location.lng ? -75.144768 : place.location.lng
             },
+            title: "fs-" + place.id,
             icon: questionableIcon,
+            label: JSON.stringify(place.id),
             animation: this.props.googleAPIValue.Animation.DROP,
-            optimized: false
+            // optimized: false
           }
         )
+
+        marker.addListener('click', () => {
+          this.map.panTo(
+            {
+              lat: place.location.lat,
+              lng: place.location.lng
+            }
+          );
+
+          // const pos = this.getPosition()
+          console.log("go fuck yo'self", place.id)
+          // infowindow.open(mapArg, marker);
+        });
+
+        return marker;
 
       }
 
@@ -348,7 +389,7 @@ class MapSection extends Component {
     // https://developers.google.com/maps/documentation/javascript/infowindows
 
     return fs.map((MarkerDiv, i) => {
-      return <section className="test">{MarkerDiv}</section>
+      return MarkerDiv
     })
 
   }
@@ -356,6 +397,10 @@ class MapSection extends Component {
 
 
   render() {
+
+    const {
+      settingsModal
+    } = this.props.modalState;
 
     const displayValue = this.props.data_display ? null : "none";
 
@@ -381,6 +426,8 @@ class MapSection extends Component {
               }}
             />
 
+            {console.log("overlay: ", console.log(document.getElementById("markerLayer")))}
+
             {
               <MarkerComp
                 key="OKMark"
@@ -388,18 +435,6 @@ class MapSection extends Component {
                 data_lng={-75}
                 data_icon="https://img.icons8.com/office/33/000000/error.png"
               />
-            }
-
-            {
-              !this.props.foursquareValue ? null :
-                console.log(
-                  <MarkerComp
-                    key="OKMark"
-                    data_lat={40}
-                    data_lng={-75}
-                    data_icon="https://img.icons8.com/office/33/000000/error.png"
-                  />
-                )
             }
 
             <RecenterButton />
@@ -411,25 +446,77 @@ class MapSection extends Component {
         </div>
 
 
-        {
+        {/* {
           this.state.geo_same_ctr ? null : (
-            <div className="col animated fadeIn slow px-3 py-2" onClick={this.resetCenter}
+            <div className="row animated fadeIn px-3 py-2" onClick={this.resetCenter}
               style={{
                 position: "absolute",
-                left: "25%",
-                right: "25%",
+                left: "0",
+                right: "0",
                 margin: "0 auto",
-                bottom: "60px",
+                top: "25px",
                 height: "fit-content",
                 width: "fit-content",
                 borderRadius: "7.5px",
                 backgroundColor: "rgba(245,245,245,0.5)",
                 backdropFilter: "blur(5px)",
                 WebkitBackdropFilter: "blur(5px)",
-                boxShadow: "0 0 12px #a2ddd9"
+                boxShadow: "0 0 10px #a2ddd9"
               }}
             >
               <span><em>Redo search in this area</em></span>
+            </div>
+          )
+        } */}
+        {console.log("settingsModal", settingsModal)}
+        {
+          settingsModal || this.state.geo_same_ctr ? null : (
+            <div className="row animated fadeIn slow px-1 py-1" onClick={this.resetCenter}
+              style={{
+                position: "absolute",
+                left: "0",
+                right: "0",
+                margin: "0 auto",
+                top: "12.5px",
+                height: "75px",
+                width: "95%",
+                // maxWidth: "350px",
+                borderRadius: "5px",
+                backgroundColor: "rgba(255,255,255,0.5)",
+                // backgroundColor: "white",
+                backdropFilter: "blur(5px)",
+                WebkitBackdropFilter: "blur(5px)",
+                border: "0.5px solid lightgrey",
+                fontSize: "12.25px"
+                // boxShadow: "0 0 12px #a2ddd9"
+              }}
+            >
+              <div className="col-2">
+                {/* rating icon */} icon
+              </div>
+              <div className="col-6 ">
+                {/* key info */}
+                <div className="row">
+                  <div className="col">Craig's Pizza</div>
+                </div>
+                <div className="row">
+                  <div className="col">Category - score</div>
+                </div>
+                <div className="row">
+                  <div className="col">last line</div></div>
+              </div>
+              <div className="col-3">
+                {/* addl info */}
+                <div className="row">
+                  <div className="col">stuff</div>
+                </div>
+                <div className="row">
+                  <div className="col">more stuff</div>
+                </div>
+              </div>
+              <div className="col-1 ai-fe ac-fe ta-r">
+                <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}>></span>
+              </div>
             </div>
           )
         }
@@ -456,7 +543,8 @@ const mapStateToProps = (state, ownProps) => {
     centerLngValue: state.centerState.centerLngValue,
     foursquareValue: state.foursquareState.foursquareValue,
     mapListToggleValue: ownProps.display,
-    googleAPIValue: state.googleAPIState.googleAPIValue
+    googleAPIValue: state.googleAPIState.googleAPIValue,
+    modalState: state.modalState,
     // inputValue: state.inputState.inputValue
     // ,state: state
   }

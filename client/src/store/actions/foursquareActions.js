@@ -18,7 +18,8 @@ export const getPlacesFromFoursquare = (location) => {
               near: location,
               limit: 20,
               intent: "checkin",
-              v: "20191130",
+              v: "20200331",
+              // v: "20191130",
             },
             responseType: 'json',
             transformResponse: [
@@ -26,7 +27,9 @@ export const getPlacesFromFoursquare = (location) => {
                 const state = getState();
                 const currLat = state.centerState.centerLatValue;
                 const currLng = state.centerState.centerLngValue;
+                
                 const fsWIthDistance = res.response.venues.map(venue => {
+                  // console.log("Raw venues: ", venue)
                   const venueLat = venue.location.labeledLatLngs ? venue.location.labeledLatLngs[0].lat : null;
                   const venueLng = venue.location.labeledLatLngs ? venue.location.labeledLatLngs[0].lng : null;
                   const venueDistance = !venue.location.labeledLatLngs ? null : getDistance(

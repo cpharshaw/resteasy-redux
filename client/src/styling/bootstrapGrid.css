@@ -414,6 +414,22 @@ button > *,
   align-items: space-evenly !important; 
 }
 
+.ta-c {
+  text-align: center !important;
+}
+
+.ta-l {
+  text-align: left !important;
+}
+
+.ta-r {
+  text-align: right !important;
+}
+
+.ta-j {
+  text-align: justify !important;
+}
+
 
 
 .m-1 {

@@ -47,7 +47,7 @@ export class MapListSection extends Component {
           settingsModal ? (
             <div
               id=""
-              className="col animated fadeIn faster bg-primary px-2 py-1"
+              className="col animated fadeIn fast bg-primary px-2 py-1"
               style={{
                 zIndex: "99999999999999999999999",
                 position: "absolute",
