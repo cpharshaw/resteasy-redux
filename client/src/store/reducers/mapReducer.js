@@ -1,5 +1,6 @@
 const initState = {
-  mapValue: null
+  mapValue: null,
+  selectedMarkerValue: null
 }
 
 const mapReducer = (state = initState, action) => {
@@ -10,6 +11,14 @@ const mapReducer = (state = initState, action) => {
         ...state,
         mapValue: action.payload
       }
+
+    case 'MARKER_SELECTED':
+      // console.log('geolocation success');
+      return {
+        ...state,
+        selectedMarkerValue: action.payload
+      }
+
     default:
       return {
         ...state

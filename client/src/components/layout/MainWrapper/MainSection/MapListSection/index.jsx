@@ -11,7 +11,14 @@ import LocationModal from '../Modals/ModalFormLocationSelector';
 
 export class MapListSection extends Component {
 
-  
+  componentDidUpdate() {
+    const relocate = document.getElementById("relocate");
+    const pacInput = document.getElementById("pac-input");
+    if (relocate && pacInput) {
+      pacInput.focus();
+    }
+  }
+
 
   render() {
     const { selectedSectionValue } = this.props;
@@ -46,7 +53,7 @@ export class MapListSection extends Component {
         {
           settingsModal ? (
             <div
-              id=""
+              id="relocate"
               className="col animated fadeIn fast bg-primary px-2 py-1"
               style={{
                 zIndex: "99999999999999999999999",
@@ -56,12 +63,14 @@ export class MapListSection extends Component {
                 right: "0",
                 height: "50px",
                 width: "100%",
+                backdropFilter: "blur(7px)",
+                WebkitBackdropFilter: "blur(7px)"
               }}
             >
               <LocationModal
-                // data_width="95%"
-                // data_height="92%"
-                // data_border="3px solid #0abab5"
+              // data_width="95%"
+              // data_height="92%"
+              // data_border="3px solid #0abab5"
               />
             </div>
           ) : null

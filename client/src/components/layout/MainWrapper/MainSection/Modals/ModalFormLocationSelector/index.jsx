@@ -72,7 +72,7 @@ export class LocationModal extends Component {
           place,
           value: place.name
         });
-        console.log("place: ", place)
+        // console.log("LocationModal selected place: ", place)
 
         const ctrLat = place.geometry.location.lat();
         const ctrLng = place.geometry.location.lng();

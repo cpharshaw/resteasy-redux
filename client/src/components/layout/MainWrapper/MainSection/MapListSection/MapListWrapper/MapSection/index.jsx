@@ -5,13 +5,21 @@ import RecenterButton from './RecenterButton';
 
 import { getGeolocation } from '../../../../../../../store/actions/geoActions';
 import { getPlacesFromFoursquare } from '../../../../../../../store/actions/foursquareActions';
-import { storeMap } from '../../../../../../../store/actions/mapActions';
+import { storeMap, storeSelectedMarker } from '../../../../../../../store/actions/mapActions';
 import { storeBounds } from '../../../../../../../store/actions/boundsActions';
 import { storeCenter } from '../../../../../../../store/actions/centerActions';
 import { storeInput } from '../../../../../../../store/actions/inputActions';
 
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
+
+import greyMarker from '../../MapListWrapper/greyMarker50.png';
+import redMarker from '../../MapListWrapper/redMarker50.png';
+import orangeMarker from '../../MapListWrapper/orangeMarker50.png';
+import yellowMarker from '../../MapListWrapper/yellowMarker50.png';
+import chartreuseMarker from '../../MapListWrapper/chartreuseMarker50.png';
+import greenMarker from '../../MapListWrapper/greenMarker50.png';
+
 
 import { GoogleApiWrapper } from "google-maps-react";
 
@@ -23,11 +31,26 @@ import { connect } from 'react-redux';
 import MyStyle from './mapStyle.js';
 
 // import './loading.css';
-var myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
+const myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
 
-// const greatIcon = "https://img.icons8.com/flat_round/40/000000/star--v1.png";
-// const goodIcon = "https://img.icons8.com/office/40/000000/good-quality.png";
-const questionableIcon = "https://img.icons8.com/office/33/000000/error.png";
+const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
+
+
+
+// "https://img.icons8.com/officel/38/000000/marker.png";
+
+// <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+//   width="33" height="33"
+//   viewBox="0 0 172 172"
+//   style={{fill: "#0abab5"}}>
+//   <g fill="none" fillRule="nonzero" stroke="none" strokeWwidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{mixBlendMode: "normal"}}>
+//     <path d="M0,172v-172h172v172z" fill="none" />
+//     <g fill="#0abab5">
+//       <path d="M35.83333,64.4355c0,32.12817 42.77067,84.33017 44.591,86.53033l5.5255,6.70083l5.5255,-6.70083c1.82033,-2.20733 44.591,-54.40217 44.591,-86.53033c0,-27.64183 -22.48183,-50.1165 -50.1165,-50.1165c-27.63467,0 -50.1165,22.48183 -50.1165,50.1165zM90.09933,64.5l-18.5975,-18.59033l10.13367,-10.13367l28.73117,28.724l-28.68817,28.68817l-10.13367,-10.13367z" />
+//     </g>
+//   </g>
+// </svg>
+
 // const poorIcon = "https://img.icons8.com/office/40/000000/poor-quality.png";
 // const terribleIcon = "https://img.icons8.com/officel/40/000000/evil.png";
 
@@ -40,7 +63,8 @@ class MapSection extends Component {
     this.state = {
       initialUpdate: 0,
       geo_same_ctr: true,
-      fsMarkers: null
+      fsMarkers: null,
+      markerIcon: null
     };
 
     this.map = null;
@@ -94,6 +118,8 @@ class MapSection extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
+
+
     // console.log("map component update")
 
     // variables
@@ -144,7 +170,7 @@ class MapSection extends Component {
 
     if (fsPlacesUpdate) {
       // https://frontarm.com/james-k-nelson/pdf-cheatsheets/
-      this.renderJunk(map);
+      this.renderJunk(map, iconArr);
     }
 
 
@@ -336,20 +362,50 @@ class MapSection extends Component {
   }
 
 
-  renderJunk(map) {
+  renderJunk(map, colors) {
     // <div style={{animation-name: _gm5393}} />
     const mapParam = map;
 
+
+
     const fs = this.props.foursquareValue.map((place, i) => {
 
-      const markerCreator = (mapArg) => {
 
-        const infowindow = new this.props.googleAPIValue.InfoWindow({
-          content: JSON.stringify(place.name),
-          // content: "",
-          // maxWidth: "0",
-          // pixelOffset: 0
+      const getRandomInt = (min, max) => {
+
+        const minNum = Math.ceil(min);
+        const maxNum = Math.floor(max);
+
+        console.log("minNum: ", minNum)
+        console.log("maxNum: ", maxNum)
+
+        return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
+      }
+
+      const randomMarkerColor = iconArr[getRandomInt(0, colors.length)];
+
+      const attachSecretMessage = (marker, place, secretMessage) => {
+        marker.addListener('click', () => {
+
+          this.props.storeSelectedMarker(place)
+
+          this.setState({
+            markerIcon: randomMarkerColor
+          })
+
+          mapParam.panTo(
+            {
+              lat: place.location.lat,
+              lng: place.location.lng
+            }
+          );
+
+          console.log("place", place)
+          console.log("secretMessage: ", secretMessage)
         });
+      }
+
+      const markerCreator = (mapArg) => {
 
         const marker = new this.props.googleAPIValue.Marker(
           {
@@ -359,25 +415,13 @@ class MapSection extends Component {
               lng: !place.location.lng ? -75.144768 : place.location.lng
             },
             title: "fs-" + place.id,
-            icon: questionableIcon,
+            icon: randomMarkerColor,
             label: JSON.stringify(place.id),
             animation: this.props.googleAPIValue.Animation.DROP,
             // optimized: false
           }
         )
-
-        marker.addListener('click', () => {
-          this.map.panTo(
-            {
-              lat: place.location.lat,
-              lng: place.location.lng
-            }
-          );
-
-          // const pos = this.getPosition()
-          console.log("go fuck yo'self", place.id)
-          // infowindow.open(mapArg, marker);
-        });
+        attachSecretMessage(marker, place, "test of the secret message");
 
         return marker;
 
@@ -399,14 +443,21 @@ class MapSection extends Component {
   render() {
 
     const {
-      settingsModal
+      settingsModal,
+
     } = this.props.modalState;
+
+    const {
+      foursquareValue,
+      selectedMarkerValue
+    } = this.props;
 
     const displayValue = this.props.data_display ? null : "none";
 
     return (
 
-      <div className="container-fluid animated fadeIn fast" style={{ display: displayValue }}>
+      <div className="container-fluid animated fadeIn fast" style={{ display: displayValue, fontSize: "12.25px" }}>
+
         <div className="row">
 
           <div id="mapSection" className="col"
@@ -426,7 +477,7 @@ class MapSection extends Component {
               }}
             />
 
-            {console.log("overlay: ", console.log(document.getElementById("markerLayer")))}
+            {/* {console.log("overlay: ", console.log(document.getElementById("markerLayer")))} */}
 
             {
               <MarkerComp
@@ -446,7 +497,7 @@ class MapSection extends Component {
         </div>
 
 
-        {/* {
+        {
           this.state.geo_same_ctr ? null : (
             <div className="row animated fadeIn px-3 py-2" onClick={this.resetCenter}
               style={{
@@ -454,69 +505,146 @@ class MapSection extends Component {
                 left: "0",
                 right: "0",
                 margin: "0 auto",
-                top: "25px",
+                bottom: "37.5px",
                 height: "fit-content",
                 width: "fit-content",
-                borderRadius: "7.5px",
-                backgroundColor: "rgba(245,245,245,0.5)",
+                borderRadius: "5px",
+                backgroundColor: "rgba(250,250,250,0.805)",
                 backdropFilter: "blur(5px)",
                 WebkitBackdropFilter: "blur(5px)",
-                boxShadow: "0 0 10px #a2ddd9"
+                boxShadow: "0 0 5px #a2ddd9",
               }}
             >
               <span><em>Redo search in this area</em></span>
             </div>
           )
-        } */}
-        {console.log("settingsModal", settingsModal)}
+        }
+
+        {/* {console.log("fs value", foursquareValue)} */}
+
         {
-          settingsModal || this.state.geo_same_ctr ? null : (
-            <div className="row animated fadeIn slow px-1 py-1" onClick={this.resetCenter}
+          settingsModal ? null : (
+            <div className="row animated fadeIn slow px-1 py-1"
               style={{
                 position: "absolute",
                 left: "0",
                 right: "0",
                 margin: "0 auto",
-                top: "12.5px",
-                height: "75px",
+                top: "10px",
+                height: "72.5px",
                 width: "95%",
                 // maxWidth: "350px",
                 borderRadius: "5px",
-                backgroundColor: "rgba(255,255,255,0.5)",
+                backgroundColor: "rgba(250,250,250,.805)",
                 // backgroundColor: "white",
                 backdropFilter: "blur(5px)",
                 WebkitBackdropFilter: "blur(5px)",
                 border: "0.5px solid lightgrey",
-                fontSize: "12.25px"
-                // boxShadow: "0 0 12px #a2ddd9"
+                // fontSize: "12.25px"
+                boxShadow: "0 0 3px #a8a8a8",
               }}
             >
-              <div className="col-2">
-                {/* rating icon */} icon
-              </div>
-              <div className="col-6 ">
-                {/* key info */}
-                <div className="row">
-                  <div className="col">Craig's Pizza</div>
-                </div>
-                <div className="row">
-                  <div className="col">Category - score</div>
-                </div>
-                <div className="row">
-                  <div className="col">last line</div></div>
-              </div>
-              <div className="col-3">
-                {/* addl info */}
-                <div className="row">
-                  <div className="col">stuff</div>
-                </div>
-                <div className="row">
-                  <div className="col">more stuff</div>
-                </div>
-              </div>
-              <div className="col-1 ai-fe ac-fe ta-r">
-                <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}>></span>
-              </div>
+              {
+                !selectedMarkerValue ? null : (
+                  <>
+                    <div className="col-2 ai-c">
+                      {/* rating icon */}
+                      <img className="markerIcon" height="45" width="45" src={this.state.markerIcon} />
+                      <span style={{ fontSize: "9.5px", color: "grey" }}><em>3.4 / 5</em></span>
+                      <span style={{ fontSize: "9.5px", color: "grey" }}><em>123 reviews</em></span>
+                    </div>
+
+                    <div className="col-7">
+                      {/* key info */}
+                      <div className="row">
+                        <div className="col">
+                          <span>{selectedMarkerValue.name ? selectedMarkerValue.name : ""}</span>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          <span>{selectedMarkerValue.categories ? (selectedMarkerValue.categories[0] ? selectedMarkerValue.categories[0].name : "") : ""}</span>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          <span>{selectedMarkerValue.location ? (selectedMarkerValue.location.address ? selectedMarkerValue.location.address : "") : ""}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-2">
+                      {/* addl info */}
+                      <div className="row">
+                        <div className="col">
+                          <span style={{ fontSize: "11px", color: "grey" }}>{selectedMarkerValue.distance ? selectedMarkerValue.distance : ""} m</span>
+                        </div>
+                      </div>
+
+                      <div className="row">
+
+                        <div className="col">
+
+                         {/* <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                            width="19" height="19"
+                            viewBox="0 0 172 172"
+                            style={{ fill: "#000000" }}>
+                            <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
+                              <path d="M0,172v-172h172v172z" fill="none" />
+                              <g fill="#eeeeee">
+                                <path d="M86,14.33333c-39.49552,0 -71.66667,32.17115 -71.66667,71.66667c0,39.49552 32.17115,71.66667 71.66667,71.66667c39.49552,0 71.66667,-32.17115 71.66667,-71.66667c0,-39.49552 -32.17115,-71.66667 -71.66667,-71.66667zM86,28.66667c31.74921,0 57.33333,25.58412 57.33333,57.33333c0,31.74921 -25.58412,57.33333 -57.33333,57.33333c-31.74921,0 -57.33333,-25.58412 -57.33333,-57.33333c0,-31.74921 25.58412,-57.33333 57.33333,-57.33333z" />
+                              </g>
+                            </g>
+                          </svg> */}
+
+                          <img src="https://img.icons8.com/material-outlined/17/000000/checked.png"/>
+
+ 
+                        </div>
+
+                        <div className="col">
+
+                          {/* <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                            width="20" height="20"
+                            viewBox="0 0 172 172"
+                            style={{fill: "#000000"}}>
+                            <g fill="none" fill-rule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{mixBlendMode: "normal"}}>
+                              <path d="M0,172v-172h172v172z" fill="none" />
+                              <g fill="#eeeeee">
+                                <path d="M43.06999,14.33333c-7.85076,0 -14.33333,6.46862 -14.33333,14.31934l-0.06999,129.014l57.33333,-21.5l57.33333,21.5v-10.34407v-118.65593c0,-7.83362 -6.49972,-14.33333 -14.33333,-14.33333zM43.06999,28.66667h85.93001v108.31185l-43,-16.125l-42.986,16.125z" />
+                              </g>
+                            </g>
+                          </svg> */}
+
+
+                          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                            width="20" height="20"
+                            viewBox="0 0 172 172"
+                            style={{ fill: "#000000" }}>
+                            <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
+                              <path d="M0,172v-172h172v172z" fill="none" />
+                              <g fill="#f1c40f">
+                                <path d="M136.16667,147.63333l-50.16667,-18.63333l-50.16667,18.63333v-118.96667c0,-3.58333 2.86667,-7.16667 7.16667,-7.16667h86c4.3,0 7.16667,2.86667 7.16667,7.16667z" opacity="0.3" />
+                                <path d="M28.66667,157.66667v-129c0,-7.88333 6.45,-14.33333 14.33333,-14.33333h86c7.88333,0 14.33333,6.45 14.33333,14.33333v129l-57.33333,-21.5zM86,121.11667l43,16.48333v-108.93333h-86v108.21667z" />
+                              </g>
+                            </g>
+                          </svg>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-1 ai-fe ac-fe ta-r">
+                      {/* <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}> */}
+                      {/* <img src="https://img.icons8.com/ultraviolet/15/000000/chevron-right.png"/> */}
+                      <img className="animated heartBeat slower" src="https://img.icons8.com/ios-glyphs/18/000000/chevron-right.png" />
+                      {/* </span> */}
+                    </div>
+                  </>
+                )
+
+              }
             </div>
           )
         }
@@ -545,6 +673,7 @@ const mapStateToProps = (state, ownProps) => {
     mapListToggleValue: ownProps.display,
     googleAPIValue: state.googleAPIState.googleAPIValue,
     modalState: state.modalState,
+    selectedMarkerValue: state.mapState.selectedMarkerValue
     // inputValue: state.inputState.inputValue
     // ,state: state
   }
@@ -569,6 +698,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     storeInput: (input) => {
       return dispatch(storeInput(input));
+    },
+    storeSelectedMarker: (marker) => {
+      return dispatch(storeSelectedMarker(marker))
     }
   }
 }

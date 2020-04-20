@@ -151,7 +151,7 @@ export class ModalContainer extends Component {
                   style={{
                     background: "#f5f5f5",
                     borderRadius: "5px",
-                    boxShadow: "0 1px 3px #a8a8a8",
+                    boxShadow: "0 0 3px #a8a8a8",
                   }}
                 >
 

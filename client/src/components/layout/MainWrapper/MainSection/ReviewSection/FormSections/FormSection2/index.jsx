@@ -246,7 +246,7 @@ export class FormSection2 extends Component {
                 <RadioInput
                   data_value="4"
                   data_name="formComfortValue"
-                  data_checked={formComfortValue === "3" ? true : false}
+                  data_checked={formComfortValue === "4" ? true : false}
                   func_handlechange={radioSelected}
                 />
                 <RadioInput
