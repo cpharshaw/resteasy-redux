@@ -19,7 +19,7 @@ import orangeMarker from '../../MapListWrapper/orangeMarker50.png';
 import yellowMarker from '../../MapListWrapper/yellowMarker50.png';
 import chartreuseMarker from '../../MapListWrapper/chartreuseMarker50.png';
 import greenMarker from '../../MapListWrapper/greenMarker50.png';
-
+import PlaceCard from './../../../../../../sharedComponents/mapListComponents/PlaceCard';
 
 import { GoogleApiWrapper } from "google-maps-react";
 
@@ -524,7 +524,7 @@ class MapSection extends Component {
 
         {
           settingsModal ? null : (
-            <div className="row animated fadeIn slow px-1 py-1"
+            <div className="row animated fadeIn slow  py-1"
               style={{
                 position: "absolute",
                 left: "0",
@@ -550,8 +550,8 @@ class MapSection extends Component {
                     <div className="col-2 ai-c">
                       {/* rating icon */}
                       <img className="markerIcon" height="45" width="45" src={this.state.markerIcon} />
-                      <span style={{ fontSize: "9.5px", color: "grey" }}><em>3.4 / 5</em></span>
-                      <span style={{ fontSize: "9.5px", color: "grey" }}><em>123 reviews</em></span>
+                      <span style={{ fontSize: "9px", color: "grey" }}><em>3.4 / 5</em></span>
+                      <span style={{ fontSize: "9px", color: "grey" }}><em>123 ratings</em></span>
                     </div>
 
                     <div className="col-7">
@@ -563,12 +563,12 @@ class MapSection extends Component {
                       </div>
                       <div className="row">
                         <div className="col">
-                          <span>{selectedMarkerValue.categories ? (selectedMarkerValue.categories[0] ? selectedMarkerValue.categories[0].name : "") : ""}</span>
+                          <span style={{fontSize: "11px", color: "grey"}}>{selectedMarkerValue.categories ? (selectedMarkerValue.categories[0] ? selectedMarkerValue.categories[0].name : "") : ""}</span>
                         </div>
                       </div>
                       <div className="row">
                         <div className="col">
-                          <span>{selectedMarkerValue.location ? (selectedMarkerValue.location.address ? selectedMarkerValue.location.address : "") : ""}</span>
+                          <span style={{fontSize: "11px", color: "grey"}}>{selectedMarkerValue.location ? (selectedMarkerValue.location.address ? selectedMarkerValue.location.address : "") : ""}</span>
                         </div>
                       </div>
                     </div>

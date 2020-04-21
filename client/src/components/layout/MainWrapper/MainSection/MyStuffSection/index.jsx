@@ -448,7 +448,7 @@ export class MyStuffSection extends Component {
                   fontStyle: "italic"
                 }}
               >rest☆easy
-                </span>
+              </span>
             </div>
           </div>
 
