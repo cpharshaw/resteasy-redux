@@ -374,11 +374,9 @@ export class FormSection4 extends Component {
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
-    selectedSectionValue: state.mapListState.selectedSectionValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
     photosArrValue: state.formState.photosArrValue,
-    selectedSectionValue: ownProps.display
   }
 }
 

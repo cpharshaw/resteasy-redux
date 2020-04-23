@@ -188,14 +188,13 @@ class RecenterButton extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     // displayValue: ownProps.display ? "none" : "",
-    geolocationValue: state.geolocationState.geolocationValue,
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
     geolocationUpdates: state.geolocationState.geolocationUpdates,
     mapValue: state.mapState.mapValue,
-    boundsValue: state.boundsState.boundsValue,
-    centerLatValue: state.centerState.centerLatValue,
-    centerLngValue: state.centerState.centerLngValue,
+    boundsValue: state.mapState.boundsValue,
+    centerLatValue: state.mapState.centerLatValue,
+    centerLngValue: state.mapState.centerLngValue,
     inputValue: state.inputState.inputValue,
     foursquareValue: state.foursquareState.foursquareValue,
   }

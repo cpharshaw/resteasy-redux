@@ -12,7 +12,7 @@ const initState = {
 const geolocationReducer = (state = initState, action) => {
   switch (action.type) {
     case 'GEOLOCATION_SUCCESS':
-
+      console.log("geolocation received in STORE")
       // if (
       //   (Math.round(state.geolocationLatValue * 1000000) / 1000000) !== (Math.round(action.payload.latitude * 1000000) / 1000000)
       //     ||

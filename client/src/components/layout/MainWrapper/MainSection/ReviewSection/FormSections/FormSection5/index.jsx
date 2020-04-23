@@ -75,7 +75,6 @@ export class FormSection5 extends Component {
 // export default ReviewSection5;
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log("mainwrapper state: ", state);
   return {
     formStepValue: state.formState.formStepValue,
     formCommentsValue: state.formState.formCommentsValue,

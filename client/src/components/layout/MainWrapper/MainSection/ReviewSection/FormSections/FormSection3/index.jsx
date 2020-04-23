@@ -64,8 +64,8 @@ export class FormSection3 extends Component {
 
   render() {
 
-    const { selectedSectionValue } = this.props;
-    const displayValue = selectedSectionValue === "review" ? "flex" : "`none`";
+    // const { selectedSectionValue } = this.props;
+    // const displayValue = selectedSectionValue === "review" ? "flex" : "`none`";
 
     const {
       // func_handlechange,
@@ -248,9 +248,7 @@ export class FormSection3 extends Component {
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
-    selectedSectionValue: state.mapListState.selectedSectionValue,
     // geolocationValue: state.geolocationState.geolocationValue,
-    boundsValue: state.boundsState.boundsValue,
     formValue: state.formState.formValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
@@ -261,8 +259,6 @@ const mapStateToProps = (state, ownProps) => {
     formAdmissionValue: state.formState.formAdmissionValue,
     formFeeDisplayValue: state.formState.formFeeDisplayValue,
     formFeeValue: state.formState.formFeeValue,
-
-    selectedSectionValue: ownProps.display
   }
 }
 

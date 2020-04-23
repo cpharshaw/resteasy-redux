@@ -468,9 +468,6 @@ export class MyStuffSection extends Component {
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
-    // selectedSectionValue: state.mapListState.selectedSectionValue,
-    // geolocationValue: state.geolocationState.geolocationValue,
-    boundsValue: state.boundsState.boundsValue,
     // reviews: state.firestore.ordered.reviews,
     auth: state.firebase,
     selectedSectionValue: ownProps.display,

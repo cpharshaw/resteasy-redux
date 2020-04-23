@@ -408,9 +408,6 @@ export class FormSection2 extends Component {
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
-    selectedSectionValue: state.mapListState.selectedSectionValue,
-    // geolocationValue: state.geolocationState.geolocationValue,
-    boundsValue: state.boundsState.boundsValue,
     formValue: state.formState.formValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
@@ -421,8 +418,6 @@ const mapStateToProps = (state, ownProps) => {
     formCapacityValue: state.formState.formCapacityValue,
     formSafetyValue: state.formState.formSafetyValue,
     formStyleValue: state.formState.formStyleValue,
-
-    selectedSectionValue: ownProps.display
   }
 }
 

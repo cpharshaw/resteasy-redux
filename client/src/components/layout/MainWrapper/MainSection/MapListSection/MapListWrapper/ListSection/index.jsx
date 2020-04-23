@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-
+import PlaceCard from './../../../../../../sharedComponents/mapListComponents/PlaceCard';
 // import { statement } from '@babel/template';
 
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -25,38 +25,86 @@ class ListSection extends Component {
     super(props);
     this.fsListings = null;
     this.state = {
-      markerIcon: null
-    }
+      markerIcon: null,
+      placeArr: []
+    };
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
 
-    // const fsPlacesUpdate = foursquareValue && (JSON.stringify(foursquareValue) !== JSON.stringify(prev_foursquareValue));
+    const foursquareValue = this.props.foursquareValue;
+    const prev_foursquareValue = prevProps.foursquareValue;
 
-    // if (fsPlacesUpdate) {
-    //   this.renderJunk(map, iconArr);
-    // }
+    const fsPlacesUpdate = foursquareValue && (JSON.stringify(foursquareValue) !== JSON.stringify(prev_foursquareValue));
+
+    // console.log("prev_foursquareValue", prev_foursquareValue)
+    // console.log("foursquareValue", fsPlacesUpdate)
+
+    // console.log("fsPlacesUpdate", fsPlacesUpdate)
+
+    if (fsPlacesUpdate) {
 
 
+      // console.log("inside if state for fsPlacesUpdate")
 
+      const tempArr = foursquareValue.map((place, i) => {
+
+        // console.log("inside map fsPlacesUpdate")
+
+        const getRandomInt = (min, max) => {
+
+          const minNum = Math.ceil(min);
+          const maxNum = Math.floor(max);
+
+          // console.log("minNum: ", minNum)
+          // console.log("maxNum: ", maxNum)
+
+          return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
+        }
+
+        // placeholders
+
+
+        const placeName = place.name;
+        const placeAddress = place.location ? place.location.address : "-";
+        const placeCategory = place.categories ? (place.categories[0] ? place.categories[0].name : "-") : "-";
+        const placeDistance = place.distance;
+        const placeMarker = this.state.markerIcon;
+        const placeNumReviews = 14;
+        const userReviwed = getRandomInt(0, 10) === 2 ? true : false;
+        const userBookmarked = getRandomInt(0, 10) === 3 ? true : false;
+
+        return (
+          <div className="row" key={i + "listFSkey"} >
+            <div className="col py-1">
+              <PlaceCard
+                data_componentsource="list"
+
+                data_placename={placeName}
+                data_placeaddress={placeAddress}
+                data_placecategory={placeCategory}
+                data_placedistance={placeDistance}
+
+                data_placemarker={placeMarker}
+                // data_placerating={}
+                data_placenumreviews={placeNumReviews}
+
+                data_userreviewed={userReviwed}
+                data_userbookmarked={userBookmarked}
+              />
+            </div>
+          </div>
+        )
+      });
+
+      this.setState({
+        placeArr: tempArr
+      })
+
+    }
   }
 
   render() {
-
-    const getRandomInt = (min, max) => {
-
-      const minNum = Math.ceil(min);
-      const maxNum = Math.floor(max);
-
-      console.log("minNum: ", minNum)
-      console.log("maxNum: ", maxNum)
-
-      return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
-    }
-
-    // const randomMarkerColor = iconArr[getRandomInt(0, colors.length)];
-
-    // console.log(process.env);
 
     const displayValue = this.props.data_display ? null : "none";
 
@@ -65,392 +113,29 @@ class ListSection extends Component {
       selectedMarkerValue
     } = this.props;
 
-    // console.log("all the props, ListSection: ", this.props);
     return (
-      // <div
-      // id="listSection"
-      //   className="rs animated fadeIn faster"
-      //   style={{
-      //     display: displayValue,
-      //   }}
-      // >
-      <div id="listSection" className="container-fluid animated fadeIn fast" style={{ display: displayValue }}>
-        <div className="row">
-          <div className="col py-2">
-
-            <div className="row animated fadeIn slow px-1 py-1"
-              style={{
-                // position: "absolute",
-                // left: "0",
-                // right: "0",
-                margin: "0 auto",
-                // top: "12.5px",
-                height: "72.5px",
-                width: "95%",
-                // maxWidth: "350px",
-                borderRadius: "5px",
-                backgroundColor: "rgba(255,255,255,0.5)",
-                // backgroundColor: "white",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                border: "0.5px solid lightgrey",
-                // fontSize: "12.25px"
-                // boxShadow: "0 0 12px #a2ddd9"
-              }}
-            >
-              <div className="col-2">
-                {/* rating icon */}
-                <span>icon</span>
-              </div>
-              <div className="col-6 ">
-                {/* key info */}
-                <div className="row">
-                  <div className="col">
-                    <span>Stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>Category - score</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>last line</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-3">
-                {/* addl info */}
-                <div className="row">
-                  <div className="col">
-                    <span>stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>more stuff</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-1 ai-fe ac-fe ta-r">
-                <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}>></span>
-              </div>
-
-            </div>
-
-            <div className="row animated fadeIn slow px-1 py-1"
-              style={{
-                // position: "absolute",
-                // left: "0",
-                // right: "0",
-                margin: "0 auto",
-                // top: "12.5px",
-                height: "72.5px",
-                width: "95%",
-                // maxWidth: "350px",
-                borderRadius: "5px",
-                backgroundColor: "rgba(255,255,255,0.5)",
-                // backgroundColor: "white",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                border: "0.5px solid lightgrey",
-                // fontSize: "12.25px"
-                // boxShadow: "0 0 12px #a2ddd9"
-              }}
-            >
-              <div className="col-2">
-                {/* rating icon */}
-                <span>icon</span>
-              </div>
-              <div className="col-6 ">
-                {/* key info */}
-                <div className="row">
-                  <div className="col">
-                    <span>Stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>Category - score</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>last line</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-3">
-                {/* addl info */}
-                <div className="row">
-                  <div className="col">
-                    <span>stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>more stuff</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-1 ai-fe ac-fe ta-r">
-                <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}>
-                  <img src="https://img.icons8.com/ultraviolet/80/000000/chevron-right.png" />
-                </span>
-              </div>
-
-            </div>
-
-
-
-            <div className="row animated fadeIn slow px-1 py-1"
-              style={{
-                // position: "absolute",
-                // left: "0",
-                // right: "0",
-                margin: "0 auto",
-                // top: "12.5px",
-                height: "72.5px",
-                width: "95%",
-                // maxWidth: "350px",
-                borderRadius: "5px",
-                backgroundColor: "rgba(255,255,255,0.5)",
-                // backgroundColor: "white",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                border: "0.5px solid lightgrey",
-                // fontSize: "12.25px"
-                // boxShadow: "0 0 12px #a2ddd9"
-              }}
-            >
-              <div className="col-2">
-                {/* rating icon */}
-                <span>icon</span>
-              </div>
-              <div className="col-6 ">
-                {/* key info */}
-                <div className="row">
-                  <div className="col">
-                    <span>Stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>Category - score</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>last line</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-3">
-                {/* addl info */}
-                <div className="row">
-                  <div className="col">
-                    <span>stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>more stuff</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-1 ai-fe ac-fe ta-r">
-                <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}>></span>
-              </div>
-            </div >
-
-
-
-
-            <div className="row animated fadeIn slow px-1 py-1"
-              style={{
-                // position: "absolute",
-                // left: "0",
-                // right: "0",
-                margin: "0 auto",
-                // top: "12.5px",
-                height: "72.5px",
-                width: "95%",
-                // maxWidth: "350px",
-                borderRadius: "5px",
-                backgroundColor: "rgba(255,255,255,0.5)",
-                // backgroundColor: "white",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                border: "0.5px solid lightgrey",
-                // fontSize: "12.25px"
-                // boxShadow: "0 0 12px #a2ddd9"
-              }}
-            >
-              <div className="col-2">
-                {/* rating icon */}
-                <span>icon</span>
-              </div>
-              <div className="col-6 ">
-                {/* key info */}
-                <div className="row">
-                  <div className="col">
-                    <span>Stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>Category - score</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>last line</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-3">
-                {/* addl info */}
-                <div className="row">
-                  <div className="col">
-                    <span>stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>more stuff</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-1 ai-fe ac-fe ta-r">
-                <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}>></span>
-              </div>
-            </div >
-
-
-
-            <div className="row animated fadeIn slow px-1 py-1"
-              style={{
-                // position: "absolute",
-                // left: "0",
-                // right: "0",
-                margin: "0 auto",
-                // top: "12.5px",
-                height: "72.5px",
-                width: "95%",
-                // maxWidth: "350px",
-                borderRadius: "5px",
-                backgroundColor: "rgba(255,255,255,0.5)",
-                // backgroundColor: "white",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                border: "0.5px solid lightgrey",
-                // fontSize: "12.25px"
-                // boxShadow: "0 0 12px #a2ddd9"
-              }}
-            >
-              <div className="col-2">
-                {/* rating icon */}
-                <span>icon</span>
-              </div>
-              <div className="col-6 ">
-                {/* key info */}
-                <div className="row">
-                  <div className="col">
-                    <span>Stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>Category - score</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>last line</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-3">
-                {/* addl info */}
-                <div className="row">
-                  <div className="col">
-                    <span>stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>more stuff</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-1 ai-fe ac-fe ta-r">
-                <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}>></span>
-              </div>
-            </div >
-
-
-            <div className="row animated fadeIn slow px-1 py-1"
-              style={{
-                // position: "absolute",
-                // left: "0",
-                // right: "0",
-                margin: "0 auto",
-                // top: "12.5px",
-                height: "72.5px",
-                width: "95%",
-                // maxWidth: "350px",
-                borderRadius: "5px",
-                backgroundColor: "rgba(255,255,255,0.825)",
-                // backgroundColor: "white",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                border: "0.5px solid lightgrey",
-                // fontSize: "12.25px"
-                // boxShadow: "0 0 12px #a2ddd9"
-              }}
-            >
-              <div className="col-2">
-                {/* rating icon */}
-                <span>icon</span>
-              </div>
-              <div className="col-6 ">
-                {/* key info */}
-                <div className="row">
-                  <div className="col">
-                    <span>Stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>Category - score</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>last line</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-3">
-                {/* addl info */}
-                <div className="row">
-                  <div className="col">
-                    <span>stuff</span>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <span>more stuff</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-1 ai-fe ac-fe ta-r">
-                <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}>></span>
-              </div>
-            </div >
-
-          </div >
+      <div className="row ai-fs animated fadeIn fast" id="listSection"
+        style={{
+          display: displayValue,
+          height: "inherit",
+          WebkitOverflowScrolling: "touch",
+          overflowY: "scroll",
+          msOverflowY: "scroll",
+          overflowX: "hidden",
+          msOverflowX: "hidden",
+        }}
+      >
+        <div
+          id=""
+          className="col jc-fs py-2"
+          style={{
+            overflowX: "hidden",
+            msOverflowX: "hidden",
+            overflowY: "hidden",
+            msOverflowY: "hidden",
+          }}
+        >
+          {this.state.placeArr}
         </div >
       </div >
     )
@@ -462,7 +147,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     geolocation: state.geoLocation,
     mapListToggleValue: ownProps.display,
-    selectedMarkerValue: state.mapState.selectedMarkerValue
+    selectedMarkerValue: state.mapState.selectedMarkerValue,
+    foursquareValue: state.foursquareState.foursquareValue,
     // reviews: state.firestore.ordered.reviews,
     // auth: state.firebase.auth
   }

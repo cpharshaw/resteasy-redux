@@ -3,7 +3,7 @@ const axios = require('axios');
 const endpoint = "https://api.foursquare.com/v2/venues/search";
 
 export const getPlacesFromFoursquare = (location) => {
-
+  console.log("getPlacesFromFoursquare ACTION triggered")
   return (dispatch, getState) => {
 
     return (
@@ -25,8 +25,11 @@ export const getPlacesFromFoursquare = (location) => {
             transformResponse: [
               res => {
                 const state = getState();
-                const currLat = state.centerState.centerLatValue;
-                const currLng = state.centerState.centerLngValue;
+                // const currLat = state.centerState.centerLatValue;
+                // const currLng = state.centerState.centerLngValue;
+                
+                const currLat = state.geolocationState.geolocationLatValue;
+                const currLng = state.geolocationState.geolocationLngValue;
                 
                 const fsWIthDistance = res.response.venues.map(venue => {
                   // console.log("Raw venues: ", venue)

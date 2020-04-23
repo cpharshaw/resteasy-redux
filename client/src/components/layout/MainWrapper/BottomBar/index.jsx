@@ -134,7 +134,6 @@ export class BottomBar extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     selectedSectionValue: state.sectionState.selectedSectionValue,
-    boundsValue: state.boundsState.boundsValue,
     data_height: ownProps.data_height
   }
 }

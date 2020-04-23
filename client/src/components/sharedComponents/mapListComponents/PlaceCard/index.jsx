@@ -13,25 +13,28 @@ import greenMarker from '../../../../components/layout/MainWrapper/MainSection/M
 export class PlaceCard extends Component {
 
 
-  assignPlaceIcon = (rating = null) => {
-    switch (rating) {
-      // case rating >= 4.85:
-      //   return "STAR icon"
-      case rating >= 4.5:
-        return greenMarker;
-      case rating >= 4:
-        return chartreuseMarker;
-      case rating >= 3:
-        return yellowMarker;
-      case rating >= 2:
-        return orangeMarker;
-      case rating > 0:
-        return redMarker;
+  assignPlaceIcon = (rating) => {
+
+    if (rating >= 4.5) {
+      return greenMarker
+    } else if (rating >= 4) {
+      return chartreuseMarker;
+    } else if (rating >= 3) {
+      return yellowMarker;
+    } else if (rating >= 2) {
+      return orangeMarker;
+    } else if (rating > 0) {
+      return redMarker;
+    } else {
+      return greyMarker;
+    }
+        
+       // case rating >= 4.85:
+      //   return "STAR icon";   
+
       // case rating >= 1.15:
       //   return "RADIOACTIVE icon";          
-      default:
-        return greyMarker;
-    }
+
   };
 
   placeCardClicked = (e) => {
@@ -44,6 +47,7 @@ export class PlaceCard extends Component {
 
     const {
       data_componentsource,
+      data_placemarker, //temporary until real data is avail
       data_placerating,
       data_placenumreviews,
       data_placename,
@@ -53,6 +57,9 @@ export class PlaceCard extends Component {
       data_userreviewed,
       data_userbookmarked,
     } = this.props;
+
+    // console.log("rating: ", data_placerating)
+    // console.log("typeof rating: ", typeof data_placerating)
 
     // const placeRating = data_placerating ? data_placerating : null;
     const placeCardPosition = data_componentsource === "map" ? ["absolute", "0"] : data_componentsource === "list" ? [null, null] : [null, null];
@@ -72,16 +79,16 @@ export class PlaceCard extends Component {
           backgroundColor: "rgba(250,250,250,.805)",
           backdropFilter: "blur(5px)",
           WebkitBackdropFilter: "blur(5px)",
-          border: "0.5px solid lightgrey",
+          // border: "0.5px solid lightgrey",
           boxShadow: "0 0 3px #a8a8a8",
         }}
       >
 
         <div className="col-2 ai-c">
           {/* rating icon */}
-          <img className="markerIcon" height="45" width="45" src={this.assignPlaceIcon(data_placerating)} />
-          <span style={{ fontSize: "9.5px", color: "grey" }}><em>{data_placerating} / 5</em></span>
-          <span style={{ fontSize: "9.5px", color: "grey" }}><em>{data_placenumreviews} reviews</em></span>
+          <img className="markerIcon" height="45" width="45" src={data_placerating ? this.assignPlaceIcon(data_placerating) : data_placemarker} />
+          <span style={{ fontSize: "9px", color: "grey" }}><em>{data_placerating ? data_placerating : "tbd"} / 5</em></span>
+          <span style={{ fontSize: "9px", color: "grey" }}><em>{data_placenumreviews} reviews</em></span>
         </div>
 
         <div className="col-7">
@@ -93,12 +100,12 @@ export class PlaceCard extends Component {
           </div>
           <div className="row">
             <div className="col">
-              <span>{data_placecategory}</span>
+              <span style={{ fontSize: "11px", color: "grey" }}>{data_placecategory}</span>
             </div>
           </div>
           <div className="row">
             <div className="col">
-              <span>{data_placeaddress}</span>
+              <span style={{ fontSize: "11px", color: "grey" }}>{data_placeaddress}</span>
             </div>
           </div>
         </div>
@@ -158,7 +165,7 @@ export class PlaceCard extends Component {
                       width="20" height="20"
                       viewBox="0 0 172 172"
                       style={{ fill: "#000000" }}>
-                      <g fill="none" fill-rule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
+                      <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
                         <path d="M0,172v-172h172v172z" fill="none" />
                         <g fill="#eeeeee">
                           <path d="M43.06999,14.33333c-7.85076,0 -14.33333,6.46862 -14.33333,14.31934l-0.06999,129.014l57.33333,-21.5l57.33333,21.5v-10.34407v-118.65593c0,-7.83362 -6.49972,-14.33333 -14.33333,-14.33333zM43.06999,28.66667h85.93001v108.31185l-43,-16.125l-42.986,16.125z" />

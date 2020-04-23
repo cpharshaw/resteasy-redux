@@ -10,10 +10,8 @@ import HorizontalRule from '../../../../sharedComponents/general/HorizontalRule'
 import ModalFormReset from './ModalFormReset';
 import LocationModal from './ModalFormLocationSelector';
 
+
 export class ModalContainer extends Component {
-
-
-
 
   closeModal(e) {
     e.preventDefault();
@@ -84,7 +82,7 @@ export class ModalContainer extends Component {
 
       foursquareValue.map((place, i) => {
         
-        console.log("fsPlace - " + i + " - ", place);
+        // console.log("fsPlace - " + i + " - ", place);
 
         const name = place.name ? place.name : null;
         const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
@@ -232,8 +230,8 @@ export class ModalContainer extends Component {
                     ) : null
                   }
 
-                  {console.log("currentModal: ", currentModal)}
-                  {console.log("formStepValue: ", formStepValue)}
+                  {/* {console.log("currentModal: ", currentModal)}
+                  {console.log("formStepValue: ", formStepValue)} */}
                   {
                     currentModal !== "formLocationModal" && (currentModal !== "" || formStepValue > 5) ? (
 
@@ -244,7 +242,7 @@ export class ModalContainer extends Component {
                             <div className="col">
                               {currentModal === "formResetModal" ? <p>Reset review form and start over?</p> : null}
                               {formStepValue === 6 ? <p>Ok to submit review?</p> : null}
-                              {formStepValue === 7 ? <p>Thank you for your review.  You've done your part to help save the world.  Go home now and feel good about yourself.</p> : null}
+                              {formStepValue === 7 ? <p>Thank you for your review.</p> : null}
                             </div>
                           </div>
 
@@ -291,9 +289,7 @@ export class ModalContainer extends Component {
 const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
-    selectedSectionValue: state.mapListState.selectedSectionValue,
     // geolocationValue: state.geolocationState.geolocationValue,
-    boundsValue: state.boundsState.boundsValue,
     formStepValue: state.formState.formStepValue,
     modalState: state.modalState,
     currentModal: state.modalState.currentModal,
@@ -301,7 +297,6 @@ const mapStateToProps = (state, ownProps) => {
     centerLngValue: state.centerState.centerLngValue,
     // reviews: state.firestore.ordered.reviews,
     auth: state.firebase.auth,
-    selectedSectionValue: ownProps.display,
     foursquareValue: state.foursquareState.foursquareValue,
   }
 }

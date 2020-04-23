@@ -5,7 +5,9 @@ import BottomBar from './BottomBar/';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { GoogleApiWrapper } from "google-maps-react";
-import { storeGoogleAPI } from '../../../store/actions/googleAPIActions';
+import { storeGoogleAPI } from '../../../store/actions/mapActions';
+import { getGeolocation } from '../../../store/actions/geoActions';
+import { getPlacesFromFoursquare } from '../../../store/actions/foursquareActions';
 
 import '../../../styling/reset/customReset.css';
 
@@ -27,7 +29,50 @@ class MainWrapper extends Component {
   }
 
   componentDidMount() {
+    this.props.getGeolocation();
     this.props.storeGoogleAPI(this.props.google.maps);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
+    // const googleAPIUpdate = prevProps.googleAPIValue === null && this.props.googleAPIValue !== null;
+
+    const prev_geoLat = prevProps.geolocationLatValue;
+    const prev_geoLng = prevProps.geolocationLngValue;
+    const geoLat = this.props.geolocationLatValue;
+    const geoLng = this.props.geolocationLngValue;
+
+    const prev_ctrLat = prevProps.centerLatValue;
+    const prev_ctrLng = prevProps.centerLngValue;
+    const ctrLat = this.props.centerLatValue;
+    const ctrLng = this.props.centerLngValue;
+    const numCenterUpdates = this.props.numCenterUpdates;
+
+    const geo_update = (
+      geoLat !== prev_geoLat
+      ||
+      geoLng !== prev_geoLng
+    );
+
+    const ctr_update = (
+      ctrLat !== prev_ctrLat
+      ||
+      ctrLng !== prev_ctrLng
+    );
+
+    if (geo_update) {
+      const fsLL = geoLat + "," + geoLng;
+      this.props.getPlacesFromFoursquare(fsLL);
+    }
+
+    if (!geo_update && ctr_update) {
+      const fsLL = ctrLat + "," + ctrLng;
+      this.props.getPlacesFromFoursquare(fsLL);
+    }
+
+    console.log("from mainWrapper - numCenterUpdates: ", numCenterUpdates)
+    console.log("from mainWrapper - ctrLat, ctrLng: ", ctrLat, ctrLng)
+
   }
 
 
@@ -39,6 +84,7 @@ class MainWrapper extends Component {
     } = this.props;
 
     return (
+
       <div id="mainWrapper" className="container-fluid ai-c"
         style={{
           position: "fixed",
@@ -53,7 +99,6 @@ class MainWrapper extends Component {
           boxShadow: "0 0 10px lightgrey"
         }}
       >
-
         <main
           id="mainSection"
           className="row animated fadeIn fast"
@@ -68,14 +113,14 @@ class MainWrapper extends Component {
         </main>
 
         <footer
-          id="footer"
+          id="bottomBar"
           className="row animated fadeIn faster"
           style={{
             position: "relative",
             height: "62.5px",
           }}
         >
-          <nav id="bottomBar" className="col bg-primary">
+          <nav id="bottomBarComponent" className="col bg-primary">
             < BottomBar />
           </nav>
         </footer >
@@ -93,14 +138,21 @@ class MainWrapper extends Component {
 const mapStateToProps = (state) => {
   return {
     mapListToggleValue: state.mapListState.mapListToggleValue,
-    boundsValue: state.boundsState.boundsValue,
-    googleAPIValue: state.googleAPIState.googleAPIValue,
+    boundsValue: state.mapState.boundsValue,
+    googleAPIValue: state.mapState.googleAPIValue,
+    geolocationLatValue: state.geolocationState.geolocationLatValue,
+    geolocationLngValue: state.geolocationState.geolocationLngValue,
+    centerLatValue: state.mapState.centerLatValue,
+    centerLngValue: state.mapState.centerLngValue,
+    numCenterUpdates: state.mapState.numCenterUpdates
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    storeGoogleAPI: api => dispatch(storeGoogleAPI(api))
+    storeGoogleAPI: api => dispatch(storeGoogleAPI(api)),
+    getGeolocation: () => dispatch(getGeolocation()),
+    getPlacesFromFoursquare: (location) => dispatch(getPlacesFromFoursquare(location)),
   }
 }
 

@@ -5,9 +5,7 @@ import RecenterButton from './RecenterButton';
 
 import { getGeolocation } from '../../../../../../../store/actions/geoActions';
 import { getPlacesFromFoursquare } from '../../../../../../../store/actions/foursquareActions';
-import { storeMap, storeSelectedMarker } from '../../../../../../../store/actions/mapActions';
-import { storeBounds } from '../../../../../../../store/actions/boundsActions';
-import { storeCenter } from '../../../../../../../store/actions/centerActions';
+import { storeMap, storeSelectedMarker, storeBounds, storeCenter } from '../../../../../../../store/actions/mapActions';
 import { storeInput } from '../../../../../../../store/actions/inputActions';
 
 import React, { Component } from "react";
@@ -66,15 +64,10 @@ class MapSection extends Component {
       fsMarkers: null,
       markerIcon: null
     };
-
     this.map = null;
-
     this.layer = null
-
     this.renderJunk = this.renderJunk.bind(this);
-
     this.marker = null;
-
   }
   // https://stackoverflow.com/questions/20916953/get-distance-between-two-points-in-canvas
 
@@ -106,10 +99,59 @@ class MapSection extends Component {
     console.log('reset center clicked')
   }
 
+
+  renderJunk(map, colors) {
+    const mapParam = map;
+    const fs = this.props.foursquareValue.map((place, i) => {
+      const getRandomInt = (min, max) => {
+        const minNum = Math.ceil(min);
+        const maxNum = Math.floor(max);
+        return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
+      }
+      const randomMarkerColor = iconArr[getRandomInt(0, colors.length)];
+      const attachSecretMessage = (marker, place, secretMessage) => {
+        marker.addListener('click', () => {
+          this.props.storeSelectedMarker(place)
+          this.setState({
+            markerIcon: randomMarkerColor
+          })
+          mapParam.panTo({
+            lat: place.location.lat,
+            lng: place.location.lng
+          });
+        });
+      }
+      const markerCreator = (mapArg) => {
+        const marker = new this.props.googleAPIValue.Marker({
+          map: mapArg,
+          position: {
+            lat: !place.location.lat ? 39.962292 : place.location.lat,
+            lng: !place.location.lng ? -75.144768 : place.location.lng
+          },
+          title: "fs-" + place.id,
+          icon: randomMarkerColor,
+          label: JSON.stringify(place.id),
+          animation: this.props.googleAPIValue.Animation.DROP,
+        })
+        attachSecretMessage(marker, place, "test of the secret message");
+        return marker;
+      }    // https://developers.google.com/maps/documentation/javascript/infowindows
+      return markerCreator(mapParam);
+    })
+    return fs.map((MarkerDiv, i) => {
+      return MarkerDiv
+    })
+  }
+
+
   componentDidMount() {
-
-    this.props.getGeolocation();
-
+    const map = this.props.mapValue;
+    const foursquareValue = this.props.foursquareValue;
+    if (map && foursquareValue) {
+      console.log("map ...didMount", foursquareValue)
+      // https://frontarm.com/james-k-nelson/pdf-cheatsheets/
+      this.renderJunk(map, iconArr);
+    }
     // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
     // https://developers.google.com/maps/documentation/javascript/places - nearby
   }
@@ -117,10 +159,6 @@ class MapSection extends Component {
 
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-
-
-
-    // console.log("map component update")
 
     // variables
     const foursquareValue = this.props.foursquareValue;
@@ -149,26 +187,13 @@ class MapSection extends Component {
     const map = this.props.mapValue;
     const prev_map = prevProps.mapValue;
 
-    const mapUpdate = map !== prev_map
-
-
-
-    // console.log("numGeoUpdates: ", numGeoUpdates);
-
     // checks for changes
 
     const googleAPIUpdate = prevProps.googleAPIValue === null && this.props.googleAPIValue !== null;
 
-    // console.log("prevProps.googleAPIValue: ", prevProps.googleAPIValue)
-    // console.log("this.props.googleAPIValue: ", this.props.googleAPIValue)
-    // console.log("googleAPIUpdate: ", googleAPIUpdate)
-
-    // console.log("prev_fs JSON: ", JSON.stringify(prev_foursquareValue));
-    // console.log("fs JSON: ", JSON.stringify(foursquareValue));
-
     const fsPlacesUpdate = foursquareValue && (JSON.stringify(foursquareValue) !== JSON.stringify(prev_foursquareValue));
 
-    if (fsPlacesUpdate) {
+    if (fsPlacesUpdate || foursquareValue) {
       // https://frontarm.com/james-k-nelson/pdf-cheatsheets/
       this.renderJunk(map, iconArr);
     }
@@ -235,14 +260,6 @@ class MapSection extends Component {
         }
       );
 
-      // this.myoverlay = new this.props.googleAPIValue.OverlayView();
-
-      // this.myoverlay.draw = function () {
-      //   this.getPanes().markerLayer.id = 'markerLayer';
-      // };
-      // this.myoverlay.setMap(this.map);
-
-
 
       this.marker = new this.props.googleAPIValue.Marker(
         {
@@ -265,7 +282,7 @@ class MapSection extends Component {
         'idle',
         () => {
 
-          this.mapFuncs("idleListener fired");
+          // this.mapFuncs("idleListener fired");
 
           // console.log('map idle fired')
 
@@ -362,81 +379,6 @@ class MapSection extends Component {
   }
 
 
-  renderJunk(map, colors) {
-    // <div style={{animation-name: _gm5393}} />
-    const mapParam = map;
-
-
-
-    const fs = this.props.foursquareValue.map((place, i) => {
-
-
-      const getRandomInt = (min, max) => {
-
-        const minNum = Math.ceil(min);
-        const maxNum = Math.floor(max);
-
-        console.log("minNum: ", minNum)
-        console.log("maxNum: ", maxNum)
-
-        return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
-      }
-
-      const randomMarkerColor = iconArr[getRandomInt(0, colors.length)];
-
-      const attachSecretMessage = (marker, place, secretMessage) => {
-        marker.addListener('click', () => {
-
-          this.props.storeSelectedMarker(place)
-
-          this.setState({
-            markerIcon: randomMarkerColor
-          })
-
-          mapParam.panTo(
-            {
-              lat: place.location.lat,
-              lng: place.location.lng
-            }
-          );
-
-          console.log("place", place)
-          console.log("secretMessage: ", secretMessage)
-        });
-      }
-
-      const markerCreator = (mapArg) => {
-
-        const marker = new this.props.googleAPIValue.Marker(
-          {
-            map: mapArg,
-            position: {
-              lat: !place.location.lat ? 39.962292 : place.location.lat,
-              lng: !place.location.lng ? -75.144768 : place.location.lng
-            },
-            title: "fs-" + place.id,
-            icon: randomMarkerColor,
-            label: JSON.stringify(place.id),
-            animation: this.props.googleAPIValue.Animation.DROP,
-            // optimized: false
-          }
-        )
-        attachSecretMessage(marker, place, "test of the secret message");
-
-        return marker;
-
-      }
-
-      return markerCreator(mapParam);
-    })
-
-    // https://developers.google.com/maps/documentation/javascript/infowindows
-
-    return fs.map((MarkerDiv, i) => {
-      return MarkerDiv
-    })
-
-  }
 
 
 
@@ -444,7 +386,6 @@ class MapSection extends Component {
 
     const {
       settingsModal,
-
     } = this.props.modalState;
 
     const {
@@ -456,198 +397,76 @@ class MapSection extends Component {
 
     return (
 
-      <div className="container-fluid animated fadeIn fast" style={{ display: displayValue, fontSize: "12.25px" }}>
+      <div id="mapSection" className="row animated fadeIn fast" style={{ display: displayValue }}>
+        <div className="col">
 
-        <div className="row">
-
-          <div id="mapSection" className="col"
-            style={{
-              position: "absolute",
-              // top: "0",
-              left: "0",
-              right: "0",
-              // bottom: "55px",
-              height: "100%"
-            }}
-          >
-
-            <div id="google-map" className="row" ref={this.googleMapRef}
+          <div className="row">
+            <div className="col"
               style={{
+                position: "absolute",
+                // top: "0",
+                left: "0",
+                right: "0",
+                // bottom: "55px",
                 height: "100%"
               }}
-            />
-
-            {/* {console.log("overlay: ", console.log(document.getElementById("markerLayer")))} */}
-
-            {
-              <MarkerComp
-                key="OKMark"
-                data_lat={40}
-                data_lng={-75}
-                data_icon="https://img.icons8.com/office/33/000000/error.png"
+            >
+              <div id="google-map" className="row" ref={this.googleMapRef}
+                style={{
+                  height: "500px"
+                }}
               />
-            }
-
-            <RecenterButton />
-
-
+              <RecenterButton />
+            </div>
           </div>
 
+          {
+            this.state.geo_same_ctr ? null : (
+              <div className="row animated fadeIn px-3 py-2" onClick={this.resetCenter}
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  right: "0",
+                  margin: "0 auto",
+                  bottom: "37.5px",
+                  height: "fit-content",
+                  width: "fit-content",
+                  borderRadius: "5px",
+                  backgroundColor: "rgba(250,250,250,0.805)",
+                  backdropFilter: "blur(5px)",
+                  WebkitBackdropFilter: "blur(5px)",
+                  boxShadow: "0 0 5px #a2ddd9",
+                }}
+              >
+                <span><em>Redo search in this area</em></span>
+              </div>
+            )
+          }
 
+          {/* {console.log("fs value", foursquareValue)} */}
+
+          {
+            settingsModal || !selectedMarkerValue ? null : (
+
+              <PlaceCard
+                data_componentsource="map"
+
+                data_placename={selectedMarkerValue.name}
+                data_placeaddress={selectedMarkerValue.location.address}
+                data_placecategory={selectedMarkerValue.categories[0].name}
+                data_placedistance={selectedMarkerValue.distance}
+
+                data_placemarker={this.state.markerIcon}
+                // data_placerating={}
+                data_placenumreviews={14}
+
+                data_userreviewed={true}
+                data_userbookmarked={false}
+              />
+
+            )
+          }
         </div>
-
-
-        {
-          this.state.geo_same_ctr ? null : (
-            <div className="row animated fadeIn px-3 py-2" onClick={this.resetCenter}
-              style={{
-                position: "absolute",
-                left: "0",
-                right: "0",
-                margin: "0 auto",
-                bottom: "37.5px",
-                height: "fit-content",
-                width: "fit-content",
-                borderRadius: "5px",
-                backgroundColor: "rgba(250,250,250,0.805)",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                boxShadow: "0 0 5px #a2ddd9",
-              }}
-            >
-              <span><em>Redo search in this area</em></span>
-            </div>
-          )
-        }
-
-        {/* {console.log("fs value", foursquareValue)} */}
-
-        {
-          settingsModal ? null : (
-            <div className="row animated fadeIn slow  py-1"
-              style={{
-                position: "absolute",
-                left: "0",
-                right: "0",
-                margin: "0 auto",
-                top: "10px",
-                height: "72.5px",
-                width: "95%",
-                // maxWidth: "350px",
-                borderRadius: "5px",
-                backgroundColor: "rgba(250,250,250,.805)",
-                // backgroundColor: "white",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                border: "0.5px solid lightgrey",
-                // fontSize: "12.25px"
-                boxShadow: "0 0 3px #a8a8a8",
-              }}
-            >
-              {
-                !selectedMarkerValue ? null : (
-                  <>
-                    <div className="col-2 ai-c">
-                      {/* rating icon */}
-                      <img className="markerIcon" height="45" width="45" src={this.state.markerIcon} />
-                      <span style={{ fontSize: "9px", color: "grey" }}><em>3.4 / 5</em></span>
-                      <span style={{ fontSize: "9px", color: "grey" }}><em>123 ratings</em></span>
-                    </div>
-
-                    <div className="col-7">
-                      {/* key info */}
-                      <div className="row">
-                        <div className="col">
-                          <span>{selectedMarkerValue.name ? selectedMarkerValue.name : ""}</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col">
-                          <span style={{fontSize: "11px", color: "grey"}}>{selectedMarkerValue.categories ? (selectedMarkerValue.categories[0] ? selectedMarkerValue.categories[0].name : "") : ""}</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col">
-                          <span style={{fontSize: "11px", color: "grey"}}>{selectedMarkerValue.location ? (selectedMarkerValue.location.address ? selectedMarkerValue.location.address : "") : ""}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-2">
-                      {/* addl info */}
-                      <div className="row">
-                        <div className="col">
-                          <span style={{ fontSize: "11px", color: "grey" }}>{selectedMarkerValue.distance ? selectedMarkerValue.distance : ""} m</span>
-                        </div>
-                      </div>
-
-                      <div className="row">
-
-                        <div className="col">
-
-                         {/* <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                            width="19" height="19"
-                            viewBox="0 0 172 172"
-                            style={{ fill: "#000000" }}>
-                            <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
-                              <path d="M0,172v-172h172v172z" fill="none" />
-                              <g fill="#eeeeee">
-                                <path d="M86,14.33333c-39.49552,0 -71.66667,32.17115 -71.66667,71.66667c0,39.49552 32.17115,71.66667 71.66667,71.66667c39.49552,0 71.66667,-32.17115 71.66667,-71.66667c0,-39.49552 -32.17115,-71.66667 -71.66667,-71.66667zM86,28.66667c31.74921,0 57.33333,25.58412 57.33333,57.33333c0,31.74921 -25.58412,57.33333 -57.33333,57.33333c-31.74921,0 -57.33333,-25.58412 -57.33333,-57.33333c0,-31.74921 25.58412,-57.33333 57.33333,-57.33333z" />
-                              </g>
-                            </g>
-                          </svg> */}
-
-                          <img src="https://img.icons8.com/material-outlined/17/000000/checked.png"/>
-
- 
-                        </div>
-
-                        <div className="col">
-
-                          {/* <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                            width="20" height="20"
-                            viewBox="0 0 172 172"
-                            style={{fill: "#000000"}}>
-                            <g fill="none" fill-rule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{mixBlendMode: "normal"}}>
-                              <path d="M0,172v-172h172v172z" fill="none" />
-                              <g fill="#eeeeee">
-                                <path d="M43.06999,14.33333c-7.85076,0 -14.33333,6.46862 -14.33333,14.31934l-0.06999,129.014l57.33333,-21.5l57.33333,21.5v-10.34407v-118.65593c0,-7.83362 -6.49972,-14.33333 -14.33333,-14.33333zM43.06999,28.66667h85.93001v108.31185l-43,-16.125l-42.986,16.125z" />
-                              </g>
-                            </g>
-                          </svg> */}
-
-
-                          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                            width="20" height="20"
-                            viewBox="0 0 172 172"
-                            style={{ fill: "#000000" }}>
-                            <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
-                              <path d="M0,172v-172h172v172z" fill="none" />
-                              <g fill="#f1c40f">
-                                <path d="M136.16667,147.63333l-50.16667,-18.63333l-50.16667,18.63333v-118.96667c0,-3.58333 2.86667,-7.16667 7.16667,-7.16667h86c4.3,0 7.16667,2.86667 7.16667,7.16667z" opacity="0.3" />
-                                <path d="M28.66667,157.66667v-129c0,-7.88333 6.45,-14.33333 14.33333,-14.33333h86c7.88333,0 14.33333,6.45 14.33333,14.33333v129l-57.33333,-21.5zM86,121.11667l43,16.48333v-108.93333h-86v108.21667z" />
-                              </g>
-                            </g>
-                          </svg>
-
-
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-1 ai-fe ac-fe ta-r">
-                      {/* <span style={{ width: "fit-content", fontSize: "16px", fontWeight: "bold" }}> */}
-                      {/* <img src="https://img.icons8.com/ultraviolet/15/000000/chevron-right.png"/> */}
-                      <img className="animated heartBeat slower" src="https://img.icons8.com/ios-glyphs/18/000000/chevron-right.png" />
-                      {/* </span> */}
-                    </div>
-                  </>
-                )
-
-              }
-            </div>
-          )
-        }
       </div>
     )
   }
@@ -659,19 +478,19 @@ class MapSection extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     displayValue: ownProps.display ? "none" : "",
-    geolocationValue: state.geolocationState.geolocationValue,
+    // geolocationValue: state.geolocationState.geolocationValue,
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
-    boundsValue: state.boundsState.boundsValue,
+    boundsValue: state.mapState.boundsValue,
     foursquareValue: state.foursquareState.foursquareValue,
     // circleValue: state.circleState.circleValue,
-    centerLatValue: state.centerState.centerLatValue,
-    centerLngValue: state.centerState.centerLngValue,
+    centerLatValue: state.mapState.centerLatValue,
+    centerLngValue: state.mapState.centerLngValue,
     foursquareValue: state.foursquareState.foursquareValue,
     mapListToggleValue: ownProps.display,
-    googleAPIValue: state.googleAPIState.googleAPIValue,
+    googleAPIValue: state.mapState.googleAPIValue,
     modalState: state.modalState,
     selectedMarkerValue: state.mapState.selectedMarkerValue
     // inputValue: state.inputState.inputValue

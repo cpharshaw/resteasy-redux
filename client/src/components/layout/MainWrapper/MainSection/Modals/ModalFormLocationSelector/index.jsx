@@ -4,8 +4,7 @@ import { compose } from 'redux';
 import { formPrev } from '../../../../../../store/actions/formActions';
 import { modalToggled, modalClosed } from '../../../../../../store/actions/modalActions';
 // import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { storeCircle } from '../../../../../../store/actions/circleActions';
-import { storeCenter } from '../../../../../../store/actions/centerActions';
+import { storeCircle, storeCenter } from '../../../../../../store/actions/mapActions';
 import { getPlacesFromFoursquare } from '../../../../../../store/actions/foursquareActions';
 // import ModalBlurBackground from '../ModalBlurBackground';
 
@@ -127,8 +126,8 @@ export class LocationModal extends Component {
     const prev_ctrLat = prevProps.centerLatValue;
     const prev_ctrLng = prevProps.centerLngValue;
 
-    const bounds = this.props.boundsValue;
-    const prev_bounds = prevProps.boundsValue;
+    // const bounds = this.props.boundsValue;
+    // const prev_bounds = prevProps.boundsValue;
 
     const inputVal = this.props.inputValue;
     const prev_inputVal = prevProps.inputValue;
@@ -148,7 +147,7 @@ export class LocationModal extends Component {
       ||
       ctrLng !== prev_ctrLng;
 
-    const bounds_update = JSON.stringify(bounds) !== JSON.stringify(prev_bounds);
+    // const bounds_update = JSON.stringify(bounds) !== JSON.stringify(prev_bounds);
 
     const input_update = inputVal !== prev_inputVal;
 
@@ -281,16 +280,15 @@ export class LocationModal extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     formStepValue: state.formState.formStepValue,
-    geolocationValue: state.geolocationState.geolocationValue,
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
-    boundsValue: state.boundsState.boundsValue,
-    centerLatValue: state.centerState.centerLatValue,
-    centerLngValue: state.centerState.centerLngValue,
+    // boundsValue: state.mapState.boundsValue,
+    // centerLatValue: state.mapState.centerLatValue,
+    // centerLngValue: state.mapState.centerLngValue,
     foursquareValue: state.foursquareState.foursquareValue,
-    googleAPIValue: state.googleAPIState.googleAPIValue,
+    googleAPIValue: state.mapState.googleAPIValue,
     selectedSectionValue: state.sectionState.selectedSectionValue,
   }
 }
