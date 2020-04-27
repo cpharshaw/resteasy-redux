@@ -6,8 +6,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { getGeolocation } from '../../../../../../../../store/actions/geoActions';
-import { storeInput }              from '../../../../../../../../store/actions/inputActions';
+import { storeInput } from '../../../../../../../../store/actions/inputActions';
 import { getPlacesFromFoursquare } from '../../../../../../../../store/actions/foursquareActions';
+import { recenterMap } from '../../../../../../../../store/actions/mapActions';
+
+
 import './recenter.css';
 
 
@@ -20,136 +23,64 @@ class RecenterButton extends Component {
       color: "grey"
     };
     this.handleClick = this.handleClick.bind(this);
+    this.color = "grey";
   }
 
 
   handleClick() {
-    // this.props.storeInput("human");
+    const googleAPI = this.props.googleAPIValue;
+    const googleMap = this.props.mapValue;
+    const googleMapLoaded = this.props.initialMapTilesLoaded;
+    const fsValue = this.props.foursquareValue;
+    const geolocLat = this.props.geolocationLatValue;
+    const geolocLng = this.props.geolocationLngValue;
+    const mapMovementCounter = this.props.mapMovedCounterValue;
 
-    if (
-      (this.props.geolocationLatValue !== this.props.centerLatValue) 
-      || 
-      (this.props.geolocationLngValue !== this.props.centerLngValue)
-    ) {
-      this.props.getGeolocation();
-    }
+    const googleMapBounds = googleMap ? googleMap.getBounds() : null;
+    const googleMapCenter = googleMap ? googleMap.getCenter() : null;
+    const googleMapCenterLat = googleMap ? googleMapCenter.lat() : 0;
+    const googleMapCenterLng = googleMap ? googleMapCenter.lng() : 0;
 
-    // console.log('recenter clicked');
-
-    // this.setState({
-    //   color: "#1898dd"
-    // });
-  }
-
-
-
-  componentDidMount() {
-
-    // variables
-    const geoUpdates = this.props.geolocationUpdates;
-    const geoLat = this.props.geolocationLatValue;
-    const geoLng = this.props.geolocationLngValue;
-    const ctrLat = this.props.centerLatValue;
-    const ctrLng = this.props.centerLngValue;
-    const bounds = this.props.boundsValue;
-    const inputVal = this.props.inputValue;
-
-    const ctr_matches_geo =
-      geoLat === ctrLat
-      &&
-      geoLng === ctrLng;
-
-
-    if (ctr_matches_geo) {
-      // console.log("center matches geoLoc");
-      this.setState({
-        color: "#1898dd"
-      });
-    }
-
-
-  }
-
-
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-
-    // variables
-    const geoUpdates = this.props.geolocationUpdates;
-    const geoLat = this.props.geolocationLatValue;
-    const geoLng = this.props.geolocationLngValue;
-    const prev_geoLat = prevProps.geolocationLatValue;
-    const prev_geoLng = prevProps.geolocationLngValue;
-
-    const ctrLat = this.props.centerLatValue;
-    const ctrLng = this.props.centerLngValue;
-    const prev_ctrLat = prevProps.centerLatValue;
-    const prev_ctrLng = prevProps.centerLngValue;
-
-    const bounds = this.props.boundsValue;
-    const prev_bounds = prevProps.boundsValue;
-
-    const inputVal = this.props.inputValue;
-    const prev_inputVal = prevProps.inputValue;
-
-
-    // checks for changes
-    const geo_update =
-      geoLat !== prev_geoLat
-      ||
-      geoLng !== prev_geoLng;
-
-    const ctr_update =
-      ctrLat !== prev_ctrLat
-      ||
-      ctrLng !== prev_ctrLng;
-
-    const bounds_update = JSON.stringify(bounds) !== JSON.stringify(prev_bounds);
-
-    const input_update = inputVal !== prev_inputVal;
-
-
-
-    //
-    //
-    //
-
-    // changes above; other checks below
     const geo_same_ctr =
-      geoLat == ctrLat
+      geolocLat == googleMapCenterLat
       &&
-      geoLng == ctrLng;
-    // console.log("RECENTER - geo_same_ctr: ", geo_same_ctr);
+      geolocLng == googleMapCenterLng;
 
-    // 
-
-    // console.log("recenter button changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
-
-
-    if ((ctr_update || geo_update) && geo_same_ctr) {
-      this.setState({
-        color: "#1898dd"
-      });
-      // console.log('recenter', this.props.foursquareValue);
-      // console.log("RECENTER BUTTON - DidUpdate - color changed to tiffany");
-
-    } else if ((ctr_update || geo_update) && !geo_same_ctr) {
-      this.setState({
-        color: "grey"
-      });
-      // console.log("RECENTER BUTTON - DidUpdate - color changed to grey");    
+    if (!geo_same_ctr) {
+      console.log("recenter clicked");
+      this.props.getGeolocation();
+      this.props.recenterMap();
     }
 
   }
+
 
 
   render() {
 
-    const color = this.state.color;
+    const googleAPI = this.props.googleAPIValue;
+    const googleMap = this.props.mapValue;
+    const googleMapLoaded = this.props.initialMapTilesLoaded;
+    const fsValue = this.props.foursquareValue;
+    const geolocLat = this.props.geolocationLatValue;
+    const geolocLng = this.props.geolocationLngValue;
+    const mapMovementCounter = this.props.mapMovedCounterValue;
+
+    const googleMapBounds = googleMap ? googleMap.getBounds() : null;
+    const googleMapCenter = googleMap ? googleMap.getCenter() : null;
+    const googleMapCenterLat = googleMap ? googleMapCenter.lat() : 0;
+    const googleMapCenterLng = googleMap ? googleMapCenter.lng() : 0;
+
+    const geo_same_ctr =
+      geolocLat == googleMapCenterLat
+      &&
+      geolocLng == googleMapCenterLng;
+
+    const color = geo_same_ctr ? "#1898dd" : "grey";
 
     return (
 
-       <div className="recenterButton animated fadeInRight faster"
+      <div className="recenterButton animated fadeInRight faster"
         style={{
           borderColor: color
         }}
@@ -187,30 +118,34 @@ class RecenterButton extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // displayValue: ownProps.display ? "none" : "",
+    displayValue: ownProps.display ? "none" : "",
+    // geolocationValue: state.geolocationState.geolocationValue,
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
-    geolocationUpdates: state.geolocationState.geolocationUpdates,
+    numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
     boundsValue: state.mapState.boundsValue,
+    googleAPIValue: state.mapState.googleAPIValue,
+    initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
+    foursquareValue: state.foursquareState.foursquareValue,
+    mapMovedCounterValue: state.mapState.mapMovedCounterValue,
     centerLatValue: state.mapState.centerLatValue,
     centerLngValue: state.mapState.centerLngValue,
-    inputValue: state.inputState.inputValue,
-    foursquareValue: state.foursquareState.foursquareValue,
+    mapListToggleValue: ownProps.display,
+    googleAPIValue: state.mapState.googleAPIValue,
+    modalState: state.modalState,
+    selectedMarkerValue: state.mapState.selectedMarkerValue
+    // inputValue: state.inputState.inputValue
+    // ,state: state
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGeolocation: () => {
-      return dispatch(getGeolocation());
-    },
-    storeInput: (input) => {
-      return dispatch(storeInput(input));
-    },
-    getPlacesFromFoursquare: (location) => {
-      return dispatch(getPlacesFromFoursquare(location))
-    },
+    getGeolocation: () => dispatch(getGeolocation()),
+    storeInput: (input) => dispatch(storeInput(input)),
+    getPlacesFromFoursquare: (location) => dispatch(getPlacesFromFoursquare(location)),
+    recenterMap: () => dispatch(recenterMap())
   }
 }
 
@@ -223,8 +158,4 @@ export default compose(
   //     orderBy: ['createdAt', 'desc']
   //   }
   // ]),
-  GoogleApiWrapper({
-    apiKey: "AIzaSyBVYS3YTeyILl2Cr7ajZ0ZdKbO092cW6lw",
-    version: "3.30"
-  })
 )(RecenterButton);

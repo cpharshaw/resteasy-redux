@@ -70,8 +70,8 @@ class MainWrapper extends Component {
       this.props.getPlacesFromFoursquare(fsLL);
     }
 
-    console.log("from mainWrapper - numCenterUpdates: ", numCenterUpdates)
-    console.log("from mainWrapper - ctrLat, ctrLng: ", ctrLat, ctrLng)
+    // console.log("from mainWrapper - numCenterUpdates: ", numCenterUpdates)
+    // console.log("from mainWrapper - ctrLat, ctrLng: ", ctrLat, ctrLng)
 
   }
 

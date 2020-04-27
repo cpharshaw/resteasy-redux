@@ -15,11 +15,11 @@ export class LocationSelector extends Component {
     this.props.modalToggled("formLocationModal");
 
     //update list
-    const ctrLat = this.props.centerLatValue;
-    const ctrLng = this.props.centerLngValue;
-    const fsLL = ctrLat + "," + ctrLng;
-    this.props.getPlacesFromFoursquare(fsLL);
-    console.log("update fs in review")
+    // const ctrLat = this.props.centerLatValue;
+    // const ctrLng = this.props.centerLngValue;
+    // const fsLL = ctrLat + "," + ctrLng;
+    // this.props.getPlacesFromFoursquare(fsLL);
+    // console.log("update fs in review")
 
   }
 
@@ -55,8 +55,8 @@ const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
     modalState: state.modalState,
-    centerLatValue: state.centerState.centerLatValue,
-    centerLngValue: state.centerState.centerLngValue,
+    centerLatValue: state.mapState.centerLatValue,
+    centerLngValue: state.mapState.centerLngValue,
   }
 }
 

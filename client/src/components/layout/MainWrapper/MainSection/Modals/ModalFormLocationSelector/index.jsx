@@ -23,7 +23,7 @@ export class LocationModal extends Component {
   handleChange = e => {
     const value = e.target.value;
     this.setState({
-      value
+      value: value
     })
   }
 
@@ -38,15 +38,13 @@ export class LocationModal extends Component {
 
   componentDidMount() {
 
-    const circle = new this.props.googleAPIValue.Circle(
-      {
-        center: {
-          lat: this.props.geolocationLatValue,
-          lng: this.props.geolocationLngValue
-        },
-        radius: 56000
-      }
-    );
+    const circle = new this.props.googleAPIValue.Circle({
+      center: {
+        lat: this.props.geolocationLatValue,
+        lng: this.props.geolocationLngValue
+      },
+      radius: 56000
+    });
 
     const bounds = circle.getBounds();
 
@@ -68,28 +66,28 @@ export class LocationModal extends Component {
         // console.log(this.searchBox)
         const place = this.searchBox.getPlace();
         this.setState({
-          place,
+          place: place,
           value: place.name
         });
         // console.log("LocationModal selected place: ", place)
 
-        const ctrLat = place.geometry.location.lat();
-        const ctrLng = place.geometry.location.lng();
+        const locationLat = place.geometry.location.lat();
+        const locationLng = place.geometry.location.lng();
 
         const center = {
-          lat: ctrLat,
-          lng: ctrLng
+          lat: locationLat,
+          lng: locationLng
         };
 
-        const fsLL = ctrLat + "," + ctrLng;
-        this.props.getPlacesFromFoursquare(fsLL);
+        // const fsLL = locationLat + "," + locationLng;
+        // this.props.getPlacesFromFoursquare(fsLL);
 
         // setTimeout(() => console.log("fs value updated: ", this.props.foursquareValue), 2000)
         // console.log("fs value updated: ", this.props.foursquareValue);
 
         this.props.storeCenter(center);
 
-        if (this.props.selectedSectionValue === "mapList")  this.props.modalClosed();
+        if (this.props.selectedSectionValue === "mapList") this.props.modalClosed();
 
       }
     );
@@ -244,34 +242,34 @@ export class LocationModal extends Component {
     // console.log(data_classname)
     return (
 
-        <input
-          id="pac-input"
-          className={data_classname ? data_classname : null}
-          type="search"
-          ref={this.searchBoxRef}
-          placeholder="Recenter around location..."
-          style={{
-            // all: "unset",
-            position: data_position ? data_position : null,
-            top: data_top ? data_top : null ,
-            bottom: data_bottom ? data_bottom : null,
-            left: data_left ? data_left : null,
-            right: data_right ? data_right : null,
-            // height: data_height ? data_height : "50%",
-            // height: data_height ? data_height : "44px !important",
-            // width: data_width ? data_width : null,
-            margin: data_margin ? data_margin : null,
-            fontStyle: "italic",
-            borderRadius: "5px",
-            padding: "10px !important",
-            fontSize: "12.5px",
-            // background: "#f5f5f5",
-            border: data_border ? data_border : null,
-            textOverflow: "ellipsis",
-            zIndex: "1100 !important"
-          }}
-        /> 
-  
+      <input
+        id="pac-input"
+        className={data_classname ? data_classname : null}
+        type="search"
+        ref={this.searchBoxRef}
+        placeholder="Recenter around location..."
+        style={{
+          // all: "unset",
+          position: data_position ? data_position : null,
+          top: data_top ? data_top : null,
+          bottom: data_bottom ? data_bottom : null,
+          left: data_left ? data_left : null,
+          right: data_right ? data_right : null,
+          // height: data_height ? data_height : "50%",
+          // height: data_height ? data_height : "44px !important",
+          // width: data_width ? data_width : null,
+          margin: data_margin ? data_margin : null,
+          fontStyle: "italic",
+          borderRadius: "5px",
+          padding: "10px !important",
+          fontSize: "12.5px",
+          // background: "#f5f5f5",
+          border: data_border ? data_border : null,
+          textOverflow: "ellipsis",
+          zIndex: "1100 !important"
+        }}
+      />
+
     )
   }
 }

@@ -1,13 +1,12 @@
-
 // https://codesandbox.io/s/rzwrk2854
 import MarkerComp from './Marker';
 import RecenterButton from './RecenterButton';
 
 import { getGeolocation } from '../../../../../../../store/actions/geoActions';
 import { getPlacesFromFoursquare } from '../../../../../../../store/actions/foursquareActions';
-import { storeMap, storeSelectedMarker, storeBounds, storeCenter } from '../../../../../../../store/actions/mapActions';
+import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeMarker, storeBounds, storeCenter, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../store/actions/mapActions';
 import { storeInput } from '../../../../../../../store/actions/inputActions';
-
+import { GoogleApiWrapper } from "google-maps-react";
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 
@@ -18,10 +17,6 @@ import yellowMarker from '../../MapListWrapper/yellowMarker50.png';
 import chartreuseMarker from '../../MapListWrapper/chartreuseMarker50.png';
 import greenMarker from '../../MapListWrapper/greenMarker50.png';
 import PlaceCard from './../../../../../../sharedComponents/mapListComponents/PlaceCard';
-
-import { GoogleApiWrapper } from "google-maps-react";
-
-
 import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
@@ -30,74 +25,61 @@ import MyStyle from './mapStyle.js';
 
 // import './loading.css';
 const myLocationIcon = 'https://img.icons8.com/ultraviolet/40/000000/map-pin.png';
+// "https://img.icons8.com/officel/38/000000/marker.png";
+// const poorIcon = "https://img.icons8.com/office/40/000000/poor-quality.png";
+// const terribleIcon = "https://img.icons8.com/officel/40/000000/evil.png";
+// const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
 
 const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
 
-
-
-// "https://img.icons8.com/officel/38/000000/marker.png";
-
-// <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-//   width="33" height="33"
-//   viewBox="0 0 172 172"
-//   style={{fill: "#0abab5"}}>
-//   <g fill="none" fillRule="nonzero" stroke="none" strokeWwidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{mixBlendMode: "normal"}}>
-//     <path d="M0,172v-172h172v172z" fill="none" />
-//     <g fill="#0abab5">
-//       <path d="M35.83333,64.4355c0,32.12817 42.77067,84.33017 44.591,86.53033l5.5255,6.70083l5.5255,-6.70083c1.82033,-2.20733 44.591,-54.40217 44.591,-86.53033c0,-27.64183 -22.48183,-50.1165 -50.1165,-50.1165c-27.63467,0 -50.1165,22.48183 -50.1165,50.1165zM90.09933,64.5l-18.5975,-18.59033l10.13367,-10.13367l28.73117,28.724l-28.68817,28.68817l-10.13367,-10.13367z" />
-//     </g>
-//   </g>
-// </svg>
-
-// const poorIcon = "https://img.icons8.com/office/40/000000/poor-quality.png";
-// const terribleIcon = "https://img.icons8.com/officel/40/000000/evil.png";
-
-// const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
 
 class MapSection extends Component {
   constructor(props) {
     super(props);
     this.googleMapRef = React.createRef();
     this.state = {
-      initialUpdate: 0,
+      initialUpdate: false,
       geo_same_ctr: true,
       fsMarkers: null,
-      markerIcon: null
+      markerIcon: null,
+      movedMap: false,
+      currentCenterLat: null,
+      currentCenterLng: null,
+      currentBounds: null,
     };
-    this.map = null;
-    this.layer = null
+    this.geo_same_ctr = true;
+
+    this.currentMap = null;
+
+    this.myLocationMarker = null;
+
     this.renderJunk = this.renderJunk.bind(this);
-    this.marker = null;
+    this.mapFuncs = this.mapFuncs.bind(this);
+
+    this.map_getBounds = this.map_getBounds.bind(this);
+    this.map_getCenter = this.map_getCenter.bind(this);
+    this.map_setCenter = this.map_setCenter.bind(this);
+    this.map_panTo = this.map_panTo.bind(this);
+
+
+    this.map_storeCenter = this.map_storeCenter.bind(this);
+    this.map_storeMap = this.map_storeMap.bind(this);
+    this.map_storeBounds = this.map_storeBounds.bind(this);
+
+    this.map_updateMap = this.map_updateMap.bind(this);
+
+
+    this.marker_setPosition = this.marker_setPosition.bind(this);
+    this.marker_getIcon = this.marker_getIcon.bind(this);
+    this.marker_getLabel = this.marker_getLabel.bind(this);
+    this.marker_getTitle = this.marker_getTitle.bind(this);
+    this.marker_setPosition = this.marker_setPosition.bind(this);
+
+    this.marker_storeMarker = this.marker_storeMarker.bind(this);
   }
   // https://stackoverflow.com/questions/20916953/get-distance-between-two-points-in-canvas
 
-  mapFuncs(message) {
-    const map = this.map;
-    const centerObj = map.getCenter();
-    const center = {
-      lat: centerObj.lat(),
-      lng: centerObj.lng()
-    };
-    const bounds = map.getBounds();
 
-    this.props.storeMap(map);
-    this.props.storeCenter(center);
-    this.props.storeBounds(bounds);
-
-    // console.log("the map: ", map);
-
-    // console.log(message);
-    // console.log("map", map);
-    // console.log("center", center);
-    // console.log("geoLoc", this.props.geolocationLatValue, this.props.geolocationLngValue)
-    // console.log("bounds", bounds);
-  }
-
-
-  resetCenter = e => {
-    alert('reset center clicked');
-    console.log('reset center clicked')
-  }
 
 
   renderJunk(map, colors) {
@@ -144,241 +126,265 @@ class MapSection extends Component {
   }
 
 
-  componentDidMount() {
-    const map = this.props.mapValue;
-    const foursquareValue = this.props.foursquareValue;
-    if (map && foursquareValue) {
-      console.log("map ...didMount", foursquareValue)
-      // https://frontarm.com/james-k-nelson/pdf-cheatsheets/
-      this.renderJunk(map, iconArr);
-    }
-    // https://engineering.universe.com/building-a-google-map-in-react-b103b4ee97f1
-    // https://developers.google.com/maps/documentation/javascript/places - nearby
+  map_setCenter = (map, lat, lng) => {
+    map.setCenter({ lat, lng });
   }
+
+  map_panTo = (map, lat, lng) => {
+    map.panTo({ lat, lng });
+  }
+
+  map_getBounds = (map) => {
+    return map.getBounds();
+  }
+
+  map_getCenter = (map) => {
+    const centerObj = map.getCenter();
+    const centerLat = centerObj.lat();
+    const centerLng = centerObj.lng();
+    const centerData = {
+      centerObj,
+      centerLat,
+      centerLng
+    }
+    return centerData;
+  }
+
+
+  map_storeMap = (map) => {
+    return this.props.storeMap(map);
+  }
+
+  map_storeBounds = (bounds) => {
+    return this.props.storeBounds(bounds);
+  }
+
+  map_storeCenter = (center) => {
+    return this.props.storeCenter(center);
+  }
+
+
+  marker_setPosition = (marker, lat, lng) => {
+    marker.setPosition({ lat, lng });
+  }
+
+  marker_getIcon = (marker) => {
+    return marker.getIcon();
+  }
+
+  marker_getLabel = (marker) => {
+    return marker.getLabel();
+  }
+
+  marker_getTitle = (marker) => {
+    return marker.getTitle();
+  }
+
+  marker_storeMarker = (marker) => {
+    return this.props.storeMarker(marker);
+  }
+
+  map_updateMap = () => {
+    this.map_storeMap(this.currentMap);
+    this.map_storeCenter(this.map_getCenter(this.currentMap));
+    this.map_storeBounds(this.map_getBounds(this.currentMap));
+    this.setState({
+      movedMap: false
+    })
+  }
+
+
+  mapFuncs = (source) => {
+
+    if (source == "tilesloaded") {
+      if (!this.props.initialMapTilesLoaded) {
+        this.props.registerInitialMapTilesloaded();
+        // console.log("tilesloaded");
+      }
+    }
+
+    if (source === "idle") {
+      if (this.props.initialMapTilesLoaded) {
+        this.props.registerSubsequentMapMovement();
+        // console.log("idle");
+      }
+    }
+
+  }
+
+
+
 
 
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    // variables
-    const foursquareValue = this.props.foursquareValue;
-    const prev_foursquareValue = prevProps.foursquareValue;
+    const googleAPI = this.props.googleAPIValue; const prev_googleAPI = prevProps.googleAPIValue; const update_googleAPI = JSON.stringify(googleAPI) !== JSON.stringify(prev_googleAPI);
+    const googleMap = this.props.mapValue; const prev_googleMap = prevProps.mapValue; const update_googleMap = googleMap !== prev_googleMap;
+    const googleMapLoaded = this.props.initialMapTilesLoaded; const prev_googleMapLoaded = prevProps.initialMapTilesLoaded; const update_googleMapLoaded = (prev_googleMapLoaded === null && googleMapLoaded !== null) || (prev_googleMapLoaded !== googleMapLoaded);
 
-    const numGeoUpdates = this.props.numGeolocationUpdates;
-    const prev_numGeoUpdates = prevProps.numGeolocationUpdates;
+    const googleMapBounds = googleMap ? googleMap.getBounds() : null; const prev_googleMapBounds = prev_googleMap ? prev_googleMap.getBounds() : null; const update_googleMapBounds = JSON.stringify(googleMapBounds) !== JSON.stringify(prev_googleMapBounds);
+    const googleMapCenter = googleMap ? googleMap.getCenter() : null; const prev_googleMapCenter = prev_googleMap ? prev_googleMap.getCenter() : null; const update_googleMapCenter = JSON.stringify(googleMapCenter) !== JSON.stringify(prev_googleMapCenter)
+    const googleMapCenterLat = googleMap ? googleMapCenter.lat() : 0; const prev_googleMapCenterLat = prev_googleMap ? prev_googleMapCenter.lat() : 0; const update_googleMapCenterLat = googleMapCenterLat !== prev_googleMapCenterLat;
+    const googleMapCenterLng = googleMap ? googleMapCenter.lng() : 0; const prev_googleMapCenterLng = prev_googleMap ? prev_googleMapCenter.lng() : 0; const update_googleMapCenterLng = googleMapCenterLng !== prev_googleMapCenterLng;
 
-    const geoLat = this.props.geolocationLatValue;
-    const geoLng = this.props.geolocationLngValue;
-    const prev_geoLat = prevProps.geolocationLatValue;
-    const prev_geoLng = prevProps.geolocationLngValue;
+    const fsValue = this.props.foursquareValue; const prev_fsValue = prevProps.foursquareValue; const update_fsValue = JSON.stringify(fsValue) !== JSON.stringify(prev_fsValue);
 
-    const ctrLat = this.props.centerLatValue;
-    const ctrLng = this.props.centerLngValue;
-    const prev_ctrLat = prevProps.centerLatValue;
-    const prev_ctrLng = prevProps.centerLngValue;
+    const geolocLat = this.props.geolocationLatValue; const prev_geolocLat = prevProps.geolocationLatValue; const update_geolocLat = geolocLat !== prev_geolocLat;
+    const geolocLng = this.props.geolocationLngValue; const prev_geolocLng = prevProps.geolocationLngValue; const update_geolocLng = geolocLng !== prev_geolocLng; const update_geoloc = update_geolocLat && update_geolocLng;
 
-    const bounds = this.props.boundsValue;
-    const prev_bounds = prevProps.boundsValue;
+    const mapMovementCounter = this.props.mapMovedCounterValue; const prev_mapMovementCounter = prevProps.mapMovedCounterValue; const update_mapMovementCounter = mapMovementCounter !== prev_mapMovementCounter;
+    const recenterIncrementerValue = this.props.recenterIncrementerValue; const prev_recenterIncrementerValue = prevProps.recenterIncrementerValue; const update_recenterIncrementerValue = recenterIncrementerValue !== prev_recenterIncrementerValue;
 
-    const inputVal = this.props.inputValue;
-    const prev_inputVal = prevProps.inputValue;
+    const currentMap = this.currentMap;
+    const currentMapBounds = currentMap ? currentMap.getBounds() : null;
+    const currentMapCenter = currentMap ? currentMap.getCenter() : null;
+    const currentMapCenterLat = currentMap ? currentMapCenter.lat() : null;
+    const currentMapCenterLng = currentMap ? currentMapCenter.lng() : null;
 
-
-    const map = this.props.mapValue;
-    const prev_map = prevProps.mapValue;
-
-    // checks for changes
-
-    const googleAPIUpdate = prevProps.googleAPIValue === null && this.props.googleAPIValue !== null;
-
-    const fsPlacesUpdate = foursquareValue && (JSON.stringify(foursquareValue) !== JSON.stringify(prev_foursquareValue));
-
-    if (fsPlacesUpdate || foursquareValue) {
-      // https://frontarm.com/james-k-nelson/pdf-cheatsheets/
-      this.renderJunk(map, iconArr);
-    }
+    const movedMap = this.state.movedMap; const prev_movedMap = prevState.movedMap; const update_movedMap = movedMap !== prev_movedMap;
 
 
-    // console.log("fs update: ", fsPlacesUpdate)
+    if ((!this.currentMap && update_googleAPI) || (!googleMap && googleAPI && update_geoloc)) {
 
-    const geo_update = this.props.googleAPIValue && (
-      geoLat !== prev_geoLat
-      ||
-      geoLng !== prev_geoLng
-    );
-
-    const numGeo_update = (numGeoUpdates !== prev_numGeoUpdates) && this.props.googleAPIValue;
-
-    const ctr_update = this.props.googleAPIValue && (
-      ctrLat !== prev_ctrLat
-      ||
-      ctrLng !== prev_ctrLng
-    );
-
-    // console.log(ctr_update);
-
-    const bounds_update = (JSON.stringify(bounds) !== JSON.stringify(prev_bounds)) && this.props.googleAPIValue;
-
-    const input_update = (inputVal !== prev_inputVal) && this.props.googleAPIValue;
-
-    const geo_same_ctr = this.props.googleAPIValue && (
-      geoLat === ctrLat
-      &&
-      geoLng === ctrLng
-    );
-
-    if (this.map && this.props.googleAPIValue && ctr_update && !geo_same_ctr) this.setState({ geo_same_ctr: false });
-
-
-
-
-    if (JSON.stringify(this.state.fsMarkers) !== JSON.stringify(prevState.fsMarkers)) console.log('state update')
-
-
-
-    if (googleAPIUpdate) {
-
-      this.map = new this.props.googleAPIValue.Map(
+      this.currentMap = new googleAPI.Map(
         this.googleMapRef.current,
         {
           zoom: 17,
           styles: MyStyle,
           center: {
-            lat: geoLat,
-            lng: geoLng
+            lat: geolocLat,
+            lng: geolocLng
           },
           zoomControlOptions: {
-            // position: this.props.googleAPIValue.ControlPosition.LEFT_CENTER
-            position: this.props.googleAPIValue.ControlPosition.LEFT_BOTTOM
-            // position: this.props.googleAPIValue.ControlPosition.RIGHT_CENTER
-            // position: this.props.googleAPIValue.ControlPosition.RIGHT_BOTTOM
+            position: googleAPI.ControlPosition.LEFT_BOTTOM
           },
           mapTypeControl: false,
           fullscreenControl: false,
           streetViewControl: false,
-          // disableDefaultUI: true
         }
       );
 
-
-      this.marker = new this.props.googleAPIValue.Marker(
-        {
-          map: this.map,
-          position: {
-            lat: geoLat,
-            lng: geoLng
-          },
-          icon: myLocationIcon,
-          animation: this.props.googleAPIValue.Animation.DROP,
+      this.currentMap.addListener(
+        'tilesloaded',
+        () => {
+          this.mapFuncs("tilesloaded");
         }
-      );
+      )
 
-      // https://medium.com/@13milliseconds/interact-with-google-maps-markers-in-the-dom-8772452ebeef
-      // https://www.sitepoint.com/animated-google-map-markers-css-javascript/
-
-
-
-      const idleListener = this.map.addListener(
+      this.currentMap.addListener(
         'idle',
         () => {
-
-          // this.mapFuncs("idleListener fired");
-
-          // console.log('map idle fired')
-
-          const fsLL = geoLat + "," + geoLng;
-          // this.props.getPlacesFromFoursquare(fsLL);
-          // console.log("fs value: ", this.props.foursquareValue);
-
-
-          // if (this.props.numGeolocationUpdates > 0) {
-          //   var pyrmont = new this.props.google.maps.LatLng(
-          //     this.props.centerLatValue,
-          //     this.props.centerLngValue
-          //   );
-
-
-          // var options = {
-          //   location: pyrmont,
-          // type: ['point_of_interest'],
-          // type: ['establishment'],
-          // rankBy: this.props.google.maps.places.RankBy.DISTANCE,
-          // radius: '500',
-          // };
-          // https://github.com/foursquare/react-foursquare
-
-
-          // const service = new this.props.google.maps.places.PlacesService(this.map);
-          // service.nearbySearch(options, callback);
-
-          // function callback(results, status) {
-          //   console.log("nearby results: ", results);
-          // }
-          // }
-
+          this.mapFuncs("idle");
         }
-      );
+      )
 
     }
 
 
-    if (this.map && ctr_update) {
-      this.map.setCenter(
-        {
-          lat: ctrLat,
-          lng: ctrLng
-        }
-      );
-      const fsLL = ctrLat + "," + ctrLng;
-      // this.props.getPlacesFromFoursquare(fsLL);
-      // console.log("fs value updated: ", this.props.foursquareValue);
+    if (update_googleMapLoaded) {
+      this.myLocationMarker = new this.props.googleAPIValue.Marker({
+        map: this.currentMap,
+        position: {
+          lat: geolocLat,
+          lng: geolocLng
+        },
+        icon: myLocationIcon,
+        animation: this.props.googleAPIValue.Animation.DROP,
+      });
+      this.map_storeMap(this.currentMap);
+      this.map_storeCenter(this.map_getCenter(this.currentMap));
+      this.map_storeBounds(this.map_getBounds(this.currentMap));
+      this.marker_storeMarker(this.myLocationMarker);
+      // console.log("update googleMapLoaded");
     }
 
-    // 
-    // 
-    // console.log("map changes:",geo_update,ctr_update,geo_same_ctr,bounds_update)
+
+    if (update_mapMovementCounter) {
+      // this.map_storeMap(this.currentMap);
+      // this.map_storeCenter(this.map_getCenter(this.currentMap));
+      // this.map_storeBounds(this.map_getBounds(this.currentMap));
+      console.log("update mapMovementCounter", mapMovementCounter);
+    }
 
 
-    if (this.map && this.marker && (geo_update || numGeo_update)) {
-
-      // console.log("map updated - FIRST update type", geo_update, numGeo_update);
-
-      // this.map.panTo(
-      //   {
-      //     lat: geoLat,
-      //     lng: geoLng
-      //   }
-      // );
-
-      this.map.setCenter(
-        {
-          lat: geoLat,
-          lng: geoLng
-        }
-      );
-
-      this.marker.setPosition(
-        {
-          lat: geoLat,
-          lng: geoLng
-        }
-      );
-
-      const fsLL = geoLat + "," + geoLng;
-      // this.props.getPlacesFromFoursquare(fsLL);
-      // console.log("fs value updated: ", this.props.foursquareValue);
-
+    if (googleMapLoaded && update_geoloc) {
+      this.map_panTo(this.currentMap, geolocLat, geolocLng);
+      this.marker_setPosition(this.myLocationMarker, geolocLat, geolocLng);
+      this.map_setCenter(this.currentMap, geolocLat, geolocLng);
       this.setState({
-        geo_same_ctr: true
+        movedMap: false
       })
+      console.log("new geoloc, repositioning...")
+    }
 
-    };
 
-    // console.log("places: ", this.map.getPlaces());
+
+    if (update_recenterIncrementerValue) {
+      this.map_panTo(this.currentMap, geolocLat, geolocLng);
+      this.map_setCenter(this.currentMap, geolocLat, geolocLng);
+      this.map_storeMap(this.currentMap);
+      this.map_storeCenter(this.map_getCenter(this.currentMap));
+      this.map_storeBounds(this.map_getBounds(this.currentMap));
+      this.setState({
+        movedMap: false
+      })
+    }
+
+    if (googleMapLoaded && !movedMap && !update_movedMap && !update_geolocLat && update_mapMovementCounter && (currentMapCenterLat !== geolocLat || currentMapCenterLng !== geolocLng)) {
+      this.setState({
+        movedMap: true
+      })
+    }
+
+
+    // if (googleMapLoaded && googleMap) {
+    // https://frontarm.com/james-k-nelson/pdf-cheatsheets/
+    // this.renderJunk(googleMap, iconArr);      
+
+    // this.props.storeMyLocationMarker(newMarker);
+    // }
+
+
+
+    // https://medium.com/@13milliseconds/interact-with-google-maps-markers-in-the-dom-8772452ebeef
+    // https://www.sitepoint.com/animated-google-map-markers-css-javascript/
+
+
+
+
+    // console.log("idle trigged", this.state.initialUpdate, this.state.movedMap)
+    // if (!this.state.initialUpdate) this.setState({ initialUpdate: true });
+
+    // if (this.state.initialUpdate) this.setState({ movedMap: true })
+
+
+
+    // if (this.props.numGeolocationUpdates > 0) {
+    //   const pyrmont = new this.props.google.maps.LatLng(
+    //     this.props.centerLatValue,
+    //     this.props.centerLngValue
+    //   );
+
+    //   var options = {
+    //     location: pyrmont,
+    //     type: ['point_of_interest'],
+    //     type: ['establishment'],
+    //     rankBy: this.props.google.maps.places.RankBy.DISTANCE,
+    //     radius: '500',
+    //   };
+    //   https://github.com/foursquare/react-foursquare
+
+    //   const service = new this.props.google.maps.places.PlacesService(this.currentMap);
+    //   service.nearbySearch(options, callback);
+
+    //   function callback(results, status) {
+    //     console.log("nearby results: ", results);
+    //   }
+    // }
+
 
   }
-
-
 
 
 
@@ -396,6 +402,8 @@ class MapSection extends Component {
     const displayValue = this.props.data_display ? null : "none";
 
     return (
+
+
 
       <div id="mapSection" className="row animated fadeIn fast" style={{ display: displayValue }}>
         <div className="col">
@@ -421,8 +429,8 @@ class MapSection extends Component {
           </div>
 
           {
-            this.state.geo_same_ctr ? null : (
-              <div className="row animated fadeIn px-3 py-2" onClick={this.resetCenter}
+            !this.state.movedMap ? null : (
+              <div className="row animated fadeIn px-3 py-2" onClick={this.map_updateMap}
                 style={{
                   position: "absolute",
                   left: "0",
@@ -438,7 +446,7 @@ class MapSection extends Component {
                   boxShadow: "0 0 5px #a2ddd9",
                 }}
               >
-                <span><em>Redo search in this area</em></span>
+                <span><em>Update map around this area</em></span>
               </div>
             )
           }
@@ -484,15 +492,17 @@ const mapStateToProps = (state, ownProps) => {
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
     mapValue: state.mapState.mapValue,
     boundsValue: state.mapState.boundsValue,
+    googleAPIValue: state.mapState.googleAPIValue,
+    initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
     foursquareValue: state.foursquareState.foursquareValue,
-    // circleValue: state.circleState.circleValue,
+    mapMovedCounterValue: state.mapState.mapMovedCounterValue,
     centerLatValue: state.mapState.centerLatValue,
     centerLngValue: state.mapState.centerLngValue,
-    foursquareValue: state.foursquareState.foursquareValue,
     mapListToggleValue: ownProps.display,
     googleAPIValue: state.mapState.googleAPIValue,
     modalState: state.modalState,
-    selectedMarkerValue: state.mapState.selectedMarkerValue
+    selectedMarkerValue: state.mapState.selectedMarkerValue,
+    recenterIncrementerValue: state.mapState.recenterIncrementerValue
     // inputValue: state.inputState.inputValue
     // ,state: state
   }
@@ -500,27 +510,17 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGeolocation: () => {
-      return dispatch(getGeolocation())
-    },
-    getPlacesFromFoursquare: (location) => {
-      return dispatch(getPlacesFromFoursquare(location))
-    },
-    storeMap: (map) => {
-      return dispatch(storeMap(map));
-    },
-    storeBounds: (bounds) => {
-      return dispatch(storeBounds(bounds));
-    },
-    storeCenter: (center) => {
-      return dispatch(storeCenter(center));
-    },
-    storeInput: (input) => {
-      return dispatch(storeInput(input));
-    },
-    storeSelectedMarker: (marker) => {
-      return dispatch(storeSelectedMarker(marker))
-    }
+    getGeolocation: () => dispatch(getGeolocation()),
+    getPlacesFromFoursquare: (location) => dispatch(getPlacesFromFoursquare(location)),
+    storeMap: (map) => dispatch(storeMap(map)),
+    storeMyLocationMarker: (map) => dispatch(storeMyLocationMarker(map)),
+    registerInitialMapTilesloaded: () => dispatch(registerInitialMapTilesloaded()),
+    registerSubsequentMapMovement: () => dispatch(registerSubsequentMapMovement()),
+    storeBounds: (bounds) => dispatch(storeBounds(bounds)),
+    storeCenter: (center) => dispatch(storeCenter(center)),
+    storeInput: (input) => dispatch(storeInput(input)),
+    storeSelectedMarker: (marker) => dispatch(storeSelectedMarker(marker)),
+    storeMarker: (marker) => dispatch(storeMarker(marker)),
   }
 }
 

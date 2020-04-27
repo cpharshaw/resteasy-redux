@@ -1,6 +1,6 @@
 
 export const getGeolocation = () => {
-  console.log("getGeolocation ACTION triggered")
+  // console.log("getGeolocation ACTION triggered")
   return (
 
     (dispatch, getState) => {

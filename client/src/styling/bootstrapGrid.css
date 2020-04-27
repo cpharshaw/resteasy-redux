@@ -6,7 +6,7 @@
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: box;
+  /* display: box; */
   display: flexbox;
   display: flex;
   

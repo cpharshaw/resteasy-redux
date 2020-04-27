@@ -3,7 +3,7 @@ const axios = require('axios');
 const endpoint = "https://api.foursquare.com/v2/venues/search";
 
 export const getPlacesFromFoursquare = (location) => {
-  console.log("getPlacesFromFoursquare ACTION triggered")
+  // console.log("getPlacesFromFoursquare ACTION triggered")
   return (dispatch, getState) => {
 
     return (
@@ -18,7 +18,7 @@ export const getPlacesFromFoursquare = (location) => {
               near: location,
               limit: 20,
               intent: "checkin",
-              v: "20200331",
+              v: "20191231",
               // v: "20191130",
             },
             responseType: 'json',
@@ -53,7 +53,6 @@ export const getPlacesFromFoursquare = (location) => {
         .then(
           res => {
             const data = res.data;
-
             const newData = data.sort((a, b) => {
               return a.distance - b.distance;
             })

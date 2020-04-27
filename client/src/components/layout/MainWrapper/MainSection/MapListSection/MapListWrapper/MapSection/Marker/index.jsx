@@ -30,18 +30,16 @@ class MarkerComp extends Component {
     if (googleAPIUpdate) {
 
       this.createMarker = () => {
-        new this.props.googleAPIValue.Marker(
-          {
-            map: this.props.mapValue,
-            position: {
-              lat: data_lat ? data_lat : 39.962292,
-              lng: data_lng ? data_lng : -75.144768
-            },
-            icon: data_icon ? data_icon : null,
-            animation: this.props.googleAPIValue.Animation.DROP,
-            // optimized:false
-          }
-        )
+        new this.props.googleAPIValue.Marker({
+          map: this.props.mapValue,
+          position: {
+            lat: data_lat ? data_lat : 39.962292,
+            lng: data_lng ? data_lng : -75.144768
+          },
+          icon: data_icon ? data_icon : null,
+          animation: this.props.googleAPIValue.Animation.DROP,
+          // optimized:false
+        })
       }
 
 
@@ -54,9 +52,9 @@ class MarkerComp extends Component {
   render() {
 
     return (
-      <div>
+      <>
         {this.createMarker ? this.createMarker() : null}
-      </div>
+      </>
     )
 
   }
@@ -67,11 +65,11 @@ const mapStateToProps = (state, ownProps) => {
   return {
     geolocationValue: state.geolocationState.geolocationValue,
     mapValue: state.mapState.mapValue,
-    centerValue: state.centerState.centerValue,
+    centerValue: state.mapState.centerValue,
     // markerLat: ownProps.data_lat,
     // markerLng: ownProps.data_lng,
     // key: ownProps.data_key,
-    googleAPIValue: state.googleAPIState.googleAPIValue
+    googleAPIValue: state.mapState.googleAPIValue
   }
 }
 
