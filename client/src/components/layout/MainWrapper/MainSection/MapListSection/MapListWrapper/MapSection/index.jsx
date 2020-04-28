@@ -53,7 +53,7 @@ class MapSection extends Component {
 
     this.myLocationMarker = null;
 
-    this.renderJunk = this.renderJunk.bind(this);
+    this.renderFS = this.renderFS.bind(this);
     this.mapFuncs = this.mapFuncs.bind(this);
 
     this.map_getBounds = this.map_getBounds.bind(this);
@@ -82,47 +82,67 @@ class MapSection extends Component {
 
 
 
-  renderJunk(map, colors) {
-    const mapParam = map;
-    const fs = this.props.foursquareValue.map((place, i) => {
-      const getRandomInt = (min, max) => {
-        const minNum = Math.ceil(min);
-        const maxNum = Math.floor(max);
-        return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
-      }
-      const randomMarkerColor = iconArr[getRandomInt(0, colors.length)];
-      const attachSecretMessage = (marker, place, secretMessage) => {
-        marker.addListener('click', () => {
-          this.props.storeSelectedMarker(place)
-          this.setState({
-            markerIcon: randomMarkerColor
-          })
-          mapParam.panTo({
-            lat: place.location.lat,
-            lng: place.location.lng
+  renderFS = (map, colors, removeInd) => {
+
+    console.log("renderFS running");
+
+    if (map && colors && this.props.foursquareValue) {
+
+      const mapParam = map;
+
+      const fs = this.props.foursquareValue.map((place, i) => {
+
+        const getRandomInt = (min, max) => {
+          const minNum = Math.ceil(min);
+          const maxNum = Math.floor(max);
+          return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
+        }
+
+        const randomMarkerColor = iconArr[getRandomInt(0, colors.length)];
+
+        const attachSecretMessage = (marker, place, secretMessage) => {
+          marker.addListener('click', () => {
+            this.props.storeSelectedMarker(place)
+            this.setState({
+              markerIcon: randomMarkerColor
+            })
+            mapParam.panTo({
+              lat: place.location.lat,
+              lng: place.location.lng
+            });
           });
-        });
-      }
-      const markerCreator = (mapArg) => {
-        const marker = new this.props.googleAPIValue.Marker({
-          map: mapArg,
-          position: {
-            lat: !place.location.lat ? 39.962292 : place.location.lat,
-            lng: !place.location.lng ? -75.144768 : place.location.lng
-          },
-          title: "fs-" + place.id,
-          icon: randomMarkerColor,
-          label: JSON.stringify(place.id),
-          animation: this.props.googleAPIValue.Animation.DROP,
-        })
-        attachSecretMessage(marker, place, "test of the secret message");
-        return marker;
-      }    // https://developers.google.com/maps/documentation/javascript/infowindows
-      return markerCreator(mapParam);
-    })
-    return fs.map((MarkerDiv, i) => {
-      return MarkerDiv
-    })
+        }
+
+        const markerCreator = (mapArg) => {
+          const marker = new this.props.googleAPIValue.Marker({
+            map: mapArg,
+            position: {
+              lat: !place.location.lat ? 39.962292 : place.location.lat,
+              lng: !place.location.lng ? -75.144768 : place.location.lng
+            },
+            title: "fs-" + place.id,
+            icon: randomMarkerColor,
+            label: JSON.stringify(place.id),
+            animation: this.props.googleAPIValue.Animation.DROP,
+          })
+
+          attachSecretMessage(marker, place, "test of the secret message");
+
+          return marker;
+        }
+
+        return markerCreator(mapParam);
+
+      });
+
+      return fs.map((MarkerDiv, i) => {
+        if (removeInd === "clear") {
+          return MarkerDiv.setMap(null);
+        }
+        return MarkerDiv
+      });
+
+    }
   }
 
 
@@ -150,7 +170,6 @@ class MapSection extends Component {
     return centerData;
   }
 
-
   map_storeMap = (map) => {
     return this.props.storeMap(map);
   }
@@ -162,7 +181,6 @@ class MapSection extends Component {
   map_storeCenter = (center) => {
     return this.props.storeCenter(center);
   }
-
 
   marker_setPosition = (marker, lat, lng) => {
     marker.setPosition({ lat, lng });
@@ -191,6 +209,7 @@ class MapSection extends Component {
     this.setState({
       movedMap: false
     })
+    this.renderFS(this.currentMap, iconArr, "clear");
   }
 
 
@@ -278,6 +297,8 @@ class MapSection extends Component {
           this.mapFuncs("idle");
         }
       )
+      this.renderFS(currentMap, iconArr, "clear");
+      this.renderFS(currentMap, iconArr);
 
     }
 
@@ -296,6 +317,8 @@ class MapSection extends Component {
       this.map_storeCenter(this.map_getCenter(this.currentMap));
       this.map_storeBounds(this.map_getBounds(this.currentMap));
       this.marker_storeMarker(this.myLocationMarker);
+      this.renderFS(currentMap, iconArr, "clear");
+      this.renderFS(currentMap, iconArr);
       // console.log("update googleMapLoaded");
     }
 
@@ -315,6 +338,8 @@ class MapSection extends Component {
       this.setState({
         movedMap: false
       })
+      this.renderFS(currentMap, iconArr, "clear");
+      this.renderFS(currentMap, iconArr);
       console.log("new geoloc, repositioning...")
     }
 
@@ -329,6 +354,8 @@ class MapSection extends Component {
       this.setState({
         movedMap: false
       })
+      this.renderFS(currentMap, iconArr, "clear");
+      this.renderFS(currentMap, iconArr);
     }
 
     if (googleMapLoaded && !movedMap && !update_movedMap && !update_geolocLat && update_mapMovementCounter && (currentMapCenterLat !== geolocLat || currentMapCenterLng !== geolocLng)) {
@@ -539,3 +566,4 @@ export default compose(
   // })
 )(MapSection);
 
+ // https://developers.google.com/maps/documentation/javascript/infowindows
