@@ -1,3 +1,4 @@
+
 const initState = {
   googleAPIValue: null,
   numGoogleAPIUpdates: 0,
@@ -7,15 +8,48 @@ const initState = {
   // centerLngValue: -75.144768,
   initialMapTilesLoaded: false,
   mapMovedCounterValue: 0,
-  centerLatValue: null,
-  centerLngValue: null,
+  boundsValue: function () {
+    if (this.mapValue) {
+      return this.mapValue.getBounds();
+    } else {
+      return null
+    }
+  },
+  centerValue: function () {
+    if (this.mapValue) {
+      return this.mapValue.getCenter();
+    } else {
+      return null
+    }
+  },
+  centerLatValue: function () {
+    if (this.mapValue) {
+      return this.mapValue.getCenter().lat();
+    } else {
+      return null
+    }
+  },
+  centerLngValue: function () {
+    if (this.mapValue) {
+      return this.mapValue.getCenter().lng();
+    } else {
+      return null
+    }
+  },
+  numMapUpdates: 0,
   numCenterUpdates: 0,
-  boundsValue: null,
   numBoundsUpdates: 0,
   circleValue: null,
   selectedMarkerValue: null,
   storedMarker: null,
-  recenterIncrementerValue: 0
+  recenterIncrementerValue: 0,
+  allMapDataLoaded: function () {
+    if (this.initialMapTilesLoaded && this.centerLatValue() && this.centerValue() && this.boundsValue()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 const mapReducer = (state = initState, action) => {
@@ -29,7 +63,7 @@ const mapReducer = (state = initState, action) => {
       }
 
     case 'MAP_RECEIVED':
-    // console.log('MAP_RECEIVED reducer')
+      // console.log('MAP_RECEIVED reducer')
       return {
         ...state,
         mapValue: action.payload
@@ -68,30 +102,29 @@ const mapReducer = (state = initState, action) => {
         storedMarker: action.payload
       }
 
-    case 'CENTER_RECEIVED':
-    // console.log('CENTER_RECEIVED reducer')
-      return {
-        ...state,
-        centerLatValue: Math.round(action.payload.lat * 1000000) / 1000000,
-        centerLngValue: Math.round(action.payload.lng * 1000000) / 1000000,
-        numCenterUpdates: state.numCenterUpdates + 1
-      }
+    // case 'CENTER_RECEIVED':
+    //   console.log('CENTER_RECEIVED reducer', action.payload)
+    //   return {
+    //     ...state,
+    //     centerLatValue: Math.round(action.payload.lat * 1000000) / 1000000,
+    //     centerLngValue: Math.round(action.payload.lng * 1000000) / 1000000,
+    //     numCenterUpdates: state.numCenterUpdates + 1
+    //   }
 
-    case 'BOUNDS_RECEIVED':
-    // console.log('BOUNDS_RECEIVED reducer')
-      return {
-        ...state,
-        boundsValue: action.payload,
-        numBoundsUpdates: state.numBoundsUpdates + 1
-      }
+    // case 'BOUNDS_RECEIVED':
+    //   return {
+    //     ...state,
+    //     boundsValue: action.payload,
+    //     numBoundsUpdates: state.numBoundsUpdates + 1
+    //   }
 
     case 'RECENTER_CLICKED':
       // console.log('BOUNDS_RECEIVED reducer')
-        return {
-          ...state,
-          recenterIncrementerValue: state.recenterIncrementerValue + 1
-        }
-  
+      return {
+        ...state,
+        recenterIncrementerValue: state.recenterIncrementerValue + 1
+      }
+
 
     default:
       // console.log("state returned")

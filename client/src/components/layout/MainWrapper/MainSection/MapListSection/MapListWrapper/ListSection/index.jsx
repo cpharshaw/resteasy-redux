@@ -32,22 +32,45 @@ class ListSection extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    const foursquareValue = this.props.foursquareValue;
-    const prev_foursquareValue = prevProps.foursquareValue;
 
-    const fsPlacesUpdate = foursquareValue && (JSON.stringify(foursquareValue) !== JSON.stringify(prev_foursquareValue));
+    const googleAPI = this.props.googleAPIValue; const prev_googleAPI = prevProps.googleAPIValue; const update_googleAPI = JSON.stringify(googleAPI) !== JSON.stringify(prev_googleAPI);
+    const googleMap = this.props.mapValue; const prev_googleMap = prevProps.mapValue; const update_googleMap = googleMap !== prev_googleMap;
+    const googleMapLoaded = this.props.initialMapTilesLoaded; const prev_googleMapLoaded = prevProps.initialMapTilesLoaded; const update_googleMapLoaded = (prev_googleMapLoaded === null && googleMapLoaded !== null) || (prev_googleMapLoaded !== googleMapLoaded);
+
+    const googleMapBounds = googleMap ? googleMap.getBounds() : null; const prev_googleMapBounds = prev_googleMap ? prev_googleMap.getBounds() : null; const update_googleMapBounds = JSON.stringify(googleMapBounds) !== JSON.stringify(prev_googleMapBounds);
+    const googleMapCenter = googleMap ? googleMap.getCenter() : null; const prev_googleMapCenter = prev_googleMap ? prev_googleMap.getCenter() : null; const update_googleMapCenter = JSON.stringify(googleMapCenter) !== JSON.stringify(prev_googleMapCenter)
+    const googleMapCenterLat = googleMap ? googleMapCenter.lat() : 0; const prev_googleMapCenterLat = prev_googleMap ? prev_googleMapCenter.lat() : 0; const update_googleMapCenterLat = googleMapCenterLat !== prev_googleMapCenterLat;
+    const googleMapCenterLng = googleMap ? googleMapCenter.lng() : 0; const prev_googleMapCenterLng = prev_googleMap ? prev_googleMapCenter.lng() : 0; const update_googleMapCenterLng = googleMapCenterLng !== prev_googleMapCenterLng;
+
+    const fsValue = this.props.foursquareValue; const prev_fsValue = prevProps.foursquareValue; const update_fsValue = JSON.stringify(fsValue) !== JSON.stringify(prev_fsValue);
+
+    const geolocLat = this.props.geolocationLatValue; const prev_geolocLat = prevProps.geolocationLatValue; const update_geolocLat = geolocLat !== prev_geolocLat;
+    const geolocLng = this.props.geolocationLngValue; const prev_geolocLng = prevProps.geolocationLngValue; const update_geolocLng = geolocLng !== prev_geolocLng; const update_geoloc = update_geolocLat && update_geolocLng;
+
+    const mapMovementCounter = this.props.mapMovedCounterValue; const prev_mapMovementCounter = prevProps.mapMovedCounterValue; const update_mapMovementCounter = mapMovementCounter !== prev_mapMovementCounter;
+    const recenterIncrementerValue = this.props.recenterIncrementerValue; const prev_recenterIncrementerValue = prevProps.recenterIncrementerValue; const update_recenterIncrementerValue = recenterIncrementerValue !== prev_recenterIncrementerValue;
+
+    const currentMap = this.currentMap;
+    const currentMapBounds = currentMap ? currentMap.getBounds() : null;
+    const currentMapCenter = currentMap ? currentMap.getCenter() : null;
+    const currentMapCenterLat = currentMap ? currentMapCenter.lat() : null;
+    const currentMapCenterLng = currentMap ? currentMapCenter.lng() : null;
+
+    const movedMap = this.state.movedMap; const prev_movedMap = prevState.movedMap; const update_movedMap = movedMap !== prev_movedMap;
+
+    const fsMarkers = this.state.fsMarkers; const prev_fsMarkers = prevState.fsMarkers; const update_fsMarkers = fsMarkers !== prev_fsMarkers;
+
+    const allMapDataLoaded = this.props.allMapDataLoaded;
 
     // console.log("prev_foursquareValue", prev_foursquareValue)
     // console.log("foursquareValue", fsPlacesUpdate)
 
     // console.log("fsPlacesUpdate", fsPlacesUpdate)
 
-    if (fsPlacesUpdate) {
+    if (allMapDataLoaded && update_fsValue) {
+      console.log("inside if state for fsPlacesUpdate", fsValue)
 
-
-      // console.log("inside if state for fsPlacesUpdate")
-
-      const tempArr = foursquareValue.map((place, i) => {
+      const tempArr = fsValue.map((place, i) => {
 
         // console.log("inside map fsPlacesUpdate")
 
@@ -145,12 +168,29 @@ class ListSection extends Component {
 const mapStateToProps = (state, ownProps) => {
   // console.log(state);
   return {
-    geolocation: state.geoLocation,
+    displayValue: ownProps.display ? "none" : "",
     mapListToggleValue: ownProps.display,
+    googleAPIValue: state.mapState.googleAPIValue,
+
+    mapValue: state.mapState.mapValue,
+    boundsValue: state.mapState.boundsValue(),
+    centerLatValue: state.mapState.centerLatValue(),
+    centerLngValue: state.mapState.centerLngValue(),    
+    googleAPIValue: state.mapState.googleAPIValue,
+    initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
+    allMapDataLoaded: state.mapState.allMapDataLoaded(),
+
     selectedMarkerValue: state.mapState.selectedMarkerValue,
+    mapMovedCounterValue: state.mapState.mapMovedCounterValue,
+    recenterIncrementerValue: state.mapState.recenterIncrementerValue,
+
+    geolocationLatValue: state.geolocationState.geolocationLatValue,
+    geolocationLngValue: state.geolocationState.geolocationLngValue,
+    numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
+
     foursquareValue: state.foursquareState.foursquareValue,
-    // reviews: state.firestore.ordered.reviews,
-    // auth: state.firebase.auth
+
+    modalState: state.modalState,
   }
 }
 

@@ -10,12 +10,14 @@ import { GoogleApiWrapper } from "google-maps-react";
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 
+
 import greyMarker from '../../MapListWrapper/greyMarker50.png';
 import redMarker from '../../MapListWrapper/redMarker50.png';
 import orangeMarker from '../../MapListWrapper/orangeMarker50.png';
 import yellowMarker from '../../MapListWrapper/yellowMarker50.png';
 import chartreuseMarker from '../../MapListWrapper/chartreuseMarker50.png';
 import greenMarker from '../../MapListWrapper/greenMarker50.png';
+
 import PlaceCard from './../../../../../../sharedComponents/mapListComponents/PlaceCard';
 import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -62,9 +64,9 @@ class MapSection extends Component {
     this.map_panTo = this.map_panTo.bind(this);
 
 
-    this.map_storeCenter = this.map_storeCenter.bind(this);
+    // this.map_storeCenter = this.map_storeCenter.bind(this);
     this.map_storeMap = this.map_storeMap.bind(this);
-    this.map_storeBounds = this.map_storeBounds.bind(this);
+    // this.map_storeBounds = this.map_storeBounds.bind(this);
 
     this.map_updateMap = this.map_updateMap.bind(this);
 
@@ -87,19 +89,16 @@ class MapSection extends Component {
     console.log("renderFS running");
 
     if (map && colors && this.props.foursquareValue) {
-
       const mapParam = map;
 
-      const fs = this.props.foursquareValue.map((place, i) => {
+      const fsMarkerArr = this.props.foursquareValue.map((place, i) => {
 
         const getRandomInt = (min, max) => {
           const minNum = Math.ceil(min);
           const maxNum = Math.floor(max);
           return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
         }
-
         const randomMarkerColor = iconArr[getRandomInt(0, colors.length)];
-
         const attachSecretMessage = (marker, place, secretMessage) => {
           marker.addListener('click', () => {
             this.props.storeSelectedMarker(place)
@@ -110,54 +109,64 @@ class MapSection extends Component {
               lat: place.location.lat,
               lng: place.location.lng
             });
+            mapParam.setCenter({
+              lat: place.location.lat,
+              lng: place.location.lng
+            });
+            console.log("marker icon", marker.getIcon());
+            console.log("marker title", marker.getTitle());
+            console.log("marker label", marker.getLabel());
+            console.log("whole marker", marker);
           });
         }
 
-        const markerCreator = (mapArg) => {
+        const MarkerCreator = (mapParam) => {
+          // const mapParam = props.mapParam;
+          // https://blog.vanila.io/writing-a-google-maps-react-component-fae411588a91
+          // https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/
+
           const marker = new this.props.googleAPIValue.Marker({
-            map: mapArg,
+            map: mapParam,
             position: {
-              lat: !place.location.lat ? 39.962292 : place.location.lat,
-              lng: !place.location.lng ? -75.144768 : place.location.lng
+              lat: place.location.lat,
+              lng: place.location.lng
             },
-            title: "fs-" + place.id,
             icon: randomMarkerColor,
             label: JSON.stringify(place.id),
+            title: "fs-" + place.id,
             animation: this.props.googleAPIValue.Animation.DROP,
           })
 
           attachSecretMessage(marker, place, "test of the secret message");
 
-          return marker;
+          return <div>{() => marker}</div>;
         }
 
-        return markerCreator(mapParam);
+        return MarkerCreator;
 
       });
 
-      return fs.map((MarkerDiv, i) => {
-        if (removeInd === "clear") {
-          return MarkerDiv.setMap(null);
-        }
-        return MarkerDiv
-      });
 
+      // this.setState({
+      //   fsMarkers: fsMarkerArr.map((marker, i) => {
+      //     return marker(mapParam)
+      //   })
+      // })
+
+      this.setState({
+        fsMarkers: fsMarkerArr
+      })
     }
+
+
   }
 
-
-  map_setCenter = (map, lat, lng) => {
-    map.setCenter({ lat, lng });
-  }
-
-  map_panTo = (map, lat, lng) => {
-    map.panTo({ lat, lng });
-  }
-
-  map_getBounds = (map) => {
-    return map.getBounds();
-  }
-
+  map_setCenter = (map, lat, lng) => map.setCenter({ lat, lng });
+  map_panTo = (map, lat, lng) => map.panTo({ lat, lng });
+  map_getBounds = (map) => map.getBounds();
+  map_storeMap = (map) => this.props.storeMap(map);
+  // map_storeBounds = (bounds) => this.props.storeBounds(bounds);
+  // map_storeCenter = (center) => this.props.storeCenter(center);
   map_getCenter = (map) => {
     const centerObj = map.getCenter();
     const centerLat = centerObj.lat();
@@ -170,46 +179,27 @@ class MapSection extends Component {
     return centerData;
   }
 
-  map_storeMap = (map) => {
-    return this.props.storeMap(map);
-  }
-
-  map_storeBounds = (bounds) => {
-    return this.props.storeBounds(bounds);
-  }
-
-  map_storeCenter = (center) => {
-    return this.props.storeCenter(center);
-  }
-
-  marker_setPosition = (marker, lat, lng) => {
-    marker.setPosition({ lat, lng });
-  }
-
-  marker_getIcon = (marker) => {
-    return marker.getIcon();
-  }
-
-  marker_getLabel = (marker) => {
-    return marker.getLabel();
-  }
-
-  marker_getTitle = (marker) => {
-    return marker.getTitle();
-  }
-
-  marker_storeMarker = (marker) => {
-    return this.props.storeMarker(marker);
-  }
+  marker_setPosition = (marker, lat, lng) => marker.setPosition({ lat, lng });
+  marker_getIcon = (marker) => marker.getIcon();
+  marker_getLabel = (marker) => marker.getLabel();
+  marker_getTitle = (marker) => marker.getTitle();
+  marker_storeMarker = (marker) => this.props.storeMarker(marker);
 
   map_updateMap = () => {
     this.map_storeMap(this.currentMap);
-    this.map_storeCenter(this.map_getCenter(this.currentMap));
-    this.map_storeBounds(this.map_getBounds(this.currentMap));
+    // this.map_storeCenter(this.map_getCenter(this.currentMap));
+    // this.map_storeBounds(this.map_getBounds(this.currentMap));
     this.setState({
-      movedMap: false
+      movedMap: false,
+      fsMarkers: []
     })
-    this.renderFS(this.currentMap, iconArr, "clear");
+    // this.renderFS(this.currentMap, iconArr, "clear");
+    // this.renderFS(this.currentMap, iconArr);
+    // if (this.state.fsMarkers.length > 0) {
+    // this.state.fsMarkers.map((marker, i) => {
+    //   console.log("map markers", marker.setMap(null))
+    // })
+    // } 
   }
 
 
@@ -263,6 +253,15 @@ class MapSection extends Component {
 
     const movedMap = this.state.movedMap; const prev_movedMap = prevState.movedMap; const update_movedMap = movedMap !== prev_movedMap;
 
+    const fsMarkers = this.state.fsMarkers; const prev_fsMarkers = prevState.fsMarkers; const update_fsMarkers = fsMarkers !== prev_fsMarkers;
+
+    const allMapDataLoaded = this.props.allMapDataLoaded; const prev_allMapDataLoaded = prevProps.allMapDataLoaded; const update_allMapDataLoaded = allMapDataLoaded !== prev_allMapDataLoaded;
+
+    // if (update_fsMarkers) {
+    //   console.log(fsMarkers, prev_fsMarkers, update_fsMarkers);
+    //   this.renderFS(this.currentMap, iconArr)
+    // }
+
 
     if ((!this.currentMap && update_googleAPI) || (!googleMap && googleAPI && update_geoloc)) {
 
@@ -297,8 +296,7 @@ class MapSection extends Component {
           this.mapFuncs("idle");
         }
       )
-      this.renderFS(currentMap, iconArr, "clear");
-      this.renderFS(currentMap, iconArr);
+
 
     }
 
@@ -314,19 +312,13 @@ class MapSection extends Component {
         animation: this.props.googleAPIValue.Animation.DROP,
       });
       this.map_storeMap(this.currentMap);
-      this.map_storeCenter(this.map_getCenter(this.currentMap));
-      this.map_storeBounds(this.map_getBounds(this.currentMap));
       this.marker_storeMarker(this.myLocationMarker);
-      this.renderFS(currentMap, iconArr, "clear");
-      this.renderFS(currentMap, iconArr);
       // console.log("update googleMapLoaded");
     }
 
 
     if (update_mapMovementCounter) {
       // this.map_storeMap(this.currentMap);
-      // this.map_storeCenter(this.map_getCenter(this.currentMap));
-      // this.map_storeBounds(this.map_getBounds(this.currentMap));
       console.log("update mapMovementCounter", mapMovementCounter);
     }
 
@@ -338,8 +330,7 @@ class MapSection extends Component {
       this.setState({
         movedMap: false
       })
-      this.renderFS(currentMap, iconArr, "clear");
-      this.renderFS(currentMap, iconArr);
+
       console.log("new geoloc, repositioning...")
     }
 
@@ -349,19 +340,32 @@ class MapSection extends Component {
       this.map_panTo(this.currentMap, geolocLat, geolocLng);
       this.map_setCenter(this.currentMap, geolocLat, geolocLng);
       this.map_storeMap(this.currentMap);
-      this.map_storeCenter(this.map_getCenter(this.currentMap));
-      this.map_storeBounds(this.map_getBounds(this.currentMap));
       this.setState({
         movedMap: false
       })
-      this.renderFS(currentMap, iconArr, "clear");
-      this.renderFS(currentMap, iconArr);
     }
 
     if (googleMapLoaded && !movedMap && !update_movedMap && !update_geolocLat && update_mapMovementCounter && (currentMapCenterLat !== geolocLat || currentMapCenterLng !== geolocLng)) {
       this.setState({
         movedMap: true
       })
+    }
+
+    if (allMapDataLoaded && update_fsValue && fsValue) {
+      // console.log("initialMapTilesLoaded", this.props.initialMapTilesLoaded)
+      // console.log("allMapDataLoaded", allMapDataLoaded)
+      // console.log("update_googleMapLoaded", update_googleMapLoaded)
+      // console.log("update_fsValue", update_fsValue)
+      // console.log("fsValue", fsValue)
+      this.renderFS(this.currentMap, iconArr)
+    }
+    // console.log("map markers", this.state.fsMarkers)
+
+
+    if (allMapDataLoaded && update_fsMarkers && update_geolocLat) {
+      // this.state.fsMarkers.map((marker, i) => {
+      //   console.log("map markers", marker(this.currentMap))
+      // })
     }
 
 
@@ -478,8 +482,28 @@ class MapSection extends Component {
             )
           }
 
-          {/* {console.log("fs value", foursquareValue)} */}
-
+          <MarkerComp
+            map={this.currentMap}
+            lat={this.props.geolocationLatValue}
+            lng={this.props.geolocationLngValue}
+            // https://blog.vanila.io/writing-a-google-maps-react-component-fae411588a91
+            // https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/#removing-markers
+          />
+          {/* {
+            !this.props.foursquareValue ? null : this.props.foursquareValue.map((place, i) => {
+              return (
+                <MarkerComp
+                  map={this.currentMap}
+                  lat={place.location.lat}
+                  lng={place.location.lng}
+                  label="test_label"
+                  title="test_title"
+                  key={"fsKey" + i}
+                />
+              )
+            })
+          } */}
+          {console.log(this.props.geolocationLatValue, this.props.geolocationLngValue)}
           {
             settingsModal || !selectedMarkerValue ? null : (
 
@@ -513,25 +537,27 @@ class MapSection extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     displayValue: ownProps.display ? "none" : "",
-    // geolocationValue: state.geolocationState.geolocationValue,
+    mapListToggleValue: ownProps.display,
+    googleAPIValue: state.mapState.googleAPIValue,
+
+    mapValue: state.mapState.mapValue,
+    boundsValue: state.mapState.boundsValue(),
+    centerLatValue: state.mapState.centerLatValue(),
+    centerLngValue: state.mapState.centerLngValue(),
+    initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
+    allMapDataLoaded: state.mapState.allMapDataLoaded(),
+
+    selectedMarkerValue: state.mapState.selectedMarkerValue,
+    mapMovedCounterValue: state.mapState.mapMovedCounterValue,
+    recenterIncrementerValue: state.mapState.recenterIncrementerValue,
+
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
-    mapValue: state.mapState.mapValue,
-    boundsValue: state.mapState.boundsValue,
-    googleAPIValue: state.mapState.googleAPIValue,
-    initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
+
     foursquareValue: state.foursquareState.foursquareValue,
-    mapMovedCounterValue: state.mapState.mapMovedCounterValue,
-    centerLatValue: state.mapState.centerLatValue,
-    centerLngValue: state.mapState.centerLngValue,
-    mapListToggleValue: ownProps.display,
-    googleAPIValue: state.mapState.googleAPIValue,
+
     modalState: state.modalState,
-    selectedMarkerValue: state.mapState.selectedMarkerValue,
-    recenterIncrementerValue: state.mapState.recenterIncrementerValue
-    // inputValue: state.inputState.inputValue
-    // ,state: state
   }
 }
 

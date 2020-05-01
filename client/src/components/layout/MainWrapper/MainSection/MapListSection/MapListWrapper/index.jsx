@@ -12,7 +12,7 @@ export class MapListSection extends Component {
     return (
 
       <React.Fragment>
-        < ListSection data_display={!this.props.mapListToggleValue} />
+        {/* < ListSection data_display={!this.props.mapListToggleValue} /> */}
         < MapSection data_display={this.props.mapListToggleValue} />
       </React.Fragment>
       

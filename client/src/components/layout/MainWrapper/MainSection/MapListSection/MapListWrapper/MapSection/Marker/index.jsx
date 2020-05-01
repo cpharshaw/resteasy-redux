@@ -2,74 +2,122 @@
 // https://codesandbox.io/s/rzwrk2854
 
 import React, { Component } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
+import greyMarker from '../../../MapListWrapper/greyMarker50.png';
+import redMarker from '../../../MapListWrapper/redMarker50.png';
+import orangeMarker from '../../../MapListWrapper/orangeMarker50.png';
+import yellowMarker from '../../../MapListWrapper/yellowMarker50.png';
+import chartreuseMarker from '../../../MapListWrapper/chartreuseMarker50.png';
+import greenMarker from '../../../MapListWrapper/greenMarker50.png';
+const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
+const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
 
 class MarkerComp extends Component {
-  constructor(props) {
-    super(props);
-    this.marker = null;
-    this.createMarker = null;
+
+
+  componentDidMount() {
+    const googleMapLoaded = this.props.initialMapTilesLoaded
+    if (googleMapLoaded) this.renderMarker();
   }
+
+  componentWillUnmount() {
+    if (this.marker) {
+      this.marker.setMap(null);
+    }
+  }
+
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-
-    const {
-      data_lat,
-      data_lng,
-      data_icon
-    } = this.props;
-
-    // console.log("key test", data_lat, data_lng, data_icon)
-
-    const googleAPIUpdate = prevProps.googleAPIValue === null && this.props.googleAPIValue !== null;
-
-    if (googleAPIUpdate) {
-
-      this.createMarker = () => {
-        new this.props.googleAPIValue.Marker({
-          map: this.props.mapValue,
-          position: {
-            lat: data_lat ? data_lat : 39.962292,
-            lng: data_lng ? data_lng : -75.144768
-          },
-          icon: data_icon ? data_icon : null,
-          animation: this.props.googleAPIValue.Animation.DROP,
-          // optimized:false
-        })
-      }
-
-
-    }
-
+    const googleMapLoaded = this.props.initialMapTilesLoaded; const prev_googleMapLoaded = prevProps.initialMapTilesLoaded; const update_googleMapLoaded = (prev_googleMapLoaded === null && googleMapLoaded !== null) || (prev_googleMapLoaded !== googleMapLoaded);
+    this.renderMarker();
+    if (update_googleMapLoaded && !this.currentMarker) this.renderMarker();
   }
 
+  renderMarker = () => {
+
+    const {
+      map, lat, lng, icon, label, title
+    } = this.props;
+
+    const getRandomInt = (min, max) => {
+      const minNum = Math.ceil(min);
+      const maxNum = Math.floor(max);
+      return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
+    }
+
+    const randomMarkerColor = iconArr[getRandomInt(0, iconArr.length)];
+
+    this.marker = new this.props.googleAPIValue.Marker({
+      map: map,
+      position: {
+        lat: lat,
+        lng: lng
+      },
+      icon: skull,
+      // randomMarkerColor,
+      // label: JSON.stringify(label),
+      // title: "fs - " + title,
+      animation: this.props.googleAPIValue.Animation.DROP,
+    })
+
+    this.marker.addListener('click', () => {
+      // this.props.storeSelectedMarker(place)
+      console.log("marker component clicked")
+      // this.setState({
+      //   markerIcon: randomMarkerColor
+      // })
+      // mapParam.panTo({
+      //   lat: place.location.lat,
+      //   lng: place.location.lng
+      // });
+      // mapParam.setCenter({
+      //   lat: place.location.lat,
+      //   lng: place.location.lng
+      // });
+      console.log("marker icon", this.marker.getIcon());
+      console.log("marker title", this.marker.getTitle());
+      console.log("marker label", this.marker.getLabel());
+      console.log("whole marker", this.marker);
+    });
+
+  }
 
 
   render() {
-
-    return (
-      <>
-        {this.createMarker ? this.createMarker() : null}
-      </>
-    )
-
+    console.log("rendering marker...")
+    return null
   }
 
 }
 
+
 const mapStateToProps = (state, ownProps) => {
   return {
-    geolocationValue: state.geolocationState.geolocationValue,
+    displayValue: ownProps.display ? "none" : "",
+    mapListToggleValue: ownProps.display,
+    googleAPIValue: state.mapState.googleAPIValue,
+
     mapValue: state.mapState.mapValue,
-    centerValue: state.mapState.centerValue,
-    // markerLat: ownProps.data_lat,
-    // markerLng: ownProps.data_lng,
-    // key: ownProps.data_key,
-    googleAPIValue: state.mapState.googleAPIValue
+    boundsValue: state.mapState.boundsValue(),
+    centerLatValue: state.mapState.centerLatValue(),
+    centerLngValue: state.mapState.centerLngValue(),
+    initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
+    allMapDataLoaded: state.mapState.allMapDataLoaded(),
+
+    selectedMarkerValue: state.mapState.selectedMarkerValue,
+    mapMovedCounterValue: state.mapState.mapMovedCounterValue,
+    recenterIncrementerValue: state.mapState.recenterIncrementerValue,
+
+    geolocationLatValue: state.geolocationState.geolocationLatValue,
+    geolocationLngValue: state.geolocationState.geolocationLngValue,
+    numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
+
+    foursquareValue: state.foursquareState.foursquareValue,
+
+    modalState: state.modalState,
   }
 }
 

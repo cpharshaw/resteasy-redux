@@ -48,6 +48,12 @@ class MainWrapper extends Component {
     const ctrLng = this.props.centerLngValue;
     const numCenterUpdates = this.props.numCenterUpdates;
 
+    const fsValue = this.props.foursquareValue; const prev_fsValue = prevProps.foursquareValue; const update_fsValue = JSON.stringify(fsValue) !== JSON.stringify(prev_fsValue);
+
+    const googleMapLoaded = this.props.initialMapTilesLoaded; const prev_googleMapLoaded = prevProps.initialMapTilesLoaded; const update_googleMapLoaded = (prev_googleMapLoaded === null && googleMapLoaded !== null) || (prev_googleMapLoaded !== googleMapLoaded);
+
+    const allMapDataLoaded = this.props.allMapDataLoaded; const prev_allMapDataLoaded = prevProps.allMapDataLoaded; const update_allMapDataLoaded = allMapDataLoaded !== prev_allMapDataLoaded;
+
     const geo_update = (
       geoLat !== prev_geoLat
       ||
@@ -60,14 +66,22 @@ class MainWrapper extends Component {
       ctrLng !== prev_ctrLng
     );
 
-    if (geo_update) {
-      const fsLL = geoLat + "," + geoLng;
-      this.props.getPlacesFromFoursquare(fsLL);
-    }
+    // if (googleMapLoaded && geo_update && ctrLat) {
+    //   const fsLL = geoLat + "," + geoLng;
+    //   this.props.getPlacesFromFoursquare(fsLL);
+    // }
+    // console.log("initialMapTilesLoaded", this.props.initialMapTilesLoaded)
+    // console.log("allMapDataLoaded", allMapDataLoaded)
+    // console.log("update_googleMapLoaded", update_googleMapLoaded)
+    // console.log("update_fsValue", update_fsValue)
+    // console.log("fsValue", fsValue)
 
-    if (!geo_update && ctr_update) {
+    if (update_allMapDataLoaded) {
+
+      // console.log("ctrLat", ctrLat);
+      // console.log("ctrLng", ctrLng);
       const fsLL = ctrLat + "," + ctrLng;
-      this.props.getPlacesFromFoursquare(fsLL);
+      // this.props.getPlacesFromFoursquare(fsLL);
     }
 
     // console.log("from mainWrapper - numCenterUpdates: ", numCenterUpdates)
@@ -138,13 +152,16 @@ class MainWrapper extends Component {
 const mapStateToProps = (state) => {
   return {
     mapListToggleValue: state.mapListState.mapListToggleValue,
-    boundsValue: state.mapState.boundsValue,
+    boundsValue: state.mapState.boundsValue(),
     googleAPIValue: state.mapState.googleAPIValue,
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
-    centerLatValue: state.mapState.centerLatValue,
-    centerLngValue: state.mapState.centerLngValue,
-    numCenterUpdates: state.mapState.numCenterUpdates
+    centerLatValue: state.mapState.centerLatValue(),
+    centerLngValue: state.mapState.centerLngValue(),
+    numCenterUpdates: state.mapState.numCenterUpdates,
+    initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
+    allMapDataLoaded: state.mapState.allMapDataLoaded(),
+    foursquareValue: state.foursquareState.foursquareValue,
   }
 }
 
