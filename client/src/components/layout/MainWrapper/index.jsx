@@ -81,7 +81,7 @@ class MainWrapper extends Component {
       // console.log("ctrLat", ctrLat);
       // console.log("ctrLng", ctrLng);
       const fsLL = ctrLat + "," + ctrLng;
-      // this.props.getPlacesFromFoursquare(fsLL);
+      this.props.getPlacesFromFoursquare(fsLL);
     }
 
     // console.log("from mainWrapper - numCenterUpdates: ", numCenterUpdates)

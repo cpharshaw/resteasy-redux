@@ -4,7 +4,7 @@ import RecenterButton from './RecenterButton';
 
 import { getGeolocation } from '../../../../../../../store/actions/geoActions';
 import { getPlacesFromFoursquare } from '../../../../../../../store/actions/foursquareActions';
-import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeMarker, storeBounds, storeCenter, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../store/actions/mapActions';
+import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeMarker, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../store/actions/mapActions';
 import { storeInput } from '../../../../../../../store/actions/inputActions';
 import { GoogleApiWrapper } from "google-maps-react";
 import React, { Component } from "react";
@@ -88,76 +88,28 @@ class MapSection extends Component {
 
     console.log("renderFS running");
 
-    if (map && colors && this.props.foursquareValue) {
-      const mapParam = map;
+    // if (map && colors && this.props.foursquareValue) {
 
-      const fsMarkerArr = this.props.foursquareValue.map((place, i) => {
+    const fs = this.props.foursquareValue.map((place, i) => {
+      return (
+        <MarkerComp
+          key={"fsMarkerKey_" + i}
+          data_map={this.currentMap}
+          data_lat={place.location.lat}
+          data_lng={place.location.lng}
+          // data_icon=""
+          data_label={JSON.stringify(place.id)}
+          data_title={"fs-" + place.id}
+          data_place={place}
+        />
+      )
+    })
 
-        const getRandomInt = (min, max) => {
-          const minNum = Math.ceil(min);
-          const maxNum = Math.floor(max);
-          return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
-        }
-        const randomMarkerColor = iconArr[getRandomInt(0, colors.length)];
-        const attachSecretMessage = (marker, place, secretMessage) => {
-          marker.addListener('click', () => {
-            this.props.storeSelectedMarker(place)
-            this.setState({
-              markerIcon: randomMarkerColor
-            })
-            mapParam.panTo({
-              lat: place.location.lat,
-              lng: place.location.lng
-            });
-            mapParam.setCenter({
-              lat: place.location.lat,
-              lng: place.location.lng
-            });
-            console.log("marker icon", marker.getIcon());
-            console.log("marker title", marker.getTitle());
-            console.log("marker label", marker.getLabel());
-            console.log("whole marker", marker);
-          });
-        }
+    this.setState({
+      fsMarkers: fs
+    })
 
-        const MarkerCreator = (mapParam) => {
-          // const mapParam = props.mapParam;
-          // https://blog.vanila.io/writing-a-google-maps-react-component-fae411588a91
-          // https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/
-
-          const marker = new this.props.googleAPIValue.Marker({
-            map: mapParam,
-            position: {
-              lat: place.location.lat,
-              lng: place.location.lng
-            },
-            icon: randomMarkerColor,
-            label: JSON.stringify(place.id),
-            title: "fs-" + place.id,
-            animation: this.props.googleAPIValue.Animation.DROP,
-          })
-
-          attachSecretMessage(marker, place, "test of the secret message");
-
-          return <div>{() => marker}</div>;
-        }
-
-        return MarkerCreator;
-
-      });
-
-
-      // this.setState({
-      //   fsMarkers: fsMarkerArr.map((marker, i) => {
-      //     return marker(mapParam)
-      //   })
-      // })
-
-      this.setState({
-        fsMarkers: fsMarkerArr
-      })
-    }
-
+    // }
 
   }
 
@@ -301,7 +253,7 @@ class MapSection extends Component {
     }
 
 
-    if (update_googleMapLoaded) {
+    if ((update_googleMapLoaded && geolocLat !== 0 && geolocLat !== 0) || (googleMapLoaded && !this.myLocationMarker && update_geoloc)) {
       this.myLocationMarker = new this.props.googleAPIValue.Marker({
         map: this.currentMap,
         position: {
@@ -309,11 +261,10 @@ class MapSection extends Component {
           lng: geolocLng
         },
         icon: myLocationIcon,
-        animation: this.props.googleAPIValue.Animation.DROP,
+        // animation: this.props.googleAPIValue.Animation.DROP,
       });
       this.map_storeMap(this.currentMap);
       this.marker_storeMarker(this.myLocationMarker);
-      // console.log("update googleMapLoaded");
     }
 
 
@@ -323,13 +274,15 @@ class MapSection extends Component {
     }
 
 
-    if (googleMapLoaded && update_geoloc) {
+    if (allMapDataLoaded && update_geoloc && geolocLat !== 0 && geolocLat !== 0) {
       this.map_panTo(this.currentMap, geolocLat, geolocLng);
       this.marker_setPosition(this.myLocationMarker, geolocLat, geolocLng);
       this.map_setCenter(this.currentMap, geolocLat, geolocLng);
       this.setState({
-        movedMap: false
+        movedMap: false,
+        fsMarkers: null
       })
+      // this.renderFS();
 
       console.log("new geoloc, repositioning...")
     }
@@ -341,8 +294,10 @@ class MapSection extends Component {
       this.map_setCenter(this.currentMap, geolocLat, geolocLng);
       this.map_storeMap(this.currentMap);
       this.setState({
-        movedMap: false
+        movedMap: false,
+        fsMarkers: null
       })
+      this.renderFS();
     }
 
     if (googleMapLoaded && !movedMap && !update_movedMap && !update_geolocLat && update_mapMovementCounter && (currentMapCenterLat !== geolocLat || currentMapCenterLng !== geolocLng)) {
@@ -351,15 +306,10 @@ class MapSection extends Component {
       })
     }
 
-    if (allMapDataLoaded && update_fsValue && fsValue) {
-      // console.log("initialMapTilesLoaded", this.props.initialMapTilesLoaded)
-      // console.log("allMapDataLoaded", allMapDataLoaded)
-      // console.log("update_googleMapLoaded", update_googleMapLoaded)
-      // console.log("update_fsValue", update_fsValue)
-      // console.log("fsValue", fsValue)
-      this.renderFS(this.currentMap, iconArr)
+    if (allMapDataLoaded && update_fsValue && fsValue && geolocLat !== 0 && geolocLng !== 0) {
+      console.log("running renderFS from componentDidUpdate; geoLoc", geolocLat, geolocLng)
+      this.renderFS();
     }
-    // console.log("map markers", this.state.fsMarkers)
 
 
     if (allMapDataLoaded && update_fsMarkers && update_geolocLat) {
@@ -427,7 +377,8 @@ class MapSection extends Component {
 
     const {
       foursquareValue,
-      selectedMarkerValue
+      selectedMarkerValue,
+      selectedPlaceValue
     } = this.props;
 
     const displayValue = this.props.data_display ? null : "none";
@@ -482,45 +433,29 @@ class MapSection extends Component {
             )
           }
 
-          <MarkerComp
-            map={this.currentMap}
-            lat={this.props.geolocationLatValue}
-            lng={this.props.geolocationLngValue}
-            // https://blog.vanila.io/writing-a-google-maps-react-component-fae411588a91
-            // https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/#removing-markers
-          />
-          {/* {
-            !this.props.foursquareValue ? null : this.props.foursquareValue.map((place, i) => {
-              return (
-                <MarkerComp
-                  map={this.currentMap}
-                  lat={place.location.lat}
-                  lng={place.location.lng}
-                  label="test_label"
-                  title="test_title"
-                  key={"fsKey" + i}
-                />
-              )
-            })
-          } */}
-          {console.log(this.props.geolocationLatValue, this.props.geolocationLngValue)}
+
+         {
+           !foursquareValue ? null : this.state.fsMarkers
+         }
+         
+
           {
             settingsModal || !selectedMarkerValue ? null : (
 
               <PlaceCard
                 data_componentsource="map"
 
-                data_placename={selectedMarkerValue.name}
-                data_placeaddress={selectedMarkerValue.location.address}
-                data_placecategory={selectedMarkerValue.categories[0].name}
-                data_placedistance={selectedMarkerValue.distance}
+                // data_placename={selectedPlaceValue.name}
+                // data_placeaddress={selectedPlaceValue.location.address}
+                // data_placecategory={selectedPlaceValue.categories[0].name}
+                // data_placedistance={selectedPlaceValue.distance}
 
-                data_placemarker={this.state.markerIcon}
-                // data_placerating={}
-                data_placenumreviews={14}
+                // data_placemarker=""
+                // data_placerating=""
+                // data_placenumreviews={14}
 
-                data_userreviewed={true}
-                data_userbookmarked={false}
+                // data_userreviewed={true}
+                // data_userbookmarked={false}
               />
 
             )
@@ -548,6 +483,7 @@ const mapStateToProps = (state, ownProps) => {
     allMapDataLoaded: state.mapState.allMapDataLoaded(),
 
     selectedMarkerValue: state.mapState.selectedMarkerValue,
+    selectedPlaceValue: state.mapState.selectedPlaceValue,
     mapMovedCounterValue: state.mapState.mapMovedCounterValue,
     recenterIncrementerValue: state.mapState.recenterIncrementerValue,
 
@@ -569,8 +505,6 @@ const mapDispatchToProps = (dispatch) => {
     storeMyLocationMarker: (map) => dispatch(storeMyLocationMarker(map)),
     registerInitialMapTilesloaded: () => dispatch(registerInitialMapTilesloaded()),
     registerSubsequentMapMovement: () => dispatch(registerSubsequentMapMovement()),
-    storeBounds: (bounds) => dispatch(storeBounds(bounds)),
-    storeCenter: (center) => dispatch(storeCenter(center)),
     storeInput: (input) => dispatch(storeInput(input)),
     storeSelectedMarker: (marker) => dispatch(storeSelectedMarker(marker)),
     storeMarker: (marker) => dispatch(storeMarker(marker)),

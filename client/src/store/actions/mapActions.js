@@ -69,6 +69,16 @@ export const storeSelectedMarker = (marker) => {
   }
 }
 
+export const storeSelectedPlace = (place) => {
+  return (dispatch, getState) => {
+    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
+    dispatch({
+      type: 'PLACE_SELECTED',
+      payload: place
+    })
+    
+  }
+}
 
 export const storeMarker = (marker) => {
   return (dispatch, getState) => {
@@ -81,27 +91,23 @@ export const storeMarker = (marker) => {
   }
 }
 
-export const storeBounds = (bounds) => {
-  return (dispatch, getState) => {
-    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
-    dispatch({
-      type: 'BOUNDS_RECEIVED',
-      payload: bounds
-    })
-    // console.log("bounds sent", bounds);
-  }
-}
+// export const storeBounds = (bounds) => {
+//   return (dispatch, getState) => {
+//     dispatch({
+//       type: 'BOUNDS_RECEIVED',
+//       payload: bounds
+//     })
+//   }
+// }
 
-export const storeCenter = (center) => {
-  return (dispatch, getState) => {
-    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
-    dispatch({
-      type: 'CENTER_RECEIVED',
-      payload: center
-    })
-    // console.log("center sent", center);
-  }
-}
+// export const storeCenter = (center) => {
+//   return (dispatch, getState) => {
+//     dispatch({
+//       type: 'CENTER_RECEIVED',
+//       payload: center
+//     })
+//   }
+// }
 
 export const storeCircle = (circle) => {
   return (dispatch, getState) => {

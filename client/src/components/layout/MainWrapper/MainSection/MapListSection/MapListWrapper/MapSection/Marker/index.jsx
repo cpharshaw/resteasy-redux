@@ -12,11 +12,17 @@ import orangeMarker from '../../../MapListWrapper/orangeMarker50.png';
 import yellowMarker from '../../../MapListWrapper/yellowMarker50.png';
 import chartreuseMarker from '../../../MapListWrapper/chartreuseMarker50.png';
 import greenMarker from '../../../MapListWrapper/greenMarker50.png';
+
+import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeSelectedPlace, storeMarker, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../../store/actions/mapActions';
+
 const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
 const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
 
-class MarkerComp extends Component {
 
+
+class MarkerComp extends Component {
+  // https://blog.vanila.io/writing-a-google-maps-react-component-fae411588a91
+  // https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/
 
   componentDidMount() {
     const googleMapLoaded = this.props.initialMapTilesLoaded
@@ -32,15 +38,31 @@ class MarkerComp extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const googleMapLoaded = this.props.initialMapTilesLoaded; const prev_googleMapLoaded = prevProps.initialMapTilesLoaded; const update_googleMapLoaded = (prev_googleMapLoaded === null && googleMapLoaded !== null) || (prev_googleMapLoaded !== googleMapLoaded);
-    this.renderMarker();
+    // this.renderMarker();
     if (update_googleMapLoaded && !this.currentMarker) this.renderMarker();
   }
 
   renderMarker = () => {
 
     const {
-      map, lat, lng, icon, label, title
+      data_map,
+      data_lat, data_lng,
+      data_icon,
+      data_label,
+      data_title,
+      data_place
     } = this.props;
+
+
+    // console.log(
+    //   "data_map", data_map,
+    //   "data_lat", data_lat,
+    //   "data_lng", data_lng,
+    //   "data_icon", data_icon,
+    //   "data_label", data_label,
+    //   "data_title", data_title,
+    //   "data_place", data_place,
+    // )
 
     const getRandomInt = (min, max) => {
       const minNum = Math.ceil(min);
@@ -51,31 +73,33 @@ class MarkerComp extends Component {
     const randomMarkerColor = iconArr[getRandomInt(0, iconArr.length)];
 
     this.marker = new this.props.googleAPIValue.Marker({
-      map: map,
+      map: data_map,
       position: {
-        lat: lat,
-        lng: lng
+        lat: data_lat,
+        lng: data_lng
       },
-      icon: skull,
+      icon: data_icon || randomMarkerColor || skull,
       // randomMarkerColor,
-      // label: JSON.stringify(label),
-      // title: "fs - " + title,
+      label: JSON.stringify(data_label),
+      title: "fs - " + data_title,
       animation: this.props.googleAPIValue.Animation.DROP,
     })
 
     this.marker.addListener('click', () => {
-      // this.props.storeSelectedMarker(place)
-      console.log("marker component clicked")
+      if (data_place) this.props.storeSelectedMarker(this.marker);
+      if (data_place) this.props.storeSelectedPlace(data_place);
+      console.log("marker component clicked, place: ", data_place)
+      console.log("marker component clicked, marker: ", this.marker)
       // this.setState({
       //   markerIcon: randomMarkerColor
       // })
-      // mapParam.panTo({
-      //   lat: place.location.lat,
-      //   lng: place.location.lng
+      // data_map.panTo({
+      //   lat: data_place.location.lat,
+      //   lng: data_place.location.lng
       // });
-      // mapParam.setCenter({
-      //   lat: place.location.lat,
-      //   lng: place.location.lng
+      // data_map.setCenter({
+      //   lat: data_place.location.lat,
+      //   lng: data_place.location.lng
       // });
       console.log("marker icon", this.marker.getIcon());
       console.log("marker title", this.marker.getTitle());
@@ -87,7 +111,7 @@ class MarkerComp extends Component {
 
 
   render() {
-    console.log("rendering marker...")
+    // console.log("rendering marker...")
     return null
   }
 
@@ -121,8 +145,19 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-// export default MarkerComp;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    storeMap: (map) => dispatch(storeMap(map)),
+    storeMyLocationMarker: (map) => dispatch(storeMyLocationMarker(map)),
+    registerInitialMapTilesloaded: () => dispatch(registerInitialMapTilesloaded()),
+    registerSubsequentMapMovement: () => dispatch(registerSubsequentMapMovement()),
+    storeSelectedMarker: (marker) => dispatch(storeSelectedMarker(marker)),
+    storeSelectedPlace: (place) => dispatch(storeSelectedPlace(place)),
+    storeMarker: (marker) => dispatch(storeMarker(marker)),
+  }
+}
+
 
 export default compose(
-  connect(mapStateToProps, null),
+  connect(mapStateToProps, mapDispatchToProps),
 )(MarkerComp);

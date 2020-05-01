@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { formPrev } from '../../../../../../store/actions/formActions';
 import { modalToggled, modalClosed } from '../../../../../../store/actions/modalActions';
 // import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { storeCircle, storeCenter } from '../../../../../../store/actions/mapActions';
+import { storeCircle } from '../../../../../../store/actions/mapActions';
 import { getPlacesFromFoursquare } from '../../../../../../store/actions/foursquareActions';
 // import ModalBlurBackground from '../ModalBlurBackground';
 
@@ -85,7 +85,7 @@ export class LocationModal extends Component {
         // setTimeout(() => console.log("fs value updated: ", this.props.foursquareValue), 2000)
         // console.log("fs value updated: ", this.props.foursquareValue);
 
-        this.props.storeCenter(center);
+        // this.props.storeCenter(center);
 
         if (this.props.selectedSectionValue === "mapList") this.props.modalClosed();
 
@@ -297,12 +297,7 @@ const mapDispatchToProps = (dispatch) => {
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     modalClosed: () => dispatch(modalClosed()),
     storeCircle: (circle) => dispatch(storeCircle(circle)),
-    storeCenter: (center) => {
-      return dispatch(storeCenter(center));
-    },
-    getPlacesFromFoursquare: (location) => {
-      return dispatch(getPlacesFromFoursquare(location))
-    },
+    getPlacesFromFoursquare: (location) => dispatch(getPlacesFromFoursquare(location))
   }
 }
 

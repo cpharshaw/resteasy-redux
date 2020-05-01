@@ -4,8 +4,6 @@ const initState = {
   numGoogleAPIUpdates: 0,
   mapValue: null,
   myLocationMarkerValue: null,
-  // centerLatValue: 39.962292,
-  // centerLngValue: -75.144768,
   initialMapTilesLoaded: false,
   mapMovedCounterValue: 0,
   boundsValue: function () {
@@ -41,10 +39,11 @@ const initState = {
   numBoundsUpdates: 0,
   circleValue: null,
   selectedMarkerValue: null,
+  selectedPlaceValue: null,
   storedMarker: null,
   recenterIncrementerValue: 0,
   allMapDataLoaded: function () {
-    if (this.initialMapTilesLoaded && this.centerLatValue() && this.centerValue() && this.boundsValue()) {
+    if (this.initialMapTilesLoaded && this.centerLatValue() && this.centerValue() && this.boundsValue() ) {
       return true;
     } else {
       return false;
@@ -95,6 +94,12 @@ const mapReducer = (state = initState, action) => {
         ...state,
         selectedMarkerValue: action.payload
       }
+
+    case 'MARKER_SELECTED':
+      return {
+        ...state,
+        selectedPlaceValue: action.payload
+      }      
 
     case 'MARKER_TO_BE_STORED':
       return {
