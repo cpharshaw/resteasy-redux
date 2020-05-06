@@ -44,7 +44,7 @@ export class MapListSection extends Component {
 
           <div className="row" id="mapListBar"
             style={{
-              position: "relative",
+              position: "absolute",
               top: "0",
               height: "92.5px"
             }}
@@ -54,14 +54,13 @@ export class MapListSection extends Component {
             </div>
           </div>
 
-
           {
             settingsModal ? (
               <div
                 id="relocate"
                 className="col animated fadeIn fast bg-primary px-2 py-1"
                 style={{
-                  zIndex: "99999999999999999999999",
+                  zIndex: "999999999",
                   position: "absolute",
                   top: "92.5px",
                   left: "0",
@@ -83,11 +82,11 @@ export class MapListSection extends Component {
 
           <div className="row js-fg" id="mapListWrapper"
             style={{
-              position: "relative",
+              position: "absolute",
+              top: "92.5px",
               bottom: "0",
-              // left: "0",
-              // right: "0",
-              maxHeight: "calc(100% - 92.5px)",
+              left: "0",
+              right: "0",
             }}
           >
             <div className="col">

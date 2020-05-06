@@ -2,9 +2,18 @@ import { getDistance } from 'geolib';
 const axios = require('axios');
 const endpoint = "https://api.foursquare.com/v2/venues/search";
 
-export const getPlacesFromFoursquare = (location) => {
+export const getPlacesFromFoursquare = (locationPref) => {
   // console.log("getPlacesFromFoursquare ACTION triggered", location)
   return (dispatch, getState) => {
+    const state = getState();
+    const location = 
+      locationPref == "geolocation" ? 
+      state.geolocationState.geolocationLatValue + "," + state.geolocationState.geolocationLngValue
+      :
+      locationPref == "center" ? 
+      state.mapState.centerLatValue() + "," + state.mapState.centerLngValue()
+      :
+      locationPref;
 
     return (
       axios

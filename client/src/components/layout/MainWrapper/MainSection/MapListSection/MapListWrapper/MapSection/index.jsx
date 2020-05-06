@@ -4,7 +4,7 @@ import RecenterButton from './RecenterButton';
 
 import { getGeolocation } from '../../../../../../../store/actions/geoActions';
 import { getPlacesFromFoursquare } from '../../../../../../../store/actions/foursquareActions';
-import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeMarker, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../store/actions/mapActions';
+import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeSelectedPlace, storeMarker, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../store/actions/mapActions';
 import { storeInput } from '../../../../../../../store/actions/inputActions';
 import { GoogleApiWrapper } from "google-maps-react";
 import React, { Component } from "react";
@@ -42,12 +42,13 @@ class MapSection extends Component {
     this.state = {
       initialUpdate: false,
       geo_same_ctr: true,
-      fsMarkers: null,
+      fsMarkers: [],
       markerIcon: null,
       movedMap: false,
       currentCenterLat: null,
       currentCenterLng: null,
       currentBounds: null,
+      optionToUpdate: false
     };
     this.geo_same_ctr = true;
 
@@ -61,6 +62,7 @@ class MapSection extends Component {
     this.map_getBounds = this.map_getBounds.bind(this);
     this.map_getCenter = this.map_getCenter.bind(this);
     this.map_setCenter = this.map_setCenter.bind(this);
+    this.map_setZoom = this.map_setZoom.bind(this);
     this.map_panTo = this.map_panTo.bind(this);
 
 
@@ -84,16 +86,15 @@ class MapSection extends Component {
 
 
 
-  renderFS = (map, colors, removeInd) => {
+  renderFS = () => {
 
-    console.log("renderFS running");
-
-    // if (map && colors && this.props.foursquareValue) {
+    // console.log("renderFS running");
 
     const fs = this.props.foursquareValue.map((place, i) => {
       return (
         <MarkerComp
           key={"fsMarkerKey_" + i}
+          data_id={i + "_marker"}
           data_map={this.currentMap}
           data_lat={place.location.lat}
           data_lng={place.location.lng}
@@ -109,11 +110,14 @@ class MapSection extends Component {
       fsMarkers: fs
     })
 
-    // }
-
   }
 
+
   map_setCenter = (map, lat, lng) => map.setCenter({ lat, lng });
+  map_setZoom = (map, zoomLevel) => {
+    map.setZoom(zoomLevel)
+    console.log('zooooooommmmmiinnngg') 
+  };
   map_panTo = (map, lat, lng) => map.panTo({ lat, lng });
   map_getBounds = (map) => map.getBounds();
   map_storeMap = (map) => this.props.storeMap(map);
@@ -139,19 +143,14 @@ class MapSection extends Component {
 
   map_updateMap = () => {
     this.map_storeMap(this.currentMap);
-    // this.map_storeCenter(this.map_getCenter(this.currentMap));
-    // this.map_storeBounds(this.map_getBounds(this.currentMap));
     this.setState({
       movedMap: false,
-      fsMarkers: []
+      fsMarkers: [],
+      optionToUpdate: false
     })
-    // this.renderFS(this.currentMap, iconArr, "clear");
-    // this.renderFS(this.currentMap, iconArr);
-    // if (this.state.fsMarkers.length > 0) {
-    // this.state.fsMarkers.map((marker, i) => {
-    //   console.log("map markers", marker.setMap(null))
-    // })
-    // } 
+    this.props.getPlacesFromFoursquare("center");
+    // this.props.storeSelectedPlace(null);
+    // this.props.storeSelectedMarker(null);
   }
 
 
@@ -172,8 +171,6 @@ class MapSection extends Component {
     }
 
   }
-
-
 
 
 
@@ -220,7 +217,7 @@ class MapSection extends Component {
       this.currentMap = new googleAPI.Map(
         this.googleMapRef.current,
         {
-          zoom: 17,
+          zoom: 2,
           styles: MyStyle,
           center: {
             lat: geolocLat,
@@ -253,7 +250,8 @@ class MapSection extends Component {
     }
 
 
-    if ((update_googleMapLoaded && geolocLat !== 0 && geolocLat !== 0) || (googleMapLoaded && !this.myLocationMarker && update_geoloc)) {
+    if ((update_googleMapLoaded && geolocLat !== 39.8283459 && geolocLng !== -98.5794797) || (googleMapLoaded && !this.myLocationMarker && update_geoloc)) {
+      this.map_setZoom(this.currentMap, 17);
       this.myLocationMarker = new this.props.googleAPIValue.Marker({
         map: this.currentMap,
         position: {
@@ -269,35 +267,37 @@ class MapSection extends Component {
 
 
     if (update_mapMovementCounter) {
-      // this.map_storeMap(this.currentMap);
+      this.map_storeMap(this.currentMap);
       console.log("update mapMovementCounter", mapMovementCounter);
+      
     }
 
 
-    if (allMapDataLoaded && update_geoloc && geolocLat !== 0 && geolocLat !== 0) {
+    if (allMapDataLoaded && update_geoloc && geolocLat !== 39.8283459 && geolocLng !== -98.5794797) {
       this.map_panTo(this.currentMap, geolocLat, geolocLng);
       this.marker_setPosition(this.myLocationMarker, geolocLat, geolocLng);
       this.map_setCenter(this.currentMap, geolocLat, geolocLng);
       this.setState({
         movedMap: false,
-        fsMarkers: null
+        fsMarkers: []
       })
+      this.map_setZoom(this.currentMap, 17);
       // this.renderFS();
 
       console.log("new geoloc, repositioning...")
     }
 
 
-
     if (update_recenterIncrementerValue) {
+      
       this.map_panTo(this.currentMap, geolocLat, geolocLng);
       this.map_setCenter(this.currentMap, geolocLat, geolocLng);
       this.map_storeMap(this.currentMap);
       this.setState({
         movedMap: false,
-        fsMarkers: null
+        optionToUpdate: true
       })
-      this.renderFS();
+
     }
 
     if (googleMapLoaded && !movedMap && !update_movedMap && !update_geolocLat && update_mapMovementCounter && (currentMapCenterLat !== geolocLat || currentMapCenterLng !== geolocLng)) {
@@ -306,8 +306,8 @@ class MapSection extends Component {
       })
     }
 
-    if (allMapDataLoaded && update_fsValue && fsValue && geolocLat !== 0 && geolocLng !== 0) {
-      console.log("running renderFS from componentDidUpdate; geoLoc", geolocLat, geolocLng)
+    if (allMapDataLoaded && update_fsValue && fsValue && geolocLat !== 39.8283459 && geolocLng !== -98.5794797) {
+      // console.log("running renderFS from componentDidUpdate; geoLoc", geolocLat, geolocLng)
       this.renderFS();
     }
 
@@ -318,15 +318,7 @@ class MapSection extends Component {
       // })
     }
 
-
-    // if (googleMapLoaded && googleMap) {
     // https://frontarm.com/james-k-nelson/pdf-cheatsheets/
-    // this.renderJunk(googleMap, iconArr);      
-
-    // this.props.storeMyLocationMarker(newMarker);
-    // }
-
-
 
     // https://medium.com/@13milliseconds/interact-with-google-maps-markers-in-the-dom-8772452ebeef
     // https://www.sitepoint.com/animated-google-map-markers-css-javascript/
@@ -383,11 +375,14 @@ class MapSection extends Component {
 
     const displayValue = this.props.data_display ? null : "none";
 
+
     return (
 
-
+      
 
       <div id="mapSection" className="row animated fadeIn fast" style={{ display: displayValue }}>
+      {/* {console.log("selectedPlaceValue", selectedPlaceValue)}
+      {console.log("selectedMarkerValue", selectedMarkerValue)} */}
         <div className="col">
 
           <div className="row">
@@ -411,7 +406,7 @@ class MapSection extends Component {
           </div>
 
           {
-            !this.state.movedMap ? null : (
+            !this.state.movedMap && !this.state.optionToUpdate ? null : (
               <div className="row animated fadeIn px-3 py-2" onClick={this.map_updateMap}
                 style={{
                   position: "absolute",
@@ -437,25 +432,24 @@ class MapSection extends Component {
          {
            !foursquareValue ? null : this.state.fsMarkers
          }
-         
 
+         {/* {this.state.fsMarkers[0] ? console.log("marker getIcon test: ", this.props) : null} */}
           {
-            settingsModal || !selectedMarkerValue ? null : (
-
+            settingsModal || !selectedPlaceValue || !selectedMarkerValue ? null : (
+              // console.log("selectedMarkerValue", selectedMarkerValue),
               <PlaceCard
                 data_componentsource="map"
 
-                // data_placename={selectedPlaceValue.name}
-                // data_placeaddress={selectedPlaceValue.location.address}
-                // data_placecategory={selectedPlaceValue.categories[0].name}
-                // data_placedistance={selectedPlaceValue.distance}
+                data_placename={selectedPlaceValue.name || foursquareValue[0].name}
+                data_placeaddress={selectedPlaceValue.location.address || foursquareValue[0].location.address}
+                data_placecategory={selectedPlaceValue.categories[0] ? selectedPlaceValue.categories[0].name : null || foursquareValue[0].categories[0] ? foursquareValue[0].categories[0].name : null}
+                data_placedistance={selectedPlaceValue.distance || foursquareValue[0].distance}
 
-                // data_placemarker=""
-                // data_placerating=""
-                // data_placenumreviews={14}
+                data_placemarker={selectedMarkerValue.icon}
+                data_placenumreviews={14}
 
-                // data_userreviewed={true}
-                // data_userbookmarked={false}
+                data_userreviewed={true}
+                data_userbookmarked={true}
               />
 
             )
@@ -507,6 +501,7 @@ const mapDispatchToProps = (dispatch) => {
     registerSubsequentMapMovement: () => dispatch(registerSubsequentMapMovement()),
     storeInput: (input) => dispatch(storeInput(input)),
     storeSelectedMarker: (marker) => dispatch(storeSelectedMarker(marker)),
+    storeSelectedPlace: (marker) => dispatch(storeSelectedPlace(marker)),
     storeMarker: (marker) => dispatch(storeMarker(marker)),
   }
 }

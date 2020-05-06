@@ -96,10 +96,18 @@ const mapReducer = (state = initState, action) => {
       }
 
     case 'MARKER_SELECTED':
+    // console.log("marker selected");
       return {
         ...state,
         selectedPlaceValue: action.payload
-      }      
+      }
+
+    case 'PLACE_SELECTED':
+      // console.log("place selected");
+        return {
+          ...state,
+          selectedPlaceValue: action.payload
+        }           
 
     case 'MARKER_TO_BE_STORED':
       return {

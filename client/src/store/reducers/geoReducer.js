@@ -1,8 +1,8 @@
 
 const initState = {
   geolocationValue: null,
-  geolocationLatValue: 0,
-  geolocationLngValue: 0,
+  geolocationLatValue: 39.8283459,
+  geolocationLngValue: -98.5794797,
   geolocationAcc: 600,
   geolocationStatus: null,
   numGeolocationUpdates: 0

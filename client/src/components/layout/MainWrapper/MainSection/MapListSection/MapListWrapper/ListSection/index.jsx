@@ -62,8 +62,15 @@ class ListSection extends Component {
 
     const allMapDataLoaded = this.props.allMapDataLoaded;
 
+    const selectedMarkerValue = this.props.selectedMarkerValue;
+    const selectedPlaceValue = this.props.selectedPlaceValue;
+
     // console.log("prev_foursquareValue", prev_foursquareValue)
     // console.log("foursquareValue", fsPlacesUpdate)
+    // console.log("list allMapDataLoaded", allMapDataLoaded)
+    // console.log("list update_fsValue", update_fsValue)
+    // console.log("list selectedMarkerValue", selectedMarkerValue)
+    // console.log("list selectedPlaceValue", selectedPlaceValue)
 
     // console.log("fsPlacesUpdate", fsPlacesUpdate)
 
@@ -97,21 +104,19 @@ class ListSection extends Component {
         const userReviwed = getRandomInt(0, 10) === 2 ? true : false;
         const userBookmarked = getRandomInt(0, 10) === 3 ? true : false;
 
+
+
         return (
           <div className="row" key={i + "listFSkey"} >
             <div className="col py-1">
               <PlaceCard
                 data_componentsource="list"
-
                 data_placename={placeName}
                 data_placeaddress={placeAddress}
                 data_placecategory={placeCategory}
                 data_placedistance={placeDistance}
-
                 data_placemarker={placeMarker}
-                // data_placerating={}
                 data_placenumreviews={placeNumReviews}
-
                 data_userreviewed={userReviwed}
                 data_userbookmarked={userBookmarked}
               />
@@ -140,7 +145,6 @@ class ListSection extends Component {
       <div className="row ai-fs animated fadeIn fast" id="listSection"
         style={{
           display: displayValue,
-          height: "inherit",
           WebkitOverflowScrolling: "touch",
           overflowY: "scroll",
           msOverflowY: "scroll",
@@ -156,9 +160,11 @@ class ListSection extends Component {
             msOverflowX: "hidden",
             overflowY: "hidden",
             msOverflowY: "hidden",
+            
           }}
         >
           {this.state.placeArr}
+          {/* {console.log("list: ", this.state.placeArr)} */}
         </div >
       </div >
     )
@@ -175,12 +181,13 @@ const mapStateToProps = (state, ownProps) => {
     mapValue: state.mapState.mapValue,
     boundsValue: state.mapState.boundsValue(),
     centerLatValue: state.mapState.centerLatValue(),
-    centerLngValue: state.mapState.centerLngValue(),    
+    centerLngValue: state.mapState.centerLngValue(),
     googleAPIValue: state.mapState.googleAPIValue,
     initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
     allMapDataLoaded: state.mapState.allMapDataLoaded(),
 
     selectedMarkerValue: state.mapState.selectedMarkerValue,
+    selectedPlaceValue: state.mapState.selectedPlaceValue,
     mapMovedCounterValue: state.mapState.mapMovedCounterValue,
     recenterIncrementerValue: state.mapState.recenterIncrementerValue,
 

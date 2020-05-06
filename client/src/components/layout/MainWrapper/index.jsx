@@ -81,7 +81,7 @@ class MainWrapper extends Component {
       // console.log("ctrLat", ctrLat);
       // console.log("ctrLng", ctrLng);
       const fsLL = ctrLat + "," + ctrLng;
-      this.props.getPlacesFromFoursquare(fsLL);
+      this.props.getPlacesFromFoursquare("center");
     }
 
     // console.log("from mainWrapper - numCenterUpdates: ", numCenterUpdates)
@@ -118,7 +118,7 @@ class MainWrapper extends Component {
           className="row animated fadeIn fast"
           style={{
             position: "relative",
-            height: "calc(100% - 62.5px)"
+            height: "calc(100% - 62.5px)",
           }}
         >
           <div className="col">

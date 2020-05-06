@@ -50,19 +50,19 @@ class MarkerComp extends Component {
       data_icon,
       data_label,
       data_title,
-      data_place
+      data_place,
+      data_id
     } = this.props;
 
-
-    // console.log(
-    //   "data_map", data_map,
-    //   "data_lat", data_lat,
-    //   "data_lng", data_lng,
-    //   "data_icon", data_icon,
-    //   "data_label", data_label,
-    //   "data_title", data_title,
-    //   "data_place", data_place,
-    // )
+    console.log(
+      // "data_map", data_map,
+      // "data_lat", data_lat,
+      // "data_lng", data_lng,
+      // "data_icon", data_icon,
+      // "data_label", data_label,
+      // "data_title", data_title,
+      // "data_place", data_place,
+    )
 
     const getRandomInt = (min, max) => {
       const minNum = Math.ceil(min);
@@ -79,32 +79,43 @@ class MarkerComp extends Component {
         lng: data_lng
       },
       icon: data_icon || randomMarkerColor || skull,
+      store_icon: data_icon,
       // randomMarkerColor,
       label: JSON.stringify(data_label),
       title: "fs - " + data_title,
       animation: this.props.googleAPIValue.Animation.DROP,
-    })
+      store_id: data_id,
+    });
 
+    if (data_id === "0_marker") {
+      // console.log("0th marker", this.marker.getIcon())
+      this.props.storeSelectedMarker(this.marker);
+      this.props.storeSelectedPlace(data_place);
+    }
+    
     this.marker.addListener('click', () => {
-      if (data_place) this.props.storeSelectedMarker(this.marker);
-      if (data_place) this.props.storeSelectedPlace(data_place);
-      console.log("marker component clicked, place: ", data_place)
-      console.log("marker component clicked, marker: ", this.marker)
+      if (data_place) {
+        this.props.storeSelectedMarker(this.marker);
+        this.props.storeSelectedPlace(data_place);
+      };
+      // console.log("marker component clicked, place: ", data_place)
+      // console.log("marker component clicked, marker: ", this.marker)
+      // console.log("marker component clicked, marker ID: ", this.marker.id)
       // this.setState({
       //   markerIcon: randomMarkerColor
       // })
-      // data_map.panTo({
-      //   lat: data_place.location.lat,
-      //   lng: data_place.location.lng
-      // });
+      data_map.panTo({
+        lat: data_lat,
+        lng: data_lng
+      });
       // data_map.setCenter({
       //   lat: data_place.location.lat,
       //   lng: data_place.location.lng
       // });
-      console.log("marker icon", this.marker.getIcon());
-      console.log("marker title", this.marker.getTitle());
-      console.log("marker label", this.marker.getLabel());
-      console.log("whole marker", this.marker);
+      // console.log("marker icon", this.marker.getIcon());
+      // console.log("marker title", this.marker.getTitle());
+      // console.log("marker label", this.marker.getLabel());
+      // console.log("whole marker", this.marker);
     });
 
   }

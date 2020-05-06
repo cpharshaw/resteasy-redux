@@ -14,7 +14,7 @@ export class PlaceCard extends Component {
 
 
   assignPlaceIcon = (rating) => {
-
+    console.log("assignPlaceIcon", rating)
     if (rating >= 4.5) {
       return greenMarker
     } else if (rating >= 4) {
