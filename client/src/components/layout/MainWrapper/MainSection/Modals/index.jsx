@@ -125,6 +125,7 @@ export class ModalContainer extends Component {
               className="animated fadeIn faster col ai-c"
               style={{
                 position: "absolute",
+                // top: selectedSectionValue === "mapList" ? "92.5px" : "0",
                 top: "0",
                 left: "0",
                 right: "0",
@@ -139,27 +140,41 @@ export class ModalContainer extends Component {
 
               <div className="row animated fadeIn ac-fs"
                 style={{
-                  maxHeight: currentModal === "formLocationModal" ? "87.5%" : currentModal !== "settingsModal" ? "27.5%" : "50%",
-                  maxWidth: currentModal === "formLocationModal" ? "92.5%" : currentModal !== "settingsModal" ? "70%" : "50%",
+                  maxHeight: (
+                    currentModal === "formLocationModal" ? "87.5%" :
+                    currentModal === "placeModal" ? "97.5%" :
+                    currentModal ? "27.5%" :
+                    "50%"
+                  ),
+                  maxWidth: (
+                    currentModal === "formLocationModal" ? "92.5%" : 
+                    currentModal === "placeModal" ? "95%" :
+                    currentModal ? "70%" : 
+                    "50%"
+                  ),
+                  background: "#f5f5f5",
+                  borderRadius: "5px",
+                  boxShadow: "0 0 3px #a8a8a8",
                 }}
               >
 
 
+
+
                 <div className="col jc-fs ac-fs ai-s"
                   style={{
-                    background: "#f5f5f5",
-                    borderRadius: "5px",
-                    boxShadow: "0 0 3px #a8a8a8",
+                    // background: "#f5f5f5",
+                    // borderRadius: "5px",
+                    // boxShadow: "0 0 3px #a8a8a8",
                   }}
                 >
 
-                  <div className="row animated fadeIn slow ac-fe"
+                  <div className="row animated fadeIn slow ac-fe "
                     style={{
                       minHeight: "40px",
                       maxHeight: "40px",
                     }}
                   >
-
                     <div className="col ai-fe"
                       style={{
                         pointerEvents: "all",
@@ -181,13 +196,33 @@ export class ModalContainer extends Component {
                     </div>
                   </div>
 
+
+
+
+
+                  {
+                    currentModal === "placeModal" ? (
+
+                      <div className="row" style={{ pointerEvents: "all" }}>
+                        <div className="col jc-se">
+                          Hello world
+                        </div>
+                      </div>
+                        
+                    ) : null
+                  }
+
+
+
+
+
                   {
                     currentModal === "formLocationModal" ? (
 
                       this.props.foursquareValue === null ? <div className="fsLoader" /> : (
                         <React.Fragment>
 
-                          <div className="row mt-1"
+                          <div className="row mt-1 "
                             style={{
                               minHeight: "45px",
                               maxHeight: "45px"
@@ -230,10 +265,12 @@ export class ModalContainer extends Component {
                     ) : null
                   }
 
-                  {/* {console.log("currentModal: ", currentModal)}
-                  {console.log("formStepValue: ", formStepValue)} */}
+
+
+
+
                   {
-                    currentModal !== "formLocationModal" && (currentModal !== "" || formStepValue > 5) ? (
+                    currentModal !== "formLocationModal" && currentModal !== "placeModal" && (currentModal || formStepValue > 5) ? (
 
                       <div className="row" style={{ pointerEvents: "all" }}>
                         <div className="col jc-se">
@@ -276,6 +313,12 @@ export class ModalContainer extends Component {
                       </div>
                     ) : null
                   }
+
+
+
+
+
+
                 </div>
               </div>
             </section>
@@ -295,6 +338,7 @@ const mapStateToProps = (state, ownProps) => {
     currentModal: state.modalState.currentModal,
     centerLatValue: state.mapState.centerLatValue,
     centerLngValue: state.mapState.centerLngValue,
+    selectedSectionValue: state.sectionState.selectedSectionValue,
     // reviews: state.firestore.ordered.reviews,
     auth: state.firebase.auth,
     foursquareValue: state.foursquareState.foursquareValue,

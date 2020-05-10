@@ -8,6 +8,7 @@ import orangeMarker from '../../../../components/layout/MainWrapper/MainSection/
 import yellowMarker from '../../../../components/layout/MainWrapper/MainSection/MapListSection/MapListWrapper/yellowMarker50.png';
 import chartreuseMarker from '../../../../components/layout/MainWrapper/MainSection/MapListSection/MapListWrapper/chartreuseMarker50.png';
 import greenMarker from '../../../../components/layout/MainWrapper/MainSection/MapListSection/MapListWrapper/greenMarker50.png';
+import { modalToggled } from '../../../../store/actions/modalActions';
 
 
 export class PlaceCard extends Component {
@@ -28,18 +29,19 @@ export class PlaceCard extends Component {
     } else {
       return greyMarker;
     }
-        
-       // case rating >= 4.85:
-      //   return "STAR icon";   
 
-      // case rating >= 1.15:
-      //   return "RADIOACTIVE icon";          
+    // case rating >= 4.85:
+    //   return "STAR icon";   
+
+    // case rating >= 1.15:
+    //   return "RADIOACTIVE icon";          
 
   };
 
   placeCardClicked = (e) => {
     e.preventDefault();
     console.log('clicked on placeCard')
+    this.props.modalToggled("placeModal");
   }
 
 
@@ -208,7 +210,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
   }
 }
 
