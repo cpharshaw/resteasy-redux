@@ -92,7 +92,7 @@ export class MyStuffSection extends Component {
               <div className="col">
 
                 <div className="row jc-fs ac-fs">
-                  <div className="col-3 jc-fs">
+                  <div className="col-3">
                     <img
                       className="skip"
                       style={{
@@ -108,22 +108,6 @@ export class MyStuffSection extends Component {
                     <span>{email ? email : "cpharshaw@gmail.com"}</span>
                   </div>
                 </div>
-
-                {/* <div className="row mt-2 bg-yellow">
-                  <button
-                    id=""
-                    className=" py-2 px-3"
-                    onClick={this.signOutclicked}
-                    style={{
-                      border: "1px solid #0abab5",
-                      color: "#0abab5",
-                      background: "inherit"
-                    }}
-                  >
-                    <span><em>Sign out</em></span>
-                  </button>
-                </div> */}
-
 
               </div>
             </div>
@@ -196,7 +180,7 @@ export class MyStuffSection extends Component {
               </div>
             </div>
 
-            <div className="row js-fg jc-c ai-c">
+            <div className="row js-fg">
 
               {
                 this.state.myStuffCategory !== "My Reviews" ? null : (
@@ -430,7 +414,8 @@ export class MyStuffSection extends Component {
           <div className="row"
             style={{
               background: "#E8E8E8",
-              // height: "55px",
+              // height: "55px !important",
+              // maxHeight: "55px !important",
             }}
           >
             <div className="col my-2">
@@ -452,10 +437,15 @@ export class MyStuffSection extends Component {
             </div>
           </div>
 
-          <div className="row js-fg">
-            <div className="col">
-              {displayName ? <SignedInComponent /> : <SignedOutComponent />}
-            </div>
+           <div className="row js-fg"
+              style={{
+                // height: "calc(100% - 55px)",
+                // background: "yellow"
+              }}
+            >
+              <div className="col" style={{ padding: "10px 0 10px 0" }}>
+                {displayName ? <SignedInComponent /> : <SignedOutComponent />}
+              </div>
           </div>
 
         </div>

@@ -71,7 +71,9 @@ export class ModalContainer extends Component {
       currentModal,
       data_size,
       children,
-      foursquareValue
+      foursquareValue,
+      selectedMarkerValue,
+      selectedPlaceValue
     } = this.props;
 
     // console.log("typeof: ", typeof foursquareValue)
@@ -81,7 +83,7 @@ export class ModalContainer extends Component {
     const foursquarePlaces = !foursquareValue ? null : (
 
       foursquareValue.map((place, i) => {
-        
+
         // console.log("fsPlace - " + i + " - ", place);
 
         const name = place.name ? place.name : null;
@@ -142,15 +144,15 @@ export class ModalContainer extends Component {
                 style={{
                   maxHeight: (
                     currentModal === "formLocationModal" ? "87.5%" :
-                    currentModal === "placeModal" ? "97.5%" :
-                    currentModal ? "27.5%" :
-                    "50%"
+                      currentModal === "placeModal" ? "97.5%" :
+                        currentModal ? "27.5%" :
+                          "50%"
                   ),
                   maxWidth: (
-                    currentModal === "formLocationModal" ? "92.5%" : 
-                    currentModal === "placeModal" ? "95%" :
-                    currentModal ? "70%" : 
-                    "50%"
+                    currentModal === "formLocationModal" ? "92.5%" :
+                      currentModal === "placeModal" ? "95%" :
+                        currentModal ? "70%" :
+                          "50%"
                   ),
                   background: "#f5f5f5",
                   borderRadius: "5px",
@@ -204,11 +206,34 @@ export class ModalContainer extends Component {
                     currentModal === "placeModal" ? (
 
                       <div className="row" style={{ pointerEvents: "all" }}>
-                        <div className="col jc-se">
-                          Hello world
+                        <div className="col fc">
+
+                          <div className="row ">
+                            <div className="col-2 ai-c">
+                              <img className="" height="75" width="75" src={selectedMarkerValue.icon} />
+                            </div>
+                            <div className="col-8 bg-red">
+                              <span>{selectedPlaceValue.name}</span>
+                              <span>{selectedPlaceValue.location.address}</span>
+                            </div>
+                            <div className="col-2 ai-c"/>
+                          </div>
+
+
+                          <div className="row js-fg">
+                            <div className="col"></div>
+                          </div>
+                          {/* data_placecategory={selectedPlaceValue.categories[0] ? selectedPlaceValue.categories[0].name : null}
+                          data_placedistance={selectedPlaceValue.distance}
+
+                          data_placemarker={selectedMarkerValue.icon}
+                          data_placenumreviews={14}
+
+                          data_userreviewed={true}
+                          data_userbookmarked={true} */}
                         </div>
                       </div>
-                        
+
                     ) : null
                   }
 
@@ -339,6 +364,8 @@ const mapStateToProps = (state, ownProps) => {
     centerLatValue: state.mapState.centerLatValue,
     centerLngValue: state.mapState.centerLngValue,
     selectedSectionValue: state.sectionState.selectedSectionValue,
+    selectedPlaceValue: state.mapState.selectedPlaceValue,
+    selectedMarkerValue: state.mapState.selectedMarkerValue,
     // reviews: state.firestore.ordered.reviews,
     auth: state.firebase.auth,
     foursquareValue: state.foursquareState.foursquareValue,

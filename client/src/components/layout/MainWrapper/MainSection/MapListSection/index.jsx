@@ -40,7 +40,7 @@ export class MapListSection extends Component {
           display: displayValue,
         }}
       >
-        <div className="col fc jc-fs">
+        <div className="col jc-fs">
 
           <div className="row" id="mapListBar"
             style={{

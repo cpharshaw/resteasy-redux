@@ -33,7 +33,7 @@
 }
 
 
-.row {
+.row, [class^="row-"] {
   -ms-flex-direction: row !important;
   flex-direction: row !important;
 
@@ -55,40 +55,26 @@
 }
 
 
-[class^="row-"] {
-  -ms-flex-direction: row !important;
-  flex-direction: row !important;
 
-  width: 100%;
-
-  flex-grow: 1;
-
-  -webkit-justify-content: space-evenly;
-  justify-content: space-evenly;
-
-  -webkit-box-align: stretch;
-  -moz-box-align: stretch;
-  -ms-flex-align: stretch;
-  -ms-align-items: stretch;
-  align-items: stretch;
-
-  -webkit-align-content: stretch;
-  align-content: stretch;
+.col.fc > .row { /*use this to make rows' heights shrink to match their content's height*/
+  /* max-height: fit-content; */
+  flex: 0 1 auto;
+  /* color: red; */
 }
 
-.col.fc > .row {
-  max-height: fit-content;
-}
-
-.col.sc > .row {
+.col.fc > .row.js-fg { /*use this to make a single row expand vertically to fill remaining space*/
   max-height: 100%;
   flex-grow: 1;
+  /* color: red; */
 }
 
-.col.fc > .row.js-fg {
+.col.sc > .row { /*use this to make rows' heights stretch to equally fill their parent container's height*/
   max-height: 100%;
   flex-grow: 1;
+  /* color: red; */
 }
+
+
 
 
 
