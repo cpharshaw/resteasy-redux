@@ -74,10 +74,20 @@ export class LocationModal extends Component {
         const locationLat = place.geometry.location.lat();
         const locationLng = place.geometry.location.lng();
 
-        const center = {
-          lat: locationLat,
-          lng: locationLng
-        };
+        const latLng = new this.props.googleAPIValue.LatLng(locationLat, locationLng)
+
+        const googleMap = this.props.mapValue;
+        // const googleMapCenter = googleMap ? googleMap.getCenter() : null;
+
+        googleMap.setCenter(latLng);
+
+        console.log("store center- ", this.props.mapValue.getCenter().lat(), this.props.mapValue.getCenter().lng());
+        console.log("variable center - ", googleMap.getCenter().lat(), googleMap.getCenter().lng())
+
+        // const center = {
+        //   lat: locationLat,
+        //   lng: locationLng
+        // };
 
         // const fsLL = locationLat + "," + locationLng;
         // this.props.getPlacesFromFoursquare(fsLL);
@@ -297,6 +307,7 @@ const mapDispatchToProps = (dispatch) => {
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     modalClosed: () => dispatch(modalClosed()),
     storeCircle: (circle) => dispatch(storeCircle(circle)),
+    // storeCenter: (center) => dispatch(storeCenter(center)),
     getPlacesFromFoursquare: (location) => dispatch(getPlacesFromFoursquare(location))
   }
 }
