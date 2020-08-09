@@ -86,7 +86,7 @@ class MapSection extends Component {
 
 
 
-  renderFS = () => {
+  renderFS = (thing) => {
 
     // console.log("renderFS running");
 
@@ -116,7 +116,7 @@ class MapSection extends Component {
   map_setCenter = (map, lat, lng) => map.setCenter({ lat, lng });
   map_setZoom = (map, zoomLevel) => {
     map.setZoom(zoomLevel)
-    console.log('zooooooommmmmiinnngg') 
+    console.log('zooooooommmmmiinnngg')
   };
   map_panTo = (map, lat, lng) => map.panTo({ lat, lng });
   map_getBounds = (map) => map.getBounds();
@@ -269,7 +269,7 @@ class MapSection extends Component {
     if (update_mapMovementCounter) {
       this.map_storeMap(this.currentMap);
       console.log("update mapMovementCounter", mapMovementCounter);
-      
+
     }
 
 
@@ -289,7 +289,7 @@ class MapSection extends Component {
 
 
     if (update_recenterIncrementerValue) {
-      
+
       this.map_panTo(this.currentMap, geolocLat, geolocLng);
       this.map_setCenter(this.currentMap, geolocLat, geolocLng);
       this.map_storeMap(this.currentMap);
@@ -308,7 +308,32 @@ class MapSection extends Component {
 
     if (allMapDataLoaded && update_fsValue && fsValue && geolocLat !== 39.8283459 && geolocLng !== -98.5794797) {
       // console.log("running renderFS from componentDidUpdate; geoLoc", geolocLat, geolocLng)
-      this.renderFS();
+      console.log("renderFS")
+
+      const self = this;
+
+      const f = async self => {
+
+        const promise = new Promise((resolve, reject) => {
+
+          resolve(
+            self.setState({
+              movedMap: false,
+              fsMarkers: [],
+              optionToUpdate: false
+            })
+          );
+
+        });
+
+        const result = await promise; // wait until the promise resolves (*)
+
+        self.renderFS(result);
+      }
+
+      f(self);
+
+      // this.renderFS();
     }
 
 
@@ -378,10 +403,10 @@ class MapSection extends Component {
 
     return (
 
-      
+
 
       <div id="mapSection" className="row animated fadeIn fast" style={{ display: displayValue }}>
-      {/* {console.log("selectedPlaceValue", selectedPlaceValue)}
+        {/* {console.log("selectedPlaceValue", selectedPlaceValue)}
       {console.log("selectedMarkerValue", selectedMarkerValue)} */}
         <div className="col">
 
@@ -429,11 +454,11 @@ class MapSection extends Component {
           }
 
 
-         {
-           !foursquareValue ? null : this.state.fsMarkers
-         }
+          {
+            !foursquareValue ? null : this.state.fsMarkers
+          }
 
-         {/* {this.state.fsMarkers[0] ? console.log("marker getIcon test: ", this.props) : null} */}
+          {/* {this.state.fsMarkers[0] ? console.log("marker getIcon test: ", this.props) : null} */}
           {
             settingsModal || !selectedPlaceValue || !selectedMarkerValue ? null : (
               // console.log("selectedMarkerValue", selectedMarkerValue),

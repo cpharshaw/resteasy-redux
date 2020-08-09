@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { formPrev } from '../../../../../../store/actions/formActions';
 import { modalToggled, modalClosed } from '../../../../../../store/actions/modalActions';
 // import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { storeCircle } from '../../../../../../store/actions/mapActions';
+import { storeMap, storeCircle } from '../../../../../../store/actions/mapActions';
 import { getPlacesFromFoursquare } from '../../../../../../store/actions/foursquareActions';
 // import ModalBlurBackground from '../ModalBlurBackground';
 
@@ -80,17 +80,18 @@ export class LocationModal extends Component {
         // const googleMapCenter = googleMap ? googleMap.getCenter() : null;
 
         googleMap.setCenter(latLng);
+        this.props.storeMap(googleMap);
 
-        console.log("store center- ", this.props.mapValue.getCenter().lat(), this.props.mapValue.getCenter().lng());
-        console.log("variable center - ", googleMap.getCenter().lat(), googleMap.getCenter().lng())
+        // console.log("store center- ", this.props.mapValue.getCenter().lat(), this.props.mapValue.getCenter().lng());
+        // console.log("variable center - ", googleMap.getCenter().lat(), googleMap.getCenter().lng())
 
         // const center = {
         //   lat: locationLat,
         //   lng: locationLng
         // };
 
-        // const fsLL = locationLat + "," + locationLng;
-        // this.props.getPlacesFromFoursquare(fsLL);
+        const fsLL = locationLat + "," + locationLng;
+        this.props.getPlacesFromFoursquare(fsLL);
 
         // setTimeout(() => console.log("fs value updated: ", this.props.foursquareValue), 2000)
         // console.log("fs value updated: ", this.props.foursquareValue);
@@ -307,6 +308,7 @@ const mapDispatchToProps = (dispatch) => {
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     modalClosed: () => dispatch(modalClosed()),
     storeCircle: (circle) => dispatch(storeCircle(circle)),
+    storeMap: (map) => dispatch(storeMap(map)),
     // storeCenter: (center) => dispatch(storeCenter(center)),
     getPlacesFromFoursquare: (location) => dispatch(getPlacesFromFoursquare(location))
   }

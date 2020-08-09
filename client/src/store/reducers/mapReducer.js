@@ -52,6 +52,7 @@ const initState = {
 }
 
 const mapReducer = (state = initState, action) => {
+  
   switch (action.type) {
 
     case 'GOOGLE_API_RECEIVED':
