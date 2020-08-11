@@ -27,7 +27,7 @@ export const getPlacesFromFoursquare = (locationPref) => {
               near: location,
               limit: 20,
               intent: "checkin",
-              v: "20191231",
+              v: "20207731",
               // v: "20191130",
             },
             responseType: 'json',

@@ -3,6 +3,7 @@ const initState = {
 
   // page1
   formLocationValue: {},
+  noBathrooomValue: false,
   formRestroomTypeValue: "Restroom type...",
   formLocationNotesValue: "",
   formTimeOfVisitValue: "Time of day...",

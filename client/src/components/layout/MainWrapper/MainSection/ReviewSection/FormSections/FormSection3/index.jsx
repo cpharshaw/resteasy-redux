@@ -120,7 +120,7 @@ export class FormSection3 extends Component {
             <div className="col-8">
               < FieldLabel
                 data_htmlFor="formGenderNeutralValue"
-                data_text="Gender neutral option"
+                data_text="Gender-neutral option"
               />
             </div>
             <div className="col-4">

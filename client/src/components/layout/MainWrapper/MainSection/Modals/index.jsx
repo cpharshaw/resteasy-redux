@@ -210,9 +210,9 @@ export class ModalContainer extends Component {
 
                           <div className="row ">
                             <div className="col-2 ai-c">
-                              <img className="" height="75" width="75" src={selectedMarkerValue.icon} />
+                              <img className="mx-2" height="70" width="70" src={selectedMarkerValue.icon} />
                             </div>
-                            <div className="col-8 bg-red">
+                            <div className="col-8 ">
                               <span>{selectedPlaceValue.name}</span>
                               <span>{selectedPlaceValue.location.address}</span>
                             </div>

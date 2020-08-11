@@ -68,11 +68,10 @@ export class FormSection1 extends Component {
       formLocationNotesValue,
       formTimeOfVisitValue,
       formOutOfOrderValue,
-
+      noBathrooomValue,
       dropdownSelected,
       textEntered,
       checkboxClicked,
-
     } = this.props;
     // console.log("formLocationValue: ", formLocationValue)
 
@@ -111,6 +110,27 @@ export class FormSection1 extends Component {
 
               {/* <br /> */}
               <br />
+              <HorizontalRule data_width="90%" />
+              {/* <br /> */}
+
+              <div id="outOfOrder" className="row">
+                <div className="col-5">
+                  < FieldLabel data_htmlFor="noBathrooomValue">No bathroom here</ FieldLabel >
+                </div>
+
+                <div className="col-7">
+                  <CheckInput
+                    data_id="noBathrooomValue"
+                    data_name="noBathrooomValue"
+                    data_value={noBathrooomValue}
+                    func_handlechange={checkboxClicked}
+                  />
+                </div>
+              </div>
+
+
+              {/* <br /> */}
+              {/* <br /> */}
               <HorizontalRule data_width="90%" />
               {/* <br /> */}
 
@@ -212,6 +232,7 @@ const mapStateToProps = (state, ownProps) => {
     centerLatValue: state.mapState.centerLatValue,
     centerLngValue: state.mapState.centerLngValue,
     formLocationValue: state.formState.formLocationValue,
+    noBathrooomValue: state.formState.noBathrooomValue,
     formRestroomTypeValue: state.formState.formRestroomTypeValue,
     formLocationNotesValue: state.formState.formLocationNotesValue,
     formTimeOfVisitValue: state.formState.formTimeOfVisitValue,

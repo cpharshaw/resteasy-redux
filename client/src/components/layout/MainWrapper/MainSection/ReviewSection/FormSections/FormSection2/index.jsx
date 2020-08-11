@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import FieldWrapper from '../../../../../../sharedComponents/formComponents/FieldWrapper';
 import FieldLabel from '../../../../../../sharedComponents/formComponents/FieldLabel';
 import RadioInput from '../../../../../../sharedComponents/formComponents/RadioInput';
+import HorizontalRule from '../../../../../../sharedComponents/general/HorizontalRule';
 import {
   formNext,
   formPrev,
@@ -121,7 +122,7 @@ export class FormSection2 extends Component {
           </div>
 
           <div className="row">
-          <div className="col-6">
+            <div className="col-6">
               < FieldLabel
                 data_text="Smell"
                 data_htmlFor="formSmellValue"
@@ -166,7 +167,7 @@ export class FormSection2 extends Component {
 
 
           <div className="row">
-          <div className="col-6">
+            <div className="col-6">
               <FieldLabel
                 data_text="Privacy"
                 data_htmlFor="formPrivacyValue"
@@ -213,56 +214,10 @@ export class FormSection2 extends Component {
 
           </div>
 
+
+
           <div className="row">
-          <div className="col-6">
-
-              < FieldLabel
-                data_text="Comfort"
-                data_htmlFor="formComfortValue"
-              />
-
-            </div>
             <div className="col-6">
-              <div className="row">
-
-                <RadioInput
-                  data_value="1"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "1" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="2"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "2" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="3"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "3" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="4"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "4" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="5"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "5" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-              </div>
-            </div>
-
-          </div>
-
-
-          <div className="row">
-          <div className="col-6">
               < FieldLabel
                 data_text="Capacity / Size"
                 data_htmlFor="formCapacityValue"
@@ -306,7 +261,7 @@ export class FormSection2 extends Component {
           </div>
 
           <div className="row">
-          <div className="col-6">
+            <div className="col-6">
               < FieldLabel
                 data_text="Perceived Safety"
                 data_htmlFor="formSafetyValue"
@@ -351,8 +306,58 @@ export class FormSection2 extends Component {
 
           </div>
 
+
           <div className="row">
-          <div className="col-6">
+            <div className="col-6">
+
+              < FieldLabel
+                data_text="Comfort"
+                data_htmlFor="formComfortValue"
+              />
+
+            </div>
+            <div className="col-6">
+              <div className="row">
+
+                <RadioInput
+                  data_value="1"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "1" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="2"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "2" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="3"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "3" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="4"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "4" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+                <RadioInput
+                  data_value="5"
+                  data_name="formComfortValue"
+                  data_checked={formComfortValue === "5" ? true : false}
+                  func_handlechange={radioSelected}
+                />
+              </div>
+            </div>
+
+          </div>          
+          
+          <HorizontalRule data_width="90%" />
+
+          <div className="row">
+            <div className="col-6">
               < FieldLabel
                 data_text="Style / Poshness"
                 data_htmlFor="formStyleValue"
