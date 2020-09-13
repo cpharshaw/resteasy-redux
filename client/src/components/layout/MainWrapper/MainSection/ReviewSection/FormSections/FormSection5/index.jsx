@@ -49,6 +49,7 @@ export class FormSection5 extends Component {
               <textarea
                 className=""
                 name="formCommentsValue"
+                maxLength="210"
                 style={{
                   width: "92.5%",
                   height: "90%",
@@ -58,6 +59,7 @@ export class FormSection5 extends Component {
                   // marginRight: "30px",
                   textAlignLast: "left",
                   textAlign: "left"
+
                 }}
                 placeholder={formOutOfOrderValue ? "This restroom was out of order..." : "You obviously know what you're talking about, so please, elaborate a little why dontchya..."}
                 onChange={e => textEntered(e)}

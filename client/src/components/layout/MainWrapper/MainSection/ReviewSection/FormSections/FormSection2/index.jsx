@@ -121,7 +121,7 @@ export class FormSection2 extends Component {
 
           </div>
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-6">
               < FieldLabel
                 data_text="Smell"
@@ -162,8 +162,7 @@ export class FormSection2 extends Component {
                 />
               </div>
             </div>
-
-          </div>
+          </div> */}
 
 
           <div className="row">
@@ -216,7 +215,7 @@ export class FormSection2 extends Component {
 
 
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-6">
               < FieldLabel
                 data_text="Capacity / Size"
@@ -257,8 +256,7 @@ export class FormSection2 extends Component {
                 />
               </div>
             </div>
-
-          </div>
+          </div> */}
 
           <div className="row">
             <div className="col-6">
@@ -354,7 +352,7 @@ export class FormSection2 extends Component {
 
           </div>          
           
-          <HorizontalRule data_width="90%" />
+          {/* <HorizontalRule data_width="90%" /> */}
 
           <div className="row">
             <div className="col-6">

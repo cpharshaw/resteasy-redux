@@ -55,6 +55,11 @@
 }
 
 
+.col.sc > .row { /* default?  use this to make rows' heights stretch to equally fill their parent container's height*/
+  max-height: 100%;
+  flex-grow: 1;
+  /* color: red; */
+}
 
 .col.fc > .row { /*use this to make rows' heights shrink to match their content's height*/
   /* max-height: fit-content; */
@@ -68,11 +73,7 @@
   /* color: red; */
 }
 
-.col.sc > .row { /*use this to make rows' heights stretch to equally fill their parent container's height*/
-  max-height: 100%;
-  flex-grow: 1;
-  /* color: red; */
-}
+
 
 
 
