@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import PlaceCard from './../../../../../../sharedComponents/mapListComponents/PlaceCard';
+
 // import { statement } from '@babel/template';
 
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -110,6 +111,7 @@ class ListSection extends Component {
           <div className="row" key={i + "listFSkey"} >
             <div className="col py-1">
               <PlaceCard
+                data_place={place}
                 data_componentsource="list"
                 data_placename={placeName}
                 data_placeaddress={placeAddress}
@@ -200,6 +202,9 @@ const mapStateToProps = (state, ownProps) => {
     modalState: state.modalState,
   }
 }
+
+
+
 
 export default compose(
   connect(mapStateToProps, null),

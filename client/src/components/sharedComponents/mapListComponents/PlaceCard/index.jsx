@@ -9,7 +9,7 @@ import yellowMarker from '../../../../components/layout/MainWrapper/MainSection/
 import chartreuseMarker from '../../../../components/layout/MainWrapper/MainSection/MapListSection/MapListWrapper/chartreuseMarker50.png';
 import greenMarker from '../../../../components/layout/MainWrapper/MainSection/MapListSection/MapListWrapper/greenMarker50.png';
 import { modalToggled } from '../../../../store/actions/modalActions';
-
+import { storeSelectedPlace } from '../../../../store/actions/mapActions';
 
 export class PlaceCard extends Component {
 
@@ -38,16 +38,18 @@ export class PlaceCard extends Component {
 
   };
 
-  placeCardClicked = (e) => {
+  placeCardClicked = (e, data_place) => {
     e.preventDefault();
-    console.log('clicked on placeCard')
+    console.log('clicked on placeCard');
     this.props.modalToggled("placeModal");
+    if (!this.props.mapListToggleValue) this.props.storeSelectedPlace(data_place);
   }
 
 
   render() {
 
     const {
+      data_place,
       data_componentsource,
       data_placemarker, //temporary until real data is avail
       data_placerating,
@@ -183,7 +185,7 @@ export class PlaceCard extends Component {
           </div>
         </div>
 
-        <div className="col-1 ai-fe ac-fe ta-r" onClick={this.placeCardClicked}>
+        <div className="col-1 ai-fe ac-fe ta-r" onClick={e => this.placeCardClicked(e, data_place)}>
           <img className="animated heartBeat slower" src="https://img.icons8.com/ios-glyphs/18/000000/chevron-right.png" />
         </div>
 
@@ -199,8 +201,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     geolocation: state.geoLocation,
     mapListToggleValue: ownProps.display,
-    selectedMarkerValue: state.mapState.selectedMarkerValue
-    // reviews: state.firestore.ordered.reviews,
+    selectedMarkerValue: state.mapState.selectedMarkerValue,
+    mapListToggleValue: state.mapListState.mapListToggleValue
     // auth: state.firebase.auth
   }
 }
@@ -211,9 +213,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
+    storeSelectedPlace: (place) => dispatch(storeSelectedPlace(place)),
+    
   }
 }
-
 
 
 export default compose(

@@ -244,69 +244,72 @@ export class ModalContainer extends Component {
                           <div className="row-f-1 mt-2">
                             <div className="col">
 
-                              <div className="row">
+                              <div className="row ">
                                 <div className="col">
-                                  <div className="row my-1">
+                                  <div className="row mb-1">
                                     <div className="col-6" style={{ fontSize: "13.5px" }}>Cleanliness</div>
                                     <div className="col-6" style={{ fontSize: "13.5px", fontStyle: "italic" }}>4.7</div>
                                   </div>
-                                  <div className="row my-1">
+                                  <div className="row mb-1">
                                     <div className="col-6" style={{ fontSize: "13.5px" }}>Privacy</div>
                                     <div className="col-6" style={{ fontSize: "13.5px", fontStyle: "italic" }}>4.5</div>
                                   </div>
-                                  <div className="row my-1">
+                                  <div className="row mb-1">
                                     <div className="col-6" style={{ fontSize: "13.5px" }}>Safety</div>
                                     <div className="col-6" style={{ fontSize: "13.5px", fontStyle: "italic" }}>5</div>
                                   </div>
-                                  <div className="row my-1">
+                                  <div className="row mb-1">
                                     <div className="col-6" style={{ fontSize: "13.5px" }}>Comfort</div>
                                     <div className="col-6" style={{ fontSize: "13.5px", fontStyle: "italic" }}>4.5</div>
                                   </div>
-                                  <div className="row my-1">
+                                  <div className="row">
                                     <div className="col-6" style={{ fontSize: "13.5px" }}>Style</div>
                                     <div className="col-6" style={{ fontSize: "13.5px", fontStyle: "italic" }}>3</div>
                                   </div>
                                 </div>
                               </div>
 
+                              <div className="row ">
+                                <div className="col-12">
+                                  <div className="row  ">
+                                    <span className="mx-1 ta-l"><span style={{ fontStyle: "italic", fontSize: "10px" }}>"This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc"</span><span style={{ fontSize: "9px", color: "grey" }}> 22hrs</span></span>
+                                  </div>
+                                  <div className="row  ">
+                                    <span className="mx-1 ta-l"><span style={{ fontStyle: "italic", fontSize: "10px" }}>"This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc"</span><span style={{ fontSize: "9px", color: "grey" }}> 22hrs</span></span>
+                                  </div>
+                                  <div className="row  ">
+                                    <span className="mx-1 ta-l"><span style={{ fontStyle: "italic", fontSize: "10px" }}>"This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc"</span><span style={{ fontSize: "9px", color: "grey" }}> 22hrs</span></span>
+                                  </div>
+                                </div>
+                              </div>
+
                               <div className="row">
                                 <div className="col">
-                                  <div className="row jc-fs ac-fs ai-fs">
-                                    <p className="mx-1 my-1 ta-l" ><span style={{ fontSize: "9px", color: "grey" }}>22hrs </span><span style={{ fontStyle: "italic", fontSize: "10px" }}>"This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc"</span></p>
-                                  </div>
-                                  <div className="row jc-fs ac-fs ai-fs">
-                                    <p className="mx-1 my-1 ta-l" ><span style={{ fontSize: "9px", color: "grey" }}>22hrs </span><span style={{ fontStyle: "italic", fontSize: "10px" }}>"This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc"</span></p>
-                                  </div>
-                                  <div className="row jc-fs ac-fs ai-fs">
-                                    <p className="mx-1 my-1 ta-l" ><span style={{ fontSize: "9px", color: "grey" }}>22hrs </span><span style={{ fontStyle: "italic", fontSize: "10px" }}>"This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc"</span></p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="row ">
-                                <div className="col">
                                   <img src="https://scontent.fphl2-4.fna.fbcdn.net/v/t1.0-9/14657505_10100478880636346_4568339785774748949_n.jpg?_nc_cat=108&_nc_sid=09cbfe&_nc_ohc=_BmcNJduSw8AX8ZlKAR&_nc_ht=scontent.fphl2-4.fna&oh=8e72647c22dd78cc8bfb7b9bb3755b12&oe=5F7F0306"
-                                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                                    style={{ maxWidth: "95px", maxHeight: "95px" }}
                                   />
                                 </div>
                                 <div className="col">
                                   <img src="https://scontent.fphl2-4.fna.fbcdn.net/v/t1.0-9/14657505_10100478880636346_4568339785774748949_n.jpg?_nc_cat=108&_nc_sid=09cbfe&_nc_ohc=_BmcNJduSw8AX8ZlKAR&_nc_ht=scontent.fphl2-4.fna&oh=8e72647c22dd78cc8bfb7b9bb3755b12&oe=5F7F0306"
-                                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                                    style={{ maxWidth: "95px", maxHeight: "95px" }}
                                   />
                                 </div>
                                 <div className="col">
                                   <img src="https://scontent.fphl2-4.fna.fbcdn.net/v/t1.0-9/14657505_10100478880636346_4568339785774748949_n.jpg?_nc_cat=108&_nc_sid=09cbfe&_nc_ohc=_BmcNJduSw8AX8ZlKAR&_nc_ht=scontent.fphl2-4.fna&oh=8e72647c22dd78cc8bfb7b9bb3755b12&oe=5F7F0306"
-                                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                                    style={{ maxWidth: "95px", maxHeight: "95px" }}
                                   />
                                 </div>
                               </div>
 
-                              <div className="row ">
-                                <div className="col">-- Add Review --</div>
-                              </div>
+
 
                             </div>
                           </div>
+
+                          <div className="row mb-2">
+                            <span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span>
+                          </div>
+
                           {/* data_placecategory={selectedPlaceValue.categories[0] ? selectedPlaceValue.categories[0].name : null}
                           data_placedistance={selectedPlaceValue.distance}
 

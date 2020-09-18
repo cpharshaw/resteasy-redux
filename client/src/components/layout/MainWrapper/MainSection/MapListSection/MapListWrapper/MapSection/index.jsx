@@ -475,6 +475,7 @@ class MapSection extends Component {
 
                 data_userreviewed={true}
                 data_userbookmarked={true}
+                // data_place={place}
               />
 
             )
