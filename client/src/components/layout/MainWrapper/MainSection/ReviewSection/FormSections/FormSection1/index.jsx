@@ -95,9 +95,9 @@ export class FormSection1 extends Component {
                   {
                     formLocationValue.name ? (
                       <>
-                        <em><span>{formLocationValue.name} </span></em>
-                        <em><span>{formLocationValue.address} </span></em>
-                        <em><span>{formLocationValue.category} </span></em>
+                        <em><span>{formLocationValue.name}</span></em>
+                        <em><span>{formLocationValue.address}</span></em>
+                        <em><span>{formLocationValue.category}</span></em>
                       </>
                     ) :
                       <LocationSelector

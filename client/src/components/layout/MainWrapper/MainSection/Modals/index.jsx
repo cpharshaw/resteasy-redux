@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
-import { formPrev, resetForm } from '../../../../../store/actions/formActions';
+import { formNext, formPrev, resetForm } from '../../../../../store/actions/formActions';
 import { selectSection } from '../../../../../store/actions/sectionActions';
 import { locationChosen } from '../../../../../store/actions/formActions';
 import FormNavButton from '../../../../sharedComponents/formComponents/FormNavButton';
@@ -29,11 +29,14 @@ export class ModalContainer extends Component {
 
   }
 
-  placeSelected = e => {
-    const name = e.currentTarget.getAttribute('data_placename');
-    const category = e.currentTarget.getAttribute('data_placecategory');
-    const distance = e.currentTarget.getAttribute('data_placedistance');
-    const address = e.currentTarget.getAttribute('data_placeaddress');
+  
+  placeSelected = (e, place) => {
+    e.preventDefault();
+    const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
+    console.log("place: ", place)
+    const category = place ? place.categories[0].name : e.currentTarget.getAttribute('data_placecategory');
+    const distance = place ? place.distance : e.currentTarget.getAttribute('data_placedistance');
+    const address = place ? place.location.address + ", " + place.location.city + ", " + place.location.state : e.currentTarget.getAttribute('data_placeaddress');
 
     const placeObj = {
       name,
@@ -41,11 +44,37 @@ export class ModalContainer extends Component {
       distance,
       address
     }
-    // console.log("place selected: ", placeObj)
+    
     this.props.locationChosen(placeObj);
     this.props.modalClosed();
+    
   }
 
+
+  addReviewClicked = (e, place) => {
+    e.preventDefault();
+    const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
+    console.log("place: ", place)
+    const category = place ? place.categories[0].name : e.currentTarget.getAttribute('data_placecategory');
+    const distance = place ? place.distance : e.currentTarget.getAttribute('data_placedistance');
+    const address = place ? place.location.address + ", " + place.location.city + ", " + place.location.state : e.currentTarget.getAttribute('data_placeaddress');
+
+    const placeObj = {
+      name,
+      category,
+      distance,
+      address
+    }
+    
+    this.props.locationChosen(placeObj);
+    this.props.modalClosed();
+    if (place) this.props.formNext("addReviewStep1");
+    if (place) this.props.selectSection("review");
+    
+  }  
+
+
+  
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // const prevFSVal = prevProps.foursquareValue;
@@ -87,7 +116,7 @@ export class ModalContainer extends Component {
         // console.log("fsPlace - " + i + " - ", place);
 
         const name = place.name ? place.name : null;
-        const category = place.categories ? (place.categories[0] ? place.categories[0].shortName : "") : null;
+        const category = place.categories ? (place.categories[0] ? place.categories[0].name : "") : null;
         const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
         const distance = place.distance + " ft";
 
@@ -306,7 +335,7 @@ export class ModalContainer extends Component {
                             </div>
                           </div>
 
-                          <div className="row mb-2">
+                          <div className="row mb-2" onClick={e => this.addReviewClicked(e, selectedPlaceValue)}>
                             <span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span>
                           </div>
 
@@ -463,6 +492,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // locationChosen: location => dispatch(locationChosen(location)),
     modalClosed: () => dispatch(modalClosed()),
+    formNext: (step) => dispatch(formNext(step)),
     formPrev: () => dispatch(formPrev()),
     resetForm: () => dispatch(resetForm()),
     selectSection: (section) => dispatch(selectSection(section)),

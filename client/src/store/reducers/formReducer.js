@@ -37,14 +37,14 @@ const initState = {
 const formReducer = (state = initState, action) => {
 
   const newFormStep = action.payload;
-
+  console.log("new form step", newFormStep, state.formStepValue)
   switch (action.type) {
 
     case "FORM_NEXT":
 
       return {
         ...state,
-        formStepValue: newFormStep === "outOfOrder" ? 5 : state.formStepValue + 1
+        formStepValue: newFormStep === "outOfOrder" ? 5 : newFormStep === "addReviewStep1" ? 1 : state.formStepValue + 1
       };
 
     case "FORM_PREV":
