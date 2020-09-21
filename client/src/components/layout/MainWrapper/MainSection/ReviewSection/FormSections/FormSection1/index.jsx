@@ -115,7 +115,7 @@ export class FormSection1 extends Component {
 
               <div id="outOfOrder" className="row">
                 <div className="col-5">
-                  < FieldLabel data_htmlFor="noBathrooomValue">No bathroom here</ FieldLabel >
+                  < FieldLabel data_htmlFor="noBathrooomValue">No restroom here</ FieldLabel >
                 </div>
 
                 <div className="col-7">
