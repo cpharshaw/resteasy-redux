@@ -37,7 +37,7 @@ const initState = {
 const formReducer = (state = initState, action) => {
 
   const newFormStep = action.payload;
-  console.log("new form step", newFormStep, state.formStepValue)
+  // console.log("new form step", newFormStep, state.formStepValue)
   switch (action.type) {
 
     case "FORM_NEXT":

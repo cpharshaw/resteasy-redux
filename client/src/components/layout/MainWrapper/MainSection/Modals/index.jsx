@@ -29,7 +29,7 @@ export class ModalContainer extends Component {
 
   }
 
-  
+
   placeSelected = (e, place) => {
     e.preventDefault();
     const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
@@ -44,10 +44,10 @@ export class ModalContainer extends Component {
       distance,
       address
     }
-    
+
     this.props.locationChosen(placeObj);
     this.props.modalClosed();
-    
+
   }
 
 
@@ -65,16 +65,16 @@ export class ModalContainer extends Component {
       distance,
       address
     }
-    
+
     this.props.locationChosen(placeObj);
     this.props.modalClosed();
     if (place) this.props.formNext("addReviewStep1");
     if (place) this.props.selectSection("review");
-    
-  }  
+
+  }
 
 
-  
+
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // const prevFSVal = prevProps.foursquareValue;
@@ -174,13 +174,13 @@ export class ModalContainer extends Component {
                   maxHeight: (
                     currentModal === "formLocationModal" ? "87.5%" :
                       currentModal === "placeModal" ? "97.5%" :
-                        currentModal ? "27.5%" :
+                      currentModal || formStepValue === 6 || formStepValue === 7 ? "27.5%" :
                           "50%"
                   ),
                   maxWidth: (
                     currentModal === "formLocationModal" ? "92.5%" :
                       currentModal === "placeModal" ? "95%" :
-                        currentModal ? "70%" :
+                        currentModal || formStepValue === 6 || formStepValue === 7 ? "70%" :
                           "50%"
                   ),
                   background: "#f5f5f5",

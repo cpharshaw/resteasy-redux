@@ -67,7 +67,7 @@ export class MapListBar extends Component {
             }}
           >
 
-            <div className="col-8 ai-fs">
+            <div className="col-9 ai-fs">
               <button
                 className="text-white bg-primary  ml-5"
                 onClick={this.toggleMapList}
@@ -76,9 +76,9 @@ export class MapListBar extends Component {
               </button>
             </div>
 
-            <div className="col-4">
+            <div className="col-3">
               <div className="row ">
-                <div className="col">
+                {/* <div className="col">
                   <button
                     className="text-white"
                     onClick={this.toggleFilters}
@@ -94,7 +94,6 @@ export class MapListBar extends Component {
                         <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none"
                           style={{ mixBlendMode: "normal" }}
                         >
-                          {/* <path d="M0,172v-172h172v172z" fill="#0abab5"></path> */}
                           <g fill="#f5f5f5">
                             <path d="M21.5,21.5v14.33333h7.16667l35.83333,57.33333v57.33333h43v-57.33333l35.83333,-57.33333h7.16667v-14.33333h-7.16667h-114.66667zM45.57552,35.83333h80.86295l-33.27181,53.2181v47.11524h-14.33333v-47.11524z"></path>
                           </g>
@@ -103,7 +102,7 @@ export class MapListBar extends Component {
                       </g>
                     </svg>
                   </button>
-                </div>
+                </div> */}
 
                 <div className="col">
                   <button

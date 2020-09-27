@@ -57,6 +57,21 @@ export class FormSection1 extends Component {
     this.props.modalToggled("formLocationModal");
   }
 
+  noRestroomSelected(e) {
+
+    this.props.dropdownSelected(e);
+
+    const cost = e.target.value;
+
+    console.log("admission selected", cost)
+
+    if (cost === "Fee...") {
+      this.props.feeChosen("visible");
+    } else {
+      this.props.feeChosen("hidden");
+    }
+
+  }
 
 
 
@@ -113,7 +128,7 @@ export class FormSection1 extends Component {
               <HorizontalRule data_width="90%" />
               {/* <br /> */}
 
-              <div id="outOfOrder" className="row">
+              {/* <div id="outOfOrder" className="row">
                 <div className="col-5">
                   < FieldLabel data_htmlFor="noBathrooomValue">No restroom here</ FieldLabel >
                 </div>
@@ -126,12 +141,12 @@ export class FormSection1 extends Component {
                     func_handlechange={checkboxClicked}
                   />
                 </div>
-              </div>
+              </div> */}
 
 
               {/* <br /> */}
               {/* <br /> */}
-              <HorizontalRule data_width="90%" />
+              {/* <HorizontalRule data_width="90%" /> */}
               {/* <br /> */}
 
               <div className="row ">
