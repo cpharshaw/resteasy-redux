@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { formNext, formPrev, resetForm } from '../../../../store/actions/formActions';
+import { formNext, formPrev, resetForm, submitForm } from '../../../../store/actions/formActions';
 import { selectSection } from '../../../../store/actions/sectionActions';
 import { modalToggled, modalClosed } from '../../../../store/actions/modalActions';
 
@@ -48,7 +48,8 @@ export class FormNavButton extends Component {
   finshedForm = () => {
     // const newValue = event.currentTarget.value;
     // const newValue = event.currentTarget.getAttribute('value');
-    // console.log("bottom bar selected section: ", newValue);
+    this.props.submitForm();
+    console.log("submitted");
     this.props.resetForm();
     this.props.selectSection("mapList");
   };
@@ -129,6 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     formNext: (outOfOrderInd) => dispatch(formNext(outOfOrderInd)),
     formPrev: (outOfOrderInd) => dispatch(formPrev(outOfOrderInd)),
     resetForm: () => dispatch(resetForm()),
+    submitForm: () => dispatch(submitForm()),
     selectSection: (section) => dispatch(selectSection(section)),
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     modalClosed: () => dispatch(modalClosed()),

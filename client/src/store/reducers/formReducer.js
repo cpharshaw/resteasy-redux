@@ -114,6 +114,13 @@ const formReducer = (state = initState, action) => {
         photosArrValue: action.payload
       }
 
+    case 'FORM_SUBMITTED':
+      console.log("submitForm success");
+      return state;
+    case 'FORM_SUBMITTED_ERROR':
+      console.log("submitForm ERROR", action.payload);
+      return state;
+      
 
     default:
       return state;

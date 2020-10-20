@@ -114,7 +114,7 @@ export class MyStuffSection extends Component {
 
             <div id="" className="row pt-3 pb-2 px-1">
 
-              <div className="col-3 pb-1"
+              <div className="col-4 pb-1"
                 style={{
                   borderBottom: this.state.myStuffCategory === "My Reviews" ? "2px solid #0abab5" : "1px solid darkgrey",
                 }}
@@ -131,7 +131,7 @@ export class MyStuffSection extends Component {
               </div>
 
               <div
-                className="col-3 pb-1"
+                className="col-4 pb-1"
                 style={{
                   borderBottom: this.state.myStuffCategory === "Favorites" ? "2px solid #0abab5" : "1px solid darkgrey",
                 }}
@@ -147,7 +147,7 @@ export class MyStuffSection extends Component {
                 >Favorites</span>
               </div>
 
-              <div
+              {/* <div
                 className="col-3 pb-1"
                 style={{
                   borderBottom: this.state.myStuffCategory === "Notifications" ? "2px solid #0abab5" : "1px solid darkgrey",
@@ -161,10 +161,10 @@ export class MyStuffSection extends Component {
                     width: "100%"
                   }}
                 >Notifications</span>
-              </div>
+              </div> */}
 
               <div
-                className="col-3 pb-1"
+                className="col-4 pb-1"
                 style={{
                   borderBottom: this.state.myStuffCategory === "Settings" ? "2px solid #0abab5" : "1px solid darkgrey",
                 }}

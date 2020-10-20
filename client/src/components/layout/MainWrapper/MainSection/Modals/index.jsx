@@ -32,17 +32,29 @@ export class ModalContainer extends Component {
 
   placeSelected = (e, place) => {
     e.preventDefault();
+    console.log("place test: ", place)
     const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
-    console.log("place: ", place)
+    const address = place ? place.location.address : e.currentTarget.getAttribute('data_placeaddress');
     const category = place ? place.categories[0].name : e.currentTarget.getAttribute('data_placecategory');
     const distance = place ? place.distance : e.currentTarget.getAttribute('data_placedistance');
-    const address = place ? place.location.address + ", " + place.location.city + ", " + place.location.state : e.currentTarget.getAttribute('data_placeaddress');
+
+    const id = place ? place.id : e.currentTarget.getAttribute('data_placeid');
+    const city = place ? place.location.city : e.currentTarget.getAttribute('data_placecity');
+    const stateCode = place ? place.location.state : e.currentTarget.getAttribute('data_placestatecode');
+    const zip = place ? place.location.postalCode : e.currentTarget.getAttribute('data_placezip');
+    const country = place ? place.location.country : e.currentTarget.getAttribute('data_placecountry');
 
     const placeObj = {
       name,
+      address,
       category,
       distance,
-      address
+
+      id,
+      city,
+      stateCode,
+      zip,
+      country
     }
 
     this.props.locationChosen(placeObj);
@@ -53,17 +65,29 @@ export class ModalContainer extends Component {
 
   addReviewClicked = (e, place) => {
     e.preventDefault();
-    const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
     console.log("place: ", place)
+    const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
     const category = place ? place.categories[0].name : e.currentTarget.getAttribute('data_placecategory');
     const distance = place ? place.distance : e.currentTarget.getAttribute('data_placedistance');
-    const address = place ? place.location.address + ", " + place.location.city + ", " + place.location.state : e.currentTarget.getAttribute('data_placeaddress');
+    const address = place ? place.location.address : e.currentTarget.getAttribute('data_placeaddress');
+
+    const id = place ? place.id : e.currentTarget.getAttribute('data_placeid');
+    const city = place ? place.location.city : e.currentTarget.getAttribute('data_placecity');
+    const stateCode = place ? place.location.state : e.currentTarget.getAttribute('data_placestatecode');
+    const zip = place ? place.location.postalCode : e.currentTarget.getAttribute('data_placezip');
+    const country = place ? place.location.country : e.currentTarget.getAttribute('data_placecountry');
 
     const placeObj = {
       name,
       category,
       distance,
-      address
+      address,
+
+      id,
+      city,
+      stateCode,
+      zip,
+      country      
     }
 
     this.props.locationChosen(placeObj);
@@ -117,19 +141,32 @@ export class ModalContainer extends Component {
 
         const name = place.name ? place.name : null;
         const category = place.categories ? (place.categories[0] ? place.categories[0].name : "") : null;
-        const address = place.location.address + ", " + place.location.city + ", " + place.location.state;
+        const address = place.location.address;
         const distance = place.distance + " ft";
+
+        const id = place.id;
+        const city = place.location.city;
+        const stateCode = place.location.state;
+        const zip = place.location.postalCode;
+        const country = place.location.country;
 
         return (
           <div className="row" key={i + "fs"}>
             <div
               className="col jc-se ai-c"
               data_placedata={JSON.stringify(place)}
-              onClick={e => this.placeSelected(e)}
+              onClick={e => this.placeSelected(e, place)}
               data_placename={name}
               data_placeaddress={address}
               data_placecategory={category}
               data_placedistance={distance}
+
+              data_placeid={id}
+              data_placecity={city}
+              data_placestatecode={stateCode}
+              data_placezip={zip}
+              data_placecountry={country}
+
               style={{
                 flexWrap: "wrap",
                 whiteSpace: "wrap",

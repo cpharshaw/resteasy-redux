@@ -1,4 +1,110 @@
 
+import axios from 'axios';
+
+
+export const submitForm = () => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let processing = true;
+    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
+    const firestore = getFirestore();
+    const formState = getState().formState;
+    const authState = getState().auth;
+
+    const finalPhotosArr = [];
+
+    console.log("submitForm formState results: ", formState);
+    console.log("submitForm authState results: ", authState);
+
+    // const photosArr = photosArr => {
+    console.log("submitForm authState results: ", authState);
+
+    formState.photosArrValue.forEach((file, i) => {
+      const fileSrc = file.src;
+      // console.log("photo file src: ", fileSrc);
+      const config = {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      };
+      const formData = new FormData();
+      formData.append('file', fileSrc);
+      formData.append('upload_preset', "rnpjoamq");
+      axios.post("https://api.cloudinary.com/v1_1/resteasyredux/upload", formData, config)
+        .then(res => {
+          console.log(i, formState.photosArrValue.length, res);
+          finalPhotosArr.push(res.data.secure_url);
+
+          if (i+1 === formState.photosArrValue.length) {
+
+            const review = {
+
+              basicInfo: {
+                timeOfVisit: new Date(),
+                locationState: formState.formLocationValue.stateCode,
+                restroomUsed: formState.formRestroomTypeValue,
+                locationName: formState.formLocationValue.name,
+                locationState: formState.formLocationValue.stateCode,
+                locationZip: formState.formLocationValue.zip,
+                locationCountry: formState.formLocationValue.country,
+                outOfOrder: formState.formOutOfOrderValue,
+                locationNotes: formState.formLocationNotesValue,
+                locationCategory: formState.formLocationValue.category,
+                locationCity: formState.formLocationValue.city
+              },
+      
+              comments: formState.formCommentsValue,
+      
+              features: {
+                genderNeutral: formState.formGenderNeutralValue,
+                babyStation: formState.formBabyChangeValue,
+                accessible: formState.formHandicappedValue,
+                price: formState.formFeeValue,
+                admission: formState.formAdmissionValue,
+                cleaningSchedule: formState.formScheduleValue
+              },
+      
+              locationID: formState.formLocationValue.id,
+      
+              photos: finalPhotosArr,
+      
+              scores: {
+                cleanliness: formState.formCleanlinessValue,
+                style: formState.formStyleValue,
+                comfort: formState.formComfortValue,
+                safety: formState.formSafetyValue,
+                privacy: formState.formPrivacyValue
+              },
+      
+              userID: authState.loginCredentialValue.uid
+            };
+      
+            firestore.collection('reviews').add({
+              review
+            })
+              .then(() => {
+                console.log("submitted this review: ", review)
+                dispatch({ type: 'FORM_SUBMITTED', payload: review })
+              })
+              .catch(err => {
+                console.error("error in call to firestore", err)
+                console.log("errored review in firestore", review)
+                dispatch({ type: 'FORM_SUBMITTED_ERROR', payload: err })
+              });
+          }
+
+
+        })
+        .catch(err => {
+          console.error(err)
+          // console.error("error in call to cloudinary", err)
+          // console.log("errored review in cloudinary", review)
+        })
+    });
+
+    // };
+
+  }
+}
+
+
 export const formNext = (outOfOrderInd) => {
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
