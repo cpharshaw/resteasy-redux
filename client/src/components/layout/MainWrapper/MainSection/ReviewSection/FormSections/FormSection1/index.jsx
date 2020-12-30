@@ -39,7 +39,7 @@ export class FormSection1 extends Component {
 
     e.preventDefault();
 
-    console.log("location button clicked")
+    // console.log("location button clicked")
 
     this.props.modalToggled("formLocationModal");
 
@@ -63,7 +63,7 @@ export class FormSection1 extends Component {
 
     const cost = e.target.value;
 
-    console.log("admission selected", cost)
+    // console.log("admission selected", cost)
 
     if (cost === "Fee...") {
       this.props.feeChosen("visible");

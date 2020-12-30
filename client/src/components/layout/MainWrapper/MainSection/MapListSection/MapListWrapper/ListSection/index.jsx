@@ -76,7 +76,7 @@ class ListSection extends Component {
     // console.log("fsPlacesUpdate", fsPlacesUpdate)
 
     if (allMapDataLoaded && update_fsValue) {
-      console.log("inside if state for fsPlacesUpdate", fsValue)
+      // console.log("inside if state for fsPlacesUpdate", fsValue)
 
       const tempArr = fsValue.map((place, i) => {
 

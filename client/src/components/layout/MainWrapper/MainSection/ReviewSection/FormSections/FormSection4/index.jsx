@@ -23,7 +23,7 @@ export class FormSection4 extends Component {
 
   nextStep = () => {
     this.props.formNext();
-    console.log("entry props: ", this.props.formValue)
+    // console.log("entry props: ", this.props.formValue)
   }
 
   prevStep = () => {
@@ -55,7 +55,7 @@ export class FormSection4 extends Component {
       });
 
       if (this.props.photosArrValue.length !== arr.length) {
-        console.log("dupe");
+        // console.log("dupe");
         return;
       } else {
         const photoData = {
@@ -353,7 +353,7 @@ export class FormSection4 extends Component {
                     :
                     this.state.photoArr
                 }
-                {console.log("# of photos: ", this.state.photoArr.length)}
+                {/* {console.log("# of photos: ", this.state.photoArr.length)} */}
               </div>
             </div>
 

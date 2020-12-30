@@ -27,12 +27,12 @@ export class FormSection3 extends Component {
   }
 
   nextStep = () => {
-    console.log();
+    // console.log();
     this.props.formNext();
   }
 
   prevStep = () => {
-    console.log();
+    // console.log();
     this.props.formPrev();
   }
 
@@ -51,7 +51,7 @@ export class FormSection3 extends Component {
 
     const cost = e.target.value;
 
-    console.log("admission selected", cost)
+    // console.log("admission selected", cost)
 
     if (cost === "Fee...") {
       this.props.feeChosen("visible");
@@ -206,7 +206,7 @@ export class FormSection3 extends Component {
             </div>
           </div>
 
-          {console.log("formFeeDisplayValue: ", formFeeDisplayValue)}
+          {/* {console.log("formFeeDisplayValue: ", formFeeDisplayValue)} */}
 
           <div className="row"
             style={{

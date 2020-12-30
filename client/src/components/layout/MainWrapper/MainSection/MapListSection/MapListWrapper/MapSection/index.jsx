@@ -116,7 +116,7 @@ class MapSection extends Component {
   map_setCenter = (map, lat, lng) => map.setCenter({ lat, lng });
   map_setZoom = (map, zoomLevel) => {
     map.setZoom(zoomLevel)
-    console.log('zooooooommmmmiinnngg')
+    // console.log('zooooooommmmmiinnngg')
   };
   map_panTo = (map, lat, lng) => map.panTo({ lat, lng });
   map_getBounds = (map) => map.getBounds();
@@ -268,7 +268,7 @@ class MapSection extends Component {
 
     if (update_mapMovementCounter) {
       this.map_storeMap(this.currentMap);
-      console.log("update mapMovementCounter", mapMovementCounter);
+      // console.log("update mapMovementCounter", mapMovementCounter);
 
     }
 
@@ -284,7 +284,7 @@ class MapSection extends Component {
       this.map_setZoom(this.currentMap, 17);
       // this.renderFS();
 
-      console.log("new geoloc, repositioning...")
+      // console.log("new geoloc, repositioning...")
     }
 
 
@@ -308,7 +308,7 @@ class MapSection extends Component {
 
     if (allMapDataLoaded && update_fsValue && fsValue && geolocLat !== 39.8283459 && geolocLng !== -98.5794797) {
       // console.log("running renderFS from componentDidUpdate; geoLoc", geolocLat, geolocLng)
-      console.log("renderFS")
+      // console.log("renderFS")
 
       const self = this;
 

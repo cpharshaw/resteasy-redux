@@ -1,5 +1,10 @@
 const initState = {
-  formStepValue: 0,
+
+  formStepValue: 0, 
+
+  formProcessingValue: false,
+
+  formRes: null,
 
   // page1
   formLocationValue: {},
@@ -61,7 +66,7 @@ const formReducer = (state = initState, action) => {
       };
 
     case "LOCATION_CHOSEN":
-      console.log("location chosen, reducer: ", action.payload)
+      // console.log("location chosen, reducer: ", action.payload)
       return {
         ...state,
         formLocationValue: action.payload
@@ -114,9 +119,22 @@ const formReducer = (state = initState, action) => {
         photosArrValue: action.payload
       }
 
+    case 'FORM_PROCESSING':
+      // console.log("submitForm processing");
+      return {
+        ...state,
+        formProcessingValue: true,
+        formStepValue: newFormStep === "outOfOrder" ? 5 : newFormStep === "addReviewStep1" ? 1 : state.formStepValue + 1
+      }
+
     case 'FORM_SUBMITTED':
-      console.log("submitForm success");
-      return state;
+      // console.log("submitForm success; step- ", state.formStepValue, 'formProcessingValue- ', state.formProcessingValue);
+      return {
+        ...state,
+        formProcessingValue: false,
+        formRes: action.payload
+      }
+
     case 'FORM_SUBMITTED_ERROR':
       console.log("submitForm ERROR", action.payload);
       return state;

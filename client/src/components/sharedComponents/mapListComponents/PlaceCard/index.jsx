@@ -40,7 +40,7 @@ export class PlaceCard extends Component {
 
   placeCardClicked = (e, data_place) => {
     e.preventDefault();
-    console.log('clicked on placeCard');
+    // console.log('clicked on placeCard');
     this.props.modalToggled("placeModal");
     if (!this.props.mapListToggleValue) this.props.storeSelectedPlace(data_place);
   }

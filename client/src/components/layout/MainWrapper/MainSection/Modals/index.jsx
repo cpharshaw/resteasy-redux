@@ -32,7 +32,7 @@ export class ModalContainer extends Component {
 
   placeSelected = (e, place) => {
     e.preventDefault();
-    console.log("place test: ", place)
+    // console.log("place test: ", place)
     const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
     const address = place ? place.location.address : e.currentTarget.getAttribute('data_placeaddress');
     const category = place ? place.categories[0].name : e.currentTarget.getAttribute('data_placecategory');
@@ -65,7 +65,7 @@ export class ModalContainer extends Component {
 
   addReviewClicked = (e, place) => {
     e.preventDefault();
-    console.log("place: ", place)
+    // console.log("place: ", place)
     const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
     const category = place ? place.categories[0].name : e.currentTarget.getAttribute('data_placecategory');
     const distance = place ? place.distance : e.currentTarget.getAttribute('data_placedistance');
@@ -87,7 +87,7 @@ export class ModalContainer extends Component {
       city,
       stateCode,
       zip,
-      country      
+      country
     }
 
     this.props.locationChosen(placeObj);
@@ -121,6 +121,7 @@ export class ModalContainer extends Component {
     const {
       selectedSectionValue,
       formStepValue,
+      formProcessingValue,
       currentModal,
       data_size,
       children,
@@ -211,7 +212,7 @@ export class ModalContainer extends Component {
                   maxHeight: (
                     currentModal === "formLocationModal" ? "87.5%" :
                       currentModal === "placeModal" ? "97.5%" :
-                      currentModal || formStepValue === 6 || formStepValue === 7 ? "27.5%" :
+                        currentModal || formStepValue === 6 || formStepValue === 7 ? "27.5%" :
                           "50%"
                   ),
                   maxWidth: (
@@ -455,22 +456,32 @@ export class ModalContainer extends Component {
 
                           <div className="row">
                             <div className="col">
-                              {currentModal === "formResetModal" ? <p>Reset review form and start over?</p> : null}
-                              {formStepValue === 6 ? <p>Ok to submit review?</p> : null}
-                              {formStepValue === 7 ? <p>Thank you for your review.</p> : null}
+                              {currentModal === "formResetModal" && !formProcessingValue ? <p>Reset review form and start over?</p> : null}
+                              {formStepValue === 6 && !formProcessingValue ? <p>Ok to submit review?</p> : null}
+                              {/* {formStepValue === 7 ? <p>Saving review...</p> : null} */}
+                              {formStepValue === 7 && formProcessingValue ? <p>Saving review...          </p> : null}
+                              {formStepValue === 7 && !formProcessingValue ? <p>Thank you for your review.</p> : null}
                             </div>
                           </div>
 
 
                           <div className="row">
                             {
-                              formStepValue !== 7 ? (
+                              formStepValue !== 7 && !formProcessingValue ? (
                                 <div className="col">
                                   <FormNavButton
-                                    data_text={currentModal === "formResetModal" ? "Cancel" : formStepValue === 6 ? "Cancel" : null}
+                                    data_text={
+                                      currentModal === "formResetModal" && !formProcessingValue ? "Cancel" :
+                                        formStepValue === 6 && !formProcessingValue ? "Cancel" :
+                                          null
+                                    }
                                     data_classes="button-form-modal"
                                     data_width="100px"
-                                    func_navcommand={currentModal === "formResetModal" ? "cancel" : formStepValue === 6 ? "prev" : null}
+                                    func_navcommand={
+                                      currentModal === "formResetModal" && !formProcessingValue ? "cancel" :
+                                        formStepValue === 6 && !formProcessingValue ? "prev" :
+                                          null
+                                    }
                                   />
                                 </div>
 
@@ -478,10 +489,20 @@ export class ModalContainer extends Component {
                             }
                             <div className="col">
                               <FormNavButton
-                                data_text={currentModal === "formResetModal" ? "Reset" : formStepValue === 6 ? "Submit" : formStepValue === 7 ? "Close" : null}
+                                data_text={
+                                  currentModal === "formResetModal" && !formProcessingValue ? "Reset" :
+                                    formStepValue === 6 ? "Submit" :
+                                      formStepValue === 7 && !formProcessingValue ? "Close" :
+                                        null
+                                }
                                 data_classes="button-form-modal"
                                 data_width="100px"
-                                func_navcommand={currentModal === "formResetModal" ? "reset" : formStepValue === 6 ? "next" : formStepValue === 7 ? "finish" : null}
+                                func_navcommand={
+                                  currentModal === "formResetModal" && !formProcessingValue ? "reset" :
+                                    formStepValue === 6 ? "submit" :
+                                      formStepValue === 7 && !formProcessingValue ? "finish" :
+                                        null
+                                }
                               />
                             </div>
 
@@ -512,6 +533,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     // geolocationValue: state.geolocationState.geolocationValue,
     formStepValue: state.formState.formStepValue,
+    formProcessingValue: state.formState.formProcessingValue,
     modalState: state.modalState,
     currentModal: state.modalState.currentModal,
     centerLatValue: state.mapState.centerLatValue,

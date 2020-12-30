@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { formNext, formPrev, resetForm, submitForm } from '../../../../store/actions/formActions';
+import { formNext, formPrev, resetForm, submitFormProcessing, submitForm } from '../../../../store/actions/formActions';
 import { selectSection } from '../../../../store/actions/sectionActions';
 import { modalToggled, modalClosed } from '../../../../store/actions/modalActions';
 
@@ -10,7 +10,7 @@ export class FormNavButton extends Component {
   nextStep = (e) => {
     e.preventDefault();
 
-    console.log("button clicked")
+    // console.log("button clicked")
 
     let outOfOrderInd;
 
@@ -31,7 +31,7 @@ export class FormNavButton extends Component {
 
     let outOfOrderInd;
 
-    console.log("button clicked")
+    // console.log("button clicked")
 
     if (
       this.props.formStepValue === 5
@@ -45,25 +45,40 @@ export class FormNavButton extends Component {
 
   }
 
-  finshedForm = () => {
-    // const newValue = event.currentTarget.value;
-    // const newValue = event.currentTarget.getAttribute('value');
-    this.props.submitForm();
-    console.log("submitted");
+  submitForm = () => {
+    console.log("submitForm", this.props.formProcessingValue)
+    if (!this.props.formProcessingValue && !this.props.formRes) this.props.submitForm();
+    // if (!this.props.formProcessingValue && !this.props.formRes) this.props.submitFormProcessing();
+  };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    let formProcessingValueUpdate = false;
+    formProcessingValueUpdate = prevProps.formProcessingValue !== this.props.formProcessingValue;
+
+
+    if (formProcessingValueUpdate && this.props.formProcessingValue && !this.props.formRes) {
+      // console.log("prevProps.formProcessingValue is: ", prevProps.formProcessingValue);
+      // console.log("this.props.formProcessingValue is: ", this.props.formProcessingValue);
+      // console.log("XXX formProcessingValueUpdate is: ", formProcessingValueUpdate);
+      // this.props.submitForm();
+    }
+  }
+
+  finishForm = () => {
     this.props.resetForm();
     this.props.selectSection("mapList");
   };
 
 
   modalCancel = () => {
-    console.log("cancel clicked")
+    // console.log("cancel clicked")
     this.props.modalClosed();
   };
 
 
   resetForm = e => {
     e.preventDefault();
-    console.log("reset clicked")
+    // console.log("reset clicked")
     this.props.resetForm();
     this.props.modalClosed();
   }
@@ -90,7 +105,8 @@ export class FormNavButton extends Component {
             func_navcommand === "prev" ? this.prevStep :
               func_navcommand === "cancel" ? this.modalCancel :
                 func_navcommand === "reset" ? this.resetForm :
-                  func_navcommand === "finish" ? this.finshedForm : null
+                  func_navcommand === "submit" ? this.submitForm :
+                    func_navcommand === "finish" ? this.finishForm : null
         }
         className={"" + data_classes + ""}
         style={{
@@ -119,7 +135,9 @@ const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
     formOutOfOrderValue: state.formState.formOutOfOrderValue,
+    formProcessingValue: state.formState.formProcessingValue,
     formStepValue: state.formState.formStepValue,
+    formRes: state.formState.formRes
   }
 }
 
@@ -131,6 +149,7 @@ const mapDispatchToProps = (dispatch) => {
     formPrev: (outOfOrderInd) => dispatch(formPrev(outOfOrderInd)),
     resetForm: () => dispatch(resetForm()),
     submitForm: () => dispatch(submitForm()),
+    submitFormProcessing: () => dispatch(submitFormProcessing()),
     selectSection: (section) => dispatch(selectSection(section)),
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     modalClosed: () => dispatch(modalClosed()),
