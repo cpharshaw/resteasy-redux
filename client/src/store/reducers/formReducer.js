@@ -1,6 +1,6 @@
 const initState = {
 
-  formStepValue: 0, 
+  formStepValue: 0,
 
   formProcessingValue: false,
 
@@ -10,8 +10,8 @@ const initState = {
   formLocationValue: {},
   noBathrooomValue: false,
   formRestroomTypeValue: "Restroom type...",
-  formLocationNotesValue: "",
   formTimeOfVisitValue: "Time of day...",
+  formLocationNotesValue: "",
   formOutOfOrderValue: false,
 
   //page 2
@@ -37,6 +37,8 @@ const initState = {
 
   //page 5
   formCommentsValue: "",
+
+  formMissingValue: false
 }
 
 const formReducer = (state = initState, action) => {
@@ -49,14 +51,23 @@ const formReducer = (state = initState, action) => {
 
       return {
         ...state,
-        formStepValue: newFormStep === "outOfOrder" ? 5 : newFormStep === "addReviewStep1" ? 1 : state.formStepValue + 1
+        formStepValue: newFormStep === "outOfOrder" ? 5 : newFormStep === "addReviewStep1" ? 1 : state.formStepValue + 1,
+        formMissingValue: false
       };
 
     case "FORM_PREV":
 
       return {
         ...state,
-        formStepValue: newFormStep === "outOfOrder" ? 1 : state.formStepValue - 1
+        formStepValue: newFormStep === "outOfOrder" ? 1 : state.formStepValue - 1,
+        formMissingValue: false
+      };
+
+    case "FORM_MISSING_ALERT":
+
+      return {
+        ...state,
+        formMissingValue: true
       };
 
     case "FORM_RESET":
@@ -138,7 +149,7 @@ const formReducer = (state = initState, action) => {
     case 'FORM_SUBMITTED_ERROR':
       console.log("submitForm ERROR", action.payload);
       return state;
-      
+
 
     default:
       return state;

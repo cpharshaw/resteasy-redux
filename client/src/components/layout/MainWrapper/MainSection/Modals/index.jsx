@@ -3,12 +3,16 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
 import { formNext, formPrev, resetForm } from '../../../../../store/actions/formActions';
+import {signIn} from '../../../../../store/actions/authActions';
 import { selectSection } from '../../../../../store/actions/sectionActions';
 import { locationChosen } from '../../../../../store/actions/formActions';
 import FormNavButton from '../../../../sharedComponents/formComponents/FormNavButton';
 import HorizontalRule from '../../../../sharedComponents/general/HorizontalRule';
 import ModalFormReset from './ModalFormReset';
 import LocationModal from './ModalFormLocationSelector';
+import signIn_normal from '../MyStuffSection/btn_google_signin_light_normal_web.png';
+import signIn_focus from '../MyStuffSection/btn_google_signin_light_focus_web.png';
+import signIn_pressed from '../MyStuffSection/btn_google_signin_light_pressed_web.png';
 
 
 export class ModalContainer extends Component {
@@ -99,6 +103,76 @@ export class ModalContainer extends Component {
 
 
 
+  signInClicked = e => {
+    e.preventDefault();
+    // e.currentTarget.src = signIn_pressed;
+    console.log("auth status: ", this.props.loginCredentialValue)
+    this.props.signIn();
+  }
+
+  signInDown = e => {
+    e.preventDefault();
+    console.log("mouse down")
+    e.currentTarget.src = signIn_pressed;
+    // this.props.signIn();
+  }
+  signInUp = e => {
+    e.preventDefault();
+    console.log("mouse up")
+    e.currentTarget.src = signIn_normal;
+    // this.props.signIn();
+  }
+  signInMouseOut = e => {
+    e.preventDefault();
+    console.log("mouse out")
+    e.currentTarget.src = signIn_normal;
+    // this.props.signIn();
+  }
+  signInMouseLeave = e => {
+    e.preventDefault();
+    console.log("mouse leave")
+    e.currentTarget.src = signIn_normal;
+    // this.props.signIn();
+  }
+  signInFocus = e => {
+    e.preventDefault();
+    console.log("mouse focus")
+    e.currentTarget.src = signIn_focus;
+    // this.props.signIn();
+  }
+  signInBlur = e => {
+    e.preventDefault();
+    console.log("mouse blur")
+    e.currentTarget.src = signIn_focus;
+    // this.props.signIn();
+  }
+
+  signInTouchStart = e => {
+    e.preventDefault();
+    console.log("touch start");
+    e.currentTarget.src = signIn_pressed;
+    this.props.signIn();
+  }
+
+  signInTouchEnd = e => {
+    e.preventDefault();
+    console.log("touch end");
+    e.currentTarget.src = signIn_normal;
+  }
+
+  signInTouchCancel = e => {
+    e.preventDefault();
+    console.log("touch cancel");
+    e.currentTarget.src = signIn_normal;
+  }
+
+  signOutClicked = e => {
+    this.props.signOut();
+    // console.log("sign out clicked")
+  }
+
+
+
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // const prevFSVal = prevProps.foursquareValue;
@@ -127,10 +201,11 @@ export class ModalContainer extends Component {
       children,
       foursquareValue,
       selectedMarkerValue,
-      selectedPlaceValue
+      selectedPlaceValue,
+      loginCredentialValue
     } = this.props;
 
-    // console.log("typeof: ", typeof foursquareValue)
+    console.log("loginCredentialValue in render before return: ", loginCredentialValue)
 
 
 
@@ -150,6 +225,14 @@ export class ModalContainer extends Component {
         const stateCode = place.location.state;
         const zip = place.location.postalCode;
         const country = place.location.country;
+
+
+        // const signInButtonComponent = () => {
+        //   return (
+        //     <div className="row">
+        //     </div>
+        //     )
+        // }
 
         return (
           <div className="row" key={i + "fs"}>
@@ -457,12 +540,35 @@ export class ModalContainer extends Component {
                           <div className="row">
                             <div className="col">
                               {currentModal === "formResetModal" && !formProcessingValue ? <p>Reset review form and start over?</p> : null}
-                              {formStepValue === 6 && !formProcessingValue ? <p>Ok to submit review?</p> : null}
-                              {/* {formStepValue === 7 ? <p>Saving review...</p> : null} */}
-                              {formStepValue === 7 && formProcessingValue ? <p>Saving review...          </p> : null}
-                              {formStepValue === 7 && !formProcessingValue ? <p>Thank you for your review.</p> : null}
+                              {currentModal !== "formResetModal" && !formProcessingValue && !loginCredentialValue ? <p>Please sign in to submit review</p> : null}
+                              {formStepValue === 6 && !formProcessingValue && loginCredentialValue ? <p>Ok to submit review?</p> : null}
+                              {formStepValue === 7 && formProcessingValue && loginCredentialValue ? <p>Saving review...          </p> : null}
+                              {formStepValue === 7 && !formProcessingValue && loginCredentialValue ? <p>Thank you for your review.</p> : null}
                             </div>
                           </div>
+
+
+                          {
+                            formStepValue !== 7 && !loginCredentialValue && !formProcessingValue ? (
+                              <div className="row">
+                                <div className="col">
+                                  <img
+                                    src={signIn_normal}
+                                    onClick={this.signInClicked}
+                                    onMouseDown={this.signInDown}
+                                    onMouseUp={this.signInUp}
+                                    onFocus={this.signInFocus}
+                                    onBlur={this.signInBlur}
+                                    onTouchEnd={this.signInTouchEnd}
+                                    onTouchStart={this.signInTouchStart}
+                                    onTouchCancel={this.signInTouchCancel}
+                                    onMouseOut={this.signInMouseOut}
+                                    onMouseLeave={this.signInMouseLeave}
+                                  />
+                                </div>
+                              </div>
+                            ) : null
+                          }
 
 
                           <div className="row">
@@ -487,24 +593,29 @@ export class ModalContainer extends Component {
 
                               ) : null
                             }
-                            <div className="col">
-                              <FormNavButton
-                                data_text={
-                                  currentModal === "formResetModal" && !formProcessingValue ? "Reset" :
-                                    formStepValue === 6 ? "Submit" :
-                                      formStepValue === 7 && !formProcessingValue ? "Close" :
-                                        null
-                                }
-                                data_classes="button-form-modal"
-                                data_width="100px"
-                                func_navcommand={
-                                  currentModal === "formResetModal" && !formProcessingValue ? "reset" :
-                                    formStepValue === 6 ? "submit" :
-                                      formStepValue === 7 && !formProcessingValue ? "finish" :
-                                        null
-                                }
-                              />
-                            </div>
+
+                            {
+                              this.props.loginCredentialValue && !formProcessingValue ? (
+                                <div className="col">
+                                  <FormNavButton
+                                    data_text={
+                                      currentModal === "formResetModal" && !formProcessingValue ? "Reset" :
+                                        formStepValue === 6 ? "Submit" :
+                                          formStepValue === 7 && !formProcessingValue ? "Close" :
+                                            null
+                                    }
+                                    data_classes="button-form-modal"
+                                    data_width="100px"
+                                    func_navcommand={
+                                      currentModal === "formResetModal" && !formProcessingValue ? "reset" :
+                                        formStepValue === 6 ? "submit" :
+                                          formStepValue === 7 && !formProcessingValue ? "finish" :
+                                            null
+                                    }
+                                  />
+                                </div>
+                              ) : null
+                            }
 
                           </div>
 
@@ -542,7 +653,7 @@ const mapStateToProps = (state, ownProps) => {
     selectedPlaceValue: state.mapState.selectedPlaceValue,
     selectedMarkerValue: state.mapState.selectedMarkerValue,
     // reviews: state.firestore.ordered.reviews,
-    auth: state.firebase.auth,
+    loginCredentialValue: state.auth.loginCredentialValue,
     foursquareValue: state.foursquareState.foursquareValue,
   }
 }
@@ -556,7 +667,8 @@ const mapDispatchToProps = (dispatch) => {
     resetForm: () => dispatch(resetForm()),
     selectSection: (section) => dispatch(selectSection(section)),
     locationChosen: location => dispatch(locationChosen(location)),
-    modalClosed: () => dispatch(modalClosed())
+    modalClosed: () => dispatch(modalClosed()),
+    signIn: () => dispatch(signIn())
   }
 }
 

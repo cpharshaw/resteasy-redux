@@ -168,22 +168,6 @@ export class FormSection1 extends Component {
                 </div>
               </div>
 
-              <div className="row">
-                <div className="col-5">
-                  < FieldLabel data_htmlFor="formLocationNotesValue">Location notes</ FieldLabel >
-                </div>
-                <div className="col-7">
-                  <TextInput
-                    data_id="formLocationNotesValue"
-                    data_name="formLocationNotesValue"
-                    data_justify="flex-start"
-                    data_placeholder="ex: 'third floor'"
-                    func_handlechange={textEntered}
-                    data_value={formLocationNotesValue}
-                  />
-                </div>
-              </div>
-
 
               <div className="row ">
                 <div className="col-5">
@@ -211,7 +195,25 @@ export class FormSection1 extends Component {
               </div>
 
 
-              <HorizontalRule data_width="90%" />
+              <div className="row">
+                <div className="col-5">
+                  < FieldLabel data_htmlFor="formLocationNotesValue">Location notes</ FieldLabel >
+                </div>
+                <div className="col-7">
+                  <TextInput
+                    data_id="formLocationNotesValue"
+                    data_name="formLocationNotesValue"
+                    data_justify="flex-start"
+                    data_placeholder="ex: 'third floor'"
+                    func_handlechange={textEntered}
+                    data_value={formLocationNotesValue}
+                  />
+                </div>
+              </div>
+
+
+
+              {/* <HorizontalRule data_width="90%" /> */}
 
 
               <div id="outOfOrder" className="row">

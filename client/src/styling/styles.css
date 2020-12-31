@@ -11,6 +11,10 @@
 	color: #f5f5f5 ;
 }
 
+.signInButton:focus {
+	border: 5px solid red;
+}
+
 
 
 .button-primary-outline {

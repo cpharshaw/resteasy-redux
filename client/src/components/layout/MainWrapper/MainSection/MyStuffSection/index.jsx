@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { signIn, signOut } from '../../../../../store/actions/authActions';
+import signIn_normal from './btn_google_signin_light_normal_web.png';
+import signIn_focus from './btn_google_signin_light_focus_web.png';
+import signIn_pressed from './btn_google_signin_light_pressed_web.png';
+import signIn_normal2x from './btn_google_signin_light_normal_web@2x.png';
+import signIn_focus2x from './btn_google_signin_light_focus_web@2x.png';
+import signIn_pressed2x from './btn_google_signin_light_pressed_web@2x.png';
 
 export class MyStuffSection extends Component {
 
@@ -10,12 +16,69 @@ export class MyStuffSection extends Component {
     myStuffCategory: "My Reviews"
   }
 
-  signInclicked = e => {
+  signInClicked = e => {
+    e.preventDefault();
+    // e.currentTarget.src = signIn_pressed;
     this.props.signIn();
-    // console.log("sign in clicked")
   }
 
-  signOutclicked = e => {
+  signInDown = e => {
+    e.preventDefault();
+    console.log("mouse down")
+    e.currentTarget.src = signIn_pressed;
+    // this.props.signIn();
+  }
+  signInUp = e => {
+    e.preventDefault();
+    console.log("mouse up")
+    e.currentTarget.src = signIn_normal;
+    // this.props.signIn();
+  }
+  signInMouseOut = e => {
+    e.preventDefault();
+    console.log("mouse out")
+    e.currentTarget.src = signIn_normal;
+    // this.props.signIn();
+  }
+  signInMouseLeave = e => {
+    e.preventDefault();
+    console.log("mouse leave")
+    e.currentTarget.src = signIn_normal;
+    // this.props.signIn();
+  }  
+  signInFocus = e => {
+    e.preventDefault();
+    console.log("mouse focus")
+    e.currentTarget.src = signIn_focus;
+    // this.props.signIn();
+  }
+  signInBlur = e => {
+    e.preventDefault();
+    console.log("mouse blur")
+    e.currentTarget.src = signIn_focus;
+    // this.props.signIn();
+  }
+
+  signInTouchStart = e => {
+    e.preventDefault();
+    console.log("touch start");
+    e.currentTarget.src = signIn_pressed;
+    this.props.signIn();
+  }
+
+  signInTouchEnd = e => {
+    e.preventDefault();
+    console.log("touch end");
+    e.currentTarget.src = signIn_normal;
+  }
+
+  signInTouchCancel = e => {
+    e.preventDefault();
+    console.log("touch cancel");
+    e.currentTarget.src = signIn_normal;
+  }
+
+  signOutClicked = e => {
     this.props.signOut();
     // console.log("sign out clicked")
   }
@@ -32,6 +95,7 @@ export class MyStuffSection extends Component {
     })
   }
 
+  
 
   render() {
 
@@ -61,19 +125,33 @@ export class MyStuffSection extends Component {
 
             <span>You are currently not signed in.</span>
 
-            <button
-              id=""
-              className=""
-              onClick={this.signInclicked}
-              style={{
-                padding: "9px 16px 9px 16px",
-                border: "1px solid #0abab5",
-                color: "#0abab5",
-                background: "inherit"
+            {/* <div */}
+              {/* id="" */}
+              {/* className="row bg-red" */}
+              {/* // onClick={this.signInClicked} */}
+              {/* // style={{ */}
+                {/* // padding: "9px 16px 9px 16px",
+                // border: "1px solid #0abab5",
+                // color: "#0abab5",
+                // background: "inherit"
               }}
-            >
-              <span><em>Sign in</em></span>
-            </button>
+            > */}
+              <img
+                src={signIn_normal}
+                onClick={this.signInClicked}
+                onMouseDown={this.signInDown}
+                onMouseUp={this.signInUp}
+                onFocus={this.signInFocus}
+                onBlur={this.signInBlur}
+                onTouchEnd={this.signInTouchEnd}
+                onTouchStart={this.signInTouchStart}
+                onTouchCancel={this.signInTouchCancel}
+                onMouseOut={this.signInMouseOut}
+                onMouseLeave={this.signInMouseLeave}             
+              />
+            {/* </div> */}
+
+
 
           </div>
         </div>
@@ -213,7 +291,7 @@ export class MyStuffSection extends Component {
                         <button
                           id=""
                           className=" py-2 px-3"
-                          onClick={this.signOutclicked}
+                          onClick={this.signOutClicked}
                           style={{
                             // border: "1px solid #0abab5",
                             color: "#0abab5",
@@ -223,7 +301,7 @@ export class MyStuffSection extends Component {
                           <span><em>Log out</em></span>
                         </button>
                       </div>
-                    </li>                    
+                    </li>
                   </ul>
 
                 )
@@ -437,15 +515,15 @@ export class MyStuffSection extends Component {
             </div>
           </div>
 
-           <div className="row js-fg"
-              style={{
-                // height: "calc(100% - 55px)",
-                // background: "yellow"
-              }}
-            >
-              <div className="col" style={{ padding: "10px 0 10px 0" }}>
-                {displayName ? <SignedInComponent /> : <SignedOutComponent />}
-              </div>
+          <div className="row js-fg"
+            style={{
+              // height: "calc(100% - 55px)",
+              // background: "yellow"
+            }}
+          >
+            <div className="col" style={{ padding: "10px 0 10px 0" }}>
+              {displayName ? <SignedInComponent /> : <SignedOutComponent />}
+            </div>
           </div>
 
         </div>

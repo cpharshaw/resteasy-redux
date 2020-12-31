@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { formNext, formPrev, resetForm, submitFormProcessing, submitForm } from '../../../../store/actions/formActions';
+import { formNext, formPrev, formMissingAlert, resetForm, submitFormProcessing, submitForm } from '../../../../store/actions/formActions';
 import { selectSection } from '../../../../store/actions/sectionActions';
 import { modalToggled, modalClosed } from '../../../../store/actions/modalActions';
 
@@ -22,7 +22,54 @@ export class FormNavButton extends Component {
       outOfOrderInd = "outOfOrder";
     }
 
-    this.props.formNext(outOfOrderInd);
+    if (
+      (
+        this.props.formStepValue === 1
+        &&
+        (
+          Object.keys(this.props.formLocationValue).length === 0
+          ||
+          this.props.formRestroomTypeValue === "Restroom type..."
+          ||
+          this.props.formTimeOfVisitValue === "Time of day..."
+        )
+      )
+      ||
+      (
+        this.props.formStepValue === 2
+        &&
+        (
+          !this.props.formCleanlinessValue
+          ||
+          !this.props.formPrivacyValue
+          ||
+          !this.props.formComfortValue
+          ||
+          !this.props.formSafetyValue
+          ||
+          !this.props.formStyleValue
+        )
+      )
+      ||
+      (
+        this.props.formStepValue === 3
+        &&
+        (
+          (this.props.formAdmissionValue === "¿Gratis o no?")
+          ||
+          (this.props.formAdmissionValue === "Fee..." && this.props.formFeeValue === "")
+        )
+      )
+
+    ) {
+      console.log("missing form value(s)", this.props.formMissingValue);
+      this.props.formMissingAlert();
+    }
+
+    else {
+      this.props.formNext(outOfOrderInd);
+    }
+
 
   }
 
@@ -137,7 +184,20 @@ const mapStateToProps = (state, ownProps) => {
     formOutOfOrderValue: state.formState.formOutOfOrderValue,
     formProcessingValue: state.formState.formProcessingValue,
     formStepValue: state.formState.formStepValue,
-    formRes: state.formState.formRes
+    formRes: state.formState.formRes,
+
+    formLocationValue: state.formState.formLocationValue,
+    formRestroomTypeValue: state.formState.formRestroomTypeValue,
+    formTimeOfVisitValue: state.formState.formTimeOfVisitValue,
+    formCleanlinessValue: state.formState.formCleanlinessValue,
+    formPrivacyValue: state.formState.formPrivacyValue,
+    formComfortValue: state.formState.formComfortValue,
+    formSafetyValue: state.formState.formSafetyValue,
+    formStyleValue: state.formState.formStyleValue,
+    formAdmissionValue: state.formState.formAdmissionValue,
+    formFeeValue: state.formState.formFeeValue,
+
+    formMissingValue: state.formState.formMissingValue
   }
 }
 
@@ -147,6 +207,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     formNext: (outOfOrderInd) => dispatch(formNext(outOfOrderInd)),
     formPrev: (outOfOrderInd) => dispatch(formPrev(outOfOrderInd)),
+    formMissingAlert: () => dispatch(formMissingAlert()),
     resetForm: () => dispatch(resetForm()),
     submitForm: () => dispatch(submitForm()),
     submitFormProcessing: () => dispatch(submitFormProcessing()),
