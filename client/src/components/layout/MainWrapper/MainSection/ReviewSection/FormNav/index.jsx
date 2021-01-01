@@ -95,7 +95,7 @@ export class ReviewMainNav extends Component {
                 visibility: this.props.formMissingValue ? "visible" : "hidden"
               }}
               className="animated pulse"
-            >Missing value(s)...
+            ><b>*</b>Missing value(s)...
             </p>
           </div>
         </div>

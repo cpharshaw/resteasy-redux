@@ -70,7 +70,7 @@ export const signIn = (credentials) => {
 
         dispatch({
           type: 'LOGIN_ERROR',
-          payload: loginObj
+          payload: error
         })
       });
 

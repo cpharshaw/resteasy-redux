@@ -549,7 +549,7 @@ export class ModalContainer extends Component {
 
 
                           {
-                            formStepValue !== 7 && !loginCredentialValue && !formProcessingValue ? (
+                             currentModal !== "formResetModal" && formStepValue !== 7 && !loginCredentialValue && !formProcessingValue ? (
                               <div className="row">
                                 <div className="col">
                                   <img
@@ -595,7 +595,7 @@ export class ModalContainer extends Component {
                             }
 
                             {
-                              this.props.loginCredentialValue && !formProcessingValue ? (
+                               (currentModal === "formResetModal") || (this.props.loginCredentialValue && !formProcessingValue) ? (
                                 <div className="col">
                                   <FormNavButton
                                     data_text={

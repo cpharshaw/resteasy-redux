@@ -44,7 +44,7 @@ export class LocationSelector extends Component {
           backgroundColor: "rgb(230,230,230)"
         }}
       >
-        <em><span style={{ color: "grey", fontSize: "14.5px" }}>Select location...</span></em>
+        <em><span style={{ color: "grey", fontSize: "14.5px" }}>*Select location...</span></em>
       </button>
     )
   }

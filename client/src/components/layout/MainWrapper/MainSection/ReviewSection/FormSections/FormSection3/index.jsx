@@ -185,7 +185,7 @@ export class FormSection3 extends Component {
             <div className="col-6">
               < FieldLabel
                 data_htmlFor="formAdmissionValue"
-                data_text="Admission"
+                data_text="*Admission"
               />
             </div>
             <div className="col-6">
@@ -215,7 +215,7 @@ export class FormSection3 extends Component {
           >
             <div className="col-6">
               < FieldLabel
-                data_text="Price ($USD)"
+                data_text="*Price ($USD)"
                 data_htmlFor="formFeeValue"
               />
             </div>

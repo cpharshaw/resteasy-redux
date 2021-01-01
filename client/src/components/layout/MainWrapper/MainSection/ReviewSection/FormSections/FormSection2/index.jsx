@@ -79,7 +79,7 @@ export class FormSection2 extends Component {
           <div className="row">
             <div className="col-6">
               < FieldLabel
-                data_text="Cleanliness"
+                data_text="*Cleanliness"
                 data_htmlFor="formCleanlinessValue"
               />
             </div>
@@ -168,7 +168,7 @@ export class FormSection2 extends Component {
           <div className="row">
             <div className="col-6">
               <FieldLabel
-                data_text="Privacy"
+                data_text="*Privacy"
                 data_htmlFor="formPrivacyValue"
               />
             </div>
@@ -261,7 +261,7 @@ export class FormSection2 extends Component {
           <div className="row">
             <div className="col-6">
               < FieldLabel
-                data_text="Perceived Safety"
+                data_text="*Perceived Safety"
                 data_htmlFor="formSafetyValue"
               />
 
@@ -309,7 +309,7 @@ export class FormSection2 extends Component {
             <div className="col-6">
 
               < FieldLabel
-                data_text="Comfort"
+                data_text="*Comfort"
                 data_htmlFor="formComfortValue"
               />
 
@@ -357,7 +357,7 @@ export class FormSection2 extends Component {
           <div className="row">
             <div className="col-6">
               < FieldLabel
-                data_text="Style / Poshness"
+                data_text="*Style / Poshness"
                 data_htmlFor="formStyleValue"
               />
 

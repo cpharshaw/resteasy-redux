@@ -151,7 +151,7 @@ export class FormSection1 extends Component {
 
               <div className="row ">
                 <div className="col-5 jc-se">
-                  < FieldLabel data_htmlFor="formRestroomTypeValue">Restroom used</ FieldLabel >
+                  < FieldLabel data_htmlFor="formRestroomTypeValue">*Restroom used</ FieldLabel >
                 </div>
                 <div className="col-7">
                   <SelectBox
@@ -171,7 +171,7 @@ export class FormSection1 extends Component {
 
               <div className="row ">
                 <div className="col-5">
-                  < FieldLabel data_htmlFor="formTimeOfVisitValue">Time of visit</ FieldLabel >
+                  < FieldLabel data_htmlFor="formTimeOfVisitValue">*Time of visit</ FieldLabel >
                 </div>
                 <div className="col-7">
                   <SelectBox
