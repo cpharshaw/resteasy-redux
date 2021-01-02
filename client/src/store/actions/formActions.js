@@ -32,13 +32,12 @@ export const submitForm = () => {
     const review = {
 
       basicInfo: {
-        timeOfVisit: new Date(),
         locationState: formState.formLocationValue.stateCode,
         restroomUsed: formState.formRestroomTypeValue,
         locationName: formState.formLocationValue.name,
-        locationState: formState.formLocationValue.stateCode,
         locationZip: formState.formLocationValue.zip,
         locationCountry: formState.formLocationValue.country,
+        timeOfVisit: formState.formTimeOfVisitValue,
         outOfOrder: formState.formOutOfOrderValue,
         locationNotes: formState.formLocationNotesValue,
         locationCategory: formState.formLocationValue.category,
@@ -68,7 +67,8 @@ export const submitForm = () => {
         privacy: formState.formPrivacyValue
       },
 
-      userID: authState.loginCredentialValue.uid
+      userID: authState.loginCredentialValue.uid,
+      reviewDatetime: new Date()
     };    
 
     // console.log("submitForm formState results: ", formState);
@@ -126,9 +126,9 @@ export const submitForm = () => {
       //   userID: authState.loginCredentialValue.uid
       // };
 
-      firestore.collection('reviews').add({
+      firestore.collection('reviews').add(
         review
-      })
+      )
         .then(res => {
           dispatch({
             type: 'FORM_SUBMITTED',

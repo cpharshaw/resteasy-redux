@@ -4,16 +4,21 @@ const endpoint = "https://api.foursquare.com/v2/venues/search";
 
 export const getPlacesFromFoursquare = (locationPref) => {
   // console.log("getPlacesFromFoursquare ACTION triggered", location)
-  return (dispatch, getState) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+    const firestore = getFirestore();
+    const formState = getState().formState;
+    const authState = getState().auth;
+
     const state = getState();
-    const location = 
-      locationPref == "geolocation" ? 
-      state.geolocationState.geolocationLatValue + "," + state.geolocationState.geolocationLngValue
-      :
-      locationPref == "center" ? 
-      state.mapState.centerLatValue() + "," + state.mapState.centerLngValue()
-      :
-      locationPref;
+    const location =
+      locationPref == "geolocation" ?
+        state.geolocationState.geolocationLatValue + "," + state.geolocationState.geolocationLngValue
+        :
+        locationPref == "center" ?
+          state.mapState.centerLatValue() + "," + state.mapState.centerLngValue()
+          :
+          locationPref;
 
     return (
       axios
@@ -25,7 +30,7 @@ export const getPlacesFromFoursquare = (locationPref) => {
               client_secret: "FRCGLR2MJHZ2I2AMFL5PECJOERPOPCNHU3L3EYQGVYX1YU1H",
               radius: 500,
               near: location,
-              limit: 20,
+              limit: 10,
               intent: "checkin",
               v: "20207731",
               // v: "20191130",
@@ -36,10 +41,10 @@ export const getPlacesFromFoursquare = (locationPref) => {
                 const state = getState();
                 const currLat = state.mapState.centerLatValue();
                 const currLng = state.mapState.centerLngValue();
-                
+
                 // const currLat = state.geolocationState.geolocationLatValue;
                 // const currLng = state.geolocationState.geolocationLngValue;
-                
+
                 const fsWIthDistance = res.response.venues.map(venue => {
                   // console.log("Raw venues: ", venue)
                   const venueLat = venue.location.labeledLatLngs ? venue.location.labeledLatLngs[0].lat : null;
@@ -65,6 +70,24 @@ export const getPlacesFromFoursquare = (locationPref) => {
             const newData = data.sort((a, b) => {
               return a.distance - b.distance;
             })
+
+            const fsIDs = newData.map(fsPlace => {
+              return fsPlace.id;
+            });
+
+            const reviewsRef = firestore.collection('reviews');
+
+            reviewsRef.where('locationID', 'in', fsIDs).get()
+              .then(res =>
+                res.empty ?
+                  console.log('No matching documents... ')
+                  :
+                  res.forEach(doc => {
+                    console.log("Query success!");
+                    console.log(doc.id, '=>', doc.data());
+                  })
+              );
+
 
             dispatch({
               type: "FOURSQUARE_SUCCESS",
