@@ -1,8 +1,12 @@
+import { firestore } from "firebase";
+
 export const signIn = (credentials) => {
 
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
 
     const firebase = getFirebase();
+    const firestore = getFirestore();
+
 
     const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -33,10 +37,16 @@ export const signIn = (credentials) => {
           email,
           credential
         }
+
+        firestore.collection('users').doc(uid).set({
+          email
+        });
+
         dispatch({
           type: 'LOGIN_SUCCESS',
           payload: loginObj
-        })        
+        });
+
       })
       .catch(error => {
 

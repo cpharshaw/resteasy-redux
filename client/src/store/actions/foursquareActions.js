@@ -28,11 +28,11 @@ export const getPlacesFromFoursquare = (locationPref) => {
             params: {
               client_id: "0LGB42K434S53KGEGHWWSIMGGAYY5KOYXBJ14SK2W1O0FNTF",
               client_secret: "FRCGLR2MJHZ2I2AMFL5PECJOERPOPCNHU3L3EYQGVYX1YU1H",
-              radius: 500,
+              radius: 550,
               near: location,
-              limit: 10,
+              limit: 20,
               intent: "checkin",
-              v: "20207731",
+              v: "20201231",
               // v: "20191130",
             },
             responseType: 'json',
@@ -45,7 +45,7 @@ export const getPlacesFromFoursquare = (locationPref) => {
                 // const currLat = state.geolocationState.geolocationLatValue;
                 // const currLng = state.geolocationState.geolocationLngValue;
 
-                const fsWIthDistance = res.response.venues.map(venue => {
+                const fsWithDistance = res.response.venues.map(venue => {
                   // console.log("Raw venues: ", venue)
                   const venueLat = venue.location.labeledLatLngs ? venue.location.labeledLatLngs[0].lat : null;
                   const venueLng = venue.location.labeledLatLngs ? venue.location.labeledLatLngs[0].lng : null;
@@ -56,7 +56,7 @@ export const getPlacesFromFoursquare = (locationPref) => {
                   venue.distance = venue.location.labeledLatLngs ? venueDistance : null;
                   return venue;
                 });
-                return fsWIthDistance.filter(venue => {
+                return fsWithDistance.filter(venue => {
                   // console.log("ACTION: ", venue)
                   return venue && venue.location && venue.location.address && venue.location.city && venue.location.state && venue.location.postalCode && venue.location.lat && venue.location.lng
                 });
@@ -66,32 +66,47 @@ export const getPlacesFromFoursquare = (locationPref) => {
         )
         .then(
           res => {
-            const data = res.data;
-            const newData = data.sort((a, b) => {
-              return a.distance - b.distance;
-            })
 
-            const fsIDs = newData.map(fsPlace => {
+            const mergedArr = [];
+
+            let sortedFSData = res.data.sort((a, b) => {
+              return a.distance - b.distance;
+            }).slice(0, 10);
+
+            const fsIDs = sortedFSData.map(fsPlace => {
               return fsPlace.id;
             });
 
-            const reviewsRef = firestore.collection('reviews');
+            const fireStoreReviews = firestore.collection('reviews');
 
-            reviewsRef.where('locationID', 'in', fsIDs).get()
-              .then(res =>
-                res.empty ?
+            fireStoreReviews.where('locationID', 'in', fsIDs).get()
+              .then(firestoreResponse =>
+                firestoreResponse.empty ?
                   console.log('No matching documents... ')
                   :
-                  res.forEach(doc => {
-                    console.log("Query success!");
-                    console.log(doc.id, '=>', doc.data());
+                  sortedFSData.forEach(fsPlace => {
+                    // console.log("Query success!");
+                    // console.log(review.id, '=>', review.data());
+
+                    const tempArr = sortedFSData.filter(fsPlace => {
+                      // return fsPlace.id = review.locationID;
+                    });
+
+
+
+                    
+
+
+
+
                   })
               );
 
+            console.log("fs data: ", sortedFSData);
 
             dispatch({
               type: "FOURSQUARE_SUCCESS",
-              payload: newData
+              payload: sortedFSData
             });
           }
         )

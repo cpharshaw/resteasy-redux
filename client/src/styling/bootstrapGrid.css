@@ -207,7 +207,7 @@
 .col > img, .col > svg,
 .col > input, .col > label, .col > select, .col > textarea, .col > hr 
 .col > button,  */
-:not(label) > .col > *:not(.row):not([class^="row-"]):not(.container-fluid):not(.container):not(.skip),
+:not(label) > .col > *:not(.row):not([class^="row-"]):not(.container-fluid):not(.container):not(.skip):not(p),
 button > *,
 .col > .row[style*="max-width"],
 .row > *:not(.col):not([class^="col-"]):not(.container-fluid):not(.container) {
@@ -403,18 +403,30 @@ button > *,
 
 .ta-c {
   text-align: center !important;
+  text-align-last: center !important;
+  -moz-text-align-last: center !important;
+  -ms-text-align-last: center !important;
 }
 
 .ta-l {
   text-align: left !important;
+  text-align-last: left !important;
+  -moz-text-align-last: left !important;
+  -ms-text-align-last: left !important;
 }
 
 .ta-r {
   text-align: right !important;
+  text-align-last: right !important;
+  -moz-text-align-last: right !important;
+  -ms-text-align-last: right !important;
 }
 
 .ta-j {
   text-align: justify !important;
+  text-align-last: justify !important;
+  -moz-text-align-last: justify !important;
+  -ms-text-align-last: justify !important;
 }
 
 

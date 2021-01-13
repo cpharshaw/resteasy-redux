@@ -6,7 +6,7 @@ export const HorizontalRule = (props) => (
     style={{
       borderTop: "1px dotted lightgrey",
       width: props.data_width ? props.data_width : "70%",
-      margin: "8px 4px 8px 4px",
+      margin: "5.5px 4px 5.5px 4px",
     }}
   />
 )

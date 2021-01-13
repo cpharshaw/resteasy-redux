@@ -4,7 +4,6 @@ import axios from 'axios';
 export const submitFormProcessing = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let processing = true;
-    // console.log("form action - processing")
     dispatch({
       type: 'FORM_PROCESSING',
       payload: processing //not necessary, just here to convey what's happening
@@ -18,10 +17,8 @@ export const submitForm = () => {
 
     dispatch({
       type: 'FORM_PROCESSING',
-      // payload: processing - not necessary, just here to convey what's happening
     })
 
-    // console.log("form action - submitted")
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     const firestore = getFirestore();
     const formState = getState().formState;
@@ -71,60 +68,8 @@ export const submitForm = () => {
       reviewDatetime: new Date()
     };    
 
-    // console.log("submitForm formState results: ", formState);
-    // console.log("submitForm authState results: ", authState);
-
-    // const photosArr = photosArr => {
-    // console.log("submitForm authState results: ", authState);
-
-
-    //formState.formProcessingValue && 
 
     if (formState.photosArrValue.length === 0) {
-
-      console.log("no photos");
-
-      // const review = {
-
-      //   basicInfo: {
-      //     timeOfVisit: new Date(),
-      //     locationState: formState.formLocationValue.stateCode,
-      //     restroomUsed: formState.formRestroomTypeValue,
-      //     locationName: formState.formLocationValue.name,
-      //     locationState: formState.formLocationValue.stateCode,
-      //     locationZip: formState.formLocationValue.zip,
-      //     locationCountry: formState.formLocationValue.country,
-      //     outOfOrder: formState.formOutOfOrderValue,
-      //     locationNotes: formState.formLocationNotesValue,
-      //     locationCategory: formState.formLocationValue.category,
-      //     locationCity: formState.formLocationValue.city
-      //   },
-
-      //   comments: formState.formCommentsValue,
-
-      //   features: {
-      //     genderNeutral: formState.formGenderNeutralValue,
-      //     babyStation: formState.formBabyChangeValue,
-      //     accessible: formState.formHandicappedValue,
-      //     price: formState.formFeeValue,
-      //     admission: formState.formAdmissionValue,
-      //     cleaningSchedule: formState.formScheduleValue
-      //   },
-
-      //   locationID: formState.formLocationValue.id,
-
-      //   photos: finalPhotosArr,
-
-      //   scores: {
-      //     cleanliness: formState.formCleanlinessValue,
-      //     style: formState.formStyleValue,
-      //     comfort: formState.formComfortValue,
-      //     safety: formState.formSafetyValue,
-      //     privacy: formState.formPrivacyValue
-      //   },
-
-      //   userID: authState.loginCredentialValue.uid
-      // };
 
       firestore.collection('reviews').add(
         review
@@ -144,13 +89,9 @@ export const submitForm = () => {
     }
 
     else {
-      console.log("photos to upload");
-      // console.log("photosArrValue before axios and loop - ", formState.photosArrValue.length);
-
       formState.photosArrValue.forEach((file, i) => {
 
         const fileSrc = file.src;
-        // console.log("photo file src: ", fileSrc);
         const config = {
           headers: { "X-Requested-With": "XMLHttpRequest" }
         };
@@ -161,61 +102,14 @@ export const submitForm = () => {
         axios.post("https://api.cloudinary.com/v1_1/resteasyredux/upload", formData, config)
           .then(res => {
             finalPhotosArr.push(res.data.secure_url);
-            console.log("finalPhotosArr = [", finalPhotosArr, "]; i = [", i, "]");
 
             if (finalPhotosArr.length === formState.photosArrValue.length) {
 
-              console.log("inside axios loop, should only run once?...  ", finalPhotosArr.length, ", ", formState.photosArrValue.length);
-
-              console.log(finalPhotosArr.length === formState.photosArrValue.length);
-
               review.photos = finalPhotosArr;
 
-              // const review = {
-
-              //   basicInfo: {
-              //     timeOfVisit: new Date(),
-              //     locationState: formState.formLocationValue.stateCode,
-              //     restroomUsed: formState.formRestroomTypeValue,
-              //     locationName: formState.formLocationValue.name,
-              //     locationState: formState.formLocationValue.stateCode,
-              //     locationZip: formState.formLocationValue.zip,
-              //     locationCountry: formState.formLocationValue.country,
-              //     outOfOrder: formState.formOutOfOrderValue,
-              //     locationNotes: formState.formLocationNotesValue,
-              //     locationCategory: formState.formLocationValue.category,
-              //     locationCity: formState.formLocationValue.city
-              //   },
-
-              //   comments: formState.formCommentsValue,
-
-              //   features: {
-              //     genderNeutral: formState.formGenderNeutralValue,
-              //     babyStation: formState.formBabyChangeValue,
-              //     accessible: formState.formHandicappedValue,
-              //     price: formState.formFeeValue,
-              //     admission: formState.formAdmissionValue,
-              //     cleaningSchedule: formState.formScheduleValue
-              //   },
-
-              //   locationID: formState.formLocationValue.id,
-
-              //   photos: finalPhotosArr,
-
-              //   scores: {
-              //     cleanliness: formState.formCleanlinessValue,
-              //     style: formState.formStyleValue,
-              //     comfort: formState.formComfortValue,
-              //     safety: formState.formSafetyValue,
-              //     privacy: formState.formPrivacyValue
-              //   },
-
-              //   userID: authState.loginCredentialValue.uid
-              // };
-
-              firestore.collection('reviews').add({
+              firestore.collection('reviews').add(
                 review
-              })
+              )
                 .then(res => {
                   dispatch({
                     type: 'FORM_SUBMITTED',
@@ -233,15 +127,11 @@ export const submitForm = () => {
 
           })
           .catch(err => {
-            console.error(err)
-            // console.error("error in call to cloudinary", err)
-            // console.log("errored review in cloudinary", review)
+            console.error("axios error: ", err)
           })
 
       });
     }
-
-    // };
 
   }
 }
