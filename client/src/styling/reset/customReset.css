@@ -225,3 +225,10 @@ button:not([class^="gm"]):not(#locationSelectorButton) {
   align-content: center;
   align-items: center;
 }
+
+sup {
+  all: unset !important;
+  vertical-align: super !important;
+  font-size: smaller !important;
+  font-family: inherit !important;
+}

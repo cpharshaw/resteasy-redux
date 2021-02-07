@@ -53,7 +53,7 @@ export class FormSection3 extends Component {
 
     // console.log("admission selected", cost)
 
-    if (cost === "Fee...") {
+    if (cost !== "Free" && cost !== "¿Gratis o no?") {
       this.props.feeChosen("visible");
     } else {
       this.props.feeChosen("hidden");
@@ -197,10 +197,10 @@ export class FormSection3 extends Component {
                 func_handlechange={e => this.admissionSelected(e)}
                 data_value={formAdmissionValue}
               >
-                <option disabled value="¿Gratis o no?" >¿Gratis o no? </option>
-                <option value="Free/Public"   >Free/Public   </option>
-                <option value="Customers Only">Customers only</option>
-                <option value="Fee..."        >Fee...        </option>
+                <option disabled value="¿Gratis o no?">¿Gratis o no?</option>
+                <option value="Free">Free</option>
+                <option value="Pay/Customers-Only">Pay/Customers-Only</option>
+                {/* <option value="Fee..."        >Fee...        </option> */}
               </SelectBox>
 
             </div>
@@ -215,7 +215,7 @@ export class FormSection3 extends Component {
           >
             <div className="col-6">
               < FieldLabel
-                data_text="*Price ($USD)"
+                data_text="*Fee/Min. Purch. ($)"
                 data_htmlFor="formFeeValue"
               />
             </div>

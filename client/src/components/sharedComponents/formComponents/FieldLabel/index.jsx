@@ -65,7 +65,7 @@ export class FieldLabel extends Component {
               flexWrap: "wrap",
             }}
           >
-            {children ? children : data_text} <sup>&nbsp;(i)</sup>
+            {children ? children : data_text} <sup>(i)</sup>
           </span>
         </div>
       </label>

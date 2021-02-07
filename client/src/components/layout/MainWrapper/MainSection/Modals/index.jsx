@@ -206,7 +206,7 @@ export class ModalContainer extends Component {
       loginCredentialValue
     } = this.props;
 
-    console.log("loginCredentialValue in render before return: ", loginCredentialValue)
+    // console.log("loginCredentialValue in render before return: ", loginCredentialValue)
 
 
 
@@ -549,6 +549,94 @@ export class ModalContainer extends Component {
                                         </div>
                                       </div>
 
+
+                                      <div className="row js-fg mb-2">
+                                        <div className="col fc jc-fs ai-fs mx-2">
+                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
+                                            &nbsp;
+                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
+                                            <span>&nbsp;&nbsp;</span>
+                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
+                                            &nbsp;
+                                            </p>
+                                          <p className="ta-l mt-1">
+                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
+                                            &nbsp;
+                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
+                                            &nbsp;
+                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
+                                          </p>
+                                          <div className="row mt-2 mb-2">
+                                            <div className="col">
+                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
+                                            </div>
+                                            <div className="col">
+                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
+                                            </div>
+                                          </div>
+                                          <HorizontalRule data_width="45%" />
+                                        </div>
+                                      </div>
+
+
+                                      <div className="row js-fg mb-2">
+                                        <div className="col fc jc-fs ai-fs mx-2">
+                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
+                                            &nbsp;
+                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
+                                            <span>&nbsp;&nbsp;</span>
+                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
+                                            &nbsp;
+                                            </p>
+                                          <p className="ta-l mt-1">
+                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
+                                            &nbsp;
+                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
+                                            &nbsp;
+                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
+                                          </p>
+                                          <div className="row mt-2 mb-2">
+                                            <div className="col">
+                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
+                                            </div>
+                                            <div className="col">
+                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
+                                            </div>
+                                          </div>
+                                          <HorizontalRule data_width="45%" />
+                                        </div>
+                                      </div>
+
+
+                                      <div className="row js-fg mb-2">
+                                        <div className="col fc jc-fs ai-fs mx-2">
+                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
+                                            &nbsp;
+                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
+                                            <span>&nbsp;&nbsp;</span>
+                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
+                                            &nbsp;
+                                            </p>
+                                          <p className="ta-l mt-1">
+                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
+                                            &nbsp;
+                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
+                                            &nbsp;
+                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
+                                          </p>
+                                          <div className="row mt-2 mb-2">
+                                            <div className="col">
+                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
+                                            </div>
+                                            <div className="col">
+                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
+                                            </div>
+                                          </div>
+                                          <HorizontalRule data_width="45%" />
+                                        </div>
+                                      </div>
+
+
                                       {/* <div className="row js-fg">
                                         <div className="col fc jc-fs ai-fs mx-2">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
@@ -600,7 +688,7 @@ export class ModalContainer extends Component {
                           <div className="row mb-2" >
                             <div className="col-2"></div>
                             <div className="col-8" onClick={e => this.addReviewClicked(e, selectedPlaceValue)}>
-                              
+
                               {/* if reviewed already, "Edit Review" intead */}
                               <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span></p>
                             </div>
@@ -616,7 +704,7 @@ export class ModalContainer extends Component {
                                   </g>
                                 </g>
                               </svg> */}
-                              <img src="https://img.icons8.com/material-outlined/21/383838/bookmark-ribbon--v1.png"/>
+                              <img src="https://img.icons8.com/material-outlined/21/383838/bookmark-ribbon--v1.png" />
                             </div>
                           </div>
 

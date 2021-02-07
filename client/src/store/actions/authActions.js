@@ -7,6 +7,12 @@ export const signIn = (credentials) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
 
+    const state = getState();
+
+    const currAuth = state.auth.loginCredentialValue;
+
+    if (currAuth) return;
+
 
     const provider = new firebase.auth.GoogleAuthProvider();
 
