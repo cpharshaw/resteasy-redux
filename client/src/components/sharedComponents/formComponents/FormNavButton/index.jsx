@@ -57,7 +57,15 @@ export class FormNavButton extends Component {
         (
           (this.props.formAdmissionValue === "¿Gratis o no?")
           ||
-          (this.props.formAdmissionValue === "Fee..." && this.props.formFeeValue === "")
+          (
+            (
+              (this.props.formAdmissionValue !== "Free" && this.props.formAdmissionValue !== "¿Gratis o no?")
+              ||
+              this.props.formAdmissionValue === "Pay/Customers-Only"
+            )
+            &&
+            (this.props.formFeeValue === "" || !this.props.formFeeValue)
+          )
         )
       )
 

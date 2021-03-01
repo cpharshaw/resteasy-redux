@@ -30,7 +30,7 @@ const initState = {
   formScheduleValue: false,
   formAdmissionValue: "¿Gratis o no?",
   formFeeDisplayValue: "hidden",
-  formFeeValue: "",
+  formFeeValue: null,
 
   //page 4
   photosArrValue: [],

@@ -229,7 +229,9 @@ export class FormSection3 extends Component {
                   // data_width="37%"
                   data_id="formFeeValue"
                   data_name="formFeeValue"
-                  data_value={formFeeValue}
+                  data_value={formFeeValue || ""}
+                  data_type="number"
+                  data_placeholder="1.00"
                   func_handlechange={textEntered}
                 />
               </div>
