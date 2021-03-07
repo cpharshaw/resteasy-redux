@@ -56,38 +56,40 @@ admin.initializeApp(functions.config().firebase);
 
 const createPlaceReview = dataArr => {
 
+  // functions.logger.info("createPlaceReview --> dataArr ---> ", dataArr);
+
   const mensArr = dataArr.map(review => review.basicInfo.restroomUsed = "Men's");
   const womensArr = dataArr.map(review => review.basicInfo.restroomUsed = "Women's");
   const genderNeutralArr = dataArr.map(review => review.basicInfo.restroomUsed = "Family/Gender-neutral");
 
   const getAvgScore = (scoreName, arr) => {
-    const scoreArr = firestoreResponse.map(review => review.scores[`${scoreName}`]);
+    const scoreArr = arr.map(review => review.scores[`${scoreName}`]);
     const scoreTotal = scoreArr.reduce((runningTotal, reviewScore) => runningTotal + reviewScore, 0);
     return (scoreTotal / scoreArr.length);
   };
 
   const restroomUsedFunc = (name, data) => {
-    const cnt = data.length();
-
+    const cnt = data.length;
+    functions.logger.info("fsResponseData.docs.map(review => review.data()) ---> ", fsResponseDataDocsMap);
     const cleanScoreArr = data.map(review => review.scores.cleanliness);
-    const cleanAvg = (cleanScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / cleanScoreArr.length()).toFixed(1);
+    const cleanAvg = (cleanScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / cleanScoreArr.length).toFixed(1);
 
     const safetyScoreArr = data.map(review => review.scores.safety);
-    const safetyAvg = (safetyScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / safetyScoreArr.length()).toFixed(1);
+    const safetyAvg = (safetyScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / safetyScoreArr.length).toFixed(1);
 
     const privacyScoreArr = data.map(review => review.scores.privacy);
-    const privacyAvg = (privacyScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / privacyScoreArr.length()).toFixed(1);
+    const privacyAvg = (privacyScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / privacyScoreArr.length).toFixed(1);
 
     const comfortScoreArr = data.map(review => review.scores.comfort);
-    const comfortAvg = (comfortScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / comfortScoreArr.length()).toFixed(1);
+    const comfortAvg = (comfortScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / comfortScoreArr.length).toFixed(1);
 
     const styleScoreArr = data.map(review => review.scores.style);
-    const styleAvg = (styleScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / styleScoreArr.length()).toFixed(1);
+    const styleAvg = (styleScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / styleScoreArr.length).toFixed(1);
 
-    const weightedAvg = (sum((cleanAvg * 9) + (safetyAvg * 7) + (privacyAvg * 6) + (comfortAvg * 4.5) + (styleAvg * 2)) / 28.5).toFixed(1);
+    const weightedAvg = (((cleanAvg * 9) + (safetyAvg * 7) + (privacyAvg * 6) + (comfortAvg * 4.5) + (styleAvg * 2)) / 28.5).toFixed(1);
 
-    const cleaningSchedule = data.map(review => review.features.cleaningSchedule).length() >= 3 ? true : false;
-    const babyStation = data.map(review => review.features.babyStation).length() >= 3 ? true : false;
+    const cleaningSchedule = data.map(review => review.features.cleaningSchedule).length >= 3 ? true : false;
+    const babyStation = data.map(review => review.features.babyStation).length >= 3 ? true : false;
 
     const recentReviewsSort = data.sort((x, y) => x.reviewDatatime - y.reviewDatatime);
     const recentReviews = recentReviewsSort.slice(0, 7);
@@ -106,47 +108,28 @@ const createPlaceReview = dataArr => {
     }
   };
 
-  // const getFeatures = (featureName) => {
-  //   const featureArr = firestoreResponse.map(review => review.features[`${featureName}`] ? 1 : 0);
-  //   const featureTotal = featureArr.reduce((featureTotal, feature) => featureTotal + feature, 0);
-  //   return (featureTotal / featureArr.length);
-  // };
-
-  // const aggregateField = (source, field, type) => {
-  //   const fieldArr = firestoreResponse.map(review => {
-  //     return review[`${source}`][`${field}`] ? (
-  //       type === "score" ? review[`${source}`][`${field}`] : 1
-  //     ) : 0
-  //   });
-  //   const fieldTotal = fieldArr.reduce((fieldTotal, field) => fieldTotal + field, 0);
-  //   return (fieldTotal / fieldArr.length);
-  // };
-
-  // firestoreResponse.forEach(review => {
-  //   const cleanlinessScore = aggregateField("scores", "cleanliness", "score");
-  //   const styleScore = aggregateField("scores", "style", "score");
-  //   const comfortScore = aggregateField("scores", "comfort", "score");
-  //   const safetyScore = aggregateField("scores", "safety", "score");
-  //   const privacyScore = aggregateField("scores", "privacy", "score");
-  //   const accessible = aggregateField("features", "accessible", "binary");
-  //   const babyStation = aggregateField("features", "babyStation", "binary");
-  //   const cleaningSchedule = aggregateField("features", "cleaningSchedule", "binary");
-  //   const genderNeutral = aggregateField("features", "genderNeutral", "binary");
-  //   const getOutOfOrder = aggregateField("basicInfo", "outOfOrder", "binary");
-  // });  
 
   const placeID = dataArr[0].locationID;
-  const placeName = dataArr[0].basicInfo.locationName,
+  const placeName = dataArr[0].basicInfo.locationName;
 
-  const admissionFreeArrLength = data.map(review => review.features.admission === "Free").length();
-  const admissionPayArrLength = data.map(review => review.features.admission === "Pay/Customers-Only").length();
+  const admissionFreeArrLength = dataArr.map(review => review.features.admission === "Free").length || 0;
+  const admissionPayArrLength = dataArr.map(review => review.features.admission === "Pay/Customers-Only").length || 0;
+  functions.logger.info("admissionFreeArrLength ---> ", admissionFreeArrLength);
+  functions.logger.info("admissionPayArrLength ---> ", admissionPayArrLength);
   const admission = admissionPayArrLength > admissionFreeArrLength ? "Pay" : admissionPayArrLength < admissionFreeArrLength ? "Free" : admissionFreeArrLength > 0 ? "Unknown" : "Unknown";
 
-  const priceArr = data.map(review => review.features.price);
-  const price = (priceArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / priceArr.length()).toFixed(1);
+  const priceArr = dataArr.map(review => review.features.price);
+  const price = (priceArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / priceArr.length).toFixed(1);
 
-  const genderNeutral = data.map(review => review.features.genderNeutral).length() >= 3 ? true : false;
-  const accessible = data.map(review => review.features.accessible).length() >= 3 ? true : false;
+  const genderNeutral = dataArr.length < 3 ? "Unknown" : dataArr.map(review => review.features.genderNeutral).length >= 3 ? true : false;
+  const accessible = dataArr.length < 3 ? "Unknown" : dataArr.map(review => review.features.accessible).length >= 3 ? true : false;
+
+  const allCleanAvg = getAvgScore("cleanliness", dataArr);
+  const allSafetyAvg = getAvgScore("safety", dataArr);
+  const allPrivacyAvg = getAvgScore("safety", dataArr);
+  const allComfortAvg = getAvgScore("comfort", dataArr);
+  const allStyleAvg = getAvgScore("style", dataArr);
+  const allWeightedAvg = (((allCleanAvg * 9) + (allSafetyAvg * 7) + (allPrivacyAvg * 6) + (allComfortAvg * 4.5) + (allStyleAvg * 2)) / 28.5).toFixed(1);
 
   const placeReview = {
     placeID: placeID,
@@ -158,57 +141,29 @@ const createPlaceReview = dataArr => {
     genderNeutral: genderNeutral,
     accessible: accessible,
 
-    allCnt: dataArr.length(),
+    allCnt: dataArr.length,
 
-    allCleanAvg: getAvgScore("cleanliness", dataArr),
-    allSafetyAvg: getAvgScore("safety", dataArr),
-    allPrivacyAvg: getAvgScore("safety", dataArr),
-    allComfortAvg: getAvgScore("comfort", dataArr),
-    allStyleAvg: getAvgScore("style", dataArr),
-    allWeightedAvg: (sum((allCleanAvg * 9) + (allSafetyAvg * 7) + (allPrivacyAvg * 6) + (allComfortAvg * 4.5) + (allStyleAvg * 2)) / 28.5).toFixed(1),
+    allCleanAvg: allCleanAvg,
+    allSafetyAvg: allSafetyAvg,
+    allPrivacyAvg: allPrivacyAvg,
+    allComfortAvg: allComfortAvg,
+    allStyleAvg: allStyleAvg,
+    allWeightedAvg: allWeightedAvg,
 
-    writeReview: () => (
-      doc.basicInfo.restroomUsed === "Men's" ? this.men = restroomUsedFunc("men", mensArr) :
-        doc.basicInfo.restroomUsed === "Women's" ? this.women = restroomUsedFunc("women", womensArr) :
-          doc.basicInfo.restroomUsed === "Family/Gender-neutral" ? this.genderNeutral = restroomUsedFunc("genderNeutral", genderNeutralArr) : null
-    )
+    // writeReview: () => (
+    //   dataArr[0].basicInfo.restroomUsed === "Men's" ? this.men = restroomUsedFunc("men", mensArr) :
+    //     dataArr[0].basicInfo.restroomUsed === "Women's" ? this.women = restroomUsedFunc("women", womensArr) :
+    //       dataArr[0].basicInfo.restroomUsed === "Family/Gender-neutral" ? this.genderNeutral = restroomUsedFunc("genderNeutral", genderNeutralArr) : null
+    // )
 
   }
 
+  // .writeReview()
+  return admin.firestore().collection('places').doc(placeID).set(placeReview);
 
-
-
-
-
-
-
-
-  firestoreResponse.length() <= 1 ?
-    admin.firestore().collection('places').add(
-      placeReview
-    ) :
-    admin.firestore().collection('places').set(
-      placeReview
-    );
-
-}
-
-const createBaseReviewArr = resData => {
-  // const firestoreResponse = [];
-  // return resData.forEach(
-  //   review => {
-  //     functions.logger.info("forEach inside get");
-  //     firestoreResponse.push(review.data());
-  //   }
-  // );
-
-  return resData.map(review => review.data());
-  // review => {
-  //   functions.logger.info("forEach inside get");
-  //   return review.data();
-  // }
-  // );  
 };
+
+
 
 const savePlaceEntry = locationID => {
   return admin.firestore().collection('reviews')
@@ -216,17 +171,26 @@ const savePlaceEntry = locationID => {
     .get()
     .then(fsResponseData => {
       // const fsResponseData = QueryDocumentSnapshot;
-      functions.logger.info("Inside firestore get", fsResponseData);
+      // functions.logger.info("Inside firestore get", fsResponseData);
 
-      const createReview = data => functions.logger.info("**async function, passed the data array", data); // remap to bigger function 
+      // const createReview = data => functions.logger.info(" passed the data array", data); // remap to bigger function 
+
+      // functions.logger.info(" createPlaceReview(createBaseReviewArr(fsResponseData)) --> fsResponseData ---> ", fsResponseData);
 
       // return createBaseReviewArr(fsResponseData)
       //   .then(
       //     createReview(firestoreResponse) 
       //   );
 
-      // return createReview(createBaseReviewArr(fsResponseData));
-      return createPlaceReview(createBaseReviewArr(fsResponseData));
+      const fsResponseDataDocsMap = fsResponseData.docs.map(review => review.data());
+
+      // return createReview(fsResponseDataDocs);
+
+      functions.logger.info("fsResponseData.docs.map(review => review.data()) ---> ", fsResponseDataDocsMap);
+
+      return createPlaceReview(fsResponseDataDocsMap);
+
+      // return createBaseReviewArr(fsResponseData);
 
     });
 }
@@ -235,7 +199,7 @@ exports.reviewSubmitted = functions.firestore.document('reviews/{reviewID}').onC
   (QueryDocumentSnapshot) => {
     const responseData = QueryDocumentSnapshot.data();
     const locationID = responseData.locationID;
-    functions.logger.info("Hello response data... ", responseData);
+    // functions.logger.info("Hello response data... ", responseData);
     // functions.logger.info("typeof... ", typeof responseData);
 
     return savePlaceEntry(locationID);
@@ -335,3 +299,31 @@ exports.reviewSubmitted = functions.firestore.document('reviews/{reviewID}').onC
 
 
 
+  // const getFeatures = (featureName) => {
+  //   const featureArr = firestoreResponse.map(review => review.features[`${featureName}`] ? 1 : 0);
+  //   const featureTotal = featureArr.reduce((featureTotal, feature) => featureTotal + feature, 0);
+  //   return (featureTotal / featureArr.length);
+  // };
+
+  // const aggregateField = (source, field, type) => {
+  //   const fieldArr = firestoreResponse.map(review => {
+  //     return review[`${source}`][`${field}`] ? (
+  //       type === "score" ? review[`${source}`][`${field}`] : 1
+  //     ) : 0
+  //   });
+  //   const fieldTotal = fieldArr.reduce((fieldTotal, field) => fieldTotal + field, 0);
+  //   return (fieldTotal / fieldArr.length);
+  // };
+
+  // firestoreResponse.forEach(review => {
+  //   const cleanlinessScore = aggregateField("scores", "cleanliness", "score");
+  //   const styleScore = aggregateField("scores", "style", "score");
+  //   const comfortScore = aggregateField("scores", "comfort", "score");
+  //   const safetyScore = aggregateField("scores", "safety", "score");
+  //   const privacyScore = aggregateField("scores", "privacy", "score");
+  //   const accessible = aggregateField("features", "accessible", "binary");
+  //   const babyStation = aggregateField("features", "babyStation", "binary");
+  //   const cleaningSchedule = aggregateField("features", "cleaningSchedule", "binary");
+  //   const genderNeutral = aggregateField("features", "genderNeutral", "binary");
+  //   const getOutOfOrder = aggregateField("basicInfo", "outOfOrder", "binary");
+  // });  
