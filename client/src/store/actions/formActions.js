@@ -47,7 +47,7 @@ export const submitForm = () => {
         genderNeutral: formState.formGenderNeutralValue,
         babyStation: formState.formBabyChangeValue,
         accessible: formState.formHandicappedValue,
-        price: formState.formFeeValue,
+        price: parseFloat(formState.formFeeValue),
         admission: formState.formAdmissionValue,
         cleaningSchedule: formState.formScheduleValue
       },
@@ -57,11 +57,11 @@ export const submitForm = () => {
       photos: finalPhotosArr,
 
       scores: {
-        cleanliness: formState.formCleanlinessValue,
-        style: formState.formStyleValue,
-        comfort: formState.formComfortValue,
-        safety: formState.formSafetyValue,
-        privacy: formState.formPrivacyValue
+        cleanliness: parseInt(formState.formCleanlinessValue),
+        style: parseInt(formState.formStyleValue),
+        comfort: parseInt(formState.formComfortValue),
+        safety: parseInt(formState.formSafetyValue),
+        privacy: parseInt(formState.formPrivacyValue)
       },
 
       userID: authState.loginCredentialValue.uid,

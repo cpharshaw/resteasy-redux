@@ -64,29 +64,34 @@ const createPlaceReview = dataArr => {
 
   const getAvgScore = (scoreName, arr) => {
     const scoreArr = arr.map(review => review.scores[`${scoreName}`]);
-    const scoreTotal = scoreArr.reduce((runningTotal, reviewScore) => runningTotal + reviewScore, 0);
-    return (scoreTotal / scoreArr.length);
+    const scoreTotal = scoreArr.reduce((runningTotal, reviewScore) => parseInt(runningTotal) + parseInt(reviewScore));
+
+    // functions.logger.info("scoreName ---> ", scoreName);
+    // functions.logger.info("scoreArr... arr.map(review => review.scores[`${scoreName}`]) ---> ", arr.map(review => review.scores[`${scoreName}`]));
+    // functions.logger.info("scoreTotal... scoreArr.reduce((runningTotal, reviewScore) => runningTotal + reviewScore) ---> ", scoreArr.reduce((runningTotal, reviewScore) => parseInt(runningTotal) + parseInt(reviewScore)));
+
+    return parseFloat((scoreTotal / scoreArr.length)).toFixed(3);
   };
 
   const restroomUsedFunc = (name, data) => {
     const cnt = data.length;
-    functions.logger.info("fsResponseData.docs.map(review => review.data()) ---> ", fsResponseDataDocsMap);
+    
     const cleanScoreArr = data.map(review => review.scores.cleanliness);
-    const cleanAvg = (cleanScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / cleanScoreArr.length).toFixed(1);
+    const cleanAvg = (cleanScoreArr.reduce((fieldTotal, field) => parseInt(fieldTotal) + parseInt(field)) / cleanScoreArr.length).toFixed(3);
 
     const safetyScoreArr = data.map(review => review.scores.safety);
-    const safetyAvg = (safetyScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / safetyScoreArr.length).toFixed(1);
+    const safetyAvg = (safetyScoreArr.reduce((fieldTotal, field) => parseInt(fieldTotal) + parseInt(field)) / safetyScoreArr.length).toFixed(3);
 
     const privacyScoreArr = data.map(review => review.scores.privacy);
-    const privacyAvg = (privacyScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / privacyScoreArr.length).toFixed(1);
+    const privacyAvg = (privacyScoreArr.reduce((fieldTotal, field) => parseInt(fieldTotal) + parseInt(field)) / privacyScoreArr.length).toFixed(3);
 
     const comfortScoreArr = data.map(review => review.scores.comfort);
-    const comfortAvg = (comfortScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / comfortScoreArr.length).toFixed(1);
+    const comfortAvg = (comfortScoreArr.reduce((fieldTotal, field) => parseInt(fieldTotal) + parseInt(field)) / comfortScoreArr.length).toFixed(3);
 
     const styleScoreArr = data.map(review => review.scores.style);
-    const styleAvg = (styleScoreArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / styleScoreArr.length).toFixed(1);
+    const styleAvg = (styleScoreArr.reduce((fieldTotal, field) => parseInt(fieldTotal) + parseInt(field)) / styleScoreArr.length).toFixed(3);
 
-    const weightedAvg = (((cleanAvg * 9) + (safetyAvg * 7) + (privacyAvg * 6) + (comfortAvg * 4.5) + (styleAvg * 2)) / 28.5).toFixed(1);
+    const weightedAvg = parseFloat((((cleanAvg * 9) + (safetyAvg * 7) + (privacyAvg * 6) + (comfortAvg * 4.5) + (styleAvg * 2)) / 28.5)).toFixed(3);
 
     const cleaningSchedule = data.map(review => review.features.cleaningSchedule).length >= 3 ? true : false;
     const babyStation = data.map(review => review.features.babyStation).length >= 3 ? true : false;
@@ -95,13 +100,13 @@ const createPlaceReview = dataArr => {
     const recentReviews = recentReviewsSort.slice(0, 7);
 
     return {
-      cnt: cnt,
-      cleanAvg: cleanAvg,
-      safetyAvg: safetyAvg,
-      privacyAvg: privacyAvg,
-      comfortAvg: comfortAvg,
-      styleAvg: styleAvg,
-      weightedAvg: weightedAvg,
+      cnt: parseInt(cnt),
+      cleanAvg: parseFloat(cleanAvg).toFixed(3),
+      safetyAvg: parseFloat(safetyAvg).toFixed(3),
+      privacyAvg: parseFloat(privacyAvg).toFixed(3),
+      comfortAvg: parseFloat(comfortAvg).toFixed(3),
+      styleAvg: parseFloat(styleAvg).toFixed(3),
+      weightedAvg: parseFloat(weightedAvg).toFixed(3),
       cleaningSchedule: cleaningSchedule,
       babyStation: babyStation,
       recentReviews: recentReviews
@@ -112,43 +117,51 @@ const createPlaceReview = dataArr => {
   const placeID = dataArr[0].locationID;
   const placeName = dataArr[0].basicInfo.locationName;
 
-  const admissionFreeArrLength = dataArr.map(review => review.features.admission === "Free").length || 0;
-  const admissionPayArrLength = dataArr.map(review => review.features.admission === "Pay/Customers-Only").length || 0;
-  functions.logger.info("admissionFreeArrLength ---> ", admissionFreeArrLength);
-  functions.logger.info("admissionPayArrLength ---> ", admissionPayArrLength);
+  const admissionFreeArrLength = dataArr.filter(review => review.features.admission === "Free").length || 0;
+  functions.logger.info("admissionFreeArrLength ---> ", dataArr.filter(review => review.features.admission === "Free").length);
+
+  const admissionPayArrLength = dataArr.filter(review => review.features.admission === "Pay/Customers-Only").length || 0;
+  functions.logger.info("admissionPayArrLength ---> ",  dataArr.filter(review => review.features.admission === "Pay/Customers-Only").length);
+
   const admission = admissionPayArrLength > admissionFreeArrLength ? "Pay" : admissionPayArrLength < admissionFreeArrLength ? "Free" : admissionFreeArrLength > 0 ? "Unknown" : "Unknown";
-
+  functions.logger.info("admissionPayArrLength > admissionFreeArrLength ... 'Pay' ---> ", admissionPayArrLength > admissionFreeArrLength);
+  functions.logger.info("admissionPayArrLength < admissionFreeArrLength ... 'Free' ---> ", admissionPayArrLength < admissionFreeArrLength);
+  functions.logger.info("admissionFreeArrLength > 0 ... 'Unknown' ---> ", admissionFreeArrLength > 0);
+  
   const priceArr = dataArr.map(review => review.features.price);
-  const price = (priceArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / priceArr.length).toFixed(1);
+  const price = (priceArr.reduce((fieldTotal, field) => fieldTotal + field, 0) / priceArr.length).toFixed(3);
 
-  const genderNeutral = dataArr.length < 3 ? "Unknown" : dataArr.map(review => review.features.genderNeutral).length >= 3 ? true : false;
-  const accessible = dataArr.length < 3 ? "Unknown" : dataArr.map(review => review.features.accessible).length >= 3 ? true : false;
+  const genderNeutral = dataArr.length < 3 ? "TBD" : dataArr.map(review => review.features.genderNeutral).length >= 3 ? true : false;
+  const accessible = dataArr.length < 3 ? "TBD" : dataArr.map(review => review.features.accessible).length >= 3 ? true : false;
 
-  const allCleanAvg = getAvgScore("cleanliness", dataArr);
-  const allSafetyAvg = getAvgScore("safety", dataArr);
-  const allPrivacyAvg = getAvgScore("safety", dataArr);
-  const allComfortAvg = getAvgScore("comfort", dataArr);
-  const allStyleAvg = getAvgScore("style", dataArr);
-  const allWeightedAvg = (((allCleanAvg * 9) + (allSafetyAvg * 7) + (allPrivacyAvg * 6) + (allComfortAvg * 4.5) + (allStyleAvg * 2)) / 28.5).toFixed(1);
+  const allCnt = parseInt(dataArr.length);
+
+  const allCleanAvg = parseFloat(getAvgScore("cleanliness", dataArr)).toFixed(3);
+  const allSafetyAvg = parseFloat(getAvgScore("safety", dataArr)).toFixed(3);
+  const allPrivacyAvg = parseFloat(getAvgScore("safety", dataArr)).toFixed(3);
+  const allComfortAvg = parseFloat(getAvgScore("comfort", dataArr)).toFixed(3);
+  const allStyleAvg = parseFloat(getAvgScore("style", dataArr)).toFixed(3);
+  
+  const allWeightedAvg = parseFloat((((allCleanAvg * 9) + (allSafetyAvg * 7) + (allPrivacyAvg * 6) + (allComfortAvg * 4.5) + (allStyleAvg * 2)) / 28.5)).toFixed(3);
 
   const placeReview = {
     placeID: placeID,
     placeName: placeName,
 
     admission: admission,
-    price: price,
+    price: parseFloat(price).toFixed(3),
 
     genderNeutral: genderNeutral,
     accessible: accessible,
 
-    allCnt: dataArr.length,
+    allCnt: parseInt(allCnt),
 
-    allCleanAvg: allCleanAvg,
-    allSafetyAvg: allSafetyAvg,
-    allPrivacyAvg: allPrivacyAvg,
-    allComfortAvg: allComfortAvg,
-    allStyleAvg: allStyleAvg,
-    allWeightedAvg: allWeightedAvg,
+    allCleanAvg: parseFloat(allCleanAvg).toFixed(3),
+    allSafetyAvg: parseFloat(allSafetyAvg).toFixed(3),
+    allPrivacyAvg: parseFloat(allPrivacyAvg).toFixed(3),
+    allComfortAvg: parseFloat(allComfortAvg).toFixed(3),
+    allStyleAvg: parseFloat(allStyleAvg).toFixed(3),
+    allWeightedAvg: parseFloat(allWeightedAvg).toFixed(3),
 
     // writeReview: () => (
     //   dataArr[0].basicInfo.restroomUsed === "Men's" ? this.men = restroomUsedFunc("men", mensArr) :
