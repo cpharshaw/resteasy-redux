@@ -24,7 +24,7 @@ const initState = {
   formStyleValue: null,
 
   //page 3
-  formHandicappedValue: false,
+  formHandicappedValue: true,
   formGenderNeutralValue: false,
   formBabyChangeValue: false,
   formScheduleValue: false,
