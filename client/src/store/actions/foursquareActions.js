@@ -73,41 +73,35 @@ export const getPlacesFromFoursquare = (locationPref) => {
               return a.distance - b.distance;
             }).slice(0, 10);
 
+
+
+
+
+
+
             const fsIDs = sortedFSData.map(fsPlace => {
               return fsPlace.id;
             });
 
-            const fireStoreReviews = firestore.collection('reviews');
+            const firestorePlaces = firestore.collection('places');
 
-            fireStoreReviews.where('locationID', 'in', fsIDs).get()
-              .then(firestoreResponse =>
-                firestoreResponse.empty ?
-                  console.log('No matching documents... ')
-                  :
-                  sortedFSData.forEach(fsPlace => {
-                    // console.log("Query success!");
-                    // console.log(review.id, '=>', review.data());
+            firestorePlaces.where('placeID', 'in', fsIDs)
+              .get()
+              .then(({ docs }) => {
+                const docsFormatted = docs.map(place => place.data());
+                const combined = sortedFSData.map(t1 => ({ ...t1, ...docsFormatted.find(t2 => t2.placeID === t1.id) }));
 
-                    const tempArr = sortedFSData.filter(fsPlace => {
-                      // return fsPlace.id = review.locationID;
-                    });
+                console.log("fs data: ", sortedFSData);
+                console.log("docsFormatted data: ", docsFormatted);
+                console.log("combined data: ", combined);
 
+                dispatch({
+                  type: "FOURSQUARE_SUCCESS",
+                  payload: combined
+                })
 
+              });
 
-                    
-
-
-
-
-                  })
-              );
-
-            console.log("fs data: ", sortedFSData);
-
-            dispatch({
-              type: "FOURSQUARE_SUCCESS",
-              payload: sortedFSData
-            });
           }
         )
         .catch(
