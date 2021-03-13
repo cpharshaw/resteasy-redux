@@ -13,7 +13,8 @@ import signIn_pressed2x from './btn_google_signin_light_pressed_web@2x.png';
 export class MyStuffSection extends Component {
 
   state = {
-    myStuffCategory: "My Reviews"
+    // myStuffCategory: "My Reviews"
+    myStuffCategory: "Settings"
   }
 
   signInClicked = e => {
@@ -522,7 +523,7 @@ export class MyStuffSection extends Component {
             }}
           >
             <div className="col" style={{ padding: "10px 0 10px 0" }}>
-              {displayName ? <SignedInComponent /> : <SignedOutComponent />}
+              {!displayName ? <SignedInComponent /> : <SignedOutComponent />}
             </div>
           </div>
 

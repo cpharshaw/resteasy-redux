@@ -357,7 +357,9 @@ export class ModalContainer extends Component {
                     currentModal === "placeModal" ? (
 
                       <div className="row " style={{ pointerEvents: "all" }}>
-                        <div className="col fc jc-fs">
+                        <div className="col fc jc-fs"
+                          style={{ border: "1px solid whitesmoke" }}
+                        >
 
                           <div className="row ">
                             <div className="col-2 ai-c">
@@ -435,10 +437,12 @@ export class ModalContainer extends Component {
                                 {/* <div className="col-1"></div> */}
                               </div>
 
-                              <HorizontalRule data_width="60%" />
+                              {/* <HorizontalRule data_width="60%" /> */}
 
 
-                              <div className="row js-fg my-1">
+                              <div className="row js-fg my-1"
+                              // style={{border: "1px solid red"}}
+                              >
                                 <div className="col">
 
 
@@ -451,22 +455,24 @@ export class ModalContainer extends Component {
                                       msOverflowY: "scroll",
                                       overflowX: "hidden",
                                       msOverflowX: "hidden",
+                                      // border: "1px solid red"
                                     }}
                                   >
                                     <div
                                       id="commentsScroller"
-                                      className="col jc-fs pt-1"
+                                      className="col jc-fs pt-1 "
                                       style={{
                                         overflowX: "hidden",
                                         msOverflowX: "hidden",
                                         overflowY: "hidden",
                                         msOverflowY: "hidden",
+                                        backgroundColor: "#E0E0E0"
                                       }}
                                     >
                                       {/* {foursquarePlaces} */}
 
-                                      <div className="row js-fg mb-2">
-                                        <div className="col fc jc-fs ai-fs mx-1">
+                                      <div className="row js-fg mb-1">
+                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
                                             &nbsp;
                                              <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
@@ -489,12 +495,12 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/150" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          <HorizontalRule data_width="45%" />
+                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
-                                      <div className="row js-fg mb-2">
-                                        <div className="col fc jc-fs ai-fs mx-2">
+                                      <div className="row js-fg mb-1">
+                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
                                             &nbsp;
                                              <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
@@ -517,12 +523,12 @@ export class ModalContainer extends Component {
                                               {/* <img src="https://via.placeholder.com/160x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} /> */}
                                             </div>
                                           </div>
-                                          <HorizontalRule data_width="45%" />
+                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
-                                      <div className="row js-fg mb-2">
-                                        <div className="col fc jc-fs ai-fs mx-2">
+                                      <div className="row js-fg mb-1">
+                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
                                             &nbsp;
                                              <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
@@ -545,13 +551,13 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          <HorizontalRule data_width="45%" />
+                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
 
-                                      <div className="row js-fg mb-2">
-                                        <div className="col fc jc-fs ai-fs mx-2">
+                                      <div className="row js-fg mb-1">
+                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
                                             &nbsp;
                                              <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
@@ -574,13 +580,13 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          <HorizontalRule data_width="45%" />
+                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
 
-                                      <div className="row js-fg mb-2">
-                                        <div className="col fc jc-fs ai-fs mx-2">
+                                      <div className="row js-fg mb-1">
+                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
                                             &nbsp;
                                              <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
@@ -603,13 +609,13 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          <HorizontalRule data_width="45%" />
+                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
 
-                                      <div className="row js-fg mb-2">
-                                        <div className="col fc jc-fs ai-fs mx-2">
+                                      <div className="row js-fg mb-1">
+                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
                                             &nbsp;
                                              <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
@@ -632,7 +638,7 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          <HorizontalRule data_width="45%" />
+                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 

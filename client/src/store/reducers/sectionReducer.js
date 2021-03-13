@@ -1,7 +1,7 @@
 const initState = {
-  selectedSectionValue: "review"
+  // selectedSectionValue: "review"
   // selectedSectionValue: "mapList"
-  // selectedSectionValue: "myStuff"
+  selectedSectionValue: "myStuff"
 }
 
 const sectionReducer = (state = initState, action) => {

@@ -87,6 +87,18 @@
 	background-color: #626262;
 }
 
+.bg-whitesmoke {
+	background-color: whitesmoke;
+}
+
+.brdr-rad {
+	/* border-radius: 1.4%; */
+	border-top-left-radius: 1.25%;
+	border-top-right-radius: 1.25%;
+	/* box-shadow: 5px black; */
+	box-shadow: 0 0 1px grey !important;
+}
+
 
 .bg-red {
 	background-color: red;
@@ -112,8 +124,12 @@
 	background-color: brown;
 }
 
-.bg-grey {
+.bg-grey, .bg-gray {
 	background-color: grey;
+}
+
+.bg-lightgrey, .bg-lightgray {
+	background-color: lightgrey;
 }
 
 .bg-teal {
@@ -171,6 +187,6 @@
 	background-color: #aa1a30;
 }
 
-.bg-secondary-gray {
+.bg-secondary-grey,.bg-secondary-gray {
 	background-color: #626262;
 }
