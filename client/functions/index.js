@@ -146,6 +146,8 @@ const createPlaceReview = (dataArr, latestReviewGender) => {
 
   const allWeightedAvg = parseFloat((((allCleanAvg * 9) + (allSafetyAvg * 7) + (allPrivacyAvg * 6) + (allComfortAvg * 4.5) + (allStyleAvg * 2)) / 28.5)).toFixed(3);
 
+  const allRecentReviewsSort = dataArr.sort((x, y) => x.reviewDatatime - y.reviewDatatime);
+  const allRecentReviews = allRecentReviewsSort.slice(0, 7);  
 
   const placeReview = {
     placeID: placeID,
@@ -165,6 +167,8 @@ const createPlaceReview = (dataArr, latestReviewGender) => {
     allComfortAvg: parseFloat(allComfortAvg).toFixed(3),
     allStyleAvg: parseFloat(allStyleAvg).toFixed(3),
     allWeightedAvg: parseFloat(allWeightedAvg).toFixed(3),
+
+    allRecentReviews: allRecentReviews,
 
     mens: mensArr.length > 0 ? restroomUsedFunc(mensArr) : null,
     womens: womensArr.length > 0 ? restroomUsedFunc(womensArr) : null,
