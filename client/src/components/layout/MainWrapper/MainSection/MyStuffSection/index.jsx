@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { saveUnitsPreference, saveGenderPreference } from '../../.././../../store/actions/authActions.js';
 
 import { signIn, signOut } from '../../../../../store/actions/authActions';
 import signIn_normal from './btn_google_signin_light_normal_web.png';
@@ -14,7 +15,9 @@ export class MyStuffSection extends Component {
 
   state = {
     // myStuffCategory: "My Reviews"
-    myStuffCategory: "Settings"
+    myStuffCategory: "Settings",
+    updatedGender: false,
+    updatedUnitsOfMeasure: false
   }
 
   signInClicked = e => {
@@ -46,7 +49,7 @@ export class MyStuffSection extends Component {
     console.log("mouse leave")
     e.currentTarget.src = signIn_normal;
     // this.props.signIn();
-  }  
+  }
   signInFocus = e => {
     e.preventDefault();
     console.log("mouse focus")
@@ -96,11 +99,81 @@ export class MyStuffSection extends Component {
     })
   }
 
-  
+
+  settings_selectUnitsOfMeasure = e => {
+    e.preventDefault();
+    // const currentTarget = e.currentTarget;
+    const target = e.target;
+    // const src = currentTarget.src;
+    const value = target.value;
+
+    // console.log("currentTarget ---> ", currentTarget);
+    // console.log("src ---> ", src);
+    // console.log("target ---> ", target);
+    console.log("value ---> ", value);
+
+    this.props.saveUnitsPreference(value);
+
+    this.setState({
+      updatedUnitsOfMeasure: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        updatedUnitsOfMeasure: false
+      })
+    }, 3000);
+
+    return;
+  }
+
+  settings_selectGender = e => {
+    e.preventDefault();
+    // const currentTarget = e.currentTarget;
+    const target = e.target;
+    // const src = currentTarget.src;
+    const value = target.value;
+
+    // console.log("currentTarget ---> ", currentTarget);
+    // console.log("src ---> ", src);
+    // console.log("target ---> ", target);
+    console.log("value ---> ", value);
+
+    this.props.saveGenderPreference(value);
+
+    this.setState({
+      updatedGender: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        updatedGender: false
+      })
+    }, 3000);
+
+    return;
+  }
+
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   const prev_settingsUnitsOfMeasure = prevProps.settingsUnitsOfMeasure;
+  //   const prev_settingsGenderPreference = prevProps.settingsGenderPreference;
+
+  //   const curr_settingsUnitsOfMeasure = this.props.settingsUnitsOfMeasure;
+  //   const curr_settingsGenderPreference = this.props.settingsGenderPreference;
+
+  //   const update_settingsUnitsOfMeasure = prev_settingsUnitsOfMeasure !== curr_settingsUnitsOfMeasure;
+  //   const update_settingsGenderPreference = prev_settingsGenderPreference !== curr_settingsGenderPreference;
+
+  //   console.log("update_settingsUnitsOfMeasure ---> ", update_settingsUnitsOfMeasure);
+  //   console.log("update_settingsGenderPreference ---> ", update_settingsGenderPreference);
+  // }
+
 
   render() {
 
     const { selectedSectionValue } = this.props;
+
+    const { unitsPreference, genderPreference } = this.props;
 
     const displayValue = selectedSectionValue === "myStuff" ? "flex" : "none";
 
@@ -127,29 +200,29 @@ export class MyStuffSection extends Component {
             <span>You are currently not signed in.</span>
 
             {/* <div */}
-              {/* id="" */}
-              {/* className="row bg-red" */}
-              {/* // onClick={this.signInClicked} */}
-              {/* // style={{ */}
-                {/* // padding: "9px 16px 9px 16px",
+            {/* id="" */}
+            {/* className="row bg-red" */}
+            {/* // onClick={this.signInClicked} */}
+            {/* // style={{ */}
+            {/* // padding: "9px 16px 9px 16px",
                 // border: "1px solid #0abab5",
                 // color: "#0abab5",
                 // background: "inherit"
               }}
             > */}
-              <img
-                src={signIn_normal}
-                onClick={this.signInClicked}
-                onMouseDown={this.signInDown}
-                onMouseUp={this.signInUp}
-                onFocus={this.signInFocus}
-                onBlur={this.signInBlur}
-                onTouchEnd={this.signInTouchEnd}
-                onTouchStart={this.signInTouchStart}
-                onTouchCancel={this.signInTouchCancel}
-                onMouseOut={this.signInMouseOut}
-                onMouseLeave={this.signInMouseLeave}             
-              />
+            <img
+              src={signIn_normal}
+              onClick={this.signInClicked}
+              onMouseDown={this.signInDown}
+              onMouseUp={this.signInUp}
+              onFocus={this.signInFocus}
+              onBlur={this.signInBlur}
+              onTouchEnd={this.signInTouchEnd}
+              onTouchStart={this.signInTouchStart}
+              onTouchCancel={this.signInTouchCancel}
+              onMouseOut={this.signInMouseOut}
+              onMouseLeave={this.signInMouseLeave}
+            />
             {/* </div> */}
 
 
@@ -260,54 +333,122 @@ export class MyStuffSection extends Component {
             </div>
 
             <div className="row js-fg">
+              <div className="col">
+                {
+                  this.state.myStuffCategory !== "My Reviews" ? null : (
+                    <span>You have reviewed 0 bathrooms.</span>
+                  )
+                }
 
-              {
-                this.state.myStuffCategory !== "My Reviews" ? null : (
-                  <span>You have reviewed 0 bathrooms.</span>
-                )
-              }
+                {
+                  this.state.myStuffCategory !== "Favorites" ? null : (
+                    <span>You have 0 favorites.</span>
+                  )
+                }
 
-              {
-                this.state.myStuffCategory !== "Favorites" ? null : (
-                  <span>You have 0 favorites.</span>
-                )
-              }
+                {
+                  this.state.myStuffCategory !== "Notifications" ? null : (
+                    <span><em>Coming soon...</em></span>
+                  )
+                }
 
-              {
-                this.state.myStuffCategory !== "Notifications" ? null : (
-                  <span><em>Coming soon...</em></span>
-                )
-              }
+                {
+                  this.state.myStuffCategory !== "Settings" ? null : (
 
-              {
-                this.state.myStuffCategory !== "Settings" ? null : (
+                    <div className="row">
+                      <div className="col py-3 px-2">
+                        <span className="animated fadeIn" style={{ marginBottom: "-15px", fontStyle: "italic", color: "green", fontSize: "13.5px", visibility: this.state.updatedGender || this.state.updatedUnitsOfMeasure ? "visible" : "hidden" }}>Profile Updated</span>
+                        <div className="row">
+                          <div className="col-5 ai-fs">
+                            <p style={{ fontSize: "12.5px" }}>Units of Measure</p>
+                          </div>
+                          <div className="col-5">
+                            <select
+                              id="settings_unitsOfMeasure"
+                              className=""
+                              name="settings_unitsOfMeasure"
+                              value={unitsPreference}
+                              // this.props.loginCredentialValue.preferredUnitOfMeasure || 
+                              onChange={e => this.settings_selectUnitsOfMeasure(e)}
+                              style={{
+                                width: "95%",
+                                height: "100%",
+                                fontSize: "12.5px",
+                                fontStyle: "italic",
+                                background: "inherit",
+                                color: "grey",
+                                textOverflow: "ellipsis"
+                              }}
+                            >
+                              <option value="imperial">Imperial (US)</option>
+                              <option value="metric">Metric</option>
+                            </select>
+                          </div>
+                        </div>
 
-                  <ul>
-                    <li>My country</li>
-                    <li>Units of Measure</li>
-                    <li>Dark Mode (Coming soon...)</li>
-                    <li>Send feedback to developer</li>
-                    <li>
-                      <div className="row">
-                        <button
-                          id=""
-                          className=" py-2 px-3"
-                          onClick={this.signOutClicked}
-                          style={{
-                            // border: "1px solid #0abab5",
-                            color: "#0abab5",
-                            background: "inherit"
-                          }}
-                        >
-                          <span><em>Log out</em></span>
-                        </button>
+                        <div className="row">
+                          <div className="col-5 ai-fs">
+                            <p style={{ fontSize: "12.5px" }}>Restroom Preference</p>
+                          </div>
+                          <div className="col-5">
+                            <select
+                              id="settings_gender"
+                              className=""
+                              name="settings_gender"
+                              value={genderPreference}
+                              // this.props.loginCredentialValue.preferredGender || 
+                              onChange={e => this.settings_selectGender(e)}
+                              style={{
+                                // width: "95%",
+                                height: "100%",
+                                fontSize: "12.5px",
+                                fontStyle: "italic",
+                                background: "inherit",
+                                color: "grey",
+                                textOverflow: "ellipsis"
+                              }}
+                            >
+                              <option value="any">No Preference</option>
+                              <option value="mens">Men's</option>
+                              <option value="womens">Women's</option>
+                              <option value="genderNeutral">Family/Gender-neutral</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="row">
+                          <div className="col-5 ai-fs">
+                            <p style={{ fontSize: "12.5px" }}>Developer Contact</p>
+                          </div>
+                          <div className="col-5 jc-se">
+                            <a style={{ fontSize: "12.5px" }} href="mailto:resteasydev@gmail.com?subject=Report issue/bug">Report issue/bug</a>
+                            <a style={{ fontSize: "12.5px" }} href="mailto:resteasydev@gmail.com?subject=Suggest feature(s)">Suggest feature(s)</a>
+                          </div>
+                        </div>
+
+
+                        <div className="row">
+                          <div className="col">
+                            <button
+                              id=""
+                              className=" py-2 px-3"
+                              onClick={this.signOutClicked}
+                              style={{
+                                color: "#0abab5",
+                                background: "inherit"
+                              }}
+                            >
+                              <span style={{ fontSize: "13.5px" }}><em>Log out</em></span>
+                            </button>
+                          </div>
+                        </div>
+
                       </div>
-                    </li>
-                  </ul>
+                    </div>
 
-                )
-              }
-
+                  )
+                }
+              </div>
             </div >
 
             {/* <div
@@ -523,13 +664,13 @@ export class MyStuffSection extends Component {
             }}
           >
             <div className="col" style={{ padding: "10px 0 10px 0" }}>
-              {!displayName ? <SignedInComponent /> : <SignedOutComponent />}
+              {displayName ? <SignedInComponent /> : <SignedOutComponent />}
             </div>
           </div>
 
         </div>
 
-      </div>
+      </div >
     )
   }
 }
@@ -540,7 +681,9 @@ const mapStateToProps = (state, ownProps) => {
     // reviews: state.firestore.ordered.reviews,
     auth: state.firebase,
     selectedSectionValue: ownProps.display,
-    loginCredentialValue: state.auth.loginCredentialValue
+    loginCredentialValue: state.auth.loginCredentialValue,
+    unitsPreference: state.auth.unitsPreference,
+    genderPreference: state.auth.genderPreference,
   }
 }
 
@@ -548,6 +691,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     signIn: () => dispatch(signIn()),
     signOut: () => dispatch(signOut()),
+    saveUnitsPreference: (input) => dispatch(saveUnitsPreference(input)),
+    saveGenderPreference: (input) => dispatch(saveGenderPreference(input)),
   }
 }
 

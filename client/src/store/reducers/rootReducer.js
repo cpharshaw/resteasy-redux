@@ -4,6 +4,7 @@ import geolocationReducer from './geoReducer';
 import mapListReducer from './mapListReducer';
 import sectionReducer from './sectionReducer';
 import inputReducer from './inputReducer';
+import myStuffReducer from './myStuffReducer';
 import foursquareReducer from './foursquareReducer';
 import mapReducer from './mapReducer';
 import modalReducer from './modalReducer';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   mapListState: mapListReducer,
   sectionState: sectionReducer,
   modalState: modalReducer,
+  myStuffState: myStuffReducer,
   mapState: mapReducer,
   formState: formReducer,
   inputState: inputReducer,

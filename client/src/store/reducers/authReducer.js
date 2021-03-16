@@ -1,7 +1,9 @@
 
 const initState = {
   loginCredentialValue: null,
-  authError: null
+  authError: null,
+  unitsPreference: "imperial",
+  genderPreference: "any"
 }
 
 const authReducer = (state = initState, action) => {
@@ -12,12 +14,14 @@ const authReducer = (state = initState, action) => {
 
       return {
         ...state,
-        loginCredentialValue: action.payload
+        loginCredentialValue: action.payload.loginObj,
+        unitsPreference: action.payload.preferences.unitsPreference,
+        genderPreference: action.payload.preferences.genderPreference,
       }
 
     case 'LOGIN_ERROR':
       console.log('login error', action.payload)
-      
+
       return {
         ...state,
         loginCredentialValue: action.payload,
@@ -41,6 +45,20 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         authError: action.err.message
+      }
+
+    case 'UNITS_PREFERENCE_RECEIVED':
+      // console.log('login success', action.payload)
+      return {
+        ...state,
+        unitsPreference: action.payload
+      }
+
+    case 'GENDER_PREFERENCE_RECEIVED':
+      // console.log('login success', action.payload)
+      return {
+        ...state,
+        genderPreference: action.payload
       }
 
     default:
