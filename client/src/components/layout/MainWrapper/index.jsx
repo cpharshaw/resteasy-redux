@@ -85,7 +85,7 @@ class MainWrapper extends Component {
 
 
       // 3/13/21 @ 5:14PM ... UNCOMMENT THIS AFTER FINISHED WITH MYSTUFF-SETTINGS 
-      // this.props.getPlacesFromFoursquare("center");
+      this.props.getPlacesFromFoursquare("center");
 
 
 

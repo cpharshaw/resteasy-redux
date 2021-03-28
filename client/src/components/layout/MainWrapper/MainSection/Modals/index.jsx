@@ -101,6 +101,40 @@ export class ModalContainer extends Component {
 
   }
 
+  favoriteClicked = (e, place) => {
+    e.preventDefault();
+    // console.log("place: ", place)
+    const name = place ? place.name : e.currentTarget.getAttribute('data_placename');
+    const category = place ? place.categories[0].name : e.currentTarget.getAttribute('data_placecategory');
+    const distance = place ? place.distance : e.currentTarget.getAttribute('data_placedistance');
+    const address = place ? place.location.address : e.currentTarget.getAttribute('data_placeaddress');
+
+    const id = place ? place.id : e.currentTarget.getAttribute('data_placeid');
+    const city = place ? place.location.city : e.currentTarget.getAttribute('data_placecity');
+    const stateCode = place ? place.location.state : e.currentTarget.getAttribute('data_placestatecode');
+    const zip = place ? place.location.postalCode : e.currentTarget.getAttribute('data_placezip');
+    const country = place ? place.location.country : e.currentTarget.getAttribute('data_placecountry');
+
+    const placeObj = {
+      name,
+      category,
+      distance,
+      address,
+
+      id,
+      city,
+      stateCode,
+      zip,
+      country
+    }
+
+    this.props.locationChosen(placeObj);
+    this.props.modalClosed();
+    if (place) this.props.formNext("addReviewStep1");
+    if (place) this.props.selectSection("review");
+
+  }
+
 
 
   signInClicked = e => {
@@ -699,18 +733,9 @@ export class ModalContainer extends Component {
                               <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span></p>
                             </div>
                             <div className="col-2 jc-c ai-c ac-c">
-                              {/* <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                                width="21" height="21"
-                                viewBox="0 0 172 172"
-                                style={{ fill: "#000000" }}>
-                                <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
-                                  <path d="M0,172v-172h172v172z" fill="none" />
-                                  <g fill="#f1c40f">
-                                    <path d="M43.06999,14.33333c-7.85076,0 -14.33333,6.46862 -14.33333,14.31934l-0.06999,129.014l57.33333,-21.5l57.33333,21.5v-10.34407v-118.65593c0,-7.83362 -6.49972,-14.33333 -14.33333,-14.33333zM43.06999,28.66667h85.93001v108.31185l-43,-16.125l-42.986,16.125z" />
-                                  </g>
-                                </g>
-                              </svg> */}
-                              <img src="https://img.icons8.com/material-outlined/21/383838/bookmark-ribbon--v1.png" />
+                            {/* <div className="col-2 jc-c ai-c ac-c" onClick={e => this.favoriteClicked(e, selectedPlaceValue)}> */}
+                              {/* <img src="https://img.icons8.com/material-outlined/21/383838/bookmark-ribbon--v1.png" /> */}
+                              {/* <img src="https://img.icons8.com/material-two-tone/21/000000/bookmark-ribbon--v1.png"/> */}
                             </div>
                           </div>
 

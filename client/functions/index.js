@@ -147,7 +147,7 @@ const createPlaceReview = (dataArr, latestReviewGender) => {
   const allWeightedAvg = parseFloat((((allCleanAvg * 9) + (allSafetyAvg * 7) + (allPrivacyAvg * 6) + (allComfortAvg * 4.5) + (allStyleAvg * 2)) / 28.5)).toFixed(3);
 
   const allRecentReviewsSort = dataArr.sort((x, y) => x.reviewDatatime - y.reviewDatatime);
-  const allRecentReviews = allRecentReviewsSort.slice(0, 7);  
+  const allRecentReviews = allRecentReviewsSort.slice(0, 7);
 
   const placeReview = {
     placeID: placeID,
@@ -226,53 +226,54 @@ const savePlaceEntry = (locationID, latestReviewGender) => {
     });
 }
 
-exports.reviewSubmitted = functions.firestore.document('reviews/{reviewID}').onCreate(
-  QueryDocumentSnapshot => {
-    const responseData = QueryDocumentSnapshot.data();
-    const locationID = responseData.locationID;
-    const latestReviewGender = responseData.basicInfo.restroomUsed;
-    // functions.logger.info("Hello QueryDocumentSnapshot response data... ", responseData);
-    // functions.logger.info("typeof... ", typeof responseData);
+exports.reviewSubmitted = functions.firestore.document('reviews/{reviewID}')
+  .onCreate(
+    QueryDocumentSnapshot => {
+      const responseData = QueryDocumentSnapshot.data();
+      const locationID = responseData.locationID;
+      const latestReviewGender = responseData.basicInfo.restroomUsed;
+      // functions.logger.info("Hello QueryDocumentSnapshot response data... ", responseData);
+      // functions.logger.info("typeof... ", typeof responseData);
 
-    return savePlaceEntry(locationID, latestReviewGender);
+      return savePlaceEntry(locationID, latestReviewGender);
 
-    // const test = { 
-    //   "comments": "", 
-    //   "userID": "RseEGIFFIuPhqXcFCEfAMSlIID22", 
-    //   "reviewDatetime": { "_nanoseconds": 578000000, "_seconds": 1611526982 }, 
-    //   "photos": ["https://res.cloudinary.com/resteasyredux/image/upload/v1611526985/lrakygfuxj2xruodz6xy.jpg"], 
-    //   "scores": { "comfort": "5", "style": "3", "privacy": "4", "safety": "4", "cleanliness": "5" }, 
-    //   "locationID": "4c94173ef7cfa1cd2acbb015", 
-    //   "basicInfo": { 
-    //     "locationState": "MD", 
-    //     "locationCategory": "Pool", 
-    //     "outOfOrder": false, 
-    //     "locationCity": "College Park", 
-    //     "restroomUsed": "Men's", 
-    //     "timeOfVisit": "Morning", 
-    //     "locationZip": "20740", 
-    //     "locationCountry": "United States", 
-    //     "locationName": "Seven Springs Neighborhood Pool", 
-    //     "locationNotes": "" }, 
-    //   "features": { 
-    //     "price": "", 
-    //     "babyStation": false, 
-    //     "admission": "Free", 
-    //     "genderNeutral": false, 
-    //     "cleaningSchedule": false, 
-    //     "accessible": false 
-    //   } 
-    // }
+      // const test = { 
+      //   "comments": "", 
+      //   "userID": "RseEGIFFIuPhqXcFCEfAMSlIID22", 
+      //   "reviewDatetime": { "_nanoseconds": 578000000, "_seconds": 1611526982 }, 
+      //   "photos": ["https://res.cloudinary.com/resteasyredux/image/upload/v1611526985/lrakygfuxj2xruodz6xy.jpg"], 
+      //   "scores": { "comfort": "5", "style": "3", "privacy": "4", "safety": "4", "cleanliness": "5" }, 
+      //   "locationID": "4c94173ef7cfa1cd2acbb015", 
+      //   "basicInfo": { 
+      //     "locationState": "MD", 
+      //     "locationCategory": "Pool", 
+      //     "outOfOrder": false, 
+      //     "locationCity": "College Park", 
+      //     "restroomUsed": "Men's", 
+      //     "timeOfVisit": "Morning", 
+      //     "locationZip": "20740", 
+      //     "locationCountry": "United States", 
+      //     "locationName": "Seven Springs Neighborhood Pool", 
+      //     "locationNotes": "" }, 
+      //   "features": { 
+      //     "price": "", 
+      //     "babyStation": false, 
+      //     "admission": "Free", 
+      //     "genderNeutral": false, 
+      //     "cleaningSchedule": false, 
+      //     "accessible": false 
+      //   } 
+      // }
 
-    // return admin.firestore().collection('reviews')
-    //   .where('locationID', '==', doc.locationID)
-    //   .get()
-    //   .then(firestoreResponse => {
-    //     functions.logger.info("Inside firestore get!", { structuredData: true });
-    //     return;
-    //   });
+      // return admin.firestore().collection('reviews')
+      //   .where('locationID', '==', doc.locationID)
+      //   .get()
+      //   .then(firestoreResponse => {
+      //     functions.logger.info("Inside firestore get!", { structuredData: true });
+      //     return;
+      //   });
 
-  });
+    });
 
 
 

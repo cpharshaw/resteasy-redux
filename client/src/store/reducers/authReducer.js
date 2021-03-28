@@ -3,7 +3,9 @@ const initState = {
   loginCredentialValue: null,
   authError: null,
   unitsPreference: "imperial",
-  genderPreference: "any"
+  genderPreference: "any",
+  userReviews: null,
+  uid: null
 }
 
 const authReducer = (state = initState, action) => {
@@ -17,6 +19,8 @@ const authReducer = (state = initState, action) => {
         loginCredentialValue: action.payload.loginObj,
         unitsPreference: action.payload.preferences.unitsPreference,
         genderPreference: action.payload.preferences.genderPreference,
+        userReviews: action.payload.userReviews,
+        uid: action.payload.loginObj.uid
       }
 
     case 'LOGIN_ERROR':
@@ -25,7 +29,7 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         loginCredentialValue: action.payload,
-        authError: 'Login failed'
+        authError: 'Login failed: ' + action.payload
       }
 
 
@@ -59,6 +63,19 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         genderPreference: action.payload
+      }
+
+    case 'NEW_FAVORITE':
+      // console.log('center success: ', action.payload);
+      return {
+        ...state,
+        favoriteValue: action.payload
+      }
+    case 'REMOVE_FAVORITE':
+      // console.log('center success: ', action.payload);
+      return {
+        ...state,
+        favoriteValue: action.payload
       }
 
     default:

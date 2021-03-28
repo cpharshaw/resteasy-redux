@@ -51,11 +51,33 @@ export const saveGenderPreference = (newGenderPreference) => {
   }
 }
 
+export const saveFavorite = favoriteData => {
+  return (dispatch, getState) => {
+    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
+    dispatch({
+      type: 'NEW_FAVORITE',
+      payload: favoriteData,
+    })
+    // console.log("input received");
+  }
+}
+
+export const removeFavorite = favoriteData => {
+  return (dispatch, getState) => {
+    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
+    dispatch({
+      type: 'REMOVE_FAVORITE',
+      payload: favoriteData,
+    })
+    // console.log("input received");
+  }
+}
+
 
 export const signIn = (credentials) => {
 
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    console.log("authAction reached")
+    // console.log("authAction reached")
     const firebase = getFirebase();
     const firestore = getFirestore();
 
@@ -71,7 +93,7 @@ export const signIn = (credentials) => {
       .then(result => {
         // singed in now........
 
-        console.log("sign in result ---> ", result);
+        // console.log("sign in result ---> ", result);
 
         const token = result.credential.accessToken;
         const userFirebase = result.user;
@@ -110,9 +132,9 @@ export const signIn = (credentials) => {
         const newUser = result.additionalUserInfo.isNewUser;
         // console.log("currentUser ---> ", currentUser)
         // console.log("currentUserMetadata ---> ", currentUserMetadata)
-        console.log("currentUserMetadata.creationTime ---> ", currentUserMetadata.creationTime)
-        console.log("currentUserMetadata.lastSignInTime ---> ", currentUserMetadata.lastSignInTime)
-
+        // console.log("currentUserMetadata.creationTime ---> ", currentUserMetadata.creationTime)
+        // console.log("currentUserMetadata.lastSignInTime ---> ", currentUserMetadata.lastSignInTime)
+        console.log("newuser ---> ", result.additionalUserInfo.isNewUser)
         if (newUser) {
 
           console.log("new user");
@@ -129,25 +151,39 @@ export const signIn = (credentials) => {
 
         }
 
-        console.log("NOT new user");
+        // console.log("NOT new user");
 
         const firestoreUsers = firestore.collection('users');
+        const firestoreUserReviews = firestore.collection('reviews');
 
-        firestoreUsers.where('uid', '==', uid)
+        firestoreUserReviews.where('userID', '==', uid)
           .get()
-          .then(({ docs }) => {
-            const userFirestore = docs.map(user => user.data())[0];
+          .then(userReviewsResponse => {
+            const userReviewsResponseData = userReviewsResponse.docs.map(review => review.data());
+            
+            firestoreUsers.where('uid', '==', uid)
+              .get()
+              .then(({ docs }) => {
+                const userFirestore = docs.map(user => user.data())[0];
 
-            // console.log("userFirestore obj ---> ", userFirestore)
+                // console.log("userFirestore obj ---> ", userFirestore)
 
-            completeUserObj.preferences.genderPreference = userFirestore.genderPreference;
-            completeUserObj.preferences.unitsPreference = userFirestore.unitsPreference;
+                completeUserObj.preferences.genderPreference = userFirestore.genderPreference;
+                completeUserObj.preferences.unitsPreference = userFirestore.unitsPreference;
+                completeUserObj.userReviews = userReviewsResponseData;
 
-            return dispatch({
-              type: 'LOGIN_SUCCESS',
-              payload: completeUserObj
-            });
+                // console.log("completeUserObj.reviews ---> ", completeUserObj.userReviews)
+
+                return dispatch({
+                  type: 'LOGIN_SUCCESS',
+                  payload: completeUserObj
+                });
+              })
+
           })
+
+
+
 
       })
 

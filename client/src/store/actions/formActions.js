@@ -3,9 +3,10 @@ import axios from 'axios';
 
 export const submitFormProcessing = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
+    console.log("AGGGGGGGHHHHH")
     let processing = true;
     dispatch({
-      type: 'FORM_PROCESSING',
+      // type: 'FORM_PROCESSING',
       payload: processing //not necessary, just here to convey what's happening
     })
   }
@@ -61,7 +62,8 @@ export const submitForm = () => {
         style: parseInt(formState.formStyleValue),
         comfort: parseInt(formState.formComfortValue),
         safety: parseInt(formState.formSafetyValue),
-        privacy: parseInt(formState.formPrivacyValue)
+        privacy: parseInt(formState.formPrivacyValue),
+        total: parseFloat((((parseInt(formState.formCleanlinessValue) * 9) + (parseInt(formState.formSafetyValue) * 7) + (parseInt(formState.formPrivacyValue) * 6) + (parseInt(formState.formComfortValue) * 4.5) + (parseInt(formState.formStyleValue) * 2)) / 28.5)).toFixed(3)
       },
 
       userID: authState.loginCredentialValue.uid,

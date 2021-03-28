@@ -32,7 +32,7 @@ export const getPlacesFromFoursquare = (locationPref) => {
               near: location,
               limit: 20,
               intent: "checkin",
-              v: "20201231",
+              v: "20210315",
               // v: "20191130",
             },
             responseType: 'json',
@@ -91,9 +91,9 @@ export const getPlacesFromFoursquare = (locationPref) => {
                 const docsFormatted = docs.map(place => place.data());
                 const combined = sortedFSData.map(t1 => ({ ...t1, ...docsFormatted.find(t2 => t2.placeID === t1.id) }));
 
-                console.log("fs data: ", sortedFSData);
-                console.log("docsFormatted data: ", docsFormatted);
-                console.log("combined data: ", combined);
+                // console.log("fs data: ", sortedFSData);
+                // console.log("docsFormatted data: ", docsFormatted);
+                // console.log("combined data: ", combined);
 
                 dispatch({
                   type: "FOURSQUARE_SUCCESS",

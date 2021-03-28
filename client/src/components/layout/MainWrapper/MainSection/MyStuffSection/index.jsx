@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { saveUnitsPreference, saveGenderPreference } from '../../.././../../store/actions/authActions.js';
+import { firestoreConnect } from 'react-redux-firebase';
 
+import { saveUnitsPreference, saveGenderPreference } from '../../.././../../store/actions/authActions.js';
 import { signIn, signOut } from '../../../../../store/actions/authActions';
 import signIn_normal from './btn_google_signin_light_normal_web.png';
 import signIn_focus from './btn_google_signin_light_focus_web.png';
@@ -10,14 +11,17 @@ import signIn_pressed from './btn_google_signin_light_pressed_web.png';
 import signIn_normal2x from './btn_google_signin_light_normal_web@2x.png';
 import signIn_focus2x from './btn_google_signin_light_focus_web@2x.png';
 import signIn_pressed2x from './btn_google_signin_light_pressed_web@2x.png';
+import MyReviewPlaceCard from '../../../../sharedComponents/myStuffComponents/MyStuffPlaceCard';
+
 
 export class MyStuffSection extends Component {
 
   state = {
-    // myStuffCategory: "My Reviews"
-    myStuffCategory: "Settings",
+    myStuffCategory: "My Reviews",
+    // myStuffCategory: "Settings",
     updatedGender: false,
-    updatedUnitsOfMeasure: false
+    updatedUnitsOfMeasure: false,
+    reviewArr: null
   }
 
   signInClicked = e => {
@@ -28,57 +32,57 @@ export class MyStuffSection extends Component {
 
   signInDown = e => {
     e.preventDefault();
-    console.log("mouse down")
+    // console.log("mouse down")
     e.currentTarget.src = signIn_pressed;
     // this.props.signIn();
   }
   signInUp = e => {
     e.preventDefault();
-    console.log("mouse up")
+    // console.log("mouse up")
     e.currentTarget.src = signIn_normal;
     // this.props.signIn();
   }
   signInMouseOut = e => {
     e.preventDefault();
-    console.log("mouse out")
+    // console.log("mouse out")
     e.currentTarget.src = signIn_normal;
     // this.props.signIn();
   }
   signInMouseLeave = e => {
     e.preventDefault();
-    console.log("mouse leave")
+    // console.log("mouse leave")
     e.currentTarget.src = signIn_normal;
     // this.props.signIn();
   }
   signInFocus = e => {
     e.preventDefault();
-    console.log("mouse focus")
+    // console.log("mouse focus")
     e.currentTarget.src = signIn_focus;
     // this.props.signIn();
   }
   signInBlur = e => {
     e.preventDefault();
-    console.log("mouse blur")
+    // console.log("mouse blur")
     e.currentTarget.src = signIn_focus;
     // this.props.signIn();
   }
 
   signInTouchStart = e => {
     e.preventDefault();
-    console.log("touch start");
+    // console.log("touch start");
     e.currentTarget.src = signIn_pressed;
     this.props.signIn();
   }
 
   signInTouchEnd = e => {
     e.preventDefault();
-    console.log("touch end");
+    // console.log("touch end");
     e.currentTarget.src = signIn_normal;
   }
 
   signInTouchCancel = e => {
     e.preventDefault();
-    console.log("touch cancel");
+    // console.log("touch cancel");
     e.currentTarget.src = signIn_normal;
   }
 
@@ -110,7 +114,7 @@ export class MyStuffSection extends Component {
     // console.log("currentTarget ---> ", currentTarget);
     // console.log("src ---> ", src);
     // console.log("target ---> ", target);
-    console.log("value ---> ", value);
+    // console.log("value ---> ", value);
 
     this.props.saveUnitsPreference(value);
 
@@ -137,7 +141,7 @@ export class MyStuffSection extends Component {
     // console.log("currentTarget ---> ", currentTarget);
     // console.log("src ---> ", src);
     // console.log("target ---> ", target);
-    console.log("value ---> ", value);
+    // console.log("value ---> ", value);
 
     this.props.saveGenderPreference(value);
 
@@ -154,24 +158,38 @@ export class MyStuffSection extends Component {
     return;
   }
 
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   const prev_settingsUnitsOfMeasure = prevProps.settingsUnitsOfMeasure;
-  //   const prev_settingsGenderPreference = prevProps.settingsGenderPreference;
+  componentDidUpdate(prevProps, prevState, snapshot) {
 
-  //   const curr_settingsUnitsOfMeasure = this.props.settingsUnitsOfMeasure;
-  //   const curr_settingsGenderPreference = this.props.settingsGenderPreference;
+    const userReviewsValue = this.props.userReviews2;
+    // console.log("userReviewsValue ---> ", userReviewsValue);
+    const prev_userReviewsValue = prevProps.userReviews2;
+    const update_userReviewsValue = JSON.stringify(userReviewsValue) !== JSON.stringify(prev_userReviewsValue);
 
-  //   const update_settingsUnitsOfMeasure = prev_settingsUnitsOfMeasure !== curr_settingsUnitsOfMeasure;
-  //   const update_settingsGenderPreference = prev_settingsGenderPreference !== curr_settingsGenderPreference;
+    if (update_userReviewsValue) {
+      this.setState({
+        reviewArr: userReviewsValue
+      });
+    }
 
-  //   console.log("update_settingsUnitsOfMeasure ---> ", update_settingsUnitsOfMeasure);
-  //   console.log("update_settingsGenderPreference ---> ", update_settingsGenderPreference);
-  // }
+    //   const prev_settingsUnitsOfMeasure = prevProps.settingsUnitsOfMeasure;
+    //   const prev_settingsGenderPreference = prevProps.settingsGenderPreference;
+
+    //   const curr_settingsUnitsOfMeasure = this.props.settingsUnitsOfMeasure;
+    //   const curr_settingsGenderPreference = this.props.settingsGenderPreference;
+
+    //   const update_settingsUnitsOfMeasure = prev_settingsUnitsOfMeasure !== curr_settingsUnitsOfMeasure;
+    //   const update_settingsGenderPreference = prev_settingsGenderPreference !== curr_settingsGenderPreference;
+
+    //   console.log("update_settingsUnitsOfMeasure ---> ", update_settingsUnitsOfMeasure);
+    //   console.log("update_settingsGenderPreference ---> ", update_settingsGenderPreference);
+  }
 
 
   render() {
 
     const { selectedSectionValue } = this.props;
+
+    // if (this.props.loginCredentialValue) console.log("this.props.loginCredentialValue.uid ---> ",  this.props.loginCredentialValue.uid)
 
     const { unitsPreference, genderPreference } = this.props;
 
@@ -187,6 +205,36 @@ export class MyStuffSection extends Component {
       displayName = this.props.loginCredentialValue.displayName;
       photoURL = this.props.loginCredentialValue.photoURL;
       email = this.props.loginCredentialValue.email;
+    }
+
+    const UserReviewsComponent = props => {
+      // return reviews.map(review => {
+
+      //   const reviewName = review.basicInfo.locationName;
+      //   const reviewAddress = review.basicInfo.locationName;
+      //   const reviewCategory = review.basicInfo.locationCategory;
+      //   const reviewTotalScore = review.scores.total;
+
+      //   const reviewCleanlinessScore = review.scores.cleanliness;
+      //   const reviewPrivacyScore = review.scores.privacy;
+      //   const reviewStyleScore = review.scores.style;
+      //   const reviewComfortScore = review.scores.comfort;
+      //   const reviewSafetyScore = review.scores.safety;
+
+      //   const reviewGender = review.basicInfo.restroomUsed;
+      //   const reviewTime = review.basic.TimeOfVisit;
+
+      // })
+      // console.log("test... props ---> ", props.data);
+
+      return <>
+        {
+          props.data.map((review, i) => (
+            < MyReviewPlaceCard data={review} key={i} />
+          ))
+        }
+      </>
+
     }
 
 
@@ -332,17 +380,20 @@ export class MyStuffSection extends Component {
               </div>
             </div>
 
-            <div className="row js-fg">
+            <div className={`row ${this.state.myStuffCategory !== "My Reviews" ? "js-fg" : null}`}>
               <div className="col">
+
                 {
-                  this.state.myStuffCategory !== "My Reviews" ? null : (
+                  this.state.myStuffCategory !== "My Reviews" ? null : this.state.reviewArr ?
+                    <UserReviewsComponent data={this.state.reviewArr} />
+                    :
                     <span>You have reviewed 0 bathrooms.</span>
-                  )
                 }
 
                 {
                   this.state.myStuffCategory !== "Favorites" ? null : (
-                    <span>You have 0 favorites.</span>
+                    <span style={{ fontStyle: "italic" }}>Coming soon...</span>
+                    // <span>You have 0 favorites.</span>
                   )
                 }
 
@@ -676,7 +727,8 @@ export class MyStuffSection extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log("mainwrapper state: ", state);
+  // console.log("mapStateToProps state: ", state);
+
   return {
     // reviews: state.firestore.ordered.reviews,
     auth: state.firebase,
@@ -684,10 +736,14 @@ const mapStateToProps = (state, ownProps) => {
     loginCredentialValue: state.auth.loginCredentialValue,
     unitsPreference: state.auth.unitsPreference,
     genderPreference: state.auth.genderPreference,
+    userReviews1: state.auth.userReviews,
+
+    userReviews2: state.firestore.ordered.reviews
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
+
   return {
     signIn: () => dispatch(signIn()),
     signOut: () => dispatch(signOut()),
@@ -696,6 +752,17 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect(props => {
+    if (!props.loginCredentialValue) return []
+    return [
+      {
+        collection: 'reviews',
+        where: ['userID', '==', props.loginCredentialValue.uid],
+        orderBy: ['reviewDatetime', 'desc']
+      }
+    ]
+  })
 )(MyStuffSection);
