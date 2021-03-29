@@ -11,7 +11,7 @@ import signIn_pressed from './btn_google_signin_light_pressed_web.png';
 import signIn_normal2x from './btn_google_signin_light_normal_web@2x.png';
 import signIn_focus2x from './btn_google_signin_light_focus_web@2x.png';
 import signIn_pressed2x from './btn_google_signin_light_pressed_web@2x.png';
-import MyReviewPlaceCard from '../../../../sharedComponents/myStuffComponents/MyStuffPlaceCard';
+import MyReviewPlaceCard from '../../../../sharedComponents/myStuffComponents/MyReviewPlaceCard';
 
 
 export class MyStuffSection extends Component {
@@ -230,7 +230,11 @@ export class MyStuffSection extends Component {
       return <>
         {
           props.data.map((review, i) => (
+            // <div className="row" key={i + "listReviewKey"} >
+            //   <div className="col">
             < MyReviewPlaceCard data={review} key={i} />
+            //   </div>
+            // </div>
           ))
         }
       </>
@@ -380,12 +384,50 @@ export class MyStuffSection extends Component {
               </div>
             </div>
 
-            <div className={`row ${this.state.myStuffCategory !== "My Reviews" ? "js-fg" : null}`}>
+            <div className={`row ${this.state.myStuffCategory !== "My Reviews" ? "js-fg" : null}`}
+              style={{
+                position: "absolute",
+                top: "208px",
+                bottom: "0",
+                left: "0",
+                right: "0",
+              }}
+            >
               <div className="col">
 
                 {
                   this.state.myStuffCategory !== "My Reviews" ? null : this.state.reviewArr ?
-                    <UserReviewsComponent data={this.state.reviewArr} />
+                    <div className="row ai-fs animated fadeIn fast "
+                      style={{
+                        WebkitOverflowScrolling: "touch",
+                        
+                        overflowX: "hidden",
+                        msOverflowX: "hidden",
+                        overflowY: "scroll",
+                        msOverflowY: "scroll"
+                      }}
+                    >
+                      <div
+                        className="col jc-fs"
+                        style={{
+                          overflowX: "hidden",
+                          msOverflowX: "hidden",
+                          overflowY: "hidden",
+                          msOverflowY: "hidden",
+                        }}
+                      >
+                        {/* <UserReviewsComponent data={this.state.reviewArr} /> */}
+                        {
+                          this.state.reviewArr.map((review, i) => (
+                            // <div className="row" key={i + "listReviewKey"} >
+                            //   <div className="col">
+                            < MyReviewPlaceCard data={review} key={i + "myReview"} />
+                            //   </div>
+                            // </div>
+                          ))
+                        }
+                      </div >
+                    </div >
                     :
                     <span>You have reviewed 0 bathrooms.</span>
                 }

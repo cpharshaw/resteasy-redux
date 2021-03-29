@@ -104,7 +104,7 @@ export class PlaceCard extends Component {
           </div>
           <div className="row">
             <div className="col">
-              <span style={{ fontSize: "11px", color: "grey" }}>{data_placecategory}</span>
+              <span style={{ fontSize: "11px", color: "grey" }}>{data_placecategory || "n/a"}</span>
             </div>
           </div>
           <div className="row">

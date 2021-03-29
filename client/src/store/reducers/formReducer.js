@@ -47,6 +47,47 @@ const formReducer = (state = initState, action) => {
   // console.log("new form step", newFormStep, state.formStepValue)
   switch (action.type) {
 
+    case "EDIT_REVIEW":
+
+      return {
+        ...state,
+        
+        formStepValue: action.payload.formStepValue,
+    
+        // formProcessingValue: false,
+      
+        // formRes: null,
+      
+        // page1
+        formLocationValue: action.payload.formLocationValue,
+        formRestroomTypeValue: action.payload.formRestroomTypeValue,
+        formTimeOfVisitValue: action.payload.formTimeOfVisitValue,
+        formLocationNotesValue: action.payload.formLocationNotesValue,
+        formOutOfOrderValue: action.payload.formOutOfOrderValue,
+  
+        //page 2
+        formCleanlinessValue: action.payload.formCleanlinessValue.toString(),
+        formPrivacyValue: action.payload.formPrivacyValue.toString(),
+        formComfortValue: action.payload.formComfortValue.toString(),
+        formSafetyValue: action.payload.formSafetyValue.toString(),
+        formStyleValue: action.payload.formStyleValue.toString(),
+  
+        //page 3
+        formHandicappedValue: action.payload.formHandicappedValue,
+        formGenderNeutralValue: action.payload.formGenderNeutralValue,
+        formBabyChangeValue: action.payload.formBabyChangeValue,
+        formScheduleValue: action.payload.formScheduleValue,
+        formAdmissionValue: action.payload.formAdmissionValue,
+        formFeeDisplayValue: action.payload.formFeeDisplayValue,
+        formFeeValue: action.payload.formFeeValue,
+      
+        //page 4
+        photosArrValue: action.payload.photosArrValue,
+      
+        //page 5
+        formCommentsValue: action.payload.formCommentsValue,
+      };
+
     case "FORM_NEXT":
 
       return {
@@ -77,7 +118,7 @@ const formReducer = (state = initState, action) => {
       };
 
     case "LOCATION_CHOSEN":
-      // console.log("location chosen, reducer: ", action.payload)
+      console.log("location chosen, reducer: ", action.payload)
       return {
         ...state,
         formLocationValue: action.payload

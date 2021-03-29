@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const submitFormProcessing = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    console.log("AGGGGGGGHHHHH")
+    // console.log("AGGGGGGGHHHHH")
     let processing = true;
     dispatch({
       // type: 'FORM_PROCESSING',
@@ -11,6 +11,18 @@ export const submitFormProcessing = () => {
     })
   }
 }
+
+
+export const initiateReviewEdit = (data) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    dispatch({
+      type: 'EDIT_REVIEW',
+      payload: data
+    })
+  }
+}
+
+
 
 export const submitForm = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -37,8 +49,9 @@ export const submitForm = () => {
         locationCountry: formState.formLocationValue.country,
         timeOfVisit: formState.formTimeOfVisitValue,
         outOfOrder: formState.formOutOfOrderValue,
+        locationValue: formState.formLocationValue,
         locationNotes: formState.formLocationNotesValue,
-        locationCategory: formState.formLocationValue.category,
+        locationCategory: formState.formLocationValue.category || "n/a",
         locationCity: formState.formLocationValue.city
       },
 
