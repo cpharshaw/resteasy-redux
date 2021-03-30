@@ -237,7 +237,8 @@ export class ModalContainer extends Component {
       selectedMarkerValue,
       selectedPlaceValue,
       formRestroomTypeValue,
-      loginCredentialValue
+      loginCredentialValue,
+      formEditModeValue
     } = this.props;
 
     // console.log("loginCredentialValue in render before return: ", loginCredentialValue)
@@ -733,7 +734,7 @@ export class ModalContainer extends Component {
                               <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span></p>
                             </div>
                             <div className="col-2 jc-c ai-c ac-c">
-                            {/* <div className="col-2 jc-c ai-c ac-c" onClick={e => this.favoriteClicked(e, selectedPlaceValue)}> */}
+                              {/* <div className="col-2 jc-c ai-c ac-c" onClick={e => this.favoriteClicked(e, selectedPlaceValue)}> */}
                               {/* <img src="https://img.icons8.com/material-outlined/21/383838/bookmark-ribbon--v1.png" /> */}
                               {/* <img src="https://img.icons8.com/material-two-tone/21/000000/bookmark-ribbon--v1.png"/> */}
                             </div>
@@ -819,11 +820,15 @@ export class ModalContainer extends Component {
 
                           <div className="row">
                             <div className="col">
-                              {currentModal === "formResetModal" && !formProcessingValue ? <p>Reset review form and start over?</p> : null}
+                              {currentModal === "formResetModal" && !formProcessingValue && !formEditModeValue ? <p>Reset review form and start over?</p> : null}
+                              {currentModal === "formResetModal" && !formProcessingValue && formEditModeValue ? <p>Exit edit of review?</p> : null}
                               {currentModal !== "formResetModal" && !formProcessingValue && !loginCredentialValue ? <p>Please sign in to submit review</p> : null}
-                              {formStepValue === 6 && !formProcessingValue && loginCredentialValue ? <p>Ok to submit review?</p> : null}
-                              {formStepValue === 7 && formProcessingValue && loginCredentialValue ? <p>Saving review...          </p> : null}
-                              {formStepValue === 7 && !formProcessingValue && loginCredentialValue ? <p>Thank you for your review.</p> : null}
+                              {formStepValue === 6 && !formProcessingValue && loginCredentialValue && !formEditModeValue ? <p>Ok to submit review?</p> : null}
+                              {formStepValue === 6 && !formProcessingValue && loginCredentialValue && formEditModeValue ? <p>Ok to submit editted review?</p> : null}
+                              {formStepValue === 7 && formProcessingValue && loginCredentialValue && !formEditModeValue ? <p>Saving review...          </p> : null}
+                              {formStepValue === 7 && formProcessingValue && loginCredentialValue && formEditModeValue ? <p>Saving editted review...          </p> : null}
+                              {formStepValue === 7 && !formProcessingValue && loginCredentialValue && !formEditModeValue ? <p>Thank you for your review.</p> : null}
+                              {/* {formStepValue === 7 && !formProcessingValue && loginCredentialValue && formEditModeValue ? <p>Thank you for editing your review.</p> : null} */}
                             </div>
                           </div>
 
@@ -879,7 +884,8 @@ export class ModalContainer extends Component {
                                 <div className="col">
                                   <FormNavButton
                                     data_text={
-                                      currentModal === "formResetModal" && !formProcessingValue ? "Reset" :
+                                      currentModal === "formResetModal" && !formProcessingValue && !formEditModeValue ? "Reset" :
+                                      currentModal === "formResetModal" && !formProcessingValue && formEditModeValue ? "Exit" :
                                         formStepValue === 6 ? "Submit" :
                                           formStepValue === 7 && !formProcessingValue ? "Close" :
                                             null
@@ -924,6 +930,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     // geolocationValue: state.geolocationState.geolocationValue,
     formStepValue: state.formState.formStepValue,
+    formEditModeValue: state.formState.formEditModeValue,
     formProcessingValue: state.formState.formProcessingValue,
     modalState: state.modalState,
     currentModal: state.modalState.currentModal,

@@ -19,7 +19,8 @@ export class ReviewMainNav extends Component {
   render() {
 
     const {
-      formStepValue
+      formStepValue,
+      formEditModeValue
     } = this.props;
     // console.log(formStepValue)
 
@@ -60,7 +61,7 @@ export class ReviewMainNav extends Component {
             {/* <div className="col-2 jc-fs pt-3 bg-grey"> */}
             <div className="col-2 jc-fe pb-2">
               {
-                formStepValue > 0 ? (
+                formStepValue > 0 && !formEditModeValue ? (
                   // null
                   < button
                     className="reset"
@@ -79,7 +80,30 @@ export class ReviewMainNav extends Component {
                       </g>
                     </svg>
                   </button>
-                ) : null
+                ) :
+                  formStepValue > 0 && formEditModeValue ? (
+                    // null
+                    < button
+                      className="reset"
+                      onClick={e => this.resetClicked(e)}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                        // className="animated heartBeat slow"
+                        width="24" height="24"
+                        viewBox="0 0 172 172"
+                        style={{ fill: "#0a0a0a" }}>
+                        <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
+                          <path d="M0,172v-172h172v172z">
+                          </path>
+                          <g fill="#0a0a0a">
+                            <path d="M40.90039,30.76628l-10.13411,10.13411l45.09961,45.09961l-45.09961,45.09961l10.13411,10.13411l45.09961,-45.09961l45.09961,45.09961l10.13411,-10.13411l-45.09961,-45.09961l45.09961,-45.09961l-10.13411,-10.13411l-45.09961,45.09961z">
+                            </path>
+                          </g>
+                        </g>
+                      </svg>
+                    </button>
+                  )
+                    : null
               }
 
 
@@ -112,6 +136,7 @@ const mapStateToProps = (state, ownProps) => {
   // console.log("mainwrapper state: ", state);
   return {
     formStepValue: state.formState.formStepValue,
+    formEditModeValue: state.formState.formEditModeValue,
     formMissingValue: state.formState.formMissingValue
   }
 }

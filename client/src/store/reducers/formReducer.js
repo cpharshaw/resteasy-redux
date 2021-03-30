@@ -4,6 +4,8 @@ const initState = {
 
   formProcessingValue: false,
 
+  formEditModeValue: false,
+
   formRes: null,
 
   // page1
@@ -53,6 +55,9 @@ const formReducer = (state = initState, action) => {
         ...state,
         
         formStepValue: action.payload.formStepValue,
+
+
+        formEditModeValue: true,
     
         // formProcessingValue: false,
       
@@ -181,9 +186,11 @@ const formReducer = (state = initState, action) => {
 
     case 'FORM_SUBMITTED':
       // console.log("submitForm success; step- ", state.formStepValue, 'formProcessingValue- ', state.formProcessingValue);
+      console.log('form submitted, formEditModeValue ---> ', state.formEditModeValue);
       return {
         ...state,
         formProcessingValue: false,
+        formEditModeValue: false,
         formRes: action.payload
       }
 

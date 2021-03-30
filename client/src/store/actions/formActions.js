@@ -30,7 +30,9 @@ export const submitForm = () => {
 
     dispatch({
       type: 'FORM_PROCESSING',
-    })
+    });
+
+
 
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     const firestore = getFirestore();
@@ -81,26 +83,84 @@ export const submitForm = () => {
 
       userID: authState.loginCredentialValue.uid,
       reviewDatetime: new Date()
-    };    
+    };
 
 
     if (formState.photosArrValue.length === 0) {
 
-      firestore.collection('reviews').add(
-        review
-      )
+      // firestore.collection('reviews').add(
+      //   review
+      // )
+      //   .then(res => {
+      //     dispatch({
+      //       type: 'FORM_SUBMITTED',
+      //       payload: res
+      //     })
+      //   })
+      //   .catch(err => {
+      //     dispatch({
+      //       type: 'FORM_SUBMITTED_ERROR',
+      //       payload: err
+      //     })
+      //   });
+
+      console.log("submitting editted form!, formState.formEditModeValue ---> ", formState.formEditModeValue, "review.locationID ---> ", review.locationID);
+
+      if (formState.formEditModeValue) {
+
+        const reviewtoEdit = firestore.collection("reviews").where("userID","==",review.userID).where("locationID","==",review.locationID);
+        // console.log("reviewtoEdit ---> ", reviewtoEdit);
+        reviewtoEdit.get()
         .then(res => {
-          dispatch({
-            type: 'FORM_SUBMITTED',
-            payload: res
+
+          console.log("inside res ---> ", res, ", review object ---> ", review);
+
+          res.forEach(doc => {
+            console.log("inside res.forEach for edit of review...", doc.id);
+            const id = doc.id;
+            firestore.collection('reviews').doc(id).set(
+              review
+            )
+              .then(res => {
+                dispatch({
+                  type: 'FORM_SUBMITTED',
+                  payload: res
+                })
+              })
+              .catch(err => {
+                dispatch({
+                  type: 'FORM_SUBMITTED_ERROR',
+                  payload: err
+                })
+              });
+
           })
+ 
+
+
         })
-        .catch(err => {
-          dispatch({
-            type: 'FORM_SUBMITTED_ERROR',
-            payload: err
+
+
+      } else {
+
+        firestore.collection('reviews').add(
+          review
+        )
+          .then(res => {
+            dispatch({
+              type: 'FORM_SUBMITTED',
+              payload: res
+            })
           })
-        });
+          .catch(err => {
+            dispatch({
+              type: 'FORM_SUBMITTED_ERROR',
+              payload: err
+            })
+          });
+
+      }
+
     }
 
     else {
@@ -111,6 +171,7 @@ export const submitForm = () => {
           headers: { "X-Requested-With": "XMLHttpRequest" }
         };
         const formData = new FormData();
+
         formData.append('file', fileSrc);
         formData.append('upload_preset', "rnpjoamq");
 
@@ -122,21 +183,51 @@ export const submitForm = () => {
 
               review.photos = finalPhotosArr;
 
-              firestore.collection('reviews').add(
-                review
-              )
-                .then(res => {
-                  dispatch({
-                    type: 'FORM_SUBMITTED',
-                    payload: res
+              console.log("submitting editted form!, formState.formEditModeValue ---> ", formState.formEditModeValue);
+
+              if (formState.formEditModeValue) {
+
+                console.log("submitting editted form! ---> ", review);
+
+                firestore.collection('reviews').doc(review.locationID).set(
+                  review
+                )
+                  .then(res => {
+                    dispatch({
+                      type: 'FORM_SUBMITTED',
+                      payload: res
+                    })
                   })
-                })
-                .catch(err => {
-                  dispatch({
-                    type: 'FORM_SUBMITTED_ERROR',
-                    payload: err
+                  .catch(err => {
+                    dispatch({
+                      type: 'FORM_SUBMITTED_ERROR',
+                      payload: err
+                    })
+                  });
+
+              } else {
+
+                firestore.collection('reviews').add(
+                  review
+                )
+                  .then(res => {
+                    dispatch({
+                      type: 'FORM_SUBMITTED',
+                      payload: res
+                    })
                   })
-                });
+                  .catch(err => {
+                    dispatch({
+                      type: 'FORM_SUBMITTED_ERROR',
+                      payload: err
+                    })
+                  });
+
+              }
+
+
+
+
             }
 
 
