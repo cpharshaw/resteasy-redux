@@ -6,6 +6,10 @@ const initState = {
 
   formEditModeValue: false,
 
+  formDeleteModeValue: false,
+
+  formReviewToDeleteValue: null,
+
   formRes: null,
 
   // page1
@@ -49,34 +53,69 @@ const formReducer = (state = initState, action) => {
   // console.log("new form step", newFormStep, state.formStepValue)
   switch (action.type) {
 
+    case "DELETE_REVIEW":
+
+      return {
+        ...state,
+        formDeleteModeValue: true,
+        // formEditModeValue: false,
+        formReviewToDeleteValue: action.payload
+      }
+
+    case "DELETE_PROCESSING":
+
+      return {
+        ...state,
+        formProcessingValue: true
+      }
+
+    case "DELETE_REVIEW_CONFIRMED":
+
+      return {
+        ...state,
+        formDeleteModeValue: false,
+        formReviewToDeleteValue: null,
+        formProcessingValue: false,
+        formRes: action.payload
+      }
+
+    case "DELETE_REVIEW_CANCELLED":
+
+      return {
+        ...state,
+        formDeleteModeValue: false,
+        formReviewToDeleteValue: null,
+        formRes: null
+      }
+
     case "EDIT_REVIEW":
 
       return {
         ...state,
-        
+
         formStepValue: action.payload.formStepValue,
 
-
+        // formDeleteModeValue: false,
         formEditModeValue: true,
-    
+
         // formProcessingValue: false,
-      
+
         // formRes: null,
-      
+
         // page1
         formLocationValue: action.payload.formLocationValue,
         formRestroomTypeValue: action.payload.formRestroomTypeValue,
         formTimeOfVisitValue: action.payload.formTimeOfVisitValue,
         formLocationNotesValue: action.payload.formLocationNotesValue,
         formOutOfOrderValue: action.payload.formOutOfOrderValue,
-  
+
         //page 2
         formCleanlinessValue: action.payload.formCleanlinessValue.toString(),
         formPrivacyValue: action.payload.formPrivacyValue.toString(),
         formComfortValue: action.payload.formComfortValue.toString(),
         formSafetyValue: action.payload.formSafetyValue.toString(),
         formStyleValue: action.payload.formStyleValue.toString(),
-  
+
         //page 3
         formHandicappedValue: action.payload.formHandicappedValue,
         formGenderNeutralValue: action.payload.formGenderNeutralValue,
@@ -85,10 +124,10 @@ const formReducer = (state = initState, action) => {
         formAdmissionValue: action.payload.formAdmissionValue,
         formFeeDisplayValue: action.payload.formFeeDisplayValue,
         formFeeValue: action.payload.formFeeValue,
-      
+
         //page 4
         photosArrValue: action.payload.photosArrValue,
-      
+
         //page 5
         formCommentsValue: action.payload.formCommentsValue,
       };

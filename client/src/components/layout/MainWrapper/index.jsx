@@ -142,7 +142,7 @@ class MainWrapper extends Component {
           }}
         >
           <nav id="bottomBarComponent" className="col bg-primary">
-            < BottomBar />
+            {this.props.formEditModeValue ? null : < BottomBar />}
           </nav>
         </footer >
 
@@ -169,6 +169,7 @@ const mapStateToProps = (state) => {
     initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
     allMapDataLoaded: state.mapState.allMapDataLoaded(),
     foursquareValue: state.foursquareState.foursquareValue,
+    formEditModeValue: state.formState.formEditModeValue
   }
 }
 

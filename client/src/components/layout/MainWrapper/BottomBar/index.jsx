@@ -46,7 +46,6 @@ export class BottomBar extends Component {
               style={{
                 height: "39px",
                 width: "39px",
-                // borderRadius: "50%",
               }}
             >
               <g
@@ -109,8 +108,7 @@ export class BottomBar extends Component {
               viewBox="0 0 172 172"
               style={{ 
                 height: "40px", 
-                width: "40px", 
-                // borderRadius: "50%" 
+                width: "40px",
               }}
             >
               <g

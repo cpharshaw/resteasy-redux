@@ -21,7 +21,7 @@ export class MyStuffSection extends Component {
     // myStuffCategory: "Settings",
     updatedGender: false,
     updatedUnitsOfMeasure: false,
-    reviewArr: null
+    reviewArr: []
   }
 
   signInClicked = e => {
@@ -169,6 +169,8 @@ export class MyStuffSection extends Component {
       this.setState({
         reviewArr: userReviewsValue
       });
+
+      console.log("update, this.state.reviewArr ---> ", this.state.reviewArr);
     }
 
     //   const prev_settingsUnitsOfMeasure = prevProps.settingsUnitsOfMeasure;
@@ -394,13 +396,14 @@ export class MyStuffSection extends Component {
               }}
             >
               <div className="col">
-
+                {/* {console.log("in HTML reviewArr ---> ", this.state.reviewArr)} */}
                 {
-                  this.state.myStuffCategory !== "My Reviews" ? null : this.state.reviewArr ?
+                  this.state.myStuffCategory !== "My Reviews" ? null : this.state.reviewArr.length > 0 ?
+                  
                     <div className="row ai-fs animated fadeIn fast "
                       style={{
                         WebkitOverflowScrolling: "touch",
-                        
+
                         overflowX: "hidden",
                         msOverflowX: "hidden",
                         overflowY: "scroll",
@@ -416,20 +419,15 @@ export class MyStuffSection extends Component {
                           msOverflowY: "hidden",
                         }}
                       >
-                        {/* <UserReviewsComponent data={this.state.reviewArr} /> */}
                         {
                           this.state.reviewArr.map((review, i) => (
-                            // <div className="row" key={i + "listReviewKey"} >
-                            //   <div className="col">
                             < MyReviewPlaceCard data={review} key={i + "myReview"} />
-                            //   </div>
-                            // </div>
                           ))
                         }
                       </div >
                     </div >
                     :
-                    <span>You have reviewed 0 bathrooms.</span>
+                    <span>You have 0 bathroom reviews.</span>
                 }
 
                 {

@@ -5,14 +5,16 @@ import FormNavButton from '../../../../../sharedComponents/formComponents/FormNa
 // import FormNavButton from '../../ReviewFormElements/FormNavButton';
 import { resetForm } from '../../../../../../store/actions/formActions';
 import { modalToggled } from '../../../../../../store/actions/modalActions';
+import { selectSection } from '../../../../../../store/actions/sectionActions';
 
 export class ReviewMainNav extends Component {
 
-  resetClicked(e) {
+  resetClicked(e, editMode) {
     e.preventDefault();
-
+    
     // console.log("reset clicked");
     this.props.modalToggled("formResetModal");
+    // if (editMode) this.props.selectSection("myStuff");
     // this.props.resetForm();
   }
 
@@ -85,7 +87,7 @@ export class ReviewMainNav extends Component {
                     // null
                     < button
                       className="reset"
-                      onClick={e => this.resetClicked(e)}
+                      onClick={e => this.resetClicked(e, "editMode")}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                         // className="animated heartBeat slow"
@@ -145,6 +147,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
+    selectSection: (section) => dispatch(selectSection(section)),
     resetForm: () => dispatch(resetForm()),
   }
 }

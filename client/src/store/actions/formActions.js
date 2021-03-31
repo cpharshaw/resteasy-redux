@@ -22,6 +22,54 @@ export const initiateReviewEdit = (data) => {
   }
 }
 
+export const initiateReviewDelete = (data) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    dispatch({
+      type: 'DELETE_REVIEW',
+      payload: data
+    })
+  }
+}
+
+
+export const confirmReviewDelete = (data) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+
+    dispatch({
+      type: 'DELETE_PROCESSING',
+    });
+
+    const firestore = getFirestore();
+    const state = getState();
+    const id = state.formState.formReviewToDeleteValue.id;
+
+    console.log("state ---> ", state);
+    console.log("formReviewToDeleteValue ---> ", state.formState.formReviewToDeleteValue);
+    console.log("id ---> ", id);
+
+    firestore.collection('reviews').doc(id).delete()
+      .then(res => {
+        dispatch({
+          type: 'DELETE_REVIEW_CONFIRMED',
+          payload: res
+        })
+      })
+
+  }
+}
+
+export const cancelReviewDelete = (data) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+    dispatch({
+      type: 'DELETE_REVIEW_CANCELLED',
+      // payload: null,
+    })
+
+
+  }
+}
 
 
 export const submitForm = () => {
@@ -108,37 +156,37 @@ export const submitForm = () => {
 
       if (formState.formEditModeValue) {
 
-        const reviewtoEdit = firestore.collection("reviews").where("userID","==",review.userID).where("locationID","==",review.locationID);
+        const reviewtoEdit = firestore.collection("reviews").where("userID", "==", review.userID).where("locationID", "==", review.locationID);
         // console.log("reviewtoEdit ---> ", reviewtoEdit);
         reviewtoEdit.get()
-        .then(res => {
+          .then(res => {
 
-          console.log("inside res ---> ", res, ", review object ---> ", review);
+            console.log("inside res ---> ", res, ", review object ---> ", review);
 
-          res.forEach(doc => {
-            console.log("inside res.forEach for edit of review...", doc.id);
-            const id = doc.id;
-            firestore.collection('reviews').doc(id).set(
-              review
-            )
-              .then(res => {
-                dispatch({
-                  type: 'FORM_SUBMITTED',
-                  payload: res
+            res.forEach(doc => {
+              console.log("inside res.forEach for edit of review...", doc.id);
+              const id = doc.id;
+              firestore.collection('reviews').doc(id).set(
+                review
+              )
+                .then(res => {
+                  dispatch({
+                    type: 'FORM_SUBMITTED',
+                    payload: res
+                  })
                 })
-              })
-              .catch(err => {
-                dispatch({
-                  type: 'FORM_SUBMITTED_ERROR',
-                  payload: err
-                })
-              });
+                .catch(err => {
+                  dispatch({
+                    type: 'FORM_SUBMITTED_ERROR',
+                    payload: err
+                  })
+                });
+
+            })
+
+
 
           })
- 
-
-
-        })
 
 
       } else {

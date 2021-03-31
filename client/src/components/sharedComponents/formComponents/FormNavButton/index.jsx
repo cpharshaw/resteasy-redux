@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { formNext, formPrev, formMissingAlert, resetForm, submitFormProcessing, submitForm } from '../../../../store/actions/formActions';
 import { selectSection } from '../../../../store/actions/sectionActions';
 import { modalToggled, modalClosed } from '../../../../store/actions/modalActions';
+import { confirmReviewDelete, cancelReviewDelete } from '../../../../store/actions/formActions';
 
 export class FormNavButton extends Component {
 
@@ -125,10 +126,28 @@ export class FormNavButton extends Component {
   };
 
 
-  modalCancel = () => {
-    // console.log("cancel clicked")
+  modalCancel = (func_navcommand) => {
+    console.log("exit clicked, func_navcommand ---> ", func_navcommand)
+    this.props.modalClosed();
+    if (func_navcommand === "exit") {
+      this.props.selectSection("myStuff");
+      this.props.resetForm();
+    }
+  };
+
+
+  cancelDelete = (e) => {
+    e.preventDefault();
+    console.log("cancelDelete clicked");
+    this.props.cancelReviewDelete();
     this.props.modalClosed();
   };
+
+  confirmDelete = (e) => {
+    e.preventDefault();
+    console.log("confirmDelete clicked");
+    this.props.confirmReviewDelete();
+  }
 
 
   resetForm = e => {
@@ -152,17 +171,21 @@ export class FormNavButton extends Component {
       data_margin,
       children
     } = this.props;
-
+    console.log("func_navcommand ---> ", func_navcommand)
     return (
       <button
         onClick={
           func_navcommand === "next" ? this.nextStep :
             func_navcommand === "prev" ? this.prevStep :
-              func_navcommand === "cancel" ? this.modalCancel :
-                func_navcommand === "reset" ? this.resetForm :
-                  func_navcommand === "submit" ? this.submitForm :
-                    func_navcommand === "finish" ? this.finishForm : null
+              func_navcommand === "cancel" ? () => this.modalCancel() :
+                func_navcommand === "exit" ? () => this.modalCancel(this.props.func_navcommand) :
+                  func_navcommand === "cancelDelete" ? this.cancelDelete : // part of deleting a review
+                    func_navcommand === "confirmDelete" ? this.confirmDelete : // part of deleting a review
+                      func_navcommand === "reset" ? this.resetForm :
+                        func_navcommand === "submit" ? this.submitForm :
+                          func_navcommand === "finish" ? this.finishForm : null
         }
+
         className={"" + data_classes + ""}
         style={{
           width: data_width ? data_width : "10%",
@@ -222,6 +245,8 @@ const mapDispatchToProps = (dispatch) => {
     selectSection: (section) => dispatch(selectSection(section)),
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     modalClosed: () => dispatch(modalClosed()),
+    confirmReviewDelete: () => dispatch(confirmReviewDelete()),
+    cancelReviewDelete: () => dispatch(cancelReviewDelete())
   }
 }
 

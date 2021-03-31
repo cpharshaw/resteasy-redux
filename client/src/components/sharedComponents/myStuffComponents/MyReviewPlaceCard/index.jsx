@@ -11,7 +11,7 @@ import greenMarker from '../../../../components/layout/MainWrapper/MainSection/M
 import { modalToggled } from '../../../../store/actions/modalActions';
 import { storeSelectedPlace } from '../../../../store/actions/mapActions';
 import { selectSection } from '../../../../store/actions/sectionActions';
-import { initiateReviewEdit } from '../../../../store/actions/formActions';
+import { initiateReviewEdit, initiateReviewDelete } from '../../../../store/actions/formActions';
 
 export class MyReviewPlaceCard extends Component {
 
@@ -114,9 +114,20 @@ export class MyReviewPlaceCard extends Component {
 
   deleteClicked = (e, data) => {
     e.preventDefault();
-    this.props.modalToggled("placeModal");
+    this.props.modalToggled("deleteModal");
+    console.log("delete clicked, data ---> ", data);
+
+    const deleteObj = {
+      id: data.id,
+      locationID: data.locationID,
+      userID: data.userID
+    }
+
+    // const locationID = data.formLocationValue.id;
+    // const userID = data.formLocationValue.id;
+    this.props.initiateReviewDelete(deleteObj);
     // if (!this.props.mapListToggleValue) this.props.storeSelectedPlace(data_place);
-  };  
+  };
 
 
   render() {
@@ -298,7 +309,8 @@ const mapDispatchToProps = (dispatch) => {
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     storeSelectedPlace: (place) => dispatch(storeSelectedPlace(place)),
     selectSection : section => dispatch(selectSection(section)),
-    initiateReviewEdit: reviewData => dispatch(initiateReviewEdit(reviewData))
+    initiateReviewEdit: reviewData => dispatch(initiateReviewEdit(reviewData)),
+    initiateReviewDelete: reviewToDelete => dispatch(initiateReviewDelete(reviewToDelete))
   }
 }
 
