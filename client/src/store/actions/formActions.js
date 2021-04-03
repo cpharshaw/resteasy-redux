@@ -126,7 +126,7 @@ export const submitForm = () => {
         comfort: parseInt(formState.formComfortValue),
         safety: parseInt(formState.formSafetyValue),
         privacy: parseInt(formState.formPrivacyValue),
-        total: parseFloat((((parseInt(formState.formCleanlinessValue) * 9) + (parseInt(formState.formSafetyValue) * 7) + (parseInt(formState.formPrivacyValue) * 6) + (parseInt(formState.formComfortValue) * 4.5) + (parseInt(formState.formStyleValue) * 2)) / 28.5)).toFixed(3)
+        total: parseFloat((((parseInt(formState.formCleanlinessValue) * 9) + (parseInt(formState.formSafetyValue) * 7) + (parseInt(formState.formPrivacyValue) * 6) + (parseInt(formState.formComfortValue) * 4.5) + (parseInt(formState.formStyleValue) * 2)) / 28.5).toFixed(3))
       },
 
       userID: authState.loginCredentialValue.uid,
