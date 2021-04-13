@@ -48,7 +48,7 @@ class RecenterButton extends Component {
 
     if (!geo_same_ctr) {
       console.log("recenter clicked");
-      this.props.getGeolocation();
+      this.props.getGeolocation("manual");
       this.props.recenterMap();
     }
 
@@ -142,7 +142,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGeolocation: () => dispatch(getGeolocation()),
+    getGeolocation: (manual) => dispatch(getGeolocation(manual)),
     storeInput: (input) => dispatch(storeInput(input)),
     getPlacesFromFoursquare: (location) => dispatch(getPlacesFromFoursquare(location)),
     recenterMap: () => dispatch(recenterMap())

@@ -3,7 +3,7 @@ import MarkerComp from './Marker';
 import RecenterButton from './RecenterButton';
 
 import { getGeolocation } from '../../../../../../../store/actions/geoActions';
-import { getPlacesFromFoursquare } from '../../../../../../../store/actions/foursquareActions';
+import { foursquareManualUpdate, getPlacesFromFoursquare } from '../../../../../../../store/actions/foursquareActions';
 import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeSelectedPlace, storeMarker, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../store/actions/mapActions';
 import { storeInput } from '../../../../../../../store/actions/inputActions';
 import { GoogleApiWrapper } from "google-maps-react";
@@ -148,11 +148,10 @@ class MapSection extends Component {
       fsMarkers: [],
       optionToUpdate: false
     })
-    this.props.getPlacesFromFoursquare("center");
-    // this.props.storeSelectedPlace(null);
-    // this.props.storeSelectedMarker(null);
+    this.props.foursquareManualUpdate();
+    // console.log("'map_updateMap' clicked");
+    // this.props.getPlacesFromFoursquare("center");
   }
-
 
   mapFuncs = (source) => {
 
@@ -206,11 +205,25 @@ class MapSection extends Component {
 
     const allMapDataLoaded = this.props.allMapDataLoaded; const prev_allMapDataLoaded = prevProps.allMapDataLoaded; const update_allMapDataLoaded = allMapDataLoaded !== prev_allMapDataLoaded;
 
-    // if (update_fsMarkers) {
-    //   console.log(fsMarkers, prev_fsMarkers, update_fsMarkers);
-    //   this.renderFS(this.currentMap, iconArr)
-    // }
 
+    const foursquareCalled = !prevProps.foursquareManual && this.props.foursquareManual === "FOURSQUARE_UPDATE_REQUESTED";
+    const pendingGeolocUpdate = !prevProps.geolocationStatus && this.props.geolocationStatus === "GEOLOCATION_INITIATED";
+    const finishedGeolocUpdate = prevProps.geolocationStatus === "GEOLOCATION_INITIATED" && !this.props.geolocationStatus;
+
+    if (
+      (this.props.initialMapTilesLoaded && foursquareCalled && !prevProps.geolocationStatus && !this.props.geolocationStatus)
+      ||
+      (this.props.initialMapTilesLoaded && finishedGeolocUpdate && foursquareCalled)
+      ||
+      (this.props.initialMapTilesLoaded && finishedGeolocUpdate && prevProps.foursquareManual === "FOURSQUARE_UPDATE_REQUESTED" && this.props.foursquareManual === "FOURSQUARE_UPDATE_REQUESTED")
+    ) {
+
+      // console.log("1.) this.props.initialMapTilesLoaded ---> ", this.props.initialMapTilesLoaded);
+      // console.log("2.) foursquareManual prev,curr ---> ", prevProps.foursquareManual, " ---> ", this.props.foursquareManual);
+      // console.log("3.) geolocationStatus prev,curr ---> ", prevProps.geolocationStatus, " ---> ", this.props.geolocationStatus);
+
+      this.props.getPlacesFromFoursquare("center");
+    }
 
     if ((!this.currentMap && update_googleAPI) || (!googleMap && googleAPI && update_geoloc)) {
 
@@ -475,7 +488,7 @@ class MapSection extends Component {
 
                 data_userreviewed={true}
                 data_userbookmarked={true}
-                // data_place={place}
+              // data_place={place}
               />
 
             )
@@ -502,11 +515,14 @@ const mapStateToProps = (state, ownProps) => {
     initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
     allMapDataLoaded: state.mapState.allMapDataLoaded(),
 
+    geolocationStatus: state.geolocationState.geolocationStatus,
+    geolocationManual: state.geolocationState.geolocationManual,
+    foursquareStatus: state.foursquareState.foursquareStatus,
+    foursquareManual: state.foursquareState.foursquareManual,
     selectedMarkerValue: state.mapState.selectedMarkerValue,
     selectedPlaceValue: state.mapState.selectedPlaceValue,
     mapMovedCounterValue: state.mapState.mapMovedCounterValue,
     recenterIncrementerValue: state.mapState.recenterIncrementerValue,
-
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
@@ -522,6 +538,7 @@ const mapDispatchToProps = (dispatch) => {
     getGeolocation: () => dispatch(getGeolocation()),
     getPlacesFromFoursquare: (location) => dispatch(getPlacesFromFoursquare(location)),
     storeMap: (map) => dispatch(storeMap(map)),
+    foursquareManualUpdate: () => dispatch(foursquareManualUpdate()),
     storeMyLocationMarker: (map) => dispatch(storeMyLocationMarker(map)),
     registerInitialMapTilesloaded: () => dispatch(registerInitialMapTilesloaded()),
     registerSubsequentMapMovement: () => dispatch(registerSubsequentMapMovement()),

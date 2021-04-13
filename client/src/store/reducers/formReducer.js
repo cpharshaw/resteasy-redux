@@ -40,6 +40,7 @@ const initState = {
 
   //page 4
   photosArrValue: [],
+  // editPhotosArrValue: [],
 
   //page 5
   formCommentsValue: "",
@@ -126,6 +127,8 @@ const formReducer = (state = initState, action) => {
         formFeeValue: action.payload.formFeeValue,
 
         //page 4
+        
+        // editPhotosArrValue: action.payload.editPhotosArrValue,
         photosArrValue: action.payload.photosArrValue,
 
         //page 5
@@ -204,6 +207,7 @@ const formReducer = (state = initState, action) => {
       };
 
     case 'PHOTO_SELECTED':
+    console.log("PHOTO_SELECTED ---> ", action.payload);
       return {
         ...state,
         photosArrValue: [...state.photosArrValue, action.payload]

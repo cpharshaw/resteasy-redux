@@ -142,12 +142,14 @@ export const signIn = (credentials) => {
           firestore.collection('users').doc(uid).set({
             email: email,
             uid: uid
-          });
+          })
+            .then(res => {
+              return dispatch({
+                type: 'LOGIN_SUCCESS',
+                payload: completeUserObj
+              });
+            });
 
-          return dispatch({
-            type: 'LOGIN_SUCCESS',
-            payload: completeUserObj
-          });
 
         }
 
@@ -160,7 +162,7 @@ export const signIn = (credentials) => {
           .get()
           .then(userReviewsResponse => {
             const userReviewsResponseData = userReviewsResponse.docs.map(review => review.data());
-            
+
             firestoreUsers.where('uid', '==', uid)
               .get()
               .then(({ docs }) => {
@@ -205,18 +207,6 @@ export const signIn = (credentials) => {
         console.log("error message: ", errorMessage)
         console.log("error email: ", email)
         console.log("error credential: ", credential)
-
-        const loginObj = {
-          token,
-          uid,
-          displayName,
-          email,
-          photoURL,
-          errorCode,
-          errorMessage,
-          email,
-          credential
-        }
 
         dispatch({
           type: 'LOGIN_ERROR',

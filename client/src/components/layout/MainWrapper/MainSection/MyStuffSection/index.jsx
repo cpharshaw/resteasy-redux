@@ -170,7 +170,7 @@ export class MyStuffSection extends Component {
         reviewArr: userReviewsValue
       });
 
-      console.log("update, this.state.reviewArr ---> ", this.state.reviewArr);
+      // console.log("update, this.state.reviewArr ---> ", this.state.reviewArr);
     }
 
     //   const prev_settingsUnitsOfMeasure = prevProps.settingsUnitsOfMeasure;

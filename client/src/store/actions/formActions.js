@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+import { FieldLabel } from '../../components/sharedComponents/formComponents/FieldLabel';
 
 export const submitFormProcessing = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -74,20 +75,30 @@ export const cancelReviewDelete = (data) => {
 
 export const submitForm = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-
-
+    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     dispatch({
       type: 'FORM_PROCESSING',
     });
 
-
-
-    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     const firestore = getFirestore();
     const formState = getState().formState;
     const authState = getState().auth;
 
-    const finalPhotosArr = [];
+    const filteredDupesPhotoArr = formState.photosArrValue.filter(photoFile => !photoFile.data);
+
+    // edit mode ---> formState.formEditModeValue
+
+    // no photos at all ---> formState.photosArrValue.length === 0
+    // only new photos ---> formState.photosArrValue.length > 0 && formState.photosArrValue.length === filteredDupesPhotoArr.length
+    // only old photos ---> formState.photosArrValue.length > 0 && filteredDupesPhotoArr.length === 0
+    // one old photo, one new photo ---> formState.photosArrValue.length > 0 && formState.photosArrValue.length !== filteredDupesPhotoArr.length && filteredDupesPhotoArr.length > 0 
+
+    const editMode = formState.formEditModeValue ? true : false;
+
+    const noPhotos = formState.photosArrValue.length === 0 || filteredDupesPhotoArr.length === 0;
+    const newPhotos = filteredDupesPhotoArr.length > 0;
+    // const oldPhotos = formState.photosArrValue.length > 0 && filteredDupesPhotoArr.length === 0;
+    // const oldAndNewPhoto = formState.photosArrValue.length > 0 && formState.photosArrValue.length !== filteredDupesPhotoArr.length && filteredDupesPhotoArr.length > 0;
 
     const review = {
 
@@ -118,7 +129,7 @@ export const submitForm = () => {
 
       locationID: formState.formLocationValue.id,
 
-      photos: finalPhotosArr,
+      photos: [...formState.photosArrValue.filter(photoFile => photoFile.data)],
 
       scores: {
         cleanliness: parseInt(formState.formCleanlinessValue),
@@ -134,161 +145,155 @@ export const submitForm = () => {
     };
 
 
-    if (formState.photosArrValue.length === 0) {
+    const saveNewReview = (review) => {
+      console.log("saveNewReview triggered!");
+      firestore.collection('reviews').add(
+        review
+      )
+        .then(res => {
+          dispatch({
+            type: 'FORM_SUBMITTED',
+            payload: res
+          })
+        })
+        .catch(err => {
+          dispatch({
+            type: 'FORM_SUBMITTED_ERROR',
+            payload: err
+          })
+        });
+    }
 
-      // firestore.collection('reviews').add(
-      //   review
-      // )
-      //   .then(res => {
-      //     dispatch({
-      //       type: 'FORM_SUBMITTED',
-      //       payload: res
-      //     })
-      //   })
-      //   .catch(err => {
-      //     dispatch({
-      //       type: 'FORM_SUBMITTED_ERROR',
-      //       payload: err
-      //     })
-      //   });
+    const updateExistingReview = (review, id) => {
+      console.log("updateExistingReview triggered!");
+      firestore.collection("reviews").where("userID", "==", review.userID).where("locationID", "==", review.locationID).get()
+        .then(res => {
+          const data = res.docs
+          console.log("res of review to edit --->", res);
 
-      console.log("submitting editted form!, formState.formEditModeValue ---> ", formState.formEditModeValue, "review.locationID ---> ", review.locationID);
-
-      if (formState.formEditModeValue) {
-
-        const reviewtoEdit = firestore.collection("reviews").where("userID", "==", review.userID).where("locationID", "==", review.locationID);
-        // console.log("reviewtoEdit ---> ", reviewtoEdit);
-        reviewtoEdit.get()
-          .then(res => {
-
-            console.log("inside res ---> ", res, ", review object ---> ", review);
-
-            res.forEach(doc => {
-              console.log("inside res.forEach for edit of review...", doc.id);
-              const id = doc.id;
-              firestore.collection('reviews').doc(id).set(
-                review
-              )
-                .then(res => {
-                  dispatch({
-                    type: 'FORM_SUBMITTED',
-                    payload: res
-                  })
+          data.forEach(({id}) => {
+            firestore.collection('reviews').doc(id).set(
+              review
+            )
+              .then(res => {
+                dispatch({
+                  type: 'FORM_SUBMITTED',
+                  payload: res
                 })
-                .catch(err => {
-                  dispatch({
-                    type: 'FORM_SUBMITTED_ERROR',
-                    payload: err
-                  })
-                });
-
-            })
-
-
-
+              })
+              .catch(err => {
+                dispatch({
+                  type: 'FORM_SUBMITTED_ERROR',
+                  payload: err
+                })
+              })
           })
+        })
+
+    }
 
 
+    const cloudinaryCallBack = (response, review, metadataFile) => {
+      console.log("cloudinaryCallBack triggered! review ---> ", review);
+
+      const data = {
+        asset_id: response.data.asset_id,
+        etag: response.data.etag,
+        public_id: response.data.public_id,
+        version_id: response.data.version_id,
+        signature: response.data.signature
+      }
+
+      const photoObj = {
+        url: response.data.secure_url,
+        metadata: metadataFile,
+        data: data
+      };
+
+      review.photos.push(photoObj);
+
+      if (editMode) {
+        return updateExistingReview(review);
       } else {
-
-        firestore.collection('reviews').add(
-          review
-        )
-          .then(res => {
-            dispatch({
-              type: 'FORM_SUBMITTED',
-              payload: res
-            })
-          })
-          .catch(err => {
-            dispatch({
-              type: 'FORM_SUBMITTED_ERROR',
-              payload: err
-            })
-          });
-
+        return saveNewReview(review);
       }
 
     }
 
-    else {
-      formState.photosArrValue.forEach((file, i) => {
+
+    const cloudinaryUpload = (formData) => {
+      console.log("cloudinaryUpload triggered!");
+
+      const config = {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      };
+      return axios.post("https://api.cloudinary.com/v1_1/resteasyredux/upload", formData, config) // has promise
+    }
+
+
+    const photosToCloudinary = (review, photosArr, cloudinaryCallBack) => {
+      console.log("photosToCloudinary triggered!");
+
+      photosArr.forEach((file, i) => {
 
         const fileSrc = file.src;
-        const config = {
-          headers: { "X-Requested-With": "XMLHttpRequest" }
+
+        const options = {
+          public_id: file.data ? file.data.public_id : null,
+          overwrite: false
         };
+
         const formData = new FormData();
 
         formData.append('file', fileSrc);
         formData.append('upload_preset', "rnpjoamq");
+        formData.append('options', options);
 
-        axios.post("https://api.cloudinary.com/v1_1/resteasyredux/upload", formData, config)
-          .then(res => {
-            finalPhotosArr.push(res.data.secure_url);
+        const metadataFile = {
+          "name": file.metadata.name,
+          "lastModified": file.metadata.lastModified,
+          "size": file.metadata.size,
+          "type": file.metadata.type,
+        };
 
-            if (finalPhotosArr.length === formState.photosArrValue.length) {
-
-              review.photos = finalPhotosArr;
-
-              console.log("submitting editted form!, formState.formEditModeValue ---> ", formState.formEditModeValue);
-
-              if (formState.formEditModeValue) {
-
-                console.log("submitting editted form! ---> ", review);
-
-                firestore.collection('reviews').doc(review.locationID).set(
-                  review
-                )
-                  .then(res => {
-                    dispatch({
-                      type: 'FORM_SUBMITTED',
-                      payload: res
-                    })
-                  })
-                  .catch(err => {
-                    dispatch({
-                      type: 'FORM_SUBMITTED_ERROR',
-                      payload: err
-                    })
-                  });
-
-              } else {
-
-                firestore.collection('reviews').add(
-                  review
-                )
-                  .then(res => {
-                    dispatch({
-                      type: 'FORM_SUBMITTED',
-                      payload: res
-                    })
-                  })
-                  .catch(err => {
-                    dispatch({
-                      type: 'FORM_SUBMITTED_ERROR',
-                      payload: err
-                    })
-                  });
-
-              }
-
-
-
-
-            }
-
-
+        cloudinaryUpload(formData)
+          .then(response => {
+            console.log("cloudinaryUpload triggered!", i);
+            return cloudinaryCallBack(response, review, metadataFile);
           })
           .catch(err => {
-            console.error("axios error: ", err)
+            console.error("axios error ---> ", err)
           })
-
       });
+    };
+
+
+
+    if (noPhotos) {
+      console.log("noPhotos if statement - top...");
+      if (editMode) {
+        console.log("noPhotos if statement - editMode...");
+        return updateExistingReview(review);
+      } else {
+        console.log("noPhotos if statement - not edit mode...");
+        return saveNewReview(review);
+      }
+    };
+
+
+    if (newPhotos) {
+      console.log("newPhotos if statement - not edit mode...");
+      photosToCloudinary(review, filteredDupesPhotoArr, cloudinaryCallBack);
     }
 
-  }
-}
+
+  };
+} // end of submitForm
+
+
+
+
+
 
 
 export const formNext = (outOfOrderInd) => {
@@ -438,7 +443,7 @@ export const textEntered = (input) => {
 
 export const photoInput = (photoObj) => {
 
-  // console.log("photoInput executed: ", photoObj);
+  console.log("photoInput executed: ", photoObj);
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
     dispatch({
@@ -463,3 +468,51 @@ export const deletePhoto = (photoArr) => {
 
 
 
+
+  // if (formState.photosArrValue.length === 0 || (formState.photosArrValue.length !== filteredDupesPhotoArr.length)) {
+  //   if (editMode) {
+  //     const reviewtoEdit = firestore.collection("reviews").where("userID", "==", review.userID).where("locationID", "==", review.locationID);
+  //   } else {
+  //     firestore.collection('reviews').add(
+  //       review
+  //     )
+  //       .then(res => {
+  //         dispatch({
+  //           type: 'FORM_SUBMITTED',
+  //           payload: res
+  //         })
+  //       })
+  //       .catch(err => {
+  //         dispatch({
+  //           type: 'FORM_SUBMITTED_ERROR',
+  //           payload: err
+  //         })
+  //       });
+  //   }
+  // }
+
+  // const updateExistingReview = (reviewToEdit) => {
+  //   reviewToEdit.get()
+  //     .then(res => {
+  //       res.forEach(({ id }) => {
+  //         updateExistingReview(reviewToEdit, id);
+  //       })
+  //     });
+  // };
+
+  // firestore.collection('reviews').doc(id).set(
+  //   review
+  // )
+  //   .then(res => {
+  //     dispatch({
+  //       type: 'FORM_SUBMITTED',
+  //       payload: res
+  //     })
+  //   })
+  //   .catch(err => {
+  //     dispatch({
+  //       type: 'FORM_SUBMITTED_ERROR',
+  //       payload: err
+  //     })
+  //   });
+  // was from cloudinary

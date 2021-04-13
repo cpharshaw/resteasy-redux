@@ -54,6 +54,10 @@ class MainWrapper extends Component {
 
     const allMapDataLoaded = this.props.allMapDataLoaded; const prev_allMapDataLoaded = prevProps.allMapDataLoaded; const update_allMapDataLoaded = allMapDataLoaded !== prev_allMapDataLoaded;
 
+
+    // console.log("update_allMapDataLoaded, prevProps.geolocationStatus ---> ", update_allMapDataLoaded, prevProps.geolocationStatus);
+    // console.log("update_allMapDataLoaded, this.props.geolocationStatus ---> ", update_allMapDataLoaded, this.props.geolocationStatus);
+
     const geo_update = (
       geoLat !== prev_geoLat
       ||
@@ -76,18 +80,16 @@ class MainWrapper extends Component {
     // console.log("update_fsValue", update_fsValue)
     // console.log("fsValue", fsValue)
 
-    if (update_allMapDataLoaded) {
-
+    if (this.props.initialMapTilesLoaded && update_allMapDataLoaded) {
+      // console.log("map loaded fs call");
       // console.log("ctrLat", ctrLat);
       // console.log("ctrLng", ctrLng);
-      const fsLL = ctrLat + "," + ctrLng;
+      // const fsLL = ctrLat + "," + ctrLng;
 
 
 
       // 3/13/21 @ 5:14PM ... UNCOMMENT THIS AFTER FINISHED WITH MYSTUFF-SETTINGS 
       this.props.getPlacesFromFoursquare("center");
-
-
 
     }
 
@@ -163,6 +165,8 @@ const mapStateToProps = (state) => {
     googleAPIValue: state.mapState.googleAPIValue,
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
+    geolocationStatus: state.geolocationState.geolocationStatus,
+    geolocationManual: state.geolocationState.geolocationManual,
     centerLatValue: state.mapState.centerLatValue(),
     centerLngValue: state.mapState.centerLngValue(),
     numCenterUpdates: state.mapState.numCenterUpdates,

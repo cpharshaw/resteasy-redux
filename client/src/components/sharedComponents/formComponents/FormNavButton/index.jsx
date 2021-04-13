@@ -171,7 +171,7 @@ export class FormNavButton extends Component {
       data_margin,
       children
     } = this.props;
-    console.log("func_navcommand ---> ", func_navcommand)
+    // console.log("func_navcommand ---> ", func_navcommand)
     return (
       <button
         onClick={

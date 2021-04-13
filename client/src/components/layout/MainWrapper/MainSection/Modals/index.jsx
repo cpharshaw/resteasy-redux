@@ -200,7 +200,7 @@ export class ModalContainer extends Component {
 
   signInTouchCancel = e => {
     e.preventDefault();
-    console.log("touch cancel");
+    // console.log("touch cancel");
     e.currentTarget.src = signIn_normal;
   }
 

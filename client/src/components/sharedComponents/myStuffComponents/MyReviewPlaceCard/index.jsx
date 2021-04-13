@@ -64,7 +64,7 @@ export class MyReviewPlaceCard extends Component {
 
     e.preventDefault();
 
-    console.log("editClicked(data) ...")
+    // console.log("editClicked(data) ...");
 
     const reviewToEdit = {
 
@@ -101,6 +101,7 @@ export class MyReviewPlaceCard extends Component {
     
       //page 4
       photosArrValue: data.photos,
+      // editPhotosArrValue: data.photos,
     
       //page 5
       formCommentsValue: data.comments,

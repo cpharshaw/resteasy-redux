@@ -97,8 +97,13 @@ export class FormSection4 extends Component {
 
     const tempArr = [];
 
+    // const photos = this.props.editPhotosArrValue ? this.props.editPhotosArrValue : this.props.photosArrValue;
+
     this.props.photosArrValue.forEach((photo, i) => {
-      const newImgSrc = photo.src;
+
+      // console.log(i, "photos for edit, ---> ", photo);
+
+      const newImgSrc = photo.src ? photo.src : photo.url;  //photo.src || 
       const imgMetadata = photo.metadata;
 
       const leftPadWithZeros = (number, length) => {
@@ -197,7 +202,6 @@ export class FormSection4 extends Component {
 
     const prevPhotos = prevProps.photosArrValue;
     const currPhotos = this.props.photosArrValue;
-
     if (
       (prevPhotos.length === 0 && currPhotos.length === 0 && this.state.updated === false)
       ||
@@ -227,7 +231,6 @@ export class FormSection4 extends Component {
       selectedSectionValue,
       photosArrValue
     } = this.props;
-
 
     return (
       <div id="reviewSection4" className="row animated fadeIn fast">
@@ -337,6 +340,7 @@ export class FormSection4 extends Component {
                 }}
               >
                 {
+                  
                   photosArrValue.length === 0 ?
                     <em>
                       <span
