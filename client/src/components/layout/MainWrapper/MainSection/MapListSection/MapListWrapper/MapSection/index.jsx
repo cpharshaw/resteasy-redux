@@ -91,6 +91,10 @@ class MapSection extends Component {
     // console.log("renderFS running");
 
     const fs = this.props.foursquareValue.map((place, i) => {
+
+
+      // account for mens/womens/gn/all eventually...
+
       return (
         <MarkerComp
           key={"fsMarkerKey_" + i}
@@ -98,7 +102,7 @@ class MapSection extends Component {
           data_map={this.currentMap}
           data_lat={place.location.lat}
           data_lng={place.location.lng}
-          // data_icon=""
+          data_placerating={place.allWeightedAvg}
           data_label={JSON.stringify(place.id)}
           data_title={"fs-" + place.id}
           data_place={place}
@@ -413,14 +417,16 @@ class MapSection extends Component {
 
     const displayValue = this.props.data_display ? null : "none";
 
+    // console.log(
+    //   "maps section, foursquareValue ---> ", foursquareValue
+    // );
 
     return (
 
 
 
       <div id="mapSection" className="row animated fadeIn fast" style={{ display: displayValue }}>
-        {/* {console.log("selectedPlaceValue", selectedPlaceValue)}
-      {console.log("selectedMarkerValue", selectedMarkerValue)} */}
+        {/* {selectedPlaceValue ? console.log("selectedPlaceValue", selectedPlaceValue) : null} */}
         <div className="col">
 
           <div className="row">
@@ -474,18 +480,18 @@ class MapSection extends Component {
           {/* {this.state.fsMarkers[0] ? console.log("marker getIcon test: ", this.props) : null} */}
           {
             settingsModal || !selectedPlaceValue || !selectedMarkerValue ? null : (
-              // console.log("selectedMarkerValue", selectedMarkerValue),
+              // selectedPlaceValue ? console.log("selectedMarkerValue ---> ", selectedMarkerValue) : null,
               <PlaceCard
                 data_componentsource="map"
-
+                data_place={selectedPlaceValue}
                 data_placename={selectedPlaceValue.name || foursquareValue[0].name}
                 data_placeaddress={selectedPlaceValue.location.address || foursquareValue[0].location.address}
                 data_placecategory={selectedPlaceValue.categories[0] ? selectedPlaceValue.categories[0].name : null || foursquareValue[0].categories[0] ? foursquareValue[0].categories[0].name : null}
                 data_placedistance={selectedPlaceValue.distance || foursquareValue[0].distance}
-
+                
                 data_placemarker={selectedMarkerValue.icon}
-                data_placenumreviews={14}
-
+                data_placenumreviews={selectedMarkerValue.store_place.allCnt}
+                data_placerating={selectedMarkerValue.store_place.allWeightedAvg}
                 data_userreviewed={true}
                 data_userbookmarked={true}
               // data_place={place}

@@ -15,6 +15,20 @@ import signIn_focus from '../MyStuffSection/btn_google_signin_light_focus_web.pn
 import signIn_pressed from '../MyStuffSection/btn_google_signin_light_pressed_web.png';
 
 
+import greyMarker from '../MapListSection/MapListWrapper/greyMarker50.png';
+import redMarker from '../MapListSection/MapListWrapper/redMarker50.png';
+import orangeMarker from '../MapListSection/MapListWrapper/orangeMarker50.png';
+import yellowMarker from '../MapListSection/MapListWrapper/yellowMarker50.png';
+import chartreuseMarker from '../MapListSection/MapListWrapper/chartreuseMarker50.png';
+import greenMarker from '../MapListSection/MapListWrapper/greenMarker50.png';
+
+// import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeSelectedPlace, storeMarker, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../../store/actions/mapActions';
+
+const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
+// const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
+const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
+
+
 export class ModalContainer extends Component {
 
   closeModal(e) {
@@ -227,6 +241,33 @@ export class ModalContainer extends Component {
   }
 
 
+  iconColor = score => {
+    // console.log("score ---> ", score)
+    if (!score) {
+      return greyMarker
+    };
+
+    if (score > 4.50) {
+      return greenMarker
+    };
+
+    if (score >= 4.00) {
+      return chartreuseMarker
+    };
+
+    if (score >= 3.50) {
+      return yellowMarker
+    };
+
+    if (score >= 2.25) {
+      return orangeMarker
+    };
+
+    if (score) {
+      return redMarker
+    };
+  }
+
 
   render() {
 
@@ -248,8 +289,6 @@ export class ModalContainer extends Component {
 
     // console.log("loginCredentialValue in render before return: ", loginCredentialValue)
 
-
-
     const foursquarePlaces = !foursquareValue ? null : (
 
       foursquareValue.map((place, i) => {
@@ -266,7 +305,6 @@ export class ModalContainer extends Component {
         const stateCode = place.location.state;
         const zip = place.location.postalCode;
         const country = place.location.country;
-
 
         // const signInButtonComponent = () => {
         //   return (
@@ -393,7 +431,7 @@ export class ModalContainer extends Component {
 
 
 
-                  {
+                  { //whereimat 4/17-4/18
                     currentModal === "placeModal" ? (
 
                       <div className="row " style={{ pointerEvents: "all" }}>
@@ -410,7 +448,7 @@ export class ModalContainer extends Component {
                               </div>
                               <div className="row">
                                 <div className="col ai-c">
-                                  <p style={{ fontStyle: "italic", fontSize: "16px" }}><b>4.6</b></p>
+                                  <p style={{ fontStyle: "italic", fontSize: "16px" }}><b>{selectedPlaceValue.allWeightedAvg ? parseFloat(selectedPlaceValue.allWeightedAvg.toFixed(1)) : null}</b></p>
                                 </div>
                               </div>
                             </div>
@@ -430,20 +468,19 @@ export class ModalContainer extends Component {
 
                           <div className="row my-1 jc-se">
                             <div className="col">
-                              <img src="https://img.icons8.com/ios-glyphs/18/d3d3d3/sporty-wheelchair-user.png" />
+                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.accessible ? `000000` : `d3d3d3`}/sporty-wheelchair-user.png`} />
                             </div>
                             <div className="col">
-                              <img src="https://img.icons8.com/ios-glyphs/18/000000/gender-neutral-washroom.png" />
+                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderNeutral ? "000000" : "d3d3d3"}/gender-neutral-washroom.png`} />
                             </div>
                             <div className="col">
-                              <img src="https://img.icons8.com/ios-glyphs/18/000000/baby.png" />
+                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.babyStation ? "000000" : "d3d3d3"}/baby.png`} />
                             </div>
                             <div className="col">
-                              <img src="https://img.icons8.com/ios-glyphs/18/d3d3d3/housekeeper-female.png" />
+                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.cleaningSchedule ? "000000" : "d3d3d3"}/housekeeper-female.png`} />
                             </div>
                             <div className="col">
-                              <img src="https://img.icons8.com/ios-glyphs/18/000000/cheap-2-1.png" />
-                              {/* <img src="https://img.icons8.com/ios-glyphs/30/000000/create-order.png"/> */}
+                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.admission === "Pay" ? "000000" : "d3d3d3"}/cheap-2-1.png`} />
                             </div>
                           </div>
 
@@ -456,23 +493,23 @@ export class ModalContainer extends Component {
                                 {/* <div className="col-1"></div> */}
                                 <div className="col">
                                   <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Clean</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>4.7</div>
+                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allCleanAvg.toFixed(1)) : null}</div>
                                 </div>
                                 <div className="col">
                                   <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Privacy</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>4.5</div>
+                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allPrivacyAvg.toFixed(1)) : null}</div>
                                 </div>
                                 <div className="col">
                                   <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Safety</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>5</div>
+                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allSafetyAvg.toFixed(1)) : null}</div>
                                 </div>
                                 <div className="col">
                                   <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Comfort</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>4.5</div>
+                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allComfortAvg.toFixed(1)) : null}</div>
                                 </div>
                                 <div className="col">
                                   <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Style</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>3</div>
+                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allStyleAvg.toFixed(1)) : null}</div>
                                 </div>
                                 {/* <div className="col-1"></div> */}
                               </div>
@@ -511,7 +548,42 @@ export class ModalContainer extends Component {
                                     >
                                       {/* {foursquarePlaces} */}
 
-                                      <div className="row js-fg mb-1">
+                                      {selectedPlaceValue.allRecentReviews ? selectedPlaceValue.allRecentReviews.map((review, i) => {
+                                        return (
+                                          <div className="row js-fg mb-1" key={"review"&&i}>
+                                            <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
+                                              <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
+                                                &nbsp;
+                                           <span style={{ fontSize: "12px", fontStyle: "italic" }}>{parseFloat(review.scores.total.toFixed(1))}</span>
+                                                <span>&nbsp;&nbsp;</span>
+                                                <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
+                                                &nbsp;
+                                          </p>
+                                              <p className="ta-l mt-1">
+                                              {console.log("review.comments ---> ", review.comments, ";;; review.comments.length ---> ", review.comments.length)}
+                                              {console.log("review.photos ---> ", review.photos, ";;; review.photos.length ---> ", review.photos.length)}
+                                                <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
+                                                &nbsp;
+                                            <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>{review.comments.length > 2 ? review.comments : null}</span>
+                                                &nbsp;
+                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
+                                              </p>
+                                              <div className="row mt-2 mb-2">
+                                                <div className="col">
+                                                  {review.photos.length >= 1 ? <img src={review.photos[0].url} style={{ maxWidth: "calc(50vw - 30px)", maxHeight: "225px" }} /> : null}
+                                                </div>
+                                                <div className="col">
+                                                  {review.photos.length === 2 ? <img src={review.photos[1].url} style={{ maxWidth: "calc(50vw - 30px)", maxHeight: "225px" }} /> : null}
+                                                </div>
+                                              </div>
+                                              {/* <HorizontalRule data_width="45%" /> */}
+                                            </div>
+                                          </div>
+                                        )
+
+                                      }) : null}
+
+                                      {/* <div className="row js-fg mb-1">
                                         <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
                                             &nbsp;
@@ -535,7 +607,6 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/150" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
@@ -557,13 +628,10 @@ export class ModalContainer extends Component {
                                           </p>
                                           <div className="row mt-2 mb-2">
                                             <div className="col">
-                                              {/* <img src="https://via.placeholder.com/160" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} /> */}
                                             </div>
                                             <div className="col">
-                                              {/* <img src="https://via.placeholder.com/160x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} /> */}
                                             </div>
                                           </div>
-                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
@@ -591,36 +659,6 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          {/* <HorizontalRule data_width="45%" /> */}
-                                        </div>
-                                      </div>
-
-
-                                      <div className="row js-fg mb-1">
-                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                            &nbsp;
-                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
-                                            <span>&nbsp;&nbsp;</span>
-                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                            &nbsp;
-                                            </p>
-                                          <p className="ta-l mt-1">
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                            &nbsp;
-                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
-                                            &nbsp;
-                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                          </p>
-                                          <div className="row mt-2 mb-2">
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                          </div>
-                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
@@ -649,7 +687,6 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
@@ -678,48 +715,37 @@ export class ModalContainer extends Component {
                                               <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
                                             </div>
                                           </div>
-                                          {/* <HorizontalRule data_width="45%" /> */}
                                         </div>
                                       </div>
 
 
-                                      {/* <div className="row js-fg">
-                                        <div className="col fc jc-fs ai-fs mx-2">
+                                      <div className="row js-fg mb-1">
+                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                           <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
                                             &nbsp;
-                                        <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
+                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
                                             <span>&nbsp;&nbsp;</span>
                                             <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
                                             &nbsp;
-                                      </p>
+                                            </p>
                                           <p className="ta-l mt-1">
                                             <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
                                             &nbsp;
-                                        <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
+                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
                                             &nbsp;
-                                        <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
+                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
                                           </p>
-                                        </div>
-                                      </div>
-
-                                      <div className="row js-fg">
-                                        <div className="col fc jc-fs ai-fs mx-2">
-                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                            &nbsp;
-                                        <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
-                                            <span>&nbsp;&nbsp;</span>
-                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                            &nbsp;
-                                      </p>
-                                          <p className="ta-l mt-1">
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                            &nbsp;
-                                        <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
-                                            &nbsp;
-                                        <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                          </p>
+                                          <div className="row mt-2 mb-2">
+                                            <div className="col">
+                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
+                                            </div>
+                                            <div className="col">
+                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
+                                            </div>
+                                          </div>
                                         </div>
                                       </div> */}
+
 
 
                                     </div>

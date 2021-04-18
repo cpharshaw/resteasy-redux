@@ -211,6 +211,8 @@ export const submitForm = () => {
       };
 
       review.photos.push(photoObj);
+      
+      if (review.photos.length !== formState.photosArrValue.length) return;
 
       if (editMode) {
         return updateExistingReview(review);

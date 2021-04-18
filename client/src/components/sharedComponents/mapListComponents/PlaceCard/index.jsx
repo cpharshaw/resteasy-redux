@@ -11,11 +11,15 @@ import greenMarker from '../../../../components/layout/MainWrapper/MainSection/M
 import { modalToggled } from '../../../../store/actions/modalActions';
 import { storeSelectedPlace } from '../../../../store/actions/mapActions';
 
+
+const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
+const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
+
 export class PlaceCard extends Component {
 
 
   assignPlaceIcon = (rating) => {
-    console.log("assignPlaceIcon", rating)
+    // console.log("assignPlaceIcon", rating)
     if (rating >= 4.5) {
       return greenMarker
     } else if (rating >= 4) {
@@ -40,7 +44,7 @@ export class PlaceCard extends Component {
 
   placeCardClicked = (e, data_place) => {
     e.preventDefault();
-    // console.log('clicked on placeCard');
+    console.log('clicked on placeCard', data_place);
     this.props.modalToggled("placeModal");
     if (!this.props.mapListToggleValue) this.props.storeSelectedPlace(data_place);
   }
@@ -61,6 +65,33 @@ export class PlaceCard extends Component {
       data_userreviewed,
       data_userbookmarked,
     } = this.props;
+
+    const iconColor = score => {
+      // console.log("score ---> ", score)
+      if (!score) {
+        return greyMarker
+      };
+
+      if (score > 4.50) {
+        return greenMarker
+      };
+
+      if (score >= 4.00) {
+        return chartreuseMarker
+      };
+
+      if (score >= 3.50) {
+        return yellowMarker
+      };
+
+      if (score >= 2.25) {
+        return orangeMarker
+      };
+
+      if (score) {
+        return redMarker
+      };
+    }
 
     // console.log("rating: ", data_placerating)
     // console.log("typeof rating: ", typeof data_placerating)
@@ -90,9 +121,10 @@ export class PlaceCard extends Component {
 
         <div className="col-2 ai-c">
           {/* rating icon */}
-          <img className="markerIcon" height="45" width="45" src={data_placerating ? this.assignPlaceIcon(data_placerating) : data_placemarker} />
-          <span style={{ fontSize: "9px", color: "grey" }}><em>{data_placerating ? data_placerating : "tbd"} / 5</em></span>
-          <span style={{ fontSize: "9px", color: "grey" }}><em>{data_placenumreviews} reviews</em></span>
+          <img className="markerIcon" height="45" width="45" src={data_placemarker ? data_placemarker : iconColor(data_placerating)} />
+          {/* <img className="markerIcon" height="45" width="45" src={data_placerating ? this.assignPlaceIcon(data_placerating) : data_placemarker} /> */}
+          <span style={{ fontSize: "9px", color: "grey", fontWeight: "900" }}><em>{data_placerating ? parseFloat(data_placerating.toFixed(1)) : "tbd"}</em></span>
+          <span style={{ fontSize: "9px", color: "grey" }}><em>{data_placenumreviews} review(s)</em></span>
         </div>
 
         <div className="col-7">
@@ -145,9 +177,9 @@ export class PlaceCard extends Component {
 
             </div>
 
-            <div className="col">
+            {/* <div className="col"> */}
 
-              {
+              {/* {
                 data_userbookmarked ? (
 
                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -179,9 +211,9 @@ export class PlaceCard extends Component {
 
                   )
 
-              }
+              } */}
 
-            </div>
+            {/* </div> */}
           </div>
         </div>
 

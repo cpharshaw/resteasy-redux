@@ -15,7 +15,8 @@ import greenMarker from '../../../MapListWrapper/greenMarker50.png';
 
 import { storeMap, storeMyLocationMarker, storeSelectedMarker, storeSelectedPlace, storeMarker, registerInitialMapTilesloaded, registerSubsequentMapMovement } from '../../../../../../../../store/actions/mapActions';
 
-const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
+const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
+// const iconArr = [greyMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker, redMarker, orangeMarker, yellowMarker, chartreuseMarker, greenMarker]
 const skull = "https://img.icons8.com/ios-filled/50/000000/poison.png";
 
 
@@ -47,22 +48,41 @@ class MarkerComp extends Component {
     const {
       data_map,
       data_lat, data_lng,
-      data_icon,
+      data_placerating,
       data_label,
       data_title,
       data_place,
       data_id
     } = this.props;
 
-    console.log(
-      // "data_map", data_map,
-      // "data_lat", data_lat,
-      // "data_lng", data_lng,
-      // "data_icon", data_icon,
-      // "data_label", data_label,
-      // "data_title", data_title,
-      // "data_place", data_place,
-    )
+
+    const iconColor = score => {
+      // console.log("score ---> ", score)
+      if (!score) {
+        return greyMarker
+      };
+
+      if (score > 4.50) {
+        return greenMarker
+      };
+
+      if (score >= 4.00) {
+        return chartreuseMarker
+      };
+
+      if (score >= 3.50) {
+        return yellowMarker
+      };
+
+      if (score >= 2.25) {
+        return orangeMarker
+      };
+
+      if (score) {
+        return redMarker
+      };
+    }
+
 
     const getRandomInt = (min, max) => {
       const minNum = Math.ceil(min);
@@ -72,27 +92,37 @@ class MarkerComp extends Component {
 
     const randomMarkerColor = iconArr[getRandomInt(0, iconArr.length)];
 
+
+    const test = iconColor(data_placerating);
+
     this.marker = new this.props.googleAPIValue.Marker({
       map: data_map,
       position: {
         lat: data_lat,
         lng: data_lng
       },
-      icon: data_icon || randomMarkerColor || skull,
-      store_icon: data_icon,
+      icon: iconColor(data_placerating) || skull,
+      store_icon: data_placerating,
       // randomMarkerColor,
       label: JSON.stringify(data_label),
       title: "fs - " + data_title,
       animation: this.props.googleAPIValue.Animation.DROP,
       store_id: data_id,
+      store_place: data_place
     });
 
     if (data_id === "0_marker") {
       // console.log("0th marker", this.marker.getIcon())
+
+      const placeWithIcon = {
+        ...data_place,
+        icon: this.marker.icon
+      }
+
       this.props.storeSelectedMarker(this.marker);
-      this.props.storeSelectedPlace(data_place);
+      this.props.storeSelectedPlace(placeWithIcon);
     }
-    
+
     this.marker.addListener('click', () => {
       if (data_place) {
         this.props.storeSelectedMarker(this.marker);

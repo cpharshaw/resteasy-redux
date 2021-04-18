@@ -251,7 +251,7 @@ const savePlaceEntry = (locationID, latestReviewGender) => {
 }
 
 exports.reviewSubmitted = functions.firestore.document('reviews/{reviewID}')
-  .onCreate(
+  .onWrite(
     QueryDocumentSnapshot => {
       const responseData = QueryDocumentSnapshot.data();
       const locationID = responseData.locationID;

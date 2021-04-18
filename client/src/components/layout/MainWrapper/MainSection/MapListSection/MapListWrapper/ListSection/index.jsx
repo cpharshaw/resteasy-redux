@@ -100,11 +100,11 @@ class ListSection extends Component {
         const placeAddress = place.location ? place.location.address : "-";
         const placeCategory = place.categories ? (place.categories[0] ? place.categories[0].name : "-") : "-";
         const placeDistance = place.distance;
+        const placeRating = place.allWeightedAvg;
         const placeMarker = this.state.markerIcon;
-        const placeNumReviews = 14;
+        const placeNumReviews = place.allCnt;
         const userReviwed = getRandomInt(0, 10) === 2 ? true : false;
         const userBookmarked = getRandomInt(0, 10) === 3 ? true : false;
-
 
 
         return (
@@ -121,6 +121,7 @@ class ListSection extends Component {
                 data_placenumreviews={placeNumReviews}
                 data_userreviewed={userReviwed}
                 data_userbookmarked={userBookmarked}
+                data_placerating={placeRating}
               />
             </div>
           </div>
