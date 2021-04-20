@@ -435,7 +435,7 @@ export class ModalContainer extends Component {
                     currentModal === "placeModal" ? (
 
                       <div className="row " style={{ pointerEvents: "all" }}>
-                        <div className="col fc jc-fs"
+                        <div className="col fc jc-sb"
                           style={{ border: "1px solid whitesmoke" }}
                         >
 
@@ -443,7 +443,7 @@ export class ModalContainer extends Component {
                             <div className="col-2 ai-c">
                               <div className="row">
                                 <div className="col ai-c">
-                                  {selectedPlaceValue ? <img src={selectedMarkerValue.icon} className="mx-2" height="50" width="50" /> : ":("}
+                                  {selectedPlaceValue.allWeightedAvg ? <img src={selectedMarkerValue.icon} className="mx-2" height="50" width="50" /> : ""}
                                 </div>
                               </div>
                               <div className="row">
@@ -454,7 +454,7 @@ export class ModalContainer extends Component {
                             </div>
                             <div className="col-8">
                               <span>{selectedPlaceValue ? selectedPlaceValue.name : "sad face :("}</span>
-                              <span>{selectedPlaceValue ? selectedPlaceValue.location.address : "your house"}</span>
+                              <span className="mt-1" style={{fontSize: "11px"}}>{selectedPlaceValue ? selectedPlaceValue.location.address : "your house"}</span>
                             </div>
                             <div className="col-2 ai-c">
                               <p>
@@ -463,301 +463,139 @@ export class ModalContainer extends Component {
                             </div>
                           </div>
 
-                          <HorizontalRule data_width="90%" />
 
 
-                          <div className="row my-1 jc-se">
-                            <div className="col">
-                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.accessible ? `000000` : `d3d3d3`}/sporty-wheelchair-user.png`} />
-                            </div>
-                            <div className="col">
-                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderNeutral ? "000000" : "d3d3d3"}/gender-neutral-washroom.png`} />
-                            </div>
-                            <div className="col">
-                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.babyStation ? "000000" : "d3d3d3"}/baby.png`} />
-                            </div>
-                            <div className="col">
-                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.cleaningSchedule ? "000000" : "d3d3d3"}/housekeeper-female.png`} />
-                            </div>
-                            <div className="col">
-                              <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.admission === "Pay" ? "000000" : "d3d3d3"}/cheap-2-1.png`} />
-                            </div>
-                          </div>
-
-                          <HorizontalRule data_width="45%" />
-
-                          <div className="row-f-1 ">
-                            <div className="col fc jc-fs">
-
-                              <div className="row jc-se my-1">
-                                {/* <div className="col-1"></div> */}
+                          {selectedPlaceValue.allRecentReviews ?
+                            <>
+                              <HorizontalRule data_width="90%" />
+                              <div className="row my-1 jc-se">
                                 <div className="col">
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Clean</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allCleanAvg.toFixed(1)) : null}</div>
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.accessible ? `000000` : `d3d3d3`}/sporty-wheelchair-user.png`} />
                                 </div>
                                 <div className="col">
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Privacy</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allPrivacyAvg.toFixed(1)) : null}</div>
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderNeutral ? "000000" : "d3d3d3"}/gender-neutral-washroom.png`} />
                                 </div>
                                 <div className="col">
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Safety</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allSafetyAvg.toFixed(1)) : null}</div>
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.babyStation ? "000000" : "d3d3d3"}/baby.png`} />
                                 </div>
                                 <div className="col">
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Comfort</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allComfortAvg.toFixed(1)) : null}</div>
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.cleaningSchedule ? "000000" : "d3d3d3"}/housekeeper-female.png`} />
                                 </div>
                                 <div className="col">
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Style</div>
-                                  <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allStyleAvg.toFixed(1)) : null}</div>
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.admission === "Pay" ? "000000" : "d3d3d3"}/cheap-2-1.png`} />
                                 </div>
-                                {/* <div className="col-1"></div> */}
                               </div>
 
-                              {/* <HorizontalRule data_width="60%" /> */}
+                              <HorizontalRule data_width="45%" />
+
+                              <div className="row-f-1 ">
+                                <div className="col fc jc-fs">
+
+                                  <div className="row jc-se my-1">
+                                    {/* <div className="col-1"></div> */}
+                                    <div className="col">
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Clean</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allCleanAvg.toFixed(1)) : null}</div>
+                                    </div>
+                                    <div className="col">
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Privacy</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allPrivacyAvg.toFixed(1)) : null}</div>
+                                    </div>
+                                    <div className="col">
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Safety</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allSafetyAvg.toFixed(1)) : null}</div>
+                                    </div>
+                                    <div className="col">
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Comfort</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allComfortAvg.toFixed(1)) : null}</div>
+                                    </div>
+                                    <div className="col">
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Style</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allStyleAvg.toFixed(1)) : null}</div>
+                                    </div>
+                                    {/* <div className="col-1"></div> */}
+                                  </div>
 
 
-                              <div className="row js-fg my-1"
-                              // style={{border: "1px solid red"}}
-                              >
-                                <div className="col">
+                                  <div className="row js-fg my-1">
+                                    <div className="col">
 
+                                      <div className="row ai-fs"
+                                        style={{
+                                          height: "15px",
+                                          WebkitOverflowScrolling: "touch",
+                                          overflowY: "scroll",
+                                          msOverflowY: "scroll",
+                                          overflowX: "hidden",
+                                          msOverflowX: "hidden",
+                                        }}
+                                      >
+                                        <div
+                                          id="commentsScroller"
+                                          className="col jc-fs pt-1 "
+                                          style={{
+                                            overflowX: "hidden",
+                                            msOverflowX: "hidden",
+                                            overflowY: "hidden",
+                                            msOverflowY: "hidden",
+                                            backgroundColor: "#E0E0E0"
+                                          }}
+                                        >
 
-                                  <div className="row ai-fs"
-                                    style={{
-                                      height: "15px",
-                                      // height: "calc(100% - (205px))",
-                                      WebkitOverflowScrolling: "touch",
-                                      overflowY: "scroll",
-                                      msOverflowY: "scroll",
-                                      overflowX: "hidden",
-                                      msOverflowX: "hidden",
-                                      // border: "1px solid red"
-                                    }}
-                                  >
-                                    <div
-                                      id="commentsScroller"
-                                      className="col jc-fs pt-1 "
-                                      style={{
-                                        overflowX: "hidden",
-                                        msOverflowX: "hidden",
-                                        overflowY: "hidden",
-                                        msOverflowY: "hidden",
-                                        backgroundColor: "#E0E0E0"
-                                      }}
-                                    >
-                                      {/* {foursquarePlaces} */}
-
-                                      {selectedPlaceValue.allRecentReviews ? selectedPlaceValue.allRecentReviews.map((review, i) => {
-                                        return (
-                                          <div className="row js-fg mb-1" key={"review"&&i}>
-                                            <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                              <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                                &nbsp;
+                                          {
+                                            selectedPlaceValue.allRecentReviews.map((review, i) => {
+                                              return (
+                                                <div className="row js-fg mb-1" key={"review" && i}>
+                                                  <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
+                                                    <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
+                                                      &nbsp;
                                            <span style={{ fontSize: "12px", fontStyle: "italic" }}>{parseFloat(review.scores.total.toFixed(1))}</span>
-                                                <span>&nbsp;&nbsp;</span>
-                                                <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                                &nbsp;
+                                                      <span>&nbsp;&nbsp;</span>
+                                                      <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
+                                                      &nbsp;
                                           </p>
-                                              <p className="ta-l mt-1">
-                                              {console.log("review.comments ---> ", review.comments, ";;; review.comments.length ---> ", review.comments.length)}
-                                              {console.log("review.photos ---> ", review.photos, ";;; review.photos.length ---> ", review.photos.length)}
-                                                <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
-                                                &nbsp;
+                                                    <p className="ta-l mt-1">
+                                                      {console.log("review.comments ---> ", review.comments, ";;; review.comments.length ---> ", review.comments.length)}
+                                                      {console.log("review.photos ---> ", review.photos, ";;; review.photos.length ---> ", review.photos.length)}
+                                                      <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
+                                                      &nbsp;
                                             <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>{review.comments.length > 2 ? review.comments : null}</span>
-                                                &nbsp;
+                                                      &nbsp;
                                             <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
-                                              </p>
-                                              <div className="row mt-2 mb-2">
-                                                <div className="col">
-                                                  {review.photos.length >= 1 ? <img src={review.photos[0].url} style={{ maxWidth: "calc(50vw - 30px)", maxHeight: "225px" }} /> : null}
+                                                    </p>
+                                                    <div className="row mt-2 mb-2">
+                                                      {review.photos.length >= 1 ?
+                                                        <div className="col">
+                                                          <img src={review.photos[0].url} style={{ maxWidth: "calc(50vw - 30px)", maxHeight: "225px" }} />
+                                                        </div>
+                                                        : null}
+                                                      {review.photos.length === 2 ?
+                                                        <div className="col">
+                                                          <img src={review.photos[1].url} style={{ maxWidth: "calc(50vw - 30px)", maxHeight: "225px" }} />
+                                                        </div>
+                                                        : null}
+                                                    </div>
+                                                  </div>
                                                 </div>
-                                                <div className="col">
-                                                  {review.photos.length === 2 ? <img src={review.photos[1].url} style={{ maxWidth: "calc(50vw - 30px)", maxHeight: "225px" }} /> : null}
-                                                </div>
-                                              </div>
-                                              {/* <HorizontalRule data_width="45%" /> */}
-                                            </div>
-                                          </div>
-                                        )
+                                              )
 
-                                      }) : null}
+                                            })
 
-                                      {/* <div className="row js-fg mb-1">
-                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                            &nbsp;
-                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
-                                            <span>&nbsp;&nbsp;</span>
-                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                            &nbsp;
-                                            </p>
-                                          <p className="ta-l mt-1">
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                            &nbsp;
-                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
-                                            &nbsp;
-                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                          </p>
-                                          <div className="row mt-2 mb-2">
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/150x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/150" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                          </div>
+                                          }
                                         </div>
                                       </div>
-
-                                      <div className="row js-fg mb-1">
-                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                            &nbsp;
-                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
-                                            <span>&nbsp;&nbsp;</span>
-                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                            &nbsp;
-                                            </p>
-                                          <p className="ta-l mt-1">
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                            &nbsp;
-                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
-                                            &nbsp;
-                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                          </p>
-                                          <div className="row mt-2 mb-2">
-                                            <div className="col">
-                                            </div>
-                                            <div className="col">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <div className="row js-fg mb-1">
-                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                            &nbsp;
-                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
-                                            <span>&nbsp;&nbsp;</span>
-                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                            &nbsp;
-                                            </p>
-                                          <p className="ta-l mt-1">
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                            &nbsp;
-                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
-                                            &nbsp;
-                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                          </p>
-                                          <div className="row mt-2 mb-2">
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-
-
-                                      <div className="row js-fg mb-1">
-                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                            &nbsp;
-                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
-                                            <span>&nbsp;&nbsp;</span>
-                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                            &nbsp;
-                                            </p>
-                                          <p className="ta-l mt-1">
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                            &nbsp;
-                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
-                                            &nbsp;
-                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                          </p>
-                                          <div className="row mt-2 mb-2">
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-
-
-                                      <div className="row js-fg mb-1">
-                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                            &nbsp;
-                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
-                                            <span>&nbsp;&nbsp;</span>
-                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                            &nbsp;
-                                            </p>
-                                          <p className="ta-l mt-1">
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                            &nbsp;
-                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
-                                            &nbsp;
-                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                          </p>
-                                          <div className="row mt-2 mb-2">
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-
-
-                                      <div className="row js-fg mb-1">
-                                        <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                          <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                            &nbsp;
-                                             <span style={{ fontSize: "12px", fontStyle: "italic" }}> 4.5</span>
-                                            <span>&nbsp;&nbsp;</span>
-                                            <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                            &nbsp;
-                                            </p>
-                                          <p className="ta-l mt-1">
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                            &nbsp;
-                                              <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also like bathrooms.  Speaking of which...  This is a test.  I like pizza, but I also endXXX cccccc</span>
-                                            &nbsp;
-                                              <span style={{ fontSize: "19px", fontStyle: "italic" }}>"</span>
-                                          </p>
-                                          <div className="row mt-2 mb-2">
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                            <div className="col">
-                                              <img src="https://via.placeholder.com/175x195" style={{ maxWidth: "calc(50vw - 20px)", maxHeight: "225px" }} />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-
-
 
                                     </div>
                                   </div>
+
                                 </div>
+
                               </div>
+                            </>
+                            : <p><em>No reviews to show...</em></p>
+                          }
 
-
-                            </div>
-                          </div>
-
-                          <div className="row mb-2" >
+                          <div className="row mb-2">
                             <div className="col-2"></div>
                             <div className="col-8" onClick={e => this.addReviewClicked(e, selectedPlaceValue)}>
 
@@ -771,17 +609,11 @@ export class ModalContainer extends Component {
                             </div>
                           </div>
 
-                          {/* data_placecategory={selectedPlaceValue.categories[0] ? selectedPlaceValue.categories[0].name : null}
-                          data_placedistance={selectedPlaceValue.distance}
 
-                          data_placemarker={selectedMarkerValue.icon}
-                          data_placenumreviews={14}
-
-                          data_userreviewed={true}
-                          data_userbookmarked={true} */}
                         </div>
-                      </div>
 
+
+                      </div>
                     ) : null
                   }
 
@@ -860,10 +692,10 @@ export class ModalContainer extends Component {
 
                               {currentModal !== "formResetModal" && !formProcessingValue && !loginCredentialValue ? <p>Please sign in to submit review</p> : null}
                               {formStepValue === 6 && !formProcessingValue && loginCredentialValue && !formEditModeValue ? <p>Ok to submit review?</p> : null}
-                              {formStepValue === 6 && !formProcessingValue && loginCredentialValue && formEditModeValue ? <p>Ok to submit editted review?</p> : null}
+                              {formStepValue === 6 && !formProcessingValue && loginCredentialValue && formEditModeValue ? <p>Ok to submit edited review?</p> : null}
 
                               {formStepValue === 7 && formProcessingValue && loginCredentialValue && !formEditModeValue && !formDeleteModeValue ? <p>Saving review...   </p> : null}
-                              {formStepValue === 7 && formProcessingValue && loginCredentialValue && formEditModeValue && !formDeleteModeValue ? <p>Saving editted review...  </p> : null}
+                              {formStepValue === 7 && formProcessingValue && loginCredentialValue && formEditModeValue && !formDeleteModeValue ? <p>Saving edited review...  </p> : null}
 
 
                               {formStepValue === 7 && !formProcessingValue && loginCredentialValue && !formEditModeValue ? <p>Thank you for your review.</p> : null}

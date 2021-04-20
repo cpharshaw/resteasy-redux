@@ -124,7 +124,7 @@ export class PlaceCard extends Component {
           <img className="markerIcon" height="45" width="45" src={data_placemarker ? data_placemarker : iconColor(data_placerating)} />
           {/* <img className="markerIcon" height="45" width="45" src={data_placerating ? this.assignPlaceIcon(data_placerating) : data_placemarker} /> */}
           <span style={{ fontSize: "9px", color: "grey", fontWeight: "900" }}><em>{data_placerating ? parseFloat(data_placerating.toFixed(1)) : "tbd"}</em></span>
-          <span style={{ fontSize: "9px", color: "grey" }}><em>{data_placenumreviews} review(s)</em></span>
+          <span style={{ fontSize: "9px", color: "grey" }}><em>{data_placenumreviews || "0"} review(s)</em></span>
         </div>
 
         <div className="col-7">

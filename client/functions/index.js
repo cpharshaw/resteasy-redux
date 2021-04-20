@@ -66,9 +66,9 @@ const createPlaceReview = (dataArr, latestReviewGender) => {
   const womensArr = dataArr.filter(review => review.basicInfo.restroomUsed === "Women's");
   const genderNeutralArr = dataArr.filter(review => review.basicInfo.restroomUsed === "Family/Gender-neutral");
 
-  functions.logger.info("mensArr ---> ", mensArr);
-  functions.logger.info("womensArr ---> ", womensArr);
-  functions.logger.info("genderNeutralArr ---> ", genderNeutralArr);
+  // functions.logger.info("mensArr ---> ", mensArr);
+  // functions.logger.info("womensArr ---> ", womensArr);
+  // functions.logger.info("genderNeutralArr ---> ", genderNeutralArr);
 
   const getAvgScore = (scoreName, arr) => {
     const scoreArr = arr.map(review => review.scores[`${scoreName}`]);
@@ -220,13 +220,14 @@ const createPlaceReview = (dataArr, latestReviewGender) => {
 
 
 const savePlaceEntry = (locationID, latestReviewGender) => {
+  functions.logger.info("Inside savePlaceEntry; ; locationID ---> ", locationID, "; latestReviewGender ---> ", latestReviewGender);
+
   return admin.firestore().collection('reviews')
     .where('locationID', '==', locationID)
     .get()
     .then(fsResponseData => {
 
       // const fsResponseData = QueryDocumentSnapshot;
-      // functions.logger.info("Inside firestore get", fsResponseData);
 
       // const createReview = data => functions.logger.info(" passed the data array", data); // remap to bigger function 
 
@@ -250,56 +251,67 @@ const savePlaceEntry = (locationID, latestReviewGender) => {
     });
 }
 
+exports.reviewDeleted = functions.firestore.document('reviews/{reviewID}')
+  .onDelete((snapshot, context) => {
+    const responseData = snapshot.data()
+    const locationID = responseData.locationID;
+    const latestReviewGender = responseData.basicInfo.restroomUsed;
+    
+    functions.logger.info("onDelete, responseData ---> ", responseData);
+    functions.logger.info("onDelete, context ---> ", context);
+    return savePlaceEntry(locationID, latestReviewGender);
+  })
+
+
 exports.reviewSubmitted = functions.firestore.document('reviews/{reviewID}')
-  .onWrite(
-    QueryDocumentSnapshot => {
-      const responseData = QueryDocumentSnapshot.data();
-      const locationID = responseData.locationID;
-      const latestReviewGender = responseData.basicInfo.restroomUsed;
-      // functions.logger.info("Hello QueryDocumentSnapshot response data... ", responseData);
-      // functions.logger.info("typeof... ", typeof responseData);
+  .onCreate((snapshot, context) => {
+    const responseData = snapshot.data();
+    const placeID = context.params.reviewID;
 
-      return savePlaceEntry(locationID, latestReviewGender);
+    const locationID = responseData.locationID;
+    const latestReviewGender = responseData.basicInfo.restroomUsed;
+    functions.logger.info("onWrite, responseData ---> ", responseData);
+    functions.logger.info("onWrite, placeID ---> ", placeID);
 
-      // const test = { 
-      //   "comments": "", 
-      //   "userID": "RseEGIFFIuPhqXcFCEfAMSlIID22", 
-      //   "reviewDatetime": { "_nanoseconds": 578000000, "_seconds": 1611526982 }, 
-      //   "photos": ["https://res.cloudinary.com/resteasyredux/image/upload/v1611526985/lrakygfuxj2xruodz6xy.jpg"], 
-      //   "scores": { "comfort": "5", "style": "3", "privacy": "4", "safety": "4", "cleanliness": "5" }, 
-      //   "locationID": "4c94173ef7cfa1cd2acbb015", 
-      //   "basicInfo": { 
-      //     "locationState": "MD", 
-      //     "locationCategory": "Pool", 
-      //     "outOfOrder": false, 
-      //     "locationCity": "College Park", 
-      //     "restroomUsed": "Men's", 
-      //     "timeOfVisit": "Morning", 
-      //     "locationZip": "20740", 
-      //     "locationCountry": "United States", 
-      //     "locationName": "Seven Springs Neighborhood Pool", 
-      //     "locationNotes": "" }, 
-      //   "features": { 
-      //     "price": "", 
-      //     "babyStation": false, 
-      //     "admission": "Free", 
-      //     "genderNeutral": false, 
-      //     "cleaningSchedule": false, 
-      //     "accessible": false 
-      //   } 
-      // }
+    return savePlaceEntry(locationID, latestReviewGender);
 
-      // return admin.firestore().collection('reviews')
-      //   .where('locationID', '==', doc.locationID)
-      //   .get()
-      //   .then(firestoreResponse => {
-      //     functions.logger.info("Inside firestore get!", { structuredData: true });
-      //     return;
-      //   });
-
-    });
+  });
 
 
+exports.reviewEditted = functions.firestore.document('reviews/{reviewID}')
+  .onUpdate((change, context) => {
+
+    const before = change.before;
+    const after = change.after;
+
+    const beforeData = before.data();
+    const afterData = after.data();
+
+    functions.logger.info("onUpdate, beforeData ---> ", beforeData);
+    // console.log("onUpdate, before ---> ", before);
+    functions.logger.info("onUpdate, afterData ---> ", afterData);
+    // console.log("onUpdate, after ---> ", after);
+
+    functions.logger.info("onUpdate, context ---> ", context);
+    // console.log("onUpdate, context ---> ", context);
+
+    const placeID = context.params.reviewID;
+    const latestReviewGender = beforeData.basicInfo.restroomUsed;
+    const locationID = beforeData.locationID;
+
+    functions.logger.info("onUpdate, locationID ---> ", locationID);
+    functions.logger.info("onUpdate, latestReviewGender ---> ", latestReviewGender);
+
+    // const responseData = snapshot.change.before.data();
+
+    return savePlaceEntry(locationID, latestReviewGender);
+    // const responseData = QueryDocumentSnapshot.data();
+    // const locationID = responseData.locationID;
+    // const latestReviewGender = responseData.basicInfo.restroomUsed;
+
+    // return savePlaceEntry(locationID, latestReviewGender);
+
+  });
 
 
 
