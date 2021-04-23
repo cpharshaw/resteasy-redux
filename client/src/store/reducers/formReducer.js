@@ -16,7 +16,10 @@ const initState = {
   formLocationValue: {},
   noBathrooomValue: false,
   formRestroomTypeValue: "Restroom type...",
-  formTimeOfVisitValue: "Time of day...",
+  formTimeOfVisitValue: "HH:MM am/pm",
+  formHHOfVisitValue: "HH",
+  formMMOfVisitValue: "MM",
+  formAMPMOfVisitValue: "am/pm",
   formLocationNotesValue: "",
   formOutOfOrderValue: false,
 
@@ -106,7 +109,10 @@ const formReducer = (state = initState, action) => {
         // page1
         formLocationValue: action.payload.formLocationValue,
         formRestroomTypeValue: action.payload.formRestroomTypeValue,
-        formTimeOfVisitValue: action.payload.formTimeOfVisitValue,
+        formTimeOfVisitValue: action.payload.formHHOfVisitValue + ":" + action.payload.formMMOfVisitValue + " " + action.payload.formAMPMOfVisitValue,
+        formHHOfVisitValue: action.payload.formHHOfVisitValue,
+        formMMOfVisitValue: action.payload.formMMOfVisitValue,
+        formAMPMOfVisitValue: action.payload.formAMPMOfVisitValue,
         formLocationNotesValue: action.payload.formLocationNotesValue,
         formOutOfOrderValue: action.payload.formOutOfOrderValue,
 

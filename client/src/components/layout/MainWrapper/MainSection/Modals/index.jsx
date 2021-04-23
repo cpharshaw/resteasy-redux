@@ -268,6 +268,19 @@ export class ModalContainer extends Component {
     };
   }
 
+  timeAgoInMin = (reviewDatetime, basicInfo) => {
+    return (((Date.now()
+      -
+      new Date(
+        new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getFullYear(),
+        new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getMonth(),
+        new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getDate(),
+        (parseInt(basicInfo.HHOfVisit) + (basicInfo.AMPMOfVisit == "pm" ? 12 : 0)),
+        parseInt(basicInfo.MMOfVisit)
+      ).getTime()
+    ) / 1000) / 60)
+  }
+
 
   render() {
 
@@ -454,7 +467,7 @@ export class ModalContainer extends Component {
                             </div>
                             <div className="col-8">
                               <span>{selectedPlaceValue ? selectedPlaceValue.name : "sad face :("}</span>
-                              <span className="mt-1" style={{fontSize: "11px"}}>{selectedPlaceValue ? selectedPlaceValue.location.address : "your house"}</span>
+                              <span className="mt-1" style={{ fontSize: "11px" }}>{selectedPlaceValue ? selectedPlaceValue.location.address : "your house"}</span>
                             </div>
                             <div className="col-2 ai-c">
                               <p>
@@ -547,20 +560,24 @@ export class ModalContainer extends Component {
                                               return (
                                                 <div className="row js-fg mb-1" key={"review" && i}>
                                                   <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
-                                                    <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>
-                                                      &nbsp;
-                                           <span style={{ fontSize: "12px", fontStyle: "italic" }}>{parseFloat(review.scores.total.toFixed(1))}</span>
+                                                    <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>&nbsp;
+                                                      <span style={{ fontSize: "12px", fontStyle: "italic" }}>{parseFloat(review.scores.total.toFixed(1))}</span>
                                                       <span>&nbsp;&nbsp;</span>
-                                                      <span style={{ fontSize: "9px", color: "grey" }}>22hrs </span>
-                                                      &nbsp;
-                                          </p>
+                                                      <span style={{ fontSize: "9px", color: "grey" }}>
+                                                        {
+                                                          this.timeAgoInMin(review.reviewDatetime, review.basicInfo) < 60 ? this.timeAgoInMin(review.reviewDatetime, review.basicInfo) + " m" :
+                                                            this.timeAgoInMin(review.reviewDatetime, review.basicInfo) < 1440 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 60) + " h" :
+                                                              this.timeAgoInMin(review.reviewDatetime, review.basicInfo) <= 10080 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 1440) + " d" :
+                                                                this.timeAgoInMin(review.reviewDatetime, review.basicInfo) <= 40320 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 10080) + " w" :
+                                                                  this.timeAgoInMin(review.reviewDatetime, review.basicInfo) <= 524160 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 40320) + " m" :
+                                                                    Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 524160) + " yr"
+                                                        }
+                                                      </span>&nbsp;</p>
                                                     <p className="ta-l mt-1">
                                                       {console.log("review.comments ---> ", review.comments, ";;; review.comments.length ---> ", review.comments.length)}
                                                       {console.log("review.photos ---> ", review.photos, ";;; review.photos.length ---> ", review.photos.length)}
-                                                      <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
-                                                      &nbsp;
-                                            <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>{review.comments.length > 2 ? review.comments : null}</span>
-                                                      &nbsp;
+                                                      <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>&nbsp;
+                                            <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>{review.comments.length > 2 ? review.comments : null}</span>&nbsp;
                                             <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
                                                     </p>
                                                     <div className="row mt-2 mb-2">

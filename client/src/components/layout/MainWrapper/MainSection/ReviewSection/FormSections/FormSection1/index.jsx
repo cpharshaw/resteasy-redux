@@ -81,7 +81,9 @@ export class FormSection1 extends Component {
       formLocationValue,
       formRestroomTypeValue,
       formLocationNotesValue,
-      formTimeOfVisitValue,
+      formHHOfVisitValue,
+      formMMOfVisitValue,
+      formAMPMOfVisitValue,
       formOutOfOrderValue,
       noBathrooomValue,
       dropdownSelected,
@@ -171,17 +173,11 @@ export class FormSection1 extends Component {
 
               <div className="row ">
                 <div className="col-5">
-                  < FieldLabel data_htmlFor="formTimeOfVisitValue">*Time of visit</ FieldLabel >
+                  < FieldLabel data_htmlFor="formHHOfVisitValue">*Est. time of visit</ FieldLabel >
                 </div>
                 <div className="col-7">
-                  <SelectBox
-                    data_id="formTimeOfVisitValue"
-                    data_name="formTimeOfVisitValue"
-                    // data_width="52.5%"
-                    func_handlechange={dropdownSelected}
-                    data_value={formTimeOfVisitValue}
-                  >
-                    <option value="Time of day..." disabled>Time of day...</option>
+                  <div className="row">
+                    {/* <option value="Time of day..." disabled>Time of day...</option>
                     <option value="Just Now">(Just now)</option>
                     <option value="Morning">Dawn</option>
                     <option value="Morning">Morning / Breafast</option>
@@ -189,8 +185,69 @@ export class FormSection1 extends Component {
                     <option value="Afternoon">Mid afternoon</option>
                     <option value="Evening">Evening / Dinnertime</option>
                     <option value="Late night">Late night</option>
-                    <option value="Middle of night">Middle of night</option>
-                  </SelectBox>
+                    <option value="Middle of night">Middle of night</option> */}
+                    <SelectBox
+                      data_id="formHHOfVisitValue"
+                      data_name="formHHOfVisitValue"
+                      func_handlechange={dropdownSelected}
+                      data_value={formHHOfVisitValue}
+                      data_fontsize="12px"
+                    >
+                      <option value="HH" disabled>HH</option>
+                      <option value="01">01</option>
+                      <option value="02">02</option>
+                      <option value="03">03</option>
+                      <option value="04">04</option>
+                      <option value="05">05</option>
+                      <option value="06">06</option>
+                      <option value="07">07</option>
+                      <option value="08">08</option>
+                      <option value="09">09</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                    </SelectBox>
+                    <SelectBox
+                      data_id="formMMOfVisitValue"
+                      data_name="formMMOfVisitValue"
+                      func_handlechange={dropdownSelected}
+                      data_value={formMMOfVisitValue}
+                      data_fontsize="12px"
+                    >
+                      <option value="MM" disabled>MM</option>
+                      <option value="00">00</option>
+                      <option value="15">15</option>
+                      <option value="30">30</option>
+                      <option value="45">45</option>
+                      {/* <option value="Just Now">(Just now)</option>
+                    <option value="Morning">Dawn</option>
+                    <option value="Morning">Morning / Breafast</option>
+                    <option value="Midday">Late morning - Noon / Lunch</option>
+                    <option value="Afternoon">Mid afternoon</option>
+                    <option value="Evening">Evening / Dinnertime</option>
+                    <option value="Late night">Late night</option>
+                    <option value="Middle of night">Middle of night</option> */}
+                    </SelectBox>
+                    <SelectBox
+                      data_id="formAMPMOfVisitValue"
+                      data_name="formAMPMOfVisitValue"
+                      func_handlechange={dropdownSelected}
+                      data_value={formAMPMOfVisitValue}
+                      data_fontsize="10px"
+                    >
+                      <option value="am/pm" disabled>am/pm</option>
+                      <option value="am">am</option>
+                      <option value="pm">pm</option>
+                      {/* <option value="Just Now">(Just now)</option>
+                    <option value="Morning">Dawn</option>
+                    <option value="Morning">Morning / Breafast</option>
+                    <option value="Midday">Late morning - Noon / Lunch</option>
+                    <option value="Afternoon">Mid afternoon</option>
+                    <option value="Evening">Evening / Dinnertime</option>
+                    <option value="Late night">Late night</option>
+                    <option value="Middle of night">Middle of night</option> */}
+                    </SelectBox>
+                  </div>
                 </div>
               </div>
 
@@ -252,7 +309,9 @@ const mapStateToProps = (state, ownProps) => {
     noBathrooomValue: state.formState.noBathrooomValue,
     formRestroomTypeValue: state.formState.formRestroomTypeValue,
     formLocationNotesValue: state.formState.formLocationNotesValue,
-    formTimeOfVisitValue: state.formState.formTimeOfVisitValue,
+    formHHOfVisitValue: state.formState.formHHOfVisitValue,
+    formMMOfVisitValue: state.formState.formMMOfVisitValue,
+    formAMPMOfVisitValue: state.formState.formAMPMOfVisitValue,
     formOutOfOrderValue: state.formState.formOutOfOrderValue,
   }
 }

@@ -296,7 +296,8 @@ class MapSection extends Component {
       this.map_setCenter(this.currentMap, geolocLat, geolocLng);
       this.setState({
         movedMap: false,
-        fsMarkers: []
+        // fsMarkers: []
+        // clearing markers here seemed to be unneeded 4/23/21
       })
       this.map_setZoom(this.currentMap, 17);
       // this.renderFS();
@@ -340,7 +341,7 @@ class MapSection extends Component {
               optionToUpdate: false
             })
           );
-
+          // console.log("async promse cleared markers...")
         });
 
         const result = await promise; // wait until the promise resolves (*)

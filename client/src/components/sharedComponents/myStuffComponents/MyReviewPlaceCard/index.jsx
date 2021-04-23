@@ -79,7 +79,14 @@ export class MyReviewPlaceCard extends Component {
       // page1
       formLocationValue: data.basicInfo.locationValue,
       formRestroomTypeValue: data.basicInfo.restroomUsed,
+      // formTimeOfVisitValue: data.basicInfo.timeOfVisit,
+      // formTimeOfVisitValue: data.basicInfo.timeOfVisit,
+      // formTimeOfVisitValue: data.basicInfo.timeOfVisit,
       formTimeOfVisitValue: data.basicInfo.timeOfVisit,
+      formHHOfVisitValue: data.basicInfo.HHOfVisit,
+      formMMOfVisitValue: data.basicInfo.MMOfVisit,
+      formAMPMOfVisitValue: data.basicInfo.AMPMOfVisit,
+
       formLocationNotesValue: data.basicInfo.locationNotes,
       formOutOfOrderValue: data.basicInfo.outOfOrder,
 
