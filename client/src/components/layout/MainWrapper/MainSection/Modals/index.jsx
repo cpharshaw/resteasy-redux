@@ -6,7 +6,7 @@ import { modalToggled, modalClosed } from '../../../../../store/actions/modalAct
 import { formNext, formPrev, resetForm } from '../../../../../store/actions/formActions';
 import { signIn } from '../../../../../store/actions/authActions';
 import { selectSection } from '../../../../../store/actions/sectionActions';
-import { locationChosen, cancelReviewDelete } from '../../../../../store/actions/formActions';
+import { locationChosen, cancelReviewDelete, initiateReviewEdit, initiateReviewDelete } from '../../../../../store/actions/formActions';
 import FormNavButton from '../../../../sharedComponents/formComponents/FormNavButton';
 import HorizontalRule from '../../../../sharedComponents/general/HorizontalRule';
 import ModalFormReset from './ModalFormReset';
@@ -120,8 +120,67 @@ export class ModalContainer extends Component {
   }
 
   editReviewClicked = (e, place) => {
-    // this.props.initiateReviewEdit(reviewToEdit);
-    // this.props.selectSection("review");
+    e.preventDefault();
+    console.log("editReviewClicked, 'review' parameter ---> ", place)
+    const placeID = place.id
+
+    const data = this.props.userReviews2.filter(review => {
+      return review.locationID === placeID;
+    })[0];
+
+    console.log("data ---> ", data)
+
+    const reviewToEdit = {
+
+      formStepValue: 1,
+    
+      // formProcessingValue: false,
+
+      // formEditModeValue: true, UNNECESSARY--ENTERED IN USING THE REDUCER DIRECTLY
+    
+      // formRes: null,
+    
+      // page1
+      formLocationValue: data.basicInfo.locationValue,
+      formRestroomTypeValue: data.basicInfo.restroomUsed,
+      // formTimeOfVisitValue: data.basicInfo.timeOfVisit,
+      // formTimeOfVisitValue: data.basicInfo.timeOfVisit,
+      // formTimeOfVisitValue: data.basicInfo.timeOfVisit,
+      formTimeOfVisitValue: data.basicInfo.timeOfVisit,
+      formHHOfVisitValue: data.basicInfo.HHOfVisit,
+      formMMOfVisitValue: data.basicInfo.MMOfVisit,
+      formAMPMOfVisitValue: data.basicInfo.AMPMOfVisit,
+
+      formLocationNotesValue: data.basicInfo.locationNotes,
+      formOutOfOrderValue: data.basicInfo.outOfOrder,
+
+      //page 2
+      formCleanlinessValue: data.scores.cleanliness,
+      formPrivacyValue: data.scores.privacy,
+      formComfortValue: data.scores.comfort,
+      formSafetyValue: data.scores.safety,
+      formStyleValue: data.scores.style,
+
+      //page 3
+      formHandicappedValue: data.features.accessible,
+      formGenderNeutralValue: data.features.genderNeutral,
+      formBabyChangeValue: data.features.babyStation,
+      formScheduleValue: data.features.cleaningSchedule,
+      formAdmissionValue: data.features.admission,
+      formFeeDisplayValue: data.features.price > 0 ? null : "hidden",
+      formFeeValue: data.features.price,
+    
+      //page 4
+      photosArrValue: data.photos,
+      // editPhotosArrValue: data.photos,
+    
+      //page 5
+      formCommentsValue: data.comments,
+      // formMissingValue: false
+    }
+    this.props.initiateReviewEdit(reviewToEdit);
+    this.props.modalClosed();
+    this.props.selectSection("review");
   }
 
   favoriteClicked = (e, place) => {
@@ -305,7 +364,8 @@ export class ModalContainer extends Component {
       formDeleteModeValue
     } = this.props;
 
-    // console.log("loginCredentialValue in render before return: ", loginCredentialValue)
+    // console.log("selectedMarkerValue in render before return: ", selectedMarkerValue)
+    // console.log("selectedPlaceValue in render before return: ", selectedPlaceValue)
 
     const foursquarePlaces = !foursquareValue ? null : (
 
@@ -617,29 +677,19 @@ export class ModalContainer extends Component {
 
                           <div className="row mb-2">
                             <div className="col-2"></div>
-                            {/* if reviewed already, "Edit Review" intead */}
-                            {console.log("selectedPlaceValue ---> ", selectedPlaceValue)}
-                            {console.log("userReviews1 ---> ", this.props.userReviews1)}
 
                             {
-
-                              this.props.userReviews1.map(userReview => {
-                                if (userReview.locationID === selectedPlaceValue.ID) {
-                                  return (
-                                    <div className="col-8" onClick={e => this.addReviewClicked(e, selectedPlaceValue)}>
-                                      <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span></p>
-                                    </div>
-                                  );
-                                } else {
-                                  return (
-                                    <div className="col-8" onClick={e => this.editReviewClicked(e, selectedPlaceValue)}>
-                                      <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Edit Review</span></p>
-                                    </div>
-                                  )
-                                }
-                              })
-
-
+                              this.props.userReviews1 && this.props.userReviews1.map(userReview => {
+                                return userReview.locationID === selectedMarkerValue.store_place.placeID;
+                              }).indexOf(true) >= 0 ? (
+                                  <div className="col-8" onClick={e => this.editReviewClicked(e, selectedPlaceValue)}>
+                                    <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}><b>Edit Your Existing Review</b></span></p>
+                                  </div>
+                                ) : (
+                                  <div className="col-8" onClick={e => this.addReviewClicked(e, selectedPlaceValue)}>
+                                    <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span></p>
+                                  </div>
+                                )
                             }
 
 
@@ -880,7 +930,9 @@ const mapDispatchToProps = (dispatch) => {
     locationChosen: location => dispatch(locationChosen(location)),
     cancelReviewDelete: () => dispatch(cancelReviewDelete()),
     modalClosed: () => dispatch(modalClosed()),
-    signIn: () => dispatch(signIn())
+    signIn: () => dispatch(signIn()),
+    initiateReviewEdit: reviewData => dispatch(initiateReviewEdit(reviewData)),
+    initiateReviewDelete: reviewToDelete => dispatch(initiateReviewDelete(reviewToDelete))
   }
 }
 
