@@ -489,11 +489,16 @@ class MapSection extends Component {
                 data_placeaddress={selectedPlaceValue.location.address || foursquareValue[0].location.address}
                 data_placecategory={selectedPlaceValue.categories[0] ? selectedPlaceValue.categories[0].name : null || foursquareValue[0].categories[0] ? foursquareValue[0].categories[0].name : null}
                 data_placedistance={selectedPlaceValue.distance || foursquareValue[0].distance}
-                
+
                 data_placemarker={selectedMarkerValue.icon}
                 data_placenumreviews={selectedMarkerValue.store_place.allCnt}
                 data_placerating={selectedMarkerValue.store_place.allWeightedAvg}
-                data_userreviewed={true}
+                data_userreviewed={
+                  this.props.userReviews1 ? this.props.userReviews1.map(userReview => {
+                    // console.log("userReview, selectedMarkerValue ---> ", userReview, selectedMarkerValue)
+                    return userReview.locationID === selectedMarkerValue.store_place.placeID;
+                  }).indexOf(true) >= 0 : false
+                }
                 data_userbookmarked={true}
               // data_place={place}
               />
@@ -533,7 +538,7 @@ const mapStateToProps = (state, ownProps) => {
     geolocationLatValue: state.geolocationState.geolocationLatValue,
     geolocationLngValue: state.geolocationState.geolocationLngValue,
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
-
+    userReviews1: state.auth.userReviews,
     foursquareValue: state.foursquareState.foursquareValue,
 
     modalState: state.modalState,

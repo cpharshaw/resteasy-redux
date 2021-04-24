@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
+import { firestoreConnect } from 'react-redux-firebase';
 import PlaceCard from './../../../../../../sharedComponents/mapListComponents/PlaceCard';
 
 // import { statement } from '@babel/template';
@@ -66,6 +66,8 @@ class ListSection extends Component {
     const selectedMarkerValue = this.props.selectedMarkerValue;
     const selectedPlaceValue = this.props.selectedPlaceValue;
 
+    // const loginCredentialValue = this.props.loginCredentialValue; const prev_loginCredentialValue = prevProps.loginCredentialValue; const update_loginCredentialValue = JSON.stringify(prev_loginCredentialValue) !== JSON.stringify(loginCredentialValue);
+
     // console.log("prev_foursquareValue", prev_foursquareValue)
     // console.log("foursquareValue", fsPlacesUpdate)
     // console.log("list allMapDataLoaded", allMapDataLoaded)
@@ -103,12 +105,18 @@ class ListSection extends Component {
         const placeRating = place.allWeightedAvg;
         const placeMarker = this.state.markerIcon;
         const placeNumReviews = place.allCnt;
-        const userReviwed = getRandomInt(0, 10) === 2 ? true : false;
+        const userReviewed = this.props.userReviews1 ? this.props.userReviews1.map(userReview => {
+          return userReview.locationID === place.id;
+        }).indexOf(true) >= 0 : false;
+        // const userReviewed = true;
+        // console.log("compare ---> ", place.id === userReview.locationID, place.id, userReview.locationID);
+
+        
         const userBookmarked = getRandomInt(0, 10) === 3 ? true : false;
 
 
         return (
-          <div className="row" key={i + "listFSkey"} >
+          <div className="row" key={i + "listFSkey"}>
             <div className="col py-1">
               <PlaceCard
                 data_place={place}
@@ -119,7 +127,7 @@ class ListSection extends Component {
                 data_placedistance={placeDistance}
                 data_placemarker={placeMarker}
                 data_placenumreviews={placeNumReviews}
-                data_userreviewed={userReviwed}
+                data_userreviewed={userReviewed}
                 data_userbookmarked={userBookmarked}
                 data_placerating={placeRating}
               />
@@ -163,7 +171,7 @@ class ListSection extends Component {
             msOverflowX: "hidden",
             overflowY: "hidden",
             msOverflowY: "hidden",
-            
+
           }}
         >
           {this.state.placeArr}
@@ -199,8 +207,10 @@ const mapStateToProps = (state, ownProps) => {
     numGeolocationUpdates: state.geolocationState.numGeolocationUpdates,
 
     foursquareValue: state.foursquareState.foursquareValue,
-
+    userReviews1: state.auth.userReviews,
+    userReviews2: state.firestore.ordered.reviews,
     modalState: state.modalState,
+    loginCredentialValue: state.auth.loginCredentialValue,
   }
 }
 
@@ -209,10 +219,14 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
   connect(mapStateToProps, null),
-  // firestoreConnect([
-  //   {
-  //     collection: 'reviews',
-  //     orderBy: ['createdAt', 'desc']
-  //   }
-  // ])
+  firestoreConnect(props => {
+    if (!props.loginCredentialValue) return []
+    return [
+      {
+        collection: 'reviews',
+        where: ['userID', '==', props.loginCredentialValue.uid],
+        orderBy: ['reviewDatetime', 'desc']
+      }
+    ]
+  })
 )(ListSection);

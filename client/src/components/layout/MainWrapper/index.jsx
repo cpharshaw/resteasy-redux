@@ -54,7 +54,7 @@ class MainWrapper extends Component {
 
     const allMapDataLoaded = this.props.allMapDataLoaded; const prev_allMapDataLoaded = prevProps.allMapDataLoaded; const update_allMapDataLoaded = allMapDataLoaded !== prev_allMapDataLoaded;
 
-
+    const loginCredentialValue = this.props.loginCredentialValue; const prev_loginCredentialValue = prevProps.loginCredentialValue; const update_loginCredentialValue = JSON.stringify(prev_loginCredentialValue) !== JSON.stringify(loginCredentialValue);
     // console.log("update_allMapDataLoaded, prevProps.geolocationStatus ---> ", update_allMapDataLoaded, prevProps.geolocationStatus);
     // console.log("update_allMapDataLoaded, this.props.geolocationStatus ---> ", update_allMapDataLoaded, this.props.geolocationStatus);
 
@@ -85,14 +85,15 @@ class MainWrapper extends Component {
       // console.log("ctrLat", ctrLat);
       // console.log("ctrLng", ctrLng);
       // const fsLL = ctrLat + "," + ctrLng;
-
-
-
       // 3/13/21 @ 5:14PM ... UNCOMMENT THIS AFTER FINISHED WITH MYSTUFF-SETTINGS 
       this.props.getPlacesFromFoursquare("center");
 
     }
-
+    
+    if (this.props.initialMapTilesLoaded && allMapDataLoaded && update_loginCredentialValue) {
+      // console.log("from mainWrapper - loginCredentialValue ---> ", loginCredentialValue)
+      this.props.getPlacesFromFoursquare("center");
+    }
     // console.log("from mainWrapper - numCenterUpdates: ", numCenterUpdates)
     // console.log("from mainWrapper - ctrLat, ctrLng: ", ctrLat, ctrLng)
 
@@ -173,7 +174,8 @@ const mapStateToProps = (state) => {
     initialMapTilesLoaded: state.mapState.initialMapTilesLoaded,
     allMapDataLoaded: state.mapState.allMapDataLoaded(),
     foursquareValue: state.foursquareState.foursquareValue,
-    formEditModeValue: state.formState.formEditModeValue
+    formEditModeValue: state.formState.formEditModeValue,
+    loginCredentialValue: state.auth.loginCredentialValue
   }
 }
 

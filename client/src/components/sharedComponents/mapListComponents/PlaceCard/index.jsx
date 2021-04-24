@@ -174,12 +174,11 @@ export class PlaceCard extends Component {
                     </svg>
                   )
               }
-
             </div>
 
             {/* <div className="col"> */}
 
-              {/* {
+            {/* {
                 data_userbookmarked ? (
 
                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -246,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     modalToggled: (selectedModal) => dispatch(modalToggled(selectedModal)),
     storeSelectedPlace: (place) => dispatch(storeSelectedPlace(place)),
-    
+
   }
 }
 

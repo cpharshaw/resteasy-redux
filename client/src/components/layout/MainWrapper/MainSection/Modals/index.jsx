@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import { modalToggled, modalClosed } from '../../../../../store/actions/modalActions';
 import { formNext, formPrev, resetForm } from '../../../../../store/actions/formActions';
 import { signIn } from '../../../../../store/actions/authActions';
@@ -116,7 +117,11 @@ export class ModalContainer extends Component {
     this.props.modalClosed();
     if (place) this.props.formNext("addReviewStep1");
     if (place) this.props.selectSection("review");
+  }
 
+  editReviewClicked = (e, place) => {
+    // this.props.initiateReviewEdit(reviewToEdit);
+    // this.props.selectSection("review");
   }
 
   favoriteClicked = (e, place) => {
@@ -574,11 +579,9 @@ export class ModalContainer extends Component {
                                                         }
                                                       </span>&nbsp;</p>
                                                     <p className="ta-l mt-1">
-                                                      {console.log("review.comments ---> ", review.comments, ";;; review.comments.length ---> ", review.comments.length)}
-                                                      {console.log("review.photos ---> ", review.photos, ";;; review.photos.length ---> ", review.photos.length)}
                                                       <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>&nbsp;
-                                            <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>{review.comments.length > 2 ? review.comments : null}</span>&nbsp;
-                                            <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
+                                                      <span style={{ fontStyle: "italic", fontSize: "12.5px" }}>{review.comments.length > 2 ? review.comments : null}</span>&nbsp;
+                                                      <span style={{ fontSize: "19px", fontStyle: "italic" }}>{review.comments.length > 2 ? '"' : null}</span>
                                                     </p>
                                                     <div className="row mt-2 mb-2">
                                                       {review.photos.length >= 1 ?
@@ -614,11 +617,32 @@ export class ModalContainer extends Component {
 
                           <div className="row mb-2">
                             <div className="col-2"></div>
-                            <div className="col-8" onClick={e => this.addReviewClicked(e, selectedPlaceValue)}>
+                            {/* if reviewed already, "Edit Review" intead */}
+                            {console.log("selectedPlaceValue ---> ", selectedPlaceValue)}
+                            {console.log("userReviews1 ---> ", this.props.userReviews1)}
 
-                              {/* if reviewed already, "Edit Review" intead */}
-                              <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span></p>
-                            </div>
+                            {
+
+                              this.props.userReviews1.map(userReview => {
+                                if (userReview.locationID === selectedPlaceValue.ID) {
+                                  return (
+                                    <div className="col-8" onClick={e => this.addReviewClicked(e, selectedPlaceValue)}>
+                                      <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Add Review</span></p>
+                                    </div>
+                                  );
+                                } else {
+                                  return (
+                                    <div className="col-8" onClick={e => this.editReviewClicked(e, selectedPlaceValue)}>
+                                      <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}>Edit Review</span></p>
+                                    </div>
+                                  )
+                                }
+                              })
+
+
+                            }
+
+
                             <div className="col-2 jc-c ai-c ac-c">
                               {/* <div className="col-2 jc-c ai-c ac-c" onClick={e => this.favoriteClicked(e, selectedPlaceValue)}> */}
                               {/* <img src="https://img.icons8.com/material-outlined/21/383838/bookmark-ribbon--v1.png" /> */}
@@ -839,7 +863,9 @@ const mapStateToProps = (state, ownProps) => {
     // reviews: state.firestore.ordered.reviews,
     loginCredentialValue: state.auth.loginCredentialValue,
     foursquareValue: state.foursquareState.foursquareValue,
-    formDeleteModeValue: state.formState.formDeleteModeValue
+    formDeleteModeValue: state.formState.formDeleteModeValue,
+    userReviews1: state.auth.userReviews,
+    userReviews2: state.firestore.ordered.reviews
   }
 }
 
@@ -859,5 +885,15 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect(props => {
+    if (!props.loginCredentialValue) return []
+    return [
+      {
+        collection: 'reviews',
+        where: ['userID', '==', props.loginCredentialValue.uid],
+        orderBy: ['reviewDatetime', 'desc']
+      }
+    ]
+  })
 )(ModalContainer);

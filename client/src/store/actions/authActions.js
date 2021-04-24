@@ -134,7 +134,7 @@ export const signIn = (credentials) => {
         // console.log("currentUserMetadata ---> ", currentUserMetadata)
         // console.log("currentUserMetadata.creationTime ---> ", currentUserMetadata.creationTime)
         // console.log("currentUserMetadata.lastSignInTime ---> ", currentUserMetadata.lastSignInTime)
-        console.log("newuser ---> ", result.additionalUserInfo.isNewUser)
+        // console.log("newuser ---> ", result.additionalUserInfo.isNewUser)
         if (newUser) {
 
           console.log("new user");
