@@ -30,6 +30,7 @@ export class RadioInput extends Component {
           width: "initial",
           marginLeft: "5px",
           marginRight: "5px",
+          maxHeight: 'fit-content'
         }}
       />
     )

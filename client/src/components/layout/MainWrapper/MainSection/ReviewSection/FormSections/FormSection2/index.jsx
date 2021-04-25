@@ -78,6 +78,7 @@ export class FormSection2 extends Component {
 
           <div className="row">
             <div className="col-6">
+              &nbsp;
               < FieldLabel
                 data_text="*Cleanliness"
                 data_htmlFor="formCleanlinessValue"
@@ -86,37 +87,52 @@ export class FormSection2 extends Component {
             <div className="col-6">
               <div className="row">
                 {/* TODO - create a loop to create input fields using array of names */}
-                <RadioInput
-                  data_value="1"
-                  data_name="formCleanlinessValue"
-                  data_checked={formCleanlinessValue === "1" ? true : false}
-                  func_handlechange={radioSelected}
-                />
+                <div className="col">
+                  <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>1</span>
+                  <RadioInput
+                    data_value="1"
+                    data_name="formCleanlinessValue"
+                    data_checked={formCleanlinessValue === "1" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
                 {/* <span>|</span> */}
-                <RadioInput
-                  data_value="2"
-                  data_name="formCleanlinessValue"
-                  data_checked={formCleanlinessValue === "2" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="3"
-                  data_name="formCleanlinessValue"
-                  data_checked={formCleanlinessValue === "3" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="4"
-                  data_name="formCleanlinessValue"
-                  data_checked={formCleanlinessValue === "4" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="5"
-                  data_name="formCleanlinessValue"
-                  data_checked={formCleanlinessValue === "5" ? true : false}
-                  func_handlechange={radioSelected}
-                />
+                <div className="col">
+                <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
+                  <RadioInput
+                    data_value="2"
+                    data_name="formCleanlinessValue"
+                    data_checked={formCleanlinessValue === "2" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
+                  <RadioInput
+                    data_value="3"
+                    data_name="formCleanlinessValue"
+                    data_checked={formCleanlinessValue === "3" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
+                  <RadioInput
+                    data_value="4"
+                    data_name="formCleanlinessValue"
+                    data_checked={formCleanlinessValue === "4" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>5</span>
+                  <RadioInput
+                    data_value="5"
+                    data_name="formCleanlinessValue"
+                    data_checked={formCleanlinessValue === "5" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
                 {/* <RadioInput
                   data_value="6"
                   data_name="formCleanlinessValue"

@@ -1,6 +1,6 @@
 const initState = {
 
-  formStepValue: 0,
+  formStepValue: 2,
 
   formProcessingValue: false,
 
