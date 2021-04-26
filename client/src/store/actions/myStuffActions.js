@@ -44,3 +44,17 @@ export const storeSettingsGenderPreference = (newGenderPreference) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
   }
 }
+
+
+export const storeMapListGenderPreference = (newGenderPreference) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+    dispatch({
+      type: 'MAPLIST_GENDERPREFERENCE_RECEIVED',
+      payload: newGenderPreference,
+    })
+
+    // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
+  }
+}
+

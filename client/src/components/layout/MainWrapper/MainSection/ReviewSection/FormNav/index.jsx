@@ -11,7 +11,7 @@ export class ReviewMainNav extends Component {
 
   resetClicked(e, editMode) {
     e.preventDefault();
-    
+
     // console.log("reset clicked");
     this.props.modalToggled("formResetModal");
     // if (editMode) this.props.selectSection("myStuff");
@@ -36,18 +36,31 @@ export class ReviewMainNav extends Component {
               {/* spacer */}
             </div>
 
+
+            {/* // <div className="col-4 ai-c jc-fs pt-2 bg-purple" > */}
+            {/* backgroundColor: "#E8E8E8", */}
             {
-              formStepValue > 0 ? (
-                // <div className="col-4 ai-c jc-fs pt-2 bg-purple" >
-                <div className="col-4 ai-c jc-fe " >
+              formStepValue === 1 && formEditModeValue ? (
+                <div className="col-4 ai-c jc-fe" >
                   <FormNavButton
                     data_text="Back"
                     data_width="100px"
-                    data_classes="button-form-nav"
-                    func_navcommand="prev"
+                    data_classes="button-form-nav-dead"
+                    func_navcommand=""
                   />
                 </div>
-              ) : null
+              )
+                :
+                formStepValue > 0 ? (
+                  <div className="col-4 ai-c jc-fe" >
+                    <FormNavButton
+                      data_text="Back"
+                      data_width="100px"
+                      data_classes="button-form-nav"
+                      func_navcommand="prev"
+                    />
+                  </div>
+                ) : null
             }
 
             {/* <div className="col-4 ai-c jc-fs pt-2 bg-orange"> */}
@@ -139,7 +152,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     formStepValue: state.formState.formStepValue,
     formEditModeValue: state.formState.formEditModeValue,
-    formMissingValue: state.formState.formMissingValue
+    formMissingValue: state.formState.formMissingValue,
+    formEditModeValue: state.formState.formEditModeValue
   }
 }
 

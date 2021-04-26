@@ -84,16 +84,11 @@ class ListSection extends Component {
 
         // console.log("inside map fsPlacesUpdate")
 
-        const getRandomInt = (min, max) => {
-
-          const minNum = Math.ceil(min);
-          const maxNum = Math.floor(max);
-
-          // console.log("minNum: ", minNum)
-          // console.log("maxNum: ", maxNum)
-
-          return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
-        }
+        // const getRandomInt = (min, max) => {
+        //   const minNum = Math.ceil(min);
+        //   const maxNum = Math.floor(max);
+        //   return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
+        // }
 
         // placeholders
 
@@ -112,7 +107,7 @@ class ListSection extends Component {
         // console.log("compare ---> ", place.id === userReview.locationID, place.id, userReview.locationID);
 
         
-        const userBookmarked = getRandomInt(0, 10) === 3 ? true : false;
+        // const userBookmarked = getRandomInt(0, 10) === 3 ? true : false;
 
 
         return (
@@ -128,7 +123,7 @@ class ListSection extends Component {
                 data_placemarker={placeMarker}
                 data_placenumreviews={placeNumReviews}
                 data_userreviewed={userReviewed}
-                data_userbookmarked={userBookmarked}
+                // data_userbookmarked={userBookmarked}
                 data_placerating={placeRating}
               />
             </div>

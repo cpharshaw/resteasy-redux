@@ -1,5 +1,6 @@
 const initState = {
   currentModal: "",
+  mapListModal: "",
   // modals
   //page1
   formLocationModal: false,
@@ -38,21 +39,39 @@ const initState = {
 
   formResetModal: false,
 
+  locationPickerModal: false,
+  filtersModal: false,
+
   settingsModal: false
 
 }
 
 const modalReducer = (state = initState, action) => {
+
+  const modalName = action.payload;
+
   switch (action.type) {
 
     case "MODAL_TOGGLED":
       // console.log("modalReducer: ", action.payload)
-      const modalName = action.payload;
-
       return {
         ...state,
         currentModal: modalName,
         [modalName]: !state[modalName]
+      };
+
+    case "MAPLIST_MODAL_TOGGLED":
+      // console.log("MAPLIST_MODAL_TOGGLED: ", action.payload);
+      return {
+        ...state,
+        [modalName]: !state[modalName]
+      };
+
+
+    case "CLOSE_MAPLIST_MODALS":
+      // console.log("CLOSE_MAPLIST_MODALS");
+      return {
+        ...initState
       };
 
     case "MODAL_CLOSED":

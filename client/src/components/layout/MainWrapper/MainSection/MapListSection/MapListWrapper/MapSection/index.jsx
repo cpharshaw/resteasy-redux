@@ -408,6 +408,8 @@ class MapSection extends Component {
 
     const {
       settingsModal,
+      filtersModal,
+      locationPickerModal
     } = this.props.modalState;
 
     const {
@@ -480,30 +482,29 @@ class MapSection extends Component {
 
           {/* {this.state.fsMarkers[0] ? console.log("marker getIcon test: ", this.props) : null} */}
           {
-            settingsModal || !selectedPlaceValue || !selectedMarkerValue ? null : (
-              // selectedPlaceValue ? console.log("selectedMarkerValue ---> ", selectedMarkerValue) : null,
-              <PlaceCard
-                data_componentsource="map"
-                data_place={selectedPlaceValue}
-                data_placename={selectedPlaceValue.name || foursquareValue[0].name}
-                data_placeaddress={selectedPlaceValue.location.address || foursquareValue[0].location.address}
-                data_placecategory={selectedPlaceValue.categories[0] ? selectedPlaceValue.categories[0].name : null || foursquareValue[0].categories[0] ? foursquareValue[0].categories[0].name : null}
-                data_placedistance={selectedPlaceValue.distance || foursquareValue[0].distance}
+            settingsModal || !selectedPlaceValue || !selectedMarkerValue || filtersModal || locationPickerModal ? null :
+              (
+                <PlaceCard
+                  data_componentsource="map"
+                  data_place={selectedPlaceValue}
+                  data_placename={selectedPlaceValue.name || foursquareValue[0].name}
+                  data_placeaddress={selectedPlaceValue.location.address || foursquareValue[0].location.address}
+                  data_placecategory={selectedPlaceValue.categories[0] ? selectedPlaceValue.categories[0].name : null || foursquareValue[0].categories[0] ? foursquareValue[0].categories[0].name : null}
+                  data_placedistance={selectedPlaceValue.distance || foursquareValue[0].distance}
 
-                data_placemarker={selectedMarkerValue.icon}
-                data_placenumreviews={selectedMarkerValue.store_place.allCnt}
-                data_placerating={selectedMarkerValue.store_place.allWeightedAvg}
-                data_userreviewed={
-                  this.props.userReviews1 ? this.props.userReviews1.map(userReview => {
-                    // console.log("userReview, selectedMarkerValue ---> ", userReview, selectedMarkerValue)
-                    return userReview.locationID === selectedMarkerValue.store_place.placeID;
-                  }).indexOf(true) >= 0 : false
-                }
-                data_userbookmarked={true}
-              // data_place={place}
-              />
+                  data_placemarker={selectedMarkerValue.icon}
 
-            )
+                  data_placenumreviews={selectedMarkerValue.store_place.allCnt}
+                  data_placerating={selectedMarkerValue.store_place.allWeightedAvg}
+                  data_userreviewed={
+                    this.props.userReviews1 ? this.props.userReviews1.map(userReview => {
+                      return userReview.locationID === selectedMarkerValue.store_place.placeID;
+                    }).indexOf(true) >= 0 : false
+                  }
+                  data_userbookmarked={true}
+                // data_place={place}
+                />
+              )
           }
         </div>
       </div>

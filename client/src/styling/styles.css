@@ -31,6 +31,14 @@
 	/* text-shadow: 0 0 2px lightgrey !important; */
 }
 
+.button-form-nav-dead {
+	/* border: 2px solid #0abab5 !important; */
+	background-color: lightgrey ;
+	color: #f5f5f5;
+	font-style: italic !important;
+	/* text-shadow: 0 0 2px lightgrey !important; */
+}
+
 .button-form-modal {
 	background: transparent;
 	font-style: italic !important;
@@ -44,6 +52,8 @@
 
 .bg-primary-light {
 	background-color: #0ce9e2 ;
+	border: 1px solid whitesmoke;
+	color: whitesmoke;
 }
 
 .bg-primary-dark {
@@ -52,6 +62,8 @@
 
 .bg-primary-xlight {
 	background-color: #c2e9e6;
+	border: 1px solid whitesmoke;
+	color: grey;
 }
 
 .bg-primary-xdark {

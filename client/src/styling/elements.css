@@ -72,10 +72,11 @@
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 7px;
+  min-width: 45px;
   font-size: 12px;
   flex-wrap: nowrap;
   white-space: nowrap;
-  color: grey;
+  color: whitesmoke;
 }
 
 .spacer-div {

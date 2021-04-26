@@ -499,10 +499,10 @@ export class MyStuffSection extends Component {
                                 textOverflow: "ellipsis"
                               }}
                             >
-                              <option value="any">No Preference</option>
-                              <option value="mens">Men's</option>
-                              <option value="womens">Women's</option>
-                              <option value="genderNeutral">Family/Gender-neutral</option>
+                              <option value="All">All</option>
+                              <option value="Men's">Men's</option>
+                              <option value="Women's">Women's</option>
+                              <option value="Gender-Neutral">Family/Gender-Neutral</option>
                             </select>
                           </div>
                         </div>

@@ -361,8 +361,14 @@ export class ModalContainer extends Component {
       formRestroomTypeValue,
       loginCredentialValue,
       formEditModeValue,
-      formDeleteModeValue
+      formDeleteModeValue,
+      mapListGenderPreference,
+      mapListGenderPreferenceUpdates,
+      settingsGenderPreference
     } = this.props;
+
+    const genderPref = mapListGenderPreferenceUpdates > 0 ? mapListGenderPreference : settingsGenderPreference;
+
 
     // console.log("selectedMarkerValue in render before return: ", selectedMarkerValue)
     // console.log("selectedPlaceValue in render before return: ", selectedPlaceValue)
@@ -383,6 +389,7 @@ export class ModalContainer extends Component {
         const stateCode = place.location.state;
         const zip = place.location.postalCode;
         const country = place.location.country;
+
 
         // const signInButtonComponent = () => {
         //   return (
@@ -535,8 +542,10 @@ export class ModalContainer extends Component {
                               <span className="mt-1" style={{ fontSize: "11px" }}>{selectedPlaceValue ? selectedPlaceValue.location.address : "your house"}</span>
                             </div>
                             <div className="col-2 ai-c">
-                              <p>
-                                <span style={{ fontSize: "12px" }}>(</span><span style={{ fontSize: "11px", fontStyle: "italic" }}>{formRestroomTypeValue ? " Men's " : formRestroomTypeValue}</span><span style={{ fontSize: "12px" }}>)</span>
+                              <p> {console.log("mapListGenderPreferenceUpdates ---> ", genderPref)}
+                                {/* <span style={{ fontSize: "12px" }}>(</span> */}
+                                <span style={{ fontSize: "11px", fontStyle: "italic" }}>{genderPref}</span>
+                                {/* <span style={{ fontSize: "12px" }}>)</span> */}
                               </p>
                             </div>
                           </div>
@@ -915,7 +924,10 @@ const mapStateToProps = (state, ownProps) => {
     foursquareValue: state.foursquareState.foursquareValue,
     formDeleteModeValue: state.formState.formDeleteModeValue,
     userReviews1: state.auth.userReviews,
-    userReviews2: state.firestore.ordered.reviews
+    userReviews2: state.firestore.ordered.reviews,
+    mapListGenderPreference: state.myStuffState.mapListGenderPreference,
+    mapListGenderPreferenceUpdates: state.myStuffState.mapListGenderPreferenceUpdates,
+    settingsGenderPreference: state.myStuffState.settingsGenderPreference
   }
 }
 

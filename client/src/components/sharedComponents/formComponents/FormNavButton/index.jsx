@@ -169,28 +169,30 @@ export class FormNavButton extends Component {
       data_width,
       data_flexgrow,
       data_margin,
-      children
+      children,
+      formEditModeValue
     } = this.props;
     // console.log("func_navcommand ---> ", func_navcommand)
     return (
       <button
         onClick={
-          func_navcommand === "next" ? this.nextStep :
-            func_navcommand === "prev" ? this.prevStep :
-              func_navcommand === "cancel" ? () => this.modalCancel() :
-                func_navcommand === "exit" ? () => this.modalCancel(this.props.func_navcommand) :
-                  func_navcommand === "cancelDelete" ? this.cancelDelete : // part of deleting a review
-                    func_navcommand === "confirmDelete" ? this.confirmDelete : // part of deleting a review
-                      func_navcommand === "reset" ? this.resetForm :
-                        func_navcommand === "submit" ? this.submitForm :
-                          func_navcommand === "finish" ? this.finishForm : null
+          func_navcommand === "" ? null :
+            func_navcommand === "next" ? this.nextStep :
+              func_navcommand === "prev" ? this.prevStep :
+                func_navcommand === "cancel" ? () => this.modalCancel() :
+                  func_navcommand === "exit" ? () => this.modalCancel(this.props.func_navcommand) :
+                    func_navcommand === "cancelDelete" ? this.cancelDelete : // part of deleting a review
+                      func_navcommand === "confirmDelete" ? this.confirmDelete : // part of deleting a review
+                        func_navcommand === "reset" ? this.resetForm :
+                          func_navcommand === "submit" ? this.submitForm :
+                            func_navcommand === "finish" ? this.finishForm : null
         }
-
         className={"" + data_classes + ""}
         style={{
           width: data_width ? data_width : "10%",
           // height: data_height ? data_height : "fit-content",
           color: data_textcolor ? data_textcolor : null,
+          backgroundColor: "grey !important",
           // maxHeight: "42px",
           // borderRadius: "3px",
           padding: "9px 0 9px 0",
@@ -227,7 +229,7 @@ const mapStateToProps = (state, ownProps) => {
     formStyleValue: state.formState.formStyleValue,
     formAdmissionValue: state.formState.formAdmissionValue,
     formFeeValue: state.formState.formFeeValue,
-
+    formEditModeValue: state.formState.formEditModeValue,
     formMissingValue: state.formState.formMissingValue
   }
 }

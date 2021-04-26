@@ -8,6 +8,7 @@ import ModalContainer from '../Modals';
 // import LocationModal from '../Modals/LocationModal';
 
 import LocationModal from '../Modals/ModalFormLocationSelector';
+import { storeMapListGenderPreference } from '../../../../../store/actions/myStuffActions';
 
 export class MapListSection extends Component {
 
@@ -19,18 +20,28 @@ export class MapListSection extends Component {
     }
   }
 
+  genderPreferenceSelected = e => {
+    e.preventDefault();
+    const currentTarget_name = e.currentTarget.name;
+
+    console.log("currentTarget_name ---> ", currentTarget_name);
+    this.props.storeMapListGenderPreference(currentTarget_name);
+  }
+
 
   render() {
-    const { selectedSectionValue } = this.props;
+    const { selectedSectionValue, mapListGenderPreference, mapListGenderPreferenceUpdates, settingsGenderPreference } = this.props;
 
     const {
-      settingsModal
+      locationPickerModal,
+      filtersModal
     } = this.props.modalState;
 
     const displayValue = selectedSectionValue === "mapList" ? "flex" : "none";
 
-    // console.log("mapListDisplayValue: ", mapListDisplayValue);
+    console.log("mapListGenderPreference: ", mapListGenderPreference);
 
+    const genderPref = mapListGenderPreferenceUpdates === 0 ? settingsGenderPreference : mapListGenderPreference;
 
     return (
       // <div  className="container-fluid animated fadeIn fast" >
@@ -46,7 +57,8 @@ export class MapListSection extends Component {
             style={{
               position: "absolute",
               top: "0",
-              height: "92.5px"
+              height: "55px"
+              // height: "92.5px"
             }}
           >
             <div className="col">
@@ -55,14 +67,15 @@ export class MapListSection extends Component {
           </div>
 
           {
-            settingsModal ? (
+            locationPickerModal ? (
               <div
                 id="relocate"
                 className="col animated fadeIn fast bg-primary px-2 py-1"
                 style={{
                   zIndex: "999999999",
                   position: "absolute",
-                  top: "92.5px",
+                  top: "55px",
+                  // top: "92.5px",
                   left: "0",
                   right: "0",
                   height: "50px",
@@ -71,19 +84,77 @@ export class MapListSection extends Component {
                   WebkitBackdropFilter: "blur(7px)"
                 }}
               >
-                <LocationModal
-                // data_width="95%"
-                // data_height="92%"
-                // data_border="3px solid #0abab5"
-                />
+                <LocationModal />
+                {/* data_width="95%"
+                data_height="92%"
+                data_border="3px solid #0abab5" */}
+
               </div>
-            ) : null
+            ) :
+
+              filtersModal ? (
+                <div
+                  id="relocate"
+                  className="col animated fadeIn fast bg-primary px-2 py-1"
+                  style={{
+                    zIndex: "999999999",
+                    position: "absolute",
+                    top: "55px",
+                    // top: "92.5px",
+                    left: "0",
+                    right: "0",
+                    height: "50px",
+                    width: "100%",
+                    backdropFilter: "blur(7px)",
+                    WebkitBackdropFilter: "blur(7px)"
+                  }}
+                >
+                  <div className="row">
+
+                    <button className={`${genderPref === "All" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="All"
+                      onClick={e => this.genderPreferenceSelected(e)}
+                    >
+                      <em>All</em>
+                    </button>
+
+
+                    <button className={`${genderPref === "Men's" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="Men's"
+                      onClick={e => this.genderPreferenceSelected(e)}
+                    >
+                      <em>Men's</em>
+                    </button>
+
+
+                    <button className={`${genderPref === "Women's" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="Women's"
+                      onClick={e => this.genderPreferenceSelected(e)}
+                    >
+                      <em>Women's</em>
+                    </button>
+
+
+                    <button className={`${genderPref === "Gender-Neutral" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="Gender-Neutral"
+                      onClick={e => this.genderPreferenceSelected(e)}
+                    >
+                      <em>Gender-Neutral</em>
+                    </button>
+
+
+                    {/* <div className="col-3"><span>Any</span></div>
+                    <div className="col-3"><span>Men's</span></div>
+                    <div className="col-3"><span>Women's</span></div>
+                    <div className="col-3"><span>Gender-Neutral</span></div> */}
+                  </div>
+                </div>
+              )
+
+                : null
           }
 
           <div className="row js-fg" id="mapListWrapper"
             style={{
               position: "absolute",
-              top: "92.5px",
+              top: "55px",
+              // top: "92.5px",
               bottom: "0",
               left: "0",
               right: "0",
@@ -108,14 +179,18 @@ const mapStateToProps = (state, ownProps) => {
     // auth: state.firebase.auth
     selectedSectionValue: ownProps.display,
     modalState: state.modalState,
+    mapListGenderPreference: state.myStuffState.mapListGenderPreference,
+    mapListGenderPreferenceUpdates: state.myStuffState.mapListGenderPreferenceUpdates,
+    settingsGenderPreference: state.myStuffState.settingsGenderPreference
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    storeMapListGenderPreference: (input) => dispatch(storeMapListGenderPreference(input)),
   }
 }
 
 export default compose(
-  connect(mapStateToProps, null)
+  connect(mapStateToProps, mapDispatchToProps)
 )(MapListSection);

@@ -13,7 +13,6 @@ import MyStuffSection from './MyStuffSection/';
 
 export class MainSection extends Component {
 
-
   render() {
 
     const {
