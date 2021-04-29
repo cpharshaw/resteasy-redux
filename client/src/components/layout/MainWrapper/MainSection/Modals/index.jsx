@@ -133,13 +133,13 @@ export class ModalContainer extends Component {
     const reviewToEdit = {
 
       formStepValue: 1,
-    
+
       // formProcessingValue: false,
 
       // formEditModeValue: true, UNNECESSARY--ENTERED IN USING THE REDUCER DIRECTLY
-    
+
       // formRes: null,
-    
+
       // page1
       formLocationValue: data.basicInfo.locationValue,
       formRestroomTypeValue: data.basicInfo.restroomUsed,
@@ -169,13 +169,16 @@ export class ModalContainer extends Component {
       formAdmissionValue: data.features.admission,
       formFeeDisplayValue: data.features.price > 0 ? null : "hidden",
       formFeeValue: data.features.price,
-    
+
       //page 4
       photosArrValue: data.photos,
       // editPhotosArrValue: data.photos,
-    
+
       //page 5
       formCommentsValue: data.comments,
+
+      reviewDatetime: data.reviewDatetime,
+      reviewEditDatetime: data.reviewEditDatetime    
       // formMissingValue: false
     }
     this.props.initiateReviewEdit(reviewToEdit);
@@ -319,11 +322,11 @@ export class ModalContainer extends Component {
       return chartreuseMarker
     };
 
-    if (score >= 3.50) {
+    if (score >= 3.00) {
       return yellowMarker
     };
 
-    if (score >= 2.25) {
+    if (score >= 2.00) {
       return orangeMarker
     };
 
@@ -333,18 +336,24 @@ export class ModalContainer extends Component {
   }
 
   timeAgoInMin = (reviewDatetime, basicInfo) => {
-    return (((Date.now()
-      -
-      new Date(
-        new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getFullYear(),
-        new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getMonth(),
-        new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getDate(),
-        (parseInt(basicInfo.HHOfVisit) + (basicInfo.AMPMOfVisit == "pm" ? 12 : 0)),
-        parseInt(basicInfo.MMOfVisit)
-      ).getTime()
-    ) / 1000) / 60)
-  }
 
+    const now = Date.now();
+
+    const reviewDate = new Date(
+      new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getFullYear(),
+      new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getMonth(),
+      new Date((reviewDatetime.nanoseconds / 1000000) + (reviewDatetime.seconds * 1000)).getDate(),
+      (parseInt(basicInfo.HHOfVisit) + (basicInfo.AMPMOfVisit == "pm" ? 12 : 0)),
+      parseInt(basicInfo.MMOfVisit)
+    );
+
+    // console.log("now ---> ", now);
+    // console.log("reviewDate ---> ", reviewDate);
+
+    return (
+      (((now - reviewDate.getTime()) / 1000) / 60)
+    )
+  }
 
   render() {
 
@@ -363,11 +372,7 @@ export class ModalContainer extends Component {
       formEditModeValue,
       formDeleteModeValue,
       mapListGenderPreference,
-      mapListGenderPreferenceUpdates,
-      settingsGenderPreference
     } = this.props;
-
-    const genderPref = mapListGenderPreferenceUpdates > 0 ? mapListGenderPreference : settingsGenderPreference;
 
 
     // console.log("selectedMarkerValue in render before return: ", selectedMarkerValue)
@@ -533,7 +538,7 @@ export class ModalContainer extends Component {
                               </div>
                               <div className="row">
                                 <div className="col ai-c">
-                                  <p style={{ fontStyle: "italic", fontSize: "16px" }}><b>{selectedPlaceValue.allWeightedAvg ? parseFloat(selectedPlaceValue.allWeightedAvg.toFixed(1)) : null}</b></p>
+                                  <p style={{ fontStyle: "italic", fontSize: "16px" }}><b>{selectedPlaceValue.allWeightedAvg ? parseFloat(selectedPlaceValue.allWeightedAvg.toFixed(3).substring(0, 3)) : null}</b></p>
                                 </div>
                               </div>
                             </div>
@@ -542,9 +547,9 @@ export class ModalContainer extends Component {
                               <span className="mt-1" style={{ fontSize: "11px" }}>{selectedPlaceValue ? selectedPlaceValue.location.address : "your house"}</span>
                             </div>
                             <div className="col-2 ai-c">
-                              <p> {console.log("mapListGenderPreferenceUpdates ---> ", genderPref)}
+                              <p>
                                 {/* <span style={{ fontSize: "12px" }}>(</span> */}
-                                <span style={{ fontSize: "11px", fontStyle: "italic" }}>{genderPref}</span>
+                                <span style={{ fontSize: "11px", fontStyle: "italic" }}>{mapListGenderPreference}</span>
                                 {/* <span style={{ fontSize: "12px" }}>)</span> */}
                               </p>
                             </div>
@@ -639,11 +644,11 @@ export class ModalContainer extends Component {
                                                       <span>&nbsp;&nbsp;</span>
                                                       <span style={{ fontSize: "9px", color: "grey" }}>
                                                         {
-                                                          this.timeAgoInMin(review.reviewDatetime, review.basicInfo) < 60 ? this.timeAgoInMin(review.reviewDatetime, review.basicInfo) + " m" :
-                                                            this.timeAgoInMin(review.reviewDatetime, review.basicInfo) < 1440 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 60) + " h" :
+                                                          this.timeAgoInMin(review.reviewDatetime, review.basicInfo) < 60 ? this.timeAgoInMin(review.reviewDatetime, review.basicInfo) + " min" :
+                                                            this.timeAgoInMin(review.reviewDatetime, review.basicInfo) < 1440 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 60) + " hr" :
                                                               this.timeAgoInMin(review.reviewDatetime, review.basicInfo) <= 10080 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 1440) + " d" :
-                                                                this.timeAgoInMin(review.reviewDatetime, review.basicInfo) <= 40320 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 10080) + " w" :
-                                                                  this.timeAgoInMin(review.reviewDatetime, review.basicInfo) <= 524160 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 40320) + " m" :
+                                                                this.timeAgoInMin(review.reviewDatetime, review.basicInfo) <= 40320 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 10080) + " wk" :
+                                                                  this.timeAgoInMin(review.reviewDatetime, review.basicInfo) <= 524160 ? Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 40320) + " mon" :
                                                                     Math.floor(this.timeAgoInMin(review.reviewDatetime, review.basicInfo) / 524160) + " yr"
                                                         }
                                                       </span>&nbsp;</p>
@@ -925,9 +930,7 @@ const mapStateToProps = (state, ownProps) => {
     formDeleteModeValue: state.formState.formDeleteModeValue,
     userReviews1: state.auth.userReviews,
     userReviews2: state.firestore.ordered.reviews,
-    mapListGenderPreference: state.myStuffState.mapListGenderPreference,
-    mapListGenderPreferenceUpdates: state.myStuffState.mapListGenderPreferenceUpdates,
-    settingsGenderPreference: state.myStuffState.settingsGenderPreference
+    mapListGenderPreference: state.auth.mapListGenderPreference,
   }
 }
 

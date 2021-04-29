@@ -56,8 +56,8 @@ export const getPlacesFromFoursquare = (locationPref) => {
             transformResponse: [
               res => {
                 const state = getState();
-                const currLat = state.mapState.centerLatValue();
-                const currLng = state.mapState.centerLngValue();
+                const currLat = state.geolocationState.geolocationLatValue;
+                const currLng = state.geolocationState.geolocationLngValue;
 
                 // const currLat = state.geolocationState.geolocationLatValue;
                 // const currLng = state.geolocationState.geolocationLngValue;

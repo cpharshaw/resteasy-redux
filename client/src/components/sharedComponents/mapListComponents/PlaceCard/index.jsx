@@ -19,14 +19,14 @@ export class PlaceCard extends Component {
 
 
   assignPlaceIcon = (rating) => {
-    // console.log("assignPlaceIcon", rating)
-    if (rating >= 4.5) {
+    // console.log("mapList PlaceCard, assignPlaceIcon ---> ", rating)
+    if (rating > 4.50) {
       return greenMarker
-    } else if (rating >= 4) {
+    } else if (rating >= 4.00) {
       return chartreuseMarker;
-    } else if (rating >= 3) {
+    } else if (rating >= 3.00) {
       return yellowMarker;
-    } else if (rating >= 2) {
+    } else if (rating >= 2.00) {
       return orangeMarker;
     } else if (rating > 0) {
       return redMarker;
@@ -44,7 +44,7 @@ export class PlaceCard extends Component {
 
   placeCardClicked = (e, data_place) => {
     e.preventDefault();
-    console.log('clicked on placeCard', data_place);
+    // console.log('clicked on placeCard', data_place);
     this.props.modalToggled("placeModal");
     if (!this.props.mapListToggleValue) this.props.storeSelectedPlace(data_place);
   }
@@ -67,30 +67,30 @@ export class PlaceCard extends Component {
     } = this.props;
 
     const iconColor = score => {
-      // console.log("score ---> ", score)
-      if (!score) {
-        return greyMarker
-      };
-
+      // console.log("mapList PlaceCard, iconColor ---> ", score)
       if (score > 4.50) {
         return greenMarker
-      };
+      }
 
-      if (score >= 4.00) {
+      else if (score >= 4.00) {
         return chartreuseMarker
-      };
+      }
 
-      if (score >= 3.50) {
+      else if (score >= 3.00) {
         return yellowMarker
-      };
+      }
 
-      if (score >= 2.25) {
+      else if (score >= 2.00) {
         return orangeMarker
-      };
+      }
 
-      if (score) {
+      else if (score > 0) {
         return redMarker
-      };
+      } 
+
+      else {
+        return greyMarker;
+      }
     }
 
     // console.log("rating: ", data_placerating)

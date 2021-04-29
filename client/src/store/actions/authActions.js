@@ -28,6 +28,7 @@ export const saveUnitsPreference = (newUnitOfMeasure) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
   }
 }
+// console.log("gender preference saved, response obj ---> ", res);
 
 
 export const saveGenderPreference = (newGenderPreference) => {
@@ -40,9 +41,8 @@ export const saveGenderPreference = (newGenderPreference) => {
     firestore.collection('users').doc(uid)
       .update({ genderPreference: newGenderPreference })
       .then(res => {
-        console.log("gender preference saved, response obj ---> ", res);
         return dispatch({
-          type: 'GENDER_PREFERENCE_RECEIVED',
+          type: 'SETTINGS_GENDERPREFERENCE_RECEIVED',
           payload: newGenderPreference,
         })
       })
@@ -51,10 +51,21 @@ export const saveGenderPreference = (newGenderPreference) => {
   }
 }
 
+export const storeMapListGenderPreference = (newGenderPreference) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+    return dispatch({
+      type: 'MAPLIST_GENDERPREFERENCE_RECEIVED',
+      payload: newGenderPreference,
+    })
+
+  }
+}
+
 export const saveFavorite = favoriteData => {
   return (dispatch, getState) => {
     // middleware allows for pausing dispatch to get data asyncronously if need-be, then resuming dispatch
-    dispatch({
+    return dispatch({
       type: 'NEW_FAVORITE',
       payload: favoriteData,
     })

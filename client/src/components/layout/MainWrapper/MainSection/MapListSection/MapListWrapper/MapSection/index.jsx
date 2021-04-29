@@ -102,7 +102,7 @@ class MapSection extends Component {
           data_map={this.currentMap}
           data_lat={place.location.lat}
           data_lng={place.location.lng}
-          data_placerating={place.allWeightedAvg}
+          data_placerating={place.allWeightedAvg ? parseFloat(place.allWeightedAvg.toFixed(3).substring(0,3)) : null}
           data_label={JSON.stringify(place.id)}
           data_title={"fs-" + place.id}
           data_place={place}
@@ -495,7 +495,7 @@ class MapSection extends Component {
                   data_placemarker={selectedMarkerValue.icon}
 
                   data_placenumreviews={selectedMarkerValue.store_place.allCnt}
-                  data_placerating={selectedMarkerValue.store_place.allWeightedAvg}
+                  data_placerating={selectedMarkerValue.store_place.allWeightedAvg ? parseFloat(selectedMarkerValue.store_place.allWeightedAvg.toFixed(3).substring(0,3)) : null}
                   data_userreviewed={
                     this.props.userReviews1 ? this.props.userReviews1.map(userReview => {
                       return userReview.locationID === selectedMarkerValue.store_place.placeID;
@@ -556,8 +556,8 @@ const mapDispatchToProps = (dispatch) => {
     registerInitialMapTilesloaded: () => dispatch(registerInitialMapTilesloaded()),
     registerSubsequentMapMovement: () => dispatch(registerSubsequentMapMovement()),
     storeInput: (input) => dispatch(storeInput(input)),
-    storeSelectedMarker: (marker) => dispatch(storeSelectedMarker(marker)),
-    storeSelectedPlace: (marker) => dispatch(storeSelectedPlace(marker)),
+    // storeSelectedMarker: (marker) => dispatch(storeSelectedMarker(marker)),
+    // storeSelectedPlace: (marker) => dispatch(storeSelectedPlace(marker)),
     storeMarker: (marker) => dispatch(storeMarker(marker)),
   }
 }

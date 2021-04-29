@@ -193,7 +193,7 @@ export class MyStuffSection extends Component {
 
     // if (this.props.loginCredentialValue) console.log("this.props.loginCredentialValue.uid ---> ",  this.props.loginCredentialValue.uid)
 
-    const { unitsPreference, genderPreference } = this.props;
+    const { unitsPreference, settingsGenderPreference } = this.props;
 
     const displayValue = selectedSectionValue === "myStuff" ? "flex" : "none";
 
@@ -209,40 +209,15 @@ export class MyStuffSection extends Component {
       email = this.props.loginCredentialValue.email;
     }
 
-    const UserReviewsComponent = props => {
-      // return reviews.map(review => {
-
-      //   const reviewName = review.basicInfo.locationName;
-      //   const reviewAddress = review.basicInfo.locationName;
-      //   const reviewCategory = review.basicInfo.locationCategory;
-      //   const reviewTotalScore = review.scores.total;
-
-      //   const reviewCleanlinessScore = review.scores.cleanliness;
-      //   const reviewPrivacyScore = review.scores.privacy;
-      //   const reviewStyleScore = review.scores.style;
-      //   const reviewComfortScore = review.scores.comfort;
-      //   const reviewSafetyScore = review.scores.safety;
-
-      //   const reviewGender = review.basicInfo.restroomUsed;
-      //   const reviewTime = review.basic.TimeOfVisit;
-
-      // })
-      // console.log("test... props ---> ", props.data);
-
-      return <>
-        {
-          props.data.map((review, i) => (
-            // <div className="row" key={i + "listReviewKey"} >
-            //   <div className="col">
-            < MyReviewPlaceCard data={review} key={i} />
-            //   </div>
-            // </div>
-          ))
-        }
-      </>
-
-    }
-
+    // const UserReviewsComponent = props => {
+    //   return <>
+    //     {
+    //       props.data.map((review, i) => (
+    //         < MyReviewPlaceCard data={review} key={i} />
+    //       ))
+    //     }
+    //   </>
+    // }
 
 
     const SignedOutComponent = () => {
@@ -399,7 +374,7 @@ export class MyStuffSection extends Component {
                 {/* {console.log("in HTML reviewArr ---> ", this.state.reviewArr)} */}
                 {
                   this.state.myStuffCategory !== "My Reviews" ? null : this.state.reviewArr.length > 0 ?
-                  
+
                     <div className="row ai-fs animated fadeIn fast "
                       style={{
                         WebkitOverflowScrolling: "touch",
@@ -449,6 +424,37 @@ export class MyStuffSection extends Component {
                     <div className="row">
                       <div className="col py-3 px-2">
                         <span className="animated fadeIn" style={{ marginBottom: "-15px", fontStyle: "italic", color: "green", fontSize: "13.5px", visibility: this.state.updatedGender || this.state.updatedUnitsOfMeasure ? "visible" : "hidden" }}>Profile Updated</span>
+
+                        <div className="row">
+                          <div className="col-5 ai-fs">
+                            <p style={{ fontSize: "12.5px" }}>Restroom Preference</p>
+                          </div>
+                          <div className="col-5">
+                            <select
+                              id="settings_gender"
+                              className=""
+                              name="settings_gender"
+                              value={settingsGenderPreference}
+                              // this.props.loginCredentialValue.preferredGender || 
+                              onChange={e => this.settings_selectGender(e)}
+                              style={{
+                                // width: "95%",
+                                height: "100%",
+                                fontSize: "12.5px",
+                                fontStyle: "italic",
+                                background: "inherit",
+                                color: "grey",
+                                textOverflow: "ellipsis"
+                              }}
+                            >
+                              <option value="All">All</option>
+                              <option value="Men's">Men's</option>
+                              <option value="Women's">Women's</option>
+                              <option value="Gender-Neutral">Family/Gender-Neutral</option>
+                            </select>
+                          </div>
+                        </div>
+
                         <div className="row">
                           <div className="col-5 ai-fs">
                             <p style={{ fontSize: "12.5px" }}>Units of Measure</p>
@@ -473,36 +479,6 @@ export class MyStuffSection extends Component {
                             >
                               <option value="imperial">Imperial (US)</option>
                               <option value="metric">Metric</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div className="row">
-                          <div className="col-5 ai-fs">
-                            <p style={{ fontSize: "12.5px" }}>Restroom Preference</p>
-                          </div>
-                          <div className="col-5">
-                            <select
-                              id="settings_gender"
-                              className=""
-                              name="settings_gender"
-                              value={genderPreference}
-                              // this.props.loginCredentialValue.preferredGender || 
-                              onChange={e => this.settings_selectGender(e)}
-                              style={{
-                                // width: "95%",
-                                height: "100%",
-                                fontSize: "12.5px",
-                                fontStyle: "italic",
-                                background: "inherit",
-                                color: "grey",
-                                textOverflow: "ellipsis"
-                              }}
-                            >
-                              <option value="All">All</option>
-                              <option value="Men's">Men's</option>
-                              <option value="Women's">Women's</option>
-                              <option value="Gender-Neutral">Family/Gender-Neutral</option>
                             </select>
                           </div>
                         </div>
@@ -775,7 +751,7 @@ const mapStateToProps = (state, ownProps) => {
     selectedSectionValue: ownProps.display,
     loginCredentialValue: state.auth.loginCredentialValue,
     unitsPreference: state.auth.unitsPreference,
-    genderPreference: state.auth.genderPreference,
+    settingsGenderPreference: state.auth.settingsGenderPreference,
     userReviews1: state.auth.userReviews,
 
     userReviews2: state.firestore.ordered.reviews

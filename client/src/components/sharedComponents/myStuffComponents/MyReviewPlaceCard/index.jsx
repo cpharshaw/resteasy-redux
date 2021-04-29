@@ -15,16 +15,15 @@ import { initiateReviewEdit, initiateReviewDelete } from '../../../../store/acti
 
 export class MyReviewPlaceCard extends Component {
 
-
   assignPlaceIcon = (rating) => {
-    // console.log("assignPlaceIcon", rating)
-    if (rating >= 4.5) {
+    // console.log("MyReviewPlaceCard, assignPlaceIcon ---> ", rating)
+    if (rating > 4.50) {
       return greenMarker
-    } else if (rating >= 4) {
+    } else if (rating >= 4.00) {
       return chartreuseMarker;
-    } else if (rating >= 3) {
+    } else if (rating >= 3.00) {
       return yellowMarker;
-    } else if (rating >= 2) {
+    } else if (rating >= 2.00) {
       return orangeMarker;
     } else if (rating > 0) {
       return redMarker;
@@ -34,14 +33,14 @@ export class MyReviewPlaceCard extends Component {
   };
 
   assignPlaceScoreColor = (rating) => {
-    // console.log("assignPlaceIcon", rating)
-    if (rating >= 4.5) {
+    // console.log("MyReviewPlaceCard, assignPlaceScoreColor ---> ", rating)
+    if (rating > 4.50) {
       return "#57bb8a"
-    } else if (rating >= 4) {
+    } else if (rating >= 4.00) {
       return "#abc878";
-    } else if (rating >= 3) {
+    } else if (rating >= 3.00) {
       return "#fcd666";
-    } else if (rating >= 2) {
+    } else if (rating >= 2.00) {
       return "#f3a96c";
     } else if (rating > 0) {
       return "#e67c73";
@@ -113,6 +112,9 @@ export class MyReviewPlaceCard extends Component {
       //page 5
       formCommentsValue: data.comments,
       // formMissingValue: false
+
+      reviewDatetime: data.reviewDatetime,
+      reviewEditDatetime: data.reviewEditDatetime
     }
 
     this.props.initiateReviewEdit(reviewToEdit);
@@ -206,7 +208,7 @@ export class MyReviewPlaceCard extends Component {
 
     const reviewMMDDYY = reviewMonth.toString() + "/" + reviewDate.toString() + "/" + reviewYear.toString();
 
-    const scoreTotal = parseFloat(data.scores.total).toFixed(1);
+    const scoreTotal = parseFloat(data.scores.total.toFixed(3).substring(0,3));
     // const placeName = data.basicInfo.locationName;
     // const placeName = data.basicInfo.locationName;
 
@@ -250,7 +252,7 @@ export class MyReviewPlaceCard extends Component {
             style={{
               fontSize: "20px",
               fontStyle: "italic",
-              color: this.assignPlaceScoreColor(scoreTotal)
+              color: this.assignPlaceScoreColor(data.scores.total)
             }}
           >
             {scoreTotal}

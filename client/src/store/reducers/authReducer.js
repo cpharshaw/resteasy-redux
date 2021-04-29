@@ -3,10 +3,14 @@ const initState = {
   loginCredentialValue: null,
   authError: null,
   unitsPreference: "imperial",
-  genderPreference: "any",
+  settingsGenderPreference: "All",
+  mapListGenderPreference: "All",
+  // settingsGenderPreferenceUpdates: 0,
+  // mapListGenderPreferenceUpdates: 0,
   userReviews: null,
   uid: null
 }
+
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
@@ -18,7 +22,9 @@ const authReducer = (state = initState, action) => {
         ...state,
         loginCredentialValue: action.payload.loginObj,
         unitsPreference: action.payload.preferences.unitsPreference,
-        genderPreference: action.payload.preferences.genderPreference,
+        // genderPreference: action.payload.preferences.genderPreference,
+        settingsGenderPreference: action.payload.preferences.genderPreference,
+        mapListGenderPreference: action.payload.preferences.genderPreference,      
         userReviews: action.payload.userReviews,
         uid: action.payload.loginObj.uid
       }
@@ -58,11 +64,18 @@ const authReducer = (state = initState, action) => {
         unitsPreference: action.payload
       }
 
-    case 'GENDER_PREFERENCE_RECEIVED':
-      // console.log('login success', action.payload)
+    case 'SETTINGS_GENDERPREFERENCE_RECEIVED':
+      console.log('login success', action.payload)
       return {
         ...state,
-        genderPreference: action.payload
+        settingsGenderPreference: action.payload,
+        mapListGenderPreference: action.payload
+      }
+
+    case 'MAPLIST_GENDERPREFERENCE_RECEIVED':
+      return {
+        ...state,
+        mapListGenderPreference: action.payload,
       }
 
     case 'NEW_FAVORITE':

@@ -144,7 +144,9 @@ export const submitForm = () => {
       },
 
       userID: authState.loginCredentialValue.uid,
-      reviewDatetime: new Date()
+
+      reviewDatetime: formState.reviewDatetime,
+      reviewEditDatetime: formState.reviewEditDatetime
     };
 
 
@@ -174,7 +176,7 @@ export const submitForm = () => {
           const data = res.docs
           console.log("res of review to edit --->", res);
 
-          data.forEach(({id}) => {
+          data.forEach(({ id }) => {
             firestore.collection('reviews').doc(id).set(
               review
             )
@@ -214,12 +216,14 @@ export const submitForm = () => {
       };
 
       review.photos.push(photoObj);
-      
+
       if (review.photos.length !== formState.photosArrValue.length) return;
 
       if (editMode) {
+        review.reviewEditDatetime = new Date();
         return updateExistingReview(review);
       } else {
+        review.reviewDatetime = new Date();
         return saveNewReview(review);
       }
 
@@ -278,9 +282,11 @@ export const submitForm = () => {
       console.log("noPhotos if statement - top...");
       if (editMode) {
         console.log("noPhotos if statement - editMode...");
+        review.reviewEditDatetime = new Date();
         return updateExistingReview(review);
       } else {
         console.log("noPhotos if statement - not edit mode...");
+        review.reviewDatetime = new Date();
         return saveNewReview(review);
       }
     };
@@ -288,7 +294,7 @@ export const submitForm = () => {
 
     if (newPhotos) {
       console.log("newPhotos if statement - not edit mode...");
-      photosToCloudinary(review, filteredDupesPhotoArr, cloudinaryCallBack);
+      return photosToCloudinary(review, filteredDupesPhotoArr, cloudinaryCallBack);
     }
 
 

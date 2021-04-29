@@ -70,11 +70,11 @@ class MarkerComp extends Component {
         return chartreuseMarker
       };
 
-      if (score >= 3.50) {
+      if (score >= 3.00) {
         return yellowMarker
       };
 
-      if (score >= 2.25) {
+      if (score >= 2.00) {
         return orangeMarker
       };
 
@@ -93,7 +93,7 @@ class MarkerComp extends Component {
     const randomMarkerColor = iconArr[getRandomInt(0, iconArr.length)];
 
 
-    const test = iconColor(data_placerating);
+    // const test = iconColor(data_placerating);
 
     this.marker = new this.props.googleAPIValue.Marker({
       map: data_map,

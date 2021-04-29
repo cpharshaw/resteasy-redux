@@ -33,7 +33,7 @@ const initState = {
   formStyleValue: null,
 
   //page 3
-  formHandicappedValue: true,
+  formHandicappedValue: false,
   formGenderNeutralValue: false,
   formBabyChangeValue: false,
   formScheduleValue: false,
@@ -48,7 +48,10 @@ const initState = {
   //page 5
   formCommentsValue: "",
 
-  formMissingValue: false
+  formMissingValue: false,
+
+  reviewDatetime: null,
+  reviewEditDatetime: null,
 }
 
 const formReducer = (state = initState, action) => {
@@ -139,6 +142,9 @@ const formReducer = (state = initState, action) => {
 
         //page 5
         formCommentsValue: action.payload.formCommentsValue,
+
+        reviewDatetime: action.payload.reviewDatetime,
+        reviewEditDatetime: action.payload.reviewEditDatetime
       };
 
     case "FORM_NEXT":
