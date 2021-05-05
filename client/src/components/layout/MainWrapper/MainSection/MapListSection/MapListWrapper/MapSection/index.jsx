@@ -102,7 +102,7 @@ class MapSection extends Component {
           data_map={this.currentMap}
           data_lat={place.location.lat}
           data_lng={place.location.lng}
-          data_placerating={place.allWeightedAvg ? parseFloat(place.allWeightedAvg.toFixed(3).substring(0,3)) : null}
+          data_placerating={place.genderedValue ? parseFloat(place.genderedValue.weightedAvg.toFixed(3).substring(0, 3)) : null}
           data_label={JSON.stringify(place.id)}
           data_title={"fs-" + place.id}
           data_place={place}
@@ -494,11 +494,11 @@ class MapSection extends Component {
 
                   data_placemarker={selectedMarkerValue.icon}
 
-                  data_placenumreviews={selectedMarkerValue.store_place.allCnt}
-                  data_placerating={selectedMarkerValue.store_place.allWeightedAvg ? parseFloat(selectedMarkerValue.store_place.allWeightedAvg.toFixed(3).substring(0,3)) : null}
+                  data_placenumreviews={selectedMarkerValue.store_place.genderedValue ? selectedMarkerValue.store_place.genderedValue.cnt : null}
+                  data_placerating={selectedMarkerValue.store_place.genderedValue ? parseFloat(selectedMarkerValue.store_place.genderedValue.weightedAvg.toFixed(3).substring(0, 3)) : null}
                   data_userreviewed={
                     this.props.userReviews1 ? this.props.userReviews1.map(userReview => {
-                      return userReview.locationID === selectedMarkerValue.store_place.placeID;
+                      return userReview.locationID === selectedMarkerValue.store_place.id;
                     }).indexOf(true) >= 0 : false
                   }
                   data_userbookmarked={true}

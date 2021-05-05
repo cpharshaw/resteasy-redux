@@ -29,10 +29,23 @@ const foursquareReducer = (state = initState, action) => {
         ...state,
         // foursquareValue: []
         foursquareValue: action.payload,
+        // foursquareGenderedValue: action.payload.foursquareGenderedValue,
         foursquareManual: null,
         foursquareStatus: null,
         numFoursquareUpdates: state.numFoursquareUpdates + 1
       }
+
+      case 'FOURSQUARE_GENDER_CHANGE':
+      console.log("new gender into reducer", action.payload);
+      return {
+        ...state,
+        // foursquareValue: []
+        foursquareValue: action.payload,
+        // foursquareGenderedValue: action.payload.foursquareGenderedValue,
+        foursquareManual: null,
+        foursquareStatus: null,
+        numFoursquareUpdates: state.numFoursquareUpdates + 1
+      }      
     case 'FOURSQUARE_ERROR':
       // console.log("foursquareReducer ERROR: ", action.payload);
       return {

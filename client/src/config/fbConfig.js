@@ -2,6 +2,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+// const functions = require('firebase-functions');
 
 // initialize Firebase
 const config = {
@@ -15,6 +16,11 @@ const config = {
 };
 
 firebase.initializeApp(config);
+//     https://firebase.google.com/docs/web/setup
+
+// firebase.initializeApp(
+//   functions.config().firebase
+// );
 firebase.firestore();
 
 export default firebase;

@@ -163,9 +163,9 @@ export class FormSection1 extends Component {
                     data_value={formRestroomTypeValue}
                   >
                     <option value="Restroom type..." disabled>Restroom type...</option>
-                    <option value="Men's">Men's</option>
-                    <option value="Women's">Women's</option>
-                    <option value="Family/Gender-neutral">Family/Gender-neutral</option>
+                    <option value="mens">Men's</option>
+                    <option value="womens">Women's</option>
+                    <option value="genderNeutral">Family/Gender-neutral</option>
                   </SelectBox>
                 </div>
               </div>

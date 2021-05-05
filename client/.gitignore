@@ -31,3 +31,4 @@ server/node_modules
 server/.env
 client/src/components/Ice box
 node_modules
+client/src/config

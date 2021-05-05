@@ -371,7 +371,7 @@ export class ModalContainer extends Component {
       loginCredentialValue,
       formEditModeValue,
       formDeleteModeValue,
-      mapListGenderPreference,
+      mapListGenderPreferenceValue,
     } = this.props;
 
 
@@ -533,12 +533,12 @@ export class ModalContainer extends Component {
                             <div className="col-2 ai-c">
                               <div className="row">
                                 <div className="col ai-c">
-                                  {selectedPlaceValue.allWeightedAvg ? <img src={selectedMarkerValue.icon} className="mx-2" height="50" width="50" /> : ""}
+                                  {selectedPlaceValue.genderedValue ? <img src={selectedMarkerValue.icon} className="mx-2" height="50" width="50" /> : ""}
                                 </div>
                               </div>
                               <div className="row">
                                 <div className="col ai-c">
-                                  <p style={{ fontStyle: "italic", fontSize: "16px" }}><b>{selectedPlaceValue.allWeightedAvg ? parseFloat(selectedPlaceValue.allWeightedAvg.toFixed(3).substring(0, 3)) : null}</b></p>
+                                  <p style={{ fontStyle: "italic", fontSize: "16px" }}><b>{selectedPlaceValue.genderedValue ? parseFloat(selectedPlaceValue.genderedValue.weightedAvg.toFixed(3).substring(0, 3)) : null}</b></p>
                                 </div>
                               </div>
                             </div>
@@ -549,7 +549,7 @@ export class ModalContainer extends Component {
                             <div className="col-2 ai-c">
                               <p>
                                 {/* <span style={{ fontSize: "12px" }}>(</span> */}
-                                <span style={{ fontSize: "11px", fontStyle: "italic" }}>{mapListGenderPreference}</span>
+                                <span style={{ fontSize: "11px", fontStyle: "italic" }}>{mapListGenderPreferenceValue}</span>
                                 {/* <span style={{ fontSize: "12px" }}>)</span> */}
                               </p>
                             </div>
@@ -557,24 +557,24 @@ export class ModalContainer extends Component {
 
 
 
-                          {selectedPlaceValue.allRecentReviews ?
+                          {selectedPlaceValue.genderedValue ?
                             <>
                               <HorizontalRule data_width="90%" />
                               <div className="row my-1 jc-se">
                                 <div className="col">
-                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.accessible ? `000000` : `d3d3d3`}/sporty-wheelchair-user.png`} />
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderedValue.accessible ? `000000` : `d3d3d3`}/sporty-wheelchair-user.png`} />
                                 </div>
                                 <div className="col">
-                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderNeutral ? "000000" : "d3d3d3"}/gender-neutral-washroom.png`} />
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderedValue.genderNeutral ? "000000" : "d3d3d3"}/gender-neutral-washroom.png`} />
                                 </div>
                                 <div className="col">
-                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.babyStation ? "000000" : "d3d3d3"}/baby.png`} />
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderedValue.babyStation ? "000000" : "d3d3d3"}/baby.png`} />
                                 </div>
                                 <div className="col">
-                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.cleaningSchedule ? "000000" : "d3d3d3"}/housekeeper-female.png`} />
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderedValue.cleaningSchedule ? "000000" : "d3d3d3"}/housekeeper-female.png`} />
                                 </div>
                                 <div className="col">
-                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.admission === "Pay" ? "000000" : "d3d3d3"}/cheap-2-1.png`} />
+                                  <img src={`https://img.icons8.com/ios-glyphs/18/${selectedPlaceValue.genderedValue.admission === "Pay" ? "000000" : "d3d3d3"}/cheap-2-1.png`} />
                                 </div>
                               </div>
 
@@ -587,23 +587,23 @@ export class ModalContainer extends Component {
                                     {/* <div className="col-1"></div> */}
                                     <div className="col">
                                       <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Clean</div>
-                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allCleanAvg.toFixed(1)) : null}</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.genderedValue ? parseFloat(selectedPlaceValue.genderedValue.cleanAvg.toFixed(1)) : null}</div>
                                     </div>
                                     <div className="col">
                                       <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Privacy</div>
-                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allPrivacyAvg.toFixed(1)) : null}</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.genderedValue ? parseFloat(selectedPlaceValue.genderedValue.privacyAvg.toFixed(1)) : null}</div>
                                     </div>
                                     <div className="col">
                                       <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Safety</div>
-                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allSafetyAvg.toFixed(1)) : null}</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.genderedValue ? parseFloat(selectedPlaceValue.genderedValue.safetyAvg.toFixed(1)) : null}</div>
                                     </div>
                                     <div className="col">
                                       <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Comfort</div>
-                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allComfortAvg.toFixed(1)) : null}</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.genderedValue ? parseFloat(selectedPlaceValue.genderedValue.comfortAvg.toFixed(1)) : null}</div>
                                     </div>
                                     <div className="col">
                                       <div className="row mt-1 mb-1" style={{ fontSize: "11.5px" }}>Style</div>
-                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.allCleanAvg ? parseFloat(selectedPlaceValue.allStyleAvg.toFixed(1)) : null}</div>
+                                      <div className="row mt-1 mb-1" style={{ fontSize: "12.5px" }}>{selectedPlaceValue.genderedValue ? parseFloat(selectedPlaceValue.genderedValue.styleAvg.toFixed(1)) : null}</div>
                                     </div>
                                     {/* <div className="col-1"></div> */}
                                   </div>
@@ -635,7 +635,7 @@ export class ModalContainer extends Component {
                                         >
 
                                           {
-                                            selectedPlaceValue.allRecentReviews.map((review, i) => {
+                                            selectedPlaceValue.genderedValue ? selectedPlaceValue.genderedValue.recentReviews.map((review, i) => {
                                               return (
                                                 <div className="row js-fg mb-1" key={"review" && i}>
                                                   <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
@@ -673,7 +673,7 @@ export class ModalContainer extends Component {
                                                 </div>
                                               )
 
-                                            })
+                                            }) : null
 
                                           }
                                         </div>
@@ -694,7 +694,7 @@ export class ModalContainer extends Component {
 
                             {
                               this.props.userReviews1 && this.props.userReviews1.map(userReview => {
-                                return userReview.locationID === selectedMarkerValue.store_place.placeID;
+                                return userReview.locationID === selectedMarkerValue.store_place.id;
                               }).indexOf(true) >= 0 ? (
                                   <div className="col-8" onClick={e => this.editReviewClicked(e, selectedPlaceValue)}>
                                     <p><span style={{ fontSize: "14px", fontStyle: "italic", color: "#0abab5" }}><b>Edit Your Existing Review</b></span></p>
@@ -930,7 +930,7 @@ const mapStateToProps = (state, ownProps) => {
     formDeleteModeValue: state.formState.formDeleteModeValue,
     userReviews1: state.auth.userReviews,
     userReviews2: state.firestore.ordered.reviews,
-    mapListGenderPreference: state.auth.mapListGenderPreference,
+    mapListGenderPreferenceValue: state.auth.mapListGenderPreferenceValue,
   }
 }
 

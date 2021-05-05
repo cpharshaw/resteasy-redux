@@ -9,6 +9,7 @@ import ModalContainer from '../Modals';
 
 import LocationModal from '../Modals/ModalFormLocationSelector';
 import { storeMapListGenderPreference } from '../../../../../store/actions/authActions';
+import { foursquareGenderChange }       from '../../../../../store/actions/foursquareActions';
 
 export class MapListSection extends Component {
 
@@ -23,14 +24,20 @@ export class MapListSection extends Component {
   genderPreferenceSelected = e => {
     e.preventDefault();
     const currentTarget_name = e.currentTarget.name;
-    this.props.storeMapListGenderPreference(currentTarget_name);
+    console.log("currentTarget_name ---> ", currentTarget_name);
+    if (currentTarget_name !== this.props.mapListGenderPreferenceValue) {
+      this.props.storeMapListGenderPreference(currentTarget_name);
+      this.props.foursquareGenderChange(currentTarget_name);
+      return;
+    }
+
   }
 
 
   render() {
     const { 
       selectedSectionValue, 
-      mapListGenderPreference
+      mapListGenderPreferenceValue
     } = this.props;
 
     const {
@@ -108,28 +115,28 @@ export class MapListSection extends Component {
                 >
                   <div className="row">
 
-                    <button className={`${mapListGenderPreference === "All" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="All"
+                    <button className={`${mapListGenderPreferenceValue === "all" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="all"
                       onClick={e => this.genderPreferenceSelected(e)}
                     >
                       <em>All</em>
                     </button>
 
 
-                    <button className={`${mapListGenderPreference === "Men's" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="Men's"
+                    <button className={`${mapListGenderPreferenceValue === "mens" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="mens"
                       onClick={e => this.genderPreferenceSelected(e)}
                     >
                       <em>Men's</em>
                     </button>
 
 
-                    <button className={`${mapListGenderPreference === "Women's" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="Women's"
+                    <button className={`${mapListGenderPreferenceValue === "womens" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="womens"
                       onClick={e => this.genderPreferenceSelected(e)}
                     >
                       <em>Women's</em>
                     </button>
 
 
-                    <button className={`${mapListGenderPreference === "Gender-Neutral" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="Gender-Neutral"
+                    <button className={`${mapListGenderPreferenceValue === "genderNeutral" ? "bg-primary-light" : "bg-primary-xlight"} filter-toggle mx-1 px-2`} style={{ fontSize: "13px" }} name="genderNeutral"
                       onClick={e => this.genderPreferenceSelected(e)}
                     >
                       <em>Gender-Neutral</em>
@@ -177,16 +184,17 @@ const mapStateToProps = (state, ownProps) => {
     selectedSectionValue: ownProps.display,
     modalState: state.modalState,
 
-    mapListGenderPreference: state.auth.mapListGenderPreference,
+    mapListGenderPreferenceValue: state.auth.mapListGenderPreferenceValue,
     mapListGenderPreferenceUpdates: state.auth.mapListGenderPreferenceUpdates,
-    settingsGenderPreference: state.auth.settingsGenderPreference,
+    settingsGenderPreferenceValue: state.auth.settingsGenderPreferenceValue,
     settingsGenderPreferenceUpdates: state.auth.settingsGenderPreferenceUpdates,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    storeMapListGenderPreference: (input) => dispatch(storeMapListGenderPreference(input))
+    storeMapListGenderPreference: (input) => dispatch(storeMapListGenderPreference(input)),
+    foursquareGenderChange: (input) => dispatch(foursquareGenderChange(input))
   }
 }
 

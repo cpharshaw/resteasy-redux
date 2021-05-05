@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
 import { saveUnitsPreference, saveGenderPreference } from '../../.././../../store/actions/authActions.js';
+import { foursquareGenderChange } from '../../.././../../store/actions/foursquareActions';
 import { signIn, signOut } from '../../../../../store/actions/authActions';
 import signIn_normal from './btn_google_signin_light_normal_web.png';
 import signIn_focus from './btn_google_signin_light_focus_web.png';
@@ -144,6 +145,7 @@ export class MyStuffSection extends Component {
     // console.log("value ---> ", value);
 
     this.props.saveGenderPreference(value);
+    this.props.foursquareGenderChange(value);
 
     this.setState({
       updatedGender: true
@@ -173,17 +175,6 @@ export class MyStuffSection extends Component {
       // console.log("update, this.state.reviewArr ---> ", this.state.reviewArr);
     }
 
-    //   const prev_settingsUnitsOfMeasure = prevProps.settingsUnitsOfMeasure;
-    //   const prev_settingsGenderPreference = prevProps.settingsGenderPreference;
-
-    //   const curr_settingsUnitsOfMeasure = this.props.settingsUnitsOfMeasure;
-    //   const curr_settingsGenderPreference = this.props.settingsGenderPreference;
-
-    //   const update_settingsUnitsOfMeasure = prev_settingsUnitsOfMeasure !== curr_settingsUnitsOfMeasure;
-    //   const update_settingsGenderPreference = prev_settingsGenderPreference !== curr_settingsGenderPreference;
-
-    //   console.log("update_settingsUnitsOfMeasure ---> ", update_settingsUnitsOfMeasure);
-    //   console.log("update_settingsGenderPreference ---> ", update_settingsGenderPreference);
   }
 
 
@@ -193,7 +184,7 @@ export class MyStuffSection extends Component {
 
     // if (this.props.loginCredentialValue) console.log("this.props.loginCredentialValue.uid ---> ",  this.props.loginCredentialValue.uid)
 
-    const { unitsPreference, settingsGenderPreference } = this.props;
+    const { unitsPreference, settingsGenderPreferenceValue } = this.props;
 
     const displayValue = selectedSectionValue === "myStuff" ? "flex" : "none";
 
@@ -434,7 +425,7 @@ export class MyStuffSection extends Component {
                               id="settings_gender"
                               className=""
                               name="settings_gender"
-                              value={settingsGenderPreference}
+                              value={settingsGenderPreferenceValue}
                               // this.props.loginCredentialValue.preferredGender || 
                               onChange={e => this.settings_selectGender(e)}
                               style={{
@@ -447,10 +438,10 @@ export class MyStuffSection extends Component {
                                 textOverflow: "ellipsis"
                               }}
                             >
-                              <option value="All">All</option>
-                              <option value="Men's">Men's</option>
-                              <option value="Women's">Women's</option>
-                              <option value="Gender-Neutral">Family/Gender-Neutral</option>
+                              <option value="all">All</option>
+                              <option value="mens">Men's</option>
+                              <option value="womens">Women's</option>
+                              <option value="genderNeutral">Family/Gender-Neutral</option>
                             </select>
                           </div>
                         </div>
@@ -751,7 +742,7 @@ const mapStateToProps = (state, ownProps) => {
     selectedSectionValue: ownProps.display,
     loginCredentialValue: state.auth.loginCredentialValue,
     unitsPreference: state.auth.unitsPreference,
-    settingsGenderPreference: state.auth.settingsGenderPreference,
+    settingsGenderPreferenceValue: state.auth.settingsGenderPreferenceValue,
     userReviews1: state.auth.userReviews,
 
     userReviews2: state.firestore.ordered.reviews
@@ -765,6 +756,7 @@ const mapDispatchToProps = (dispatch) => {
     signOut: () => dispatch(signOut()),
     saveUnitsPreference: (input) => dispatch(saveUnitsPreference(input)),
     saveGenderPreference: (input) => dispatch(saveGenderPreference(input)),
+    foursquareGenderChange: (input) => dispatch(foursquareGenderChange(input))
   }
 }
 

@@ -97,9 +97,9 @@ class ListSection extends Component {
         const placeAddress = place.location ? place.location.address : "-";
         const placeCategory = place.categories ? (place.categories[0] ? place.categories[0].name : "-") : "-";
         const placeDistance = place.distance;
-        const placeRating = place.allWeightedAvg;
+        const placeRating = place.genderedValue ? place.genderedValue.weightedAvg : null;
         const placeMarker = this.state.markerIcon;
-        const placeNumReviews = place.allCnt;
+        const placeNumReviews = place.genderedValue ? place.genderedValue.cnt : null;
         const userReviewed = this.props.userReviews1 ? this.props.userReviews1.map(userReview => {
           return userReview.locationID === place.id;
         }).indexOf(true) >= 0 : false;
