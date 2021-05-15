@@ -640,7 +640,9 @@ export class ModalContainer extends Component {
                                                 <div className="row js-fg mb-1" key={"review" && i}>
                                                   <div className="col fc jc-fs ai-fs mx-1 bg-whitesmoke py-1 px-2 brdr-rad">
                                                     <p className=" ta-l" style={{ borderBottom: "0.5px solid grey", borderRight: "1px solid lightgrey" }}>&nbsp;
-                                                      <span style={{ fontSize: "12px", fontStyle: "italic" }}>{parseFloat(review.scores.total.toFixed(1))}</span>
+                                                    {/* {console.log("review.scores.total ---> ", review.scores.total)} */}
+                                                    {/* {console.log("review.scores.total ---> ", review.scores.total)} */}
+                                                      <span style={{ fontSize: "12px", fontStyle: "italic" }}>{parseFloat(review.scores.total.toFixed(3).substring(0, 3))}</span>
                                                       <span>&nbsp;&nbsp;</span>
                                                       <span style={{ fontSize: "9px", color: "grey" }}>
                                                         {

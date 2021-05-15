@@ -22,9 +22,9 @@ const createPlaceReview = (dataArr, latestReviewGender, command, locationID) => 
   // const gender = latestReviewGender;
 
   const allArr = dataArr;
-  const mensArr = dataArr.filter(review => review.basicInfo.restroomUsed === "Men's");
-  const womensArr = dataArr.filter(review => review.basicInfo.restroomUsed === "Women's");
-  const genderNeutralArr = dataArr.filter(review => review.basicInfo.restroomUsed === "Family/Gender-neutral");
+  const mensArr = dataArr.filter(review => review.basicInfo.restroomUsed === "mens");
+  const womensArr = dataArr.filter(review => review.basicInfo.restroomUsed === "womens");
+  const genderNeutralArr = dataArr.filter(review => review.basicInfo.restroomUsed === "genderNeutral");
 
   // const getAvgScore = (scoreName, arr) => {
   //   const scoreArr = arr.map(review => review.scores[`${scoreName}`]);
@@ -35,8 +35,8 @@ const createPlaceReview = (dataArr, latestReviewGender, command, locationID) => 
 
   const restroomUsedFunc = dataArr => {
 
-    const placeID = dataArr[0].locationID;
-    const placeName = dataArr[0].basicInfo.locationName;
+    // const placeID = dataArr[0].locationID;
+    // const placeName = dataArr[0].basicInfo.locationName;
 
     const cnt = dataArr.length;
 
@@ -83,8 +83,8 @@ const createPlaceReview = (dataArr, latestReviewGender, command, locationID) => 
       // babyStation: babyStation,
       // recentReviews: recentReviews,
 
-      placeID: dataArr[0].locationID,
-      placeName: dataArr[0].basicInfo.locationName,
+      placeID: placeID,
+      placeName: placeName,
       cnt: parseInt(cnt),
       weightedAvg: parseFloat(weightedAvg.toFixed(3)),
       privacyAvg: parseFloat(privacyAvg.toFixed(3)),
@@ -128,8 +128,8 @@ const createPlaceReview = (dataArr, latestReviewGender, command, locationID) => 
   // const allRecentReviews = allRecentReviewsSort.slice(0, 7);
 
   const placeReview = {
-    placeID: dataArr[0].locationID,
-    placeName: dataArr[0].basicInfo.locationNam,
+    placeID: placeID,
+    placeName: placeName,
     // admission: admission,
     // price: parseFloat(price.toFixed(3)),
     // genderNeutral: genderNeutral,

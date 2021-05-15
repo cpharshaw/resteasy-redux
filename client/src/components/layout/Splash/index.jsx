@@ -181,6 +181,7 @@ class Splash extends Component {
             zIndex: "-100",
           }}
           autoPlay
+          playsInline
           muted
           loop
         >
