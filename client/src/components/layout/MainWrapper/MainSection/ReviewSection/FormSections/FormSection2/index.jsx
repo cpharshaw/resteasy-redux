@@ -98,7 +98,7 @@ export class FormSection2 extends Component {
                 </div>
                 {/* <span>|</span> */}
                 <div className="col">
-                <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
+                  <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
                   <RadioInput
                     data_value="2"
                     data_name="formCleanlinessValue"
@@ -107,7 +107,7 @@ export class FormSection2 extends Component {
                   />
                 </div>
                 <div className="col">
-                <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
+                  <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
                   <RadioInput
                     data_value="3"
                     data_name="formCleanlinessValue"
@@ -116,7 +116,7 @@ export class FormSection2 extends Component {
                   />
                 </div>
                 <div className="col">
-                <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
+                  <span style={{ fontStyle: "italic", color: "#A9A9A9", fontSize: "11px" }}>-</span>
                   <RadioInput
                     data_value="4"
                     data_name="formCleanlinessValue"
@@ -204,40 +204,48 @@ export class FormSection2 extends Component {
             </div>
             <div className="col-6">
               <div className="row">
+                <div className="col">
+                  <RadioInput
+                    data_value="1"
+                    data_name="formPrivacyValue"
+                    data_checked={formPrivacyValue === "1" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  {/* <span>|</span> */}
+                  <RadioInput
+                    data_value="2"
+                    data_name="formPrivacyValue"
+                    data_checked={formPrivacyValue === "2" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="3"
+                    data_name="formPrivacyValue"
+                    data_checked={formPrivacyValue === "3" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="4"
+                    data_name="formPrivacyValue"
+                    data_checked={formPrivacyValue === "4" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="5"
+                    data_name="formPrivacyValue"
+                    data_checked={formPrivacyValue === "5" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
 
-                <RadioInput
-                  data_value="1"
-                  data_name="formPrivacyValue"
-                  data_checked={formPrivacyValue === "1" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                {/* <span>|</span> */}
-                <RadioInput
-                  data_value="2"
-                  data_name="formPrivacyValue"
-                  data_checked={formPrivacyValue === "2" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-
-                  data_value="3"
-                  data_name="formPrivacyValue"
-                  data_checked={formPrivacyValue === "3" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-
-                  data_value="4"
-                  data_name="formPrivacyValue"
-                  data_checked={formPrivacyValue === "4" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="5"
-                  data_name="formPrivacyValue"
-                  data_checked={formPrivacyValue === "5" ? true : false}
-                  func_handlechange={radioSelected}
-                />
                 {/* <RadioInput
                   data_value="6"
                   data_name="formPrivacyValue"
@@ -311,38 +319,46 @@ export class FormSection2 extends Component {
             </div>
             <div className="col-6">
               <div className="row">
-
-                <RadioInput
-                  data_value="1"
-                  data_name="formSafetyValue"
-                  data_checked={formSafetyValue === "1" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                {/* <span>|</span> */}
-                <RadioInput
-                  data_value="2"
-                  data_name="formSafetyValue"
-                  data_checked={formSafetyValue === "2" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="3"
-                  data_name="formSafetyValue"
-                  data_checked={formSafetyValue === "3" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="4"
-                  data_name="formSafetyValue"
-                  data_checked={formSafetyValue === "4" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="5"
-                  data_name="formSafetyValue"
-                  data_checked={formSafetyValue === "5" ? true : false}
-                  func_handlechange={radioSelected}
-                />
+                <div className="col">
+                  <RadioInput
+                    data_value="1"
+                    data_name="formSafetyValue"
+                    data_checked={formSafetyValue === "1" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="2"
+                    data_name="formSafetyValue"
+                    data_checked={formSafetyValue === "2" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="3"
+                    data_name="formSafetyValue"
+                    data_checked={formSafetyValue === "3" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="4"
+                    data_name="formSafetyValue"
+                    data_checked={formSafetyValue === "4" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="5"
+                    data_name="formSafetyValue"
+                    data_checked={formSafetyValue === "5" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
                 {/* <RadioInput
                   data_value="6"
                   data_name="formSafetyValue"
@@ -373,38 +389,47 @@ export class FormSection2 extends Component {
             </div>
             <div className="col-6">
               <div className="row">
+                <div className="col">
+                  <RadioInput
+                    data_value="1"
+                    data_name="formComfortValue"
+                    data_checked={formComfortValue === "1" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="2"
+                    data_name="formComfortValue"
+                    data_checked={formComfortValue === "2" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="3"
+                    data_name="formComfortValue"
+                    data_checked={formComfortValue === "3" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="4"
+                    data_name="formComfortValue"
+                    data_checked={formComfortValue === "4" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="5"
+                    data_name="formComfortValue"
+                    data_checked={formComfortValue === "5" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
 
-                <RadioInput
-                  data_value="1"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "1" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                {/* <span>|</span> */}
-                <RadioInput
-                  data_value="2"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "2" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="3"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "3" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="4"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "4" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="5"
-                  data_name="formComfortValue"
-                  data_checked={formComfortValue === "5" ? true : false}
-                  func_handlechange={radioSelected}
-                />
                 {/* <RadioInput
                   data_value="6"
                   data_name="formComfortValue"
@@ -435,37 +460,46 @@ export class FormSection2 extends Component {
             </div>
             <div className="col-6">
               <div className="row">
-                <RadioInput
-                  data_value="1"
-                  data_name="formStyleValue"
-                  data_checked={formStyleValue === "1" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                {/* <span>|</span> */}
-                <RadioInput
-                  data_value="2"
-                  data_name="formStyleValue"
-                  data_checked={formStyleValue === "2" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="3"
-                  data_name="formStyleValue"
-                  data_checked={formStyleValue === "3" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="4"
-                  data_name="formStyleValue"
-                  data_checked={formStyleValue === "4" ? true : false}
-                  func_handlechange={radioSelected}
-                />
-                <RadioInput
-                  data_value="5"
-                  data_name="formStyleValue"
-                  data_checked={formStyleValue === "5" ? true : false}
-                  func_handlechange={radioSelected}
-                />
+                <div className="col">
+                  <RadioInput
+                    data_value="1"
+                    data_name="formStyleValue"
+                    data_checked={formStyleValue === "1" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="2"
+                    data_name="formStyleValue"
+                    data_checked={formStyleValue === "2" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="3"
+                    data_name="formStyleValue"
+                    data_checked={formStyleValue === "3" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="4"
+                    data_name="formStyleValue"
+                    data_checked={formStyleValue === "4" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
+                <div className="col">
+                  <RadioInput
+                    data_value="5"
+                    data_name="formStyleValue"
+                    data_checked={formStyleValue === "5" ? true : false}
+                    func_handlechange={radioSelected}
+                  />
+                </div>
                 {/* <RadioInput
                   data_value="6"
                   data_name="formStyleValue"
