@@ -230,7 +230,7 @@ class MapSection extends Component {
     }
 
     if ((!this.currentMap && update_googleAPI) || (!googleMap && googleAPI && update_geoloc)) {
-
+      // https://developers.google.com/maps/documentation/javascript/overview#js_api_loader_package
       this.currentMap = new googleAPI.Map(
         this.googleMapRef.current,
         {

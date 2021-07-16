@@ -29,11 +29,12 @@ export class SelectBox extends Component {
     return (
       <select
         id={data_id}
-        className="rs"
+        className=""
         name={data_name ? data_name : null}
         defaultValue={data_value}
         onChange={e => func_handlechange(e)}
         style={{
+          WebkitAppearance:"none",
           width: data_width ? data_width : "95%",
           height: data_height ? data_height : "100%",
           // width: "66%",

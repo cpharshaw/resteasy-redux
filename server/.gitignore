@@ -10,11 +10,9 @@
 
 # production
 /build
-/dist
 
 # misc
 .DS_Store
-.env
 .env.local
 .env.development.local
 .env.test.local
@@ -30,6 +28,4 @@ client/src/react-google-maps
 client/.env
 server/node_modules
 server/.env
-client/src/components/Ice box
 node_modules
-client/src/config

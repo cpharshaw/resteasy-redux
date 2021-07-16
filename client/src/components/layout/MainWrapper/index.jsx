@@ -108,7 +108,7 @@ class MainWrapper extends Component {
     } = this.props;
 
     return (
-
+      // https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/
       <div id="mainWrapper" className="container-fluid ai-c"
         style={{
           position: "fixed",
@@ -116,8 +116,8 @@ class MainWrapper extends Component {
           left: "0",
           right: "0",
           maxWidth: "720px",
-          maxHeight: "1680px",
-          alignSelf: "center",
+          // maxHeight: "1680px",
+          // alignSelf: "center",
           margin: "0 auto",
           // border: "0.5px solid lightgrey",
           boxShadow: "0 0 10px lightgrey"
@@ -128,7 +128,7 @@ class MainWrapper extends Component {
           className="row animated fadeIn fast"
           style={{
             position: "relative",
-            height: "calc(100% - 62.5px)",
+            height: "calc(100vh - 62.5px)",
           }}
         >
           <div className="col">

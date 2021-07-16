@@ -20,17 +20,18 @@ export class RadioInput extends Component {
       <input
         id={data_id}
         value={data_value}
-        className="rs"
+        className=""
         checked={data_checked ? data_checked : false}
         onChange={e => func_handlechange(e)}
         name={data_name}
         type="radio"
         style={{
           WebkitAppearance: "radio",
+          MozAppearance: "radio",
+          appearance: "radio",
           width: "initial",
           marginLeft: "5px",
           marginRight: "5px",
-          maxHeight: 'fit-content'
         }}
       />
     )

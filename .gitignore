@@ -29,3 +29,5 @@ client/.env
 server/node_modules
 server/.env
 node_modules
+.env
+./src/utils/google maps react FYI
