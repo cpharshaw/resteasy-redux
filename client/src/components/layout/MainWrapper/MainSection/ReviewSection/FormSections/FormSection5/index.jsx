@@ -61,7 +61,7 @@ export class FormSection5 extends Component {
                   textAlign: "left"
 
                 }}
-                placeholder={formOutOfOrderValue ? "This restroom was out of order..." : "You obviously know what you're talking about, so please, elaborate a little why dontchya..."}
+                placeholder={formOutOfOrderValue ? "This restroom was out of order..." : "Comments on bathroom go here..."}
                 onChange={e => textEntered(e)}
                 value={formCommentsValue}
               />

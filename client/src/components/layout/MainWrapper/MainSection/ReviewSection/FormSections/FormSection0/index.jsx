@@ -80,7 +80,7 @@ export class FormSection0 extends Component {
                 {/* <HorizontalRule /> */}
                 <span style={{ fontSize: "17px", fontWeight: "bold" }}>Create a Review</span>
                 {/* <br /> */}
-                <span style={{ fontSize: "16px" }}>Go for it, idiot.  Let the world know what you have to say about bathrooms.</span>
+                <span style={{ fontSize: "16px" }}>Let the world know what you have to say about bathrooms.</span>
 
                 <span style={{ fontSize: "16px" }}>To create a review, press 'Begin review'.</span>
               </div>
